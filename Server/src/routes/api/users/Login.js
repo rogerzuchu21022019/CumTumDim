@@ -7,22 +7,23 @@ const {
   ensureGuest,
   verifyIdToken,
 } = require(`../../../middlewares/authen`);
+const Passport = require("../../../utils/Passport");
 require(`dotenv`).config();
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID; // Replace with your Google client ID
 const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_SECRET_CLIENT_ID; // Replace with your Google client secret
 const CALLBACK_URL = "http://localhost:3000/api/auth/google/callback";
 
 router.get(`/auth-login`, ensureGuest, (req, res) => {
-  // res.json({
-  //   message: `ok`,
-  // })
-  res.render(`index`, { title: `Express` });
+  res.json({
+    message: `you can sign in again`,
+  })
+  // res.render(`index`, { title: `Express` });
 });
 
-router.get(`/home`, (req, res) => {
+router.get(`/home`,ensureAuth, (req, res) => {
   res.json({
     message: `ok`,
-    user: req.user,
+    status: "200",
   });
 });
 
@@ -38,8 +39,6 @@ router.get(
       // Redirect the user to the home page
 
       // res.redirect("/");
-
-      res.redirect("http://192.168.1.15:3000/api/home");
     } catch (error) {
       console.error(`error`, error);
     }
@@ -60,11 +59,17 @@ router.get(
 
     // res.redirect("/");
 
-    res.json({
-      message: `ok`,
-      user: req.user,
-    });
+    // res.redirect("http://cumtum.becofoodstore.click/api/home");
   }
 );
+
+router.post("/logout", (req, res) => {
+  req.session.destroy(); // Remove the user's session
+  console.log("logout");
+  // Send a success response
+  res.status(200).json({
+    message: "logout",
+  });
+});
 
 module.exports = router;

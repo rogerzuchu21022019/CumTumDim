@@ -18,7 +18,14 @@ const App = () => {
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Callback" component={GoogleCallback} />
-        <Stack.Screen name="Web" component={MyWebView} />
+        <Stack.Screen
+          name="Web"
+          component={MyWebView}
+          options={{
+            headerShown: true,
+            presentation: 'modal',
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

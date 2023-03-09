@@ -6,7 +6,7 @@ module.exports = {
     if (req.isAuthenticated()) {
       return next();
     } else {
-      res.redirect("/home");
+      res.redirect("/auth-login");
     }
   },
   ensureGuest: function (req, res, next) {

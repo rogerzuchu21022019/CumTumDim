@@ -29,14 +29,17 @@ const GoogleSignIn = ({navigation}) => {
 
     // Get the users ID token
     const {idToken, user} = await GoogleSignin.signIn();
-    console.log('🚀 ~ file: GoogleSignIn.js:65 ~ openWebView ~ user:', user);
-    console.log(
-      '🚀 ~ file: GoogleSignIn.js:65 ~ openWebView ~ idToken:',
-      idToken,
-    );
-    await AxiosInstance().get(`/auth/google`);
+    const res = await AxiosInstance().get(`/auth/google`);
     // await AxiosInstance().get(`/auth/google/callback?idToken=${idToken}`);
+    console.log('🚀 ~ file: GoogleSignIn.js:39 ~ signIn ~ res:', res);
+    navigation.replace('Home');
   };
+
+  // const openWebView = async () => {
+  //   // const url = "https://cumtum.becofoodstore.click/api/auth/google"
+  //   const url = "https://accounts.google.com/ServiceLogin/signinchooser?elo=1&ifkv=AWnogHejI-oVSwW1qx9xmapVyYxl6BfIDgw1B8tUgzIonpd3TviDE4-jwFFDGsKN80tZKtq1WcH_zA&flowName=GlifWebSignIn&flowEntry=ServiceLogin"
+  //   navigation.navigate('Web', {url: url})
+  // };
 
   return (
     <View>

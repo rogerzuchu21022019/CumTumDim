@@ -41,6 +41,13 @@ const ManagerMiddleware = (app) => {
   app.use(passport.initialize());
   app.use(passport.session());
 
+  const logoutOptions = {
+    successMessage: "You have successfully logged out",
+    failureMessage: "Failed to log out",
+    logoutRedirect: "/auth-login",
+    destroySession: true,
+  };
+  passport.logoutOptions(logoutOptions);
 
   const fixPublic = express.static(path.join(__dirname, "public"));
   app.use(fixPublic);

@@ -3,28 +3,26 @@ import {WebView} from 'react-native-webview';
 import {View} from 'react-native';
 import {AxiosInstance} from './src/app/api/AxiosInstance';
 
-const MyWebView = ({route}) => {
+const MyWebView = ({route, navigation}) => {
   const url = route.params.url;
-  const [uri, setUri] = useState(null);
-  console.log('🚀 ~ file: WebViewScreen.js:6 ~ MyWebView ~ url:', url);
-  useEffect(() => {
-    callApi();
+  const handleGoogleLoginSuccess = () => {
+    // Do something with the user's Google account information
 
-    return () => {};
-  }, []);
-
-  const callApi = async () => {
-    const url = 'http://localhost:3000/api/auth/google';
-    setUri(url);
-    await AxiosInstance().get(uri);
+    // Navigate to another screen
+    navigation.navigate('Home');
   };
   return (
     <View style={{flex: 1}}>
       <WebView
         source={{uri: url}}
-        style={{
-          marginTop: 50,
+        javaScriptEnabled={true}
+        userAgent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 Edge/16.16299"
+        onNavigationStateChange={state => {
+          if (state.url.includes('google.com')) {
+            handleGoogleLoginSuccess();
+          }
         }}
+        
       />
     </View>
   );

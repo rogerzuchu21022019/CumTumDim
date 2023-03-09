@@ -6,7 +6,6 @@
     "start": "node ./bin/server",
     "dev": "nodemon ./bin/server ",
     "server": "concurrently \"yarn dev\" "
-    
   },
   "dependencies": {
     "@types/passport-google-oauth20": "^2.0.11",
@@ -35,5 +34,14 @@
     "passport-google-token": "^0.1.2",
     "randombytes": "^2.1.0",
     "redis": "^4.6.4"
-  }
+  },
+  "main": "NoteUsePassport.js",
+  "bin": {
+    "server": "bin/server.js"
+  },
+  "devDependencies": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }
