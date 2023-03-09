@@ -1,9 +1,0 @@
----
-deployment:
- tasks:
- - export DEPLOYPATH=/home/caviench/repo/Server/
- - /bin/cp -r * $DEPLOYPATH
- - cd $DEPLOYPATH/bin
- - /usr/local/bin/npm install --production
- - /usr/local/bin/node server.js
- 

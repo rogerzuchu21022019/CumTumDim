@@ -15,6 +15,11 @@ export const AxiosInstance = () => {
   });
   axios.interceptors.request.use(
     function (config) {
+      config.headers = {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        'User-Agent': 'axios 0.25',
+      };
       // console.log('🚀 ~ file: AxiosInstance.js:20 ~ config:', config);
       return config;
     },

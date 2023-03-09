@@ -29,6 +29,7 @@ const GoogleSignIn = ({navigation}) => {
 
     // Get the users ID token
     const {idToken, user} = await GoogleSignin.signIn();
+    console.log("🚀 ~ file: GoogleSignIn.js:32 ~ signIn ~ idToken:", idToken)
     const res = await AxiosInstance().get(`/auth/google`);
     // await AxiosInstance().get(`/auth/google/callback?idToken=${idToken}`);
     console.log('🚀 ~ file: GoogleSignIn.js:39 ~ signIn ~ res:', res);
