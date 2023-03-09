@@ -2,5 +2,8 @@
 deployment:
  tasks:
  - export DEPLOYPATH=/home/caviench/repo/Server/
- - /bin/cp index.html $DEPLOYPATH
- - /bin/cp style.css $DEPLOYPATH
+ - /bin/cp -r * $DEPLOYPATH
+ - cd $DEPLOYPATH/bin
+ - /usr/local/bin/npm install --production
+ - /usr/local/bin/node server.js
+ 
