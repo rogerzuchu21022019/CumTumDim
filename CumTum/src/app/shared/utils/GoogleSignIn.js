@@ -20,7 +20,10 @@ const log = LOG.extend(`GOOGLE_SIGNIN.JS`);
 const GoogleSignIn = ({navigation}) => {
   const data = useSelector(adminSelector);
   const isLoading = data.isLoading;
-  console.log("🚀 ~ file: GoogleSignIn.js:23 ~ GoogleSignIn ~ isLoading:", isLoading)
+  console.log(
+    '🚀 ~ file: GoogleSignIn.js:23 ~ GoogleSignIn ~ isLoading:',
+    isLoading,
+  );
   console.log('🚀 ~ file: GoogleSignIn.js:23 ~ GoogleSignIn ~ data:', data);
 
   useEffect(() => {
@@ -44,11 +47,7 @@ const GoogleSignIn = ({navigation}) => {
 
       const {accessToken} = await GoogleSignin.getTokens();
       dispatch(fetchLogin(idToken, accessToken));
-      // console.log('🚀 ~ file: GoogleSignIn.js:35 ~ res ~ res:', res.data.user);
-      const role = data.user.role;
-      role === constants.ROLE.ADMIN
-        ? navigation.navigate(Router.ADMIN_STACK)
-        : navigation.navigate(Router.CUSTOMER_STACK);
+      
     } catch (error) {
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
       } else if (error.code === statusCodes.IN_PROGRESS) {
@@ -60,7 +59,7 @@ const GoogleSignIn = ({navigation}) => {
 
   return (
     <View>
-      {isLoading && <ActivityIndicator size={'large'} />}
+      {/* {isLoading && <ActivityIndicator size={'large'} />} */}
       <GoogleSigninButton
         style={{width: 192, height: 48}}
         size={GoogleSigninButton.Size.Wide}

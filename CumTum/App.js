@@ -14,13 +14,14 @@ import {Store} from './src/app/app_store/Store';
 import {Provider} from 'react-redux';
 import AdminStack from './src/app/navigation/AdminStack';
 import CustomerStack from './src/app/navigation/CustomerStack';
+import { navigationRef } from './src/app/navigation/RootNavigation';
 
 const App = () => {
   const Stack = createNativeStackNavigator();
   
   return (
     <Provider store={Store} >
-      <NavigationContainer>
+      <NavigationContainer ref={navigationRef}>
         <Stack.Navigator>
         
           <Stack.Screen

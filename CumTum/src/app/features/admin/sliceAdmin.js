@@ -1,7 +1,9 @@
+import Router from '../../navigation/Router';
 import {constants} from '../../shared/constants';
 import {fetchLogin} from './apiAdmin';
 
 const {createSlice} = require('@reduxjs/toolkit');
+import * as RootNavigation from '../../navigation/RootNavigation';
 
 const initialState = {
   users: [],
@@ -14,7 +16,7 @@ const initialState = {
 
 export const adminSlice = createSlice({
   name: constants.SLICE.ADMIN,
-  initialState:initialState,
+  initialState: initialState,
   reducers: {},
   extraReducers: builder => {
     builder.addCase(fetchLogin.pending, state => {
@@ -30,6 +32,10 @@ export const adminSlice = createSlice({
       state.isLoggedIn = dataResponse.isLoggedIn;
       state.error = dataResponse.error;
       state.user = dataResponse.data;
+
+      state.user.role === constants.ROLE.ADMIN
+        ? RootNavigation.navigate(Router.ADMIN_STACK)
+        : RootNavigation.navigate(Router.CUSTOMER_STACK);
     });
     builder.addCase(fetchLogin.rejected, (state, action) => {
       state.isLoading = false;
@@ -37,5 +43,5 @@ export const adminSlice = createSlice({
     });
   },
 });
-export const adminSelector = (state) => state.admin;
+export const adminSelector = state => state.admin;
 export default adminSlice.reducer;
