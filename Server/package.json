@@ -33,7 +33,8 @@
     "passport-google-oauth20": "^2.0.0",
     "passport-google-token": "^0.1.2",
     "randombytes": "^2.1.0",
-    "redis": "^4.6.4"
+    "redis": "^4.6.4",
+    "twilio": "^4.8.0"
   },
   "main": "NoteUsePassport.js",
   "bin": {
