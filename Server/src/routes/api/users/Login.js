@@ -15,35 +15,24 @@ const CALLBACK_URL = "http://localhost:3000/api/auth/google/callback";
 
 router.get(`/auth-login`, ensureGuest, (req, res) => {
   res.json({
-    message: `you can sign in again`,
-  })
+    message: `you can sign in againr`,
+  });
   // res.render(`index`, { title: `Express` });
 });
 
-router.get(`/home`,ensureAuth, (req, res) => {
+router.get(`/home`, ensureAuth, (req, res) => {
   res.json({
     message: `ok`,
     status: "200",
   });
 });
 
-router.get(
-  "/auth/google",
-  passport.authenticate("google", {
-    scope: ["profile", "email"],
-  }),
-  (req, res) => {
-    try {
-      console.log(`auth/google`);
-
-      // Redirect the user to the home page
-
-      // res.redirect("/");
-    } catch (error) {
-      console.error(`error`, error);
-    }
-  }
-);
+router.post("/auth/google", (req, res, next) => {
+  req.logout((err)=> {
+    if (err) { return next(err); }
+    passport.authenticate('google', { scope: ['profile', 'email'] })(req, res, next);
+  });
+});
 
 // Set up the Google Sign-In callback route
 router.get(

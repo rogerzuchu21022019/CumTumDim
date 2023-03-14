@@ -2,32 +2,36 @@ import {View, Text} from 'react-native';
 import React from 'react';
 import {color} from './src/app/utils/Css';
 import SafeKeyComponent from './src/app/components/safe_area/SafeKeyComponent';
-import GoogleSignIn from './src/app/utils/GoogleSignIn';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import HomeScreen from './HomeScree';
+import HomeScreen from './HomeScreen';
 import LoginScreen from './Login';
-import GoogleCallback from './GoogleCallBack';
-import MyWebView from './WebViewScreen';
+import Router from './src/app/navigation/Router';
+// import {Store} from './src/app/app_store/Store';
+import Store from './src/app/app_store/Store';
+
+// import Provider
+import {Provider} from 'react-redux';
 
 const App = () => {
+
   const Stack = createNativeStackNavigator();
+
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Login" component={LoginScreen} />
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Callback" component={GoogleCallback} />
-        <Stack.Screen
-          name="Web"
-          component={MyWebView}
-          options={{
-            headerShown: true,
-            presentation: 'modal',
-          }}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Provider store={Store}>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen
+            name={Router.Login}
+            component={LoginScreen}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen name={Router.Home} component={HomeScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 };
 

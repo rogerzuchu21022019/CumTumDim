@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {View, Text} from 'react-native';
 import SafeKeyComponent from './src/app/components/safe_area/SafeKeyComponent';
-import GoogleSignIn from './src/app/utils/GoogleSignIn';
+import GoogleSignIn from './src/app/shared/utils/GoogleSignIn';
 
 const LoginScreen = ({navigation}) => {
   return (

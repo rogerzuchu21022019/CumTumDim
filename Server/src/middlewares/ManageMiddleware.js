@@ -22,32 +22,9 @@ const ManagerMiddleware = (app) => {
   app.use(bodyParser.json());
   app.use(cookieParser());
 
-  const options = {
-    mongoUrl: process.env.URI_USER_MONGODB,
-    dbName: "cumtum",
-    collectionName: "sessions",
-    ttl: 3600,
-  };
-  app.use(
-    session({
-      secret: "keyboard cat",
-      resave: false,
-      saveUninitialized: false,
-      store: MongoStore.create(options),
-    })
-  );
 
   require("../utils/Passport")(passport);
-  app.use(passport.initialize());
-  app.use(passport.session());
 
-  const logoutOptions = {
-    successMessage: "You have successfully logged out",
-    failureMessage: "Failed to log out",
-    logoutRedirect: "/auth-login",
-    destroySession: true,
-  };
-  passport.logoutOptions(logoutOptions);
 
   const fixPublic = express.static(path.join(__dirname, "public"));
   app.use(fixPublic);
