@@ -38,7 +38,7 @@ const GoogleSignIn = ({navigation}) => {
       });
       // await AxiosInstance().get(`/auth/google/callback?idToken=${idToken}`);
       // console.log('🚀 ~ file: GoogleSignIn.js:39 ~ signIn ~ res:', res);
-      navigation.replace(Router.Home);
+      navigation.replace(Router.ADMIN_STACK);
     } catch (error) {
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
       } else if (error.code === statusCodes.IN_PROGRESS) {

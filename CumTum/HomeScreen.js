@@ -16,7 +16,7 @@ const HomeScreen = ({route, navigation}) => {
       await GoogleSignin.revokeAccess();
       await GoogleSignin.signOut();
       // const response = await AxiosInstance().post('/logout');
-      navigation.replace(Router.Login);
+      navigation.replace(Router.LOGIN);
     } catch (error) {
       console.error(error);
     }

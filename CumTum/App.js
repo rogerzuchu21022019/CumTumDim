@@ -12,9 +12,9 @@ import Store from './src/app/app_store/Store';
 
 // import Provider
 import {Provider} from 'react-redux';
+import AdminStack from './src/app/navigation/AdminStack';
 
 const App = () => {
-
   const Stack = createNativeStackNavigator();
 
   return (
@@ -28,7 +28,8 @@ const App = () => {
               headerShown: false,
             }}
           />
-          <Stack.Screen name={Router.HOME_ADMIN} component={HomeScreen} />
+
+          <Stack.Screen name={Router.ADMIN_STACK} component={AdminStack} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
