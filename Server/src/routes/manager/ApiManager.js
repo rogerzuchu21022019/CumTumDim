@@ -30,6 +30,8 @@ const ManagerRouter = (app, fixPublic) => {
   //=> Check lại hết theo project theo project
   /* Users */
   app.use(MAIN, ApiUser.login, fixPublic);
+  app.use(SUB_USERS, ApiUser.createOtp, fixPublic);
+  app.use(SUB_USERS, ApiUser.verifyOtp, fixPublic);
 //   app.use(MAIN, ApiUser.logoutRouter, fixPublic);
 //   app.use(SUB_USERS, ApiUser.registerRouter, fixPublic);
 

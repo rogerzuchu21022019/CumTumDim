@@ -6,8 +6,6 @@ const bodyParser = require("body-parser");
 const express = require("express");
 const passport = require(`passport`);
 require(`dotenv`).config();
-const session = require("express-session");
-const MongoStore = require("connect-mongo");
 const ApiUser = require("../routes/api/ApiUser");
 
 // Middleware
@@ -23,7 +21,7 @@ const ManagerMiddleware = (app) => {
   app.use(cookieParser());
 
 
-  require("../utils/Passport")(passport);
+  // require("../utils/Passport")(passport);
 
 
   const fixPublic = express.static(path.join(__dirname, "public"));

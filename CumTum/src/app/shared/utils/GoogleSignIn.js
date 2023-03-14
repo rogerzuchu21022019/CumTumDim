@@ -30,14 +30,17 @@ const GoogleSignIn = ({navigation}) => {
       await GoogleSignin.hasPlayServices({showPlayServicesUpdateDialog: true});
 
       // Get the users ID token
-      const {idToken, user} = await GoogleSignin.signIn();
-      console.log('🚀 ~ file: GoogleSignIn.js:32 ~ signIn ~ user:', user);
-      // console.log("🚀 ~ file: GoogleSignIn.js:32 ~ signIn ~ idToken:", idToken)
-      const res = await AxiosInstance().post(`/auth/google`, {
-        idToken: idToken,
+      const {idToken} = await GoogleSignin.signIn();
+      console.log("🚀 ~ file: GoogleSignIn.js:34 ~ signIn ~ idToken:", idToken)
+      
+      const {accessToken} = await GoogleSignin.getTokens();
+      console.log("🚀 ~ file: GoogleSignIn.js:36 ~ signIn ~ accessToken:", accessToken)
+      
+      const res = await AxiosInstance().post('/login', {
+        idToken,
+        accessToken
       });
-      // await AxiosInstance().get(`/auth/google/callback?idToken=${idToken}`);
-      // console.log('🚀 ~ file: GoogleSignIn.js:39 ~ signIn ~ res:', res);
+      console.log('🚀 ~ file: GoogleSignIn.js:35 ~ res ~ res:', res);
       navigation.replace(Router.ADMIN_STACK);
     } catch (error) {
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
