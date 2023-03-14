@@ -8,7 +8,7 @@ const AdminStack = () => {
   return (
     <Tab.Navigator>
       <Tab.Screen
-        name={Router.Home}
+        name={Router.HOME_ADMIN}
         component={ArticlesScreen}
         options={{
           headerShown: false,

@@ -22,13 +22,13 @@ const App = () => {
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen
-            name={Router.Login}
+            name={Router.LOGIN}
             component={LoginScreen}
             options={{
               headerShown: false,
             }}
           />
-          <Stack.Screen name={Router.Home} component={HomeScreen} />
+          <Stack.Screen name={Router.HOME_ADMIN} component={HomeScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
