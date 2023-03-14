@@ -27,5 +27,9 @@ const Router = {
   EDIT_PROFILE:"EditProfile",
   UPLOAD_IMAGE:"UploadImage",
 
+
+  /* Stack */
+  ADMIN_STACK:"AdminStack",
+  CUSTOMER_STACK:"CustomerStack",
 };
 export default Router;
