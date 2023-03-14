@@ -3,7 +3,7 @@ const Router = {
   HOME_ADMIN: 'HomeAdmin',
   DETAIL_CART_ADMIN:"DetailCartAdmin",
   SHOW_BILL_ADMIN:"ShowBillAdmin",
-  MANGER:"Manager",
+  MANAGER:"Manager",
   CRUD_MENU:"CrudMenu",
   ADD_DISH:"AddDish",
   EDIT_DISH:"EditDish",
