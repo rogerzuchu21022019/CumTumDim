@@ -12,10 +12,18 @@ router.post(`/login`, async (req, res) => {
     const { idToken, accessToken } = req.body;
     const user = await VerifyUserCon(idToken, accessToken);
     return res.json({
-      user: user,
+      isLoggedIn: true,
+      message: "Success",
+      error: false,
+      data: user
     });
   } catch (error) {
-    console.log("🚀 ~ file: Login.js:27 ~ router.post ~ error:", error);
+    console.log("🚀 ~ file: Login.js:23 ~ router.post ~ error:", error);
+    res.json({
+      isLoggedIn: false,
+      message: error.message,
+      error: true,
+    });
   }
 });
 

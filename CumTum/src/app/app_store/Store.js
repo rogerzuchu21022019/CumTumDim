@@ -1,9 +1,12 @@
 //import createSlice
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {configureStore} from '@reduxjs/toolkit';
+import sliceAdmin from '../features/admin/sliceAdmin';
 
-const Store = configureStore({
-    reducer: {},
+export const Store = configureStore({
+    reducer: {
+      admin:sliceAdmin
+    },
     middleware:(getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false, // bỏ qua kiểm tra tính immutability của state
@@ -15,4 +18,3 @@ const Store = configureStore({
     }),
 });
 
-export default Store;

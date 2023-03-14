@@ -11,6 +11,10 @@ router.post(`/verify-otp`, async (req, res) => {
     });
   } catch (error) {
     console.log("🚀 ~ file: VerifyOtp.js:13 ~ router.post ~ error:", error)
+    res.json({
+      verified: false,
+      message: error.message,
+    });
   }
 });
 module.exports = router;

@@ -2,15 +2,15 @@ import {View, Text} from 'react-native';
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Router from './Router';
-import HomeAdmin from '../features/admin/screens/homeAdmin/HomeAdmin';
+import HomeCustomer from '../features/customer/screens/homeCustomer/HomeCustomer';
 const Tab = createBottomTabNavigator();
 
-const AdminStack = () => {
+const CustomerStack = () => {
   return (
     <Tab.Navigator >
-      <Tab.Screen 
-        name={Router.HOME_ADMIN}
-        component={HomeAdmin}
+      <Tab.Screen
+        name={Router.HOME_CUSTOMER}
+        component={HomeCustomer}
         options={{
           headerShown: false,
         }}
@@ -19,4 +19,4 @@ const AdminStack = () => {
   );
 };
 
-export default AdminStack;
+export default CustomerStack;

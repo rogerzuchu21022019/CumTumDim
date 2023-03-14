@@ -1,6 +1,7 @@
 const { verifyIdToken } = require("../../../middlewares/authen");
 const User = require("../model/User");
 
+
 const VerifyUserSv = async (idToken, accessToken) => {
   const emailAdmin = "vuthanhnam21022019@gmail.com";
   try {
@@ -20,6 +21,17 @@ const VerifyUserSv = async (idToken, accessToken) => {
             imageUrl: payload.picture,
             accessToken: accessToken,
             role: "admin",
+          });
+          console.log("🚀 ~ file: Login.js:39 ~ newUser:", newUser);
+          await newUser.save();
+          return newUser;
+        }else{
+          const newUser = await User.create({
+            googleId: payload.sub,
+            name: payload.given_name,
+            email: payload.email,
+            imageUrl: payload.picture,
+            accessToken: accessToken,
           });
           console.log("🚀 ~ file: Login.js:39 ~ newUser:", newUser);
           await newUser.save();
