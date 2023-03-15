@@ -1,7 +1,7 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import LoginScreen from './Login';
+import LoginScreen from './src/app/features/admin/screens/login/Login';
 import Router from './src/app/navigation/Router';
 
 import {Store} from './src/app/app_store/Store';
@@ -17,6 +17,7 @@ import {navigationRef} from './src/app/navigation/RootNavigation';
 // Redux Persist
 import persistStore from 'redux-persist/es/persistStore';
 import {PersistGate} from 'redux-persist/integration/react';
+import SplashSrceeen from './src/app/features/admin/screens/splashSrceeen/SplashSrceeen';
 let persistor = persistStore(Store);
 
 const App = () => {
@@ -26,7 +27,14 @@ const App = () => {
     <Provider store={Store}>
       <PersistGate loading={null} persistor={persistor}>
         <NavigationContainer ref={navigationRef}>
-          <Stack.Navigator>
+          <Stack.Navigator initialRouteName='SplashSrceen'> 
+          <Stack.Screen
+          name={Router.SPLASH_SCREEN}
+              component={SplashSrceeen}
+              options={{
+                headerShown: false,
+              }}
+            />
             <Stack.Screen
               name={Router.LOGIN}
               component={LoginScreen}
