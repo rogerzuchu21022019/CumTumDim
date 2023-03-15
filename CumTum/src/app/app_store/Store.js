@@ -10,7 +10,7 @@ let persistConfig = {
   key: 'root',
   storage: AsyncStorage,
   whiteList: [],
-  blacklist: [constants.SLICE.ADMIN],
+  // blacklist: [constants.SLICE.ADMIN],
 };
 
 const rootReducers = combineReducers({
@@ -24,11 +24,5 @@ export const Store = configureStore({
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: false, // bỏ qua kiểm tra tính immutability của state
-      thunk: {
-        extraArgument: {
-          // truyền tham số thêm cho các action creator trong thunk
-          AsyncStorage, // truyền thư viện AsyncStorage
-        },
-      },
     }),
 });
