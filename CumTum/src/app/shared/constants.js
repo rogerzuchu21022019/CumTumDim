@@ -1,6 +1,6 @@
 export const constants = {
   COLOR: {
-    PRIMARY: '#53B175',
+    // PRIMARY: '#53B175',
     SECONDARY: '#414757',
     Price:'#FE724C',
     item:'#252121'
