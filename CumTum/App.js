@@ -1,22 +1,22 @@
 import React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LoginScreen from './src/app/features/admin/screens/login/Login';
 import Router from './src/app/navigation/Router';
 
-import {Store} from './src/app/app_store/Store';
+import { Store } from './src/app/app_store/Store';
 
 // import Provider
-import {Provider} from 'react-redux';
+import { Provider } from 'react-redux';
 import AdminStack from './src/app/navigation/AdminStack';
 import CustomerStack from './src/app/navigation/CustomerStack';
 
 // import RootNavigation 
-import {navigationRef} from './src/app/navigation/RootNavigation';
+import { navigationRef } from './src/app/navigation/RootNavigation';
 
 // Redux Persist
 import persistStore from 'redux-persist/es/persistStore';
-import {PersistGate} from 'redux-persist/integration/react';
+import { PersistGate } from 'redux-persist/integration/react';
 import SplashSrceeen from './src/app/features/admin/screens/splashSrceeen/SplashSrceeen';
 let persistor = persistStore(Store);
 
@@ -27,9 +27,9 @@ const App = () => {
     <Provider store={Store}>
       <PersistGate loading={null} persistor={persistor}>
         <NavigationContainer ref={navigationRef}>
-          <Stack.Navigator initialRouteName='SplashSrceen'> 
-          <Stack.Screen
-          name={Router.SPLASH_SCREEN}
+          <Stack.Navigator initialRouteName='SplashSrceen'>
+            <Stack.Screen
+              name={Router.SPLASH_SCREEN}
               component={SplashSrceeen}
               options={{
                 headerShown: false,
