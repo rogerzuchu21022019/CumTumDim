@@ -8,6 +8,7 @@ const Tab = createBottomTabNavigator();
 const AdminStack = () => {
   return (
     <Tab.Navigator>
+      
       <Tab.Screen
         name={Router.HOME_ADMIN}
         component={HomeScreen}

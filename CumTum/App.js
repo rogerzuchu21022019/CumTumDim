@@ -13,6 +13,7 @@ import Store from './src/app/app_store/Store';
 // import Provider
 import {Provider} from 'react-redux';
 import AdminStack from './src/app/navigation/AdminStack';
+import DetailCard from './src/app/features/admin/DetailCard/DetailCard';
 
 const App = () => {
   const Stack = createNativeStackNavigator();
@@ -33,6 +34,9 @@ const App = () => {
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
+    // <SafeKeyComponent>
+    //   <DetailCard/>
+    // </SafeKeyComponent>
   );
 };
 
