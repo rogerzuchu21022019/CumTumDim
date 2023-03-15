@@ -27,11 +27,13 @@ router.post("/create-otp", async (req, res) => {
     console.log("🚀 ~ file: CreateOtp.js:8 ~ router.post ~ result", result);
     res.status(200).json(result);
   } catch (error) {
+
     console.log("🚀 ~ file: CreateOTP.js:26 ~ router.post ~ error:", error);
 
     res.status(500).json({
       message: error.message,
     });
+
   }
 });
 module.exports = router;

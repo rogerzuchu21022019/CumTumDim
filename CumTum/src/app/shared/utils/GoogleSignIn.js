@@ -42,12 +42,14 @@ const GoogleSignIn = ({navigation}) => {
     try {
       await GoogleSignin.hasPlayServices({showPlayServicesUpdateDialog: true});
 
+
       const {idToken} = await GoogleSignin.signIn();
       log.info('🚀 ~ file: GoogleSignIn.js:34 ~ signIn ~ idToken:', idToken);
 
       const {accessToken} = await GoogleSignin.getTokens();
       dispatch(fetchLogin(idToken, accessToken));
       // navigation.replace(Router.ADMIN_STACK)
+
     } catch (error) {
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
       } else if (error.code === statusCodes.IN_PROGRESS) {
