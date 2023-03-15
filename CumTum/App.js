@@ -1,37 +1,56 @@
-import {View, Text} from 'react-native';
 import React from 'react';
-import {color} from './src/app/utils/Css';
-import SafeKeyComponent from './src/app/components/safe_area/SafeKeyComponent';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import HomeScreen from './HomeScreen';
-import LoginScreen from './Login';
+import LoginScreen from './src/app/features/admin/screens/login/Login';
 import Router from './src/app/navigation/Router';
-// import {Store} from './src/app/app_store/Store';
-import Store from './src/app/app_store/Store';
+
+import {Store} from './src/app/app_store/Store';
 
 // import Provider
 import {Provider} from 'react-redux';
 import AdminStack from './src/app/navigation/AdminStack';
+import CustomerStack from './src/app/navigation/CustomerStack';
+
+// import RootNavigation 
+import {navigationRef} from './src/app/navigation/RootNavigation';
+
+// Redux Persist
+import persistStore from 'redux-persist/es/persistStore';
+import {PersistGate} from 'redux-persist/integration/react';
+import SplashSrceeen from './src/app/features/admin/screens/splashSrceeen/SplashSrceeen';
+let persistor = persistStore(Store);
 
 const App = () => {
   const Stack = createNativeStackNavigator();
 
   return (
     <Provider store={Store}>
-      <NavigationContainer>
-        <Stack.Navigator>
+      <PersistGate loading={null} persistor={persistor}>
+        <NavigationContainer ref={navigationRef}>
+          <Stack.Navigator initialRouteName='SplashSrceen'> 
           <Stack.Screen
-            name={Router.LOGIN}
-            component={LoginScreen}
-            options={{
-              headerShown: false,
-            }}
-          />
+          name={Router.SPLASH_SCREEN}
+              component={SplashSrceeen}
+              options={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name={Router.LOGIN}
+              component={LoginScreen}
+              options={{
+                headerShown: false,
+              }}
+            />
 
-          <Stack.Screen name={Router.ADMIN_STACK} component={AdminStack} />
-        </Stack.Navigator>
-      </NavigationContainer>
+            <Stack.Screen name={Router.ADMIN_STACK} component={AdminStack} />
+            <Stack.Screen
+              name={Router.CUSTOMER_STACK}
+              component={CustomerStack}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </PersistGate>
     </Provider>
   );
 };
