@@ -52,6 +52,9 @@ const App = () => {
         </NavigationContainer>
       </PersistGate>
     </Provider>
+    // <SafeKeyComponent>
+    //   <DetailCard/>
+    // </SafeKeyComponent>
   );
 };
 
