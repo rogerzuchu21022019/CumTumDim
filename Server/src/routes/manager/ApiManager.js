@@ -1,6 +1,7 @@
 /* Check import lại mấy cái router này khi import */
+const ApiProducts = require("../api/ApiProducts");
 const ApiUser = require("../api/ApiUser");
-// const ApiProduct = require(`../api/Api.Product`);
+
 
 /* Được gọi từ app.js */
 const ManagerRouter = (app, fixPublic) => {
@@ -36,8 +37,10 @@ const ManagerRouter = (app, fixPublic) => {
 //   app.use(SUB_USERS, ApiUser.registerRouter, fixPublic);
 
 //   /* Products */
-//   app.use(MAIN, ApiProduct.homeRouter, fixPublic);
-//   app.use(SUB_PRODUCTS, ApiProduct.analysticRouter, fixPublic);
+  app.use(SUB_PRODUCTS, ApiProducts.createCategory, fixPublic);
+  app.use(SUB_PRODUCTS, ApiProducts.findCategories, fixPublic);
+  app.use(SUB_PRODUCTS, ApiProducts.addDish, fixPublic);
+  app.use(SUB_PRODUCTS, ApiProducts.findDishes, fixPublic);
 //   app.use(SUB_PRODUCTS, ApiProduct.chartRouter, fixPublic);
 //   app.use(SUB_PRODUCTS, ApiProduct.dataTableRouter, fixPublic);
 };

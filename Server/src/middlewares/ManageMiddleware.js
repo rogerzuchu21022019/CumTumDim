@@ -4,7 +4,6 @@ const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const bodyParser = require("body-parser");
 const express = require("express");
-const passport = require(`passport`);
 require(`dotenv`).config();
 const ApiUser = require("../routes/api/ApiUser");
 
