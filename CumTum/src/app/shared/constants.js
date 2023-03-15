@@ -1,9 +1,12 @@
 export const constants = {
   COLOR: {
-    PRIMARY: '#53B175',
-    SECONDARY: '#414757',
-    Price:'#FE724C',
-    item:'#252121'
+    ORANGE:'#FE724C',
+    GREY:'#252121',
+    YELLOW:'#FFB703',
+    BLACK:'#282222',
+    WHITE:'#FFFFFF',
+    RED:'#F20000',
+
   },
   FONT: {
     GilroyMedium: 'Gilroy-Medium',
@@ -31,7 +34,7 @@ export const constants = {
     SourceSansProSemiBold: 'SourceSansProSemiBold',
   },
   BASE_URL: {
-    MAIN: 'http://192.168.1.37:3000/api',
+    MAIN: 'http://192.168.1.55:3000/api',
     SECOND: 'https://fpoly-hcm.herokuapp.com/api',
     THIRD: 'https://cumtumdim.becofoodstore.click/api',
   },
