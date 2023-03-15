@@ -20,11 +20,11 @@ const log = LOG.extend(`GOOGLE_SIGNIN.JS`);
 const GoogleSignIn = ({navigation}) => {
   const data = useSelector(adminSelector);
   const isLoading = data.isLoading;
-  console.log(
-    '🚀 ~ file: GoogleSignIn.js:23 ~ GoogleSignIn ~ isLoading:',
-    isLoading,
-  );
-  console.log('🚀 ~ file: GoogleSignIn.js:23 ~ GoogleSignIn ~ data:', data);
+  // console.log(
+  //   '🚀 ~ file: GoogleSignIn.js:23 ~ GoogleSignIn ~ isLoading:',
+  //   isLoading,
+  // );
+  // console.log('🚀 ~ file: GoogleSignIn.js:23 ~ GoogleSignIn ~ data:', data);
 
   useEffect(() => {
     GoogleSignin.configure({
@@ -59,7 +59,7 @@ const GoogleSignIn = ({navigation}) => {
 
   return (
     <View>
-      {/* {isLoading && <ActivityIndicator size={'large'} />} */}
+      {isLoading && <ActivityIndicator size={'large'} />}
       <GoogleSigninButton
         style={{width: 192, height: 48}}
         size={GoogleSigninButton.Size.Wide}
