@@ -9,5 +9,5 @@ const storage = multer.diskStorage({
     cb(null, `${uniqueSuffix}_${file.originalname}.jpg`);
   },
 });
-
+// ok
 module.exports = multer({ storage: storage });
