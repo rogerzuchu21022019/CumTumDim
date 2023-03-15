@@ -1,6 +1,11 @@
 const { OAuth2Client } = require('google-auth-library');
-const CLIENT_ID = '589127740205-c795j2ne2i38rdn3ljotkasq79b2nec5.apps.googleusercontent.com';
-const client = new OAuth2Client(CLIENT_ID);
+const User = require('../components/users/model/User');
+require(`dotenv`).config();
+
+const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID
+const client = new OAuth2Client(GOOGLE_CLIENT_ID);
+
+
 module.exports = {
   ensureAuth: function (req, res, next) {
     if (req.isAuthenticated()) {
@@ -21,11 +26,11 @@ module.exports = {
     try {
       const ticket = await client.verifyIdToken({
         idToken: idToken,
-        audience: CLIENT_ID,
+        audience: GOOGLE_CLIENT_ID,
       });
       const payload = ticket.getPayload();
-      const userid = payload["sub"];
-      return userid;
+      
+      return payload;
     } catch (error) {
       console.log("Error verifying idToken:", error);
       return null;
