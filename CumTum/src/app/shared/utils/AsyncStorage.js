@@ -13,11 +13,14 @@ export const removeToken =async  (token) => {
 
 export const saveToken = async (tokenKey,tokenValue) => {
   await AsyncStorage.setItem(tokenKey, tokenValue);
+  console.log("🚀 ~ file: AsyncStorage.js:16 ~ saveToken ~ tokenValue:", tokenValue)
 };
 
 export const getToken = async (tokenKey) => {
   try {
     const item = await AsyncStorage.getItem(tokenKey);
+    console.log("🚀 ~ file: AsyncStorage.js:22 ~ getToken ~ item:", item)
+    console.log("🚀 ~ file: AsyncStorage.js:22 ~ getToken ~ tokenKey:", tokenKey)
     return item;
   } catch (error) {
     log.error(`error error`);

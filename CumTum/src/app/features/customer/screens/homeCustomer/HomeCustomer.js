@@ -5,17 +5,19 @@ import {
 import * as React from 'react';
 import {View, Text, Button} from 'react-native';
 import {AxiosInstance} from './src/app/shared/utils/AxiosInstance';
-import SafeKeyComponent from './src/app/components/safe_area/SafeKeyComponent';
-import Router from './src/app/navigation/Router';
 
-const HomeScreen = ({route, navigation}) => {
+import Router from '../../../../navigation/Router';
+import SafeKeyComponent from '../../../../components/safe_area/SafeKeyComponent';
+import { removeToken } from '../../../../shared/utils/AsyncStorage';
+
+const HomeCustomer = ({route, navigation}) => {
   // const user = route.params.user;
   const handleLogout = async () => {
     try {
       
       await GoogleSignin.revokeAccess();
       await GoogleSignin.signOut();
-      // const response = await AxiosInstance().post('/logout');
+
       navigation.replace(Router.LOGIN);
     } catch (error) {
       console.error(error);
@@ -24,10 +26,11 @@ const HomeScreen = ({route, navigation}) => {
   return (
     <SafeKeyComponent>
       <View>
+        <Text>Home Customer</Text>
         <Button title="Logout" onPress={handleLogout} />
       </View>
     </SafeKeyComponent>
   );
 };
 
-export default HomeScreen;
+export default HomeCustomer;
