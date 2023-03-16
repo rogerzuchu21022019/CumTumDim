@@ -1,6 +1,5 @@
 // Login.js in sever-side
 const express = require("express");
-const passport = require(`passport`);
 const VerifyUserCon = require("../../../components/users/controllers/VerifyUserController");
 
 const router = express.Router();
@@ -12,7 +11,6 @@ router.post(`/login`, async (req, res) => {
     const { idToken, accessToken } = req.body;
     const user = await VerifyUserCon(idToken, accessToken);
     return res.json({
-
       isLoggedIn: true,
       message: "Success",
       error: false,
