@@ -3,7 +3,7 @@ import {
   statusCodes,
 } from '@react-native-google-signin/google-signin';
 import {useEffect} from 'react';
-import {View, Text, Image, TouchableOpacity} from 'react-native';
+import {View, Text, Image, TouchableOpacity, ActivityIndicator} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {LOG} from '../../../../../../logger.config';
 import SafeKeyComponent from '../../../../components/safe_area/SafeKeyComponent';
@@ -49,6 +49,7 @@ const LoginScreen = ({navigation}) => {
       } else if (error.code === statusCodes.IN_PROGRESS) {
       } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
       } else {
+        
       }
     }
   };
