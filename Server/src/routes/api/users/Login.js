@@ -1,6 +1,5 @@
 // Login.js in sever-side
 const express = require("express");
-const passport = require(`passport`);
 const VerifyUserCon = require("../../../components/users/controllers/VerifyUserController");
 
 const router = express.Router();

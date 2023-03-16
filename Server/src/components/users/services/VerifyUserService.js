@@ -25,6 +25,7 @@ const VerifyUserSv = async (idToken, accessToken) => {
           console.log("🚀 ~ file: Login.js:39 ~ newUser:", newUser);
           await newUser.save();
           return newUser;
+
         }else{
           const newUser = await User.create({
             googleId: payload.sub,
@@ -36,6 +37,7 @@ const VerifyUserSv = async (idToken, accessToken) => {
           console.log("🚀 ~ file: Login.js:39 ~ newUser:", newUser);
           await newUser.save();
           return newUser;
+
         }
       }
     } catch (error) {

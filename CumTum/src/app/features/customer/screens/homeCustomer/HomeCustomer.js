@@ -19,6 +19,7 @@ const HomeCustomer = ({route, navigation}) => {
       await GoogleSignin.signOut();
 
       navigation.replace(Router.LOGIN);
+      //oke
     } catch (error) {
       console.error(error);
     }

@@ -19,6 +19,7 @@ const log = LOG.extend(`GOOGLE_SIGNIN.JS`);
 
 const GoogleSignIn = ({navigation}) => {
   const data = useSelector(adminSelector);
+  console.log("🚀 ~ file: GoogleSignIn.js:22 ~ GoogleSignIn ~ data:", data)
   const isLoading = data.isLoading;
   // console.log(
   //   '🚀 ~ file: GoogleSignIn.js:23 ~ GoogleSignIn ~ isLoading:',
@@ -42,12 +43,14 @@ const GoogleSignIn = ({navigation}) => {
     try {
       await GoogleSignin.hasPlayServices({showPlayServicesUpdateDialog: true});
 
+
       const {idToken} = await GoogleSignin.signIn();
       log.info('🚀 ~ file: GoogleSignIn.js:34 ~ signIn ~ idToken:', idToken);
 
       const {accessToken} = await GoogleSignin.getTokens();
       dispatch(fetchLogin(idToken, accessToken));
       // navigation.replace(Router.ADMIN_STACK)
+
     } catch (error) {
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
       } else if (error.code === statusCodes.IN_PROGRESS) {

@@ -29,6 +29,10 @@ const ManagerRouter = (app, fixPublic) => {
   const SUB_USERS = `${MAIN}/${USERS}`; //=> xoá bớt 1{} đi vì dư 
   const SUB_PRODUCTS = `${MAIN}/${PRODUCTS}`; //=> xoá bớt 1{} đi vì dư 
   //=> Check lại hết theo project theo project
+
+  /* Media */
+  app.use(MAIN, ApiProducts.uploadImage, fixPublic);
+
   /* Users */
   app.use(MAIN, ApiUser.login, fixPublic);
   app.use(SUB_USERS, ApiUser.createOtp, fixPublic);
