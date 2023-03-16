@@ -11,7 +11,7 @@ import Router from '../../../../navigation/Router';
 import {constants} from '../../../../shared/constants';
 import {fetchLogin} from '../../apiAdmin';
 import {adminSelector} from '../../sliceAdmin';
-import StyleLoin from '../login/StyleLogin';
+import StyleLogin from '../login/StyleLogin';
 
 const LoginScreen = ({navigation}) => {
   const log = LOG.extend(`GOOGLE_SIGNIN.JS`);
@@ -41,7 +41,6 @@ const LoginScreen = ({navigation}) => {
 
       const {accessToken} = await GoogleSignin.getTokens();
 
-      
       dispatch(fetchLogin(idToken, accessToken));
       // navigation.navigate(Router.ADMIN_STACK)
     } catch (error) {
@@ -66,22 +65,23 @@ const LoginScreen = ({navigation}) => {
           </View>
         </View>
         {/* body */}
-        <View style={StyleLoin.body}>
-          {isLoading && <ActivityIndicator size={'large'} />}
-
-          <View style={StyleLoin.TouchableOpacitybody}>
-            <TouchableOpacity onPress={signIn}>
-              <View>
+        <View style={StyleLogin.body}>
+          <View style={StyleLogin.viewbtn}>
+            <View style={StyleLogin.touchAbleOpacityBody}>
+              <TouchableOpacity
+                onPress={GoogleSignIn => (
+                  <GoogleSignIn navigation={navigation} />
+                )}>
                 <Image
-                  style={StyleLoin.imagebody1}
+                  style={StyleLogin.imageBody1}
                   source={require('../../../../../../src/assets/image/chugg.png')}
                 />
                 <Image
-                  style={StyleLoin.imagebody2}
+                  style={StyleLogin.imageBody2}
                   source={require('../../../../../../src/assets/image/logogg.png')}
                 />
-              </View>
-            </TouchableOpacity>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
       </View>
