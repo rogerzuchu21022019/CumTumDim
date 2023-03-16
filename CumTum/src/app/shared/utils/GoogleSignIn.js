@@ -19,6 +19,7 @@ const log = LOG.extend(`GOOGLE_SIGNIN.JS`);
 
 const GoogleSignIn = ({navigation}) => {
   const data = useSelector(adminSelector);
+  console.log("🚀 ~ file: GoogleSignIn.js:22 ~ GoogleSignIn ~ data:", data)
   const isLoading = data.isLoading;
   // console.log(
   //   '🚀 ~ file: GoogleSignIn.js:23 ~ GoogleSignIn ~ isLoading:',

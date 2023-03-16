@@ -33,9 +33,9 @@ export const adminSlice = createSlice({
       state.error = dataResponse.error;
       state.user = dataResponse.data;
 
-      state.user.role === constants.ROLE.ADMIN
-        ? RootNavigation.navigate(Router.ADMIN_STACK)
-        : RootNavigation.navigate(Router.CUSTOMER_STACK);
+      // state.user.role === constants.ROLE.ADMIN
+      //   ? RootNavigation.navigate(Router.ADMIN_STACK)
+      //   : RootNavigation.navigate(Router.CUSTOMER_STACK);
     });
     builder.addCase(fetchLogin.rejected, (state, action) => {
       state.isLoading = false;

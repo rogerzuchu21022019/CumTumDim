@@ -11,12 +11,13 @@ import {Provider} from 'react-redux';
 import AdminStack from './src/app/navigation/AdminStack';
 import CustomerStack from './src/app/navigation/CustomerStack';
 
-// import RootNavigation 
+// import RootNavigation
 import {navigationRef} from './src/app/navigation/RootNavigation';
 
 // Redux Persist
-import persistStore from 'redux-persist/es/persistStore';
-import {PersistGate} from 'redux-persist/integration/react';
+
+import { persistStore, persistReducer } from 'reduxjs-toolkit-persist'
+import { PersistGate } from 'reduxjs-toolkit-persist/integration/react'
 import SplashSrceeen from './src/app/features/admin/screens/splashSrceeen/SplashSrceeen';
 let persistor = persistStore(Store);
 
@@ -27,9 +28,9 @@ const App = () => {
     <Provider store={Store}>
       <PersistGate loading={null} persistor={persistor}>
         <NavigationContainer ref={navigationRef}>
-          <Stack.Navigator initialRouteName='SplashSrceen'> 
-          <Stack.Screen
-          name={Router.SPLASH_SCREEN}
+          <Stack.Navigator >
+            <Stack.Screen
+              name={Router.SPLASH_SCREEN}
               component={SplashSrceeen}
               options={{
                 headerShown: false,
@@ -52,9 +53,6 @@ const App = () => {
         </NavigationContainer>
       </PersistGate>
     </Provider>
-    // <SafeKeyComponent>
-    //   <DetailCard/>
-    // </SafeKeyComponent>
   );
 };
 
