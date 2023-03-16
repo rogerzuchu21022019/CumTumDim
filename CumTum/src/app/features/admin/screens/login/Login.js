@@ -13,6 +13,8 @@ import {fetchLogin} from '../../apiAdmin';
 import {adminSelector} from '../../sliceAdmin';
 import StyleLoin from '../login/StyleLogin';
 
+import auth from '@react-native-firebase/auth';
+
 const LoginScreen = ({navigation}) => {
   const log = LOG.extend(`GOOGLE_SIGNIN.JS`);
   const data = useSelector(adminSelector);
@@ -33,10 +35,9 @@ const LoginScreen = ({navigation}) => {
   const signIn = async () => {
     try {
       await GoogleSignin.hasPlayServices({showPlayServicesUpdateDialog: true});
-
       const {idToken} = await GoogleSignin.signIn();
       // console.log("🚀 ~ file: Login.js:44 ~ signIn ~ currentUser:", currentUser)
-      // console.log("🚀 ~ file: Login.js:38 ~ signIn ~ idToken:", idToken)
+      console.log("🚀 ~ file: Login.js:38 ~ signIn ~ idToken:", idToken)
       // log.info('🚀 ~ file: GoogleSignIn.js:34 ~ signIn ~ idToken:', idToken);
 
       const {accessToken} = await GoogleSignin.getTokens();
@@ -46,10 +47,14 @@ const LoginScreen = ({navigation}) => {
       // navigation.navigate(Router.ADMIN_STACK)
     } catch (error) {
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
-      } else if (error.code === statusCodes.IN_PROGRESS) {
-      } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
-      } else {
+        console.log("🚀 ~ file: Login.js:50 ~ signIn ~ error: SIGN_IN_CANCELLED", error)
         
+      } else if (error.code === statusCodes.IN_PROGRESS) {
+      console.log("🚀 ~ file: Login.js:53 ~ signIn ~ error: IN_PROGRESS", error)
+      } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+      console.log("🚀 ~ file: Login.js:55 ~ signIn ~ error: PLAY_SERVICES_NOT_AVAILABLE", error)
+    } else {
+        console.log("🚀 ~ file: Login.js:55 ~ signIn ~ error DEV OR CODE=10 :", error)
       }
     }
   };
