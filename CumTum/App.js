@@ -17,7 +17,7 @@ import {navigationRef} from './src/app/navigation/RootNavigation';
 // Redux Persist
 import persistStore from 'redux-persist/es/persistStore';
 import {PersistGate} from 'redux-persist/integration/react';
-import DetailCard from './src/app/features/admin/DetailCard/DetailCard';
+import DetailCard from './src/app/features/admin/screens/detailCart/DetailCard';
 import SafeKeyComponent from './src/app/components/safe_area/SafeKeyComponent';
 let persistor = persistStore(Store);
 

@@ -1,6 +1,6 @@
 import {Text, View,Image,FlatList} from 'react-native'
 import React from 'react'
-import SafeKeyComponent from '../../../components/safe_area/SafeKeyComponent'
+import SafeKeyComponent from '../../../../components/safe_area/SafeKeyComponent'
 import styles from './StylesDetailCard'
 import {FlashList} from '@shopify/flash-list';
 // import { FlatList } from 'react-native/Libraries/Lists/FlatList';
@@ -171,7 +171,7 @@ const DetailCard = () => {
                             </View>
                             <View>
                                 <Text style={styles.itemPrice}>{item.price}</Text>
-                            </View  >
+                            </View>
                         </View>
                         <View style={styles.itemQuantity}>
                             <Text style={styles.numberItem}>{item.quantity}</Text>
