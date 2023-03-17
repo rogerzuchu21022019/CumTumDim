@@ -1,8 +1,9 @@
-import {Text, View, Image, ScrollView, Flaslitst} from 'react-native';
+import {Text, View, Image, ScrollView, FlatList} from 'react-native';
 import React from 'react';
 import styles from './StylesHome';
 import SafeKeyComponent from '../../../components/safe_area/SafeKeyComponent';
-import { DATA } from './Data';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import DATA from './Data';
 
 const HomeAdmin = () => {
   return (
@@ -23,11 +24,18 @@ const HomeAdmin = () => {
           <View style={styles.strikethrough}></View>
         </View>
         <View style={styles.body}>
-          <ScrollView>
-            <View style={styles.itemOder}>
-             
-            </View>
-          </ScrollView>
+          <View style={styles.viewFlashList}>
+            <FlatList
+              data={DATA}
+              renderItem={({item}) => (
+                <View style={styles.itemOder}>
+                  <Text style={styles.itemText}>{item.name}</Text>
+                  <Text style={styles.itemText}>||</Text>
+                  <Text style={styles.itemText}>{item.price}</Text>
+                </View>
+              )}
+            />
+          </View>
         </View>
       </View>
     </SafeKeyComponent>

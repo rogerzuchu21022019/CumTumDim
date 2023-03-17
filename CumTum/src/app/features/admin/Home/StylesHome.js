@@ -32,36 +32,36 @@ const StylesHome = StyleSheet.create({
         flexDirection:'row',
         alignItems:'center',
     },
-    // header
+    //header
 
 
-    //  body
+    //body
     body: {
         flex:7,
         backgroundColor: '#252121',
         alignItems:'center',
-        
-        
     },
     groupItem:{
-
+    },
+    viewFlashList:{
+        flex: 1,
+        backgroundColor:'green',
     },
     itemOder:{
         flexDirection:'row',
-         backgroundColor:'#2F2D2D',
-
+        backgroundColor:'#2F2D2D',
         width:350,
         height:40,
         justifyContent:'space-around',
         alignItems:'center',
         borderRadius:5,
-        marginTop:10
-        
+        marginTop:10,
     },
 
     itemText:{
         color:'white',
         fontSize:15
     },
+    //body
 })
 export default StylesHome
