@@ -1,7 +1,140 @@
-import {Text, View,Image,ScrollView } from 'react-native'
+import {Text, View,Image,FlatList} from 'react-native'
 import React from 'react'
 import SafeKeyComponent from '../../../components/safe_area/SafeKeyComponent'
 import styles from './StylesDetailCard'
+import {FlashList} from '@shopify/flash-list';
+// import { FlatList } from 'react-native/Libraries/Lists/FlatList';
+
+
+const DATA = [
+    {
+      id: '1',
+      title: 'Mon chinh',
+      number:'1',
+      uri :'https://cdn.daynauan.info.vn/wp-content/uploads/2015/06/com-tam-suon-bi-cha.jpg',
+      name:'Suon bi',
+      price:'25k',
+      quantity:'1',
+    },
+    {
+      id: '2',
+      title: 'Mon chinh',
+      number:'1',
+      uri :'https://cdn.daynauan.info.vn/wp-content/uploads/2015/06/com-tam-suon-bi-cha.jpg',
+      name:'Suon bi',
+      price:'25k',
+      quantity:'1',
+    },
+    {
+      id: '3',
+      title: 'Mon chinh',
+      number:'1',
+      uri :'https://cdn.daynauan.info.vn/wp-content/uploads/2015/06/com-tam-suon-bi-cha.jpg',
+      name:'Suon bi',
+      price:'25k',
+      quantity:'1',
+    },
+    {
+      id: '4',
+      title: 'Mon chinh',
+      number:'1',
+      uri :'https://cdn.daynauan.info.vn/wp-content/uploads/2015/06/com-tam-suon-bi-cha.jpg',
+      name:'Suon bi',
+      price:'25k',
+      quantity:'1',
+    },
+    {
+      id: '5',
+      title: 'Mon chinh',
+      number:'1',
+      uri :'https://cdn.daynauan.info.vn/wp-content/uploads/2015/06/com-tam-suon-bi-cha.jpg',
+      name:'Suon bi',
+      price:'25k',
+      quantity:'1',
+    },
+    {
+      id: '6',
+      title: 'Mon chinh',
+      number:'1',
+      uri :'https://cdn.daynauan.info.vn/wp-content/uploads/2015/06/com-tam-suon-bi-cha.jpg',
+      name:'Suon bi',
+      price:'25k',
+      quantity:'1',
+    },
+    {
+      id: '7',
+      title: 'Mon chinh',
+      number:'1',
+      uri :'https://cdn.daynauan.info.vn/wp-content/uploads/2015/06/com-tam-suon-bi-cha.jpg',
+      name:'Suon bi',
+      price:'25k',
+      quantity:'1',
+    },
+    {
+      id: '8',
+      title: 'Mon chinh',
+      number:'1',
+      uri :'https://cdn.daynauan.info.vn/wp-content/uploads/2015/06/com-tam-suon-bi-cha.jpg',
+      name:'Suon bi',
+      price:'25k',
+      quantity:'1',
+    },
+    {
+      id: '9',
+      title: 'Mon chinh',
+      number:'1',
+      uri :'https://cdn.daynauan.info.vn/wp-content/uploads/2015/06/com-tam-suon-bi-cha.jpg',
+      name:'Suon bi',
+      price:'25k',
+      quantity:'1',
+    },
+    {
+      id: '10',
+      title: 'Mon chinh',
+      number:'1',
+      uri :'https://cdn.daynauan.info.vn/wp-content/uploads/2015/06/com-tam-suon-bi-cha.jpg',
+      name:'Suon bi',
+      price:'25k',
+      quantity:'1',
+    },
+    {
+      id: '11',
+      title: 'Mon chinh',
+      number:'1',
+      uri :'https://cdn.daynauan.info.vn/wp-content/uploads/2015/06/com-tam-suon-bi-cha.jpg',
+      name:'Suon bi',
+      price:'25k',
+      quantity:'1',
+    },
+    {
+      id: '12',
+      title: 'Mon chinh',
+      number:'1',
+      uri :'https://cdn.daynauan.info.vn/wp-content/uploads/2015/06/com-tam-suon-bi-cha.jpg',
+      name:'Suon bi',
+      price:'25k',
+      quantity:'1',
+    },
+    {
+      id: '13',
+      title: 'Mon chinh',
+      number:'1',
+      uri :'https://cdn.daynauan.info.vn/wp-content/uploads/2015/06/com-tam-suon-bi-cha.jpg',
+      name:'Suon bi',
+      price:'25k',
+      quantity:'1',
+    },
+    {
+      id: '14',
+      title: 'Mon chinh',
+      number:'1',
+      uri :'https://cdn.daynauan.info.vn/wp-content/uploads/2015/06/com-tam-suon-bi-cha.jpg',
+      name:'Suon bi',
+      price:'25k',
+      quantity:'1',
+    },
+  
+  ];
 
 const DetailCard = () => {
   return (
@@ -12,326 +145,47 @@ const DetailCard = () => {
                     <Image source={require("../../../../assets/iconLogo.png")}/>
                     <Text style={styles.textTitle}>Cum tứm đim</Text>
                 </View>
-                <View style={styles.strikethrough}></View>
-               
+                <View style={styles.strikethrough}>
+                </View>  
             </View>
-            <View  style={styles.body}>
-                <ScrollView>
-
+            <View style={styles.body}>
+              <View style={{flex:1}}>
+                <FlatList
+                data={DATA}
+                keyExtractor={(item)=>item.id}
+                renderItem={({ item }) => 
                     <View style={styles.itemFinal}>
-                        <View style={styles.itemTitle}><Text style={styles.nameTitle}>Mon chinh</Text></View>
-
-                        <View style={styles.itemEat}>
-                            <View style={styles.itemNumber}>
-                                <Text style={styles.numberItem}>1</Text>
-                            </View>
-                            <View style={styles.itemImg}>
-                                <Image source={require('../../../../assets/iconLogo.png')}/>
-                            </View>
-                            <View style={styles.groupItem}>
-                                <View>
-                                <Text style={styles.itemName}>Suon bi</Text>
-                                </View>
-                                <View>
-                                    <Text style={styles.itemPrice}>50k</Text>
-
-                                </View  >
-                                
-                            </View>
-                            <View style={styles.itemQuantity}>
-                                <Image source={require('../../../../assets/iconPlus.png')}/>
-                                <Text style={styles.numberItem}>01</Text>
-                                <Image source={require('../../../../assets/iconHyphen.png')}/>
-
-                                
-                            </View>
-                            
-                        </View>
-                        <View style={styles.itemEat}>
-                            <View style={styles.itemNumber}>
-                                <Text style={styles.numberItem}>1</Text>
-                            </View>
-                            <View style={styles.itemImg}>
-                                <Image source={require('../../../../assets/iconLogo.png')}/>
-                            </View>
-                            <View style={styles.groupItem}>
-                                <View>
-                                <Text style={styles.itemName}>Suon bi</Text>
-                                </View>
-                                <View>
-                                    <Text style={styles.itemPrice}>50k</Text>
-
-                                </View  >
-                                
-                            </View>
-                            <View style={styles.itemQuantity}>
-                                <Image source={require('../../../../assets/iconPlus.png')}/>
-                                <Text style={styles.numberItem}>01</Text>
-                                <Image source={require('../../../../assets/iconHyphen.png')}/>
-
-                                
-                            </View>
-                            
-                        </View>
-                        <View style={styles.itemEat}>
-                            <View style={styles.itemNumber}>
-                                <Text style={styles.numberItem}>1</Text>
-                            </View>
-                            <View style={styles.itemImg}>
-                                <Image source={require('../../../../assets/iconLogo.png')}/>
-                            </View>
-                            <View style={styles.groupItem}>
-                                <View>
-                                <Text style={styles.itemName}>Suon bi</Text>
-                                </View>
-                                <View>
-                                    <Text style={styles.itemPrice}>50k</Text>
-
-                                </View  >
-                                
-                            </View>
-                            <View style={styles.itemQuantity}>
-                                <Image source={require('../../../../assets/iconPlus.png')}/>
-                                <Text style={styles.numberItem}>01</Text>
-                                <Image source={require('../../../../assets/iconHyphen.png')}/>
-
-                                
-                            </View>
-                            
-                        </View>
-                        <View style={styles.Line}></View>
-
-                    
-
+                        <View style={styles.itemTitle}>
+                            <Text style={styles.nameTitle}>{item.title}</Text>
                     </View>
-                    <View style={styles.itemFinal}>
-                        <View style={styles.itemTitle}><Text style={styles.nameTitle}>Mon chinh</Text></View>
-
-                        <View style={styles.itemEat}>
-                            <View style={styles.itemNumber}>
-                                <Text style={styles.numberItem}>1</Text>
-                            </View>
-                            <View style={styles.itemImg}>
-                                <Image source={require('../../../../assets/iconLogo.png')}/>
-                            </View>
-                            <View style={styles.groupItem}>
-                                <View>
-                                <Text style={styles.itemName}>Suon bi</Text>
-                                </View>
-                                <View>
-                                    <Text style={styles.itemPrice}>50k</Text>
-
-                                </View  >
-                                
-                            </View>
-                            <View style={styles.itemQuantity}>
-                                <Image source={require('../../../../assets/iconPlus.png')}/>
-                                <Text style={styles.numberItem}>01</Text>
-                                <Image source={require('../../../../assets/iconHyphen.png')}/>
-
-                                
-                            </View>
-                            
+                    <View style={styles.itemEat}>
+                        <View style={styles.itemNumber}>
+                            <Text style={styles.numberItem}>{item.number}</Text>
                         </View>
-                        <View style={styles.itemEat}>
-                            <View style={styles.itemNumber}>
-                                <Text style={styles.numberItem}>1</Text>
-                            </View>
-                            <View style={styles.itemImg}>
-                                <Image source={require('../../../../assets/iconLogo.png')}/>
-                            </View>
-                            <View style={styles.groupItem}>
-                                <View>
-                                <Text style={styles.itemName}>Suon bi</Text>
-                                </View>
-                                <View>
-                                    <Text style={styles.itemPrice}>50k</Text>
-
-                                </View  >
-                                
-                            </View>
-                            <View style={styles.itemQuantity}>
-                                <Image source={require('../../../../assets/iconPlus.png')}/>
-                                <Text style={styles.numberItem}>01</Text>
-                                <Image source={require('../../../../assets/iconHyphen.png')}/>
-
-                                
-                            </View>
-                            
+                        <View style={styles.itemImg}>
+                            <Image style={styles.image} source={{uri:'https://cdn.daynauan.info.vn/wp-content/uploads/2015/06/com-tam-suon-bi-cha.jpg'}}/>
                         </View>
-                        <View style={styles.itemEat}>
-                            <View style={styles.itemNumber}>
-                                <Text style={styles.numberItem}>1</Text>
+                        <View style={styles.groupItem}>
+                            <View>
+                            <Text style={styles.itemName}>{item.name}</Text>
                             </View>
-                            <View style={styles.itemImg}>
-                                <Image source={require('../../../../assets/iconLogo.png')}/>
-                            </View>
-                            <View style={styles.groupItem}>
-                                <View>
-                                <Text style={styles.itemName}>Suon bi</Text>
-                                </View>
-                                <View>
-                                    <Text style={styles.itemPrice}>50k</Text>
-
-                                </View  >
-                                
-                            </View>
-                            <View style={styles.itemQuantity}>
-                                <Image source={require('../../../../assets/iconPlus.png')}/>
-                                <Text style={styles.numberItem}>01</Text>
-                                <Image source={require('../../../../assets/iconHyphen.png')}/>
-
-                                
-                            </View>
-                            
+                            <View>
+                                <Text style={styles.itemPrice}>{item.price}</Text>
+                            </View  >
                         </View>
-                        <View style={styles.Line}></View>
-
-                    
-
-                    </View>
-                    <View style={styles.itemFinal}>
-                        <View style={styles.itemTitle}><Text style={styles.nameTitle}>Mon chinh</Text></View>
-
-                        <View style={styles.itemEat}>
-                            <View style={styles.itemNumber}>
-                                <Text style={styles.numberItem}>1</Text>
-                            </View>
-                            <View style={styles.itemImg}>
-                                <Image source={require('../../../../assets/iconLogo.png')}/>
-                            </View>
-                            <View style={styles.groupItem}>
-                                <View>
-                                <Text style={styles.itemName}>Suon bi</Text>
-                                </View>
-                                <View>
-                                    <Text style={styles.itemPrice}>50k</Text>
-
-                                </View  >
-                                
-                            </View>
-                            <View style={styles.itemQuantity}>
-                                <Image source={require('../../../../assets/iconPlus.png')}/>
-                                <Text style={styles.numberItem}>01</Text>
-                                <Image source={require('../../../../assets/iconHyphen.png')}/>
-
-                            </View>
-                             
-
-                            
-                        </View>
-                        
-                        <View style={styles.itemEat}>
-                            <View style={styles.itemNumber}>
-                                <Text style={styles.numberItem}>1</Text>
-                            </View>
-                            <View style={styles.itemImg}>
-                                <Image source={require('../../../../assets/iconLogo.png')}/>
-                            </View>
-                            <View style={styles.groupItem}>
-                                <View>
-                                <Text style={styles.itemName}>Suon bi</Text>
-                                </View>
-                                <View>
-                                    <Text style={styles.itemPrice}>50k</Text>
-
-                                </View  >
-                                
-                            </View>
-                            <View style={styles.itemQuantity}>
-                                <Image source={require('../../../../assets/iconPlus.png')}/>
-                                <Text style={styles.numberItem}>01</Text>
-                                <Image source={require('../../../../assets/iconHyphen.png')}/>
-
-                                
-                            </View>
-                            
-                        </View>
-                        <View style={styles.itemEat}>
-                            <View style={styles.itemNumber}>
-                                <Text style={styles.numberItem}>1</Text>
-                            </View>
-                            <View style={styles.itemImg}>
-                                <Image source={require('../../../../assets/iconLogo.png')}/>
-                            </View>
-                            <View style={styles.groupItem}>
-                                <View>
-                                <Text style={styles.itemName}>Suon bi</Text>
-                                </View>
-                                <View>
-                                    <Text style={styles.itemPrice}>50k</Text>
-
-                                </View  >
-                                
-                            </View>
-                            <View style={styles.itemQuantity}>
-                                <Image source={require('../../../../assets/iconPlus.png')}/>
-                                <Text style={styles.numberItem}>01</Text>
-                                <Image source={require('../../../../assets/iconHyphen.png')}/>
-
-                                
-                            </View>
-                           
-
-                            
-                        </View>
-                        <View style={styles.Line}></View>
-                    
-
-                    </View>
-                    <View>
-                        <View style={styles.itemAddress}>
-                            <Text style={styles.textAddress}> Số nhà : 54</Text>
-                        </View> 
-                        <View style={styles.itemAddress}>
-                            <Text style={styles.textAddress}>Phường : 14</Text>
-                        </View>
-                        <View style={styles.itemAddress}>
-                            <Text style={styles.textAddress}>Đường : Đông Hưng Thuận</Text>
-                        </View>
-                        <View style={styles.itemAddress}>
-                            <Text style={styles.textAddress}>Quận : 12</Text>
-                        </View>
-                        <View style={styles.itemAddress}>
-                            <Text style={styles.textAddress}>Thành Phố : Hồ Chí Minh</Text>
-                        </View>
-                        <View style={styles.Line}></View>
-                        <View style={styles.itemAddress}>
-                            <Text style={styles.textAddress}> Giờ : 13h45p</Text>
-                        </View> 
-                        <View style={styles.itemAddress}>
-                            <Text style={styles.textAddress}>SĐT : 0866704364</Text>
-                        </View>
-                        <View style={styles.itemAddress}>
-                            <Text style={styles.textAddress}>Tổng số lượng món ăn : 4</Text>
-                        </View>
-                        <View style={styles.itemAddress}>
-                            <Text style={styles.textAddress}>Tổng số lượng món ăn thêm : 3</Text>
-                        </View>
-                        <View style={styles.itemAddress}>
-                            <Text style={styles.textAddress}>Tổng số lượng topping : 2</Text>
-                        </View>
-                        <View style={styles.itemAddress}>
-                            <Text style={styles.textAddress}>Tổng số lượng Khác : 2</Text>
-                        </View>
-                        <View style={styles.itemAddress}>
-                            <Text style={styles.textAddress}>Tổng tiền : 133k</Text>
-                        </View>
-
-                    </View>
-                    <View style={{justifyContent:'center',alignItems:'center',}}>
-                         <View style={styles.itemBtn}> 
-                            <Text style={styles.textAddress}> Xác nhận</Text>
+                        <View style={styles.itemQuantity}>
+                            <Text style={styles.numberItem}>{item.quantity}</Text>
                         </View>
                     </View>
-                       
-                  
-                   
-                    
-                    
-                    
-                </ScrollView>
+
+                    </View>
+                }
+                estimatedItemSize={10}
+                />
+              </View> 
+                
             </View>
+            
           
         </View>
     </SafeKeyComponent>

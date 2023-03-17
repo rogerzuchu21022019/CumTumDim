@@ -17,36 +17,38 @@ import {navigationRef} from './src/app/navigation/RootNavigation';
 // Redux Persist
 import persistStore from 'redux-persist/es/persistStore';
 import {PersistGate} from 'redux-persist/integration/react';
+import DetailCard from './src/app/features/admin/DetailCard/DetailCard';
+import SafeKeyComponent from './src/app/components/safe_area/SafeKeyComponent';
 let persistor = persistStore(Store);
 
 const App = () => {
   const Stack = createNativeStackNavigator();
 
   return (
-    <Provider store={Store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <NavigationContainer ref={navigationRef}>
-          <Stack.Navigator>
-            <Stack.Screen
-              name={Router.LOGIN}
-              component={LoginScreen}
-              options={{
-                headerShown: false,
-              }}
-            />
+    // <Provider store={Store}>
+    //   <PersistGate loading={null} persistor={persistor}>
+    //     <NavigationContainer ref={navigationRef}>
+    //       <Stack.Navigator>
+    //         <Stack.Screen
+    //           name={Router.LOGIN}
+    //           component={LoginScreen}
+    //           options={{
+    //             headerShown: false,
+    //           }}
+    //         />
 
-            <Stack.Screen name={Router.ADMIN_STACK} component={AdminStack} />
-            <Stack.Screen
-              name={Router.CUSTOMER_STACK}
-              component={CustomerStack}
-            />
-          </Stack.Navigator>
-        </NavigationContainer>
-      </PersistGate>
-    </Provider>
-    // <SafeKeyComponent>
-    //   <DetailCard/>
-    // </SafeKeyComponent>
+    //         <Stack.Screen name={Router.ADMIN_STACK} component={AdminStack} />
+    //         <Stack.Screen
+    //           name={Router.CUSTOMER_STACK}
+    //           component={CustomerStack}
+    //         />
+    //       </Stack.Navigator>
+    //     </NavigationContainer>
+    //   </PersistGate>
+    // </Provider>
+    <SafeKeyComponent>
+      <DetailCard/>
+    </SafeKeyComponent>
   );
 };
 

@@ -50,16 +50,13 @@ const StylesDetailCard = StyleSheet.create({
         borderRadius:10,
         paddingStart:5,
         marginBottom:10,
-        
-      
-        
-
 
     },
     itemNumber:{
         paddingEnd:10,
         
     },
+   
 
     numberItem:{
         color:'white'
@@ -72,14 +69,22 @@ const StylesDetailCard = StyleSheet.create({
         width:100,
     },
     itemImg:{
-        paddingEnd:20,
+        marginEnd:40,
+        marginStart:20     
+    },
+    image:{
+        width:60,
+        height:60,
+        borderRadius:10,
+
     },
     groupItem:{
         paddingEnd:90,
     },
     itemName:{
         paddingBottom:10,
-        color:'white'
+        color:'white',
+       
 
     },
     itemPrice:{
@@ -121,3 +126,34 @@ const StylesDetailCard = StyleSheet.create({
    
 })
 export default StylesDetailCard
+{/* <FlashList
+data={DATA}
+renderItem={({ item }) =>
+    <View style={styles.itemName}>
+        <View style={styles.itemTitle}><Text style={styles.nameTitle}>{item.title}</Text>
+    </View>
+    <View style={styles.itemEat}>
+        <View style={styles.itemNumber}>
+            <Text style={styles.numberItem}>{item.number}</Text>
+        </View>
+        <View style={styles.itemImg}>
+            <Image source={require('../../../../assets/iconLogo.png')}/>
+        </View>
+        <View style={styles.groupItem}>
+            <View>
+            <Text style={styles.itemName}>{item.name}</Text>
+            </View>
+            <View>
+                <Text style={styles.itemPrice}>{item.price}</Text>
+            </View  >
+        </View>
+        <View style={styles.itemQuantity}>
+            <Text style={styles.numberItem}>{item.quantity}</Text>
+        </View>
+    </View>
+    <View style={styles.Line}></View>
+
+    </View>
+}
+estimatedItemSize={200}
+/> */}
