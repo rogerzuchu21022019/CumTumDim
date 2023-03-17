@@ -5,6 +5,7 @@ import {
   Platform,
   SafeAreaView,
   ScrollView,
+  StatusBar,
   StyleSheet,
   TouchableWithoutFeedback,
   View,
@@ -12,22 +13,20 @@ import {
 import React from 'react';
 
 import {useDeviceOrientation} from '@react-native-community/hooks';
+import { constants } from '../../shared/constants';
 
-const SafeKeyComponent = (props) => {
+const SafeKeyComponent = props => {
   const {children} = props;
   /* ------------------------------- orientation ------------------------------ */
   const orientation = useDeviceOrientation();
   //   console.log('is orientation portrait: ', orientation.portrait);
   //   console.log('is orientation landscape: ', orientation.landscape);
-
-
   return (
     <SafeAreaView style={styles.container}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <KeyboardAvoidingView
           style={styles.container}
-          behavior={Platform.OS === "ios" ? "padding" : "height"}
-        >
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
           <>
             {/* Bắt buộc === false mới chạy được UI */}
             {orientation.portrait === false ? (

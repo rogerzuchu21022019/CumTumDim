@@ -1,6 +1,6 @@
 import Router from '../../navigation/Router';
 import {constants} from '../../shared/constants';
-import {fetchLogin} from './apiAdmin';
+import {fetchLogin, fetchSignOut} from './apiAdmin';
 
 const {createSlice} = require('@reduxjs/toolkit');
 import * as RootNavigation from '../../navigation/RootNavigation';
@@ -14,16 +14,13 @@ const initialState = {
   message: null,
 };
 
-export const adminSlice = createSlice({
-  name: constants.SLICE.ADMIN,
+export const authSlice = createSlice({
+  name: constants.SLICE.AUTH,
   initialState: initialState,
   reducers: {},
   extraReducers: builder => {
     builder.addCase(fetchLogin.pending, state => {
       state.isLoading = true;
-      state.error = null;
-      state.user = null;
-      state.isLoggedIn = null;
     });
     builder.addCase(fetchLogin.fulfilled, (state, action) => {
       const dataResponse = action.payload;
@@ -33,15 +30,27 @@ export const adminSlice = createSlice({
       state.error = dataResponse.error;
       state.user = dataResponse.data;
 
-      state.user.role === constants.ROLE.ADMIN
-        ? RootNavigation.navigate(Router.ADMIN_STACK)
-        : RootNavigation.navigate(Router.CUSTOMER_STACK);
+      // state.user.role === constants.ROLE.ADMIN
+      //   ? RootNavigation.replace(Router.ADMIN_STACK)
+      //   : RootNavigation.replace(Router.CUSTOMER_STACK);
     });
     builder.addCase(fetchLogin.rejected, (state, action) => {
       state.isLoading = false;
       state.error = true;
     });
+
+    // Sign Out
+    builder.addCase(fetchSignOut.pending, state => {
+      state.isLoading = true;
+    });
+    builder.addCase(fetchSignOut.fulfilled, state => {
+      return initialState;
+    });
+    builder.addCase(fetchSignOut.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = true;
+    });
   },
 });
-export const adminSelector = state => state.admin;
-export default adminSlice.reducer;
+export const authSelector = state => state.auth;
+export default authSlice.reducer;
