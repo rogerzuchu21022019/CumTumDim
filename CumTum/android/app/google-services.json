@@ -14,12 +14,16 @@
       },
       "oauth_client": [
         {
-          "client_id": "8392071542-mdt496r47iv1g2vb9anrlne97o0ncv4m.apps.googleusercontent.com",
+          "client_id": "8392071542-rhodj3pj05jsqjer7661m8d1pprerrio.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.cumtum",
-            "certificate_hash": "d90b179091ffc9d8e9f40adbe1fb9b921d767c5c"
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
           }
+        },
+        {
+          "client_id": "8392071542-uket243u20vj719uir2iu1ofh4chq7oc.apps.googleusercontent.com",
+          "client_type": 3
         }
       ],
       "api_key": [
@@ -31,7 +35,7 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "8392071542-gql34f16dq5snk9vpk9sobs51m55bndj.apps.googleusercontent.com",
+              "client_id": "8392071542-uket243u20vj719uir2iu1ofh4chq7oc.apps.googleusercontent.com",
               "client_type": 3
             },
             {

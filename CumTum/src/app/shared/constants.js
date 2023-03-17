@@ -1,9 +1,12 @@
 export const constants = {
   COLOR: {
-    // PRIMARY: '#53B175',
-    SECONDARY: '#414757',
-    Price:'#FE724C',
-    item:'#252121'
+    ORANGE:'#FE724C',
+    GREY:'#252121',
+    YELLOW:'#FFB703',
+    BLACK:'#282222',
+    WHITE:'#FFFFFF',
+    RED:'#F20000',
+
   },
   FONT: {
     GilroyMedium: 'Gilroy-Medium',
@@ -31,7 +34,7 @@ export const constants = {
     SourceSansProSemiBold: 'SourceSansProSemiBold',
   },
   BASE_URL: {
-    MAIN: 'http://192.168.1.37:3000/api',
+    MAIN: 'http://192.168.2.101:3000/api',
     SECOND: 'https://fpoly-hcm.herokuapp.com/api',
     THIRD: 'https://cumtumdim.becofoodstore.click/api',
   },
@@ -41,18 +44,20 @@ export const constants = {
   },
   GOOGLE_CONSOLE: {
     WEB_CLIENT:
-      '8392071542-gql34f16dq5snk9vpk9sobs51m55bndj.apps.googleusercontent.com',
+      '8392071542-uket243u20vj719uir2iu1ofh4chq7oc.apps.googleusercontent.com',
     IOS_CLIENT:
       '8392071542-6jau34qpcu594et1vbt2uukakso783au.apps.googleusercontent.com',
+    ANDROID_CLIENT:
+      '8392071542-rhodj3pj05jsqjer7661m8d1pprerrio.apps.googleusercontent.com',
   },
-  SCOPES:{
+  SCOPES: {
     PROFILE: 'profile',
     EMAIL: 'email',
   },
-  FETCH:{
-    LOGIN:"fetchLogin"
+  FETCH: {
+    LOGIN: 'fetchLogin',
   },
-  SLICE:{
-    ADMIN:"admin"
-  }
+  SLICE: {
+    ADMIN: 'admin',
+  },
 };
