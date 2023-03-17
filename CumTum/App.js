@@ -46,7 +46,6 @@ const App = () => {
                 headerShown: false,
               }}
             />
-            // ok
             <Stack.Screen name={Router.ADMIN_STACK} component={AdminStack} />
             <Stack.Screen
               name={Router.CUSTOMER_STACK}

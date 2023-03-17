@@ -41,6 +41,7 @@ const LoginScreen = ({navigation}) => {
       // log.info('🚀 ~ file: GoogleSignIn.js:34 ~ signIn ~ idToken:', idToken);
 
       const {accessToken} = await GoogleSignin.getTokens();
+      console.log("🚀 ~ file: Login.js:44 ~ signIn ~ accessToken:", accessToken)
 
       
       dispatch(fetchLogin(idToken, accessToken));
