@@ -9,7 +9,6 @@ import LoginScreen from './Login';
 import Router from './src/app/navigation/Router';
 // import {Store} from './src/app/app_store/Store';
 import Store from './src/app/app_store/Store';
-
 // import Provider
 import { Provider } from 'react-redux';
 import AdminStack from './src/app/navigation/AdminStack';

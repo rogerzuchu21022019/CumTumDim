@@ -1,10 +1,20 @@
-import { View, Text, Image, ImageBackground, TouchableOpacity } from 'react-native'
-import React from 'react'
+import { View, Text, Image, ImageBackground, TouchableOpacity, Keyboard, KeyboardAvoidingView, TextInput } from 'react-native'
+import React, { useState, useRef, useEffect } from 'react'
 import SafeKeyComponent from './../../../components/safe_area/SafeKeyComponent';
 import StyleOTP from './StylesOtp';
 
 
 const Otp = () => {
+    let textInput = useRef(null)
+    const lengthInput = 4;
+    const [internalVal, setInternalVal] = useState('');
+    const onChangText = (val) => {
+        setInternalVal(val)
+    }
+    useEffect(() => {
+        textInput.focus()
+    }, [])
+
     return (
         <SafeKeyComponent>
             <View style={StyleOTP.container}>
@@ -26,25 +36,38 @@ const Otp = () => {
                             <Text style={StyleOTP.itemSend3}>0342128462</Text>
                         </View>
                     </View>
-
                     <View style={StyleOTP.itemBorder}>
-                        <View style={StyleOTP.itemBorder1}>
-                            <Text style={StyleOTP.itemcircle}>0</Text>
-                        </View>
-                        <View style={StyleOTP.itemBorder1}>
-                            <Text style={StyleOTP.itemcircle}>0</Text>
-                        </View>
-                        <View style={StyleOTP.itemBorder1}>
-                            <Text style={StyleOTP.itemcircle}>0</Text>
-                        </View>
-                        <View style={StyleOTP.itemBorder1}>
-                            <Text style={StyleOTP.itemcircle}>0</Text>
-                        </View>
+                        <KeyboardAvoidingView
+                            KeyboardVerticaloffset={50}
+                            behavior={'padding'}>
+                            <View>
+                                <TextInput
+                                    ref={(input) => textInput = input}
+                                    onChangeText={onChangText}
+                                    value={internalVal}
+                                    style={{ height: 0, width: 0 }}
+                                    maxLength={lengthInput}
+                                    returnKeyType="done"
+                                    keyboardType="numeric" />
+                            </View>
+                            <View style={StyleOTP.itemBorder}>
+                                {Array(lengthInput).fill().map((data, index) => (
+                                    <View style={StyleOTP.itemBorder1} key={index}>
+                                        <Text style={StyleOTP.itemcircle}
+                                            onPress={() => textInput.focus()}
+                                        >
+                                            {internalVal && internalVal.length > 0 ? internalVal[index] : ""}
+                                        </Text>
+                                    </View>
+                                ))
+                                }
+                            </View>
+                        </KeyboardAvoidingView>
                     </View>
                     <View style={StyleOTP.itemTimeSend}>
                         <Text style={StyleOTP.itemTimeSend1}>00:30</Text>
                         <Text style={StyleOTP.itemTimeSend2}>Không nhận được mã ? OTP
-                        <Text style={{ color: '#FFA149' }}> Gửi lại OTP</Text></Text>
+                            <Text style={{ color: '#FFA149' }}> Gửi lại OTP</Text></Text>
                     </View>
                     <View style={StyleOTP.buttonAccepct}>
                         <TouchableOpacity>

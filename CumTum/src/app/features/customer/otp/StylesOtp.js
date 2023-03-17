@@ -63,14 +63,14 @@ const stylesOTP = StyleSheet.create({
         //backgroundColor: 'pink',
     },
     itemBorder: {
-        top: 49,
+        top: 20,
         flexDirection: 'row',
         width: '100%',
         height: 72,
-        marginLeft: 0,
         justifyContent: 'space-around',
     },
     itemBorder1: {
+       padding: 5,
         width: 63,
         height: 63,
         borderRadius: 30,
@@ -79,7 +79,7 @@ const stylesOTP = StyleSheet.create({
         borderColor: '#FE724C',
     },
     itemcircle: {
-        fontSize: 40,
+        fontSize: 30,
         textAlign: 'center',
     },
     itemTimeSend: {
