@@ -20,6 +20,11 @@
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Tôi có thể sử dụng Thư viện ảnh không? </string>
+	<key>NSCameraUsageDescription</key>
+	<string>Tôi có thể sử dụng Camera không? </string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>

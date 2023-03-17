@@ -5,7 +5,7 @@ import stylesplashSrceeen from './StyleSplashSrceeen'
 const SplashSrceeen = (props) => {
      const { navigation } = props;
      const nextScreen = () => {
-         navigation.navigate(Router.LOGIN);
+         navigation.replace(Router.LOGIN);
      }
      useEffect(() => {
          setTimeout(nextScreen, 3000);
