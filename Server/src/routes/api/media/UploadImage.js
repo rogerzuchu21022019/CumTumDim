@@ -21,7 +21,7 @@ router.post(`/upload-image`, async (req, res) => {
       isLoading: false,
       isLoggedIn: true,
       error: false,
-      imageUrl: result.url,
+      data: result.secure_url,
     });
   } catch (error) {
     console.log("🚀 ~ file: UploadImage.js:15 ~ router.post ~ error:", error);
