@@ -34,7 +34,7 @@ export const constants = {
     SourceSansProSemiBold: 'SourceSansProSemiBold',
   },
   BASE_URL: {
-    MAIN: 'http://192.168.1.55:3000/api',
+    MAIN: 'http://192.168.1.40:3000/api',
     SECOND: 'https://fpoly-hcm.herokuapp.com/api',
     THIRD: 'https://cumtumdim.becofoodstore.click/api',
   },
@@ -44,18 +44,20 @@ export const constants = {
   },
   GOOGLE_CONSOLE: {
     WEB_CLIENT:
-      '8392071542-gql34f16dq5snk9vpk9sobs51m55bndj.apps.googleusercontent.com',
+      '8392071542-uket243u20vj719uir2iu1ofh4chq7oc.apps.googleusercontent.com',
     IOS_CLIENT:
       '8392071542-6jau34qpcu594et1vbt2uukakso783au.apps.googleusercontent.com',
+    ANDROID_CLIENT:
+      '8392071542-rhodj3pj05jsqjer7661m8d1pprerrio.apps.googleusercontent.com',
   },
-  SCOPES:{
+  SCOPES: {
     PROFILE: 'profile',
     EMAIL: 'email',
   },
-  FETCH:{
-    LOGIN:"fetchLogin"
+  FETCH: {
+    LOGIN: 'fetchLogin',
   },
-  SLICE:{
-    ADMIN:"admin"
-  }
+  SLICE: {
+    ADMIN: 'admin',
+  },
 };

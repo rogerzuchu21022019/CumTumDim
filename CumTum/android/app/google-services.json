@@ -14,15 +14,15 @@
       },
       "oauth_client": [
         {
-          "client_id": "8392071542-l9126u0mn57ed1vhp4no8hfpqogeofn8.apps.googleusercontent.com",
+          "client_id": "8392071542-rhodj3pj05jsqjer7661m8d1pprerrio.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.cumtum",
-            "certificate_hash": "d90b179091ffc9d8e9f40adbe1fb9b921d767c5c"
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
           }
         },
         {
-          "client_id": "8392071542-qv0h87gk534eib9b23gf90act35021if.apps.googleusercontent.com",
+          "client_id": "8392071542-uket243u20vj719uir2iu1ofh4chq7oc.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -35,11 +35,11 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "8392071542-f6r5mq3j0i0j6gsev27fr0nivmu2ansf.apps.googleusercontent.com",
+              "client_id": "8392071542-uket243u20vj719uir2iu1ofh4chq7oc.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "8392071542-t639pcts126bcbb45t5nuof8i1j8f6da.apps.googleusercontent.com",
+              "client_id": "8392071542-6jau34qpcu594et1vbt2uukakso783au.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
                 "bundle_id": "namvt.dev.cumtum"
