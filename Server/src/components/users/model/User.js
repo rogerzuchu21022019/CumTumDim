@@ -32,9 +32,6 @@ const userSchema = new mongoose.Schema(
     accessToken: {
       type: String,
     },
-    refreshToken: {
-      type: String,
-    },
     address: {
       street: {
         type: String,

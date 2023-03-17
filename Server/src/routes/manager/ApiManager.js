@@ -1,6 +1,7 @@
 /* Check import lại mấy cái router này khi import */
+const ApiProducts = require("../api/ApiProducts");
 const ApiUser = require("../api/ApiUser");
-// const ApiProduct = require(`../api/Api.Product`);
+
 
 /* Được gọi từ app.js */
 const ManagerRouter = (app, fixPublic) => {
@@ -28,14 +29,22 @@ const ManagerRouter = (app, fixPublic) => {
   const SUB_USERS = `${MAIN}/${USERS}`; //=> xoá bớt 1{} đi vì dư 
   const SUB_PRODUCTS = `${MAIN}/${PRODUCTS}`; //=> xoá bớt 1{} đi vì dư 
   //=> Check lại hết theo project theo project
+
+  /* Media */
+  app.use(MAIN, ApiProducts.uploadImage, fixPublic);
+
   /* Users */
   app.use(MAIN, ApiUser.login, fixPublic);
+  app.use(SUB_USERS, ApiUser.createOtp, fixPublic);
+  app.use(SUB_USERS, ApiUser.verifyOtp, fixPublic);
 //   app.use(MAIN, ApiUser.logoutRouter, fixPublic);
 //   app.use(SUB_USERS, ApiUser.registerRouter, fixPublic);
 
 //   /* Products */
-//   app.use(MAIN, ApiProduct.homeRouter, fixPublic);
-//   app.use(SUB_PRODUCTS, ApiProduct.analysticRouter, fixPublic);
+  app.use(SUB_PRODUCTS, ApiProducts.createCategory, fixPublic);
+  app.use(SUB_PRODUCTS, ApiProducts.findCategories, fixPublic);
+  app.use(SUB_PRODUCTS, ApiProducts.addDish, fixPublic);
+  app.use(SUB_PRODUCTS, ApiProducts.findDishes, fixPublic);
 //   app.use(SUB_PRODUCTS, ApiProduct.chartRouter, fixPublic);
 //   app.use(SUB_PRODUCTS, ApiProduct.dataTableRouter, fixPublic);
 };

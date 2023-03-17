@@ -4,14 +4,13 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import Axios from 'axios';
 import {LOG} from '../../../../logger.config';
-import {BaseUrl} from '../../api/BaseUrl';
 import { constants } from '../constants';
 import {getToken, saveToken} from './AsyncStorage';
 const log = LOG.extend(`AXIOS_INSTANCE`);
 export const AxiosInstance = () => {
   const axios = Axios.create({
     // baseURL: BaseUrl.Main,
-    baseURL: constants.BASE_URL.THIRD,
+    baseURL: constants.BASE_URL.MAIN,
     // baseURL: BaseUrl.Four,
   });
   axios.interceptors.request.use(
