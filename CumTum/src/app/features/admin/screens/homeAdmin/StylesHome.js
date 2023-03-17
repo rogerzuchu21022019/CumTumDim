@@ -57,11 +57,13 @@ const StylesHome = StyleSheet.create({
         borderRadius:5,
         marginTop:10,
     },
-
     itemText:{
         color:'white',
         fontSize:15
     },
+   
+
+   
     //body
 })
 export default StylesHome
