@@ -1,11 +1,13 @@
 const { verifyIdToken } = require("../../../middlewares/authen");
 const User = require("../model/User");
 
-
-const VerifyUserSv = async (idToken, accessToken) => {
-  const emailAdmin = "vuthanhnam21022019@gmail.com";
+const VerifyUserSv = async (idToken) => {
+  const emailAdminNam = "vuthanhnam21022019@gmail.com";
+  const emailAdminHoang = "xuanhoanggn@gmail.com";
+  const emailAdminHai = "duchai0408@gmail.com";
+  const emailAdminPhuoc = "vongocphuocit2002@gmail.com";
   try {
-    const payload = await verifyIdToken(idToken, accessToken);
+    const payload = await verifyIdToken(idToken);
     try {
       const existedUser = await User.findOne({ googleId: payload.sub });
 
@@ -13,31 +15,35 @@ const VerifyUserSv = async (idToken, accessToken) => {
       if (existedUser) {
         return existedUser;
       } else {
-        if (payload.email === emailAdmin) {
+        if (
+          payload.email === emailAdminNam 
+          ||
+          payload.email === emailAdminHai ||
+          payload.email === emailAdminPhuoc ||
+          payload.email === emailAdminHoang
+          
+          
+        ) {
           const newUser = await User.create({
             googleId: payload.sub,
             name: payload.given_name,
             email: payload.email,
             imageUrl: payload.picture,
-            accessToken: accessToken,
             role: "admin",
           });
           console.log("🚀 ~ file: Login.js:39 ~ newUser:", newUser);
           await newUser.save();
           return newUser;
-
-        }else{
+        } else {
           const newUser = await User.create({
             googleId: payload.sub,
             name: payload.given_name,
             email: payload.email,
             imageUrl: payload.picture,
-            accessToken: accessToken,
           });
           console.log("🚀 ~ file: Login.js:39 ~ newUser:", newUser);
           await newUser.save();
           return newUser;
-
         }
       }
     } catch (error) {

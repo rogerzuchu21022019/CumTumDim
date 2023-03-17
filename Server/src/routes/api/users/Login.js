@@ -9,7 +9,7 @@ require(`dotenv`).config();
 router.post(`/login`, async (req, res) => {
   try {
     const { idToken, accessToken } = req.body;
-    const user = await VerifyUserCon(idToken, accessToken);
+    const user = await VerifyUserCon(idToken);
     return res.json({
       isLoggedIn: true,
       message: "Success",
