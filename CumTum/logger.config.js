@@ -10,7 +10,7 @@ const config = {
   severity: __DEV__ ? "debug" : "error",
   transportOptions: {
     colors: {
-      info: "blue",
+      info: "yellow",
       warn: "green",
       error: "red",
     },

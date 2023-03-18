@@ -1,34 +1,49 @@
-import {
-  GoogleSignin,
-  GoogleSigninButton,
-} from '@react-native-google-signin/google-signin';
-import * as React from 'react';
-import {View, Text, Button} from 'react-native';
-import {AxiosInstance} from './src/app/shared/utils/AxiosInstance';
+import {View, Text, Button, ActivityIndicator} from 'react-native';
 
 import Router from '../../../../navigation/Router';
 import SafeKeyComponent from '../../../../components/safe_area/SafeKeyComponent';
-import { removeToken } from '../../../../shared/utils/AsyncStorage';
+import {useDispatch, useSelector} from 'react-redux';
+import {authSelector} from '../../../admin/sliceAuth';
+import {fetchSignOut} from '../../../admin/apiAdmin';
+import {constants} from '../../../../shared/constants';
 
-const HomeCustomer = ({route, navigation}) => {
-  // const user = route.params.user;
-  const handleLogout = async () => {
-    try {
-      
-      await GoogleSignin.revokeAccess();
-      await GoogleSignin.signOut();
+const HomeCustomer = ({navigation}) => {
+  const data = useSelector(authSelector);
+  console.log('🚀 ~ file: HomeCustomer.js:19 ~ handleLogout ~ data:', data);
 
-      navigation.replace(Router.LOGIN);
-      //oke
-    } catch (error) {
-      console.error(error);
-    }
+  const isLoading = data.isLoading;
+  console.log("🚀 ~ file: HomeCustomer.js:15 ~ HomeCustomer ~ isLoading:", isLoading)
+
+  // useEffect(() => {
+  //   data ? moveTo() : null;
+  //   return () => {};
+  // }, [data]);
+
+  const moveTo = async () => {
+    navigation.navigate(Router.LOGIN);
   };
+  const dispatch = useDispatch();
+  const handleLogout = async () => {
+    dispatch(fetchSignOut());
+    moveTo();
+  };
+
   return (
     <SafeKeyComponent>
       <View>
         <Text>Home Customer</Text>
         <Button title="Logout" onPress={handleLogout} />
+
+        <View
+          style={{
+            backgroundColor: 'red',
+            width: 100,
+            height: 100,
+          }}>
+          {isLoading ? (
+            <ActivityIndicator size="large" color={constants.COLOR.RED} />
+          ) : null}
+        </View>
       </View>
     </SafeKeyComponent>
   );

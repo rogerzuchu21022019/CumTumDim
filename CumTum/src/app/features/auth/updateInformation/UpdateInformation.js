@@ -3,8 +3,12 @@ import React from 'react';
 import styleUpdateInformation from './StyleUpdateInformation';
 import BoxInputCus from '../../../components/input/BoxInput';
 import SafeKeyComponent from '../../../components/safe_area/SafeKeyComponent';
+import Router from '../../../navigation/Router';
 
-const UpdateInformation = () => {
+const UpdateInformation = ({navigation}) => {
+  const moveTo = () => {
+    navigation.navigate(Router.CUSTOMER_STACK);
+  };
   return (
     <SafeKeyComponent>
       <View style={styleUpdateInformation.container}>
@@ -36,35 +40,14 @@ const UpdateInformation = () => {
           <View>
             <BoxInputCus placeholder="name" title="Họ và tên" value="Nam1" />
           </View>
-          {/* <View style={styleUpdateInformation.viewBody}>
-                    <Text style={styleUpdateInformation.text1}>số điện thoại</Text>
-                    <View style={styleUpdateInformation.view1}>
-                        <TextInput style={styleUpdateInformation.textInput1}>0867704364</TextInput>
-                    </View>
-
-                    <Text style={styleUpdateInformation.text2}>Phường</Text>
-                    <View style={styleUpdateInformation.view2}>
-                        <TextInput style={styleUpdateInformation.textInput2}>Trung Mỹ Tây</TextInput>
-                    </View>
-
-                    <Text style={styleUpdateInformation.text3}>Đường</Text>
-                    <View style={styleUpdateInformation.view3}>
-                        <TextInput style={styleUpdateInformation.textInput3}>Tố Ký</TextInput>
-                    </View>
-
-                    <Text style={styleUpdateInformation.text4}>Số nhà</Text>
-                    <View style={styleUpdateInformation.view4}>
-                        <TextInput style={styleUpdateInformation.textInput4}>413</TextInput>
-                    </View>
-                </View> */}
         </View>
         <View style={styleUpdateInformation.footers}>
           <View style={styleUpdateInformation.viewBtn}>
-            <TouchableOpacity>
-              <View style={styleUpdateInformation.viewTextBtn}>
+            <View style={styleUpdateInformation.viewTextBtn}>
+              <TouchableOpacity onPress={moveTo}>
                 <Text style={styleUpdateInformation.textBtn}>Xác nhận</Text>
-              </View>
-            </TouchableOpacity>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
       </View>
