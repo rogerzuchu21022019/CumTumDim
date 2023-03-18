@@ -37,7 +37,7 @@ const StylesHome = StyleSheet.create({
 
     //body
     body: {
-        flex:7,
+        flex:10,
         backgroundColor: '#252121',
         alignItems:'center',
     },
@@ -57,11 +57,13 @@ const StylesHome = StyleSheet.create({
         borderRadius:5,
         marginTop:10,
     },
-
     itemText:{
         color:'white',
         fontSize:15
     },
+   
+
+   
     //body
 })
 export default StylesHome

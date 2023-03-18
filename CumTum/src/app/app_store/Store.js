@@ -1,14 +1,13 @@
 //import createSlice
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { persistReducer } from 'reduxjs-toolkit-persist'
-
+import {persistReducer} from 'reduxjs-toolkit-persist';
 
 import {combineReducers, configureStore} from '@reduxjs/toolkit';
 
+import sliceAuth from '../features/admin/sliceAuth';
 
-
-import sliceAdmin from '../features/admin/sliceAdmin';
-import {constants} from '../shared/constants';
+import sliceProduct from '../features/product/sliceProduct';
+import { constants } from '../shared/constants';
 
 let persistConfig = {
   key: 'root',
@@ -18,17 +17,16 @@ let persistConfig = {
 };
 
 const rootReducers = combineReducers({
-  admin: sliceAdmin,
+  auth: sliceAuth,
+  product: sliceProduct,
 });
 
 const resetRootReducer = (state, action) => {
-  if (action.type === 'logout/logoutFulfilled') {
+  if (action.type === constants.FETCH.SIGN_OUT+"/fulfilled") {
     state = undefined;
   }
   return rootReducers(state, action);
 };
-
-
 
 let persistedReducers = persistReducer(persistConfig, resetRootReducer);
 

@@ -7,11 +7,9 @@ import Router from './src/app/navigation/Router';
 import { Store } from './src/app/app_store/Store';
 
 // import Provider
-import { Provider } from 'react-redux';
+import {Provider} from 'react-redux';
 import AdminStack from './src/app/navigation/AdminStack';
-import Otp from './src/app/features/customer/otp/Otp';
-import stylesOTP from './src/app/features/customer/otp/StylesOtp';
-import HomeAdmin from './src/app/features/admin/Home/HomeAdmin';
+import DetailCard from './src/app/features/admin/screens/detailCart/DetailCard';
 import CustomerStack from './src/app/navigation/CustomerStack';
 
 // import RootNavigation
@@ -19,15 +17,17 @@ import {navigationRef} from './src/app/navigation/RootNavigation';
 
 // Redux Persist
 
-import {persistStore, persistReducer} from 'reduxjs-toolkit-persist';
+import {persistStore} from 'reduxjs-toolkit-persist';
 import {PersistGate} from 'reduxjs-toolkit-persist/integration/react';
 import SplashSrceeen from './src/app/features/admin/screens/splashSrceeen/SplashSrceeen';
-let persistor = persistStore(Store);
+import AddDish from './src/app/features/product/screens/addDish/AddDish';
 
+let persistor = persistStore(Store);
 const App = () => {
   const Stack = createNativeStackNavigator();
 
   return (
+
     <Provider store={Store}>
       <PersistGate loading={null} persistor={persistor}>
         <NavigationContainer ref={navigationRef}>
@@ -46,19 +46,33 @@ const App = () => {
                 headerShown: false,
               }}
             />
-            <Stack.Screen name={Router.ADMIN_STACK} component={AdminStack} />
+            <Stack.Screen
+              name={Router.ADMIN_STACK}
+              component={AdminStack}
+              options={{
+                headerShown: false,
+              }}
+            />
             <Stack.Screen
               name={Router.CUSTOMER_STACK}
               component={CustomerStack}
+              options={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name={Router.DETAIL_CART_ADMIN}
+              component={DetailCard}
+              options={{
+                headerShown: false,
+                presentation:'modal'
+              }}
             />
           </Stack.Navigator>
         </NavigationContainer>
       </PersistGate>
     </Provider>
     // <Otp/>
-    //<SafeKeyComponent>
-    //  <DetailCard/>
-    //</SafeKeyComponent>
   );
 };
 

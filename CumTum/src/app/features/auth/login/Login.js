@@ -11,13 +11,13 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import {LOG} from '../../../../../../logger.config';
-import SafeKeyComponent from '../../../../components/safe_area/SafeKeyComponent';
-import Router from '../../../../navigation/Router';
-import {constants} from '../../../../shared/constants';
-import {fetchLogin} from '../../apiAdmin';
-import {authSelector} from '../../sliceAuth';
-import StyleLoin from '../login/StyleLogin';
+import {LOG} from '../../../../../logger.config';
+import SafeKeyComponent from '../../../components/safe_area/SafeKeyComponent';
+import Router from '../../../navigation/Router';
+import {constants} from '../../../shared/constants';
+import {fetchLogin} from '../../admin/apiAdmin';
+import {authSelector} from '../../admin/sliceAuth';
+import StyleLoin from './StyleLogin';
 
 import auth from '@react-native-firebase/auth';
 
@@ -48,7 +48,6 @@ const LoginScreen = ({navigation}) => {
   const dispatch = useDispatch();
 
   const moveTo = async () => {
-   
     data.user.role === constants.ROLE.ADMIN
       ? navigation.navigate(Router.ADMIN_STACK)
       : navigation.navigate(Router.CUSTOMER_STACK);
@@ -95,35 +94,32 @@ const LoginScreen = ({navigation}) => {
   };
   return (
     <SafeKeyComponent>
-      <View style={StyleLogin.container}>
+      <View style={StyleLoin.container}>
         {/* header */}
-        <View style={StyleLogin.header}>
-          <Text style={StyleLogin.textHeader}>Đăng nhập</Text>
-          <View style={StyleLogin.viewImage}>
-            <Image
-              style={StyleLogin.imageHeader}
-              source={require('../../../../../../src/assets/image/logo.png')}
-            />
-          </View>
+        <View style={StyleLoin.header}>
+          <Text style={StyleLoin.Textheader}>Đăng nhập</Text>
+          <Image
+            style={StyleLoin.imageHeader}
+            source={require('../../../../../../src/assets/image/logo.png')}
+          />
         </View>
         {/* body */}
-        <View style={StyleLogin.body}>
-          <View style={StyleLogin.viewbtn}>
-            <View style={StyleLogin.touchAbleOpacityBody}>
-              <TouchableOpacity
-                onPress={GoogleSignIn => (
-                  <GoogleSignIn navigation={navigation} />
-                )}>
+        <View style={StyleLoin.body}>
+          {isLoading && <ActivityIndicator size={'large'} />}
+
+          <View style={StyleLoin.TouchableOpacitybody}>
+            <TouchableOpacity onPress={signIn}>
+              <View>
                 <Image
-                  style={StyleLogin.imageBody1}
+                  style={StyleLoin.imagebody1}
                   source={require('../../../../../../src/assets/image/chugg.png')}
                 />
                 <Image
-                  style={StyleLogin.imageBody2}
+                  style={StyleLoin.imagebody2}
                   source={require('../../../../../../src/assets/image/logogg.png')}
                 />
-              </TouchableOpacity>
-            </View>
+              </View>
+            </TouchableOpacity>
           </View>
         </View>
       </View>
