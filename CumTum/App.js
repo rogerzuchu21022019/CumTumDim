@@ -20,7 +20,7 @@ import {persistStore} from 'reduxjs-toolkit-persist';
 import {PersistGate} from 'reduxjs-toolkit-persist/integration/react';
 
 import LoginScreen from './src/app/features/auth/login/Login';
-import SplashSrceeen from './src/app/features/auth/splashSrceeen/SplashSrceeen';
+import SplashScreen from './src/app/features/auth/splashScreen/SplashScreen';
 import UpdateInformation from './src/app/features/auth/updateInformation/UpdateInformation';
 
 let persistor = persistStore(Store);
@@ -28,51 +28,51 @@ const App = () => {
   const Stack = createNativeStackNavigator();
 
   return (
-    <UpdateInformation></UpdateInformation>
-    // <Provider store={Store}>
-    //   <PersistGate loading={null} persistor={persistor}>
-    //     <NavigationContainer ref={navigationRef}>
-    //       <Stack.Navigator>
-    //         <Stack.Screen
-    //           name={Router.SPLASH_SCREEN}
-    //           component={SplashSrceeen}
-    //           options={{
-    //             headerShown: false,
-    //           }}
-    //         />
-    //         <Stack.Screen
-    //           name={Router.LOGIN}
-    //           component={LoginScreen}
-    //           options={{
-    //             headerShown: false,
-    //           }}
-    //         />
-    //         <Stack.Screen
-    //           name={Router.ADMIN_STACK}
-    //           component={AdminStack}
-    //           options={{
-    //             headerShown: false,
-    //           }}
-    //         />
-    //         <Stack.Screen
-    //           name={Router.CUSTOMER_STACK}
-    //           component={CustomerStack}
-    //           options={{
-    //             headerShown: false,
-    //           }}
-    //         />
-    //         <Stack.Screen
-    //           name={Router.DETAIL_CART_ADMIN}
-    //           component={DetailCard}
-    //           options={{
-    //             headerShown: false,
-    //             presentation:'modal'
-    //           }}
-    //         />
-    //       </Stack.Navigator>
-    //     </NavigationContainer>
-    //   </PersistGate>
-    // </Provider>
+    // <UpdateInformation></UpdateInformation>
+    <Provider store={Store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <NavigationContainer ref={navigationRef}>
+          <Stack.Navigator>
+            <Stack.Screen
+              name={Router.SPLASH_SCREEN}
+              component={SplashScreen}
+              options={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name={Router.LOGIN}
+              component={LoginScreen}
+              options={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name={Router.ADMIN_STACK}
+              component={AdminStack}
+              options={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name={Router.CUSTOMER_STACK}
+              component={CustomerStack}
+              options={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name={Router.DETAIL_CART_ADMIN}
+              component={DetailCard}
+              options={{
+                headerShown: false,
+                presentation:'modal'
+              }}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </PersistGate>
+    </Provider>
     // <Otp/>
   );
 };
