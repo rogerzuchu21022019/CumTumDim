@@ -6,7 +6,7 @@ import Router from './src/app/navigation/Router';
 import {Store} from './src/app/app_store/Store';
 
 // import Provider
-import { Provider } from 'react-redux';
+import {Provider} from 'react-redux';
 import AdminStack from './src/app/navigation/AdminStack';
 import DetailCard from './src/app/features/admin/screens/detailCart/DetailCard';
 import CustomerStack from './src/app/navigation/CustomerStack';
