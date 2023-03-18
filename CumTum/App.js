@@ -11,7 +11,7 @@ import { Provider } from 'react-redux';
 import AdminStack from './src/app/navigation/AdminStack';
 import Otp from './src/app/features/customer/otp/Otp';
 import stylesOTP from './src/app/features/customer/otp/StylesOtp';
-import HomeAdmin from './src/app/features/admin/Home/HomeAdmin';
+import HomeAdmin from './src/app/features/admin/home/HomeAdmin';
 import CustomerStack from './src/app/navigation/CustomerStack';
 
 // import RootNavigation
@@ -22,6 +22,7 @@ import {navigationRef} from './src/app/navigation/RootNavigation';
 import {persistStore, persistReducer} from 'reduxjs-toolkit-persist';
 import {PersistGate} from 'reduxjs-toolkit-persist/integration/react';
 import SplashSrceeen from './src/app/features/admin/screens/splashSrceeen/SplashSrceeen';
+import HomeAdmin from './src/app/features/admin/screens/homeAdmin/HomeAdmin';
 let persistor = persistStore(Store);
 
 const App = () => {
@@ -46,7 +47,6 @@ const App = () => {
                 headerShown: false,
               }}
             />
-            // ok
             <Stack.Screen name={Router.ADMIN_STACK} component={AdminStack} />
             <Stack.Screen
               name={Router.CUSTOMER_STACK}
