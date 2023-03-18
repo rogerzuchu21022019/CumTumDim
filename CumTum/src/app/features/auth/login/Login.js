@@ -97,29 +97,31 @@ const LoginScreen = ({navigation}) => {
       <View style={StyleLogin.container}>
         {/* header */}
         <View style={StyleLogin.header}>
-          <Text style={StyleLogin.Textheader}>Đăng nhập</Text>
-          <Image
-            style={StyleLogin.imageHeader}
-            source={require('../../../../assets/logo.png')}
-          />
+          <Text style={StyleLogin.textHeader}>Đăng nhập</Text>
+          <View style={StyleLogin.viewImage}>
+            <Image
+              style={StyleLogin.imageHeader}
+              source={require('../../../../assets/logo.png')}
+
+            />
+          </View>
         </View>
         {/* body */}
         <View style={StyleLogin.body}>
-          {isLoading && <ActivityIndicator size={'large'} />}
-
-          <View style={StyleLogin.TouchableOpacitybody}>
-            <TouchableOpacity onPress={signIn}>
-              <View>
+          <View style={StyleLogin.viewbtn}>
+            <View style={StyleLogin.touchAbleOpacityBody}>
+              <TouchableOpacity
+                onPress={signIn}>
                 <Image
-                  style={StyleLogin.imagebody1}
+                  style={StyleLogin.imageBody1}
                   source={require('../../../../assets/chugg.png')}
                 />
                 <Image
-                  style={StyleLogin.imagebody2}
+                  style={StyleLogin.imageBody2}
                   source={require('../../../../assets/logogg.png')}
                 />
-              </View>
-            </TouchableOpacity>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
       </View>
