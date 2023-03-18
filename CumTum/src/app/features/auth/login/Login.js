@@ -17,7 +17,7 @@ import Router from '../../../navigation/Router';
 import {constants} from '../../../shared/constants';
 import {fetchLogin} from '../../admin/apiAdmin';
 import {authSelector} from '../../admin/sliceAuth';
-import StyleLoin from './StyleLogin';
+import StyleLogin from './StyleLogin';
 
 import auth from '@react-native-firebase/auth';
 
@@ -94,29 +94,29 @@ const LoginScreen = ({navigation}) => {
   };
   return (
     <SafeKeyComponent>
-      <View style={StyleLoin.container}>
+      <View style={StyleLogin.container}>
         {/* header */}
-        <View style={StyleLoin.header}>
-          <Text style={StyleLoin.Textheader}>Đăng nhập</Text>
+        <View style={StyleLogin.header}>
+          <Text style={StyleLogin.Textheader}>Đăng nhập</Text>
           <Image
-            style={StyleLoin.imageHeader}
-            source={require('../../../../../../src/assets/image/logo.png')}
+            style={StyleLogin.imageHeader}
+            source={require('../../../../assets/logo.png')}
           />
         </View>
         {/* body */}
-        <View style={StyleLoin.body}>
+        <View style={StyleLogin.body}>
           {isLoading && <ActivityIndicator size={'large'} />}
 
-          <View style={StyleLoin.TouchableOpacitybody}>
+          <View style={StyleLogin.TouchableOpacitybody}>
             <TouchableOpacity onPress={signIn}>
               <View>
                 <Image
-                  style={StyleLoin.imagebody1}
-                  source={require('../../../../../../src/assets/image/chugg.png')}
+                  style={StyleLogin.imagebody1}
+                  source={require('../../../../assets/chugg.png')}
                 />
                 <Image
-                  style={StyleLoin.imagebody2}
-                  source={require('../../../../../../src/assets/image/logogg.png')}
+                  style={StyleLogin.imagebody2}
+                  source={require('../../../../assets/logogg.png')}
                 />
               </View>
             </TouchableOpacity>

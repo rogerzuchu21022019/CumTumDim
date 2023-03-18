@@ -1,7 +1,6 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import LoginScreen from './src/app/features/admin/screens/login/Login';
 import Router from './src/app/navigation/Router';
 
 import {Store} from './src/app/app_store/Store';
@@ -19,8 +18,9 @@ import {navigationRef} from './src/app/navigation/RootNavigation';
 
 import {persistStore} from 'reduxjs-toolkit-persist';
 import {PersistGate} from 'reduxjs-toolkit-persist/integration/react';
-import SplashSrceeen from './src/app/features/admin/screens/splashSrceeen/SplashSrceeen';
-import AddDish from './src/app/features/product/screens/addDish/AddDish';
+
+import LoginScreen from './src/app/features/auth/login/Login';
+import SplashSrceeen from './src/app/features/auth/splashSrceeen/SplashSrceeen';
 
 let persistor = persistStore(Store);
 const App = () => {
