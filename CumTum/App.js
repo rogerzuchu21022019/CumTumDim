@@ -3,7 +3,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Router from './src/app/navigation/Router';
 
-import {Store} from './src/app/app_store/Store';
+import { Store } from './src/app/app_store/Store';
 
 // import Provider
 import {Provider} from 'react-redux';
