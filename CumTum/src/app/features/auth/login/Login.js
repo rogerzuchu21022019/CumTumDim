@@ -2,7 +2,7 @@ import {
   GoogleSignin,
   statusCodes,
 } from '@react-native-google-signin/google-signin';
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -11,7 +11,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import {LOG} from '../../../../../logger.config';
+
 import SafeKeyComponent from '../../../components/safe_area/SafeKeyComponent';
 import Router from '../../../navigation/Router';
 import {constants} from '../../../shared/constants';
@@ -20,12 +20,14 @@ import {authSelector} from '../../admin/sliceAuth';
 import StyleLogin from './StyleLogin';
 
 import auth from '@react-native-firebase/auth';
+import {LOG} from '../../../../../logger.config';
 
 const LoginScreen = ({navigation}) => {
   const log = LOG.extend(`GOOGLE_SIGNIN.JS`);
   const data = useSelector(authSelector);
-  console.log('🚀 ~ file: GoogleSignIn.js:22 ~ GoogleSignIn ~ data:', data);
+  log.info('🚀 ~ file: GoogleSignIn.js:22 ~ GoogleSignIn ~ data:', data);
   const isLoading = data?.isLoading;
+
   useEffect(() => {
     GoogleSignin.configure({
       scopes: [constants.SCOPES.PROFILE, constants.SCOPES.EMAIL],
@@ -38,7 +40,6 @@ const LoginScreen = ({navigation}) => {
     return () => {};
   }, []);
 
-
   useEffect(() => {
     if (data.user.role) {
       moveTo();
@@ -48,6 +49,10 @@ const LoginScreen = ({navigation}) => {
   const dispatch = useDispatch();
 
   const moveTo = async () => {
+    console.log(
+      '🚀 ~ file: Login.js:38 ~ moveTo ~ moveto:',
+      
+    );
     data.user.role === constants.ROLE.ADMIN
       ? navigation.navigate(Router.ADMIN_STACK)
       : navigation.navigate(Router.CUSTOMER_STACK);
@@ -56,36 +61,29 @@ const LoginScreen = ({navigation}) => {
     try {
       await GoogleSignin.hasPlayServices({showPlayServicesUpdateDialog: true});
       const {idToken} = await GoogleSignin.signIn();
-      // console.log("🚀 ~ file: Login.js:44 ~ signIn ~ currentUser:", currentUser)
-      console.log('🚀 ~ file: Login.js:38 ~ signIn ~ idToken:', idToken);
-      // log.info('🚀 ~ file: GoogleSignIn.js:34 ~ signIn ~ idToken:', idToken);
+      log.info('🚀 ~ file: Login.js:38 ~ signIn ~ idToken:', idToken);
 
       const {accessToken} = await GoogleSignin.getTokens();
-      // console.log(
-      //   '🚀 ~ file: Login.js:44 ~ signIn ~ accessToken:',
-      //   accessToken,
-      // );
 
       dispatch(fetchLogin(idToken, accessToken));
-      
     } catch (error) {
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
-        console.log(
+        log.error(
           '🚀 ~ file: Login.js:50 ~ signIn ~ error: SIGN_IN_CANCELLED',
           error,
         );
       } else if (error.code === statusCodes.IN_PROGRESS) {
-        console.log(
+        log.error(
           '🚀 ~ file: Login.js:53 ~ signIn ~ error: IN_PROGRESS',
           error,
         );
       } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
-        console.log(
+        log.info(
           '🚀 ~ file: Login.js:55 ~ signIn ~ error: PLAY_SERVICES_NOT_AVAILABLE',
           error,
         );
       } else {
-        console.log(
+        log.info(
           '🚀 ~ file: Login.js:55 ~ signIn ~ error DEV OR CODE=10 :',
           error,
         );
@@ -102,16 +100,19 @@ const LoginScreen = ({navigation}) => {
             <Image
               style={StyleLogin.imageHeader}
               source={require('../../../../assets/logo.png')}
-
             />
           </View>
         </View>
         {/* body */}
         <View style={StyleLogin.body}>
+          <View style={StyleLogin.viewLoad}>
+            {isLoading ? (
+              <ActivityIndicator size="large" color={constants.COLOR.GREY} />
+            ) : null}
+          </View>
           <View style={StyleLogin.viewbtn}>
             <View style={StyleLogin.touchAbleOpacityBody}>
-              <TouchableOpacity
-                onPress={signIn}>
+              <TouchableOpacity onPress={signIn}>
                 <Image
                   style={StyleLogin.imageBody1}
                   source={require('../../../../assets/chugg.png')}

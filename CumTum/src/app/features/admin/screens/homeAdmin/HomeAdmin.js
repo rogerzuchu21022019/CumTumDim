@@ -5,12 +5,9 @@ import SafeKeyComponent from '../../../../components/safe_area/SafeKeyComponent'
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import DATA from './Data';
 import ItemView from './ItemView';
-
+import {FlashList} from '@shopify/flash-list';
 
 const HomeAdmin = ({navigation}) => {
- 
-  
-
   return (
     <SafeKeyComponent>
       <View style={styles.container}>
@@ -30,15 +27,23 @@ const HomeAdmin = ({navigation}) => {
         </View>
         <View style={styles.body}>
           <View style={styles.viewFlashList}>
-            <FlatList
+            <FlashList
               data={DATA}
-              
-              renderItem={({item}) => (
-                
-                <ItemView item={item} navigation={navigation} />
-                
-              )}
-              keyExtractor={(item,index)=>index.toString()}
+              estimatedItemSize={200}
+              getItemType={(item, index) => {
+                console.log(
+                  '🚀 ~ file: HomeAdmin.js:50 ~ HomeAdmin ~ item:',
+                  item.category,
+                );
+                return item.category;
+              }}
+              renderItem={({item}) => {
+                if (item.category === 'Món thêm') {
+                  return <ItemView item={item} navigation={navigation} />;
+                }
+                return null;
+              }}
+              keyExtractor={(item, index) => index.toString()}
             />
           </View>
         </View>
