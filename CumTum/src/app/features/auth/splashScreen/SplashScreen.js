@@ -1,8 +1,9 @@
 import {View, Text, Image} from 'react-native';
 import React, {useEffect} from 'react';
 import Router from '../../../navigation/Router';
-import stylesplashSrceeen from './StyleSplashSrceeen';
-const SplashSrceeen = props => {
+import styleSplashScreen from './StyleSplashScreen';
+
+const SplashScreen = props => {
   const {navigation} = props;
   const nextScreen = () => {
     navigation.replace(Router.LOGIN);
@@ -11,17 +12,17 @@ const SplashSrceeen = props => {
     setTimeout(nextScreen, 3000);
   }, []);
   return (
-    <View style={stylesplashSrceeen.container}>
-      <View style={stylesplashSrceeen.header}></View>
-      <View style={stylesplashSrceeen.body}>
+    <View style={styleSplashScreen.container}>
+      <View style={styleSplashScreen.header}></View>
+      <View style={styleSplashScreen.body}>
         <Image
-          style={stylesplashSrceeen.imageBody}
+          style={styleSplashScreen.imageBody}
           source={require('../../../../assets//logo.png')}
         />
       </View>
-      <View style={stylesplashSrceeen.foosters}></View>
+      <View style={styleSplashScreen.footers}></View>
     </View>
   );
 };
 
-export default SplashSrceeen;
+export default SplashScreen;

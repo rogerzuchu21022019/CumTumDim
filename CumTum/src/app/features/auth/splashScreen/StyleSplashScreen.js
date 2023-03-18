@@ -1,6 +1,6 @@
 const { StyleSheet, YellowBox } = require("react-native");
 
-const stylesplashSrceeen = StyleSheet.create({
+const styleSplashScreen = StyleSheet.create({
   container: {
     flex: 10,
     backgroundColor: "#373232"
@@ -28,6 +28,3 @@ const stylesplashSrceeen = StyleSheet.create({
     flex: 1
   }
   /*Body*/
-
-})
-export default stylesplashSrceeen
