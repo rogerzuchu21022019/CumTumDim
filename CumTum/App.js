@@ -65,6 +65,7 @@ const App = () => {
               component={DetailCard}
               options={{
                 headerShown: false,
+                presentation:'modal'
               }}
             />
           </Stack.Navigator>

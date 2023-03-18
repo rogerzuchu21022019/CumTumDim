@@ -37,7 +37,7 @@ const StylesHome = StyleSheet.create({
 
     //body
     body: {
-        flex:7,
+        flex:10,
         backgroundColor: '#252121',
         alignItems:'center',
     },
