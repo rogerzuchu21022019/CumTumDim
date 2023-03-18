@@ -1,5 +1,5 @@
 import {constants} from '../../shared/constants';
-import {fetchUploadImage} from './apiProduct';
+import {fetchAddDish, fetchCategories, fetchUploadImage} from './apiProduct';
 
 const {createSlice} = require('@reduxjs/toolkit');
 
@@ -9,6 +9,8 @@ const initialState = {
   error: null,
   success: null,
   message: null,
+  categories: [],
+  dish: {},
 };
 
 export const sliceProduct = createSlice({
@@ -31,10 +33,40 @@ export const sliceProduct = createSlice({
       state.error = true;
       state.message = action.payload;
     });
+    builder.addCase(fetchCategories.pending, state => {
+      state.loading = true;
+    });
+    builder.addCase(fetchCategories.fulfilled, (state, action) => {
+      const dataResponse = action.payload;
+      state.loading = false;
+      state.success = dataResponse.success;
+      state.message = dataResponse.message;
+      state.categories = dataResponse.data;
+    });
+    builder.addCase(fetchCategories.rejected, (state, action) => {
+      state.loading = false;
+      state.error = true;
+      state.message = action.payload;
+    });
+
+    builder.addCase(fetchAddDish.pending, state => {
+      state.loading = true;
+    });
+    builder.addCase(fetchAddDish.fulfilled, (state, action) => {
+      const dataResponse = action.payload;
+      state.loading = false;
+      state.success = dataResponse.success;
+      state.message = dataResponse.message;
+      state.dish = dataResponse.data;
+    });
+    builder.addCase(fetchAddDish.rejected, (state, action) => {
+      state.loading = false;
+      state.error = true;
+      state.message = action.payload;
+    });
   },
 });
 
 export const productSelector = state => state.product;
-
 
 export default sliceProduct.reducer;

@@ -26,7 +26,7 @@ const HomeAdmin = ({navigation}) => {
           <View style={styles.strikethrough}></View>
         </View>
         <View style={styles.body}>
-          <View style={styles.viewFlashList}>
+          {/* <View style={styles.viewFlashList}>
             <FlashList
               data={DATA}
               estimatedItemSize={200}
@@ -38,14 +38,16 @@ const HomeAdmin = ({navigation}) => {
                 return item.category;
               }}
               renderItem={({item}) => {
-                if (item.category === 'Món thêm') {
-                  return <ItemView item={item} navigation={navigation} />;
-                }
-                return null;
+              if (item.category === 'Món thêm') {
+                return <ItemView item={item} navigation={navigation} />;
+              }
+              return null;
+
               }}
+            
               keyExtractor={(item, index) => index.toString()}
             />
-          </View>
+          </View> */}
         </View>
       </View>
     </SafeKeyComponent>

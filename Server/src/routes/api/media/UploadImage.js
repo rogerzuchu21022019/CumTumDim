@@ -1,13 +1,14 @@
 const express = require(`express`);
 const Cloudirary = require("../../../utils/Cloudirary");
-
+const fs = require("fs");
+const path = require("path");
 const router = express.Router();
 
 router.post(`/upload-image`, async (req, res) => {
   try {
     const file = req.file;
     console.log("🚀 ~ file: UploadImage.js:8 ~ router.post ~ file:", file);
-
+    
     const result = await Cloudirary.uploader.upload(file.path, {
       secure: true,
       folder: "cumtum",

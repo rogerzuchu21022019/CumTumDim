@@ -1,5 +1,6 @@
 export const constants = {
   COLOR: {
+    PRIMARY: '#252121',
     ORANGE: '#FE724C',
     GREY: '#252121',
     YELLOW: '#FFB703',
@@ -56,7 +57,9 @@ export const constants = {
   FETCH: {
     LOGIN: 'fetchLogin',
     UPLOAD_IMAGE: 'fetchUploadImage',
-    SIGN_OUT:'fetchSignOut'
+    SIGN_OUT: 'fetchSignOut',
+    FIND_CATEGORIES: 'fetchCategories',
+    ADD_DISH: 'fetchAddDish',
   },
   SLICE: {
     ADMIN: 'admin',
