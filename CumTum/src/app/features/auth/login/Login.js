@@ -41,18 +41,13 @@ const LoginScreen = ({navigation}) => {
   }, []);
 
   useEffect(() => {
-    if (data.user.role) {
-      moveTo();
-    }
+    data.user.role ? moveTo() : null;
   }, [data.user.role]);
 
   const dispatch = useDispatch();
 
   const moveTo = async () => {
-    console.log(
-      '🚀 ~ file: Login.js:38 ~ moveTo ~ moveto:',
-      
-    );
+    console.log('🚀 ~ file: Login.js:38 ~ moveTo ~ moveto:');
     data.user.role === constants.ROLE.ADMIN
       ? navigation.navigate(Router.ADMIN_STACK)
       : navigation.navigate(Router.CUSTOMER_STACK);

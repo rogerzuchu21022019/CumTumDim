@@ -3,7 +3,7 @@ import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Router from './Router';
 import HomeAdmin from '../features/admin/screens/homeAdmin/HomeAdmin';
-import AddDish from '../features/product/screens/addDish/AddDish';
+import AddDish from '../features/admin/screens/addDish/AddDish';
 import { constants } from '../shared/constants';
 const Tab = createBottomTabNavigator();
 
