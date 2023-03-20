@@ -8,6 +8,7 @@ import HistoryTabs from '../features/customer/screens/histories/HistoryTabs';
 import Profile from '../features/customer/screens/profiles/profile/Profile';
 import CartTabs from '../features/customer/screens/carts/CartTabs';
 import { constants } from '../shared/constants';
+import { StackActions, useNavigation } from '@react-navigation/native';
 
 const CustomerStack = () => {
   const Tab = createBottomTabNavigator();
@@ -16,6 +17,7 @@ const CustomerStack = () => {
     <Tab.Navigator
     
       screenOptions={{
+        
         tabBarShowLabel: true,
         tabBarActiveTintColor: constants.COLOR.WHITE,
         tabBarInactiveTintColor: constants.COLOR.BLACK,
@@ -69,3 +71,4 @@ const CustomerStack = () => {
 };
 
 export default CustomerStack;
+

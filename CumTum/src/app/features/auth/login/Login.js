@@ -21,8 +21,7 @@ import StyleLogin from './StyleLogin';
 
 import auth, {firebase} from '@react-native-firebase/auth';
 import {LOG} from '../../../../../logger.config';
-
-
+import {StackActions} from '@react-navigation/native';
 
 const LoginScreen = ({navigation}) => {
   const log = LOG.extend(`GOOGLE_SIGNIN.JS`);
@@ -55,9 +54,6 @@ const LoginScreen = ({navigation}) => {
       : navigation.navigate(Router.CUSTOMER_STACK);
   };
 
- 
-
- 
   const signIn = async () => {
     try {
       await GoogleSignin.hasPlayServices({showPlayServicesUpdateDialog: true});
@@ -70,7 +66,6 @@ const LoginScreen = ({navigation}) => {
         idToken,
         accessToken,
       );
-
 
       dispatch(fetchLogin(idToken, accessToken));
       return await auth().signInWithCredential(credential);

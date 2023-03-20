@@ -95,6 +95,7 @@ const App = () => {
             />
 
             <Stack.Screen
+            
               name={Router.ADMIN_STACK}
               component={AdminStack}
               options={{

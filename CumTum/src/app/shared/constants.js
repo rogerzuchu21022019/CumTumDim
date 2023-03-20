@@ -7,6 +7,7 @@ export const constants = {
     BLACK: 'black',
     WHITE: '#FFFFFF',
     RED: '#F20000',
+    AQUA: 'aqua',
   },
   FONT: {
     GilroyMedium: 'Gilroy-Medium',
