@@ -183,7 +183,7 @@ const AddDish = ({navigation}) => {
         {/* Xử lý camera */}
         <TouchableOpacity onPress={openCamera}>
           <FastImage
-            style={{width: 300, height: 300}}
+            style={{width: 205, height: 205,marginLeft:105,marginTop:15}}
             source={avatar ? imageUrlOptions : urlHardCode}
             onLoadEnd={() => {
               FastImage.cacheControl.cacheOnly;
@@ -193,7 +193,7 @@ const AddDish = ({navigation}) => {
         </TouchableOpacity>
 
         {/* Dropdown chọn loại categories */}
-        <View>
+        <View style={{marginTop: 20,marginLeft:24,marginRight:10}}>
           <SelectList
             setSelected={onHandleSelect}
             data={item}
@@ -222,9 +222,9 @@ const AddDish = ({navigation}) => {
         {/* Sau khi đã nhấn đúng main dish thì nó hiện ra. Set CSS cứng kích thước
         cho nó bên dưới thằng dropdown trên. }
         {/*  Dropdown chọn Sườn/sườn mỡ */}
-        <View>
+        <View >
           {isIdMainDish ? (
-            <View style={{marginTop: 20}}>
+            <View >
               <SelectList
                 setSelected={setSelected2nd}
                 data={mainDishOptionsData}
@@ -234,6 +234,7 @@ const AddDish = ({navigation}) => {
                   height: 50,
                   borderColor: constants.COLOR.BLACK,
                   alignItems: 'center',
+                  
                 }}
                 arrowicon={
                   <SimpleLineIcons
@@ -250,10 +251,7 @@ const AddDish = ({navigation}) => {
         </View>
 
         {/* Dropdown tên món */}
-        <View
-          style={{
-            marginTop: 20,
-          }}>
+        <View style={{marginLeft:24,marginRight:10}}>
           <DropDownPicker
             open={open}
             value={nameValue}
@@ -326,7 +324,7 @@ const AddDish = ({navigation}) => {
         </View>
 
         {/* Dropdown giá */}
-        <View style={{marginTop: 20}}>
+        <View style={{marginLeft:24,marginRight:10}}>
           <SelectList
             setSelected={setPrice}
             data={moneyData}
@@ -351,8 +349,19 @@ const AddDish = ({navigation}) => {
         </View>
         <Text>{price}</Text>
 
-        <Button title="Create Product" onPress={onCreateProduct} />
-        <Button title="SignOut" onPress={signOut} />
+        <TouchableOpacity  onPress={onCreateProduct}>
+              <View style={{backgroundColor:constants.COLOR.YELLOW,height:40,marginLeft:123,marginRight:117,borderRadius:10,marginBottom:15,justifyContent:'center'}}>
+                <Text style={{fontWeight:'700',fontSize:20,lineHeight:28,color:constants.COLOR.WHITE,   textAlign: 'center'}}>Thêm</Text>
+              </View>
+
+            </TouchableOpacity>
+
+            <TouchableOpacity  onPress={signOut}>
+              <View style={{backgroundColor:constants.COLOR.YELLOW,height:40,marginLeft:123,marginRight:117,borderRadius:10,marginBottom:15,justifyContent:'center'}}>
+                <Text style={{fontWeight:'700',fontSize:20,lineHeight:28,color:constants.COLOR.WHITE,   textAlign: 'center'}}>Đăng xuất</Text>
+              </View>
+            </TouchableOpacity>
+        
       </View>
     </SafeKeyComponent>
   );
