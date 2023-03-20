@@ -458,6 +458,11 @@ PODS:
     - React-Core
     - React-RCTImage
     - TOCropViewController
+  - RNNotifee (7.6.1):
+    - React-Core
+    - RNNotifee/NotifeeCore (= 7.6.1)
+  - RNNotifee/NotifeeCore (7.6.1):
+    - React-Core
   - RNScreens (3.20.0):
     - React-Core
     - React-RCTImage
@@ -523,6 +528,7 @@ DEPENDENCIES:
   - "RNFlashList (from `../node_modules/@shopify/flash-list`)"
   - "RNGoogleSignin (from `../node_modules/@react-native-google-signin/google-signin`)"
   - RNImageCropPicker (from `../node_modules/react-native-image-crop-picker`)
+  - "RNNotifee (from `../node_modules/@notifee/react-native`)"
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
@@ -641,6 +647,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-google-signin/google-signin"
   RNImageCropPicker:
     :path: "../node_modules/react-native-image-crop-picker"
+  RNNotifee:
+    :path: "../node_modules/@notifee/react-native"
   RNScreens:
     :path: "../node_modules/react-native-screens"
   RNVectorIcons:
@@ -713,6 +721,7 @@ SPEC CHECKSUMS:
   RNFlashList: 8ec7f7454721145fe84566bb9e88bcf58981c9fe
   RNGoogleSignin: 22e468a9474dbcb8618d8847205ad4f0b2575d13
   RNImageCropPicker: 14fe1c29298fb4018f3186f455c475ab107da332
+  RNNotifee: bdc064c29f4d558046f51f0c3ae02bab4fd3cd85
   RNScreens: 218801c16a2782546d30bd2026bb625c0302d70f
   RNVectorIcons: fcc2f6cb32f5735b586e66d14103a74ce6ad61f8
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d

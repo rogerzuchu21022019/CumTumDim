@@ -32,14 +32,10 @@ const HomeAdmin = ({navigation}) => {
         </View>
         <View style={styles.body}>
           <View style={styles.viewFlashList}>
-            <FlashList
+            {/* <FlashList
               data={DATA}
               estimatedItemSize={200}
               getItemType={(item, index) => {
-                console.log(
-                  '🚀 ~ file: HomeAdmin.js:50 ~ HomeAdmin ~ item:',
-                  item.category,
-                );
                 return item.category;
               }}
               renderItem={({item}) => {
@@ -49,7 +45,7 @@ const HomeAdmin = ({navigation}) => {
                 return null;
               }}
               keyExtractor={(item, index) => index.toString()}
-            />
+            /> */}
           </View>
         </View>
       </View>

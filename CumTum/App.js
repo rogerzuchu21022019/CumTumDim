@@ -1,6 +1,8 @@
 import React, {useEffect} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import notifee, { EventType } from '@notifee/react-native';
+
 import Router from './src/app/navigation/Router';
 
 import {Store} from './src/app/app_store/Store';
@@ -26,6 +28,7 @@ import UpdateInformation from './src/app/features/auth/updateInformation/UpdateI
 import Test from './src/Test';
 import AddDish from './src/app/features/admin/screens/addDish/AddDish';
 import {requestUserPermission} from './src/app/shared/utils/PermissionFCM';
+import { Platform } from 'react-native';
 
 let persistor = persistStore(Store);
 
@@ -33,7 +36,24 @@ const App = () => {
   const Stack = createNativeStackNavigator();
 
   useEffect(() => {
-    requestUserPermission();
+    if(Platform.OS ==='android'){
+      requestUserPermission();
+    }
+  }, []);
+
+  
+  
+  useEffect(() => {
+    return notifee.onForegroundEvent(({ type, detail }) => {
+      switch (type) {
+        case EventType.DISMISSED:
+          console.log('User dismissed notification', detail.notification);
+          break;
+        case EventType.PRESS:
+          console.log('User pressed notification', detail.notification);
+          break;
+      }
+    });
   }, []);
 
   return (

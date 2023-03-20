@@ -1,12 +1,12 @@
 import React from 'react';
-import SafeKeyComponent from '../../../../components/safe_area/SafeKeyComponent';
+import Router from '../../../../navigation/Router';
 
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import Statistic from '../statistic/Statistic';
-import Router from '../../../../navigation/Router';
-import DetailCard from '../detailCart/DetailCard';
+import SafeKeyComponent from '../../../../components/safe_area/SafeKeyComponent';
+import Cart from './cart/Cart';
+import Payment from './payment/Payment';
 
-const Manager = () => {
+const CartTabs = () => {
   const Stack = createNativeStackNavigator();
 
   return (
@@ -14,15 +14,15 @@ const Manager = () => {
       <Stack.Navigator>
         <Stack.Group>
           <Stack.Screen
-            name="Statistic"
-            component={Statistic}
+            name={Router.CART_WITH_NO_ITEM}
+            component={Cart}
             options={{
               headerShown: false,
             }}
           />
           <Stack.Screen
-            name={Router.DETAIL_CART_ADMIN}
-            component={DetailCard}
+            name={Router.PAYMENT}
+            component={Payment}
             options={{
               headerShown: false,
             }}
@@ -33,4 +33,4 @@ const Manager = () => {
   );
 };
 
-export default Manager;
+export default CartTabs;

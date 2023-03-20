@@ -1,4 +1,5 @@
 import messaging from '@react-native-firebase/messaging';
+
 import {LOG} from '../../../../logger.config';
 const log = LOG.extend(`PERMISSION_FCM.JS`);
 export const requestUserPermission = async () => {

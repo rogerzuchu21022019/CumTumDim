@@ -4,13 +4,13 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Router from './Router';
 import HomeAdmin from '../features/admin/screens/homeAdmin/HomeAdmin';
 import AddDish from '../features/admin/screens/addDish/AddDish';
-import { constants } from '../shared/constants';
+import {constants} from '../shared/constants';
 const Tab = createBottomTabNavigator();
 
 const AdminStack = () => {
   return (
     <Tab.Navigator
-    screenOptions={{
+      screenOptions={{
         tabBarShowLabel: true,
         tabBarActiveTintColor: constants.COLOR.WHITE,
         tabBarInactiveTintColor: constants.COLOR.BLACK,
@@ -42,7 +42,6 @@ const AdminStack = () => {
         component={AddDish}
         options={{
           headerShown: false,
-          
         }}
       />
       <Tab.Screen
@@ -58,7 +57,6 @@ const AdminStack = () => {
         component={AddDish}
         options={{
           headerShown: false,
-          
         }}
       />
     </Tab.Navigator>
