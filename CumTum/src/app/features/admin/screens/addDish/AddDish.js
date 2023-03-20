@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -11,27 +11,28 @@ import {
   TextInput,
 } from 'react-native';
 import FastImage from 'react-native-fast-image';
-import { useDispatch, useSelector } from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
+import IconIonicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import SafeKeyComponent from '../../../../components/safe_area/SafeKeyComponent';
 import * as RootNavigation from '../../../../navigation/RootNavigation';
 import Router from '../../../../navigation/Router';
-import { onCamera, onGallery } from '../../../../shared/utils/Camera';
-import { androidCameraPermission } from '../../../../shared/utils/PermissionAndroid';
-import { fetchSignOut } from '../../apiAdmin';
-import styleAddDish from './StyleAddDish';
+import {onCamera, onGallery} from '../../../../shared/utils/Camera';
+import {androidCameraPermission} from '../../../../shared/utils/PermissionAndroid';
+import {fetchSignOut} from '../../apiAdmin';
+import styles from './StyleAddDish';
 import {
   fetchAddDish,
   fetchCategories,
   fetchUploadImage,
 } from '../../../product/apiProduct';
 
-import { productSelector } from '../../../product/sliceProduct';
+import {productSelector} from '../../../product/sliceProduct';
 
 // Dropdown
-import { SelectList } from 'react-native-dropdown-select-list';
+import {SelectList} from 'react-native-dropdown-select-list';
 import DropDownPicker from 'react-native-dropdown-picker';
 import {
   mainDishOptionsData,
@@ -41,12 +42,11 @@ import {
   nameExtraDishes,
   nameToppings,
 } from './DataDishes';
-import { constants } from '../../../../shared/constants';
+import {constants} from '../../../../shared/constants';
 import BoxInputCus from '../../../../components/input/BoxInput';
 import Statistic from '../statistic/Statistic';
 
-const AddDish = ({ navigation }) => {
-
+const AddDish = ({navigation}) => {
   const dispatch = useDispatch();
   // Camera states
   const [avatar, setAvatar] = useState('');
@@ -74,16 +74,16 @@ const AddDish = ({ navigation }) => {
   // Xử lý call api
   useEffect(() => {
     dispatch(fetchCategories());
-    return () => { };
+    return () => {};
   }, [dispatch]);
 
   useEffect(() => {
     setItem(
       data.categories.map(item => {
-        return { key: item._id, value: item.name };
+        return {key: item._id, value: item.name};
       }),
     );
-    return () => { };
+    return () => {};
   }, [data.categories]);
 
   /* Xử lý camera , show alert, permission */
@@ -105,12 +105,12 @@ const AddDish = ({ navigation }) => {
 
   const showAlert = () => {
     Alert.alert('Choose an option', '', [
-      { text: 'Take a photo', onPress: () => onCamera(setAvatar, setIsPicked) },
+      {text: 'Take a photo', onPress: () => onCamera(setAvatar, setIsPicked)},
       {
         text: 'Go to Gallery',
         onPress: () => onGallery(setAvatar, setIsPicked),
       },
-      { text: 'Cancel', onPress: onCancel },
+      {text: 'Cancel', onPress: onCancel},
     ]);
   };
 
@@ -136,7 +136,7 @@ const AddDish = ({ navigation }) => {
     };
 
     console.log('🚀 ~ file: AddDish.js:127 ~ onCreateProduct ~ data:', dish);
-    dispatch(fetchAddDish({ dish: dish, categoryId: categoryId }));
+    dispatch(fetchAddDish({dish: dish, categoryId: categoryId}));
   };
 
   const signOut = async () => {
@@ -183,207 +183,263 @@ const AddDish = ({ navigation }) => {
   return (
     <SafeKeyComponent>
       {/* Set CSS cho full . Bọc view cho tụi nó đầy đủ . */}
-      <View>
-        <View>
-          <View style={styleAddDish.header}>
-            <View style={styleAddDish.groupFinal}>
-              <View style={styleAddDish.groupItemHeader}>
-                <TouchableOpacity onPress={() => navigation.goBack()} >
-                <Image style={styleAddDish.imageRuturn}
-                    source={require('../../../../../assets/return.png')}
-                  />
-                </TouchableOpacity>
-                <Image style={styleAddDish.image}
-                  source={require('../../../../../assets/iconLogo_CumTumDim.jpg')}
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <View style={styles.mainHeader}>
+            <View style={styles.leftHeader}>
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.goBack();
+                }}>
+                <IconIonicons
+                  style={styles.imageReturn}
+                  name="arrow-back"
+                  color={constants.COLOR.WHITE}
+                  size={20}
                 />
-                <Text style={styleAddDish.textTitle}>Cum tứm đim</Text>
-              </View>
-            </View>
-            <View style={styleAddDish.strikethrough}></View>
-          </View>
-        </View>
-        {/* Xử lý camera */}
-        <TouchableOpacity onPress={openCamera}>
-          <FastImage
-            style={{ width: 205, height: 205, marginLeft: 105, marginTop: 15 }}
-            source={avatar ? imageUrlOptions : urlHardCode}
-            onLoadEnd={() => {
-              FastImage.cacheControl.cacheOnly;
-            }}
-            resizeMode={FastImage.resizeMode.contain}
-          />
-        </TouchableOpacity>
-
-        {/* Dropdown chọn loại categories */}
-        <View style={{ marginTop: 20, marginLeft: 24, marginRight: 10 }}>
-          <SelectList
-            setSelected={onHandleSelect}
-            data={item}
-            save="key"
-            defaultOption={categoryId}
-            boxStyles={{
-              height: 50,
-              borderColor: constants.COLOR.BLACK,
-              alignItems: 'center',
-            }}
-            placeholder="Chọn loại món"
-            arrowicon={
-              <SimpleLineIcons
-                name="arrow-down"
-                style={{
-                  marginRight: 4,
-                }}
-                size={10}
-              />
-            }
-          />
-        </View>
-
-        <Text>{categoryId}</Text>
-
-        {/* Sau khi đã nhấn đúng main dish thì nó hiện ra. Set CSS cứng kích thước
-        cho nó bên dưới thằng dropdown trên. }
-        {/*  Dropdown chọn Sườn/sườn mỡ */}
-        <View >
-          {isIdMainDish ? (
-            <View >
-              <SelectList
-                setSelected={setSelected2nd}
-                data={mainDishOptionsData}
-                save="value"
-                placeholder="Chọn loại sườn"
-                boxStyles={{
-                  height: 50,
-                  borderColor: constants.COLOR.BLACK,
-                  alignItems: 'center',
-
-                }}
-                arrowicon={
-                  <SimpleLineIcons
-                    name="arrow-down"
-                    style={{
-                      marginRight: 4,
-                    }}
-                    size={10}
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate(Router.HOME_ADMIN);
+                }}>
+                <View style={styles.viewLogo}>
+                  <FastImage
+                    style={styles.imageLogo}
+                    source={require('../../../../../assets/iconLogo_CumTumDim.jpg')}
                   />
-                }
-              />
+                  <Text style={styles.textTitle}>Cum tứm đim</Text>
+                </View>
+              </TouchableOpacity>
             </View>
-          ) : null}
-        </View>
-
-        {/* Dropdown tên món */}
-        <View style={{ marginLeft: 24, marginRight: 10 }}>
-          <DropDownPicker
-            open={open}
-            value={nameValue}
-            items={listItem}
-            setOpen={setOpen}
-            setValue={setNameValue}
-            setItems={setListItem}
-            placeholder="Chọn tên món ăn"
-            placeholderStyle={{
-              marginLeft: 10,
-              color: constants.COLOR.BLACK,
-            }}
-            textStyle={{
-              color: constants.COLOR.WHITE,
-            }}
-            //multi
-            multiple={true}
-            min={1}
-            max={1}
-            // result after choose
-            mode="BADGE"
-            showBadgeDot={true}
-            badgeProps={{
-              activeOpacity: 0.5,
-            }}
-            badgeColors={['red', 'blue', 'orange']}
-            badgeDotColors={['yellow', 'grey', 'aqua']}
-            //search
-            searchable={true}
-            searchPlaceholder="Tìm kiếm hoặc chọn lựa tên "
-            searchWithRegionalAccents={true}
-            searchContainerStyle={{
-              borderBottomColor: '#dfdfdf',
-            }}
-            searchTextInputStyle={{
-              color: constants.COLOR.WHITE,
-            }}
-            searchPlaceholderTextColor={constants.COLOR.WHITE}
-            customItemLabelStyle={{
-              fontStyle: 'italic',
-            }}
-            // show type of list item
-            listMode="MODAL"
-            modalTitle="Select an item"
-            closeAfterSelecting={true}
-            bottomOffset={100}
-            dropDownDirection="AUTO"
-            modalContentContainerStyle={{
-              backgroundColor: constants.COLOR.PRIMARY,
-            }}
-            modalAnimationType="slide"
-            //icon
-            TickIconComponent={() => (
-              <MaterialIcons
-                name="done"
-                style={{
-                  marginRight: 4,
-                }}
-                color={constants.COLOR.WHITE}
+            {/* <View style={styles.rightHeader}>
+              <IconOcticons
+                name="bell-fill"
+                color={constants.COLOR.RED}
                 size={20}
               />
-            )}
-            arrowIconStyle={{
-              width: 15,
-              height: 15,
-              marginRight: 12,
-            }}
-          />
-          <Text>{nameValue}</Text>
+            </View> */}
+          </View>
         </View>
+        <View style={styles.divideLine}></View>
 
-        {/* Dropdown giá */}
-        <View style={{ marginLeft: 24, marginRight: 10 }}>
-          <SelectList
-            setSelected={setPrice}
-            data={moneyData}
-            save="key"
-            placeholder="Chọn giá tiền"
-            defaultOption={price}
-            boxStyles={{
-              height: 50,
-              borderColor: constants.COLOR.BLACK,
-              alignItems: 'center',
-            }}
-            arrowicon={
-              <SimpleLineIcons
-                name="arrow-down"
+        <View style={styles.body}>
+          <TouchableOpacity onPress={openCamera}>
+            <FastImage
+              style={{width: 205, height: 205, marginLeft: 105, marginTop: 15}}
+              source={avatar ? imageUrlOptions : urlHardCode}
+              onLoadEnd={() => {
+                FastImage.cacheControl.cacheOnly;
+              }}
+              resizeMode={FastImage.resizeMode.contain}
+            />
+          </TouchableOpacity>
+
+          {/* Dropdown chọn loại categories */}
+          <View style={{marginTop: 20, marginLeft: 24, marginRight: 10}}>
+            <SelectList
+              setSelected={onHandleSelect}
+              data={item}
+              save="key"
+              defaultOption={categoryId}
+              boxStyles={{
+                height: 50,
+                borderColor: constants.COLOR.BLACK,
+                alignItems: 'center',
+              }}
+              placeholder="Chọn loại món"
+              arrowicon={
+                <SimpleLineIcons
+                  name="arrow-down"
+                  style={{
+                    marginRight: 4,
+                  }}
+                  size={10}
+                />
+              }
+            />
+          </View>
+
+          <Text>{categoryId}</Text>
+
+          {/* Sau khi đã nhấn đúng main dish thì nó hiện ra. Set CSS cứng kích thước
+        cho nó bên dưới thằng dropdown trên. }
+        {/*  Dropdown chọn Sườn/sườn mỡ */}
+          <View>
+            {isIdMainDish ? (
+              <View>
+                <SelectList
+                  setSelected={setSelected2nd}
+                  data={mainDishOptionsData}
+                  save="value"
+                  placeholder="Chọn loại sườn"
+                  boxStyles={{
+                    height: 50,
+                    borderColor: constants.COLOR.BLACK,
+                    alignItems: 'center',
+                  }}
+                  arrowicon={
+                    <SimpleLineIcons
+                      name="arrow-down"
+                      style={{
+                        marginRight: 4,
+                      }}
+                      size={10}
+                    />
+                  }
+                />
+              </View>
+            ) : null}
+          </View>
+
+          {/* Dropdown tên món */}
+          <View style={{marginLeft: 24, marginRight: 10}}>
+            <DropDownPicker
+              open={open}
+              value={nameValue}
+              items={listItem}
+              setOpen={setOpen}
+              setValue={setNameValue}
+              setItems={setListItem}
+              placeholder="Chọn tên món ăn"
+              placeholderStyle={{
+                marginLeft: 10,
+                color: constants.COLOR.BLACK,
+              }}
+              textStyle={{
+                color: constants.COLOR.WHITE,
+              }}
+              //multi
+              multiple={true}
+              min={1}
+              max={1}
+              // result after choose
+              mode="BADGE"
+              showBadgeDot={true}
+              badgeProps={{
+                activeOpacity: 0.5,
+              }}
+              badgeColors={['red', 'blue', 'orange']}
+              badgeDotColors={['yellow', 'grey', 'aqua']}
+              //search
+              searchable={true}
+              searchPlaceholder="Tìm kiếm hoặc chọn lựa tên "
+              searchWithRegionalAccents={true}
+              searchContainerStyle={{
+                borderBottomColor: '#dfdfdf',
+              }}
+              searchTextInputStyle={{
+                color: constants.COLOR.WHITE,
+              }}
+              searchPlaceholderTextColor={constants.COLOR.WHITE}
+              customItemLabelStyle={{
+                fontStyle: 'italic',
+              }}
+              // show type of list item
+              listMode="MODAL"
+              modalTitle="Select an item"
+              closeAfterSelecting={true}
+              bottomOffset={100}
+              dropDownDirection="AUTO"
+              modalContentContainerStyle={{
+                backgroundColor: constants.COLOR.PRIMARY,
+              }}
+              modalAnimationType="slide"
+              //icon
+              TickIconComponent={() => (
+                <MaterialIcons
+                  name="done"
+                  style={{
+                    marginRight: 4,
+                  }}
+                  color={constants.COLOR.WHITE}
+                  size={20}
+                />
+              )}
+              arrowIconStyle={{
+                width: 15,
+                height: 15,
+                marginRight: 12,
+              }}
+            />
+            <Text>{nameValue}</Text>
+          </View>
+
+          {/* Dropdown giá */}
+          <View style={{marginLeft: 24, marginRight: 10}}>
+            <SelectList
+              setSelected={setPrice}
+              data={moneyData}
+              save="key"
+              placeholder="Chọn giá tiền"
+              defaultOption={price}
+              boxStyles={{
+                height: 50,
+                borderColor: constants.COLOR.BLACK,
+                alignItems: 'center',
+              }}
+              arrowicon={
+                <SimpleLineIcons
+                  name="arrow-down"
+                  style={{
+                    marginRight: 4,
+                  }}
+                  size={10}
+                />
+              }
+            />
+          </View>
+          <Text>{price}</Text>
+
+          <TouchableOpacity onPress={onCreateProduct}>
+            <View
+              style={{
+                backgroundColor: constants.COLOR.YELLOW,
+                height: 40,
+                marginLeft: 123,
+                marginRight: 117,
+                borderRadius: 10,
+                marginBottom: 15,
+                justifyContent: 'center',
+              }}>
+              <Text
                 style={{
-                  marginRight: 4,
-                }}
-                size={10}
-              />
-            }
-          />
+                  fontWeight: '700',
+                  fontSize: 20,
+                  lineHeight: 28,
+                  color: constants.COLOR.WHITE,
+                  textAlign: 'center',
+                }}>
+                Thêm
+              </Text>
+            </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={signOut}>
+            <View
+              style={{
+                backgroundColor: constants.COLOR.YELLOW,
+                height: 40,
+                marginLeft: 123,
+                marginRight: 117,
+                borderRadius: 10,
+                marginBottom: 15,
+                justifyContent: 'center',
+              }}>
+              <Text
+                style={{
+                  fontWeight: '700',
+                  fontSize: 20,
+                  lineHeight: 28,
+                  color: constants.COLOR.WHITE,
+                  textAlign: 'center',
+                }}>
+                Đăng xuất
+              </Text>
+            </View>
+          </TouchableOpacity>
         </View>
-        <Text>{price}</Text>
-
-        <TouchableOpacity onPress={onCreateProduct}>
-          <View style={{ backgroundColor: constants.COLOR.YELLOW, height: 40, marginLeft: 123, marginRight: 117, borderRadius: 10, marginBottom: 15, justifyContent: 'center' }}>
-            <Text style={{ fontWeight: '700', fontSize: 20, lineHeight: 28, color: constants.COLOR.WHITE, textAlign: 'center' }}>Thêm</Text>
-          </View>
-
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={signOut}>
-          <View style={{ backgroundColor: constants.COLOR.YELLOW, height: 40, marginLeft: 123, marginRight: 117, borderRadius: 10, marginBottom: 15, justifyContent: 'center' }}>
-            <Text style={{ fontWeight: '700', fontSize: 20, lineHeight: 28, color: constants.COLOR.WHITE, textAlign: 'center' }}>Đăng xuất</Text>
-          </View>
-        </TouchableOpacity>
-
+        {/* Xử lý camera */}
+        <View style={styles.divideLine}></View>
       </View>
     </SafeKeyComponent>
   );

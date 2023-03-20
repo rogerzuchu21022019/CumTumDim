@@ -4,7 +4,7 @@ export const constants = {
     ORANGE: '#FE724C',
     GREY: '#252121',
     YELLOW: '#FFB703',
-    BLACK: '#282222',
+    BLACK: 'black',
     WHITE: '#FFFFFF',
     RED: '#F20000',
   },
