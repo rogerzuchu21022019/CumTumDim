@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Router from './src/app/navigation/Router';
@@ -22,18 +22,23 @@ import {PersistGate} from 'reduxjs-toolkit-persist/integration/react';
 import LoginScreen from './src/app/features/auth/login/Login';
 import SplashScreen from './src/app/features/auth/splashScreen/SplashScreen';
 import UpdateInformation from './src/app/features/auth/updateInformation/UpdateInformation';
+
 import Test from './src/Test';
 import AddDish from './src/app/features/admin/screens/addDish/AddDish';
+import {requestUserPermission} from './src/app/shared/utils/PermissionFCM';
 
 let persistor = persistStore(Store);
+
 const App = () => {
   const Stack = createNativeStackNavigator();
+
+  useEffect(() => {
+    requestUserPermission();
+  }, []);
 
   return (
     <Provider store={Store}>
       <PersistGate loading={null} persistor={persistor}>
-
-
         <NavigationContainer ref={navigationRef}>
           <Stack.Navigator>
             <Stack.Screen

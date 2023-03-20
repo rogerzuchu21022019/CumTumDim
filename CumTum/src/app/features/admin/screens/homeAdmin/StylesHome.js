@@ -33,7 +33,7 @@ const StylesHome = StyleSheet.create({
 
   //body
   body: {
-    flex: 10,
+    flex: 12,
     backgroundColor: '#252121',
     alignItems: 'center',
   },

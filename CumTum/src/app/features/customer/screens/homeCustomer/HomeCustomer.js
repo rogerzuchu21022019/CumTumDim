@@ -3,21 +3,22 @@ import {View, Text, Button, ActivityIndicator} from 'react-native';
 import Router from '../../../../navigation/Router';
 import SafeKeyComponent from '../../../../components/safe_area/SafeKeyComponent';
 import {useDispatch, useSelector} from 'react-redux';
-import {authSelector} from '../../../admin/sliceAuth';
 import {fetchSignOut} from '../../../admin/apiAdmin';
 import {constants} from '../../../../shared/constants';
+import {LOG} from '../../../../../../logger.config';
+import {productSelector} from '../../../product/sliceProduct';
+import {useEffect} from 'react';
+import {fetchCategories, fetchDishes} from '../../../product/apiProduct';
 
 const HomeCustomer = ({navigation}) => {
-  const data = useSelector(authSelector);
-  console.log('🚀 ~ file: HomeCustomer.js:19 ~ handleLogout ~ data:', data);
+  const log = LOG.extend('HOME_CUSTOMER.js');
+  const data = useSelector(productSelector);
+  console.log('🚀 ~ file: HomeCustomer.js:16 ~ HomeCustomer ~ data:', data);
 
-  const isLoading = data.isLoading;
-  console.log("🚀 ~ file: HomeCustomer.js:15 ~ HomeCustomer ~ isLoading:", isLoading)
-
-  // useEffect(() => {
-  //   data ? moveTo() : null;
-  //   return () => {};
-  // }, [data]);
+  useEffect(() => {
+    dispatch(fetchCategories());
+    dispatch(fetchDishes());
+  }, [dispatch]);
 
   const moveTo = async () => {
     navigation.navigate(Router.LOGIN);
@@ -40,9 +41,9 @@ const HomeCustomer = ({navigation}) => {
             width: 100,
             height: 100,
           }}>
-          {isLoading ? (
+          {/* {isLoading ? (
             <ActivityIndicator size="large" color={constants.COLOR.RED} />
-          ) : null}
+          ) : null} */}
         </View>
       </View>
     </SafeKeyComponent>

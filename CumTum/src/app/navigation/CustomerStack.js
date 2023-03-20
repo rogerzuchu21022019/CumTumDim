@@ -5,7 +5,7 @@ import Router from './Router';
 import HomeCustomer from '../features/customer/screens/homeCustomer/HomeCustomer';
 const Tab = createBottomTabNavigator();
 
-const CustomerStack = () => {
+const CustomerStack = (Stack) => {
   return (
     <Tab.Navigator >
       <Tab.Screen
