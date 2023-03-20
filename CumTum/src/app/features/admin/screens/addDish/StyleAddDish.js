@@ -30,5 +30,11 @@ const styleAddDish = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
     },
+    imageRuturn:{
+        marginLeft:5
+    },
+    image:{
+        marginLeft:15
+    },
 });
 export default styleAddDish;

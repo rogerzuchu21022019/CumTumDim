@@ -18,7 +18,7 @@ const StyleManagerCategories = StyleSheet.create({
         alignItems: 'center',
 
         justifyContent: 'space-evenly',
-        paddingEnd: 220,
+        marginLeft:10
     },
     strikethrough: {
         height: 2,
@@ -34,6 +34,12 @@ const StyleManagerCategories = StyleSheet.create({
     groupFinal: {
         flexDirection: 'row',
         alignItems: 'center',
+    },
+    imageRuturn:{
+        marginLeft:5
+    },
+    image:{
+        marginLeft:15
     },
     /*Body*/
     body: {

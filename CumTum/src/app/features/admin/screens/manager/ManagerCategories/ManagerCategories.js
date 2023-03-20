@@ -13,11 +13,11 @@ const ManagerCategories = () => {
                     <View style={StyleManagerCategories.groupFinal}>
                         <View style={StyleManagerCategories.groupItemHeader}>
                             <TouchableOpacity onPress={() => navigation.goBack()} >
-                                <Image
+                                <Image style={StyleManagerCategories.imageRuturn}
                                     source={require('../../../../../../assets/return.png')}
                                 />
                             </TouchableOpacity>
-                            <Image
+                            <Image style={StyleManagerCategories.image}
                                 source={require('../../../../../../assets/iconLogo_CumTumDim.jpg')}
                             />
                             <Text style={StyleManagerCategories.textTitle}>Cum tứm đim</Text>

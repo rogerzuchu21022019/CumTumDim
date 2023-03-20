@@ -189,11 +189,11 @@ const AddDish = ({ navigation }) => {
             <View style={styleAddDish.groupFinal}>
               <View style={styleAddDish.groupItemHeader}>
                 <TouchableOpacity onPress={() => navigation.goBack()} >
-                  <Image
+                <Image style={styleAddDish.imageRuturn}
                     source={require('../../../../../assets/return.png')}
                   />
                 </TouchableOpacity>
-                <Image
+                <Image style={styleAddDish.image}
                   source={require('../../../../../assets/iconLogo_CumTumDim.jpg')}
                 />
                 <Text style={styleAddDish.textTitle}>Cum tứm đim</Text>
