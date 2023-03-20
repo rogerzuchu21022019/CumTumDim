@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -11,25 +11,27 @@ import {
   TextInput,
 } from 'react-native';
 import FastImage from 'react-native-fast-image';
-import {useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import SafeKeyComponent from '../../../../components/safe_area/SafeKeyComponent';
 import * as RootNavigation from '../../../../navigation/RootNavigation';
 import Router from '../../../../navigation/Router';
-import {onCamera, onGallery} from '../../../../shared/utils/Camera';
-import {androidCameraPermission} from '../../../../shared/utils/PermissionAndroid';
-import {fetchSignOut} from '../../apiAdmin';
+import { onCamera, onGallery } from '../../../../shared/utils/Camera';
+import { androidCameraPermission } from '../../../../shared/utils/PermissionAndroid';
+import { fetchSignOut } from '../../apiAdmin';
+import styleAddDish from './StyleAddDish';
 import {
   fetchAddDish,
   fetchCategories,
   fetchUploadImage,
 } from '../../../product/apiProduct';
-import {productSelector} from '../../../product/sliceProduct';
+
+import { productSelector } from '../../../product/sliceProduct';
 
 // Dropdown
-import {SelectList} from 'react-native-dropdown-select-list';
+import { SelectList } from 'react-native-dropdown-select-list';
 import DropDownPicker from 'react-native-dropdown-picker';
 import {
   mainDishOptionsData,
@@ -39,10 +41,12 @@ import {
   nameExtraDishes,
   nameToppings,
 } from './DataDishes';
-import {constants} from '../../../../shared/constants';
+import { constants } from '../../../../shared/constants';
 import BoxInputCus from '../../../../components/input/BoxInput';
+import Statistic from '../statistic/Statistic';
 
-const AddDish = ({navigation}) => {
+const AddDish = ({ navigation }) => {
+
   const dispatch = useDispatch();
   // Camera states
   const [avatar, setAvatar] = useState('');
@@ -70,16 +74,16 @@ const AddDish = ({navigation}) => {
   // Xử lý call api
   useEffect(() => {
     dispatch(fetchCategories());
-    return () => {};
+    return () => { };
   }, [dispatch]);
 
   useEffect(() => {
     setItem(
       data.categories.map(item => {
-        return {key: item._id, value: item.name};
+        return { key: item._id, value: item.name };
       }),
     );
-    return () => {};
+    return () => { };
   }, [data.categories]);
 
   /* Xử lý camera , show alert, permission */
@@ -101,12 +105,12 @@ const AddDish = ({navigation}) => {
 
   const showAlert = () => {
     Alert.alert('Choose an option', '', [
-      {text: 'Take a photo', onPress: () => onCamera(setAvatar, setIsPicked)},
+      { text: 'Take a photo', onPress: () => onCamera(setAvatar, setIsPicked) },
       {
         text: 'Go to Gallery',
         onPress: () => onGallery(setAvatar, setIsPicked),
       },
-      {text: 'Cancel', onPress: onCancel},
+      { text: 'Cancel', onPress: onCancel },
     ]);
   };
 
@@ -132,7 +136,7 @@ const AddDish = ({navigation}) => {
     };
 
     console.log('🚀 ~ file: AddDish.js:127 ~ onCreateProduct ~ data:', dish);
-    dispatch(fetchAddDish({dish: dish, categoryId: categoryId}));
+    dispatch(fetchAddDish({ dish: dish, categoryId: categoryId }));
   };
 
   const signOut = async () => {
@@ -180,10 +184,28 @@ const AddDish = ({navigation}) => {
     <SafeKeyComponent>
       {/* Set CSS cho full . Bọc view cho tụi nó đầy đủ . */}
       <View>
+        <View>
+          <View style={styleAddDish.header}>
+            <View style={styleAddDish.groupFinal}>
+              <View style={styleAddDish.groupItemHeader}>
+                <TouchableOpacity onPress={() => navigation.goBack()} >
+                  <Image
+                    source={require('../../../../../assets/return.png')}
+                  />
+                </TouchableOpacity>
+                <Image
+                  source={require('../../../../../assets/iconLogo_CumTumDim.jpg')}
+                />
+                <Text style={styleAddDish.textTitle}>Cum tứm đim</Text>
+              </View>
+            </View>
+            <View style={styleAddDish.strikethrough}></View>
+          </View>
+        </View>
         {/* Xử lý camera */}
         <TouchableOpacity onPress={openCamera}>
           <FastImage
-            style={{width: 205, height: 205,marginLeft:105,marginTop:15}}
+            style={{ width: 205, height: 205, marginLeft: 105, marginTop: 15 }}
             source={avatar ? imageUrlOptions : urlHardCode}
             onLoadEnd={() => {
               FastImage.cacheControl.cacheOnly;
@@ -193,7 +215,7 @@ const AddDish = ({navigation}) => {
         </TouchableOpacity>
 
         {/* Dropdown chọn loại categories */}
-        <View style={{marginTop: 20,marginLeft:24,marginRight:10}}>
+        <View style={{ marginTop: 20, marginLeft: 24, marginRight: 10 }}>
           <SelectList
             setSelected={onHandleSelect}
             data={item}
@@ -234,7 +256,7 @@ const AddDish = ({navigation}) => {
                   height: 50,
                   borderColor: constants.COLOR.BLACK,
                   alignItems: 'center',
-                  
+
                 }}
                 arrowicon={
                   <SimpleLineIcons
@@ -251,7 +273,7 @@ const AddDish = ({navigation}) => {
         </View>
 
         {/* Dropdown tên món */}
-        <View style={{marginLeft:24,marginRight:10}}>
+        <View style={{ marginLeft: 24, marginRight: 10 }}>
           <DropDownPicker
             open={open}
             value={nameValue}
@@ -324,7 +346,7 @@ const AddDish = ({navigation}) => {
         </View>
 
         {/* Dropdown giá */}
-        <View style={{marginLeft:24,marginRight:10}}>
+        <View style={{ marginLeft: 24, marginRight: 10 }}>
           <SelectList
             setSelected={setPrice}
             data={moneyData}
@@ -349,19 +371,19 @@ const AddDish = ({navigation}) => {
         </View>
         <Text>{price}</Text>
 
-        <TouchableOpacity  onPress={onCreateProduct}>
-              <View style={{backgroundColor:constants.COLOR.YELLOW,height:40,marginLeft:123,marginRight:117,borderRadius:10,marginBottom:15,justifyContent:'center'}}>
-                <Text style={{fontWeight:'700',fontSize:20,lineHeight:28,color:constants.COLOR.WHITE,   textAlign: 'center'}}>Thêm</Text>
-              </View>
+        <TouchableOpacity onPress={onCreateProduct}>
+          <View style={{ backgroundColor: constants.COLOR.YELLOW, height: 40, marginLeft: 123, marginRight: 117, borderRadius: 10, marginBottom: 15, justifyContent: 'center' }}>
+            <Text style={{ fontWeight: '700', fontSize: 20, lineHeight: 28, color: constants.COLOR.WHITE, textAlign: 'center' }}>Thêm</Text>
+          </View>
 
-            </TouchableOpacity>
+        </TouchableOpacity>
 
-            <TouchableOpacity  onPress={signOut}>
-              <View style={{backgroundColor:constants.COLOR.YELLOW,height:40,marginLeft:123,marginRight:117,borderRadius:10,marginBottom:15,justifyContent:'center'}}>
-                <Text style={{fontWeight:'700',fontSize:20,lineHeight:28,color:constants.COLOR.WHITE,   textAlign: 'center'}}>Đăng xuất</Text>
-              </View>
-            </TouchableOpacity>
-        
+        <TouchableOpacity onPress={signOut}>
+          <View style={{ backgroundColor: constants.COLOR.YELLOW, height: 40, marginLeft: 123, marginRight: 117, borderRadius: 10, marginBottom: 15, justifyContent: 'center' }}>
+            <Text style={{ fontWeight: '700', fontSize: 20, lineHeight: 28, color: constants.COLOR.WHITE, textAlign: 'center' }}>Đăng xuất</Text>
+          </View>
+        </TouchableOpacity>
+
       </View>
     </SafeKeyComponent>
   );

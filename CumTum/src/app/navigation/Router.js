@@ -1,16 +1,19 @@
 const Router = {
   /* Admin */
-  HOME_ADMIN: 'HomeAdmin',
+  HOME_ADMIN: 'Trang chủ',
   DETAIL_CART_ADMIN:"DetailCartAdmin",
   SHOW_BILL_ADMIN:"ShowBillAdmin",
-  MANAGER:"Manager",
+  MANAGER:"Quản lý",
+  MANAGE:"Manage",
   CRUD_MENU:"CrudMenu",
   ADD_DISH:"AddDish",
   EDIT_DISH:"EditDish",
   UPDATE_DISH:"UpdateDish",
-  SUPPORT:"Support",
+  SUPPORT:"Hỗ trợ",
   INCOME:"Income",
-  CHART:"Chart",
+  STATISTI:"thống kê",
+  DELETE_DISH:"DeleteDish",
+
   /* Customer */
   SPLASH_SCREEN:"Splash",
   LOGIN: 'Login',

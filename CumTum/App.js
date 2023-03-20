@@ -1,29 +1,31 @@
 import React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Router from './src/app/navigation/Router';
 
-import {Store} from './src/app/app_store/Store';
+import { Store } from './src/app/app_store/Store';
 
 // import Provider
-import {Provider} from 'react-redux';
+import { Provider } from 'react-redux';
 import AdminStack from './src/app/navigation/AdminStack';
 import DetailCard from './src/app/features/admin/screens/detailCart/DetailCard';
 import CustomerStack from './src/app/navigation/CustomerStack';
 
 // import RootNavigation
-import {navigationRef} from './src/app/navigation/RootNavigation';
+import { navigationRef } from './src/app/navigation/RootNavigation';
 
 // Redux Persist
 
-import {persistStore} from 'reduxjs-toolkit-persist';
-import {PersistGate} from 'reduxjs-toolkit-persist/integration/react';
+import { persistStore } from 'reduxjs-toolkit-persist';
+import { PersistGate } from 'reduxjs-toolkit-persist/integration/react';
 
 import LoginScreen from './src/app/features/auth/login/Login';
 import SplashScreen from './src/app/features/auth/splashScreen/SplashScreen';
 import UpdateInformation from './src/app/features/auth/updateInformation/UpdateInformation';
 import Test from './src/Test';
 import AddDish from './src/app/features/admin/screens/addDish/AddDish';
+import Manage from './src/app/features/admin/screens/manager/manageDish/ManageDish';
+import ManagerCategories from './src/app/features/admin/screens/manager/ManagerCategories/ManagerCategories';
 
 let persistor = persistStore(Store);
 const App = () => {
@@ -36,7 +38,7 @@ const App = () => {
 
         <NavigationContainer ref={navigationRef}>
           <Stack.Navigator>
-            <Stack.Screen
+            {/* <Stack.Screen
               name={Router.SPLASH_SCREEN}
               component={SplashScreen}
               options={{
@@ -65,7 +67,8 @@ const App = () => {
               options={{
                 headerShown: false,
               }}
-            />
+            />  */}
+
             <Stack.Screen
               name={Router.ADMIN_STACK}
               component={AdminStack}
@@ -82,6 +85,10 @@ const App = () => {
                 presentation: 'modal',
               }}
             />
+
+
+
+
           </Stack.Navigator>
         </NavigationContainer>
       </PersistGate>

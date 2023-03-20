@@ -19,8 +19,7 @@ const styleSplashScreen = StyleSheet.create({
   imageBody: {
     height: 380,
     width: 414,
-    alignItems: 'center',
-    justifyContent: 'center',
+   marginTop:15
   },
 
   /*Header*/
