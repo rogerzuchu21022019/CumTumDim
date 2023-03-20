@@ -33,28 +33,22 @@ const HomeAdmin = ({navigation}) => {
         </View>
         <View style={styles.divideLine}></View>
         <View style={styles.body}>
-          {/* <View style={styles.viewFlashList}>
-            <FlashList
+          <View style={styles.viewFlashList}>
+            {/* <FlashList
               data={DATA}
               estimatedItemSize={200}
               getItemType={(item, index) => {
-                console.log(
-                  '🚀 ~ file: HomeAdmin.js:50 ~ HomeAdmin ~ item:',
-                  item.category,
-                );
                 return item.category;
               }}
               renderItem={({item}) => {
-              if (item.category === 'Món thêm') {
-                return <ItemView item={item} navigation={navigation} />;
-              }
-              return null;
-
+                if (item.category === 'Món thêm') {
+                  return <ItemView item={item} navigation={navigation} />;
+                }
+                return null;
               }}
-            
               keyExtractor={(item, index) => index.toString()}
-            />
-          </View> */}
+            /> */}
+          </View>
         </View>
       </View>
     </SafeKeyComponent>

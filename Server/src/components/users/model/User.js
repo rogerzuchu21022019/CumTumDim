@@ -32,6 +32,17 @@ const userSchema = new mongoose.Schema(
     accessToken: {
       type: String,
     },
+    fcmToken:{
+      type: String,
+    },
+    order:{
+      type: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Order",
+        },
+      ]
+    },
     address: {
       street: {
         type: String,
@@ -49,6 +60,7 @@ const userSchema = new mongoose.Schema(
         type: String,
       },
     },
+    
   },
   {
     timestamps: true,

@@ -34,7 +34,7 @@ export const constants = {
     SourceSansProSemiBold: 'SourceSansProSemiBold',
   },
   BASE_URL: {
-    MAIN: 'http://192.168.2.101:3000/api',
+    MAIN: 'http://192.168.1.35:3000/api',
     SECOND: 'https://fpoly-hcm.herokuapp.com/api',
     THIRD: 'https://cumtumdim.becofoodstore.click/api',
   },
@@ -60,10 +60,12 @@ export const constants = {
     SIGN_OUT: 'fetchSignOut',
     FIND_CATEGORIES: 'fetchCategories',
     ADD_DISH: 'fetchAddDish',
+    FIND_DISHES: 'fetchDishes',
   },
   SLICE: {
     ADMIN: 'admin',
     AUTH: 'auth',
     PRODUCT: 'product',
+    CART: 'cart',
   },
 };

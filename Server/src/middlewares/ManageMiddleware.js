@@ -5,10 +5,11 @@ const logger = require("morgan");
 const bodyParser = require("body-parser");
 const express = require("express");
 require(`dotenv`).config();
-const ApiUser = require("../routes/api/ApiUser");
+
 const cors = require(`cors`);
 const Multer = require("../utils/Multer");
 
+const admin = require("firebase-admin");
 // Middleware
 
 const ManagerMiddleware = (app) => {
@@ -31,6 +32,15 @@ const ManagerMiddleware = (app) => {
   );
   app.use(cookieParser());
 
+  // const serviceAccount = require(path.join(
+  //   __dirname,
+  //   "..",
+  //   "config",
+  //   "fcm.json"
+  // ));
+  // admin.initializeApp({
+  //   credential: admin.credential.cert(serviceAccount),
+  // });
 
   const publicDir = path.join(__dirname, "public");
   const fixPublic = express.static(publicDir);
