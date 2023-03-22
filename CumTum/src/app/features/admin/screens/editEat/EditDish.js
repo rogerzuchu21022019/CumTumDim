@@ -1,10 +1,11 @@
 import {StyleSheet, Text, View, Image,FlatList} from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 import SafeKeyComponent from '../../../../components/safe_area/SafeKeyComponent';
 import styles from './StyleEditEat';
 import ItemEditEat from './ItemEditEat';
 
-const DATA = [
+const EditDish = ({navigation}) => {
+  const [data,setData]= useState([
     {
       id: '1',
       number:'1',
@@ -13,7 +14,6 @@ const DATA = [
       price:'25k',
       edit: require('../../../../../assets/EditImages.png'),
       delete: require('../../../../../assets/DeleteImages.png'),
-
     },
     {
       id: '2',
@@ -69,71 +69,17 @@ const DATA = [
       edit: require('../../../../../assets/EditImages.png'),
       delete: require('../../../../../assets/DeleteImages.png'),
     },
-    {
-      id: '8',
-      number:'1',
-      uri :'https://cdn.daynauan.info.vn/wp-content/uploads/2015/06/com-tam-suon-bi-cha.jpg',
-      name:'Suon bi',
-      price:'25k',
-      edit: require('../../../../../assets/EditImages.png'),
-      delete: require('../../../../../assets/DeleteImages.png'),    },
-    {
-      id: '9',
-      number:'1',
-      uri :'https://cdn.daynauan.info.vn/wp-content/uploads/2015/06/com-tam-suon-bi-cha.jpg',
-      name:'Suon bi',
-      price:'25k',
-      edit: require('../../../../../assets/EditImages.png'),
-      delete: require('../../../../../assets/DeleteImages.png'),
-    },
-    {
-      id: '10',
-      number:'1',
-      uri :'https://cdn.daynauan.info.vn/wp-content/uploads/2015/06/com-tam-suon-bi-cha.jpg',
-      name:'Suon bi',
-      price:'25k',
-      edit: require('../../../../../assets/EditImages.png'),
-      delete: require('../../../../../assets/DeleteImages.png'),
-    },
-    {
-      id: '11',
-      number:'1',
-      uri :'https://cdn.daynauan.info.vn/wp-content/uploads/2015/06/com-tam-suon-bi-cha.jpg',
-      name:'Suon bi',
-      price:'25k',
-      edit: require('../../../../../assets/EditImages.png'),
-      delete: require('../../../../../assets/DeleteImages.png'),
-    },
-    {
-      id: '12',
-      number:'1',
-      uri :'https://cdn.daynauan.info.vn/wp-content/uploads/2015/06/com-tam-suon-bi-cha.jpg',
-      name:'Suon bi',
-      price:'25k',
-      edit: require('../../../../../assets/EditImages.png'),
-      delete: require('../../../../../assets/DeleteImages.png'),
-    },
-    {
-      id: '13',
-      number:'1',
-      uri :'https://cdn.daynauan.info.vn/wp-content/uploads/2015/06/com-tam-suon-bi-cha.jpg',
-      name:'Suon bi',
-      price:'25k',
-      edit: require('../../../../../assets/EditImages.png'),
-      delete: require('../../../../../assets/DeleteImages.png'),
-    },
-    {
-      id: '14',
-      number:'1',
-      uri :'https://cdn.daynauan.info.vn/wp-content/uploads/2015/06/com-tam-suon-bi-cha.jpg',
-      name:'Suon bi',
-      price:'5k',
-      edit: require('../../../../../assets/EditImages.png'),
-      delete: require('../../../../../assets/DeleteImages.png'),
-    },
-  
-  ];
-const EditDish = ({navigation}) => {
+    
+  ]);
+const pressHandler = (id)=>{
+    setData((itemData)=>{
+    return itemData.filter(data=>data.id !=id)
+  })
+}
+
+
+
+
   return (
     <SafeKeyComponent>
       <View style={styles.container}>
@@ -154,18 +100,14 @@ const EditDish = ({navigation}) => {
         <View style={styles.body}>
           <View>
             <FlatList
-              data={DATA}
+              data={data}
               renderItem={({item}) => (
-                <ItemEditEat item={item} navigation={navigation} />
+                <ItemEditEat item={item} navigation={navigation} pressHandler={pressHandler} />
               )}
-              keyExtractor={(item)=>item.id}
-              estimatedItemSize={10}
               />
            </View>
-           
           </View>
         </View>
-      
     </SafeKeyComponent>
   );
 };

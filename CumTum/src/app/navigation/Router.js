@@ -7,7 +7,9 @@ const Router = {
   CRUD_MENU:"CrudMenu",
   ADD_DISH:"AddDish",
   EDIT_DISH:"EditDish",
+  
   UPDATE_DISH:"UpdateDish",
+  DELETE_DISH:"DeleteDish",
   SUPPORT:"Support",
   INCOME:"Income",
   CHART:"Chart",

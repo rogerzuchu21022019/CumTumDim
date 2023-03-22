@@ -24,6 +24,8 @@ import SplashScreen from './src/app/features/auth/splashScreen/SplashScreen';
 import UpdateInformation from './src/app/features/auth/updateInformation/UpdateInformation';
 import Test from './src/Test';
 import AddDish from './src/app/features/admin/screens/addDish/AddDish';
+import EditDish from './src/app/features/admin/screens/editEat/EditDish';
+import UpdateDish from './src/app/features/admin/screens/updateDish/UpdateDish';
 
 let persistor = persistStore(Store);
 const App = () => {
@@ -36,7 +38,7 @@ const App = () => {
 
         <NavigationContainer ref={navigationRef}>
           <Stack.Navigator>
-            <Stack.Screen
+            {/* <Stack.Screen
               name={Router.SPLASH_SCREEN}
               component={SplashScreen}
               options={{
@@ -73,7 +75,7 @@ const App = () => {
                 headerShown: false,
               }}
             />
-
+  
             <Stack.Screen
               name={Router.DETAIL_CART_ADMIN}
               component={DetailCard}
@@ -81,12 +83,28 @@ const App = () => {
                 headerShown: false,
                 presentation: 'modal',
               }}
-            />
+            /> */}
+              <Stack.Screen
+              name={Router.EDIT_DISH}
+              component={EditDish}
+              options={{
+                headerShown: false,
+                presentation: 'modal',
+              }}
+            /> 
+              <Stack.Screen
+              name={Router.UPDATE_DISH}
+              component={UpdateDish}
+              options={{
+                headerShown: false,
+                presentation: 'modal',
+              }}
+            /> 
+
           </Stack.Navigator>
         </NavigationContainer>
       </PersistGate>
     </Provider>
   );
 };
-
-export default App;
+export default App
