@@ -36,6 +36,9 @@ import { Platform } from 'react-native';
 import Otp from './src/app/features/auth/otp/Otp';
 import Cart from './src/app/features/customer/screens/carts/cart/Cart';
 import Payment from './src/app/features/customer/screens/carts/payment/Payment';
+import EditProfile from './src/app/features/customer/screens/profiles/editProfile/EditProfile';
+import UploadImage from './src/app/features/customer/screens/profiles/uploadImage/UploadImage';
+
 
 import CartNoItem from './src/app/features/customer/screens/carts/cart/cartWithNoItem/CartNoItem';
 let persistor = persistStore(Store);
@@ -142,7 +145,21 @@ const App = () => {
                 headerShown: false,
               
               }} 
-            />  
+            /> 
+             <Stack.Screen
+            name={Router.EDIT_PROFILE}
+            component={EditProfile}
+            options={{
+              headerShown: false,
+            }}
+          /> 
+            <Stack.Screen
+            name={Router.UPLOAD_IMAGE}
+            component={UploadImage}
+            options={{
+              headerShown: false,
+            }}
+          /> 
           </Stack.Navigator>
         </NavigationContainer>
       </PersistGate>

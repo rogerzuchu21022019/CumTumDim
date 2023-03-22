@@ -1,8 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
 import { constants } from '../../../../../shared/constants'
-
-
 
 const styles = StyleSheet.create({
     container:{
@@ -11,24 +8,15 @@ const styles = StyleSheet.create({
     },
     // header: 
     header:{
-        flex: 2,
+        flex: 1,
         alignItems: 'center',
         justifyContent: 'space-evenly',
     },
-    iconHeader:{
-        width:30,
-        height:30,
-    },
+   
     profile:{
 
     },
-    groupHeader:{
-        width:'100%',
-        flexDirection:'row',
-        justifyContent:'space-between',
-        paddingEnd:20,
-        paddingStart:20,
-    },
+   
     tvEdit:{
         color:constants.COLOR.WHITE,
         fontSize:15,
@@ -42,7 +30,7 @@ const styles = StyleSheet.create({
 
     //body
     body:{
-        flex:7,
+        flex:6,
         backgroundColor:constants.COLOR.GREY,
         alignItems: 'center',
         borderTopStartRadius:35,
@@ -69,11 +57,24 @@ const styles = StyleSheet.create({
         borderRadius:10,
     
     },
+    iconCamera:{
+        alignItems:'flex-end',
+        bottom:30,
+        marginEnd:10
+    },
+    iconCameraStyle:{
+        width:30,
+        height:30,
+        borderRadius:15,
+        backgroundColor:constants.COLOR.WHITE,
+        alignItems:'center',
+        justifyContent: 'center',
+    },
     groupAll:{
         width:350,
     },
     item:{
-        marginBottom:20,
+        marginBottom:10,
     },
     viewImage:{
         backgroundColor:constants.COLOR.WHITE,
@@ -87,9 +88,27 @@ const styles = StyleSheet.create({
         bottom:40
     },
     viewTextName:{
-        marginTop:20,
-      alignItems:'center',
-    }
+        marginTop:10,
+        alignItems:'center',
+    },
+    btnSave:{
+        width:200,
+        height:50,
+        backgroundColor:constants.COLOR.ORANGE,
+        alignItems:'center',
+        justifyContent:"center",
+        borderRadius:20,
+        marginTop:10
+    },
+    textSave:{
+        fontSize:18,
+        color:constants.COLOR.WHITE,
+        fontWeight:"700"
+    },
+
+
     // body
-})
+
+
+    })
 export default styles

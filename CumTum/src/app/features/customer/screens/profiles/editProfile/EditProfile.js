@@ -1,62 +1,50 @@
-import {View, Text, Button, TextInput, TouchableOpacity} from 'react-native';
+import {View, Text, TextInput,TouchableOpacity} from 'react-native';
 import React from 'react';
 import SafeKeyComponent from '../../../../../components/safe_area/SafeKeyComponent';
-import {useDispatch} from 'react-redux';
-import {fetchSignOut} from '../../../../admin/apiAdmin';
-import Router from '../../../../../navigation/Router';
-import styles from './StylesProfile';
+import styles from './StylesEditProfile';
 import FastImage from 'react-native-fast-image';
-const Profile = ({navigation}) => {
-  const dispatch = useDispatch();
-  const handleLogout = async () => {
-    dispatch(fetchSignOut());
-    moveTo();
-  };
-  const moveTo = async () => {
-    navigation.navigate(Router.LOGIN);
-  };
-  const moveToEdit = async () => {
-    navigation.navigate(Router.EDIT_PROFILE);
-  };
-  
+import Router from '../../../../../navigation/Router';
+import { constants } from '../../../../../shared/constants';
+import IconEntypo from 'react-native-vector-icons/Entypo';
+
+
+const EditProfile = ({navigation}) => {
+  const moveToEditImage =()=>{
+    navigation.navigate(Router.UPLOAD_IMAGE)
+  }
   return (
     <SafeKeyComponent>
       <View style={styles.container}>
         <View style={styles.header}>
           <View style={styles.profile}>
-            <Text style={styles.textProfile}>Hồ sơ</Text>
+            <Text style={styles.textProfile}>Sữa hồ sơ</Text>
           </View>
           <View style={styles.groupHeader}>
-            <TouchableOpacity onPress={moveToEdit}>
-              <View>
-                <FastImage
-                  style={styles.iconHeader}
-                  source={require('../../../../../../assets/iconEdit.png')}
-                />
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={handleLogout}>
-              <View>
-                <FastImage
-                  style={styles.iconHeader}
-                  source={require('../../../../../../assets/iconSignOut.png')}
-                />
-              </View>
-            
-            </TouchableOpacity>
+           
           </View>
         </View>
         <View style={styles.body}>
         <View style={styles.viewFinal}>
+          <TouchableOpacity onPress={moveToEditImage}>
           <View style={styles.viewImage}>
               <FastImage
                 style={styles.imageProfile}
                 source={require('../../../../../../assets/iconLogo.png')}
               />
             </View>
-            <View style={styles.viewTextName}>
-                <Text style={styles.textProfile}>Phước</Text>
+            <View style={styles.iconCamera}>
+              <View 
+                    style={styles.iconCameraStyle}
+                    >
+              <IconEntypo
+                    name="camera"
+                    color={constants.COLOR.BLACK}
+                    size={15}
+                  />
               </View>
+        
+          </View>
+            </TouchableOpacity>
         </View>
             
           <View style={styles.groupAll}>
@@ -92,11 +80,23 @@ const Profile = ({navigation}) => {
                 <TextInput style={styles.textInput}>413</TextInput>
               </View>
             </View>
+            <View style={styles.item}>
+              <View style={styles.viewTitle}>
+                <Text style={styles.textTitle}>Số nhà</Text>
+              </View>
+              <View style={styles.viewInput}>
+                <TextInput style={styles.textInput}>413</TextInput>
+              </View>
+            </View>
+          
           </View>
+          <View style={styles.btnSave}>
+              <Text style={styles.textSave}>Lưu</Text>
+            </View>
         </View>
       </View>
     </SafeKeyComponent>
   );
 };
 
-export default Profile;
+export default EditProfile;

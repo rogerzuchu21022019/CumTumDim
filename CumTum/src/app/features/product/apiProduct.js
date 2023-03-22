@@ -37,10 +37,10 @@ export const fetchCategories = createAsyncThunk(
   constants.FETCH.FIND_CATEGORIES,
   async () => {
     const response = await AxiosInstance().get('/products/categories');
-    // log.info(
-    //   '🚀 ~ file: apiProduct.js:12 ~ fetchCategories ~ response:',
-    //   response.data,
-    // );
+    log.info(
+      '🚀 ~ file: apiProduct.js:12 ~ fetchCategories ~ response:',
+      response.data,
+    );
     return response.data;
   },
 );
