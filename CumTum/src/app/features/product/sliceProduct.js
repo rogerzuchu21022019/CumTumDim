@@ -1,4 +1,4 @@
-import {LOG} from '../../../../logger.config';
+import { LOG } from '../../../../logger.config';
 import {constants} from '../../shared/constants';
 import {
   fetchAddDish,
@@ -6,6 +6,7 @@ import {
   fetchDishes,
   fetchUploadImage,
 } from './apiProduct';
+
 
 const {createSlice} = require('@reduxjs/toolkit');
 
@@ -35,6 +36,7 @@ export const sliceProduct = createSlice({
       const data = action.payload;
       const {_id, amount} = data;
       const index = state.wishCart.findIndex(item => item._id === _id);
+      console.log('🚀 ~ file: sliceProduct.js:35 ~ index:', index);
       if (index >= 0) {
         state.wishCart[index].amount += 1;
       } else {
@@ -48,11 +50,15 @@ export const sliceProduct = createSlice({
       const data = action.payload;
       const {_id} = data;
       const index = state.wishCart.findIndex(item => item._id === _id);
-      log.error('🚀 ~ file: sliceProduct.js:51 ~ index:', index);
+      console.log('🚀 ~ file: sliceProduct.js:51 ~ index:', index);
+      state.wishCart.splice(index, 1);
     },
-    updateAmount: (state, action) => {
+    updateAmountInItem: (state, action) => {
       const {id, amount} = action.payload;
-      const item = state.wishCart.find(item => item._id === id);
+      const item = state.wishCart.find(item => {
+        log.warn('🚀 ~ file: sliceProduct.js:55 ~ item:', item);
+        return item._id === id;
+      });
       if (item) {
         item.amount = amount;
       }
@@ -145,8 +151,12 @@ export const sliceProduct = createSlice({
 });
 
 // export actions to register with store when use reducers
-export const {addDishToWishCart, removeDishFromWishCart, resetCart} =
-  sliceProduct.actions;
+export const {
+  addDishToWishCart,
+  removeDishFromWishCart,
+  resetCart,
+  updateAmountInItem,
+} = sliceProduct.actions;
 
 export const productSelector = state => state.product;
 
