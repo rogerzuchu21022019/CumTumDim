@@ -65,7 +65,7 @@ const App = () => {
       <PersistGate loading={null} persistor={persistor}>
         <NavigationContainer ref={navigationRef}>
           <Stack.Navigator>
-            {/* <Stack.Screen
+            <Stack.Screen
               name={Router.SPLASH_SCREEN}
               component={SplashScreen}
               options={{
@@ -78,23 +78,23 @@ const App = () => {
               options={{
                 headerShown: false,
               }}
-            /> */}
+            />
 
-            {/* <Stack.Screen
+            <Stack.Screen
               name={Router.UPDATE_INFO1}
               component={UpdateInformation}
               options={{
                 headerShown: false,
               }}
-            /> */}
+            />
 
-            {/* <Stack.Screen
+            <Stack.Screen
               name={Router.CUSTOMER_STACK}
               component={CustomerStack}
               options={{
                 headerShown: false,
               }}
-            /> */}
+            />
 
             <Stack.Screen
             

@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-
+import { constants } from '../../../../shared/constants';
 const StyleEditEat = StyleSheet.create({
     container:{
         flex:1,
@@ -7,34 +7,55 @@ const StyleEditEat = StyleSheet.create({
     },
     // header
     header: {
-        flex:1,
-        backgroundColor: '#252121',
-        justifyContent:'flex-end',
-    
-    },
-    groupItemHeader:{
-        flexDirection:'row',
-        alignItems:'center',
-        
-        justifyContent:'space-evenly',
-        paddingEnd:220
-
-    },
-    strikethrough:{
-        height:2,
-        backgroundColor:'black',
-        marginTop:10,
-    },
-    textTitle:{
-        color:'white',
-    },
-    groupFinal:{
-        flexDirection:'row',
-        alignItems:'center',
-    },
+        flex: 1,
+        justifyContent: 'center',
+        backgroundColor: constants.COLOR.PRIMARY,
+        alignItems: 'center',
+      },
+      imageLogo: {
+        width: 40,
+        height: 40,
+      },
+      leftHeader: {
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        // backgroundColor: constants.COLOR.WHITE,
+        // marginLeft: ,
+      },
+      rightHeader: {
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'flex-end',
+        // backgroundColor: constants.COLOR.WHITE,
+        marginRight: 20,
+      },
+      divideLine: {
+        height: 2,
+        backgroundColor: constants.COLOR.BLACK,
+      },
+      textTitle: {
+        color: 'white',
+        marginLeft: 6,
+      },
+      viewLogo: {
+        flexDirection: 'row',
+        alignItems: 'center',
+      },
+      imageReturn: {
+        // backgroundColor: constants.COLOR.WHITE,
+        marginLeft: 5,
+        marginRight: 5,
+      },
+      mainHeader: {
+        flexDirection: 'row',
+        // backgroundColor: constants.COLOR.WHITE,
+        alignItems: 'center',
+      },
     // body
     body: {
-        flex:7,
+        flex:12,
         backgroundColor: '#252121',
         alignItems:'center',
         
