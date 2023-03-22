@@ -17,7 +17,7 @@ const SplashScreen = props => {
       <View style={styleSplashScreen.body}>
         <Image
           style={styleSplashScreen.imageBody}
-          source={require('../../../../assets//logo.png')}
+          source={require('../../../../assets/logo.png')}
         />
       </View>
       <View style={styleSplashScreen.footers}></View>
