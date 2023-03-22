@@ -25,21 +25,13 @@ import LoginScreen from './src/app/features/auth/login/Login';
 import SplashScreen from './src/app/features/auth/splashScreen/SplashScreen';
 import UpdateInformation from './src/app/features/auth/updateInformation/UpdateInformation';
 
-import Test from './src/Test';
-import AddDish from './src/app/features/admin/screens/addDish/AddDish';
 import EditDish from './src/app/features/admin/screens/editEat/EditDish';
 import UpdateDish from './src/app/features/admin/screens/updateDish/UpdateDish';
-import Manage from './src/app/features/admin/screens/manager/manageDish/ManageDish';
-import ManagerCategories from './src/app/features/admin/screens/manager/ManagerCategories/ManagerCategories';
 import { requestUserPermission } from './src/app/shared/utils/PermissionFCM';
 import { Platform } from 'react-native';
-import Otp from './src/app/features/auth/otp/Otp';
-import Cart from './src/app/features/customer/screens/carts/cart/Cart';
 import Payment from './src/app/features/customer/screens/carts/payment/Payment';
 
-import CartNoItem from './src/app/features/customer/screens/carts/cart/cartWithNoItem/CartNoItem';
 let persistor = persistStore(Store);
-import {View, Text,TouchableOpacity} from 'react-native';
 
 
 const App = () => {
