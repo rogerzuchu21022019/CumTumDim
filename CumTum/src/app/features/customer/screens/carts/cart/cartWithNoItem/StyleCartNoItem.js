@@ -7,10 +7,7 @@ const styles = StyleSheet.create({
     backgroundColor:'red',
   },
  /* Header */
- container: {
-  flex: 1,
-  backgroundColor: constants.COLOR.BLACK,
-},
+ 
 header: {
   flex: 1,
   backgroundColor: constants.COLOR.PRIMARY,
@@ -33,7 +30,7 @@ divideLine: {
 /* Header */
 
 body:{
-  flex: 12,
+  flex: 14,
   backgroundColor: constants.COLOR.PRIMARY,
   alignItems:'center',
   justifyContent: 'center',
