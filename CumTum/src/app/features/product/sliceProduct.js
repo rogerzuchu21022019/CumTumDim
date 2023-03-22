@@ -46,8 +46,9 @@ export const sliceProduct = createSlice({
     },
     removeDishFromWishCart: (state, action) => {
       const data = action.payload;
-      log.warn('🚀 ~ file: sliceProduct.js:38 ~ data:', data);
-      state.wishCart.filter(item => item._id === data._id);
+      const {_id} = data;
+      const index = state.wishCart.findIndex(item => item._id === _id);
+      log.error('🚀 ~ file: sliceProduct.js:51 ~ index:', index);
     },
     updateAmount: (state, action) => {
       const {id, amount} = action.payload;

@@ -49,12 +49,12 @@ export const fetchAddDish = createAsyncThunk(
   constants.FETCH.ADD_DISH,
   async ({categoryId, dish}) => {
     log.info('🚀 ~ file: apiProduct.js:49 ~ dish:', dish);
-    // const response = await AxiosInstance().post(
-    //   `/products/${categoryId}/add-dish`,
-    //   {
-    //     dish: dish,
-    //   },
-    // );
+    const response = await AxiosInstance().post(
+      `/products/${categoryId}/add-dish`,
+      {
+        dish: dish,
+      },
+    );
 
     return response.data;
   },
