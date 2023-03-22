@@ -8,16 +8,16 @@ const SplashScreen = props => {
   const nextScreen = () => {
     navigation.replace(Router.LOGIN);
   };
-  useEffect(() => {
-    setTimeout(nextScreen, 3000);
-  }, []);
+  // useEffect(() => {
+  //   setTimeout(nextScreen, 3000);
+  // }, []);
   return (
     <View style={styleSplashScreen.container}>
       <View style={styleSplashScreen.header}></View>
       <View style={styleSplashScreen.body}>
         <Image
           style={styleSplashScreen.imageBody}
-          source={require('../../../../assets//logo.png')}
+          source={require('../../../../assets/logo.png')}
         />
       </View>
       <View style={styleSplashScreen.footers}></View>

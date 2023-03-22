@@ -2,9 +2,6 @@ import { StyleSheet, Text, View,Image,TouchableOpacity } from 'react-native'
 import React from 'react'
 import styles from './StyleEditEat'
 import Router from '../../../../navigation/Router'
-import EditDish from './EditDish'
-import {useDispatch, useSelector} from 'react-redux';
-
 
 const ItemEditEat = ({item,navigation,pressHandler}) => {
   const goto =()=>{

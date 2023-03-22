@@ -1,9 +1,11 @@
-const { StyleSheet, YellowBox } = require("react-native");
+import {constants} from '../../../shared/constants';
+
+const {StyleSheet, YellowBox} = require('react-native');
 
 const styleSplashScreen = StyleSheet.create({
   container: {
     flex: 10,
-    backgroundColor: "#373232"
+    backgroundColor: constants.COLOR.PRIMARY,
   },
 
   /*Header*/
@@ -12,21 +14,20 @@ const styleSplashScreen = StyleSheet.create({
   },
   body: {
     flex: 8,
-    alignContent: "center",
-    justifyContent: "center"
-
+    alignItems: 'center',
+    justifyContent: 'center',
+    // backgroundColor: constants.COLOR.AQUA,
   },
   imageBody: {
     height: 380,
-    width: 414,
-   marginTop:15
+    // backgroundColor: constants.COLOR.RED,
+    width: 380,
   },
 
   /*Header*/
   footers: {
-    flex: 1
-  }
+    flex: 1,
+  },
   /*Body*/
-
-})
-export default styleSplashScreen
+});
+export default styleSplashScreen;
