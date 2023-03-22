@@ -24,6 +24,13 @@ import SplashScreen from './src/app/features/auth/splashScreen/SplashScreen';
 import UpdateInformation from './src/app/features/auth/updateInformation/UpdateInformation';
 import Test from './src/Test';
 import AddDish from './src/app/features/admin/screens/addDish/AddDish';
+import Statistic from './src/app/features/admin/screens/statistic/Statistic';
+import Support from './src/app/features/admin/screens/support/Support';
+import CustomerSupport from './src/app/features/admin/screens/support/CustomerSupport';
+import Revenue from './src/app/features/admin/screens/revenue/Revenue';
+import HomeAdmin from './src/app/features/admin/screens/homeAdmin/HomeAdmin';
+
+
 
 let persistor = persistStore(Store);
 const App = () => {
@@ -32,8 +39,6 @@ const App = () => {
   return (
     <Provider store={Store}>
       <PersistGate loading={null} persistor={persistor}>
-
-
         <NavigationContainer ref={navigationRef}>
           <Stack.Navigator>
             <Stack.Screen
@@ -73,7 +78,6 @@ const App = () => {
                 headerShown: false,
               }}
             />
-
             <Stack.Screen
               name={Router.DETAIL_CART_ADMIN}
               component={DetailCard}
@@ -82,7 +86,7 @@ const App = () => {
                 presentation: 'modal',
               }}
             />
-          </Stack.Navigator>
+          </Stack.Navigator>  
         </NavigationContainer>
       </PersistGate>
     </Provider>
