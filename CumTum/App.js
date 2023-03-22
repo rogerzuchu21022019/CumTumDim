@@ -27,6 +27,8 @@ import UpdateInformation from './src/app/features/auth/updateInformation/UpdateI
 
 import Test from './src/Test';
 import AddDish from './src/app/features/admin/screens/addDish/AddDish';
+import EditDish from './src/app/features/admin/screens/editEat/EditDish';
+import UpdateDish from './src/app/features/admin/screens/updateDish/UpdateDish';
 import Manage from './src/app/features/admin/screens/manager/manageDish/ManageDish';
 import ManagerCategories from './src/app/features/admin/screens/manager/ManagerCategories/ManagerCategories';
 import {requestUserPermission} from './src/app/shared/utils/PermissionFCM';
@@ -102,7 +104,7 @@ const App = () => {
                 headerShown: false,
               }}
             />
-
+  
             <Stack.Screen
               name={Router.DETAIL_CART_ADMIN}
               component={DetailCard}
@@ -111,11 +113,27 @@ const App = () => {
                 presentation: 'modal',
               }}
             />
+              <Stack.Screen
+              name={Router.EDIT_DISH}
+              component={EditDish}
+              options={{
+                headerShown: false,
+                presentation: 'modal',
+              }}
+            /> 
+              <Stack.Screen
+              name={Router.UPDATE_DISH}
+              component={UpdateDish}
+              options={{
+                headerShown: false,
+                presentation: 'modal',
+              }}
+            /> 
+
           </Stack.Navigator>
         </NavigationContainer>
       </PersistGate>
     </Provider>
   );
 };
-
-export default App;
+export default App

@@ -195,8 +195,25 @@ const AddDish = ({ navigation }) => {
                   source={require('../../../../../assets/return.png')}
                 />
               </TouchableOpacity>
-              <Image style={styleAddDish.image}
-                source={require('../../../../../assets/iconLogo_CumTumDim.jpg')}
+              {/* Code back to HomeScreen */}
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate(Router.HOME_ADMIN);
+                }}>
+                <View style={styles.viewLogo}>
+                  <FastImage
+                    style={styles.imageLogo}
+                    source={require('../../../../../assets/iconLogo_CumTumDim.jpg')}
+                  />
+                  <Text style={styles.textTitle}>Cum tứm đim</Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+            {/* <View style={styles.rightHeader}>
+              <IconOcticons
+                name="bell-fill"
+                color={constants.COLOR.RED}
+                size={20}
               />
               <Text style={styleAddDish.textTitle}>Cum tứm đim</Text>
             </View>
@@ -218,16 +235,19 @@ const AddDish = ({ navigation }) => {
           </TouchableOpacity>
 
           {/* Dropdown chọn loại categories */}
-
-          <View style={styleAddDish.viewTypeOfDish}>
+          <View style={styles.viewDropdown}>
             <SelectList
               setSelected={onHandleSelect}
               data={item}
               save="key"
               defaultOption={categoryId}
+              dropdownStyles={{
+                backgroundColor: constants.COLOR.WHITE,
+              }}
               boxStyles={{
                 height: 50,
                 borderColor: constants.COLOR.BLACK,
+                backgroundColor: constants.COLOR.WHITE,
                 alignItems: 'center',
                 backgroundColor: constants.COLOR.WHITE
               }}
@@ -246,43 +266,86 @@ const AddDish = ({ navigation }) => {
 
 
           </View>
-
-          <Text>{categoryId}</Text>
-
           {/* Sau khi đã nhấn đúng main dish thì nó hiện ra. Set CSS cứng kích thước
         cho nó bên dưới thằng dropdown trên. }
         {/*  Dropdown chọn Sườn/sườn mỡ */}
-          <View >
+          <View>
             {isIdMainDish ? (
-              <View >
-                <SelectList
-                  setSelected={setSelected2nd}
-                  data={mainDishOptionsData}
-                  save="value"
-                  placeholder="Chọn loại sườn"
-                  boxStyles={{
-                    height: 50,
-                    borderColor: constants.COLOR.BLACK,
-
-                    alignItems: 'center',
-
+              <View style={styles.viewDropdown}>
+                <DropDownPicker
+                  open={openSubMainDish}
+                  value={valueSubMainDish}
+                  items={mainDishOptionsData}
+                  setOpen={setOpenSubMainDish}
+                  setValue={setValueSubMainDish}
+                  setItems={setListSubMainDish}
+                  placeholder="Chọn tên món ăn"
+                  placeholderStyle={{
+                    marginLeft: 10,
+                    color: constants.COLOR.BLACK,
                   }}
-                  arrowicon={
-                    <SimpleLineIcons
-                      name="arrow-down"
+                  textStyle={{
+                    color: constants.COLOR.WHITE,
+                  }}
+                  //multi
+                  multiple={true}
+                  min={1}
+                  max={1}
+                  // result after choose
+                  mode="BADGE"
+                  showBadgeDot={true}
+                  badgeProps={{
+                    activeOpacity: 0.5,
+                  }}
+                  badgeColors={['red', 'blue', 'orange']}
+                  badgeDotColors={['yellow', 'grey', 'aqua']}
+                  //search
+                  searchable={true}
+                  searchPlaceholder="Tìm kiếm hoặc chọn lựa tên "
+                  searchWithRegionalAccents={true}
+                  searchContainerStyle={{
+                    borderBottomColor: '#dfdfdf',
+                  }}
+                  searchTextInputStyle={{
+                    color: constants.COLOR.WHITE,
+                  }}
+                  searchPlaceholderTextColor={constants.COLOR.WHITE}
+                  customItemLabelStyle={{
+                    fontStyle: 'italic',
+                  }}
+                  // show type of list item
+                  listMode="MODAL"
+                  modalTitle="Select an item"
+                  closeAfterSelecting={true}
+                  bottomOffset={100}
+                  dropDownDirection="AUTO"
+                  modalContentContainerStyle={{
+                    backgroundColor: constants.COLOR.PRIMARY,
+                  }}
+                  modalAnimationType="slide"
+                  //icon
+                  TickIconComponent={() => (
+                    <MaterialIcons
+                      name="done"
                       style={{
                         marginRight: 4,
                       }}
-                      size={10}
+                      color={constants.COLOR.WHITE}
+                      size={20}
                     />
-                  }
+                  )}
+                  arrowIconStyle={{
+                    width: 15,
+                    height: 15,
+                    marginRight: 12,
+                  }}
                 />
               </View>
             ) : null}
           </View>
 
           {/* Dropdown tên món */}
-          <View style={styleAddDish.nameDish}>
+          <View style={styles.viewDropdown}>
             <DropDownPicker
               open={open}
               value={nameValue}
@@ -352,57 +415,95 @@ const AddDish = ({ navigation }) => {
                 marginRight: 12,
               }}
             />
-            <Text>{nameValue}</Text>
           </View>
 
           {/* Dropdown giá */}
-          <View style={styleAddDish.viewPrice}>
-            <SelectList
-              setSelected={setPrice}
-              data={moneyData}
-              save="key"
+          <View style={styles.viewDropdown}>
+            <DropDownPicker
+              open={openPrice}
+              value={namePrice}
+              items={listItemPrice}
+              setOpen={setOpenPrice}
+              setValue={setNamePrice}
+              setItems={setListItemPrice}
               placeholder="Chọn giá tiền"
-              defaultOption={price}
-              boxStyles={{
-                height: 50,
-                borderColor: constants.COLOR.BLACK,
-                backgroundColor: constants.COLOR.WHITE,
-                alignItems: 'center',
+              placeholderStyle={{
+                marginLeft: 10,
+                color: constants.COLOR.BLACK,
               }}
-              arrowicon={
-                <SimpleLineIcons
-                  name="arrow-down"
+              textStyle={{
+                color: constants.COLOR.WHITE,
+              }}
+              //multi
+              multiple={true}
+              min={1}
+              max={1}
+              // result after choose
+              mode="BADGE"
+              showBadgeDot={true}
+              badgeProps={{
+                activeOpacity: 0.5,
+              }}
+              badgeColors={['blue', 'orange', 'red']}
+              badgeDotColors={['grey', 'aqua', 'yellow']}
+              //search
+              searchable={true}
+              searchPlaceholder="Tìm kiếm hoặc chọn lựa tên "
+              searchWithRegionalAccents={true}
+              searchContainerStyle={{
+                borderBottomColor: '#dfdfdf',
+              }}
+              searchTextInputStyle={{
+                color: constants.COLOR.WHITE,
+              }}
+              searchPlaceholderTextColor={constants.COLOR.WHITE}
+              customItemLabelStyle={{
+                fontStyle: 'italic',
+              }}
+              // show type of list item
+              listMode="MODAL"
+              modalTitle="Select an item"
+              closeAfterSelecting={true}
+              bottomOffset={100}
+              dropDownDirection="AUTO"
+              modalContentContainerStyle={{
+                backgroundColor: constants.COLOR.PRIMARY,
+              }}
+              modalAnimationType="slide"
+              //icon
+              TickIconComponent={() => (
+                <MaterialIcons
+                  name="done"
                   style={{
                     marginRight: 4,
                   }}
-                  size={10}
+                  color={constants.COLOR.WHITE}
+                  size={20}
                 />
-              }
+              )}
+              arrowIconStyle={{
+                width: 15,
+                height: 15,
+                marginRight: 12,
+              }}
             />
           </View>
-          <Text>{price}</Text>
-
-        </View>
-
-
-        <View style={styleAddDish.footer}>
-          <View style={styleAddDish.viewBtnAdd}>
+          <View style={styles.footer}>
             <TouchableOpacity onPress={onCreateProduct}>
-              <View style={styleAddDish.btnViewAdd}>
-                <Text style={styleAddDish.textAdd}>Thêm</Text>
+              <View style={styles.viewButtonCreate}>
+                <Text style={styles.btnCreate}>Thêm</Text>
               </View>
+            </TouchableOpacity>
 
+            <TouchableOpacity onPress={signOut}>
+              <View style={styles.viewButtonCreate}>
+                <Text style={styles.btnCreate}>Đăng xuất</Text>
+              </View>
             </TouchableOpacity>
           </View>
-
-          <TouchableOpacity onPress={signOut}>
-            <View style={styleAddDish.btnViewSignOut}>
-              <Text style={styleAddDish.textSignOut}>Đăng xuất</Text>
-            </View>
-          </TouchableOpacity>
-
         </View>
 
+      </View>
       </View>
     </SafeKeyComponent>
   );

@@ -1,3 +1,4 @@
+import {LOG} from '../../../../logger.config';
 import {constants} from '../../shared/constants';
 import {
   fetchAddDish,
@@ -21,12 +22,44 @@ const initialState = {
   extraDishes: [],
   toppings: [],
   another: [],
+  wishCart: [],
 };
+
+const log = LOG.extend('SLICE_PRODUCT.JS');
 
 export const sliceProduct = createSlice({
   name: constants.SLICE.PRODUCT,
   initialState: initialState,
-  reducers: {},
+  reducers: {
+    addDishToWishCart: (state, action) => {
+      const data = action.payload;
+      const {_id, amount} = data;
+      const index = state.wishCart.findIndex(item => item._id === _id);
+      if (index >= 0) {
+        state.wishCart[index].amount += 1;
+      } else {
+        state.wishCart.push({
+          ...data,
+          amount: 1,
+        });
+      }
+    },
+    removeDishFromWishCart: (state, action) => {
+      const data = action.payload;
+      log.warn('🚀 ~ file: sliceProduct.js:38 ~ data:', data);
+      state.wishCart.filter(item => item._id === data._id);
+    },
+    updateAmount: (state, action) => {
+      const {id, amount} = action.payload;
+      const item = state.wishCart.find(item => item._id === id);
+      if (item) {
+        item.amount = amount;
+      }
+    },
+    resetCart: state => {
+      state.wishCart = [];
+    },
+  },
   extraReducers: builder => {
     builder.addCase(fetchUploadImage.pending, (state, action) => {
       state.loading = true;
@@ -109,6 +142,10 @@ export const sliceProduct = createSlice({
     });
   },
 });
+
+// export actions to register with store when use reducers
+export const {addDishToWishCart, removeDishFromWishCart, resetCart} =
+  sliceProduct.actions;
 
 export const productSelector = state => state.product;
 

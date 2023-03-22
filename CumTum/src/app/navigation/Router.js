@@ -8,8 +8,10 @@ const Router = {
   CRUD_MENU:"CrudMenu",
   ADD_DISH:"AddDish",
   EDIT_DISH:"EditDish",
+  
   UPDATE_DISH:"UpdateDish",
-  SUPPORT:"Hỗ trợ",
+  DELETE_DISH:"DeleteDish",
+  SUPPORT:"Support",
   INCOME:"Income",
   STATISTI:"thống kê",
   DELETE_DISH:"DeleteDish",
