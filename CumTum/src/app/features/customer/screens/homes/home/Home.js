@@ -6,6 +6,8 @@ import {
   Image,
   useWindowDimensions,
   ScrollView,
+  TouchableOpacity,
+  StyleSheet,
 } from 'react-native';
 
 import {useDispatch, useSelector} from 'react-redux';
@@ -14,7 +16,6 @@ import {useEffect, useState} from 'react';
 
 import {LOG} from '../../../../../../../logger.config';
 import SafeKeyComponent from '../../../../../components/safe_area/SafeKeyComponent';
-import {productSelector} from '../../../../product/sliceProduct';
 import {showNotifyLocal} from '../../../../../shared/utils/Notifies';
 import {fetchCategories, fetchDishes} from '../../../../product/apiProduct';
 import styles from './StyleHome';
@@ -30,11 +31,21 @@ import ItemView from './item/ItemView';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {mainDishOptionsData} from '../../../../admin/screens/addDish/DataDishes';
 import DropDownPicker from 'react-native-dropdown-picker';
+import {
+  addDishToWishCart,
+  productSelector,
+  removeDishFromWishCart,
+} from '../../../../product/sliceProduct';
 
 const HomeCustomer = ({navigation}) => {
   const log = LOG.extend('HOME_CUSTOMER.js');
   const dispatch = useDispatch();
+  const IMAGE_BG =
+    'https://cdn.britannica.com/38/111338-050-D23BE7C8/Stars-NGC-290-Hubble-Space-Telescope.jpg?w=400&h=300&c=crop';
   const data = useSelector(productSelector);
+
+  const [tabs, setTabs] = useState([0, 1, 2, 3]);
+  const [isShowDropdown, setIsShowDropdown] = useState(true);
 
   /* State Dropdown */
   const [openSubMainDish, setOpenSubMainDish] = useState(false);
@@ -44,107 +55,33 @@ const HomeCustomer = ({navigation}) => {
   useEffect(() => {
     dispatch(fetchCategories());
     dispatch(fetchDishes());
+    setTabs(0);
     return () => {};
   }, [dispatch]);
 
-  /* State Tab view */
-  const layout = useWindowDimensions();
+  const addDish = dish => ({
+    type: addDishToWishCart().type,
+    payload: dish,
+  });
 
-  const [index, setIndex] = useState(0);
-  console.log('🚀 ~ file: Home.js:46 ~ HomeCustomer ~ index:', index);
-
-  console.log('🚀 ~ file: HomeCustomer.js:16 ~ HomeCustomer ~ data:', data);
-
-  const [routes] = useState([
-    {key: 'Món chính', title: 'Món chính'},
-    {key: 'Đồ ăn thêm', title: 'Đồ ăn thêm'},
-    {key: 'Toppings', title: 'Toppings'},
-    {key: 'Khác', title: 'Khác'},
-  ]);
-
-  const ItemTabView = ({listItem}) => {
-    return (
-      <FlashList
-        data={listItem}
-        estimatedItemSize={100}
-        renderItem={({item, index}) => {
-          return <ItemView item={item} index={index} />;
-        }}
-      />
-    );
+  const handleAddDish = dish => {
+    console.log('🚀 ~ file: Home.js:61 ~ handleAddDish ~ dish:', dish);
+    dispatch(addDish(dish));
   };
+
+  const removeDish = dish => ({
+    type: removeDishFromWishCart().type,
+    payload: dish,
+  });
+
+  const handleRemoveDish = dish => {
+    log.error('🚀 ~ file: Home.js:75 ~ handleRemoveDish ~ dish:', dish);
+    dispatch(removeDish(dish));
+  };
+
+  /* State Tab view */
 
   /* custom tab bar icon */
-  const getTabBarIcon = props => {
-    const {route} = props;
-    if (route.key === 'Khác') {
-      return (
-        <FastImage
-          source={require('../../../../../../assets/iconLogo_CumTumDim.jpg')}
-          style={styles.imageLogo}
-        />
-      );
-    }
-
-    if (route.key === 'Món chính') {
-      return (
-        <FastImage
-          style={styles.imageLogo}
-          source={require('../../../../../../assets/iconLogo_CumTumDim.jpg')}
-        />
-      );
-    }
-
-    if (route.key === 'Đồ ăn thêm') {
-      return (
-        <FastImage
-          style={styles.imageLogo}
-          source={require('../../../../../../assets/iconLogo_CumTumDim.jpg')}
-        />
-      );
-    }
-
-    if (route.key === 'Toppings') {
-      return (
-        <FastImage
-          style={styles.imageLogo}
-          source={require('../../../../../../assets/iconLogo_CumTumDim.jpg')}
-        />
-      );
-    }
-  };
-
-  /* custom tab bar */
-  const renderTabBar = props => (
-    <TabBar
-      {...props}
-      indicatorStyle={{height: 1, backgroundColor: constants.COLOR.BLACK}}
-      style={styles.customTabBar}
-      labelStyle={{
-        color: 'red',
-        fontSize: 10,
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-      renderIcon={props => getTabBarIcon(props)}
-    />
-  );
-
-  /* custom scenes */
-  const renderScene = ({route}) => {
-    switch (route.title) {
-      case 'Món chính':
-        return <ItemTabView listItem={data.mainDishes} />;
-      case 'Đồ ăn thêm':
-        return <ItemTabView listItem={data.extraDishes} />;
-      case 'Toppings':
-        return <ItemTabView listItem={data.toppings} />;
-      case 'Khác':
-        return <ItemTabView listItem={data.another} />;
-      default:
-        return null;
-    }
-  };
 
   /* show notifications */
   const onDisplayNotification = async () => {
@@ -173,6 +110,24 @@ const HomeCustomer = ({navigation}) => {
     cache: FastImage.cacheControl.immutable,
   };
 
+  const openTab1 = () => {
+    setIsShowDropdown(true);
+    setTabs(0);
+  };
+
+  const openTab2 = () => {
+    setIsShowDropdown(false);
+    setTabs(1);
+  };
+
+  const openTab3 = () => {
+    setIsShowDropdown(false);
+    setTabs(2);
+  };
+  const openTab4 = () => {
+    setIsShowDropdown(false);
+    setTabs(3);
+  };
   return (
     <SafeKeyComponent>
       <View style={styles.container}>
@@ -217,17 +172,239 @@ const HomeCustomer = ({navigation}) => {
         </View>
         <View style={styles.body}>
           <View style={styles.firstBody}>
-            <TabView
-              style={styles.tabView}
-              navigationState={{index, routes}}
-              animationEnabled={false}
-              lazy
-              swipeEnabled={false}
-              renderScene={renderScene}
-              onIndexChange={setIndex}
-              initialLayout={{width: layout.width}}
-              renderTabBar={renderTabBar}
-            />
+            <View style={styles.boxTabs}>
+              <TouchableOpacity onPress={openTab1}>
+                <View style={styles.boxMainDishes}>
+                  <Text
+                    style={
+                      tabs === 0
+                        ? styles.textNameDishesChoosing
+                        : styles.textNameDishes
+                    }>
+                    Món chính
+                  </Text>
+                  <Text style={{color: 'white'}}>{tabs}</Text>
+                  <View style={styles.viewImageDish}>
+                    <FastImage
+                      style={styles.imageLogo}
+                      source={require('../../../../../../assets/iconLogo_CumTumDim.jpg')}
+                    />
+                  </View>
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={openTab2}>
+                <View style={styles.boxMainDishes}>
+                  <Text
+                    style={
+                      tabs === 1
+                        ? styles.textNameDishesChoosing
+                        : styles.textNameDishes
+                    }>
+                    Món thêm
+                  </Text>
+                  <View style={styles.viewImageDish}>
+                    <FastImage
+                      style={styles.imageLogo}
+                      source={require('../../../../../../assets/iconLogo_CumTumDim.jpg')}
+                    />
+                  </View>
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={openTab3}>
+                <View style={styles.boxMainDishes}>
+                  <Text
+                    style={
+                      tabs === 2
+                        ? styles.textNameDishesChoosing
+                        : styles.textNameDishes
+                    }>
+                    Toppings
+                  </Text>
+                  <View style={styles.viewImageDish}>
+                    <FastImage
+                      style={styles.imageLogo}
+                      source={require('../../../../../../assets/iconLogo_CumTumDim.jpg')}
+                    />
+                  </View>
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={openTab4}>
+                <View style={styles.boxMainDishes}>
+                  <Text
+                    style={
+                      tabs === 3
+                        ? styles.textNameDishesChoosing
+                        : styles.textNameDishes
+                    }>
+                    Món khác
+                  </Text>
+                  <View style={styles.viewImageDish}>
+                    <FastImage
+                      style={styles.imageLogo}
+                      source={require('../../../../../../assets/iconLogo_CumTumDim.jpg')}
+                    />
+                  </View>
+                </View>
+              </TouchableOpacity>
+            </View>
+
+            {isShowDropdown ? (
+              <View style={styles.boxFlashList}>
+                <Image
+                  source={{
+                    uri: IMAGE_BG,
+                    priority: FastImage.priority.normal,
+                  }}
+                  style={StyleSheet.absoluteFillObject}
+                  blurRadius={20}
+                />
+                <View style={styles.boxDropdownList}>
+                  <DropDownPicker
+                    style={styles.dropdownList}
+                    open={openSubMainDish}
+                    value={valueSubMainDish}
+                    items={listSubMainDish}
+                    setOpen={setOpenSubMainDish}
+                    setValue={setValueSubMainDish}
+                    setItems={setListSubMainDish}
+                    // custom color text
+                    placeholder="Chọn loại sườn"
+                    placeholderStyle={{
+                      marginLeft: 10,
+                      color: constants.COLOR.WHITE,
+                    }}
+                    textStyle={{
+                      color: constants.COLOR.WHITE,
+                    }}
+                    //multi
+                    multiple={true}
+                    min={1}
+                    max={1}
+                    // result after choose
+                    mode="BADGE"
+                    showBadgeDot={true}
+                    badgeProps={{
+                      activeOpacity: 0.5,
+                    }}
+                    badgeColors={['red', 'blue', 'orange']}
+                    badgeDotColors={['yellow', 'grey', 'aqua']}
+                    //search
+                    searchable={true}
+                    searchPlaceholder="Tìm kiếm hoặc chọn lựa tên "
+                    searchWithRegionalAccents={true}
+                    searchContainerStyle={{
+                      borderBottomColor: '#dfdfdf',
+                    }}
+                    searchTextInputStyle={{
+                      color: constants.COLOR.WHITE,
+                    }}
+                    searchPlaceholderTextColor={constants.COLOR.WHITE}
+                    customItemLabelStyle={{
+                      fontStyle: 'italic',
+                    }}
+                    // show type of list item
+                    listMode="MODAL"
+                    modalTitle="Select an item"
+                    bottomOffset={100}
+                    dropDownDirection="AUTO"
+                    modalContentContainerStyle={{
+                      backgroundColor: constants.COLOR.PRIMARY,
+                    }}
+                    modalAnimationType="slide"
+                    //icon
+                    TickIconComponent={() => (
+                      <MaterialIcons
+                        name="done"
+                        style={{
+                          marginRight: 4,
+                        }}
+                        color={constants.COLOR.WHITE}
+                        size={20}
+                      />
+                    )}
+                    ArrowDownIconComponent={() => (
+                      <MaterialIcons
+                        name="keyboard-arrow-down"
+                        color={constants.COLOR.WHITE}
+                        size={20}
+                      />
+                    )}
+                  />
+                </View>
+
+                <FlashList
+                  data={data.mainDishes}
+                  renderItem={({item, index}) => (
+                    <ItemView
+                      item={item}
+                      index={index}
+                      tabs={tabs}
+                      handleAddDish={handleAddDish}
+                      handleRemoveDish={handleRemoveDish}
+                    />
+                  )}
+                  keyExtractor={(item, index) => index.toString()}
+                  estimatedItemSize={100}
+                  showsVerticalScrollIndicator={false}
+                  showsHorizontalScrollIndicator={false}
+                />
+              </View>
+            ) : (
+              <View style={styles.boxFlashList}>
+                {tabs === 1 ? (
+                  <FlashList
+                    data={data.extraDishes}
+                    renderItem={({item, index}) => (
+                      <ItemView
+                        item={item}
+                        index={index}
+                        tabs={tabs}
+                        handleAddDish={handleAddDish}
+                        handleRemoveDish={handleRemoveDish}
+                      />
+                    )}
+                    keyExtractor={(item, index) => index.toString()}
+                    estimatedItemSize={100}
+                    showsVerticalScrollIndicator={false}
+                    showsHorizontalScrollIndicator={false}
+                  />
+                ) : tabs === 2 ? (
+                  <FlashList
+                    data={data.toppings}
+                    renderItem={({item, index}) => (
+                      <ItemView
+                        item={item}
+                        index={index}
+                        tabs={tabs}
+                        handleAddDish={handleAddDish}
+                        handleRemoveDish={handleRemoveDish}
+                      />
+                    )}
+                    keyExtractor={(item, index) => index.toString()}
+                    estimatedItemSize={100}
+                    showsVerticalScrollIndicator={false}
+                    showsHorizontalScrollIndicator={false}
+                  />
+                ) : tabs === 3 ? (
+                  <FlashList
+                    data={data.another}
+                    renderItem={({item, index}) => (
+                      <ItemView
+                        item={item}
+                        index={index}
+                        tabs={tabs}
+                        handleAddDish={handleAddDish}
+                        handleRemoveDish={handleRemoveDish}
+                      />
+                    )}
+                    keyExtractor={(item, index) => index.toString()}
+                    estimatedItemSize={100}
+                    showsVerticalScrollIndicator={false}
+                    showsHorizontalScrollIndicator={false}
+                  />
+                ) : null}
+              </View>
+            )}
           </View>
         </View>
         <View style={styles.divideLine}></View>

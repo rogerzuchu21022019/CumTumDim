@@ -59,5 +59,30 @@ const styles = StyleSheet.create({
     flex: 12,
     backgroundColor: constants.COLOR.PRIMARY,
   },
+  viewDropdown: {
+    marginTop: 20,
+    marginLeft: 20,
+    marginRight: 20,
+  },
+  footer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    // backgroundColor: constants.COLOR.YELLOW,
+  },
+  viewButtonCreate: {
+    backgroundColor: constants.COLOR.YELLOW,
+    marginTop: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 10,
+    paddingLeft: 20,
+    paddingRight: 20,
+  },
+  btnCreate: {
+    // backgroundColor: constants.COLOR.RED,
+    fontWeight: '700',
+    fontSize: 20,
+    color: constants.COLOR.WHITE,
+  },
 });
 export default styles;

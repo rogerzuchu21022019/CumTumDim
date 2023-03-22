@@ -69,4 +69,7 @@ export const constants = {
     PRODUCT: 'product',
     CART: 'cart',
   },
+  DISPATCH:{
+    ADD_WISH_CART:'addWishCart'
+  }
 };

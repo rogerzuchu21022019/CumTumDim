@@ -1,5 +1,5 @@
 import {create} from 'react-test-renderer';
-import { LOG } from '../../../../logger.config';
+import {LOG} from '../../../../logger.config';
 
 const {createAsyncThunk} = require('@reduxjs/toolkit');
 const {constants} = require('../../shared/constants');
