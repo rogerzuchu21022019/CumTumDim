@@ -128,7 +128,7 @@ const CustomerStack = () => {
 
       <Tab.Screen
         name={Router.PROFILE_TABS}
-        component={Profile}
+        component={ProfileTabs}
         options={{
           headerShown: false,
           tabBarIcon: ({ focused }) => (
@@ -150,7 +150,7 @@ const CustomerStack = () => {
                   lineHeight: 15,
                   color: focused ? constants.COLOR.YELLOW : constants.COLOR.WHITE
                 }}
-              >Thống kê</Text>
+              >Hồ sơ</Text>
             </View>
           )
         }}
