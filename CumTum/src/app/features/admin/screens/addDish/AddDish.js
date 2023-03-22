@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -11,27 +11,27 @@ import {
   TextInput,
 } from 'react-native';
 import FastImage from 'react-native-fast-image';
-import { useDispatch, useSelector } from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-
+import IconIonicons from 'react-native-vector-icons/Ionicons';
 import SafeKeyComponent from '../../../../components/safe_area/SafeKeyComponent';
 import * as RootNavigation from '../../../../navigation/RootNavigation';
 import Router from '../../../../navigation/Router';
-import { onCamera, onGallery } from '../../../../shared/utils/Camera';
-import { androidCameraPermission } from '../../../../shared/utils/PermissionAndroid';
-import { fetchSignOut } from '../../apiAdmin';
-import styleAddDish from './StyleAddDish';
+import {onCamera, onGallery} from '../../../../shared/utils/Camera';
+import {androidCameraPermission} from '../../../../shared/utils/PermissionAndroid';
+import {fetchSignOut} from '../../apiAdmin';
+import styles from './StyleAddDish';
 import {
   fetchAddDish,
   fetchCategories,
   fetchUploadImage,
 } from '../../../product/apiProduct';
 
-import { productSelector } from '../../../product/sliceProduct';
+import {productSelector} from '../../../product/sliceProduct';
 
 // Dropdown
-import { SelectList } from 'react-native-dropdown-select-list';
+import {SelectList} from 'react-native-dropdown-select-list';
 import DropDownPicker from 'react-native-dropdown-picker';
 import {
   mainDishOptionsData,
@@ -40,15 +40,13 @@ import {
   nameDishes,
   nameExtraDishes,
   nameToppings,
-
 } from './DataDishes';
-import { constants } from '../../../../shared/constants';
+import {constants} from '../../../../shared/constants';
 import BoxInputCus from '../../../../components/input/BoxInput';
 import Statistic from '../statistic/Statistic';
-import { ScrollView } from 'react-native/Libraries/Components/ScrollView/ScrollView';
+import {ScrollView} from 'react-native/Libraries/Components/ScrollView/ScrollView';
 
-const AddDish = ({ navigation }) => {
-
+const AddDish = ({navigation}) => {
   const dispatch = useDispatch();
   // Camera states
   const [avatar, setAvatar] = useState('');
@@ -66,9 +64,12 @@ const AddDish = ({ navigation }) => {
   const [isIdAnother, setIsIdAnother] = useState(false);
 
   // Dropdown Picker states
+  const [openPrice, setOpenPrice] = useState(false);
   const [open, setOpen] = useState(false);
   const [nameValue, setNameValue] = useState([]);
+  const [namePrice, setNamePrice] = useState([]);
   const [listItem, setListItem] = useState([]);
+  const [listItemPrice, setListItemPrice] = useState([]);
 
   let data = useSelector(productSelector);
   console.log('🚀 ~ file: AddDish.js:27 ~ AddDish ~ data:', data);
@@ -76,16 +77,16 @@ const AddDish = ({ navigation }) => {
   // Xử lý call api
   useEffect(() => {
     dispatch(fetchCategories());
-    return () => { };
+    return () => {};
   }, [dispatch]);
 
   useEffect(() => {
     setItem(
       data.categories.map(item => {
-        return { key: item._id, value: item.name };
+        return {key: item._id, value: item.name};
       }),
     );
-    return () => { };
+    return () => {};
   }, [data.categories]);
 
   /* Xử lý camera , show alert, permission */
@@ -107,12 +108,12 @@ const AddDish = ({ navigation }) => {
 
   const showAlert = () => {
     Alert.alert('Choose an option', '', [
-      { text: 'Take a photo', onPress: () => onCamera(setAvatar, setIsPicked) },
+      {text: 'Take a photo', onPress: () => onCamera(setAvatar, setIsPicked)},
       {
         text: 'Go to Gallery',
         onPress: () => onGallery(setAvatar, setIsPicked),
       },
-      { text: 'Cancel', onPress: onCancel },
+      {text: 'Cancel', onPress: onCancel},
     ]);
   };
 
@@ -138,7 +139,7 @@ const AddDish = ({ navigation }) => {
     };
 
     console.log('🚀 ~ file: AddDish.js:127 ~ onCreateProduct ~ data:', dish);
-    dispatch(fetchAddDish({ dish: dish, categoryId: categoryId }));
+    dispatch(fetchAddDish({dish: dish, categoryId: categoryId}));
   };
 
   const signOut = async () => {
@@ -185,17 +186,21 @@ const AddDish = ({ navigation }) => {
   return (
     <SafeKeyComponent>
       {/* Set CSS cho full . Bọc view cho tụi nó đầy đủ . */}
-      <View style={styleAddDish.container}>
-
-        <View style={styleAddDish.header}>
-          <View style={styleAddDish.groupFinal}>
-            <View style={styleAddDish.groupItemHeader}>
-              <TouchableOpacity onPress={() => navigation.goBack()} >
-                <Image style={styleAddDish.imageRuturn}
-                  source={require('../../../../../assets/return.png')}
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <View style={styles.mainHeader}>
+            <View style={styles.leftHeader}>
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.goBack();
+                }}>
+                <IconIonicons
+                  style={styles.imageReturn}
+                  name="arrow-back"
+                  color={constants.COLOR.WHITE}
+                  size={20}
                 />
               </TouchableOpacity>
-              {/* Code back to HomeScreen */}
               <TouchableOpacity
                 onPress={() => {
                   navigation.navigate(Router.HOME_ADMIN);
@@ -215,211 +220,205 @@ const AddDish = ({ navigation }) => {
                 color={constants.COLOR.RED}
                 size={20}
               />
-              <Text style={styleAddDish.textTitle}>Cum tứm đim</Text>
+            </View> */}
+          </View>
+          <View style={styles.divideLine}></View>
+
+          <View style={styles.body}>
+            {/* Xử lý camera */}
+            <TouchableOpacity onPress={openCamera}>
+              <FastImage
+                style={styles.falstImage}
+                source={avatar ? imageUrlOptions : urlHardCode}
+                onLoadEnd={() => {
+                  FastImage.cacheControl.cacheOnly;
+                }}
+                resizeMode={FastImage.resizeMode.contain}
+              />
+            </TouchableOpacity>
+
+            {/* Dropdown chọn loại categories */}
+            <View style={styles.viewDropdown}>
+              <SelectList
+                setSelected={onHandleSelect}
+                data={item}
+                save="key"
+                defaultOption={categoryId}
+                dropdownStyles={{
+                  backgroundColor: constants.COLOR.WHITE,
+                }}
+                boxStyles={{
+                  height: 50,
+                  borderColor: constants.COLOR.BLACK,
+                  backgroundColor: constants.COLOR.WHITE,
+                  alignItems: 'center',
+                  backgroundColor: constants.COLOR.WHITE,
+                }}
+                placeholder="Chọn loại món"
+                arrowicon={
+                  <SimpleLineIcons
+                    name="arrow-down"
+                    style={{
+                      marginRight: 4,
+                    }}
+                    size={10}
+                  />
+                }
+              />
             </View>
-          </View>
-          <View style={styleAddDish.strikethrough}></View>
-        </View>
-
-        <View style={styleAddDish.body}>
-          {/* Xử lý camera */}
-          <TouchableOpacity onPress={openCamera}>
-            <FastImage
-              style={styleAddDish.falstImage}
-              source={avatar ? imageUrlOptions : urlHardCode}
-              onLoadEnd={() => {
-                FastImage.cacheControl.cacheOnly;
-              }}
-              resizeMode={FastImage.resizeMode.contain}
-            />
-          </TouchableOpacity>
-
-          {/* Dropdown chọn loại categories */}
-          <View style={styles.viewDropdown}>
-            <SelectList
-              setSelected={onHandleSelect}
-              data={item}
-              save="key"
-              defaultOption={categoryId}
-              dropdownStyles={{
-                backgroundColor: constants.COLOR.WHITE,
-              }}
-              boxStyles={{
-                height: 50,
-                borderColor: constants.COLOR.BLACK,
-                backgroundColor: constants.COLOR.WHITE,
-                alignItems: 'center',
-                backgroundColor: constants.COLOR.WHITE
-              }}
-              placeholder="Chọn loại món"
-              arrowicon={
-                <SimpleLineIcons
-                  name="arrow-down"
-                  style={{
-                    marginRight: 4,
-
-                  }}
-                  size={10}
-                />
-              }
-            />
-
-
-          </View>
-          {/* Sau khi đã nhấn đúng main dish thì nó hiện ra. Set CSS cứng kích thước
+            {/* Sau khi đã nhấn đúng main dish thì nó hiện ra. Set CSS cứng kích thước
         cho nó bên dưới thằng dropdown trên. }
         {/*  Dropdown chọn Sườn/sườn mỡ */}
-          <View>
-            {isIdMainDish ? (
-              <View style={styles.viewDropdown}>
-                <DropDownPicker
-                  open={openSubMainDish}
-                  value={valueSubMainDish}
-                  items={mainDishOptionsData}
-                  setOpen={setOpenSubMainDish}
-                  setValue={setValueSubMainDish}
-                  setItems={setListSubMainDish}
-                  placeholder="Chọn tên món ăn"
-                  placeholderStyle={{
-                    marginLeft: 10,
-                    color: constants.COLOR.BLACK,
-                  }}
-                  textStyle={{
-                    color: constants.COLOR.WHITE,
-                  }}
-                  //multi
-                  multiple={true}
-                  min={1}
-                  max={1}
-                  // result after choose
-                  mode="BADGE"
-                  showBadgeDot={true}
-                  badgeProps={{
-                    activeOpacity: 0.5,
-                  }}
-                  badgeColors={['red', 'blue', 'orange']}
-                  badgeDotColors={['yellow', 'grey', 'aqua']}
-                  //search
-                  searchable={true}
-                  searchPlaceholder="Tìm kiếm hoặc chọn lựa tên "
-                  searchWithRegionalAccents={true}
-                  searchContainerStyle={{
-                    borderBottomColor: '#dfdfdf',
-                  }}
-                  searchTextInputStyle={{
-                    color: constants.COLOR.WHITE,
-                  }}
-                  searchPlaceholderTextColor={constants.COLOR.WHITE}
-                  customItemLabelStyle={{
-                    fontStyle: 'italic',
-                  }}
-                  // show type of list item
-                  listMode="MODAL"
-                  modalTitle="Select an item"
-                  closeAfterSelecting={true}
-                  bottomOffset={100}
-                  dropDownDirection="AUTO"
-                  modalContentContainerStyle={{
-                    backgroundColor: constants.COLOR.PRIMARY,
-                  }}
-                  modalAnimationType="slide"
-                  //icon
-                  TickIconComponent={() => (
-                    <MaterialIcons
-                      name="done"
-                      style={{
-                        marginRight: 4,
-                      }}
-                      color={constants.COLOR.WHITE}
-                      size={20}
-                    />
-                  )}
-                  arrowIconStyle={{
-                    width: 15,
-                    height: 15,
-                    marginRight: 12,
-                  }}
-                />
-              </View>
-            ) : null}
-          </View>
+            <View>
+              {isIdMainDish ? (
+                <View style={styles.viewDropdown}>
+                  <DropDownPicker
+                    open={openSubMainDish}
+                    value={valueSubMainDish}
+                    items={mainDishOptionsData}
+                    setOpen={setOpenSubMainDish}
+                    setValue={setValueSubMainDish}
+                    setItems={setListSubMainDish}
+                    placeholder="Chọn tên món ăn"
+                    placeholderStyle={{
+                      marginLeft: 10,
+                      color: constants.COLOR.BLACK,
+                    }}
+                    textStyle={{
+                      color: constants.COLOR.WHITE,
+                    }}
+                    //multi
+                    multiple={true}
+                    min={1}
+                    max={1}
+                    // result after choose
+                    mode="BADGE"
+                    showBadgeDot={true}
+                    badgeProps={{
+                      activeOpacity: 0.5,
+                    }}
+                    badgeColors={['red', 'blue', 'orange']}
+                    badgeDotColors={['yellow', 'grey', 'aqua']}
+                    //search
+                    searchable={true}
+                    searchPlaceholder="Tìm kiếm hoặc chọn lựa tên "
+                    searchWithRegionalAccents={true}
+                    searchContainerStyle={{
+                      borderBottomColor: '#dfdfdf',
+                    }}
+                    searchTextInputStyle={{
+                      color: constants.COLOR.WHITE,
+                    }}
+                    searchPlaceholderTextColor={constants.COLOR.WHITE}
+                    customItemLabelStyle={{
+                      fontStyle: 'italic',
+                    }}
+                    // show type of list item
+                    listMode="MODAL"
+                    modalTitle="Select an item"
+                    closeAfterSelecting={true}
+                    bottomOffset={100}
+                    dropDownDirection="AUTO"
+                    modalContentContainerStyle={{
+                      backgroundColor: constants.COLOR.PRIMARY,
+                    }}
+                    modalAnimationType="slide"
+                    //icon
+                    TickIconComponent={() => (
+                      <MaterialIcons
+                        name="done"
+                        style={{
+                          marginRight: 4,
+                        }}
+                        color={constants.COLOR.WHITE}
+                        size={20}
+                      />
+                    )}
+                    arrowIconStyle={{
+                      width: 15,
+                      height: 15,
+                      marginRight: 12,
+                    }}
+                  />
+                </View>
+              ) : null}
+            </View>
 
-          {/* Dropdown tên món */}
-          <View style={styles.viewDropdown}>
-            <DropDownPicker
-              open={open}
-              value={nameValue}
-              items={listItem}
-              setOpen={setOpen}
-              setValue={setNameValue}
-              setItems={setListItem}
-              placeholder="Chọn tên món ăn"
-              placeholderStyle={{
-                marginLeft: 10,
-                color: constants.COLOR.BLACK,
+            {/* Dropdown tên món */}
+            <View style={styles.viewDropdown}>
+              <DropDownPicker
+                open={open}
+                value={nameValue}
+                items={listItem}
+                setOpen={setOpen}
+                setValue={setNameValue}
+                setItems={setListItem}
+                placeholder="Chọn tên món ăn"
+                placeholderStyle={{
+                  marginLeft: 10,
+                  color: constants.COLOR.BLACK,
+                }}
+                textStyle={{
+                  color: constants.COLOR.WHITE,
+                }}
+                //multi
+                multiple={true}
+                min={1}
+                max={1}
+                // result after choose
+                mode="BADGE"
+                showBadgeDot={true}
+                badgeProps={{
+                  activeOpacity: 0.5,
+                }}
+                badgeColors={['red', 'blue', 'orange']}
+                badgeDotColors={['yellow', 'grey', 'aqua']}
+                //search
+                searchable={true}
+                searchPlaceholder="Tìm kiếm hoặc chọn lựa tên "
+                searchWithRegionalAccents={true}
+                searchContainerStyle={{
+                  borderBottomColor: '#dfdfdf',
+                }}
+                searchTextInputStyle={{
+                  color: constants.COLOR.WHITE,
+                }}
+                searchPlaceholderTextColor={constants.COLOR.WHITE}
+                customItemLabelStyle={{
+                  fontStyle: 'italic',
+                }}
+                // show type of list item
+                listMode="MODAL"
+                modalTitle="Select an item"
+                closeAfterSelecting={true}
+                bottomOffset={100}
+                dropDownDirection="AUTO"
+                modalContentContainerStyle={{
+                  backgroundColor: constants.COLOR.PRIMARY,
+                }}
+                modalAnimationType="slide"
+                //icon
+                TickIconComponent={() => (
+                  <MaterialIcons
+                    name="done"
+                    style={{
+                      marginRight: 4,
+                    }}
+                    color={constants.COLOR.WHITE}
+                    size={20}
+                  />
+                )}
+                arrowIconStyle={{
+                  width: 15,
+                  height: 15,
+                  marginRight: 12,
+                }}
+              />
+            </View>
 
-              }}
-              textStyle={{
-                color: constants.COLOR.WHITE,
-              }}
-              //multi
-              multiple={true}
-              min={1}
-              max={1}
-              // result after choose
-              mode="BADGE"
-              showBadgeDot={true}
-              badgeProps={{
-                activeOpacity: 0.5,
-              }}
-              badgeColors={['red', 'blue', 'orange']}
-              badgeDotColors={['yellow', 'grey', 'aqua']}
-              //search
-              searchable={true}
-              searchPlaceholder="Tìm kiếm hoặc chọn lựa tên "
-              searchWithRegionalAccents={true}
-              searchContainerStyle={{
-                borderBottomColor: '#dfdfdf',
-              }}
-              searchTextInputStyle={{
-                color: constants.COLOR.WHITE,
-              }}
-              searchPlaceholderTextColor={constants.COLOR.WHITE}
-              customItemLabelStyle={{
-                fontStyle: 'italic',
-              }}
-              // show type of list item
-              listMode="MODAL"
-              modalTitle="Select an item"
-              closeAfterSelecting={true}
-              bottomOffset={100}
-              dropDownDirection="AUTO"
-              modalContentContainerStyle={{
-                backgroundColor: constants.COLOR.PRIMARY,
-              }}
-              modalAnimationType="slide"
-              //icon
-              TickIconComponent={() => (
-                <MaterialIcons
-                  name="done"
-                  style={{
-                    marginRight: 4,
-                  }}
-                  color={constants.COLOR.WHITE}
-                  size={20}
-                />
-              )}
-              arrowIconStyle={{
-                width: 15,
-                height: 15,
-                marginRight: 12,
-              }}
-            />
-          </View>
-
-          {/* Dropdown giá */}
-          <View style={styles.viewDropdown}>
-            <DropDownPicker
+            {/* Dropdown giá */}
+            <View style={styles.viewDropdown}>
+              <DropDownPicker
               open={openPrice}
               value={namePrice}
               items={listItemPrice}
@@ -487,23 +486,22 @@ const AddDish = ({ navigation }) => {
                 marginRight: 12,
               }}
             />
-          </View>
-          <View style={styles.footer}>
-            <TouchableOpacity onPress={onCreateProduct}>
-              <View style={styles.viewButtonCreate}>
-                <Text style={styles.btnCreate}>Thêm</Text>
-              </View>
-            </TouchableOpacity>
+            </View>
+            <View style={styles.footer}>
+              <TouchableOpacity onPress={onCreateProduct}>
+                <View style={styles.viewButtonCreate}>
+                  <Text style={styles.btnCreate}>Thêm</Text>
+                </View>
+              </TouchableOpacity>
 
-            <TouchableOpacity onPress={signOut}>
-              <View style={styles.viewButtonCreate}>
-                <Text style={styles.btnCreate}>Đăng xuất</Text>
-              </View>
-            </TouchableOpacity>
+              <TouchableOpacity onPress={signOut}>
+                <View style={styles.viewButtonCreate}>
+                  <Text style={styles.btnCreate}>Đăng xuất</Text>
+                </View>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
-
-      </View>
       </View>
     </SafeKeyComponent>
   );
