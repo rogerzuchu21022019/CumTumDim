@@ -10,31 +10,36 @@ const styleManager = StyleSheet.create({
     /*Header*/
     header: {
         flex: 1,
-        backgroundColor: '#252121',
-        justifyContent: 'flex-end',
-    },
-    groupItemHeader: {
+        justifyContent: 'center',
+        backgroundColor: constants.COLOR.PRIMARY,
+      },
+    
+      imageLogo: {
+        width: 40,
+        height: 40,
+      },
+      leftHeader: {
+        flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
+        // backgroundColor: constants.COLOR.WHITE,
+        marginLeft: 20,
+      },
 
-        justifyContent: 'space-evenly',
-        paddingEnd: 220,
-    },
-    strikethrough: {
+      divideLine: {
         height: 2,
-        backgroundColor: 'black',
-        marginTop: 10,
-    },
-    textTitle: {
+        backgroundColor: constants.COLOR.BLACK,
+        // marginTop: 10,
+      },
+      textTitle: {
         color: 'white',
-        marginLeft: 5,
-        fontWeight: '700',
-        fontSize: 17, lineHeight: 22
-    },
-    groupFinal: {
+        marginLeft: 6,
+      },
+      mainHeader: {
         flexDirection: 'row',
+        // backgroundColor: constants.COLOR.WHITE,
         alignItems: 'center',
-    },
+      },
     /*Body*/
     body: {
         flex: 10,

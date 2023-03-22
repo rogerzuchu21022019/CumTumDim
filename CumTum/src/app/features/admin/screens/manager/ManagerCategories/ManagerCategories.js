@@ -3,6 +3,9 @@ import React from 'react'
 import StyleManagerCategories from './StyleManagerCategories'
 import SafeKeyComponent from '../../../../../components/safe_area/SafeKeyComponent'
 import { useNavigation } from '@react-navigation/native';
+import FastImage from 'react-native-fast-image';
+import IconOcticons from 'react-native-vector-icons/Octicons';
+import { constants } from '../../../../../shared/constants';
 const ManagerCategories = () => {
     const navigation = useNavigation();
     return (
@@ -10,20 +13,16 @@ const ManagerCategories = () => {
         <SafeKeyComponent>
             <View style={StyleManagerCategories.container}>
                 <View style={StyleManagerCategories.header}>
-                    <View style={StyleManagerCategories.groupFinal}>
-                        <View style={StyleManagerCategories.groupItemHeader}>
-                            <TouchableOpacity onPress={() => navigation.goBack()} >
-                                <Image style={StyleManagerCategories.imageRuturn}
-                                    source={require('../../../../../../assets/return.png')}
-                                />
-                            </TouchableOpacity>
-                            <Image style={StyleManagerCategories.image}
+                    <View style={StyleManagerCategories.mainHeader}>
+                        <View style={StyleManagerCategories.leftHeader}>
+                            <FastImage
+                                style={StyleManagerCategories.imageLogo}
                                 source={require('../../../../../../assets/iconLogo_CumTumDim.jpg')}
                             />
                             <Text style={StyleManagerCategories.textTitle}>Cum tứm đim</Text>
                         </View>
                     </View>
-                    <View style={StyleManagerCategories.strikethrough}></View>
+                    <View style={StyleManagerCategories.divideLine}></View>
                 </View>
                 <View style={StyleManagerCategories.body}>
                     <View style={StyleManagerCategories.groupBody}>

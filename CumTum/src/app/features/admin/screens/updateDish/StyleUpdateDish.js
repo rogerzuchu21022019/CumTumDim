@@ -42,55 +42,7 @@ const StyleUpdateDish = StyleSheet.create({
         backgroundColor: '#252121',
 
     },
-    groupFinalBody:{
-        flex:1,
-        backgroundColor:constants.COLOR.BLACK,
-        width:'100%',
-        alignItems:'center',
-    },
-    viewImage:{
-        width:130,
-        height:130,
-        backgroundColor:'red',
-    },  
-    itemImage: {
-        width: '100%', height: '100%'
-    },
-    groupItem:{
-        width: 400,
-        marginStart:40,
-        marginBottom:20,
-    },
-    viewNameEat:{
-
-    },
-    itemNameEat:{
-        marginStart:10,
-        marginBottom:5,
-
-    },
-    viewInputPrice:{
-        backgroundColor:constants.COLOR.WHITE,
-        width:350,
-        borderRadius:10,
-
-
-    },
-    itemInputPrice:{
-
-    },
-    viewBTN:{
-        backgroundColor:constants.COLOR.YELLOW,
-        marginTop:30,
-        width:130,
-        height:40,
-        borderRadius:10,
-        justifyContent:'center',
-        alignItems: 'center',
-    },
-    textBTN:{
-        color:constants.COLOR.WHITE,
-        fontSize:20,
-    }
+   
+   
 })
 export default StyleUpdateDish

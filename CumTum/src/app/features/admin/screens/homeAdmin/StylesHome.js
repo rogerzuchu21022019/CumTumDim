@@ -3,7 +3,7 @@ import {constants} from '../../../../shared/constants';
 
 const StylesHome = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 10,
   },
   /* Header */
   header: {

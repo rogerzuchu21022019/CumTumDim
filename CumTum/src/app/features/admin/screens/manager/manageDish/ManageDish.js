@@ -6,23 +6,25 @@ import AddDish from '../../addDish/AddDish'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import EditCategory from '../ManagerCategories/editCategory/EditCategory'
 import { useNavigation } from '@react-navigation/native';
-
+import FastImage from 'react-native-fast-image';
+import IconOcticons from 'react-native-vector-icons/Octicons';
+import { constants } from '../../../../../shared/constants'
 const ManageDish = () => {
   const navigation = useNavigation();
   return (
     <SafeKeyComponent>
       <View style={styleManager.container}>
-        <View style={styleManager.header}>
-          <View style={styleManager.groupFinal}>
-            <View style={styleManager.groupItemHeader}>
-
-              <Image
+      <View style={styleManager.header}>
+          <View style={styleManager.mainHeader}>
+            <View style={styleManager.leftHeader}>
+              <FastImage
+                style={styleManager.imageLogo}
                 source={require('../../../../../../assets/iconLogo_CumTumDim.jpg')}
               />
               <Text style={styleManager.textTitle}>Cum tứm đim</Text>
             </View>
           </View>
-          <View style={styleManager.strikethrough}></View>
+          <View style={styleManager.divideLine}></View>
         </View>
         <View style={styleManager.body}>
           <View style={styleManager.groupBody}>
