@@ -19,8 +19,9 @@ import {fetchLogin} from '../../admin/apiAdmin';
 import {authSelector} from '../../admin/sliceAuth';
 import StyleLogin from './StyleLogin';
 
-import auth from '@react-native-firebase/auth';
+import auth, {firebase} from '@react-native-firebase/auth';
 import {LOG} from '../../../../../logger.config';
+import {StackActions} from '@react-navigation/native';
 
 const LoginScreen = ({navigation}) => {
   const log = LOG.extend(`GOOGLE_SIGNIN.JS`);
@@ -52,6 +53,7 @@ const LoginScreen = ({navigation}) => {
       ? navigation.navigate(Router.ADMIN_STACK)
       : navigation.navigate(Router.CUSTOMER_STACK);
   };
+
   const signIn = async () => {
     try {
       await GoogleSignin.hasPlayServices({showPlayServicesUpdateDialog: true});
@@ -60,7 +62,13 @@ const LoginScreen = ({navigation}) => {
 
       const {accessToken} = await GoogleSignin.getTokens();
 
+      const credential = auth.GoogleAuthProvider.credential(
+        idToken,
+        accessToken,
+      );
+
       dispatch(fetchLogin(idToken, accessToken));
+      return await auth().signInWithCredential(credential);
     } catch (error) {
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
         log.error(

@@ -2,7 +2,6 @@
 const ApiProducts = require("../api/ApiProducts");
 const ApiUser = require("../api/ApiUser");
 
-
 /* Được gọi từ app.js */
 const ManagerRouter = (app, fixPublic) => {
   // https://congtydacap.club/api/users/auth-login
@@ -23,11 +22,11 @@ const ManagerRouter = (app, fixPublic) => {
   // auth-login là biểu thị cho login nằm trong sub auth,auth nằm trong sub users
   // nhưng do phân cấp lv api bị giới hạn nên chuyển auth/login thành auth-login
 
-  const MAIN = "/api"; 
+  const MAIN = "/api";
   const USERS = "users";
   const PRODUCTS = "products";
-  const SUB_USERS = `${MAIN}/${USERS}`; //=> xoá bớt 1{} đi vì dư 
-  const SUB_PRODUCTS = `${MAIN}/${PRODUCTS}`; //=> xoá bớt 1{} đi vì dư 
+  const SUB_USERS = `${MAIN}/${USERS}`; //=> xoá bớt 1{} đi vì dư
+  const SUB_PRODUCTS = `${MAIN}/${PRODUCTS}`; //=> xoá bớt 1{} đi vì dư
   //=> Check lại hết theo project theo project
 
   /* Media */
@@ -37,16 +36,18 @@ const ManagerRouter = (app, fixPublic) => {
   app.use(MAIN, ApiUser.login, fixPublic);
   app.use(SUB_USERS, ApiUser.createOtp, fixPublic);
   app.use(SUB_USERS, ApiUser.verifyOtp, fixPublic);
-//   app.use(MAIN, ApiUser.logoutRouter, fixPublic);
-//   app.use(SUB_USERS, ApiUser.registerRouter, fixPublic);
+  //   app.use(MAIN, ApiUser.logoutRouter, fixPublic);
+  //   app.use(SUB_USERS, ApiUser.registerRouter, fixPublic);
 
-//   /* Products */
+  //   /* Products */
   app.use(SUB_PRODUCTS, ApiProducts.createCategory, fixPublic);
   app.use(SUB_PRODUCTS, ApiProducts.findCategories, fixPublic);
   app.use(SUB_PRODUCTS, ApiProducts.addDish, fixPublic);
   app.use(SUB_PRODUCTS, ApiProducts.findDishes, fixPublic);
-//   app.use(SUB_PRODUCTS, ApiProduct.chartRouter, fixPublic);
-//   app.use(SUB_PRODUCTS, ApiProduct.dataTableRouter, fixPublic);
+  app.use(SUB_PRODUCTS, ApiProducts.createOrder, fixPublic);
+  app.use(SUB_PRODUCTS, ApiProducts.pushNotify, fixPublic);
+  //   app.use(SUB_PRODUCTS, ApiProduct.chartRouter, fixPublic);
+  //   app.use(SUB_PRODUCTS, ApiProduct.dataTableRouter, fixPublic);
 };
 
 module.exports = ManagerRouter;

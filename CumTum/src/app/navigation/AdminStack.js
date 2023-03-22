@@ -24,7 +24,7 @@ const AdminStack = () => {
         tabBarStyle: {
           backgroundColor: constants.COLOR.BLACK,
 
-          height: 50,
+          // height: 50,
         },
       }}>
       <Tab.Screen

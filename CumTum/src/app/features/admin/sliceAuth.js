@@ -24,7 +24,7 @@ export const authSlice = createSlice({
     });
     builder.addCase(fetchLogin.fulfilled, (state, action) => {
       const dataResponse = action.payload;
-      state.isLoading = false;
+      state.isLoading = true;
       state.message = dataResponse.message;
       state.isLoggedIn = dataResponse.isLoggedIn;
       state.error = dataResponse.error;
