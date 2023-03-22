@@ -33,8 +33,10 @@ import Manage from './src/app/features/admin/screens/manager/manageDish/ManageDi
 import ManagerCategories from './src/app/features/admin/screens/manager/ManagerCategories/ManagerCategories';
 import {requestUserPermission} from './src/app/shared/utils/PermissionFCM';
 import { Platform } from 'react-native';
-
+import CartNoItem from './src/app/features/customer/screens/carts/cart/cartWithNoItem/CartNoItem';
 let persistor = persistStore(Store);
+import {View, Text,TouchableOpacity} from 'react-native';
+
 
 const App = () => {
   const Stack = createNativeStackNavigator();
@@ -134,6 +136,7 @@ const App = () => {
         </NavigationContainer>
       </PersistGate>
     </Provider>
+    
   );
 };
 export default App
