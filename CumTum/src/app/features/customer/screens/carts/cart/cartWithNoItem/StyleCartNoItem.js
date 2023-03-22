@@ -2,10 +2,7 @@ import {StyleSheet, Text, View} from 'react-native';
 import { constants } from '../../../../../../shared/constants';
 
 const styles = StyleSheet.create({
-  container:{
-    flex: 1,
-    backgroundColor:'red',
-  },
+
  /* Header */
  
 header: {

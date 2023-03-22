@@ -8,6 +8,7 @@ export const constants = {
     WHITE: '#FFFFFF',
     RED: '#F20000',
     AQUA: 'aqua',
+    DARK_BROWN:'#2F2D2D'
   },
   FONT: {
     GilroyMedium: 'Gilroy-Medium',
