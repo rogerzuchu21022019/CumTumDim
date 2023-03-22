@@ -34,7 +34,7 @@ const CustomerStack = () => {
           // elevation: 0,
           backgroundColor: constants.COLOR.GREY,
           // borderRadius: 20,
-          height: 60,
+          // height: 60,
         },
       }}>
       <Tab.Screen
@@ -50,15 +50,14 @@ const CustomerStack = () => {
                 style={{
                   width: 20,
                   height: 20,
-                  marginBottom:5,
+                  // marginBottom:5,
                   tintColor: focused ? constants.COLOR.YELLOW : constants.COLOR.WHITE
                 }}
               />
               <Text
                 style={{
-                  fontSize: 15,
+                  fontSize: 12,
                   fontWeight: '400',
-                  lineHeight: 15,
                   color: focused ? constants.COLOR.YELLOW : constants.COLOR.WHITE
                 }}
               >Trang chủ</Text>
@@ -79,17 +78,16 @@ const CustomerStack = () => {
                 source={require('../../assets/history.png')}
                 resizeMode='contain'
                 style={{
-                  width: 20,
-                  height: 20,
+                  width: 15,
+                  height: 15,
                   marginBottom:5,
                   tintColor: focused ? constants.COLOR.YELLOW : constants.COLOR.WHITE
                 }}
               />
               <Text
                 style={{
-                  fontSize: 15,
+                  fontSize: 12,
                   fontWeight: '400',
-                  lineHeight: 15,
                   color: focused ? constants.COLOR.YELLOW : constants.COLOR.WHITE
                 }}
               >Lịchs sử</Text>
@@ -117,7 +115,7 @@ const CustomerStack = () => {
               />
               <Text
                 style={{
-                  fontSize: 15,
+                  fontSize: 12,
                   fontWeight: '400',
                   lineHeight: 15,
                   color: focused ? constants.COLOR.YELLOW : constants.COLOR.WHITE
@@ -147,7 +145,7 @@ const CustomerStack = () => {
               />
               <Text
                 style={{
-                  fontSize: 15,
+                  fontSize: 12,
                   fontWeight: '400',
                   lineHeight: 15,
                   color: focused ? constants.COLOR.YELLOW : constants.COLOR.WHITE

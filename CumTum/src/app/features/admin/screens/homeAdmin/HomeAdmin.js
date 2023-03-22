@@ -30,7 +30,6 @@ const HomeAdmin = ({navigation}) => {
               />
             </View>
           </View>
-          <View style={styles.divideLine}></View>
         </View>
         <View style={styles.divideLine}></View>
         <View style={styles.body}>

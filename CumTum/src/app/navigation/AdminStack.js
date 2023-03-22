@@ -46,7 +46,7 @@ const AdminStack = () => {
               />
               <Text
                 style={{
-                  fontSize: 15,
+                  fontSize: 12,
                   fontWeight: '400',
                   lineHeight: 15,
                   color: focused ? constants.COLOR.YELLOW : constants.COLOR.WHITE
@@ -76,7 +76,7 @@ const AdminStack = () => {
               />
               <Text
                 style={{
-                  fontSize: 15,
+                  fontSize: 12,
                   fontWeight: '400',
                   lineHeight: 15,
                   color: focused ? constants.COLOR.YELLOW : constants.COLOR.WHITE
@@ -104,7 +104,7 @@ const AdminStack = () => {
               />
               <Text
                 style={{
-                  fontSize: 15,
+                  fontSize: 12,
                   fontWeight: '400',
                   lineHeight: 15,
                   color: focused ? constants.COLOR.YELLOW : constants.COLOR.WHITE
@@ -126,14 +126,14 @@ const AdminStack = () => {
                 source={require('../../assets/user.png')}
                 resizeMode='contain'
                 style={{
-                  width: 25,
-                  height: 25,
+                  width: 20,
+                  height: 20,
                   tintColor: focused ? constants.COLOR.YELLOW : constants.COLOR.WHITE
                 }}
               />
               <Text
                 style={{
-                  fontSize: 15,
+                  fontSize: 12,
                   fontWeight: '400',
                   lineHeight: 15,
                   color: focused ? constants.COLOR.YELLOW : constants.COLOR.WHITE
