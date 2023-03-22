@@ -10,7 +10,8 @@ import styles from './StyleItem';
 import {LOG} from '../../../../../../../../logger.config';
 const log = LOG.extend('ITEM_VIEW.JS');
 const ItemView = props => {
-  const {item, index, handleAddDish, handleRemoveDish} = props;
+  const {item, index, handleAddDish, handleRemoveDish, updateAmountDish} =
+    props;
 
   const [amount, setAmount] = useState(item.amount);
   const [price, setPrice] = useState(item.price);
@@ -26,6 +27,7 @@ const ItemView = props => {
     };
     setItemNew(itemAdd);
     handleAddDish(itemAdd);
+    updateAmountDish(itemAdd);
   };
 
   const onDecrease = () => {
@@ -38,6 +40,7 @@ const ItemView = props => {
     };
     setItemNew(itemRemove);
     handleRemoveDish(itemRemove);
+    updateAmountDish(itemRemove);
   };
 
   useEffect(() => {}, [onIncrease, onDecrease]);

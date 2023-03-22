@@ -8,15 +8,18 @@ import {
   productSelector,
   removeDishFromWishCart,
   resetCart,
+  updateAmountInItem,
 } from '../../../../product/sliceProduct';
 import {FlashList} from '@shopify/flash-list';
 
 import CartNoItem from './cartWithNoItem/CartNoItem';
 import ItemView from './item/ItemView';
+import {LOG} from '../../../../../../../logger.config';
 
-const Cart = () => {
+const log = LOG.extend('CART.JS');
+const Cart = ({navigation}) => {
   const data = useSelector(productSelector);
-  console.log('🚀 ~ file: Cart.js:10 ~ Cart ~ data:', data);
+  // log.error('🚀 ~ file: Cart.js:10 ~ Cart ~ data:', data);
   const onReset = () => {
     handleResetCart();
   };
@@ -30,14 +33,22 @@ const Cart = () => {
     });
   };
 
+  const updateAmountDish = dish => {
+    dispatch({
+      type: updateAmountInItem().type,
+      payload: dish,
+    });
+  };
+
   const addDish = dish => ({
     type: addDishToWishCart().type,
     payload: dish,
   });
 
   const handleAddDish = dish => {
-    console.log('🚀 ~ file: Home.js:61 ~ handleAddDish ~ dish:', dish);
+    log.error('🚀 ~ file: Home.js:61 ~ handleAddDish ~ dish:', dish);
     dispatch(addDish(dish));
+    updateAmountDish(dish);
   };
 
   const removeDish = dish => ({
@@ -68,6 +79,7 @@ const Cart = () => {
                       item={item}
                       handleAddDish={handleAddDish}
                       handleRemoveDish={handleRemoveDish}
+                      updateAmountDish={updateAmountDish}
                     />
                   );
                 }}
@@ -95,7 +107,7 @@ const Cart = () => {
           </View>
         </View>
       ) : (
-        <CartNoItem />
+        <CartNoItem navigation={navigation} />
       )}
     </SafeKeyComponent>
   );
