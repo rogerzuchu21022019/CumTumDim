@@ -2,15 +2,9 @@ import {StyleSheet, Text, View} from 'react-native';
 import { constants } from '../../../../../../shared/constants';
 
 const styles = StyleSheet.create({
-  container:{
-    flex: 1,
-    backgroundColor:'red',
-  },
+
  /* Header */
- container: {
-  flex: 1,
-  backgroundColor: constants.COLOR.BLACK,
-},
+ 
 header: {
   flex: 1,
   backgroundColor: constants.COLOR.PRIMARY,
@@ -33,7 +27,7 @@ divideLine: {
 /* Header */
 
 body:{
-  flex: 12,
+  flex: 14,
   backgroundColor: constants.COLOR.PRIMARY,
   alignItems:'center',
   justifyContent: 'center',

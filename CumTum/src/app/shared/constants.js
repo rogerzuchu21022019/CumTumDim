@@ -8,6 +8,7 @@ export const constants = {
     WHITE: '#FFFFFF',
     RED: '#F20000',
     AQUA: 'aqua',
+    DARK_BROWN:'#2F2D2D'
   },
   FONT: {
     GilroyMedium: 'Gilroy-Medium',
@@ -35,7 +36,7 @@ export const constants = {
     SourceSansProSemiBold: 'SourceSansProSemiBold',
   },
   BASE_URL: {
-    MAIN: 'http://192.168.1.89:3000/api',
+    MAIN: 'http://192.168.1.130:3000/api',
     SECOND: 'https://fpoly-hcm.herokuapp.com/api',
     THIRD: 'https://cumtumdim.becofoodstore.click/api',
   },
