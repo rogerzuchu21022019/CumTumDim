@@ -13,7 +13,7 @@ const HomeAdmin = ({navigation}) => {
   return (
     <SafeKeyComponent>
       <View style={styles.container}>
-        <View style={styles.header}>
+      <View style={styles.header}>
           <View style={styles.mainHeader}>
             <View style={styles.leftHeader}>
               <FastImage
@@ -30,6 +30,7 @@ const HomeAdmin = ({navigation}) => {
               />
             </View>
           </View>
+          <View style={styles.divideLine}></View>
         </View>
         <View style={styles.divideLine}></View>
         <View style={styles.body}>

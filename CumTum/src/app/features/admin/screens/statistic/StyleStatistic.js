@@ -8,33 +8,48 @@ const StyleStatistic = StyleSheet.create({
   // header
   header: {
     flex: 1,
-    backgroundColor: constants.COLOR.BLACK,
-    justifyContent: 'flex-end',
+    justifyContent: 'center',
+    backgroundColor: constants.COLOR.PRIMARY,
   },
-  groupItemHeader: {
+
+  imageLogo: {
+    width: 40,
+    height: 40,
+  },
+  leftHeader: {
+    flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-
-    justifyContent: 'space-evenly',
-    paddingEnd: 220,
+    // backgroundColor: constants.COLOR.WHITE,
+    marginLeft: 20,
   },
-  strikethrough: {
+  rightHeader: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    // backgroundColor: constants.COLOR.WHITE,
+    marginRight: 20,
+  },
+  divideLine: {
     height: 2,
-    backgroundColor: 'black',
-    marginTop: 10,
+    backgroundColor: constants.COLOR.BLACK,
+    // marginTop: 10,
   },
   textTitle: {
     color: 'white',
+    marginLeft: 6,
   },
-  groupFinal: {
+  mainHeader: {
     flexDirection: 'row',
+    // backgroundColor: constants.COLOR.WHITE,
     alignItems: 'center',
   },
   //header
 
   //body
   body: {
-    flex: 10,
+    flex: 12,
     backgroundColor: constants.COLOR.BLACK,
     alignItems: 'center',
   },
