@@ -1,5 +1,11 @@
+import {LOG} from '../../../../logger.config';
 import {constants} from '../../shared/constants';
-import {fetchAddDish, fetchCategories, fetchUploadImage} from './apiProduct';
+import {
+  fetchAddDish,
+  fetchCategories,
+  fetchDishes,
+  fetchUploadImage,
+} from './apiProduct';
 
 const {createSlice} = require('@reduxjs/toolkit');
 
@@ -11,12 +17,49 @@ const initialState = {
   message: null,
   categories: [],
   dish: {},
+  dishes: [],
+  mainDishes: [],
+  extraDishes: [],
+  toppings: [],
+  another: [],
+  wishCart: [],
 };
+
+const log = LOG.extend('SLICE_PRODUCT.JS');
 
 export const sliceProduct = createSlice({
   name: constants.SLICE.PRODUCT,
   initialState: initialState,
-  reducers: {},
+  reducers: {
+    addDishToWishCart: (state, action) => {
+      const data = action.payload;
+      const {_id, amount} = data;
+      const index = state.wishCart.findIndex(item => item._id === _id);
+      if (index >= 0) {
+        state.wishCart[index].amount += 1;
+      } else {
+        state.wishCart.push({
+          ...data,
+          amount: 1,
+        });
+      }
+    },
+    removeDishFromWishCart: (state, action) => {
+      const data = action.payload;
+      log.warn('🚀 ~ file: sliceProduct.js:38 ~ data:', data);
+      state.wishCart.filter(item => item._id === data._id);
+    },
+    updateAmount: (state, action) => {
+      const {id, amount} = action.payload;
+      const item = state.wishCart.find(item => item._id === id);
+      if (item) {
+        item.amount = amount;
+      }
+    },
+    resetCart: state => {
+      state.wishCart = [];
+    },
+  },
   extraReducers: builder => {
     builder.addCase(fetchUploadImage.pending, (state, action) => {
       state.loading = true;
@@ -64,8 +107,45 @@ export const sliceProduct = createSlice({
       state.error = true;
       state.message = action.payload;
     });
+    //
+    builder.addCase(fetchDishes.pending, state => {
+      state.loading = true;
+    });
+
+    builder.addCase(fetchDishes.fulfilled, (state, action) => {
+      const dataResponse = action.payload;
+      state.loading = false;
+      state.success = dataResponse.success;
+      state.message = dataResponse.message;
+      state.dishes = dataResponse.data;
+
+      state.extraDishes = dataResponse.data.filter(
+        dish => dish.categoryId === state.categories[0]._id,
+      );
+
+      state.toppings = dataResponse.data.filter(
+        dish => dish.categoryId === state.categories[1]._id,
+      );
+
+      state.another = dataResponse.data.filter(
+        dish => dish.categoryId === state.categories[2]._id,
+      );
+
+      state.mainDishes = dataResponse.data.filter(
+        dish => dish.categoryId === state.categories[3]._id,
+      );
+    });
+    builder.addCase(fetchDishes.rejected, (state, action) => {
+      state.loading = false;
+      state.error = true;
+      state.message = action.payload;
+    });
   },
 });
+
+// export actions to register with store when use reducers
+export const {addDishToWishCart, removeDishFromWishCart, resetCart} =
+  sliceProduct.actions;
 
 export const productSelector = state => state.product;
 

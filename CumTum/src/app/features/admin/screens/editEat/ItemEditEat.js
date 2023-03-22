@@ -62,5 +62,4 @@ const ItemEditEat = ({item,navigation,pressHandler}) => {
   )
 }
 
-export default ItemEditEat
-
+export default ItemEditEat;

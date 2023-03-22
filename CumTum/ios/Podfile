@@ -22,9 +22,12 @@ if linkage != nil
   # $RNFirebaseAsStaticFramework = true
 end
 
+
 target 'CumTum' do
   config = use_native_modules!
   pod 'GoogleSignIn'
+  pod 'Firebase/Messaging'
+  pod 'RNFBApp', :path => '../node_modules/@react-native-firebase/app'
   # Flags change depending on the env values.
   flags = get_default_flags()
   use_modular_headers!

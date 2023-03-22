@@ -6,48 +6,49 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import DATA from './Data';
 import ItemView from './ItemView';
 import {FlashList} from '@shopify/flash-list';
-
+import {constants} from '../../../../shared/constants';
+import FastImage from 'react-native-fast-image';
+import IconOcticons from 'react-native-vector-icons/Octicons';
 const HomeAdmin = ({navigation}) => {
   return (
     <SafeKeyComponent>
       <View style={styles.container}>
         <View style={styles.header}>
-          <View style={styles.groupFinal}>
-            <View style={styles.groupItemHeader}>
-              <Image
+          <View style={styles.mainHeader}>
+            <View style={styles.leftHeader}>
+              <FastImage
+                style={styles.imageLogo}
                 source={require('../../../../../assets/iconLogo_CumTumDim.jpg')}
               />
               <Text style={styles.textTitle}>Cum tứm đim</Text>
             </View>
-            <View>
-              <Image source={require('../../../../../assets/iconBell.jpg')} />
+            <View style={styles.rightHeader}>
+              <IconOcticons
+                name="bell-fill"
+                color={constants.COLOR.RED}
+                size={20}
+              />
             </View>
           </View>
-          <View style={styles.strikethrough}></View>
         </View>
+        <View style={styles.divideLine}></View>
         <View style={styles.body}>
-          {/* <View style={styles.viewFlashList}>
-            <FlashList
+          <View style={styles.viewFlashList}>
+            {/* <FlashList
               data={DATA}
               estimatedItemSize={200}
               getItemType={(item, index) => {
-                console.log(
-                  '🚀 ~ file: HomeAdmin.js:50 ~ HomeAdmin ~ item:',
-                  item.category,
-                );
                 return item.category;
               }}
               renderItem={({item}) => {
-              if (item.category === 'Món thêm') {
-                return <ItemView item={item} navigation={navigation} />;
-              }
-              return null;
-
+                if (item.category === 'Món thêm') {
+                  return <ItemView item={item} navigation={navigation} />;
+                }
+                return null;
               }}
-            
               keyExtractor={(item, index) => index.toString()}
-            />
-          </View> */}
+            /> */}
+          </View>
         </View>
       </View>
     </SafeKeyComponent>

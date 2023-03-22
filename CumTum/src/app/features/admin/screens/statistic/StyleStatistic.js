@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import { constants } from '../../../../shared/constants';
 
 const StyleStatistic = StyleSheet.create({
   container: {
@@ -7,7 +8,7 @@ const StyleStatistic = StyleSheet.create({
   // header
   header: {
     flex: 1,
-    backgroundColor: '#252121',
+    backgroundColor: constants.COLOR.BLACK,
     justifyContent: 'flex-end',
   },
   groupItemHeader: {
@@ -34,13 +35,13 @@ const StyleStatistic = StyleSheet.create({
   //body
   body: {
     flex: 10,
-    backgroundColor: '#252121',
+    backgroundColor: constants.COLOR.BLACK,
     alignItems: 'center',
   },
   groupItem: {},
   viewFlashList: {
     flex: 1,
-    backgroundColor: 'green',
+    backgroundColor: constants.COLOR.BLACK,
   },
   itemOder: {
     flexDirection: 'row',

@@ -4,9 +4,10 @@ export const constants = {
     ORANGE: '#FE724C',
     GREY: '#252121',
     YELLOW: '#FFB703',
-    BLACK: '#282222',
+    BLACK: 'black',
     WHITE: '#FFFFFF',
     RED: '#F20000',
+    AQUA: 'aqua',
   },
   FONT: {
     GilroyMedium: 'Gilroy-Medium',
@@ -60,10 +61,15 @@ export const constants = {
     SIGN_OUT: 'fetchSignOut',
     FIND_CATEGORIES: 'fetchCategories',
     ADD_DISH: 'fetchAddDish',
+    FIND_DISHES: 'fetchDishes',
   },
   SLICE: {
     ADMIN: 'admin',
     AUTH: 'auth',
     PRODUCT: 'product',
+    CART: 'cart',
   },
+  DISPATCH:{
+    ADD_WISH_CART:'addWishCart'
+  }
 };

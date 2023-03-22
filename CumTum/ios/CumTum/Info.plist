@@ -20,11 +20,6 @@
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
-	
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Tôi có thể sử dụng Thư viện ảnh không? </string>
-	<key>NSCameraUsageDescription</key>
-	<string>Tôi có thể sử dụng Camera không? </string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -51,8 +46,12 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>Tôi có thể sử dụng Camera không? </string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Tôi có thể sử dụng Thư viện ảnh không? </string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>AntDesign.ttf</string>

@@ -4,4 +4,6 @@ module.exports = {
   addDish: require(`../api/products/AddDish`),
   findDishes: require(`../api/products/FindDishes`),
   uploadImage: require(`../api/media/UploadImage`),
+  createOrder: require(`../api/orders/CreateOrder`),
+  pushNotify: require(`../api/orders/PushNotify`),
 };
