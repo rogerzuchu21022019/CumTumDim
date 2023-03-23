@@ -105,7 +105,14 @@ const styles = StyleSheet.create({
         color:constants.COLOR.WHITE,
         fontWeight:"700"
     },
-
+    line:{
+        width:"100%",
+        height:1,
+        backgroundColor:constants.COLOR.BLACK,
+        marginTop:10,
+        marginBottom:5,
+        
+    },
 
     // body
 

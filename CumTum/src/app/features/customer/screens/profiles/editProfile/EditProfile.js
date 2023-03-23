@@ -90,6 +90,7 @@ const EditProfile = ({navigation}) => {
             </View>
           
           </View>
+          <View style={styles.line}></View>
           <View style={styles.btnSave}>
               <Text style={styles.textSave}>Lưu</Text>
             </View>
