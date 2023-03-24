@@ -1,30 +1,55 @@
-import {
-  GoogleSignin,
-  GoogleSigninButton,
-} from '@react-native-google-signin/google-signin';
-import * as React from 'react';
-import {View, Text, Button} from 'react-native';
-import {AxiosInstance} from '../../../../shared/utils/AxiosInstance';
+import {Text, View, Image, ScrollView, FlatList} from 'react-native';
+import React from 'react';
+import styles from './StylesHome';
 import SafeKeyComponent from '../../../../components/safe_area/SafeKeyComponent';
-import Router from '../../../../navigation/Router';
-import { removeToken } from '../../../../shared/utils/AsyncStorage';
-
-const HomeAdmin = ({route, navigation}) => {
-  // const user = route.params.user;
-  const handleLogout = async () => {
-    try {
-      
-      await GoogleSignin.revokeAccess();
-       await GoogleSignin.signOut();
-      navigation.replace(Router.LOGIN);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import DATA from './Data';
+import ItemView from './ItemView';
+import {FlashList} from '@shopify/flash-list';
+import {constants} from '../../../../shared/constants';
+import FastImage from 'react-native-fast-image';
+import IconOcticons from 'react-native-vector-icons/Octicons';
+const HomeAdmin = ({navigation}) => {
   return (
     <SafeKeyComponent>
-      <View>
-        <Button title="Logout" onPress={handleLogout} />
+      <View style={styles.container}>
+      <View style={styles.header}>
+          <View style={styles.mainHeader}>
+            <View style={styles.leftHeader}>
+              <FastImage
+                style={styles.imageLogo}
+                source={require('../../../../../assets/iconLogo_CumTumDim.jpg')}
+              />
+              <Text style={styles.textTitle}>Cum tứm đim</Text>
+            </View>
+            <View style={styles.rightHeader}>
+              <IconOcticons
+                name="bell-fill"
+                color={constants.COLOR.RED}
+                size={20}
+              />
+            </View>
+          </View>
+        </View>
+        <View style={styles.divideLine}></View>
+        <View style={styles.body}>
+          <View style={styles.viewFlashList}>
+            {/* <FlashList
+              data={DATA}
+              estimatedItemSize={200}
+              getItemType={(item, index) => {
+                return item.category;
+              }}
+              renderItem={({item}) => {
+                if (item.category === 'Món thêm') {
+                  return <ItemView item={item} navigation={navigation} />;
+                }
+                return null;
+              }}
+              keyExtractor={(item, index) => index.toString()}
+            /> */}
+          </View>
+        </View>
       </View>
     </SafeKeyComponent>
   );

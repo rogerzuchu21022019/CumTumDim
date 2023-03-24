@@ -21,9 +21,12 @@ mongoose
   });
 const app = express();
 
-ManagerMiddleware(app);
 
-const fixPublic = express.static(path.join(__dirname, "public"));
+
+const publicDir = path.join(__dirname, "public");
+const fixPublic = express.static(publicDir)
+app.use(fixPublic);
+ManagerMiddleware(app);
 
 ApiManagerRouter(app, fixPublic);
 // WebManagerRouter(app, fixPublic);

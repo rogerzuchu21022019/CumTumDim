@@ -13,12 +13,13 @@ import {constants} from '../constants';
 import {saveToken} from './AsyncStorage';
 import {LOG} from '../../../../logger.config';
 import {useDispatch, useSelector} from 'react-redux';
-import {adminSelector} from '../../features/admin/sliceAdmin';
+import {authSelector} from '../../features/admin/sliceAuth';
 import {fetchLogin} from '../../features/admin/apiAdmin';
 const log = LOG.extend(`GOOGLE_SIGNIN.JS`);
 
 const GoogleSignIn = ({navigation}) => {
-  const data = useSelector(adminSelector);
+  const data = useSelector(authSelector);
+  console.log("🚀 ~ file: GoogleSignIn.js:22 ~ GoogleSignIn ~ data:", data)
   const isLoading = data.isLoading;
   // console.log(
   //   '🚀 ~ file: GoogleSignIn.js:23 ~ GoogleSignIn ~ isLoading:',

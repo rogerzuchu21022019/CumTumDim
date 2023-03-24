@@ -14,6 +14,7 @@ const DishSchema = new Schema(
     },
     amount: {
       type: Number,
+      default: 0,
     },
     description: {
       type: String,

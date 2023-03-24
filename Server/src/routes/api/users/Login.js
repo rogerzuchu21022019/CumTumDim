@@ -1,7 +1,7 @@
 // Login.js in sever-side
 const express = require("express");
-const passport = require(`passport`);
 const VerifyUserCon = require("../../../components/users/controllers/VerifyUserController");
+const { getFCMToken } = require("../../../utils/FirebaseVerify");
 
 const router = express.Router();
 
@@ -10,13 +10,14 @@ require(`dotenv`).config();
 router.post(`/login`, async (req, res) => {
   try {
     const { idToken, accessToken } = req.body;
-    const user = await VerifyUserCon(idToken, accessToken);
+    let user = await VerifyUserCon(idToken);
+    // const fcmToken = await getFCMToken(idToken);
+    // user = { ...user, fcmToken: fcmToken };
     return res.json({
-
       isLoggedIn: true,
       message: "Success",
       error: false,
-      data: user
+      data: user,
     });
   } catch (error) {
     console.log("🚀 ~ file: Login.js:23 ~ router.post ~ error:", error);

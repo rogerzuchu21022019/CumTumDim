@@ -1,26 +1,37 @@
 //import createSlice
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {combineReducers, configureStore} from '@reduxjs/toolkit';
-import persistReducer from 'redux-persist/es/persistReducer';
+import {persistReducer} from 'reduxjs-toolkit-persist';
 
-import sliceAdmin from '../features/admin/sliceAdmin';
-import {constants} from '../shared/constants';
+import {combineReducers, configureStore} from '@reduxjs/toolkit';
+
+import sliceAuth from '../features/admin/sliceAuth';
+
+import sliceProduct from '../features/product/sliceProduct';
+import { constants } from '../shared/constants';
 
 let persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  whiteList: [],
+  // whiteList: [],
   // blacklist: [constants.SLICE.ADMIN],
 };
 
 const rootReducers = combineReducers({
-  admin: sliceAdmin,
+  auth: sliceAuth,
+  product: sliceProduct,
 });
 
-let persistReducers = persistReducer(persistConfig, rootReducers);
+const resetRootReducer = (state, action) => {
+  if (action.type === constants.FETCH.SIGN_OUT+"/fulfilled") {
+    state = undefined;
+  }
+  return rootReducers(state, action);
+};
+
+let persistedReducers = persistReducer(persistConfig, resetRootReducer);
 
 export const Store = configureStore({
-  reducer: persistReducers,
+  reducer: persistedReducers,
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: false, // bỏ qua kiểm tra tính immutability của state
