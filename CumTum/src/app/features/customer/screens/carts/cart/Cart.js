@@ -1,5 +1,5 @@
-import {View, Text, TouchableOpacity, ScrollView} from 'react-native';
-import React, {useEffect} from 'react';
+import {View, Text, TouchableOpacity, ScrollView, Alert} from 'react-native';
+import React, {useEffect, useRef} from 'react';
 import SafeKeyComponent from '../../../../../components/safe_area/SafeKeyComponent';
 import styles from './StyleCart';
 import {useDispatch, useSelector} from 'react-redux';
@@ -27,10 +27,42 @@ const Cart = ({navigation}) => {
   };
 
   const onBuy = () => {
-    // console.log('🚀 ~ file: Cart.js:12 ~ Cart ~ onBuy');
+    if (data.mainDishCart.length === 0) {
+      Alert.alert('Bạn phải đặt tối thiểu 1 món ăn chính trong giỏ hàng! ');
+    }
+    if (
+      data.mainDishCart.length != 0 ||
+      data.extraDishCart.length != 0 ||
+      data.toppingsCart.length != 0 ||
+      data.anotherCart.length != 0
+    ) {
+      const order = {
+        mainDishCart: data.mainDishCart,
+        extraDishCart: data.extraDishCart,
+        toppingsCart: data.toppingsCart,
+        anotherCart: data.anotherCart,
+        amountMainDish: solveAmountMainDish(),
+        amountExtraDish: solveAmountExtraDish(),
+        amountToppings: solveAmountToppings(),
+        amountAnotherDish: solveAmountAnotherDish(),
+        moneyToPaid: solveMoneyToPaid(),
+        amountDish: solveAmountDishes(),
+      };
+      console.log('🚀 ~ file: Cart.js:48 ~ onBuy ~ item:', order);
+      // navigation.navigate('Order', {item});
+    } else {
+      Alert.alert('Bạn phải có ít nhất 1 món chính trong bill! ');
+    }
   };
 
-  useEffect(() => {}, [ dispatch]);
+  useEffect(() => {
+    solveAmountMainDish();
+    solveAmountExtraDish();
+    solveAmountToppings();
+    solveAmountAnotherDish();
+    solveMoneyToPaid();
+    solveAmountDishes();
+  }, [dispatch]);
 
   const dispatch = useDispatch();
   const handleResetCart = () => {
@@ -57,6 +89,105 @@ const Cart = ({navigation}) => {
   const handleRemoveDish = dish => {
     // log.error('🚀 ~ file: Home.js:75 ~ handleRemoveDish ~ dish:', dish);
     dispatch(decreaseDish(dish));
+  };
+
+  const solveAmountMainDish = () => {
+    let totalAmountDish = 0;
+    data.mainDishCart.forEach(item => {
+      totalAmountDish += item.amount;
+    });
+    return totalAmountDish;
+  };
+
+  const solveAmountExtraDish = () => {
+    let totalAmountDish = 0;
+    data.extraDishCart.forEach(item => {
+      totalAmountDish += item.amount;
+    });
+    return totalAmountDish;
+  };
+
+  const solveAmountToppings = () => {
+    let totalAmountDish = 0;
+    data.toppingsCart.forEach(item => {
+      totalAmountDish += item.amount;
+    });
+    return totalAmountDish;
+  };
+
+  const solveAmountAnotherDish = () => {
+    let totalAmountDish = 0;
+    data.anotherCart.forEach(item => {
+      totalAmountDish += item.amount;
+    });
+    return totalAmountDish;
+  };
+
+  const solveAmountDishes = () => {
+    let totalAmountDish = 0;
+    data.mainDishCart.forEach(item => {
+      totalAmountDish += item.amount;
+    });
+
+    data.extraDishCart.forEach(item => {
+      totalAmountDish += item.amount;
+    });
+
+    data.toppingsCart.forEach(item => {
+      totalAmountDish += item.amount;
+    });
+    data.anotherCart.forEach(item => {
+      totalAmountDish += item.amount;
+    });
+    return totalAmountDish;
+  };
+  const moneyPaidForMainDish = () => {
+    let money = 0;
+    data.mainDishCart.forEach(item => {
+      money += item.price * item.amount;
+    });
+    return money;
+  };
+
+  const moneyPaidForExtraDish = () => {
+    let money = 0;
+    data.extraDishCart.forEach(item => {
+      money += item.price * item.amount;
+    });
+    return money;
+  };
+  const moneyPaidForToppings = () => {
+    let money = 0;
+    data.toppingsCart.forEach(item => {
+      money += item.price * item.amount;
+    });
+    return money;
+  };
+  const moneyPaidForAnother = () => {
+    let money = 0;
+    data.anotherCart.forEach(item => {
+      money += item.price * item.amount;
+    });
+    return money;
+  };
+
+  const solveMoneyToPaid = () => {
+    let total = 0;
+    total += moneyPaidForMainDish();
+
+    total += moneyPaidForExtraDish();
+    total += moneyPaidForToppings();
+    total += moneyPaidForAnother();
+    return total;
+  };
+
+  const scrollViewRef = useRef(null);
+
+  const onScroll = () => {
+    // Sử dụng requestAnimationFrame để đồng bộ hoạt động vẽ đồ họa khi cuộn
+    window.requestAnimationFrame(() => {
+      console.log('Đã cuộn');
+    });
   };
 
   return (
@@ -89,11 +220,18 @@ const Cart = ({navigation}) => {
             ) : null}
           </View>
           <View style={styles.body}>
-            <ScrollView contentContainerStyle={{flexGrow: 1}}>
+            <ScrollView
+              removeClippedSubviews={true}
+              initialScrollIndex={0}
+              scrollEventThrottle={16}
+              onScroll={onScroll}
+              contentContainerStyle={{flexGrow: 1}}>
               <View style={styles.viewScrollList}>
                 {data.mainDishCart.length ? (
                   <View style={styles.viewMainDishes}>
-                    <Text style={{color: 'white'}}>Món Chính</Text>
+                    <View style={styles.viewTextHeader}>
+                      <Text style={styles.textInfo}>Món Chính</Text>
+                    </View>
                     <FlashList
                       data={data.mainDishCart}
                       renderItem={({item, index}) => {
@@ -109,11 +247,25 @@ const Cart = ({navigation}) => {
                       keyExtractor={(item, index) => index.toString()}
                       estimatedItemSize={100}
                     />
+
+                    <View style={styles.viewTextTotalMoney}>
+                      <Text style={[styles.textInfo, styles.updateMoney]}>
+                        Tổng tiền:
+                      </Text>
+                      <Text style={[styles.textInfo, styles.updateMoney]}>
+                        {moneyPaidForMainDish()}
+                      </Text>
+                    </View>
+                    <View style={styles.viewTextHeader}>
+                      <View style={styles.divideLine}></View>
+                    </View>
                   </View>
                 ) : null}
                 {data.extraDishCart.length ? (
                   <View style={styles.viewExtraDishes}>
-                    <Text style={{color: 'white'}}>Đồ ăn thêm</Text>
+                    <View style={styles.viewTextHeader}>
+                      <Text style={styles.textInfo}>Món thêm</Text>
+                    </View>
                     <FlashList
                       data={data.extraDishCart}
                       renderItem={({item, index}) => {
@@ -129,12 +281,25 @@ const Cart = ({navigation}) => {
                       keyExtractor={(item, index) => index.toString()}
                       estimatedItemSize={100}
                     />
+                    <View style={styles.viewTextTotalMoney}>
+                      <Text style={[styles.textInfo, styles.updateMoney]}>
+                        Tổng tiền:
+                      </Text>
+                      <Text style={[styles.textInfo, styles.updateMoney]}>
+                        {moneyPaidForExtraDish()}
+                      </Text>
+                    </View>
+                    <View style={styles.viewTextHeader}>
+                      <View style={styles.divideLine}></View>
+                    </View>
                   </View>
                 ) : null}
 
                 {data.toppingsCart.length ? (
                   <View style={styles.viewToppings}>
-                    <Text style={{color: 'white'}}>Toppings</Text>
+                    <View style={styles.viewTextHeader}>
+                      <Text style={styles.textInfo}>Toppings</Text>
+                    </View>
                     <FlashList
                       data={data.toppingsCart}
                       renderItem={({item, index}) => {
@@ -150,12 +315,26 @@ const Cart = ({navigation}) => {
                       keyExtractor={(item, index) => index.toString()}
                       estimatedItemSize={100}
                     />
+
+                    <View style={styles.viewTextTotalMoney}>
+                      <Text style={[styles.textInfo, styles.updateMoney]}>
+                        Tổng tiền:
+                      </Text>
+                      <Text style={[styles.textInfo, styles.updateMoney]}>
+                        {moneyPaidForToppings()}
+                      </Text>
+                    </View>
+                    <View style={styles.viewTextHeader}>
+                      <View style={styles.divideLine}></View>
+                    </View>
                   </View>
                 ) : null}
 
                 {data.anotherCart.length ? (
                   <View style={styles.viewAnother}>
-                    <Text style={{color: 'white'}}>Khác</Text>
+                    <View style={styles.viewTextHeader}>
+                      <Text style={styles.textInfo}>Khác</Text>
+                    </View>
                     <FlashList
                       data={data.anotherCart}
                       renderItem={({item, index}) => {
@@ -171,8 +350,59 @@ const Cart = ({navigation}) => {
                       keyExtractor={(item, index) => index.toString()}
                       estimatedItemSize={100}
                     />
+                    <View style={styles.viewTextTotalMoney}>
+                      <Text style={[styles.textInfo, styles.updateMoney]}>
+                        Tổng tiền:
+                      </Text>
+                      <Text style={[styles.textInfo, styles.updateMoney]}>
+                        {moneyPaidForAnother()}
+                      </Text>
+                    </View>
+                    <View style={styles.viewTextHeader}>
+                      <View style={styles.divideLine}></View>
+                    </View>
                   </View>
                 ) : null}
+                <View style={styles.viewTotal}>
+                  <View style={styles.viewBoxShowInfoBill}>
+                    <Text style={styles.textInfo}>Số lượng món chính:</Text>
+                    <Text style={styles.textInfo}>{solveAmountMainDish()}</Text>
+                  </View>
+
+                  <View style={styles.viewBoxShowInfoBill}>
+                    <Text style={styles.textInfo}>Số lượng món thêm:</Text>
+                    <Text style={styles.textInfo}>
+                      {solveAmountExtraDish()}
+                    </Text>
+                  </View>
+                  <View style={styles.viewBoxShowInfoBill}>
+                    <Text style={styles.textInfo}>Số lượng món topping:</Text>
+                    <Text style={styles.textInfo}>{solveAmountToppings()}</Text>
+                  </View>
+
+                  <View style={styles.viewBoxShowInfoBill}>
+                    <Text style={styles.textInfo}>Số lượng món khác:</Text>
+                    <Text style={styles.textInfo}>
+                      {solveAmountAnotherDish()}
+                    </Text>
+                  </View>
+
+                  <View style={styles.viewBoxShowInfoBill}>
+                    <Text style={styles.textInfo}>Tổng Số lượng:</Text>
+                    <Text style={styles.textInfo}>{solveAmountDishes()}</Text>
+                  </View>
+                  <View style={styles.divideLine}></View>
+
+                  <View style={styles.viewBoxShowInfoBill}>
+                    <Text style={[styles.textInfo, styles.updateTextInfo]}>
+                      Tổng Tiền:
+                    </Text>
+                    <Text style={[styles.textInfo, styles.updateTextInfo]}>
+                      {solveMoneyToPaid()}
+                    </Text>
+                  </View>
+                </View>
+
                 <TouchableOpacity onPress={onBuy}>
                   <View style={styles.viewButton}>
                     <Text style={styles.textButton}>Mua</Text>

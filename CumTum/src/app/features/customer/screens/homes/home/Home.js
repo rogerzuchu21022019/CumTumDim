@@ -43,6 +43,7 @@ const HomeCustomer = ({navigation}) => {
   const IMAGE_BG =
     'https://cdn.britannica.com/38/111338-050-D23BE7C8/Stars-NGC-290-Hubble-Space-Telescope.jpg?w=400&h=300&c=crop';
   const data = useSelector(productSelector);
+  // log.error("🚀 ~ file: Home.js:46 ~ HomeCustomer ~ data:", data)
 
   const [tabs, setTabs] = useState([0, 1, 2, 3]);
   const [isShowDropdown, setIsShowDropdown] = useState(true);
@@ -341,6 +342,7 @@ const HomeCustomer = ({navigation}) => {
                       handleAddDish={handleAddDish}
                       handleRemoveDish={handleRemoveDish}
                       valueSubMainDish={valueSubMainDish}
+                      mainDishCart={data.mainDishCart}
                     />
                   )}
                   keyExtractor={(item, index) => index.toString()}

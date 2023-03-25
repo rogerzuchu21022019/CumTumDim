@@ -10,12 +10,14 @@ import styles from './StyleItem';
 import {LOG} from '../../../../../../../../logger.config';
 const log = LOG.extend('ITEM_VIEW.JS');
 const ItemView = props => {
-  const {item, index, handleAddDish, handleRemoveDish, tabs, valueSubMainDish} =
-    props;
-  console.log(
-    '🚀 ~ file: ItemView.js:14 ~ ItemView ~ valueSubMainDish:',
+  const {
+    item,
+    index,
+    handleAddDish,
+    handleRemoveDish,
+    tabs,
     valueSubMainDish,
-  );
+  } = props;
 
   const onDecrease = () => {
     handleRemoveDish(item);
@@ -25,6 +27,7 @@ const ItemView = props => {
     if (tabs.toString() === '0') {
       if (valueSubMainDish.length != 0) {
         handleAddDish(item);
+        
       } else {
         valueSubMainDish.length = 0;
         Alert.alert('Hãy chọn loại sườn trước nè ! Hihi');
@@ -33,7 +36,6 @@ const ItemView = props => {
       handleAddDish(item);
     }
   };
-
 
   const imageUrlOptions = {
     uri: item.imageUrl,
@@ -106,38 +108,6 @@ const ItemView = props => {
             </View>
           </View>
         </View>
-        {/* <View>
-          <Text
-            style={{
-              color: constants.COLOR.WHITE,
-            }}>
-            {itemNew._id}
-          </Text>
-          <Text
-            style={{
-              color: constants.COLOR.WHITE,
-            }}>
-            price : {amount === 0 ? 0 : itemNew.price}
-          </Text>
-          <Text
-            style={{
-              color: constants.COLOR.WHITE,
-            }}>
-            {amount === 0 ? 0 : itemNew.amount}
-          </Text>
-          <Text
-            style={{
-              color: constants.COLOR.WHITE,
-            }}>
-            {itemNew.name}
-          </Text>
-          <Text
-            style={{
-              color: constants.COLOR.WHITE,
-            }}>
-            {itemNew.createdAt}
-          </Text>
-        </View> */}
         <View style={styles.footer}></View>
       </View>
     </SafeKeyComponent>
