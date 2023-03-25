@@ -9,10 +9,15 @@ const styles = StyleSheet.create({
     // header: 
     header:{
         flex: 1,
-        alignItems: 'center',
-        justifyContent: 'space-evenly',
     },
-   
+    groupHeader:{
+        flexDirection:'row',
+        alignItems: 'center',
+        justifyContent:'space-between',
+        marginStart:10,
+        marginTop:15,
+        marginEnd:10,
+    },
     profile:{
 
     },
@@ -35,6 +40,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderTopStartRadius:35,
         borderTopEndRadius:35,
+        marginBottom:2
 
     },
     imageProfile:{
@@ -47,7 +53,9 @@ const styles = StyleSheet.create({
     },
     textInput:{
         marginStart:20,
-        fontSize:18
+        fontSize:18,
+        height:50
+
     },
     viewTitle:{
         marginBottom:10,
@@ -100,6 +108,17 @@ const styles = StyleSheet.create({
         borderRadius:20,
         marginTop:10
     },
+  
+
+    // body
+
+    // footer
+    footer:{
+        flex:1,
+        justifyContent:"center",
+        alignItems: "center",
+        backgroundColor:constants.COLOR.GREY
+    },
     textSave:{
         fontSize:18,
         color:constants.COLOR.WHITE,
@@ -107,14 +126,10 @@ const styles = StyleSheet.create({
     },
     line:{
         width:"100%",
-        height:1,
+        height:2,
         backgroundColor:constants.COLOR.BLACK,
-        marginTop:10,
-        marginBottom:5,
         
     },
-
-    // body
 
 
     })

@@ -16,8 +16,8 @@ const styles = StyleSheet.create({
         justifyContent: 'space-evenly',
     },
     iconHeader:{
-        width:30,
-        height:30,
+        width:25,
+        height:25,
     },
     profile:{
 
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
 
     //body
     body:{
-        flex:7,
+        flex:8,
         backgroundColor:constants.COLOR.GREY,
         alignItems: 'center',
         borderTopStartRadius:35,
@@ -59,7 +59,8 @@ const styles = StyleSheet.create({
     },
     textInput:{
         marginStart:20,
-        fontSize:18
+        fontSize:18,
+        height:50
     },
     viewTitle:{
         marginBottom:10,

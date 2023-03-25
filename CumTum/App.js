@@ -164,6 +164,7 @@ const App = () => {
         </NavigationContainer>
       </PersistGate>
     </Provider>
+  
     
   );
 };

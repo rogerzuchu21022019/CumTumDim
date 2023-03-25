@@ -9,13 +9,25 @@ const styles = StyleSheet.create({
     // header
     header:{
         flex: 3,
+    },
+    groupHeader:{
+        flexDirection:'row',
         alignItems: 'center',
+        justifyContent:'space-between',
+        marginStart:10,
+        marginTop:15,
+        marginEnd:10,
+    },  groupHeader:{
+        flexDirection:'row',
+        alignItems: 'center',
+        justifyContent:'space-between',
+        marginStart:10,
+        marginTop:15,
+        marginEnd:10,
     },
     profile:{
-        marginTop:50,
 
     },
-   
    
     tvEdit:{
         color:constants.COLOR.WHITE,
@@ -25,7 +37,6 @@ const styles = StyleSheet.create({
         color:constants.COLOR.WHITE,
         fontSize:20,
         fontWeight:'bold',
-
     },
 
     // header
@@ -45,8 +56,7 @@ const styles = StyleSheet.create({
         backgroundColor:constants.COLOR.WHITE,
         alignItems: 'center',
         justifyContent: 'center',
-        bottom:100,
-
+        bottom:100
 
 
     },
@@ -56,30 +66,31 @@ const styles = StyleSheet.create({
 
     },
     groupAll:{
-        width:350,
+        marginBottom:20
     },
     item:{
-        marginBottom:10,
+        marginBottom:15,
     },
-    viewTitle:{
-        marginBottom:10,
+    textInput:{
+    
     },
-    textTitle:{
-        color:constants.COLOR.WHITE,
-        fontSize:18,
-    },
+
     viewInput:{
         backgroundColor:constants.COLOR.WHITE,
-        borderRadius:10,
+        borderRadius:25,
+        alignItems: "center",
+        justifyContent: "center",
+        height:50,
+        width:200
     
     },
     btnSave:{
-        width:200,
-        height:50,
+        width:250,
+        height:60,
         backgroundColor:constants.COLOR.ORANGE,
         alignItems:'center',
         justifyContent:"center",
-        borderRadius:20,
+        borderRadius:30,
         marginTop:10
     },
     textSave:{
