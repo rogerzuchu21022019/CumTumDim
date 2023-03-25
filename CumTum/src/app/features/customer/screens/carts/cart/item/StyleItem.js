@@ -6,10 +6,15 @@ const styles = StyleSheet.create({
     flex: 1,
     // backgroundColor: constants.COLOR.WHITE,
   },
-  header: {},
+  header: {
+    flex: 1,
+
+  },
 
   /* Body */
-  body: {},
+  body: {
+    flex: 1,
+  },
 
   boxInfoDish: {
     flex: 1,
