@@ -21,6 +21,7 @@ const ItemView = props => {
   };
 
 
+
   const imageUrlOptions = {
     uri: item.imageUrl,
     priority: FastImage.priority.high,

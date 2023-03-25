@@ -36,6 +36,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-evenly',
+    marginTop: 40,
+    marginBottom: 40,
   },
 
   textHeader: {
@@ -65,33 +67,82 @@ const styles = StyleSheet.create({
   viewFlashList: {
     flex: 10,
     width: '100%',
+    minHeight: 50,
     // backgroundColor: constants.COLOR.WHITE,
   },
 
   viewMainDishes: {
     flex: 1,
     width: '100%',
-
+    minHeight: 50,
     // backgroundColor: constants.COLOR.AQUA,
   },
 
   viewExtraDishes: {
     flex: 1,
     width: '100%',
+    minHeight: 50,
     // backgroundColor: constants.COLOR.AQUA,
   },
 
   viewToppings: {
     flex: 1,
     width: '100%',
-    minHeight: 200,
+    minHeight: 50,
 
     // backgroundColor: constants.COLOR.AQUA,
   },
   viewAnother: {
     flex: 1,
     width: '100%',
+    minHeight: 50,
     // backgroundColor: constants.COLOR.AQUA,
+  },
+  viewTextHeader: {
+    paddingLeft: '5%',
+    paddingRight: '5%',
+  },
+  viewTextTotalMoney: {
+    paddingTop: '5%',
+    // backgroundColor: constants.COLOR.AQUA,
+    justifyContent: 'flex-end',
+    paddingRight: '5%',
+    alignItems: 'flex-end',
+    flexDirection: 'row',
+  },
+  divideLine: {
+    height: 2,
+    width: '100%',
+    backgroundColor: constants.COLOR.WHITE,
+    marginTop: 20,
+    marginBottom: 20,
+  },
+  viewTotal: {
+    minHeight: 200,
+    // backgroundColor: constants.COLOR.YELLOW,
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    width: '100%',
+    paddingLeft: '5%',
+    paddingRight: '5%',
+  },
+  viewBoxShowInfoBill: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '100%',
+    // backgroundColor: constants.COLOR.WHITE,
+  },
+  textInfo: {
+    color: constants.COLOR.WHITE,
+    fontSize: 20,
+    lineHeight: 30,
+  },
+  updateMoney: {
+    fontSize: 14,
+  },
+  updateTextInfo: {
+    fontSize: 24,
   },
   /* Body */
   footer: {
