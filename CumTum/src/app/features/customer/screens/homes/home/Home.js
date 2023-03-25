@@ -32,9 +32,9 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {mainDishOptionsData} from '../../../../admin/screens/addDish/DataDishes';
 import DropDownPicker from 'react-native-dropdown-picker';
 import {
-  addDishToWishCart,
+  addDishToWishCartOrUpdate,
   productSelector,
-  removeDishFromWishCart,
+  decreaseDishByID,
 } from '../../../../product/sliceProduct';
 
 const HomeCustomer = ({navigation}) => {
@@ -43,6 +43,7 @@ const HomeCustomer = ({navigation}) => {
   const IMAGE_BG =
     'https://cdn.britannica.com/38/111338-050-D23BE7C8/Stars-NGC-290-Hubble-Space-Telescope.jpg?w=400&h=300&c=crop';
   const data = useSelector(productSelector);
+  // log.error("🚀 ~ file: Home.js:46 ~ HomeCustomer ~ data:", data)
 
   const [tabs, setTabs] = useState([0, 1, 2, 3]);
   const [isShowDropdown, setIsShowDropdown] = useState(true);
@@ -57,10 +58,10 @@ const HomeCustomer = ({navigation}) => {
     dispatch(fetchDishes());
     setTabs(0);
     return () => {};
-  }, [dispatch]);
+  }, [dispatch, valueSubMainDish]);
 
   const addDish = dish => ({
-    type: addDishToWishCart().type,
+    type: addDishToWishCartOrUpdate().type,
     payload: dish,
   });
 
@@ -70,7 +71,7 @@ const HomeCustomer = ({navigation}) => {
   };
 
   const removeDish = dish => ({
-    type: removeDishFromWishCart().type,
+    type: decreaseDishByID().type,
     payload: dish,
   });
 
@@ -183,7 +184,6 @@ const HomeCustomer = ({navigation}) => {
                     }>
                     Món chính
                   </Text>
-                  <Text style={{color: 'white'}}>{tabs}</Text>
                   <View style={styles.viewImageDish}>
                     <FastImage
                       style={styles.imageLogo}
@@ -341,6 +341,8 @@ const HomeCustomer = ({navigation}) => {
                       tabs={tabs}
                       handleAddDish={handleAddDish}
                       handleRemoveDish={handleRemoveDish}
+                      valueSubMainDish={valueSubMainDish}
+                      mainDishCart={data.mainDishCart}
                     />
                   )}
                   keyExtractor={(item, index) => index.toString()}

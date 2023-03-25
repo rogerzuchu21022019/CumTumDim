@@ -12,35 +12,15 @@ const log = LOG.extend('ITEM_VIEW.JS');
 const ItemView = props => {
   const {item, index, handleAddDish, handleRemoveDish} = props;
 
-  const [amount, setAmount] = useState(item.amount);
-  const [price, setPrice] = useState(item.price);
-  const [itemNew, setItemNew] = useState(item);
-
   const onIncrease = () => {
-    setAmount(amount + 1);
-
-    const itemAdd = {
-      ...itemNew,
-      amount: amount + 1,
-      price: price * (amount + 1),
-    };
-    setItemNew(itemAdd);
-    handleAddDish(itemAdd);
+    handleAddDish(item);
   };
 
   const onDecrease = () => {
-    setAmount(amount - 1);
-    amount <= 0 ? setAmount(0) : setAmount(amount - 1);
-    const itemRemove = {
-      ...itemNew,
-      amount: amount === 0 ? 0 : amount - 1,
-      price: amount === 0 ? 0 : price * (amount - 1),
-    };
-    setItemNew(itemRemove);
-    handleRemoveDish(itemRemove);
+    handleRemoveDish(item);
   };
 
-  useEffect(() => {}, [onIncrease, onDecrease]);
+
 
   const imageUrlOptions = {
     uri: item.imageUrl,
@@ -82,7 +62,7 @@ const ItemView = props => {
                       styles.textBoxNameUpdate,
                       styles.updateColor,
                     ]}>
-                    {price * amount}K
+                    {item.price * item.amount}K
                   </Text>
                 </View>
               )}
@@ -99,7 +79,7 @@ const ItemView = props => {
 
               <View style={styles.boxShowAmount}>
                 <Text style={[styles.textName, styles.textNameUpdate]}>
-                  {amount}
+                  {item.amount}
                 </Text>
               </View>
               <View style={styles.boxIcon}>
@@ -113,7 +93,7 @@ const ItemView = props => {
             </View>
           </View>
         </View>
-        <View>
+        {/* <View>
           <Text
             style={{
               color: constants.COLOR.WHITE,
@@ -144,7 +124,7 @@ const ItemView = props => {
             }}>
             {itemNew.createdAt}
           </Text>
-        </View>
+        </View> */}
         <View style={styles.footer}></View>
       </View>
     </SafeKeyComponent>

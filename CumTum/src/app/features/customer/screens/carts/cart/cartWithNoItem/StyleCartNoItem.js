@@ -1,84 +1,63 @@
 import {StyleSheet, Text, View} from 'react-native';
-import React from 'react';
 import {constants} from '../../../../../../shared/constants';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: constants.COLOR.RED,
+    backgroundColor: constants.COLOR.PRIMARY,
   },
+  /* Header */
+
   header: {
     flex: 1,
-    justifyContent: 'center',
     backgroundColor: constants.COLOR.PRIMARY,
-  
-    
-  },
-
-  imageLogo: {
-    width: 40,
-    height: 40,
-  },
-  leftHeader: {
-    flex: 1,
-    flexDirection: 'row',
+    justifyContent: 'center',
     alignItems: 'center',
-    // backgroundColor: constants.COLOR.WHITE,
-    // marginLeft: ,
-  },
-  rightHeader: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    // backgroundColor: constants.COLOR.WHITE,
-    marginRight: 20,
-  },
-  divideLine: {
-    height: 2,
-    backgroundColor: constants.COLOR.BLACK,
-  },
-  textTitle: {
-    color: 'white',
-    marginLeft: 6,
-  },
-
-  imageReturn: {
-    // backgroundColor: constants.COLOR.WHITE,
-    marginLeft: 5,
-    marginRight: 5,
-  },
-  mainHeader: {
-    flexDirection: 'row',
-    // backgroundColor: constants.COLOR.WHITE,
-    alignItems: 'center',
-  
   },
   textHeader: {
     color: constants.COLOR.WHITE,
     fontSize: 20,
-    fontWeight:'700'
-   
-   
   },
-  ViewText:{
-  
+
+  divideLine: {
+    height: 2,
+    backgroundColor: constants.COLOR.BLACK,
+  },
+
+  /* Header */
+
+  body: {
+    flex: 14,
+    backgroundColor: constants.COLOR.PRIMARY,
     alignItems: 'center',
     justifyContent: 'center',
-    width: '100%',
-    
-  
- 
   },
-  body: {
-    flex: 12,
-    backgroundColor: constants.COLOR.RED,
-  
-     
+  iconCart: {
+    width: 150,
+    height: 150,
   },
-  footer: {
-    flex: 1,
-    backgroundColor: constants.COLOR.GREY,
+  groupItem: {
+    height: '50%',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: 30,
+  },
+  textDescription: {
+    color: constants.COLOR.RED,
+    fontSize: 20,
+    fontWeight: '700',
+  },
+  btnConfirm: {
+    backgroundColor: constants.COLOR.WHITE,
+    height: 50,
+    width: 150,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 25,
+  },
+  textConfirm: {
+    color: 'black',
+    fontSize: 20,
   },
 });
 export default styles;

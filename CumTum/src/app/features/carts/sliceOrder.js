@@ -1,27 +1,11 @@
+import {useSelector} from 'react-redux';
 import {LOG} from '../../../../logger.config';
 import {constants} from '../../shared/constants';
-import {
-  fetchAddDish,
-  fetchCategories,
-  fetchDishes,
-  fetchUploadImage,
-} from './apiProduct';
+import {productSelector} from '../product/sliceProduct';
 
-const {createSlice} = require('@reduxjs/toolkit');
+const {createSlice, createSelector} = require('@reduxjs/toolkit');
 
 const initialState = {
-  data: null,
-  loading: false,
-  error: null,
-  success: null,
-  message: null,
-  categories: [],
-  dish: {},
-  dishes: [],
-  mainDishes: [],
-  extraDishes: [],
-  toppings: [],
-  another: [],
   wishCart: [],
   mainDishCart: [],
   extraDishCart: [],
@@ -29,10 +13,16 @@ const initialState = {
   anotherCart: [],
 };
 
-const log = LOG.extend('SLICE_PRODUCT.JS');
+const log = LOG.extend('SLICE_CART.JS');
 
-export const sliceProduct = createSlice({
-  name: constants.SLICE.PRODUCT,
+
+export const categories = createSelector(
+  (state) => state.product.categories,
+  (categories) => categories
+);
+
+export const sliceCart = createSlice({
+  name: constants.SLICE.CART,
   initialState: initialState,
   reducers: {
     addDishToWishCartOrUpdate: (state, action) => {
@@ -52,7 +42,7 @@ export const sliceProduct = createSlice({
           ...data,
           amount: 1,
         };
-        const filterDataMainList = state.categories.filter(
+        const filterDataMainList = categories.filter(
           item => item._id === categoryId && item.name === 'Món chính',
         );
         if (filterDataMainList.length > 0) {
@@ -66,7 +56,7 @@ export const sliceProduct = createSlice({
           ...data,
           amount: 1,
         };
-        const filterDataExtraList = state.categories.filter(
+        const filterDataExtraList = categories.filter(
           item => item._id === categoryId && item.name === 'Món ăn thêm',
         );
         if (filterDataExtraList.length > 0) {
@@ -81,7 +71,7 @@ export const sliceProduct = createSlice({
           ...data,
           amount: 1,
         };
-        const filterDataToppingsList = state.categories.filter(
+        const filterDataToppingsList = categories.filter(
           item => item._id === categoryId && item.name === 'Toppings',
         );
         if (filterDataToppingsList.length > 0) {
@@ -96,7 +86,7 @@ export const sliceProduct = createSlice({
           ...data,
           amount: 1,
         };
-        const filterDataAnotherList = state.categories.filter(
+        const filterDataAnotherList = categories.filter(
           item => item._id === categoryId && item.name === 'Khác',
         );
         if (filterDataAnotherList.length > 0) {
@@ -187,93 +177,9 @@ export const sliceProduct = createSlice({
       return state;
     },
   },
-  extraReducers: builder => {
-    builder.addCase(fetchUploadImage.pending, (state, action) => {
-      state.loading = true;
-    });
-    builder.addCase(fetchUploadImage.fulfilled, (state, action) => {
-      const dataResponse = action.payload;
-      state.loading = false;
-      state.success = dataResponse.success;
-      state.message = dataResponse.message;
-      state.data = dataResponse.data;
-    });
-    builder.addCase(fetchUploadImage.rejected, (state, action) => {
-      state.loading = false;
-      state.error = true;
-      state.message = action.payload;
-    });
-    builder.addCase(fetchCategories.pending, state => {
-      state.loading = true;
-    });
-    builder.addCase(fetchCategories.fulfilled, (state, action) => {
-      const dataResponse = action.payload;
-      state.loading = false;
-      state.success = dataResponse.success;
-      state.message = dataResponse.message;
-      state.categories = dataResponse.data;
-    });
-    builder.addCase(fetchCategories.rejected, (state, action) => {
-      state.loading = false;
-      state.error = true;
-      state.message = action.payload;
-    });
-
-    builder.addCase(fetchAddDish.pending, state => {
-      state.loading = true;
-    });
-    builder.addCase(fetchAddDish.fulfilled, (state, action) => {
-      const dataResponse = action.payload;
-      state.loading = false;
-      state.success = dataResponse.success;
-      state.message = dataResponse.message;
-      state.dish = dataResponse.data;
-    });
-    builder.addCase(fetchAddDish.rejected, (state, action) => {
-      state.loading = false;
-      state.error = true;
-      state.message = action.payload;
-    });
-    //
-    builder.addCase(fetchDishes.pending, state => {
-      state.loading = true;
-    });
-
-    builder.addCase(fetchDishes.fulfilled, (state, action) => {
-      const dataResponse = action.payload;
-      state.loading = false;
-      state.success = dataResponse.success;
-      state.message = dataResponse.message;
-      state.dishes = dataResponse.data;
-
-      state.extraDishes = dataResponse.data.filter(
-        dish => dish.categoryId === state.categories[0]._id,
-      );
-
-      state.toppings = dataResponse.data.filter(
-        dish => dish.categoryId === state.categories[1]._id,
-      );
-
-      state.another = dataResponse.data.filter(
-        dish => dish.categoryId === state.categories[2]._id,
-      );
-
-      state.mainDishes = dataResponse.data.filter(
-        dish => dish.categoryId === state.categories[3]._id,
-      );
-    });
-    builder.addCase(fetchDishes.rejected, (state, action) => {
-      state.loading = false;
-      state.error = true;
-      state.message = action.payload;
-    });
-  },
 });
-
-// export actions to register with store when use reducers
 export const {addDishToWishCartOrUpdate, decreaseDishByID, resetCart} =
-  sliceProduct.actions;
+  sliceCart.actions;
 
-export const productSelector = state => state.product;
-
-export default sliceProduct.reducer;
+export const cartSelector = state => state.cart;
+export default sliceCart.reducer;
