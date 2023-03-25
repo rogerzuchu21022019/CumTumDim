@@ -1,3 +1,4 @@
+
 import { LOG } from '../../../../logger.config';
 import {constants} from '../../shared/constants';
 import {
@@ -36,7 +37,7 @@ export const sliceProduct = createSlice({
       const data = action.payload;
       const {_id, amount} = data;
       const index = state.wishCart.findIndex(item => item._id === _id);
-      console.log('🚀 ~ file: sliceProduct.js:35 ~ index:', index);
+      log.info('🚀 ~ file: sliceProduct.js:35 ~ index:', index);
       if (index >= 0) {
         state.wishCart[index].amount += 1;
       } else {
@@ -49,18 +50,29 @@ export const sliceProduct = createSlice({
     removeDishFromWishCart: (state, action) => {
       const data = action.payload;
       const {_id} = data;
-      const index = state.wishCart.findIndex(item => item._id === _id);
-      console.log('🚀 ~ file: sliceProduct.js:51 ~ index:', index);
-      state.wishCart.splice(index, 1);
+      // const index = state.wishCart.findIndex(item => item._id === _id);
+      // log.info('🚀 ~ file: sliceProduct.js:35 ~ index:', index);
+      // if (index >= 0) {
+      //   state.wishCart.splice(index, 1);
+      // }
+
+      // state.wishCart = state.wishCart.filter(item => item._id !== _id);
+
+      state.wishCart = state.wishCart.filter(item => {
+        log.warn('🚀 ~ file: sliceProduct.js:55 ~ item:', item);
+        return item._id !== _id;
+      });
+
     },
     updateAmountInItem: (state, action) => {
-      const {id, amount} = action.payload;
+      const {id, amount,price} = action.payload;
       const item = state.wishCart.find(item => {
         log.warn('🚀 ~ file: sliceProduct.js:55 ~ item:', item);
         return item._id === id;
       });
       if (item) {
         item.amount = amount;
+        item.price = price;
       }
     },
     resetCart: state => {

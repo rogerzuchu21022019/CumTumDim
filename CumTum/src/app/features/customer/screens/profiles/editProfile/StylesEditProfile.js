@@ -1,5 +1,4 @@
 import {StyleSheet, Text, View} from 'react-native';
-import React from 'react';
 import {constants} from '../../../../../shared/constants';
 
 const styles = StyleSheet.create({
@@ -9,22 +8,16 @@ const styles = StyleSheet.create({
   },
   // header:
   header: {
-    flex: 2,
+    flex: 1,
     alignItems: 'center',
-    justifyContent: 'space-evenly',
-  },
-  iconHeader: {
-    width: 20,
-    height: 20,
-  },
-  profile: {},
-  groupHeader: {
-    width: '100%',
-    flexDirection: 'row',
+    // backgroundColor: constants.COLOR.WHITE,
     justifyContent: 'space-between',
-    paddingEnd: 20,
-    paddingStart: 20,
+
+    flexDirection: 'row',
   },
+
+  profile: {},
+
   tvEdit: {
     color: constants.COLOR.WHITE,
     fontSize: 15,
@@ -60,16 +53,29 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   viewInput: {
-      backgroundColor: constants.COLOR.WHITE,
-      borderRadius: 10,
-      height: 40,
-      justifyContent:'center'
+    backgroundColor: constants.COLOR.WHITE,
+    borderRadius: 10,
+    height: 40,
+    justifyContent: 'center',
+  },
+  iconCamera: {
+    alignItems: 'flex-end',
+    bottom: 30,
+    marginEnd: 10,
+  },
+  iconCameraStyle: {
+    width: 30,
+    height: 30,
+    borderRadius: 15,
+    backgroundColor: constants.COLOR.WHITE,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   groupAll: {
     width: 350,
   },
   item: {
-    marginBottom: 20,
+    marginBottom: 10,
   },
   viewImage: {
     backgroundColor: constants.COLOR.WHITE,
@@ -81,11 +87,35 @@ const styles = StyleSheet.create({
   },
   viewFinal: {
     bottom: 40,
+    marginTop: 10,
   },
   viewTextName: {
-    marginTop: 20,
+    marginTop: 10,
     alignItems: 'center',
   },
+  viewBtnSave: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  btnSave: {
+    width: 200,
+    height: 50,
+    backgroundColor: constants.COLOR.ORANGE,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 20,
+    marginTop: 10,
+  },
+  textSave: {
+    fontSize: 18,
+    color: constants.COLOR.WHITE,
+    fontWeight: '700',
+  },
   // body
+  footer: {
+    marginTop: 2,
+    flex: 1,
+    backgroundColor: constants.COLOR.GREY,
+  },
 });
 export default styles;

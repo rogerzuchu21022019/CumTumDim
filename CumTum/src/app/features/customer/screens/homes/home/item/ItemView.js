@@ -1,4 +1,4 @@
-import {View, Text, TouchableOpacity} from 'react-native';
+import {View, Text, TouchableOpacity, Alert} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import SafeKeyComponent from '../../../../../../components/safe_area/SafeKeyComponent';
 
@@ -10,21 +10,44 @@ import styles from './StyleItem';
 import {LOG} from '../../../../../../../../logger.config';
 const log = LOG.extend('ITEM_VIEW.JS');
 const ItemView = props => {
-  const {item, index, handleAddDish, handleRemoveDish, tabs} = props;
+  const {item, index, handleAddDish, handleRemoveDish, tabs, valueSubMainDish} =
+    props;
+  console.log(
+    '🚀 ~ file: ItemView.js:14 ~ ItemView ~ valueSubMainDish:',
+    valueSubMainDish,
+  );
   const [amount, setAmount] = useState(item.amount);
   const [price, setPrice] = useState(item.price);
   const [itemNew, setItemNew] = useState(item);
 
   const onIncrease = () => {
-    setAmount(amount + 1);
+    if (tabs.toString() === '0') {
+      if (valueSubMainDish.length != 0) {
+        setAmount(amount + 1);
 
-    const itemAdd = {
-      ...itemNew,
-      amount: amount + 1,
-      price: price * (amount + 1),
-    };
-    setItemNew(itemAdd);
-    handleAddDish(itemAdd);
+        const itemAdd = {
+          ...itemNew,
+          amount: amount + 1,
+          price: price * (amount + 1),
+        };
+        setItemNew(itemAdd);
+        handleAddDish(itemAdd);
+      } else {
+        valueSubMainDish.length = 0;
+        Alert.alert('Hãy chọn loại sườn trước nè ! Hihi');
+      }
+    } else {
+      console.log(`tabs`, tabs);
+      setAmount(amount + 1);
+
+      const itemAdd = {
+        ...itemNew,
+        amount: amount + 1,
+        price: price * (amount + 1),
+      };
+      setItemNew(itemAdd);
+      handleAddDish(itemAdd);
+    }
   };
 
   const onDecrease = () => {

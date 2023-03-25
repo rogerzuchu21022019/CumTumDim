@@ -22,6 +22,7 @@ import StyleLogin from './StyleLogin';
 import auth, {firebase} from '@react-native-firebase/auth';
 import {LOG} from '../../../../../logger.config';
 import {StackActions} from '@react-navigation/native';
+import {fetchCategories, fetchDishes} from '../../product/apiProduct';
 
 const LoginScreen = ({navigation}) => {
   const log = LOG.extend(`GOOGLE_SIGNIN.JS`);
@@ -49,9 +50,13 @@ const LoginScreen = ({navigation}) => {
 
   const moveTo = async () => {
     console.log('🚀 ~ file: Login.js:38 ~ moveTo ~ moveto:');
-    data.user.role === constants.ROLE.ADMIN
-      ? navigation.navigate(Router.ADMIN_STACK)
-      : navigation.navigate(Router.CUSTOMER_STACK);
+    if (data.user.role === constants.ROLE.ADMIN) {
+      navigation.navigate(Router.ADMIN_STACK);
+    } else {
+      navigation.navigate(Router.CUSTOMER_STACK);
+      dispatch(fetchCategories());
+      dispatch(fetchDishes());
+    }
   };
 
   const signIn = async () => {
@@ -68,6 +73,7 @@ const LoginScreen = ({navigation}) => {
       );
 
       dispatch(fetchLogin(idToken, accessToken));
+
       return await auth().signInWithCredential(credential);
     } catch (error) {
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
