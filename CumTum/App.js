@@ -68,7 +68,7 @@ const App = () => {
       <PersistGate loading={null} persistor={persistor}>
         <NavigationContainer ref={navigationRef}>
           <Stack.Navigator>
-             <Stack.Screen
+              <Stack.Screen
               name={Router.SPLASH_SCREEN}
               component={SplashScreen}
               options={{
@@ -131,15 +131,9 @@ const App = () => {
                 headerShown: false,
                 presentation: 'modal',
               }} 
-            />  
-            <Stack.Screen
-              name={Router.PAYMENT}
-              component={Payment}
-              options={{
-                headerShown: false,
-              
-              }} 
-            />  
+            />   
+       
+          
           </Stack.Navigator>
         </NavigationContainer>
       </PersistGate>

@@ -50,7 +50,6 @@ const CustomerStack = () => {
                 style={{
                   width: 20,
                   height: 20,
-                  marginBottom:5,
                   tintColor: focused ? constants.COLOR.YELLOW : constants.COLOR.WHITE
                 }}
               />
@@ -81,7 +80,6 @@ const CustomerStack = () => {
                 style={{
                   width: 20,
                   height: 20,
-                  marginBottom:5,
                   tintColor: focused ? constants.COLOR.YELLOW : constants.COLOR.WHITE
                 }}
               />
@@ -111,7 +109,6 @@ const CustomerStack = () => {
                 style={{
                   width: 20,
                   height: 20,
-                  marginBottom:5, 
                   tintColor: focused ? constants.COLOR.YELLOW : constants.COLOR.WHITE
                 }}
               />
@@ -141,7 +138,6 @@ const CustomerStack = () => {
                 style={{
                   width: 20,
                   height: 20,
-                  marginBottom:5,
                   tintColor: focused ? constants.COLOR.YELLOW : constants.COLOR.WHITE
                 }}
               />
