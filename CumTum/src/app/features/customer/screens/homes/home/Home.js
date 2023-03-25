@@ -57,7 +57,7 @@ const HomeCustomer = ({navigation}) => {
     dispatch(fetchDishes());
     setTabs(0);
     return () => {};
-  }, [dispatch]);
+  }, [dispatch, valueSubMainDish]);
 
   const addDish = dish => ({
     type: addDishToWishCart().type,
@@ -183,7 +183,6 @@ const HomeCustomer = ({navigation}) => {
                     }>
                     Món chính
                   </Text>
-                  <Text style={{color: 'white'}}>{tabs}</Text>
                   <View style={styles.viewImageDish}>
                     <FastImage
                       style={styles.imageLogo}
@@ -341,6 +340,7 @@ const HomeCustomer = ({navigation}) => {
                       tabs={tabs}
                       handleAddDish={handleAddDish}
                       handleRemoveDish={handleRemoveDish}
+                      valueSubMainDish={valueSubMainDish}
                     />
                   )}
                   keyExtractor={(item, index) => index.toString()}

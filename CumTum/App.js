@@ -1,3 +1,4 @@
+
 import React, {useEffect} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -40,6 +41,8 @@ import UploadImage from './src/app/features/customer/screens/profiles/uploadImag
 import AddTypeFood from './src/app/features/admin/screens/manager/ManagerCategories/addTypeFood/AddTypeFood';
 
 import CartNoItem from './src/app/features/customer/screens/carts/cart/cartWithNoItem/CartNoItem';
+import EditProfile from './src/app/features/customer/screens/profiles/editProfile/EditProfile';
+import UploadImage from './src/app/features/customer/screens/profiles/uploadImage/UploadImage';
 
 let persistor = persistStore(Store);
 import {View, Text,TouchableOpacity} from 'react-native';
@@ -161,6 +164,22 @@ const App = () => {
             <Stack.Screen
               name={Router.CART_WITH_NO_ITEM}
               component={CartNoItem}
+              options={{
+                headerShown: false,
+              }}
+            />
+
+            <Stack.Screen
+              name={Router.EDIT_PROFILE}
+              component={EditProfile}
+              options={{
+                headerShown: false,
+              }}
+            />
+
+            <Stack.Screen
+              name={Router.UPLOAD_IMAGE}
+              component={UploadImage}
               options={{
                 headerShown: false,
               }}

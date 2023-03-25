@@ -59,6 +59,7 @@ const Cart = ({navigation}) => {
   const handleRemoveDish = dish => {
     log.error('🚀 ~ file: Home.js:75 ~ handleRemoveDish ~ dish:', dish);
     dispatch(removeDish(dish));
+    updateAmountDish(dish);
   };
 
   return (

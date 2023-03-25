@@ -37,8 +37,7 @@ export const constants = {
   },
   BASE_URL: {
     MAIN: 'http://192.168.1.11:3000/api',
-    SECOND: 'https://fpoly-hcm.herokuapp.com/api',
-    THIRD: 'https://cumtumdim.becofoodstore.click/api',
+    SECOND: 'https://cumtumdim.becofoodstore.click/api',
   },
   ROLE: {
     ADMIN: 'admin',

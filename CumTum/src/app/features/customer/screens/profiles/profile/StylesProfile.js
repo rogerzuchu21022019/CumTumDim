@@ -1,8 +1,6 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import { constants } from '../../../../../shared/constants'
-
-
+import {StyleSheet, Text, View} from 'react-native';
+import React from 'react';
+import {constants} from '../../../../../shared/constants';
 
 const styles = StyleSheet.create({
     container:{
