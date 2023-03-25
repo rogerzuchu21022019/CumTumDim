@@ -7,7 +7,7 @@ import {combineReducers, configureStore} from '@reduxjs/toolkit';
 import sliceAuth from '../features/admin/sliceAuth';
 
 import sliceProduct from '../features/product/sliceProduct';
-import { constants } from '../shared/constants';
+import {constants} from '../shared/constants';
 
 let persistConfig = {
   key: 'root',
@@ -22,7 +22,7 @@ const rootReducers = combineReducers({
 });
 
 const resetRootReducer = (state, action) => {
-  if (action.type === constants.FETCH.SIGN_OUT+"/fulfilled") {
+  if (action.type === constants.FETCH.SIGN_OUT + '/fulfilled') {
     state = undefined;
   }
   return rootReducers(state, action);

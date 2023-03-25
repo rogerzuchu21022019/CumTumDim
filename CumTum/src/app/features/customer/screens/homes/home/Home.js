@@ -32,9 +32,9 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {mainDishOptionsData} from '../../../../admin/screens/addDish/DataDishes';
 import DropDownPicker from 'react-native-dropdown-picker';
 import {
-  addDishToWishCart,
+  addDishToWishCartOrUpdate,
   productSelector,
-  removeDishFromWishCart,
+  decreaseDishByID,
 } from '../../../../product/sliceProduct';
 
 const HomeCustomer = ({navigation}) => {
@@ -60,7 +60,7 @@ const HomeCustomer = ({navigation}) => {
   }, [dispatch, valueSubMainDish]);
 
   const addDish = dish => ({
-    type: addDishToWishCart().type,
+    type: addDishToWishCartOrUpdate().type,
     payload: dish,
   });
 
@@ -70,7 +70,7 @@ const HomeCustomer = ({navigation}) => {
   };
 
   const removeDish = dish => ({
-    type: removeDishFromWishCart().type,
+    type: decreaseDishByID().type,
     payload: dish,
   });
 

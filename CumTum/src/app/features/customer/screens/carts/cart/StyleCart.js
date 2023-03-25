@@ -12,37 +12,15 @@ const styles = StyleSheet.create({
     backgroundColor: constants.COLOR.PRIMARY,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  textHeader: {
-    color: constants.COLOR.WHITE,
-    fontSize: 20,
-  },
-
-  /* Body */
-  body: {
-    flex: 12,
-    marginTop: 2,
-    // backgroundColor: constants.COLOR.ORANGE,
-    marginBottom: 2,
-  },
-  viewFlashList: {
-    flex: 1,
-    width: '100%',
-    // backgroundColor: constants.COLOR.WHITE,
-  },
-  /* Body */
-  footer: {
-    flex: 2,
-    // backgroundColor: constants.COLOR.YELLOW,
+    flexDirection: 'row',
   },
   boxButton: {
     flex: 1,
     paddingTop: 5,
     paddingBottom: 5,
-    backgroundColor: constants.COLOR.GREY,
+    // backgroundColor: constants.COLOR.WHITE,
     justifyContent: 'space-between',
     alignItems: 'center',
-    width: '100%',
   },
 
   textButton: {
@@ -51,12 +29,74 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   viewButton: {
-    backgroundColor: constants.COLOR.ORANGE,
+    backgroundColor: constants.COLOR.RED,
     width: 150,
     height: 40,
-    justifyContent: 'center',
     borderRadius: 20,
     alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+  },
+
+  textHeader: {
+    color: constants.COLOR.WHITE,
+    fontSize: 20,
+  },
+  boxTextHeader: {
+    flex: 1,
+    alignItems: 'center',
+  },
+
+  /* Body */
+  body: {
+    flex: 12,
+    marginTop: 2,
+    width: '100%',
+    height: '100%',
+    // backgroundColor: constants.COLOR.ORANGE,
+    marginBottom: 2,
+  },
+  viewScrollList: {
+    flex: 1,
+    width: '100%',
+    // minHeight: 200 ,
+    alignItems: 'center',
+  },
+  viewFlashList: {
+    flex: 10,
+    width: '100%',
+    // backgroundColor: constants.COLOR.WHITE,
+  },
+
+  viewMainDishes: {
+    flex: 1,
+    width: '100%',
+
+    // backgroundColor: constants.COLOR.AQUA,
+  },
+
+  viewExtraDishes: {
+    flex: 1,
+    width: '100%',
+    // backgroundColor: constants.COLOR.AQUA,
+  },
+
+  viewToppings: {
+    flex: 1,
+    width: '100%',
+    minHeight: 200,
+
+    // backgroundColor: constants.COLOR.AQUA,
+  },
+  viewAnother: {
+    flex: 1,
+    width: '100%',
+    // backgroundColor: constants.COLOR.AQUA,
+  },
+  /* Body */
+  footer: {
+    // flex: 2,
+    // backgroundColor: constants.COLOR.YELLOW,
   },
 });
 export default styles;
