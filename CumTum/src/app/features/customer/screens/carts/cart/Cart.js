@@ -16,6 +16,7 @@ import CartNoItem from './cartWithNoItem/CartNoItem';
 import ItemView from './item/ItemView';
 import {LOG} from '../../../../../../../logger.config';
 import {constants} from '../../../../../shared/constants';
+import Router from '../../../../../navigation/Router';
 
 const log = LOG.extend('CART.JS');
 const Cart = ({navigation}) => {
@@ -49,7 +50,7 @@ const Cart = ({navigation}) => {
         amountDish: solveAmountDishes(),
       };
       console.log('🚀 ~ file: Cart.js:48 ~ onBuy ~ item:', order);
-      // navigation.navigate('Order', {item});
+      navigation.navigate(Router.PAYMENT, {order});
     } else {
       Alert.alert('Bạn phải có ít nhất 1 món chính trong bill! ');
     }
