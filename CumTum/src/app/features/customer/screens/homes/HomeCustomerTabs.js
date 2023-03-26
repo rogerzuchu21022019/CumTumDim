@@ -17,6 +17,7 @@ const HomeCustomerTabs = () => {
               headerShown: false,
             }}
           />
+       
         </Stack.Group>
       </Stack.Navigator>
   );

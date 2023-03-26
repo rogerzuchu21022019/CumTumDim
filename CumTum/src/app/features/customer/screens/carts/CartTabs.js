@@ -14,13 +14,13 @@ const CartTabs = () => {
     <SafeKeyComponent>
       <Stack.Navigator>
         <Stack.Group>
-          <Stack.Screen
+           {/* <Stack.Screen
             name={Router.CART_WITH_NO_ITEM}
             component={Cart}
             options={{
               headerShown: false,
             }}
-          />
+          />  */}
           <Stack.Screen
             name={Router.PAYMENT}
             component={Payment}
