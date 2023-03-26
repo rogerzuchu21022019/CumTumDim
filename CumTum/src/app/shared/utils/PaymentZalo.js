@@ -1,16 +1,23 @@
-import {NativeModules, NativeEventEmitter} from 'react-native';
-const {PayZaloBridge} = NativeModules;
+import {
+  NativeModules,
+  NativeEventEmitter,
+  KeyboardAvoidingView,
+  ScrollView,
+  Button,
+  TextInput,
+  StyleSheet,
+} from 'react-native';
+// const PayZaloBridge = NativeModules.PayZaloBridge;
 
-const payZaloBridgeEmitter = new NativeEventEmitter(PayZaloBridge);
+// const payZaloBridgeEmitter = new NativeEventEmitter(PayZaloBridge);
 
 import {View, Text} from 'react-native';
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 
 const PaymentCart = () => {
   const [money, setMoney] = useState('10000');
   const [token, setToken] = useState('');
   const [returncode, setReturnCode] = useState('');
-  
 
   function getCurrentDateYYMMDD() {
     var todayDate = new Date().toISOString().slice(2, 10);
@@ -20,7 +27,7 @@ const PaymentCart = () => {
   async function createOrder(money) {
     let apptransid = getCurrentDateYYMMDD() + '_' + new Date().getTime();
 
-    let appid = 2553;
+    let appid = 2554;
     let amount = parseInt(money);
     let appuser = 'ZaloPayDemo';
     let apptime = new Date().getTime();

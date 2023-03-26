@@ -5,6 +5,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import SafeKeyComponent from '../../../../components/safe_area/SafeKeyComponent';
 import Cart from './cart/Cart';
 import Payment from './payment/Payment';
+import PaymentCart from '../../../../shared/utils/PaymentZalo';
 
 const CartTabs = () => {
   const Stack = createNativeStackNavigator();
@@ -23,6 +24,13 @@ const CartTabs = () => {
           <Stack.Screen
             name={Router.PAYMENT}
             component={Payment}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name={Router.PAYMENT_PAID}
+            component={PaymentCart}
             options={{
               headerShown: false,
             }}
