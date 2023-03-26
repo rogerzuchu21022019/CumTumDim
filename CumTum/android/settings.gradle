@@ -9,3 +9,5 @@ project(':react-native-vector-icons').projectDir = new File(rootProject.projectD
 
 include ':app'
 includeBuild('../node_modules/react-native-gradle-plugin')
+
+include ':zpdk-release-28052021'
