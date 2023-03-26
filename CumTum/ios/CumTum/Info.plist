@@ -2,6 +2,19 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
   <dict>
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+      <string>zalo</string>
+      <string>zalopay</string>
+      <string>zalopay.api.v2</string>
+    </array>
+
+
+    <key>ZPAppID</key>
+    <string>2554</string>
+    <key>ZPAppKey</key>
+    <string>sdngKKJmqEMzvh5QQcdD2A9XBSKUNaYn</string>
+
     <key>CFBundleDevelopmentRegion</key>
     <string>en</string>
     <key>CFBundleDisplayName</key>
@@ -27,6 +40,7 @@
         <string>Editor</string>
         <key>CFBundleURLSchemes</key>
         <array>
+
           <string>com.googleusercontent.apps.8392071542-6jau34qpcu594et1vbt2uukakso783au</string>
         </array>
       </dict>
@@ -90,7 +104,6 @@
       <string>UIInterfaceOrientationPortrait</string>
     </array>
     <key>UIViewControllerBasedStatusBarAppearance</key>
-
     <false />
   </dict>
 </plist>
