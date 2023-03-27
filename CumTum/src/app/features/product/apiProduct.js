@@ -55,6 +55,7 @@ export const fetchAddDish = createAsyncThunk(
         dish: dish,
       },
     );
+    console.log("🚀 ~ file: apiProduct.js:58 ~ response:", response)
 
     return response.data;
   },

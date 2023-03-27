@@ -38,10 +38,26 @@ const Cart = ({navigation}) => {
       data.anotherCart.length != 0
     ) {
       const order = {
-        mainDishCart: data.mainDishCart,
-        extraDishCart: data.extraDishCart,
-        toppingsCart: data.toppingsCart,
-        anotherCart: data.anotherCart,
+        mainDishCart: data.mainDishCart.map(item => ({
+          productId: item._id,
+          amounts: item.amount,
+          price: item.price,
+        })),
+        extraDishCart: data.extraDishCart.map(item => ({
+          productId: item._id,
+          amounts: item.amount,
+          price: item.price,
+        })),
+        toppingsCart: data.toppingsCart.map(item => ({
+          productId: item._id,
+          amounts: item.amount,
+          price: item.price,
+        })),
+        anotherCart: data.anotherCart.map(item => ({
+          productId: item._id,
+          amounts: item.amount,
+          price: item.price,
+        })),
         amountMainDish: solveAmountMainDish(),
         amountExtraDish: solveAmountExtraDish(),
         amountToppings: solveAmountToppings(),
@@ -63,6 +79,7 @@ const Cart = ({navigation}) => {
     solveAmountAnotherDish();
     solveMoneyToPaid();
     solveAmountDishes();
+    solveAmountSuonMo();
   }, [dispatch]);
 
   const dispatch = useDispatch();
@@ -96,6 +113,16 @@ const Cart = ({navigation}) => {
     let totalAmountDish = 0;
     data.mainDishCart.forEach(item => {
       totalAmountDish += item.amount;
+    });
+    return totalAmountDish;
+  };
+
+  const solveAmountSuonMo = () => {
+    let totalAmountDish = 0;
+    data.mainDishCart.forEach(item => {
+      if (item.subCategory === 'Sườn mỡ') {
+        totalAmountDish += item.amount;
+      }
     });
     return totalAmountDish;
   };
@@ -191,6 +218,14 @@ const Cart = ({navigation}) => {
     });
   };
 
+  const renderHeader = () => {
+    return (
+      <Text style={{fontSize: 20, fontWeight: 'bold', marginBottom: 10}}>
+        My List Data
+      </Text>
+    );
+  };
+
   return (
     <SafeKeyComponent>
       {data.mainDishCart.length ||
@@ -247,6 +282,7 @@ const Cart = ({navigation}) => {
                       }}
                       keyExtractor={(item, index) => index.toString()}
                       estimatedItemSize={100}
+                      key={'list1'}
                     />
 
                     <View style={styles.viewTextTotalMoney}>
@@ -279,6 +315,7 @@ const Cart = ({navigation}) => {
                           />
                         );
                       }}
+                      key={'list2'}
                       keyExtractor={(item, index) => index.toString()}
                       estimatedItemSize={100}
                     />
@@ -313,6 +350,7 @@ const Cart = ({navigation}) => {
                           />
                         );
                       }}
+                      key={'list3'}
                       keyExtractor={(item, index) => index.toString()}
                       estimatedItemSize={100}
                     />
@@ -350,6 +388,7 @@ const Cart = ({navigation}) => {
                       }}
                       keyExtractor={(item, index) => index.toString()}
                       estimatedItemSize={100}
+                      key={'list4'}
                     />
                     <View style={styles.viewTextTotalMoney}>
                       <Text style={[styles.textInfo, styles.updateMoney]}>
@@ -368,6 +407,32 @@ const Cart = ({navigation}) => {
                   <View style={styles.viewBoxShowInfoBill}>
                     <Text style={styles.textInfo}>Số lượng món chính:</Text>
                     <Text style={styles.textInfo}>{solveAmountMainDish()}</Text>
+                  </View>
+
+                  <View
+                    style={[
+                      styles.viewBoxShowInfoBill,
+                      styles.viewBoxShowSubInfoBill,
+                    ]}>
+                    <Text style={[styles.textInfo, styles.updateSubText]}>
+                      + Số lượng Suờn mỡ:
+                    </Text>
+                    <Text style={[styles.textInfo, styles.updateSubText]}>
+                      {solveAmountSuonMo()}
+                    </Text>
+                  </View>
+
+                  <View
+                    style={[
+                      styles.viewBoxShowInfoBill,
+                      styles.viewBoxShowSubInfoBill,
+                    ]}>
+                    <Text style={[styles.textInfo, styles.updateSubText]}>
+                      + Số lượng Suờn :
+                    </Text>
+                    <Text style={[styles.textInfo, styles.updateSubText]}>
+                      {solveAmountMainDish() - solveAmountSuonMo()}
+                    </Text>
                   </View>
 
                   <View style={styles.viewBoxShowInfoBill}>

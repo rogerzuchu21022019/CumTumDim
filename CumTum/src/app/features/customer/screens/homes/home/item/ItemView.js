@@ -10,14 +10,8 @@ import styles from './StyleItem';
 import {LOG} from '../../../../../../../../logger.config';
 const log = LOG.extend('ITEM_VIEW.JS');
 const ItemView = props => {
-  const {
-    item,
-    index,
-    handleAddDish,
-    handleRemoveDish,
-    tabs,
-    valueSubMainDish,
-  } = props;
+  const {item, index, handleAddDish, handleRemoveDish, tabs, valueSubMainDish} =
+    props;
 
   const onDecrease = () => {
     handleRemoveDish(item);
@@ -26,8 +20,8 @@ const ItemView = props => {
   const onIncrease = () => {
     if (tabs.toString() === '0') {
       if (valueSubMainDish.length != 0) {
+        log.error('🚀 ~ file: ItemView.js:28 ~ onIncrease ~ item:', item);
         handleAddDish(item);
-        
       } else {
         valueSubMainDish.length = 0;
         Alert.alert('Hãy chọn loại sườn trước nè ! Hihi');

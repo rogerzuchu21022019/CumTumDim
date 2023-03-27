@@ -8,7 +8,7 @@ const log = LOG.extend(`AXIOS_INSTANCE`);
 export const AxiosInstance = () => {
   const axios = Axios.create({
     // baseURL: BaseUrl.Main,
-    baseURL: constants.BASE_URL.SECOND,
+    baseURL: constants.BASE_URL.MAIN,
     // baseURL: BaseUrl.Four,
   });
   axios.interceptors.request.use(

@@ -61,41 +61,41 @@ const styles = StyleSheet.create({
   viewScrollList: {
     flex: 1,
     width: '100%',
-    // minHeight: 200 ,
+    minHeight: 300 ,
     alignItems: 'center',
   },
   viewFlashList: {
     flex: 10,
     width: '100%',
-    minHeight: 50,
+    minHeight: 300,
     // backgroundColor: constants.COLOR.WHITE,
   },
 
   viewMainDishes: {
     flex: 1,
     width: '100%',
-    minHeight: 50,
+    minHeight: 300,
     // backgroundColor: constants.COLOR.AQUA,
   },
 
   viewExtraDishes: {
     flex: 1,
     width: '100%',
-    minHeight: 50,
+    minHeight: 300,
     // backgroundColor: constants.COLOR.AQUA,
   },
 
   viewToppings: {
     flex: 1,
     width: '100%',
-    minHeight: 50,
+    minHeight: 300,
 
     // backgroundColor: constants.COLOR.AQUA,
   },
   viewAnother: {
     flex: 1,
     width: '100%',
-    minHeight: 50,
+    minHeight: 300,
     // backgroundColor: constants.COLOR.AQUA,
   },
   viewTextHeader: {
@@ -133,10 +133,16 @@ const styles = StyleSheet.create({
     width: '100%',
     // backgroundColor: constants.COLOR.WHITE,
   },
+  viewBoxShowSubInfoBill: {
+    paddingLeft: 20,
+  },
   textInfo: {
     color: constants.COLOR.WHITE,
     fontSize: 20,
     lineHeight: 30,
+  },
+  updateSubText: {
+    fontSize: 16,
   },
   updateMoney: {
     fontSize: 14,
