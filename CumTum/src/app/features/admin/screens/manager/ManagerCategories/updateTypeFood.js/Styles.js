@@ -1,10 +1,9 @@
 import { StyleSheet} from 'react-native'
-import { constants } from '../../../../shared/constants'
+import { constants } from '../../../../../../shared/constants'
 
 
 
-
-const StyleUpdateDish = StyleSheet.create({
+const Styles = StyleSheet.create({
     container:{
         flex:1,
         backgroundColor:'black',
@@ -60,65 +59,36 @@ const StyleUpdateDish = StyleSheet.create({
       },
     // body
     body: {
-        flex:9,
-        backgroundColor: '#252121',
-
+      flex:12,
+      backgroundColor: '#252121',
+      alignItems:'center',
+      justifyContent:"space-evenly"
+      
+  },
+    viewTextInput:{
+      backgroundColor: constants.COLOR.WHITE,
+      height:40,
+      width:300,
+      borderRadius:10,
     },
-    groupFinalBody:{
-        alignItems:'center',
-        justifyContent:'center',
-
-    },
-    viewImage:{
-        width:200,
-        height:200,
-        backgroundColor:'red',
-        borderRadius:10,
-        marginTop:15,
-        marginBottom:100,
-        
-    },
-    itemImage:{
-        width:200,
-        height:200,
-    },
-    groupItem:{
-        marginBottom:10,
-    },
-    viewNameEat:{
-    },
-    itemNameEat:{ 
-        color:constants.COLOR.WHITE,
-        fontSize:15,
-        marginBottom:10
-},
-    viewInputPrice:{
-        width:350,
-        height:40,
-        backgroundColor:constants.COLOR.WHITE,
-        borderRadius:5,
-    },
-
-    //footer
-   
-    footer:{
-        flex:3,
-        backgroundColor: '#252121',
-        alignItems:'center',
+    textInput:{
+      marginStart:10,
     },
     viewBTN:{
-        backgroundColor:constants.COLOR.ORANGE,
-        width:200,
-        height:50,
-        borderRadius:20,
-        justifyContent: 'center',
-        alignItems:'center',
+      backgroundColor: constants.COLOR.YELLOW,
+      height:40,
+      width:150,
+      borderRadius:10,
+      alignItems: 'center',
+      justifyContent: 'center',
     },
-    textBTN:{
-        color:constants.COLOR.WHITE,
-        fontSize:20,
+    btn:{ 
+      color: constants.COLOR.WHITE,
+      fontWeight:"600",
+      fontSize:18
     },
+  
    
    
 })
-export default StyleUpdateDish
+export default Styles

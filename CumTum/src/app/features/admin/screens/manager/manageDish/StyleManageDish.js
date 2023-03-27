@@ -5,13 +5,14 @@ const { StyleSheet } = require('react-native');
 const styleManager = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#373232',
+        backgroundColor:constants.COLOR.BLACK,
     },
     /*Header*/
     header: {
         flex: 1,
         justifyContent: 'center',
         backgroundColor: constants.COLOR.PRIMARY,
+        marginBottom:2
       },
     
       imageLogo: {
@@ -42,7 +43,8 @@ const styleManager = StyleSheet.create({
       },
     /*Body*/
     body: {
-        flex: 10,
+        flex: 12,
+        backgroundColor:constants.COLOR.GREY,
     },
     groupBody: {
         marginLeft: 24,

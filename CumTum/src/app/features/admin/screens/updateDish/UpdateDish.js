@@ -4,6 +4,9 @@ import styles from './StyleUpdateDish';
 import SafeKeyComponent from '../../../../components/safe_area/SafeKeyComponent';
 import FastImage from 'react-native-fast-image';
 import Router from '../../../../navigation/Router';
+import IconIonicons from 'react-native-vector-icons/Ionicons';
+import { constants } from '../../../../shared/constants';
+
 
 
 const UpdateDish = ({navigation, route}) => {
@@ -24,17 +27,42 @@ const UpdateDish = ({navigation, route}) => {
   return (
     <SafeKeyComponent>
       <View style={styles.container}>
-        <View style={styles.header}>
-          <View style={styles.groupFinal}>
-            <View style={styles.groupItemHeader}>
-              <Image source={require('../../../../../assets/iconLogo.png')} />
-              <Text style={styles.textTitle}>Cum tứm đim</Text>
+      <View style={styles.header}>
+          <View style={styles.mainHeader}>
+            <View style={styles.leftHeader}>
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate(Router.MANAGE);
+                }}>
+                <IconIonicons
+                  style={styles.imageReturn}
+                  name="arrow-back"
+                  color={constants.COLOR.WHITE}
+                  size={20}
+                />
+              </TouchableOpacity>
+              {/* Code back to HomeScreen */}
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate(Router.HOME_ADMIN);
+                }}>
+                <View style={styles.viewLogo}>
+                  <FastImage
+                    style={styles.imageLogo}
+                    source={require('../../../../../assets/Logo_CumTumDim.png')}
+                  />
+                  <Text style={styles.textTitle}>Cum tứm đim</Text>
+                </View>
+              </TouchableOpacity>
             </View>
-            <View>
-              <Image source={require('../../../../../assets/iconBell.jpg')} />
-            </View>
+            {/* <View style={styles.rightHeader}>
+              <IconOcticons
+                name="bell-fill"
+                color={constants.COLOR.RED}
+                size={20}
+              />
+            </View> */}
           </View>
-          <View style={styles.strikethrough}></View>
         </View>
         <View style={styles.body}>
           <View style={styles.groupFinalBody}>
@@ -42,6 +70,7 @@ const UpdateDish = ({navigation, route}) => {
               <FastImage
                 style={styles.itemImage}
                 source={item.uri}
+                
               />
             </View>
             <View style={styles.groupItem}>
@@ -59,17 +88,20 @@ const UpdateDish = ({navigation, route}) => {
                 <Text style={styles.itemNameEat}>Tên món ăn</Text>
               </View>
               <View>
-              <TextInput style={styles.viewInputPrice}y>
+              <TextInput style={styles.viewInputPrice}>
                   {item.price}
               </TextInput>
             </View>
             </View>
-            <TouchableOpacity onPress={handleSave}>
+           
+          </View>
+        </View>
+        <View style={styles.footer}>
+        <TouchableOpacity onPress={handleSave}>
             <View style={styles.viewBTN}>
               <Text style={styles.textBTN}>Lưu</Text>
             </View>
             </TouchableOpacity>
-          </View>
         </View>
       </View>
     </SafeKeyComponent>

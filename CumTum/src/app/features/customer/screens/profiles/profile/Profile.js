@@ -51,7 +51,7 @@ const Profile = ({navigation}) => {
           <View style={styles.viewImage}>
               <FastImage
                 style={styles.imageProfile}
-                source={require('../../../../../../assets/logo.png')}
+                source={require('../../../../../../assets/iconLogo.png')}
               />
             </View>
             <View style={styles.viewTextName}>

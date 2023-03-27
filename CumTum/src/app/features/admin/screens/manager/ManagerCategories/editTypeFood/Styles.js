@@ -1,10 +1,6 @@
-import { StyleSheet} from 'react-native'
-import { constants } from '../../../../shared/constants'
-
-
-
-
-const StyleUpdateDish = StyleSheet.create({
+import {StyleSheet} from 'react-native';
+import { constants } from '../../../../../../shared/constants';
+const Styles = StyleSheet.create({
     container:{
         flex:1,
         backgroundColor:'black',
@@ -15,7 +11,6 @@ const StyleUpdateDish = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: constants.COLOR.PRIMARY,
         alignItems: 'center',
-        marginBottom:2,
       },
       imageLogo: {
         width: 40,
@@ -60,65 +55,65 @@ const StyleUpdateDish = StyleSheet.create({
       },
     // body
     body: {
-        flex:9,
+        flex:12,
         backgroundColor: '#252121',
-
-    },
-    groupFinalBody:{
         alignItems:'center',
-        justifyContent:'center',
-
-    },
-    viewImage:{
-        width:200,
-        height:200,
-        backgroundColor:'red',
-        borderRadius:10,
-        marginTop:15,
-        marginBottom:100,
+        
         
     },
-    itemImage:{
-        width:200,
-        height:200,
-    },
-    groupItem:{
-        marginBottom:10,
-    },
-    viewNameEat:{
-    },
-    itemNameEat:{ 
-        color:constants.COLOR.WHITE,
-        fontSize:15,
-        marginBottom:10
-},
-    viewInputPrice:{
+  
+    itemEat:{
+        backgroundColor:'#2F2D2D',
+        height:80,
         width:350,
-        height:40,
-        backgroundColor:constants.COLOR.WHITE,
-        borderRadius:5,
-    },
-
-    //footer
-   
-    footer:{
-        flex:3,
-        backgroundColor: '#252121',
-        alignItems:'center',
-    },
-    viewBTN:{
-        backgroundColor:constants.COLOR.ORANGE,
-        width:200,
-        height:50,
-        borderRadius:20,
+        borderRadius:10,
         justifyContent: 'center',
+        marginBottom:10,
+        marginBottom:15,
+        marginTop:10
+
+
+    },
+    itemNumber:{
+        
+    },
+   
+
+    numberItem:{
+        color:'white',
+        fontSize:15,
+        fontWeight:"500"
+
+
+    },
+    itemQuantity:{
+    },
+   
+  
+    groupItem:{
+        flexDirection:'row',
+        justifyContent:'space-around',
         alignItems:'center',
     },
-    textBTN:{
-        color:constants.COLOR.WHITE,
-        fontSize:20,
+    itemName:{
+        color:'white',
+        fontSize:15,
+        fontWeight:"500"
+       
+
     },
-   
-   
+    
+    nameTitle:{
+        color:'white',
+        fontSize:20,
+        paddingBottom:15,
+
+    },
+    
+    itemImage:{
+        height:25,
+        width:25
+    }
+
 })
-export default StyleUpdateDish
+export default Styles
