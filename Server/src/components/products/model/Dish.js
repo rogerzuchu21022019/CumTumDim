@@ -26,7 +26,7 @@ const DishSchema = new Schema(
     },
     subCategory: {
       type: String,
-      enum: [`Sườn`, `Sườn Mỡ`],
+      enum: [`Sườn`, `Sườn mỡ`],
     },
     bestSeller: {
       type: Number,
