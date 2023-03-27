@@ -1,4 +1,3 @@
-
 import React, {useEffect} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -31,8 +30,6 @@ import UpdateDish from './src/app/features/admin/screens/updateDish/UpdateDish';
 import DeleteDish from './src/app/features/admin/screens/deleteDish/DeleteDish';
 import Manage from './src/app/features/admin/screens/manager/manageDish/ManageDish';
 import ManagerCategories from './src/app/features/admin/screens/manager/ManagerCategories/ManagerCategories';
-import { requestUserPermission } from './src/app/shared/utils/PermissionFCM';
-import { Platform } from 'react-native';
 import {requestUserPermission} from './src/app/shared/utils/PermissionFCM';
 import {Platform} from 'react-native';
 import Payment from './src/app/features/customer/screens/carts/payment/Payment';
@@ -41,11 +38,8 @@ import UploadImage from './src/app/features/customer/screens/profiles/uploadImag
 import AddTypeFood from './src/app/features/admin/screens/manager/ManagerCategories/addTypeFood/AddTypeFood';
 
 import CartNoItem from './src/app/features/customer/screens/carts/cart/cartWithNoItem/CartNoItem';
-import EditProfile from './src/app/features/customer/screens/profiles/editProfile/EditProfile';
-import UploadImage from './src/app/features/customer/screens/profiles/uploadImage/UploadImage';
-
 let persistor = persistStore(Store);
-import {View, Text,TouchableOpacity} from 'react-native';
+import {View, Text, TouchableOpacity} from 'react-native';
 import ManagerFood from './src/app/features/admin/screens/manager/manageFood/ManagerFood';
 
 const App = () => {
@@ -136,24 +130,24 @@ const App = () => {
               options={{
                 headerShown: false,
                 presentation: 'modal',
-              }} 
-            />  
-               <Stack.Screen
+              }}
+            />
+            <Stack.Screen
               name={Router.DELETE_DISH}
               component={DeleteDish}
               options={{
                 headerShown: false,
                 presentation: 'modal',
-              }} 
-            />  
-             <Stack.Screen
+              }}
+            />
+            <Stack.Screen
               name={Router.MANAGER_FOOD}
               component={ManagerFood}
               options={{
                 headerShown: false,
                 presentation: 'modal',
-              }} 
-            />  
+              }}
+            />
             <Stack.Screen
               name={Router.PAYMENT}
               component={Payment}
