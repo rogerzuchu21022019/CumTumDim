@@ -69,11 +69,11 @@ const styles = StyleSheet.create({
   },
 
   textNameUpdate: {
-    fontSize: 20,
+    fontSize: 16,
   },
 
   textBoxNameUpdate: {
-    fontSize: 16,
+    fontSize: 12,
   },
   imageDish: {
     width: 60,

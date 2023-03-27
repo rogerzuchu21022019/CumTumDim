@@ -333,7 +333,11 @@ const HomeCustomer = ({navigation}) => {
                 </View>
 
                 <FlashList
-                  data={data.mainDishes}
+                  data={valueSubMainDish[0] === "Sườn mỡ" ? data.mainDishes.filter(
+                    (item) => item.subCategory === "Sườn mỡ"
+                  ) : data.mainDishes.filter(
+                    (item) => item.subCategory === "Sườn"
+                  )}
                   renderItem={({item, index}) => (
                     <ItemView
                       item={item}

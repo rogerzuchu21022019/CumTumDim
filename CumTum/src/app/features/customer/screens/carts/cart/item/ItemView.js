@@ -20,8 +20,6 @@ const ItemView = props => {
     handleRemoveDish(item);
   };
 
-
-
   const imageUrlOptions = {
     uri: item.imageUrl,
     priority: FastImage.priority.high,
@@ -43,9 +41,20 @@ const ItemView = props => {
               <FastImage style={styles.imageDish} source={imageUrlOptions} />
             </View>
             <View style={styles.boxShowNamePrice}>
-              <Text style={[styles.textName, styles.textBoxNameUpdate]}>
-                {item.name}
-              </Text>
+              {item.subCategory === 'Sườn mỡ' ? (
+                <View>
+                  <Text style={[styles.textName, styles.textBoxNameUpdate]}>
+                    {item.name}
+                  </Text>
+                  <Text style={[styles.textName, styles.textBoxNameUpdate]}>
+                    ({item.subCategory})
+                  </Text>
+                </View>
+              ) : (
+                <Text style={[styles.textName, styles.textBoxNameUpdate]}>
+                  {item.name}
+                </Text>
+              )}
               {item.price === 0 ? (
                 <Text style={[styles.textName, styles.textBoxNameUpdate]}>
                   Free
