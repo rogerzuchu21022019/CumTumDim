@@ -6,6 +6,8 @@ import ItemEditEat from './ItemEditEat';
 import IconIonicons from 'react-native-vector-icons/Ionicons';
 import FastImage from 'react-native-fast-image';
 import { constants } from '../../../../shared/constants';
+import HomeAdmin from '../homeAdmin/HomeAdmin';
+import Router from '../../../../navigation/Router';
 const EditDish = ({ navigation }) => {
   const [data, setData] = useState([
     {
@@ -129,7 +131,7 @@ const EditDish = ({ navigation }) => {
             <FlatList
               data={data}
               renderItem={({ item }) => (
-                <ItemEditEat item={item} navigation={navigation} pressHandler={pressHandler} />
+                <ItemEditEat item={item} navigation={navigation}  />
               )}
             />
           </View>

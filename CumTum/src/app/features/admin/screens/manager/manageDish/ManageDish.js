@@ -4,7 +4,6 @@ import SafeKeyComponent from '../../../../../components/safe_area/SafeKeyCompone
 import styleManager from './StyleManageDish'
 import AddDish from '../../addDish/AddDish'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import EditCategory from '../ManagerCategories/editCategory/EditCategory'
 import { useNavigation } from '@react-navigation/native';
 import FastImage from 'react-native-fast-image';
 import IconOcticons from 'react-native-vector-icons/Octicons';
@@ -24,7 +23,6 @@ const ManageDish = () => {
               <Text style={styleManager.textTitle}>Cum tứm đim</Text>
             </View>
           </View>
-          <View style={styleManager.divideLine}></View>
         </View>
         <View style={styleManager.body}>
           <View style={styleManager.groupBody}>
@@ -39,7 +37,7 @@ const ManageDish = () => {
 
             </TouchableOpacity>
             {/* Quản lý món ăn */}
-            <TouchableOpacity onPress={()=>navigation.navigate('ManagerCategories')}>
+            <TouchableOpacity onPress={()=>navigation.navigate('ManagerFood')}>
               <View style={styleManager.btnAll}>
                 <Image
                   source={require('../../../../../../assets/iconLogo_CumTumDim.jpg')}

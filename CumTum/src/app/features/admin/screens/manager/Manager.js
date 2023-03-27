@@ -11,15 +11,20 @@ import DeleteDish from '../deleteDish/DeleteDish';
 import Manage from './manageDish/ManageDish';
 import ManagerCategories from './ManagerCategories/ManagerCategories';
 import ManagerDish from './manageDish/ManageDish';
-// import ManagerDish from './ManagerDish/ManagerDish';
+import ManagerFood from './manageFood/ManagerFood';
+import EditTypeFood from './ManagerCategories/editTypeFood/EditTypeFood';
+import DeleteTypeFood from './ManagerCategories/deleteTypeFood/DeleteTypeFood';
+import AddTypeFood from './ManagerCategories/addTypeFood/AddTypeFood';
+import UpdateTypeFood from './ManagerCategories/updateTypeFood.js/UpdateTypeFood';
 const Manager = ({ navigation }) => {
   const Stack = createNativeStackNavigator();
 
   return (
     <SafeKeyComponent>
       <Stack.Navigator>
+      <Stack.Group>
+
         {/* Quản lý */}
-        <Stack.Group>
           <Stack.Screen
             name={Router.MANAGE}
             component={Manage}
@@ -27,6 +32,14 @@ const Manager = ({ navigation }) => {
               headerShown: false,
             }}
           />
+            <Stack.Screen
+              name="Router.MANAGER_FOOD"
+              component={ManagerFood}
+              options={{
+                headerShown: false,
+              }}
+            />
+           
           <Stack.Group>
             <Stack.Screen
               name="ManagerCategories"
@@ -49,6 +62,35 @@ const Manager = ({ navigation }) => {
                 headerShown: false,
               }}
             />
+             <Stack.Screen
+              name="AddTypeFood"
+              component={AddTypeFood}
+              options={{
+                headerShown: false,
+              }}
+            />
+              <Stack.Screen
+              name="EditTypeFood"
+              component={EditTypeFood}
+              options={{
+                headerShown: false,
+              }}
+            />
+              <Stack.Screen
+              name="DeleteTypeFood"
+              component={DeleteTypeFood}
+              options={{
+                headerShown: false,
+              }}
+            />
+             <Stack.Screen
+              name="UpdateTypeFood"
+              component={UpdateTypeFood}
+              options={{
+                headerShown: false,
+              }}
+            />
+            
           </Stack.Group>
 
 

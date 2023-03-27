@@ -88,6 +88,7 @@ const StyleEditEat = StyleSheet.create({
         justifyContent:'space-between',
         alignItems:'center',
         width:80,
+        justifyContent:'center',
     },
     itemImg:{
         marginEnd:40,

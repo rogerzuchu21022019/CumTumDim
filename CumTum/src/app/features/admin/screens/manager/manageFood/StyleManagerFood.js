@@ -2,7 +2,7 @@ import { constants } from '../../../../../shared/constants';
 
 const { StyleSheet } = require('react-native');
 
-const StyleManagerCategories = StyleSheet.create({
+const StyleManagerFood = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor:constants.COLOR.BLACK,
@@ -13,7 +13,7 @@ const StyleManagerCategories = StyleSheet.create({
       justifyContent: 'center',
       backgroundColor: constants.COLOR.PRIMARY,
       alignItems: 'center',
-      marginBottom:2
+      marginBottom:2,
     },
     imageLogo: {
       width: 40,
@@ -23,14 +23,15 @@ const StyleManagerCategories = StyleSheet.create({
       flex: 1,
       flexDirection: 'row',
       alignItems: 'center',
-     
+      // backgroundColor: constants.COLOR.WHITE,
+      // marginLeft: ,
     },
     rightHeader: {
       flex: 1,
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'flex-end',
-     
+      // backgroundColor: constants.COLOR.WHITE,
       marginRight: 20,
     },
     divideLine: {
@@ -55,11 +56,6 @@ const StyleManagerCategories = StyleSheet.create({
       // backgroundColor: constants.COLOR.WHITE,
       alignItems: 'center',
     },
-    line:{
-      width:'100%',
-      backgroundColor: constants.COLOR.BLACK,
-    },
-
     /*Body*/
     body: {
         flex: 12,
@@ -84,4 +80,4 @@ const StyleManagerCategories = StyleSheet.create({
     //  footers
 
 });
-export default StyleManagerCategories;
+export default StyleManagerFood;

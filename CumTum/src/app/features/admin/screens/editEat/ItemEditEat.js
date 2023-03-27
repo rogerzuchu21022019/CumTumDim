@@ -3,13 +3,11 @@ import React from 'react'
 import styles from './StyleEditEat'
 import Router from '../../../../navigation/Router'
 
-const ItemEditEat = ({item,navigation,pressHandler}) => {
+const ItemEditEat = ({item,navigation}) => {
   const goto =()=>{
     navigation.navigate(Router.UPDATE_DISH,{item})
   }
-  const onDelete =()=>{
-    pressHandler(item.id)
-  }
+
   
   return (
     <View style={styles.itemEat}>
@@ -43,15 +41,6 @@ const ItemEditEat = ({item,navigation,pressHandler}) => {
                     source={ item.edit}
                   />
 
-                </View>
-                </TouchableOpacity>
-
-               <TouchableOpacity onPress={onDelete}>
-                <View>
-                  <Image
-                    style={styles.itemImage}
-                    source={item.delete}
-                  />
                 </View>
                 </TouchableOpacity>
               </View>
