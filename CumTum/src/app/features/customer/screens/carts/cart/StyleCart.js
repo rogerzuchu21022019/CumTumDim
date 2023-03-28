@@ -57,12 +57,26 @@ const styles = StyleSheet.create({
     height: '100%',
     // backgroundColor: constants.COLOR.ORANGE,
     marginBottom: 2,
+    overflow: 'hidden',
   },
+
+  divideLine: {
+    height: 2,
+    width: '100%',
+    backgroundColor: constants.COLOR.WHITE,
+    marginTop: 20,
+    marginBottom: 20,
+  },
+
   viewScrollList: {
     flex: 1,
     width: '100%',
-    minHeight: 300 ,
+    minHeight: 500,
     alignItems: 'center',
+    // backgroundColor: constants.COLOR.ORANGE,
+  },
+  scrollView: {
+    flexGrow: 1,
   },
   viewFlashList: {
     flex: 10,
@@ -107,16 +121,10 @@ const styles = StyleSheet.create({
     // backgroundColor: constants.COLOR.AQUA,
     justifyContent: 'flex-end',
     paddingRight: '5%',
-    alignItems: 'flex-end',
+    alignItems: 'center',
     flexDirection: 'row',
   },
-  divideLine: {
-    height: 2,
-    width: '100%',
-    backgroundColor: constants.COLOR.WHITE,
-    marginTop: 20,
-    marginBottom: 20,
-  },
+
   viewTotal: {
     minHeight: 200,
     // backgroundColor: constants.COLOR.YELLOW,
@@ -125,6 +133,7 @@ const styles = StyleSheet.create({
     width: '100%',
     paddingLeft: '5%',
     paddingRight: '5%',
+    // flex: 1,
   },
   viewBoxShowInfoBill: {
     flexDirection: 'row',

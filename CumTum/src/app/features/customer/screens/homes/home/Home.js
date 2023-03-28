@@ -35,7 +35,9 @@ import {
   addDishToWishCartOrUpdate,
   productSelector,
   decreaseDishByID,
+  updateAmount,
 } from '../../../../product/sliceProduct';
+import DropdownPicker from '../../../../../shared/utils/DropdownPicker';
 
 const HomeCustomer = ({navigation}) => {
   const log = LOG.extend('HOME_CUSTOMER.js');
@@ -46,28 +48,38 @@ const HomeCustomer = ({navigation}) => {
   // log.error("🚀 ~ file: Home.js:46 ~ HomeCustomer ~ data:", data)
 
   const [tabs, setTabs] = useState([0, 1, 2, 3]);
-  const [isShowDropdown, setIsShowDropdown] = useState(true);
 
   /* State Dropdown */
+  const [isShowDropdown, setIsShowDropdown] = useState(true);
   const [openSubMainDish, setOpenSubMainDish] = useState(false);
   const [valueSubMainDish, setValueSubMainDish] = useState([]);
   const [listSubMainDish, setListSubMainDish] = useState(mainDishOptionsData);
-
+  const style = styles.dropdownList;
+  const placeholder = 'Chọn loại sườn';
+  /* Fetch API and dispatch action type to store */
   useEffect(() => {
     dispatch(fetchCategories());
     dispatch(fetchDishes());
     setTabs(0);
     return () => {};
-  }, [dispatch, valueSubMainDish]);
+  }, [dispatch]);
 
+  /* Dispatch function */
   const addDish = dish => ({
     type: addDishToWishCartOrUpdate().type,
     payload: dish,
   });
 
+  const updateQuantity = dish => ({
+    type: updateAmount().type,
+    payload: dish,
+  });
+
+  /* Dispatch  */
   const handleAddDish = dish => {
-    console.log('🚀 ~ file: Home.js:61 ~ handleAddDish ~ dish:', dish);
+    // console.log('🚀 ~ file: Home.js:61 ~ handleAddDish ~ dish:', dish);
     dispatch(addDish(dish));
+    dispatch(updateQuantity(dish));
   };
 
   const removeDish = dish => ({
@@ -76,13 +88,10 @@ const HomeCustomer = ({navigation}) => {
   });
 
   const handleRemoveDish = dish => {
-    log.error('🚀 ~ file: Home.js:75 ~ handleRemoveDish ~ dish:', dish);
+    // log.error('🚀 ~ file: Home.js:75 ~ handleRemoveDish ~ dish:', dish);
     dispatch(removeDish(dish));
+    dispatch(updateQuantity(dish));
   };
-
-  /* State Tab view */
-
-  /* custom tab bar icon */
 
   /* show notifications */
   const onDisplayNotification = async () => {
@@ -259,85 +268,31 @@ const HomeCustomer = ({navigation}) => {
                   blurRadius={20}
                 />
                 <View style={styles.boxDropdownList}>
-                  <DropDownPicker
-                    style={styles.dropdownList}
-                    open={openSubMainDish}
-                    value={valueSubMainDish}
-                    items={listSubMainDish}
-                    setOpen={setOpenSubMainDish}
-                    setValue={setValueSubMainDish}
-                    setItems={setListSubMainDish}
-                    // custom color text
-                    placeholder="Chọn loại sườn"
-                    placeholderStyle={{
-                      marginLeft: 10,
-                      color: constants.COLOR.WHITE,
-                    }}
-                    textStyle={{
-                      color: constants.COLOR.WHITE,
-                    }}
-                    //multi
-                    multiple={true}
-                    min={1}
-                    max={1}
-                    // result after choose
-                    mode="BADGE"
-                    showBadgeDot={true}
-                    badgeProps={{
-                      activeOpacity: 0.5,
-                    }}
-                    badgeColors={['red', 'blue', 'orange']}
-                    badgeDotColors={['yellow', 'grey', 'aqua']}
-                    //search
-                    searchable={true}
-                    searchPlaceholder="Tìm kiếm hoặc chọn lựa tên "
-                    searchWithRegionalAccents={true}
-                    searchContainerStyle={{
-                      borderBottomColor: '#dfdfdf',
-                    }}
-                    searchTextInputStyle={{
-                      color: constants.COLOR.WHITE,
-                    }}
-                    searchPlaceholderTextColor={constants.COLOR.WHITE}
-                    customItemLabelStyle={{
-                      fontStyle: 'italic',
-                    }}
-                    // show type of list item
-                    listMode="MODAL"
-                    modalTitle="Select an item"
-                    bottomOffset={100}
-                    dropDownDirection="AUTO"
-                    modalContentContainerStyle={{
-                      backgroundColor: constants.COLOR.PRIMARY,
-                    }}
-                    modalAnimationType="slide"
-                    //icon
-                    TickIconComponent={() => (
-                      <MaterialIcons
-                        name="done"
-                        style={{
-                          marginRight: 4,
-                        }}
-                        color={constants.COLOR.WHITE}
-                        size={20}
-                      />
-                    )}
-                    ArrowDownIconComponent={() => (
-                      <MaterialIcons
-                        name="keyboard-arrow-down"
-                        color={constants.COLOR.WHITE}
-                        size={20}
-                      />
-                    )}
+                  <DropdownPicker
+                    style={style}
+                    openSubMainDish={openSubMainDish}
+                    valueSubMainDish={valueSubMainDish}
+                    listSubMainDish={listSubMainDish}
+                    setOpenSubMainDish={setOpenSubMainDish}
+                    setValueSubMainDish={setValueSubMainDish}
+                    setListSubMainDish={setListSubMainDish}
+                    placeholder={placeholder}
+                    colorIconArrow={constants.COLOR.WHITE}
+                    colorCloseIcon={constants.COLOR.WHITE}
+                    colorPlaceholder={constants.COLOR.WHITE}
                   />
                 </View>
 
                 <FlashList
-                  data={valueSubMainDish[0] === "Sườn mỡ" ? data.mainDishes.filter(
-                    (item) => item.subCategory === "Sườn mỡ"
-                  ) : data.mainDishes.filter(
-                    (item) => item.subCategory === "Sườn"
-                  )}
+                  data={
+                    valueSubMainDish[0] === 'Sườn mỡ'
+                      ? data.mainDishes.filter(
+                          item => item.subCategory === 'Sườn mỡ',
+                        )
+                      : data.mainDishes.filter(
+                          item => item.subCategory === 'Sườn',
+                        )
+                  }
                   renderItem={({item, index}) => (
                     <ItemView
                       item={item}

@@ -8,13 +8,30 @@ import {mainDishOptionsData} from '../../../../../admin/screens/addDish/DataDish
 import {constants} from '../../../../../../shared/constants';
 import styles from './StyleItem';
 import {LOG} from '../../../../../../../../logger.config';
+import {useSelector} from 'react-redux';
+import {productSelector} from '../../../../../product/sliceProduct';
 const log = LOG.extend('ITEM_VIEW.JS');
 const ItemView = props => {
   const {item, index, handleAddDish, handleRemoveDish, tabs, valueSubMainDish} =
     props;
-
+  
   const onDecrease = () => {
-    handleRemoveDish(item);
+    if (tabs.toString() === '0') {
+      if (valueSubMainDish.length != 0) {
+        if (item.amount === 0) {
+          return;
+        }
+        handleRemoveDish(item);
+      } else {
+        Alert.alert('Hãy chọn loại sườn trước nè ! Hihi');
+        return;
+      }
+    } else {
+      if (item.amount === 0) {
+        return;
+      }
+      handleRemoveDish(item);
+    }
   };
 
   const onIncrease = () => {
@@ -25,6 +42,7 @@ const ItemView = props => {
       } else {
         valueSubMainDish.length = 0;
         Alert.alert('Hãy chọn loại sườn trước nè ! Hihi');
+        return;
       }
     } else {
       handleAddDish(item);
