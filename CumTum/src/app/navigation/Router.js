@@ -14,7 +14,7 @@ const Router = {
   DELETE_DISH:"DeleteDish",
   SUPPORT:"Support",
   INCOME:"Income",
-  STATISTI:"thống kê",
+  STATISTIC:"thống kê",
   DELETE_DISH:"DeleteDish",
 
   /* Customer */

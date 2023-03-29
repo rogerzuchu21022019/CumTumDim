@@ -6,29 +6,33 @@ import {constants} from '../constants';
 
 const DropdownPicker = props => {
   const {
-    open,
-    nameValue,
-    listItem,
-    setOpen,
-    setNameValue,
-    setListItem,
+    openSubMainDish,
+    valueSubMainDish,
+    listSubMainDish,
+    setOpenSubMainDish,
+    setValueSubMainDish,
+    setListSubMainDish,
     placeholder,
-    onChangeItem
+    style,
+    colorIconArrow,
+    colorCloseIcon,
+    colorPlaceholder
   } = props;
 
   return (
     <DropDownPicker
-      open={open}
-      value={nameValue}
-      items={listItem}
-      setOpen={setOpen}
-      setValue={setNameValue}
-      setItems={setListItem}
+      style={style}
+      open={openSubMainDish}
+      value={valueSubMainDish}
+      items={listSubMainDish}
+      setOpen={setOpenSubMainDish}
+      setValue={setValueSubMainDish}
+      setItems={setListSubMainDish}
+      // custom color text
       placeholder={placeholder}
-      onChangeValue={onChangeItem}
       placeholderStyle={{
         marginLeft: 10,
-        color: constants.COLOR.BLACK,
+        color: colorPlaceholder,
       }}
       textStyle={{
         color: constants.COLOR.WHITE,
@@ -64,6 +68,7 @@ const DropdownPicker = props => {
       modalTitle="Select an item"
       bottomOffset={100}
       dropDownDirection="AUTO"
+      closeAfterSelecting={true}
       modalContentContainerStyle={{
         backgroundColor: constants.COLOR.PRIMARY,
       }}
@@ -79,11 +84,19 @@ const DropdownPicker = props => {
           size={20}
         />
       )}
-      arrowIconStyle={{
-        width: 15,
-        height: 15,
-        marginRight: 12,
-      }}
+      CloseIconComponent={() => (
+        <MaterialIcons name="done" color={colorCloseIcon} size={20} />
+      )}
+      ArrowDownIconComponent={() => (
+        <MaterialIcons
+          style={{
+            marginRight: 10,
+          }}
+          name="keyboard-arrow-down"
+          color={colorIconArrow}
+          size={20}
+        />
+      )}
     />
   );
 };

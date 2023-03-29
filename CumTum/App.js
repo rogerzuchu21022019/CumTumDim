@@ -37,10 +37,10 @@ import EditProfile from './src/app/features/customer/screens/profiles/editProfil
 import UploadImage from './src/app/features/customer/screens/profiles/uploadImage/UploadImage';
 import AddTypeFood from './src/app/features/admin/screens/manager/ManagerCategories/addTypeFood/AddTypeFood';
 
-import CartNoItem from './src/app/features/customer/screens/carts/cart/cartWithNoItem/CartNoItem';
 let persistor = persistStore(Store);
 import {View, Text, TouchableOpacity} from 'react-native';
 import ManagerFood from './src/app/features/admin/screens/manager/manageFood/ManagerFood';
+import CartNoItem from './src/app/features/customer/screens/carts/cart/cartWithNoItem/CartNoItem';
 
 const App = () => {
   const Stack = createNativeStackNavigator();

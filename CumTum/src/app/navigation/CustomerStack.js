@@ -50,7 +50,6 @@ const CustomerStack = () => {
                 style={{
                   width: 20,
                   height: 20,
-                  // marginBottom:5,
                   tintColor: focused ? constants.COLOR.YELLOW : constants.COLOR.WHITE
                 }}
               />
@@ -78,9 +77,8 @@ const CustomerStack = () => {
                 source={require('../../assets/history.png')}
                 resizeMode='contain'
                 style={{
-                  width: 15,
-                  height: 15,
-                  marginBottom:5,
+                  width: 20,
+                  height: 20,
                   tintColor: focused ? constants.COLOR.YELLOW : constants.COLOR.WHITE
                 }}
               />

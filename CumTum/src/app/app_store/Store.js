@@ -8,6 +8,7 @@ import sliceAuth from '../features/admin/sliceAuth';
 
 import sliceProduct from '../features/product/sliceProduct';
 import {constants} from '../shared/constants';
+import sliceCart from '../features/carts/sliceOrder';
 
 let persistConfig = {
   key: 'root',
@@ -19,6 +20,7 @@ let persistConfig = {
 const rootReducers = combineReducers({
   auth: sliceAuth,
   product: sliceProduct,
+  cart: sliceCart,
 });
 
 const resetRootReducer = (state, action) => {

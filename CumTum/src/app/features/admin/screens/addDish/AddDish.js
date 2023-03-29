@@ -45,6 +45,7 @@ import {
 import {constants} from '../../../../shared/constants';
 import BoxInputCus from '../../../../components/input/BoxInput';
 import Statistic from '../statistic/Statistic';
+import DropdownPicker from '../../../../shared/utils/DropdownPicker';
 
 const AddDish = ({navigation}) => {
   const dispatch = useDispatch();
@@ -111,6 +112,10 @@ const AddDish = ({navigation}) => {
       showAlert();
     }
   };
+
+  const placeholderPrice = 'Chọn giá tiền';
+  const placeholderTypeMeal = 'Chọn loại sườn';
+  const placeholderNameDish = 'Chọn tên món ăn';
 
   const showAlert = () => {
     const optionTitle = 'Choose an option';
@@ -324,73 +329,17 @@ const AddDish = ({navigation}) => {
           <View>
             {isIdMainDish ? (
               <View style={styles.viewDropdown}>
-                <DropDownPicker
-                  open={openSubMainDish}
-                  value={valueSubMainDish}
-                  items={mainDishOptionsData}
-                  setOpen={setOpenSubMainDish}
-                  setValue={setValueSubMainDish}
-                  setItems={setListSubMainDish}
-                  placeholder="Chọn tên món ăn"
-                  placeholderStyle={{
-                    marginLeft: 10,
-                    color: constants.COLOR.BLACK,
-                  }}
-                  textStyle={{
-                    color: constants.COLOR.WHITE,
-                  }}
-                  //multi
-                  multiple={true}
-                  min={1}
-                  max={1}
-                  // result after choose
-                  mode="BADGE"
-                  showBadgeDot={true}
-                  badgeProps={{
-                    activeOpacity: 0.5,
-                  }}
-                  badgeColors={['red', 'blue', 'orange']}
-                  badgeDotColors={['yellow', 'grey', 'aqua']}
-                  //search
-                  searchable={true}
-                  searchPlaceholder="Tìm kiếm hoặc chọn lựa tên "
-                  searchWithRegionalAccents={true}
-                  searchContainerStyle={{
-                    borderBottomColor: '#dfdfdf',
-                  }}
-                  searchTextInputStyle={{
-                    color: constants.COLOR.WHITE,
-                  }}
-                  searchPlaceholderTextColor={constants.COLOR.WHITE}
-                  customItemLabelStyle={{
-                    fontStyle: 'italic',
-                  }}
-                  // show type of list item
-                  listMode="MODAL"
-                  modalTitle="Select an item"
-                  closeAfterSelecting={true}
-                  bottomOffset={100}
-                  dropDownDirection="AUTO"
-                  modalContentContainerStyle={{
-                    backgroundColor: constants.COLOR.PRIMARY,
-                  }}
-                  modalAnimationType="slide"
-                  //icon
-                  TickIconComponent={() => (
-                    <MaterialIcons
-                      name="done"
-                      style={{
-                        marginRight: 4,
-                      }}
-                      color={constants.COLOR.WHITE}
-                      size={20}
-                    />
-                  )}
-                  arrowIconStyle={{
-                    width: 15,
-                    height: 15,
-                    marginRight: 12,
-                  }}
+                <DropdownPicker
+                  openSubMainDish={openSubMainDish}
+                  valueSubMainDish={valueSubMainDish}
+                  listSubMainDish={mainDishOptionsData}
+                  setOpenSubMainDish={setOpenSubMainDish}
+                  setValueSubMainDish={setValueSubMainDish}
+                  setListSubMainDish={setListSubMainDish}
+                  placeholder={placeholderTypeMeal}
+                  colorIconArrow={constants.COLOR.GREY}
+                  colorCloseIcon={constants.COLOR.WHITE}
+                  colorPlaceholder={constants.COLOR.WHITE}
                 />
               </View>
             ) : null}
@@ -398,145 +347,33 @@ const AddDish = ({navigation}) => {
 
           {/* Dropdown tên món */}
           <View style={styles.viewDropdown}>
-            <DropDownPicker
-              open={open}
-              value={nameValue}
-              items={listItem}
-              setOpen={setOpen}
-              setValue={setNameValue}
-              setItems={setListItem}
-              placeholder="Chọn tên món ăn"
-              placeholderStyle={{
-                marginLeft: 10,
-                color: constants.COLOR.BLACK,
-              }}
-              textStyle={{
-                color: constants.COLOR.WHITE,
-              }}
-              //multi
-              multiple={true}
-              min={1}
-              max={1}
-              // result after choose
-              mode="BADGE"
-              showBadgeDot={true}
-              badgeProps={{
-                activeOpacity: 0.5,
-              }}
-              badgeColors={['red', 'blue', 'orange']}
-              badgeDotColors={['yellow', 'grey', 'aqua']}
-              //search
-              searchable={true}
-              searchPlaceholder="Tìm kiếm hoặc chọn lựa tên "
-              searchWithRegionalAccents={true}
-              searchContainerStyle={{
-                borderBottomColor: '#dfdfdf',
-              }}
-              searchTextInputStyle={{
-                color: constants.COLOR.WHITE,
-              }}
-              searchPlaceholderTextColor={constants.COLOR.WHITE}
-              customItemLabelStyle={{
-                fontStyle: 'italic',
-              }}
-              // show type of list item
-              listMode="MODAL"
-              modalTitle="Select an item"
-              closeAfterSelecting={true}
-              bottomOffset={100}
-              dropDownDirection="AUTO"
-              modalContentContainerStyle={{
-                backgroundColor: constants.COLOR.PRIMARY,
-              }}
-              modalAnimationType="slide"
-              //icon
-              TickIconComponent={() => (
-                <MaterialIcons
-                  name="done"
-                  style={{
-                    marginRight: 4,
-                  }}
-                  color={constants.COLOR.WHITE}
-                  size={20}
-                />
-              )}
-              arrowIconStyle={{
-                width: 15,
-                height: 15,
-                marginRight: 12,
-              }}
+            <DropdownPicker
+              openSubMainDish={open}
+              valueSubMainDish={nameValue}
+              listSubMainDish={listItem}
+              setOpenSubMainDish={setOpen}
+              setValueSubMainDish={setNameValue}
+              setListSubMainDish={setListItem}
+              // custom color text
+              placeholder={placeholderNameDish}
+              colorIconArrow={constants.COLOR.GREY}
+              colorCloseIcon={constants.COLOR.WHITE}
             />
           </View>
 
           {/* Dropdown giá */}
           <View style={styles.viewDropdown}>
-            <DropDownPicker
-              open={openPrice}
-              value={namePrice}
-              items={listItemPrice}
-              setOpen={setOpenPrice}
-              setValue={setNamePrice}
-              setItems={setListItemPrice}
-              placeholder="Chọn giá tiền"
-              placeholderStyle={{
-                marginLeft: 10,
-                color: constants.COLOR.BLACK,
-              }}
-              textStyle={{
-                color: constants.COLOR.WHITE,
-              }}
-              //multi
-              multiple={true}
-              min={1}
-              max={1}
-              // result after choose
-              mode="BADGE"
-              showBadgeDot={true}
-              badgeProps={{
-                activeOpacity: 0.5,
-              }}
-              badgeColors={['blue', 'orange', 'red']}
-              badgeDotColors={['grey', 'aqua', 'yellow']}
-              //search
-              searchable={true}
-              searchPlaceholder="Tìm kiếm hoặc chọn lựa tên "
-              searchWithRegionalAccents={true}
-              searchContainerStyle={{
-                borderBottomColor: '#dfdfdf',
-              }}
-              searchTextInputStyle={{
-                color: constants.COLOR.WHITE,
-              }}
-              searchPlaceholderTextColor={constants.COLOR.WHITE}
-              customItemLabelStyle={{
-                fontStyle: 'italic',
-              }}
-              // show type of list item
-              listMode="MODAL"
-              modalTitle="Select an item"
-              closeAfterSelecting={true}
-              bottomOffset={100}
-              dropDownDirection="AUTO"
-              modalContentContainerStyle={{
-                backgroundColor: constants.COLOR.PRIMARY,
-              }}
-              modalAnimationType="slide"
-              //icon
-              TickIconComponent={() => (
-                <MaterialIcons
-                  name="done"
-                  style={{
-                    marginRight: 4,
-                  }}
-                  color={constants.COLOR.WHITE}
-                  size={20}
-                />
-              )}
-              arrowIconStyle={{
-                width: 15,
-                height: 15,
-                marginRight: 12,
-              }}
+            <DropdownPicker
+              openSubMainDish={openPrice}
+              valueSubMainDish={namePrice}
+              listSubMainDish={listItemPrice}
+              setOpenSubMainDish={setOpenPrice}
+              setValueSubMainDish={setNamePrice}
+              setListSubMainDish={setListItemPrice}
+              // custom color text
+              placeholder={placeholderPrice}
+              colorIconArrow={constants.COLOR.GREY}
+              colorCloseIcon={constants.COLOR.WHITE}
             />
           </View>
           <View style={styles.footer}>

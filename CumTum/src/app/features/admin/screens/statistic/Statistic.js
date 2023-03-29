@@ -8,6 +8,7 @@ import {
   Button,
   ScrollView,
   StyleSheet,
+  TouchableNativeFeedback,
 } from 'react-native';
 import React, {useState} from 'react';
 import styles from './StyleStatistic';
@@ -277,23 +278,25 @@ const Statistic = ({navigation}) => {
                 </View>
               </View>
               <View style={styles.strikethrough}></View>
-              <FlashList
-                estimatedItemSize={100}
-                data={filteredProducts}
-                renderItem={({item}) => (
-                  <View style={styles.itemOder}>
-                    <View>
-                      <Text style={styles.itemText}>{item.id}</Text>
-                      <Text style={styles.itemText}>{item.datee}</Text>
-                      <Text style={styles.itemText1}>{item.time}</Text>
+              <TouchableNativeFeedback>
+                <FlashList
+                  estimatedItemSize={100}
+                  data={filteredProducts}
+                  renderItem={({item}) => (
+                    <View style={styles.itemOder}>
+                      <View>
+                        <Text style={styles.itemText}>{item.id}</Text>
+                        <Text style={styles.itemText}>{item.datee}</Text>
+                        <Text style={styles.itemText1}>{item.time}</Text>
+                      </View>
+                      <View style={styles.itemText1}>
+                        <Text style={styles.itemText}>{item.done}</Text>
+                        <Text style={styles.itemText1}>{item.price}</Text>
+                      </View>
                     </View>
-                    <View style={styles.itemText1}>
-                      <Text style={styles.itemText}>{item.done}</Text>
-                      <Text style={styles.itemText1}>{item.price}</Text>
-                    </View>
-                  </View>
-                )}
-              />
+                  )}
+                />
+              </TouchableNativeFeedback>
             </View>
           )}
           {/* bieu do */}

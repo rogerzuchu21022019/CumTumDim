@@ -12,21 +12,21 @@ export const AxiosInstance = () => {
     // baseURL: BaseUrl.Four,
   });
   axios.interceptors.request.use(
-    function (config) {
+    config => {
       return config;
     },
-    function (error) {
+    error => {
       return Promise.reject(error);
     },
   );
 
   // Add a response interceptor
   axios.interceptors.response.use(
-    function (response) {
+    response => {
       // log.info('🚀 ~ file: AxiosInstance.js:32 ~ response:', response);
       return response;
     },
-    function (error) {
+    error => {
       return Promise.reject(error);
     },
   );
