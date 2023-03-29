@@ -3,32 +3,40 @@ import React, {useState, Component} from 'react';
 import SafeKeyComponent from '../../../../../components/safe_area/SafeKeyComponent';
 import {Table, Row, Rows} from 'react-native-table-component';
 import styles from './Styles';
-
+import {useSelector} from 'react-redux';
+import {productSelector} from '../../../../product/sliceProduct';
+import {LOG} from '../../../../../../../logger.config';
+const log = LOG.extend('PAYMENT_ZALO.JS');
 const PaymentZalo = () => {
-     const [tableHead, setTableHead] = useState([
+  const [tableHead, setTableHead] = useState([
     'Mặt hàng',
     'Số lượng',
     'Giá',
     'Thành tiền',
   ]);
- 
-  const [tableData, setTableData] = useState([
-    // name, amount, price
-    ['Sườn bì chả', '3', '35', '105'],
-    ['Sườn chả', '2', '25', '50'],
-    ['Sườn chả', '2', '25', '50'],
-    ['Sườn chả', '2', '25', '50'],
-    ['Sườn chả', '2', '25', '50'],
-    ['Sườn chả', '2', '25', '50'],
-    ['Sườn chả', '2', '25', '50'],
-    ['Sườn chả', '2', '25', '50'],
-    ['Sườn chả', '2', '25', '50'],
-    ['Sườn chả', '2', '25', '50'],
-  ]);
-  const [tableDataFinal, setTableDataFinal] = useState([
-  
-    ['Tổng tiền : 155k'],
-  ]);
+
+  const data = useSelector(productSelector);
+  // log.error("🚀 ~ file: PaymentZalo.js:18 ~ PaymentZalo ~ data:", data)
+  const mainData = data.mainDishCart.map(item => {
+    return [item.name, item.amount, item.price, item.price * item.amount];
+  });
+
+  const extraData = data.extraDishCart.map(item => {
+    return [item.name, item.amount, item.price, item.price * item.amount];
+  });
+
+  const toppingData = data.toppingsCart.map(item => {
+    return [item.name, item.amount, item.price, item.price * item.amount];
+  });
+
+  const anotherData = data.anotherCart.map(item => {
+    return [item.name, item.amount, item.price, item.price * item.amount];
+  });
+  const [tableMainData, setTableMainData] = useState(mainData);
+  const [tableExtraData, setTableExtraData] = useState(extraData);
+  const [tableToppingData, setTableToppingData] = useState(toppingData);
+  const [tableAnotherData, setTableAnotherData] = useState(anotherData);
+  const [tableDataFinal, setTableDataFinal] = useState([['Tổng tiền : 155k']]);
 
   return (
     <SafeKeyComponent>
@@ -36,7 +44,6 @@ const PaymentZalo = () => {
         <View style={styles.header}>
           <View style={styles.viewShowBill}>
             <Text style={styles.textShowBill}>Show Bill</Text>
-
           </View>
         </View>
         <View style={styles.body}>
@@ -75,8 +82,61 @@ const PaymentZalo = () => {
                   style={styles.head}
                   textStyle={styles.text}
                 />
-                <Rows data={tableData} textStyle={styles.textMoney}  style={styles.money}/>
-                <Rows data={tableDataFinal} textStyle={styles.textTotalMoney}  style={styles.totalMoney}/>
+                {mainData ? (
+                  <Row
+                    data={Array.of('Món chính')}
+                    style={styles.head}
+                    textStyle={styles.text}
+                  />
+                ) : null}
+                <Rows
+                  data={tableMainData}
+                  textStyle={styles.textMoney}
+                  style={styles.money}
+                />
+                {extraData ? (
+                  <Row
+                    data={Array.of('Món ăn thêm')}
+                    style={styles.head}
+                    textStyle={styles.text}
+                  />
+                ) : null}
+                <Rows
+                  data={tableExtraData}
+                  textStyle={styles.textMoney}
+                  style={styles.money}
+                />
+
+                {toppingData ? (
+                  <Row
+                    data={Array.of('Toppings')}
+                    style={styles.head}
+                    textStyle={styles.text}
+                  />
+                ) : null}
+                <Rows
+                  data={tableToppingData}
+                  textStyle={styles.textMoney}
+                  style={styles.money}
+                />
+
+                {anotherData ? (
+                  <Row
+                    data={Array.of('Món khác')}
+                    style={styles.head}
+                    textStyle={styles.text}
+                  />
+                ) : null}
+                <Rows
+                  data={tableAnotherData}
+                  textStyle={styles.textMoney}
+                  style={styles.money}
+                />
+                <Rows
+                  data={tableDataFinal}
+                  textStyle={styles.textTotalMoney}
+                  style={styles.totalMoney}
+                />
               </Table>
             </View>
           </View>

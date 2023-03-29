@@ -46,10 +46,15 @@ const App = () => {
   const Stack = createNativeStackNavigator();
 
   useEffect(() => {
-    if (Platform.OS === 'android') {
-      requestUserPermission();
-    }
+    requestPermissionNoti();
+    // if (Platform.OS === 'android') {
+    //   requestUserPermission();
+    // }
   }, []);
+
+  const requestPermissionNoti = async () => {
+    await notifee.requestPermission();
+  };
 
   useEffect(() => {
     return notifee.onForegroundEvent(({type, detail}) => {

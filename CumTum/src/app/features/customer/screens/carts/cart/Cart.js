@@ -37,8 +37,11 @@ const log = LOG.extend('CART.JS');
 const Cart = ({navigation}) => {
   const data = useSelector(productSelector);
   const auth = useSelector(authSelector);
+  
+  
   // log.info("🚀 ~ file: Cart.js:38 ~ Cart ~ auth:", auth.user)
   const userId = auth.user._id;
+  
 
   // log.error('🚀 ~ file: Cart.js:10 ~ Cart ~ data:', data);
   const onReset = () => {
@@ -86,12 +89,12 @@ const Cart = ({navigation}) => {
           amounts: item.amount,
           price: item.price,
         })),
-        amountMainDish: solveAmountMainDish(),
-        amountExtraDish: solveAmountExtraDish(),
-        amountToppings: solveAmountToppings(),
-        amountAnotherDish: solveAmountAnotherDish(),
+        totalMainDish: solveAmountMainDish(),
+        totalExtraDish: solveAmountExtraDish(),
+        totalTopping: solveAmountToppings(),
+        totalAnother: solveAmountAnotherDish(),
         moneyToPaid: solveMoneyToPaid(),
-        amountDish: solveAmountDishes(),
+        totalAmount: solveAmountDishes(),
         userId: userId,
       };
       // console.log('🚀 ~ file: Cart.js:48 ~ onBuy ~ item:', order);

@@ -75,13 +75,13 @@ const OrderSchema = new mongoose.Schema(
     ],
     paymentStatus: {
       type: String,
-      enum: ["pending", "paid", "failed"],
-      required: true,
+      enum: ["Đang chờ", "Đã thanh toán", "Chưa thanh toán"],
+      default: "Đang chờ",
     },
     orderStatus: {
       type: String,
-      enum: ["accepted", "denied", "pending"],
-      default: "pending",
+      enum: ["Chấp nhận", "Từ chối", "Đang chờ"],
+      default: "Đang chờ",
     },
     totalMainDish: {
       type: Number,

@@ -45,7 +45,7 @@ const GoogleSignIn = ({navigation}) => {
 
 
       const {idToken} = await GoogleSignin.signIn();
-      log.info('🚀 ~ file: GoogleSignIn.js:34 ~ signIn ~ idToken:', idToken);
+      // log.info('🚀 ~ file: GoogleSignIn.js:34 ~ signIn ~ idToken:', idToken);
 
       const {accessToken} = await GoogleSignin.getTokens();
       dispatch(fetchLogin(idToken, accessToken));

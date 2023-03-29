@@ -1,19 +1,32 @@
 import {Text, View, Image, ScrollView, FlatList} from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import styles from './StylesHome';
 import SafeKeyComponent from '../../../../components/safe_area/SafeKeyComponent';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import DATA from './Data';
-import ItemView from './ItemView';
+import ItemView from './item/ItemView';
 import {FlashList} from '@shopify/flash-list';
 import {constants} from '../../../../shared/constants';
 import FastImage from 'react-native-fast-image';
 import IconOcticons from 'react-native-vector-icons/Octicons';
+import {useDispatch, useSelector} from 'react-redux';
+import {cartSelector} from '../../../carts/sliceOrder';
+import {LOG} from '../../../../../../logger.config';
+import {fetchFindNotifications, fetchOrders} from '../../../carts/apiOrder';
+const log = LOG.extend(`HOME_ADMIN.JS`);
 const HomeAdmin = ({navigation}) => {
+  const dispatch = useDispatch();
+  const data = useSelector(cartSelector);
+  log.info('🚀 ~ file: HomeAdmin.js:19 ~ HomeAdmin ~ data:', data);
+
+  useEffect(() => {
+    dispatch(fetchOrders());
+    dispatch(fetchFindNotifications());
+  }, [dispatch]);
+
   return (
     <SafeKeyComponent>
       <View style={styles.container}>
-      <View style={styles.header}>
+        <View style={styles.header}>
           <View style={styles.mainHeader}>
             <View style={styles.leftHeader}>
               <FastImage
@@ -34,20 +47,21 @@ const HomeAdmin = ({navigation}) => {
         <View style={styles.divideLine}></View>
         <View style={styles.body}>
           <View style={styles.viewFlashList}>
-            {/* <FlashList
-              data={DATA}
+            <FlashList
+              data={data.orders}
               estimatedItemSize={200}
-              getItemType={(item, index) => {
-                return item.category;
-              }}
-              renderItem={({item}) => {
-                if (item.category === 'Món thêm') {
-                  return <ItemView item={item} navigation={navigation} />;
-                }
-                return null;
+              showsHorizontalScrollIndicator={false}
+              showsVerticalScrollIndicator={false}
+              // getItemType={(item, index) => {
+              //   return item.category;
+              // }}
+              renderItem={({item, index}) => {
+                return (
+                  <ItemView item={item} index={index} navigation={navigation} />
+                );
               }}
               keyExtractor={(item, index) => index.toString()}
-            /> */}
+            />
           </View>
         </View>
       </View>
