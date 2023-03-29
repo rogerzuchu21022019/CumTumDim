@@ -23,6 +23,7 @@ import {
 } from '../../../../product/sliceProduct';
 import {FlashList} from '@shopify/flash-list';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
+import IconMaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import CartNoItem from './cartWithNoItem/CartNoItem';
 import ItemView from './item/ItemView';
@@ -95,7 +96,7 @@ const Cart = ({navigation}) => {
       };
       // console.log('🚀 ~ file: Cart.js:48 ~ onBuy ~ item:', order);
       handleCreateHistoryCart(order);
-      // navigation.navigate(Router.PAYMENT, {order});
+      navigation.navigate(Router.PAYMENT_ZALO, {order});
     } else {
       Alert.alert('Bạn phải có ít nhất 1 món chính trong bill! ');
     }
@@ -288,10 +289,10 @@ const Cart = ({navigation}) => {
                 <TouchableOpacity onPress={onReset}>
                   <View style={styles.viewButton}>
                     <Text style={styles.textButton}>Reset</Text>
-                    <IconAntDesign
+                    <IconMaterialCommunityIcons
                       name="delete"
-                      color={constants.COLOR.WHITE}
-                      size={20}
+                      color={constants.COLOR.BLACK}
+                      size={30}
                     />
                   </View>
                 </TouchableOpacity>
@@ -334,20 +335,27 @@ const Cart = ({navigation}) => {
 
                       <View style={styles.viewTextTotalMoney}>
                         <TouchableOpacity onPress={handleResetMainDishes}>
-                          <View>
-                            <IconAntDesign
+                          <View style={styles.itemDelete}>
+                            <IconMaterialCommunityIcons
                               name="delete"
                               color={constants.COLOR.RED}
-                              size={20}
+                              size={30}
                             />
                           </View>
                         </TouchableOpacity>
+                        <View style={styles.itemDelete}>
+                          <Text style={[styles.textInfo, styles.updateMoney]}>
+                            Tổng tiền:
+                          </Text>
+
+                        </View>
+                        <View style={styles.itemPriceFood}>
+
                         <Text style={[styles.textInfo, styles.updateMoney]}>
-                          Tổng tiền:
+                          {moneyPaidForMainDish()} K
                         </Text>
-                        <Text style={[styles.textInfo, styles.updateMoney]}>
-                          {moneyPaidForMainDish()}
-                        </Text>
+                        </View>
+
                       </View>
                       <View style={styles.viewTextHeader}>
                         <View style={styles.divideLine}></View>
@@ -377,20 +385,27 @@ const Cart = ({navigation}) => {
                       />
                       <View style={styles.viewTextTotalMoney}>
                         <TouchableOpacity onPress={handleResetExtraDishes}>
-                          <View>
-                            <IconAntDesign
+                          <View style={styles.itemDelete}>
+                            <IconMaterialCommunityIcons
                               name="delete"
                               color={constants.COLOR.RED}
-                              size={20}
+                              size={30}
                             />
                           </View>
                         </TouchableOpacity>
+                        <View style={styles.itemDelete}>
+
                         <Text style={[styles.textInfo, styles.updateMoney]}>
                           Tổng tiền:
                         </Text>
+                        </View>
+                        <View style={styles.itemPriceFood}>
+
                         <Text style={[styles.textInfo, styles.updateMoney]}>
-                          {moneyPaidForExtraDish()}
+                          {moneyPaidForExtraDish()} K
                         </Text>
+                        </View>
+
                       </View>
                       <View style={styles.viewTextHeader}>
                         <View style={styles.divideLine}></View>
@@ -421,21 +436,30 @@ const Cart = ({navigation}) => {
                       />
 
                       <View style={styles.viewTextTotalMoney}>
-                        <TouchableOpacity onPress={handleResetToppings}>
-                          <View>
-                            <IconAntDesign
+                      <TouchableOpacity onPress={handleResetToppings}>
+                          <View style={styles.itemDelete}>
+                            <IconMaterialCommunityIcons
                               name="delete"
                               color={constants.COLOR.RED}
-                              size={20}
+                              size={30}
                             />
                           </View>
                         </TouchableOpacity>
+                        
+                        <View style={styles.itemDelete}>
+
                         <Text style={[styles.textInfo, styles.updateMoney]}>
                           Tổng tiền:
                         </Text>
+                        </View>
+                        <View style={styles.itemPriceFood}>
+
                         <Text style={[styles.textInfo, styles.updateMoney]}>
-                          {moneyPaidForToppings()}
+                          {moneyPaidForToppings()} K
                         </Text>
+                        </View>
+                       
+
                       </View>
                       <View style={styles.viewTextHeader}>
                         <View style={styles.divideLine}></View>
@@ -466,20 +490,26 @@ const Cart = ({navigation}) => {
                       />
                       <View style={styles.viewTextTotalMoney}>
                         <TouchableOpacity onPress={handleResetAnother}>
-                          <View>
-                            <IconAntDesign
+                          <View style={styles.itemDelete}>
+                            <IconMaterialCommunityIcons
                               name="delete"
                               color={constants.COLOR.RED}
-                              size={20}
+                              size={30}
                             />
                           </View>
                         </TouchableOpacity>
-                        <Text style={[styles.textInfo, styles.updateMoney]}>
-                          Tổng tiền:
-                        </Text>
-                        <Text style={[styles.textInfo, styles.updateMoney]}>
-                          {moneyPaidForAnother()}
-                        </Text>
+                        <View style={styles.itemDelete}>
+                          <Text style={[styles.textInfo, styles.updateMoney]}>
+                            Tổng tiền:
+                          </Text>
+
+                        </View>
+                        <View style={styles.itemPriceFood}>
+                          <Text style={[styles.textInfo, styles.updateMoney]}>
+                            {moneyPaidForAnother()} K
+                          </Text>
+                        </View>
+                       
                       </View>
                       <View style={styles.viewTextHeader}>
                         <View style={styles.divideLine}></View>
@@ -490,7 +520,7 @@ const Cart = ({navigation}) => {
                     <View style={styles.viewBoxShowInfoBill}>
                       <Text style={styles.textInfo}>Số lượng món chính:</Text>
                       <Text style={styles.textInfo}>
-                        {solveAmountMainDish()}
+                        {solveAmountMainDish()} 
                       </Text>
                     </View>
 
@@ -503,7 +533,7 @@ const Cart = ({navigation}) => {
                         + Số lượng Suờn mỡ:
                       </Text>
                       <Text style={[styles.textInfo, styles.updateSubText]}>
-                        {solveAmountSuonMo()}
+                        {solveAmountSuonMo()} 
                       </Text>
                     </View>
 
@@ -551,7 +581,7 @@ const Cart = ({navigation}) => {
                         Tổng Tiền:
                       </Text>
                       <Text style={[styles.textInfo, styles.updateTextInfo]}>
-                        {solveMoneyToPaid()}
+                        {solveMoneyToPaid()} K
                       </Text>
                     </View>
                   </View>

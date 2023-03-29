@@ -12,7 +12,8 @@ const Styles = StyleSheet.create({
     // header
     header:{
         flex: 1,
-        backgroundColor:constants.COLOR.RED,
+        backgroundColor:constants.COLOR.PRIMARY,
+        justifyContent:"center"
     },
     viewShowBill:{
         alignItems: 'center',
@@ -21,6 +22,7 @@ const Styles = StyleSheet.create({
     textShowBill:{
         fontSize:20,
         color:constants.COLOR.WHITE,
+        fontWeight:'bold'
     },
    // body
     body:{
@@ -82,7 +84,7 @@ const Styles = StyleSheet.create({
     totalMoney:{
         height:35,
     },
-    
+   
 })
 
 export default Styles

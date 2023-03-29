@@ -41,8 +41,9 @@ const styles = StyleSheet.create({
   },
 
   textHeader: {
-    color: constants.COLOR.WHITE,
-    fontSize: 20,
+    color:constants.COLOR.WHITE,
+    fontSize:16,
+    fontWeight:'bold',
   },
   boxTextHeader: {
     flex: 1,
@@ -117,12 +118,12 @@ const styles = StyleSheet.create({
     paddingRight: '5%',
   },
   viewTextTotalMoney: {
-    paddingTop: '5%',
     // backgroundColor: constants.COLOR.AQUA,
     justifyContent: 'flex-end',
-    paddingRight: '5%',
     alignItems: 'center',
     flexDirection: 'row',
+    marginEnd:20
+
   },
 
   viewTotal: {
@@ -147,7 +148,7 @@ const styles = StyleSheet.create({
   },
   textInfo: {
     color: constants.COLOR.WHITE,
-    fontSize: 20,
+    fontSize: 16,
     lineHeight: 30,
   },
   updateSubText: {
@@ -159,6 +160,16 @@ const styles = StyleSheet.create({
   updateTextInfo: {
     fontSize: 24,
   },
+  itemDelete:{
+    marginEnd:10,
+    alignItems: 'center',
+  },
+  itemPriceFood:{
+    width:50,
+    flexDirection:'row',
+    justifyContent: "flex-end",
+},
+
   /* Body */
   footer: {
     // flex: 2,
