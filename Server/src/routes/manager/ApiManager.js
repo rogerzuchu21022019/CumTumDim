@@ -45,7 +45,9 @@ const ManagerRouter = (app, fixPublic) => {
   app.use(SUB_PRODUCTS, ApiProducts.addDish, fixPublic);
   app.use(SUB_PRODUCTS, ApiProducts.findDishes, fixPublic);
   app.use(SUB_PRODUCTS, ApiProducts.createOrder, fixPublic);
-  app.use(SUB_PRODUCTS, ApiProducts.pushNotify, fixPublic);
+  app.use(SUB_PRODUCTS, ApiProducts.findOrders, fixPublic);
+  app.use(SUB_PRODUCTS, ApiProducts.pushNotification, fixPublic);
+  app.use(SUB_PRODUCTS, ApiProducts.findNotifications, fixPublic);
   //   app.use(SUB_PRODUCTS, ApiProduct.chartRouter, fixPublic);
   //   app.use(SUB_PRODUCTS, ApiProduct.dataTableRouter, fixPublic);
 };
