@@ -29,14 +29,28 @@ import ItemView from './item/ItemView';
 import {LOG} from '../../../../../../../logger.config';
 import {constants} from '../../../../../shared/constants';
 import Router from '../../../../../navigation/Router';
+import {authSelector} from '../../../../admin/sliceAuth';
+import {createHistoryCart} from '../../../../carts/sliceOrder';
 
 const log = LOG.extend('CART.JS');
 const Cart = ({navigation}) => {
   const data = useSelector(productSelector);
+  const auth = useSelector(authSelector);
+  // log.info("🚀 ~ file: Cart.js:38 ~ Cart ~ auth:", auth.user)
+  const userId = auth.user._id;
 
   // log.error('🚀 ~ file: Cart.js:10 ~ Cart ~ data:', data);
   const onReset = () => {
     handleResetCart();
+  };
+
+  const onCreateHistoryCart = order => ({
+    type: createHistoryCart().type,
+    payload: order,
+  });
+
+  const handleCreateHistoryCart = order => {
+    dispatch(onCreateHistoryCart(order));
   };
 
   const onBuy = () => {
@@ -77,9 +91,11 @@ const Cart = ({navigation}) => {
         amountAnotherDish: solveAmountAnotherDish(),
         moneyToPaid: solveMoneyToPaid(),
         amountDish: solveAmountDishes(),
+        userId: userId,
       };
-      console.log('🚀 ~ file: Cart.js:48 ~ onBuy ~ item:', order);
-      navigation.navigate(Router.PAYMENT, {order});
+      // console.log('🚀 ~ file: Cart.js:48 ~ onBuy ~ item:', order);
+      handleCreateHistoryCart(order);
+      // navigation.navigate(Router.PAYMENT, {order});
     } else {
       Alert.alert('Bạn phải có ít nhất 1 món chính trong bill! ');
     }
@@ -251,16 +267,6 @@ const Cart = ({navigation}) => {
     total += moneyPaidForToppings();
     total += moneyPaidForAnother();
     return total;
-  };
-
-  const scrollViewRef = useRef(null);
-
-  const renderHeader = () => {
-    return (
-      <Text style={{fontSize: 20, fontWeight: 'bold', marginBottom: 10}}>
-        My List Data
-      </Text>
-    );
   };
 
   return (

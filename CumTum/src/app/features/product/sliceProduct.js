@@ -158,7 +158,7 @@ export const sliceProduct = createSlice({
           itemToppingsCart.amount -= 1;
         }
         if (itemToppingsCart.amount === 0) {
-          console.log('🚀 ~ file: sliceProduct.js:161 ~ itemToppingsCart:');
+          // console.log('🚀 ~ file: sliceProduct.js:161 ~ itemToppingsCart:');
 
           state.toppingsCart = state.toppingsCart.filter(item => {
             return item._id !== _id;
@@ -183,10 +183,10 @@ export const sliceProduct = createSlice({
     },
     updateAmount: (state, action) => {
       const data = action.payload;
-      log.error(
-        '🚀 ~ file: sliceProduct.js:184 ~ data get when before update:',
-        data,
-      );
+      // log.error(
+      //   '🚀 ~ file: sliceProduct.js:184 ~ data get when before update:',
+      //   data,
+      // );
       const {_id, amount} = data;
       // handle mainDish and index
       const indexOfMainDishInArray = state.mainDishes.findIndex(

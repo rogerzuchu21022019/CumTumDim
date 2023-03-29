@@ -1,19 +1,15 @@
-import {constants} from '../../../../../shared/constants';
+import {StyleSheet} from 'react-native';
+import {constants} from '../../../../shared/constants';
 
-const {StyleSheet} = require('react-native');
-
-const StyleManagerFood = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: constants.COLOR.BLACK,
+    flex: 10,
   },
-  /*Header*/
   header: {
     flex: 1,
     justifyContent: 'center',
     backgroundColor: constants.COLOR.PRIMARY,
     alignItems: 'center',
-    marginBottom: 2,
   },
   imageLogo: {
     width: 40,
@@ -24,7 +20,7 @@ const StyleManagerFood = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     // backgroundColor: constants.COLOR.WHITE,
-    // marginLeft: ,
+    marginLeft: 20,
   },
   rightHeader: {
     flex: 1,
@@ -56,26 +52,38 @@ const StyleManagerFood = StyleSheet.create({
     // backgroundColor: constants.COLOR.WHITE,
     alignItems: 'center',
   },
-  /*Body*/
+  //header
+
+  //body
   body: {
     flex: 12,
-    backgroundColor: constants.COLOR.GREY,
-  },
-  groupBody: {
-    marginLeft: 24,
-  },
-  textAll: {
-    fontWeight: '700',
-    fontSize: 17,
-    lineHeight: 22,
-    color: constants.COLOR.WHITE,
-    marginStart: 10,
-  },
-  btnAll: {
+    backgroundColor: '#252121',
     flexDirection: 'row',
+    justifyContent: 'space-evenly',
     alignItems: 'center',
-    marginTop: 30,
   },
-  //  footers
+  itemSupport: {
+    marginBottom: 40,
+    flex: 1,
+    backgroundColor: '#252121',
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+  },
+  itemSupport1: {
+    gap: 55,
+    flexDirection: 'column',
+  },
+  itemSupport2: {
+    gap: 80,
+    flexDirection: 'column',
+  },
+  itemText: {
+    color: 'white',
+    fontSize: 20,
+    fontWeight: '700',
+  },
+  //body
 });
-export default StyleManagerFood;
+
+export default styles;
