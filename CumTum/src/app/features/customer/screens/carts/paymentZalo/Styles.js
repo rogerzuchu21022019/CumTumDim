@@ -12,7 +12,7 @@ const Styles = StyleSheet.create({
     // header
     header:{
         flex: 1,
-        backfaceVisibility:constants.COLOR.GREY,
+        backgroundColor:constants.COLOR.RED,
     },
     viewShowBill:{
         alignItems: 'center',
@@ -31,7 +31,9 @@ const Styles = StyleSheet.create({
     head: {
         height:34
     },
-    text: { margin: 6 },
+    text: {
+         margin: 6 
+        },
     table:{
         borderWidth:2,
         
