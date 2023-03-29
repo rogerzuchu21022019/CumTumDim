@@ -52,6 +52,7 @@ const styles = StyleSheet.create({
 
   textName: {
     color: constants.COLOR.WHITE,
+    fontSize:16,
   },
   updateColor: {
     color: constants.COLOR.ORANGE,

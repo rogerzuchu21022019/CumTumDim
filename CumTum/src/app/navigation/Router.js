@@ -31,6 +31,7 @@ const Router = {
   CART_CAN_DENY:"CartCanDeny",
   PAYMENT:"Payment",
   PAYMENT_PAID:"PaymentPaid",
+  PAYMENT_ZALO:"PaymentZalo",
 
   HISTORY_TABS:'Histories',
   HISTORY_WITH_NO_ORDER:"HistoryOrderWithNoOder",

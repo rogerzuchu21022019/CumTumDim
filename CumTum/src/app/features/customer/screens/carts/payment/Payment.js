@@ -28,7 +28,7 @@ const Payment = ({navigation, route}) => {
     }
     if (checkedId === 3) {
       console.log('Zalo Pay', checkedId);
-      navigation.navigate(Router.PAYMENT_PAID, {order});
+      navigation.navigate(Router.PAYMENT_ZALO, {order});
     }
   };
   return (
