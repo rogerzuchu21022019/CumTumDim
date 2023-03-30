@@ -88,6 +88,8 @@ const CustomerStack = () => {
                   fontWeight: '400',
                   color: focused ? constants.COLOR.YELLOW : constants.COLOR.WHITE
                 }}
+
+                
               >Lịchs sử</Text>
             </View>
           )
