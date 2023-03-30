@@ -12,7 +12,8 @@ import {
 
 import {useDispatch, useSelector} from 'react-redux';
 
-import {useEffect, useState} from 'react';
+import {useCallback, useEffect, useState} from 'react';
+import notifee from '@notifee/react-native';
 
 import {LOG} from '../../../../../../../logger.config';
 import SafeKeyComponent from '../../../../../components/safe_area/SafeKeyComponent';
@@ -23,7 +24,6 @@ import styles from './StyleHome';
 import FastImage from 'react-native-fast-image';
 import IconOcticons from 'react-native-vector-icons/Octicons';
 import {constants} from '../../../../../shared/constants';
-import notifee from '@notifee/react-native';
 
 import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
 import {FlashList} from '@shopify/flash-list';
@@ -38,14 +38,15 @@ import {
   updateAmount,
 } from '../../../../product/sliceProduct';
 import DropdownPicker from '../../../../../shared/utils/DropdownPicker';
+import {cartSelector} from '../../../../carts/sliceOrder';
 
 const HomeCustomer = ({navigation}) => {
   const log = LOG.extend('HOME_CUSTOMER.js');
   const dispatch = useDispatch();
+  const cartSelect = useSelector(cartSelector);
   const IMAGE_BG =
     'https://cdn.britannica.com/38/111338-050-D23BE7C8/Stars-NGC-290-Hubble-Space-Telescope.jpg?w=400&h=300&c=crop';
   const data = useSelector(productSelector);
-  // log.error("🚀 ~ file: Home.js:46 ~ HomeCustomer ~ data:", data)
 
   const [tabs, setTabs] = useState([0, 1, 2, 3]);
 
@@ -57,9 +58,32 @@ const HomeCustomer = ({navigation}) => {
   const style = styles.dropdownList;
   const placeholder = 'Chọn loại sườn';
   /* Fetch API and dispatch action type to store */
+
+  const onDisplayNotification = async () => {
+    // Request permissions (required for iOS)
+    
+
+    // Create a channel (required for Android)
+    const channelId = await notifee.createChannel({
+      id: 'default',
+      name: 'Default Channel',
+    });
+    const title = 'Notification';
+    const content = 'Chào mừng bạn đến với dịch vụ của CumTumDim.';
+    // console.log("🚀 ~ file: Payment.js:45 ~ onDisplayNotification ~ content:", content)
+    const dataMap = {
+      title,
+      content,
+      channelId,
+    };
+    // Display a notification
+    showNotifyLocal(dataMap);
+  };
+
   useEffect(() => {
     dispatch(fetchCategories());
     dispatch(fetchDishes());
+    onDisplayNotification();
     setTabs(0);
     return () => {};
   }, [dispatch]);
@@ -93,26 +117,7 @@ const HomeCustomer = ({navigation}) => {
     dispatch(updateQuantity(dish));
   };
 
-  /* show notifications */
-  const onDisplayNotification = async () => {
-    // Request permissions (required for iOS)
-    await notifee.requestPermission();
-
-    // Create a channel (required for Android)
-    const channelId = await notifee.createChannel({
-      id: 'default',
-      name: 'Default Channel',
-    });
-    const title = data.message;
-    const content = 'show notifies content';
-    const dataMap = {
-      title,
-      content,
-      channelId,
-    };
-    // Display a notification
-    showNotifyLocal(dataMap);
-  };
+  // i want to use useCallback to call onDisplayNotification
 
   const imageUrlOptions = {
     uri: '',

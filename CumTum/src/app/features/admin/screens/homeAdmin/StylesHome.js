@@ -1,9 +1,10 @@
 import {StyleSheet} from 'react-native';
 import {constants} from '../../../../shared/constants';
 
-const StylesHome = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 10,
+    // backgroundColor: constants.COLOR.PRIMARY,
   },
   /* Header */
   header: {
@@ -50,30 +51,19 @@ const StylesHome = StyleSheet.create({
   //body
   body: {
     flex: 12,
-    backgroundColor: constants.COLOR.GREY,
-    alignItems: 'center',
+    backgroundColor: constants.COLOR.BLACK,
+    marginTop: 2,
+    // width:'100%'
   },
   groupItem: {},
   viewFlashList: {
     flex: 1,
-    // backgroundColor: 'green',
-    width: '100%',
-  },
-  itemOder: {
-    flexDirection: 'row',
-    backgroundColor: '#2F2D2D',
-    width: 350,
-    height: 40,
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    borderRadius: 5,
+    // backgroundColor: constants.COLOR.GREEN,
+    paddingLeft: 20,
+    paddingRight: 20,
     marginTop: 10,
-  },
-  itemText: {
-    color: 'white',
-    fontSize: 15,
   },
 
   //body
 });
-export default StylesHome;
+export default styles;

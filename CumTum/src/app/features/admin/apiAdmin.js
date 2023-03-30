@@ -17,6 +17,15 @@ export const fetchLogin = createAsyncThunk(
   },
 );
 
+export const fetchUserById = createAsyncThunk(
+  constants.FETCH.USER_BY_ID,
+  async userId => {
+    const response = await AxiosInstance().get(`/${userId}/user-info`);
+    // log.info("🚀 ~ file: apiAdmin.js:8 ~ fetchLogin ~ response:", response.data)
+    return response.data;
+  },
+);
+
 export const fetchSignOut = createAsyncThunk(
   constants.FETCH.SIGN_OUT,
   async () => {

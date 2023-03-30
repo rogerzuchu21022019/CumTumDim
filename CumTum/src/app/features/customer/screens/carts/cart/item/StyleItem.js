@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     // width: '0%',
     // backgroundColor: constants.COLOR.YELLOW,
-    alignItems: 'flex-start',
+    alignItems: 'center',
   },
   boxIcon: {
     flex: 1,

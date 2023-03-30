@@ -15,16 +15,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent:'space-between',
         marginStart:10,
-        marginTop:15,
+        marginTop:25,
         marginEnd:10,
-    },  groupHeader:{
-        flexDirection:'row',
-        alignItems: 'center',
-        justifyContent:'space-between',
-        marginStart:10,
-        marginTop:15,
-        marginEnd:10,
-    },
+    }, 
     profile:{
 
     },

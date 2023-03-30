@@ -1,18 +1,19 @@
 const express = require(`express`);
-const CreateOrderCon = require("../../../components/oders/controllers/CreateOrderCon");
+const FindUserByIdCon = require("../../../components/users/controllers/FindUserByIdCon");
 
 const route = express.Router();
 
-route.post(`/create-order`, async (req, res) => {
+route.get(`/:userId/user-info`, async (req, res) => {
   try {
-    const { order } = req.body;
-    console.log("🚀 ~ file: CreateOrder.js:9 ~ route.post ~ orderData:", order);
-    const orderData = await CreateOrderCon(order);
+    const { userId } = req.params;
+    console.log("🚀 ~ file: FindUserById.js:8 ~ route.get ~ userId:", userId);
+    const data = await FindUserByIdCon(userId);
+
     return res.status(200).json({
       isLoading: false,
-      message: "Create Order Success",
+      message: "Get User success",
       error: false,
-      data: orderData,
+      data: data,
     });
   } catch (error) {
     console.log(
@@ -21,7 +22,7 @@ route.post(`/create-order`, async (req, res) => {
     );
     return res.status(500).json({
       isLoading: false,
-      message: "Create Order Failed",
+      message: "Get User fail",
       error: true,
       data: {},
     });

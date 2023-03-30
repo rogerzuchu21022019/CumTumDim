@@ -17,6 +17,7 @@ const styles = StyleSheet.create({
   textHeader: {
     color: constants.COLOR.WHITE,
     fontSize: 20,
+    fontWeight:'400'
   },
 
   divideLine: {
@@ -33,8 +34,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   iconCart: {
-    width: 150,
-    height: 150,
+    width: 100,
+    height: 100,
   },
   groupItem: {
     height: '50%',
@@ -44,11 +45,11 @@ const styles = StyleSheet.create({
   },
   textDescription: {
     color: constants.COLOR.RED,
-    fontSize: 20,
-    fontWeight: '700',
+    fontSize: 18,
+    fontWeight: '900',
   },
   btnConfirm: {
-    backgroundColor: constants.COLOR.WHITE,
+    backgroundColor: constants.COLOR.RED,
     height: 50,
     width: 150,
     alignItems: 'center',
@@ -56,8 +57,9 @@ const styles = StyleSheet.create({
     borderRadius: 25,
   },
   textConfirm: {
-    color: 'black',
-    fontSize: 20,
+    fontSize: 18,
+    color:constants.COLOR.WHITE,
+    fontWeight:'500'
   },
 });
 export default styles;

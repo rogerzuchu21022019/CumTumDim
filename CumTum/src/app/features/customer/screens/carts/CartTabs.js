@@ -6,6 +6,7 @@ import SafeKeyComponent from '../../../../components/safe_area/SafeKeyComponent'
 import Cart from './cart/Cart';
 import Payment from './payment/Payment';
 import DetailPaymentCartZalo from '../../../../shared/utils/DetailPaymentZalo';
+import PaymentZalo from './paymentZalo/PaymentZalo';
 
 const CartTabs = () => {
   const Stack = createNativeStackNavigator();
@@ -34,7 +35,15 @@ const CartTabs = () => {
             options={{
               headerShown: false,
             }}
-          />
+          /> 
+          <Stack.Screen
+          name={Router.PAYMENT_ZALO}
+          component={PaymentZalo}
+          options={{
+            headerShown: false,
+          }}
+        />
+
         </Stack.Group>
       </Stack.Navigator>
     </SafeKeyComponent>
