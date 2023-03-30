@@ -5,7 +5,7 @@ const router = express.Router();
 router.get(`/find-orders`, async (req, res) => {
   try {
     const orders = await FindOrdersCon();
-    console.log("🚀 ~ file: FindOrders.js:8 ~ router.get ~ orders:", orders);
+    // console.log("🚀 ~ file: FindOrders.js:8 ~ router.get ~ orders:", orders);
 
     return res.status(200).json({
       isLoading: false,

@@ -10,6 +10,7 @@ const NotificationSchema = new Schema(
     messageToCustomer: {
       type: String,
       required: true,
+      unique: true,
     },
     messageToAdmin: {
       type: String,

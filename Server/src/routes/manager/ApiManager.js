@@ -34,6 +34,7 @@ const ManagerRouter = (app, fixPublic) => {
 
   /* Users */
   app.use(MAIN, ApiUser.login, fixPublic);
+  app.use(MAIN, ApiUser.findUserById, fixPublic);
   app.use(SUB_USERS, ApiUser.createOtp, fixPublic);
   app.use(SUB_USERS, ApiUser.verifyOtp, fixPublic);
   //   app.use(MAIN, ApiUser.logoutRouter, fixPublic);

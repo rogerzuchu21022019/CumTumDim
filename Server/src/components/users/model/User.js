@@ -1,7 +1,6 @@
 // User.js
 const mongoose = require("mongoose");
 
-
 const userSchema = new mongoose.Schema(
   {
     name: {
@@ -32,17 +31,31 @@ const userSchema = new mongoose.Schema(
     accessToken: {
       type: String,
     },
-    fcmToken:{
+    fcmToken: {
       type: String,
     },
-    order:{
+    order: {
       type: [
         {
           type: mongoose.Schema.Types.ObjectId,
           ref: "Order",
         },
-      ]
+      ],
     },
+    notifications: [
+      {
+        title: {
+          type: String,
+        },
+        messageToCustomer: {
+          type: String,
+        },
+        messageToAdmin: {
+          type: String,
+        },
+      },
+    ],
+
     address: {
       street: {
         type: String,
@@ -60,7 +73,6 @@ const userSchema = new mongoose.Schema(
         type: String,
       },
     },
-    
   },
   {
     timestamps: true,

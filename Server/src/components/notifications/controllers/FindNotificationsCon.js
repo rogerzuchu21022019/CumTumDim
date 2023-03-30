@@ -1,8 +1,8 @@
-const FindNotificationSv = require("../services/FindNotificationsSV");
+const FindNotificationsSv = require("../services/FindNotificationsSV");
 
 const FindNotificationsCon = async () => {
   try {
-    const notifications = await FindNotificationSv();
+    const notifications = await FindNotificationsSv();
     return notifications;
   } catch (error) {
     console.log(

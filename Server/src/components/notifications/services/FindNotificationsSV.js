@@ -1,8 +1,12 @@
 const Notification = require("../model/Notification");
 
-const FindNotificationSv = async () => {
+const FindNotificationsSv = async () => {
   try {
     const notifications = await Notification.find({});
+    console.log(
+      "🚀 ~ file: FindNotificationsSV.js:6 ~ FindNotificationSv ~ notifications:",
+      notifications
+    );
     return notifications;
   } catch (error) {
     console.log(
@@ -12,4 +16,4 @@ const FindNotificationSv = async () => {
   }
 };
 
-module.exports = FindNotificationSv;
+module.exports = FindNotificationsSv;
