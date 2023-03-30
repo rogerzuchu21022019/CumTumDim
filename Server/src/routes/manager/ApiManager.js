@@ -34,6 +34,7 @@ const ManagerRouter = (app, fixPublic) => {
 
   /* Users */
   app.use(MAIN, ApiUser.login, fixPublic);
+  app.use(MAIN, ApiUser.findUserById, fixPublic);
   app.use(SUB_USERS, ApiUser.createOtp, fixPublic);
   app.use(SUB_USERS, ApiUser.verifyOtp, fixPublic);
   //   app.use(MAIN, ApiUser.logoutRouter, fixPublic);
@@ -45,7 +46,9 @@ const ManagerRouter = (app, fixPublic) => {
   app.use(SUB_PRODUCTS, ApiProducts.addDish, fixPublic);
   app.use(SUB_PRODUCTS, ApiProducts.findDishes, fixPublic);
   app.use(SUB_PRODUCTS, ApiProducts.createOrder, fixPublic);
-  app.use(SUB_PRODUCTS, ApiProducts.pushNotify, fixPublic);
+  app.use(SUB_PRODUCTS, ApiProducts.findOrders, fixPublic);
+  app.use(SUB_PRODUCTS, ApiProducts.pushNotification, fixPublic);
+  app.use(SUB_PRODUCTS, ApiProducts.findNotifications, fixPublic);
   //   app.use(SUB_PRODUCTS, ApiProduct.chartRouter, fixPublic);
   //   app.use(SUB_PRODUCTS, ApiProduct.dataTableRouter, fixPublic);
 };

@@ -48,8 +48,8 @@ const styles = StyleSheet.create({
 
     },
     imageProfile:{
-        width:80,
-        height:80,
+        width:100,
+        height:100,
     },
     textTitle:{
         color:constants.COLOR.WHITE,
@@ -57,16 +57,18 @@ const styles = StyleSheet.create({
     },
     textInput:{
         marginStart:20,
-        fontSize:18,
+        fontSize:16,
         height:50
     },
     viewTitle:{
-        marginBottom:10,
+        marginBottom:15,
     },
     viewInput:{
         backgroundColor:constants.COLOR.WHITE,
         borderRadius:10,
-    
+        height:40,
+        justifyContent: 'center',
+        
     },
     groupAll:{
         width:350,

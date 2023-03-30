@@ -32,7 +32,7 @@ const StylesDetailCard = StyleSheet.create({
 
     // /*Body*/ 
     body: {
-        flex:7,
+        flex:12,
         backgroundColor: '#252121',
         alignItems:'center',
         

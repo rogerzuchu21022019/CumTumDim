@@ -63,7 +63,7 @@ const LoginScreen = ({navigation}) => {
     try {
       await GoogleSignin.hasPlayServices({showPlayServicesUpdateDialog: true});
       const {idToken} = await GoogleSignin.signIn();
-      log.info('🚀 ~ file: Login.js:38 ~ signIn ~ idToken:', idToken);
+      // log.info('🚀 ~ file: Login.js:38 ~ signIn ~ idToken:', idToken);
 
       const {accessToken} = await GoogleSignin.getTokens();
 

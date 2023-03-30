@@ -1,8 +1,13 @@
 import notifee from '@notifee/react-native';
 
 export const showNotifyLocal = async data => {
-//   notifee
-//     .setBadgeCount(data.countBadge)
+  //   notifee
+  //     .setBadgeCount(data.countBadge)
+
+  const channelId = await notifee.createChannel({
+    id: 'default',
+    name: 'Default Channel',
+  });
   await notifee.displayNotification({
     title: data.title,
     body: data.content,
@@ -15,6 +20,8 @@ export const showNotifyLocal = async data => {
         banner: true,
         list: true,
       },
+
+      sound: 'default',
 
       attachments: [
         //   {
@@ -39,8 +46,8 @@ export const showNotifyLocal = async data => {
     },
 
     android: {
-      channelId: data.channelId,
-      smallIcon: 'name-of-a-small-icon', // optional, defaults to 'ic_launcher'.
+      channelId: channelId,
+      // smallIcon: 'name-of-a-small-icon', // optional, defaults to 'ic_launcher'.
       // pressAction is needed if you want the notification to open the app when pressed
       pressAction: {
         id: 'default',
