@@ -55,6 +55,13 @@ const App = () => {
   const requestPermissionNoti = async () => {
     await notifee.requestPermission();
   };
+  useEffect(() => {
+    return notifee.onBackgroundEvent(async ({type, detail}) => {
+      console.log(`Received background event: ${type}`, detail);
+
+      // Handle the background event here
+    });
+  }, []);
 
   useEffect(() => {
     return notifee.onForegroundEvent(({type, detail}) => {

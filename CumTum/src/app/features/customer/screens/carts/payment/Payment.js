@@ -25,26 +25,15 @@ const Payment = ({navigation, route}) => {
   const moneyToPaid = order.moneyToPaid;
   // console.log('🚀 ~ file: Payment.js:11 ~ Payment ~ order:', order);
 
-  const cartSelect = useSelector(cartSelector);
-  log.warn(
-    '🚀 ~ file: Home.js:46 ~ HomeCustomer ~ cartSelect:',
-    cartSelect.notifications[0],
-  );
-
   const onDisplayNotification = async () => {
-
     // Create a channel (required for Android)
-    const channelId = await notifee.createChannel({
-      id: 'default',
-      name: 'Default Channel',
-    });
     const title = 'Notification';
-    const content = cartSelect.notifications[0]?.messageToCustomer;
+    const content =
+      `Cảm ơn bạn ${name} đã đặt hàng. Đơn hàng của bạn đang được chúng tôi xác nhận.....`;
     // console.log("🚀 ~ file: Payment.js:45 ~ onDisplayNotification ~ content:", content)
     const dataMap = {
       title,
       content,
-      channelId,
     };
     // Display a notification
     showNotifyLocal(dataMap);

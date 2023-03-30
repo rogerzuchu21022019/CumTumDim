@@ -37,7 +37,7 @@ export const constants = {
     SourceSansProSemiBold: 'SourceSansProSemiBold',
   },
   BASE_URL: {
-    MAIN: 'http://192.168.1.205:3000/api',
+    MAIN: 'http://192.168.2.8:3000/api',
     SECOND: 'https://cumtumdim.becofoodstore.click/api',
   },
   ROLE: {
@@ -58,6 +58,7 @@ export const constants = {
   },
   FETCH: {
     LOGIN: 'fetchLogin',
+    USER_BY_ID: 'fetchUserById',
     UPLOAD_IMAGE: 'fetchUploadImage',
     SIGN_OUT: 'fetchSignOut',
     FIND_CATEGORIES: 'fetchCategories',

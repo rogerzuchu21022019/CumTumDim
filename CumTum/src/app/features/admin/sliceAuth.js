@@ -1,6 +1,6 @@
 import Router from '../../navigation/Router';
 import {constants} from '../../shared/constants';
-import {fetchLogin, fetchSignOut} from './apiAdmin';
+import {fetchLogin, fetchSignOut, fetchUserById} from './apiAdmin';
 
 const {createSlice} = require('@reduxjs/toolkit');
 import * as RootNavigation from '../../navigation/RootNavigation';
@@ -35,6 +35,24 @@ export const authSlice = createSlice({
       //   : RootNavigation.replace(Router.CUSTOMER_STACK);
     });
     builder.addCase(fetchLogin.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = true;
+    });
+
+    // User ById
+    builder.addCase(fetchUserById.pending, state => {
+      state.isLoading = true;
+    });
+    builder.addCase(fetchUserById.fulfilled, (state, action) => {
+      const dataResponse = action.payload;
+      state.isLoading = true;
+      state.message = dataResponse.message;
+      state.isLoggedIn = dataResponse.isLoggedIn;
+      state.error = dataResponse.error;
+      state.user = dataResponse.data;
+
+    });
+    builder.addCase(fetchUserById.rejected, (state, action) => {
       state.isLoading = false;
       state.error = true;
     });

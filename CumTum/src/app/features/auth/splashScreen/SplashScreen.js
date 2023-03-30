@@ -9,7 +9,10 @@ const SplashScreen = props => {
     navigation.replace(Router.LOGIN);
   };
   useEffect(() => {
-    setTimeout(nextScreen, 3000);
+    const time = setTimeout(nextScreen, 3000);
+    return () => {
+      clearTimeout(time);
+    }
   }, []);
   return (
     <View style={styleSplashScreen.container}>

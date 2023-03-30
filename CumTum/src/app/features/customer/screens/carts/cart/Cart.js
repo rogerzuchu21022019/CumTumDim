@@ -37,11 +37,9 @@ const log = LOG.extend('CART.JS');
 const Cart = ({navigation}) => {
   const data = useSelector(productSelector);
   const auth = useSelector(authSelector);
-  
-  
+
   // log.info("🚀 ~ file: Cart.js:38 ~ Cart ~ auth:", auth.user)
   const userId = auth.user._id;
-  
 
   // log.error('🚀 ~ file: Cart.js:10 ~ Cart ~ data:', data);
   const onReset = () => {
@@ -98,8 +96,8 @@ const Cart = ({navigation}) => {
         userId: userId,
       };
       // console.log('🚀 ~ file: Cart.js:48 ~ onBuy ~ item:', order);
-      handleCreateHistoryCart(order);
-      navigation.navigate(Router.PAYMENT_ZALO, {order});
+      // handleCreateHistoryCart(order);
+      navigation.navigate(Router.PAYMENT, {order});
     } else {
       Alert.alert('Bạn phải có ít nhất 1 món chính trong bill! ');
     }
@@ -350,15 +348,12 @@ const Cart = ({navigation}) => {
                           <Text style={[styles.textInfo, styles.updateMoney]}>
                             Tổng tiền:
                           </Text>
-
                         </View>
                         <View style={styles.itemPriceFood}>
-
-                        <Text style={[styles.textInfo, styles.updateMoney]}>
-                          {moneyPaidForMainDish()} K
-                        </Text>
+                          <Text style={[styles.textInfo, styles.updateMoney]}>
+                            {moneyPaidForMainDish()} K
+                          </Text>
                         </View>
-
                       </View>
                       <View style={styles.viewTextHeader}>
                         <View style={styles.divideLine}></View>
@@ -397,18 +392,15 @@ const Cart = ({navigation}) => {
                           </View>
                         </TouchableOpacity>
                         <View style={styles.itemDelete}>
-
-                        <Text style={[styles.textInfo, styles.updateMoney]}>
-                          Tổng tiền:
-                        </Text>
+                          <Text style={[styles.textInfo, styles.updateMoney]}>
+                            Tổng tiền:
+                          </Text>
                         </View>
                         <View style={styles.itemPriceFood}>
-
-                        <Text style={[styles.textInfo, styles.updateMoney]}>
-                          {moneyPaidForExtraDish()} K
-                        </Text>
+                          <Text style={[styles.textInfo, styles.updateMoney]}>
+                            {moneyPaidForExtraDish()} K
+                          </Text>
                         </View>
-
                       </View>
                       <View style={styles.viewTextHeader}>
                         <View style={styles.divideLine}></View>
@@ -439,7 +431,7 @@ const Cart = ({navigation}) => {
                       />
 
                       <View style={styles.viewTextTotalMoney}>
-                      <TouchableOpacity onPress={handleResetToppings}>
+                        <TouchableOpacity onPress={handleResetToppings}>
                           <View style={styles.itemDelete}>
                             <IconMaterialCommunityIcons
                               name="delete"
@@ -448,21 +440,17 @@ const Cart = ({navigation}) => {
                             />
                           </View>
                         </TouchableOpacity>
-                        
-                        <View style={styles.itemDelete}>
 
-                        <Text style={[styles.textInfo, styles.updateMoney]}>
-                          Tổng tiền:
-                        </Text>
+                        <View style={styles.itemDelete}>
+                          <Text style={[styles.textInfo, styles.updateMoney]}>
+                            Tổng tiền:
+                          </Text>
                         </View>
                         <View style={styles.itemPriceFood}>
-
-                        <Text style={[styles.textInfo, styles.updateMoney]}>
-                          {moneyPaidForToppings()} K
-                        </Text>
+                          <Text style={[styles.textInfo, styles.updateMoney]}>
+                            {moneyPaidForToppings()} K
+                          </Text>
                         </View>
-                       
-
                       </View>
                       <View style={styles.viewTextHeader}>
                         <View style={styles.divideLine}></View>
@@ -505,14 +493,12 @@ const Cart = ({navigation}) => {
                           <Text style={[styles.textInfo, styles.updateMoney]}>
                             Tổng tiền:
                           </Text>
-
                         </View>
                         <View style={styles.itemPriceFood}>
                           <Text style={[styles.textInfo, styles.updateMoney]}>
                             {moneyPaidForAnother()} K
                           </Text>
                         </View>
-                       
                       </View>
                       <View style={styles.viewTextHeader}>
                         <View style={styles.divideLine}></View>
@@ -523,7 +509,7 @@ const Cart = ({navigation}) => {
                     <View style={styles.viewBoxShowInfoBill}>
                       <Text style={styles.textInfo}>Số lượng món chính:</Text>
                       <Text style={styles.textInfo}>
-                        {solveAmountMainDish()} 
+                        {solveAmountMainDish()}
                       </Text>
                     </View>
 
@@ -536,7 +522,7 @@ const Cart = ({navigation}) => {
                         + Số lượng Suờn mỡ:
                       </Text>
                       <Text style={[styles.textInfo, styles.updateSubText]}>
-                        {solveAmountSuonMo()} 
+                        {solveAmountSuonMo()}
                       </Text>
                     </View>
 

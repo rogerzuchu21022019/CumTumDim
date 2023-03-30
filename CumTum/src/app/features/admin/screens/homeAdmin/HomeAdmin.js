@@ -12,16 +12,28 @@ import {useDispatch, useSelector} from 'react-redux';
 import {cartSelector} from '../../../carts/sliceOrder';
 import {LOG} from '../../../../../../logger.config';
 import {fetchFindNotifications, fetchOrders} from '../../../carts/apiOrder';
+import {authSelector} from '../../sliceAuth';
+import {fetchUserById} from '../../apiAdmin';
 const log = LOG.extend(`HOME_ADMIN.JS`);
 const HomeAdmin = ({navigation}) => {
   const dispatch = useDispatch();
   const data = useSelector(cartSelector);
-  log.info('🚀 ~ file: HomeAdmin.js:19 ~ HomeAdmin ~ data:', data);
+  const user = useSelector(authSelector);
+  // log.info('🚀 ~ file: HomeAdmin.js:19 ~ HomeAdmin ~ data:', data);
 
   useEffect(() => {
     dispatch(fetchOrders());
     dispatch(fetchFindNotifications());
   }, [dispatch]);
+
+  useEffect(() => {
+    const time = setTimeout(() => {
+      dispatch(fetchUserById(user.user._id));
+    }, 15000);
+    return () => {
+      clearTimeout(time);
+    };
+  }, [user.user.notifications]);
 
   return (
     <SafeKeyComponent>
