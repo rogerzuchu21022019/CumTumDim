@@ -45,9 +45,9 @@ const Payment = ({navigation, route}) => {
           </View>
         </View>
         <View style={styles.body}>
-          <Text style={styles.text}>Payment Method</Text>
+          <Text style={styles.text}>Phương thức thanh toán</Text>
           <Text style={styles.text1}>
-            Please choose one of the following methods :
+          Vui lòng chọn một trong các phương thức sau:
           </Text>
 
           <View style={styles.viewText}>

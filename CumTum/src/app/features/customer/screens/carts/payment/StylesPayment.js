@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
     flex: 2,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: constants.COLOR.PRIMARY,
+    backgroundColor: constants.COLOR.DARK_BROWN,
     // backgroundColor: constants.COLOR.YELLOW,
   },
   viewButtonNext: {
