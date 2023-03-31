@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
 
     },
     viewTitle:{
-        marginBottom:15,
+        marginBottom:5,
     },
     viewInput:{
         backgroundColor:constants.COLOR.WHITE,

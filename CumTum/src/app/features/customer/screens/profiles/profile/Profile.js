@@ -65,7 +65,7 @@ const Profile = ({navigation}) => {
                 <Text style={styles.textTitle}>Số điện thoại</Text>
               </View>
               <View style={styles.viewInput}>
-                <TextInput style={styles.textInput}>0342128462</TextInput>
+                <Text style={styles.textInput}>0342128462</Text>
               </View>
             </View>
             <View style={styles.item}>
@@ -73,7 +73,7 @@ const Profile = ({navigation}) => {
                 <Text style={styles.textTitle}>Phường</Text>
               </View>
               <View style={styles.viewInput}>
-                <TextInput style={styles.textInput}>Trung Mỹ Tây</TextInput>
+                <Text style={styles.textInput}>Trung Mỹ Tây</Text>
               </View>
             </View>
             <View style={styles.item}>
@@ -81,7 +81,7 @@ const Profile = ({navigation}) => {
                 <Text style={styles.textTitle}>Đường</Text>
               </View>
               <View style={styles.viewInput}>
-                <TextInput style={styles.textInput}>Tô Ký</TextInput>
+                <Text style={styles.textInput}>Tô Ký</Text>
               </View>
             </View>
             <View style={styles.item}>
@@ -89,7 +89,7 @@ const Profile = ({navigation}) => {
                 <Text style={styles.textTitle}>Số nhà</Text>
               </View>
               <View style={styles.viewInput}>
-                <TextInput style={styles.textInput}>413</TextInput>
+                <Text style={styles.textInput}>413</Text>
               </View>
             </View>
           </View>

@@ -58,16 +58,16 @@ const styles = StyleSheet.create({
     textInput:{
         marginStart:20,
         fontSize:16,
-        height:50
     },
     viewTitle:{
-        marginBottom:15,
+        marginBottom:5,
     },
     viewInput:{
         backgroundColor:constants.COLOR.WHITE,
         borderRadius:10,
         height:40,
         justifyContent: 'center',
+        alignContent: 'center'
         
     },
     groupAll:{

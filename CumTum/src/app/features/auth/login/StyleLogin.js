@@ -1,5 +1,8 @@
-const {StyleSheet} = require('react-native');
+import { constants } from '../../../shared/constants';
 
+const {StyleSheet} = require('react-native');
+const blendedColor = 'rgba(255, 255, 255, 0.5)' 
+                    + 'rgba(128, 128, 128, 0.5)'
 const stylesLogin = StyleSheet.create({
   container: {
     flex: 10,
@@ -50,16 +53,16 @@ const stylesLogin = StyleSheet.create({
     bottom: 5,
   },
   imageBody2: {
-    width: 39,
-    height: 39,
+    width: 29,
+    height: 29,
     marginLeft: 42,
-    bottom: 65,
+    bottom: 60,
   },
   touchAbleOpacityBody: {
-    backgroundColor: 'white',
+    backgroundColor: constants.COLOR.WHITE ,
     width: 262,
     height: 59,
-    borderRadius: 30,
+    borderRadius: 30, 
   },
   viewbtn: {
     alignItems: 'center',

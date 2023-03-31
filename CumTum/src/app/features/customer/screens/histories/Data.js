@@ -47,7 +47,36 @@ const DATA = [
         days:"10/03/2023",
         time:"9:20",
     },
-
+    {
+        id: 7,
+        name: 'Đơn hàng đã được giao',
+        price: '90k',
+        category:"3 món",
+        days:"10/03/2023",
+        time:"9:20",
+    },    {
+        id: 8,
+        name: 'Đơn hàng đã được giao',
+        price: '90k',
+        category:"3 món",
+        days:"10/03/2023",
+        time:"9:20",
+    },    {
+        id: 9,
+        name: 'Đơn hàng đã được giao',
+        price: '90k',
+        category:"3 món",
+        days:"10/03/2023",
+        time:"9:20",
+    },
+    {
+    id: 10,
+    name: 'Đơn hàng đã được giao',
+    price: '90k',
+    category:"3 món",
+    days:"10/03/2023",
+    time:"9:20",
+},
 
 ]
 export default DATA;

@@ -30,15 +30,17 @@ const styles = StyleSheet.create({
 
   body: {
     flex: 14,
-    backgroundColor: constants.COLOR.BLACK,
+    backgroundColor: constants.COLOR.PRIMARY,
      
     
   },
   viewFlashList: {
     flex: 1,
     width: '100%',
+    height: '100%',
     paddingRight:20,
     paddingLeft:20,
+    paddingBottom:20
   },
   itemOder: {
     flex: 12,
