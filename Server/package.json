@@ -40,7 +40,8 @@
     "path": "^0.12.7",
     "randombytes": "^2.1.0",
     "redis": "^4.6.4",
-    "twilio": "^4.8.0"
+    "twilio": "^4.8.0",
+    "uuid": "^9.0.0"
   },
   "main": "NoteUsePassport.js",
   "bin": {

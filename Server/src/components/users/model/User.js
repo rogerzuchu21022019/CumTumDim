@@ -44,6 +44,9 @@ const userSchema = new mongoose.Schema(
     },
     notifications: [
       {
+        notificationUUID: {
+          type: String,
+        },
         title: {
           type: String,
         },
