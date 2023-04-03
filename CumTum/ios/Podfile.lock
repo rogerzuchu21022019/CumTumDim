@@ -28,7 +28,7 @@ PODS:
     - GoogleUtilities/AppDelegateSwizzler (~> 7.8)
     - GoogleUtilities/Environment (~> 7.8)
     - GTMSessionFetcher/Core (< 4.0, >= 2.1)
-  - FirebaseAuthUI (12.3.0):
+  - FirebaseAuthUI (13.0.0):
     - FirebaseAuth (< 11.0, >= 8.0)
     - FirebaseCore
   - FirebaseCore (10.6.0):
@@ -39,7 +39,7 @@ PODS:
     - FirebaseCore (~> 10.0)
   - FirebaseCoreInternal (10.7.0):
     - "GoogleUtilities/NSData+zlib (~> 7.8)"
-  - FirebaseEmailAuthUI (12.3.0):
+  - FirebaseEmailAuthUI (13.0.0):
     - FirebaseAuth
     - FirebaseAuthUI
     - FirebaseCore
@@ -58,15 +58,15 @@ PODS:
     - GoogleUtilities/Reachability (~> 7.8)
     - GoogleUtilities/UserDefaults (~> 7.8)
     - nanopb (< 2.30910.0, >= 2.30908.0)
-  - FirebaseOAuthUI (12.3.0):
+  - FirebaseOAuthUI (13.0.0):
     - FirebaseAuth (< 11.0, >= 8.0)
-    - FirebaseAuthUI (< 13.0, >= 12.0.2)
-  - FirebaseUI/Auth (12.3.0):
-    - FirebaseAuthUI (~> 12.0)
-  - FirebaseUI/Email (12.3.0):
-    - FirebaseEmailAuthUI (~> 12.0)
-  - FirebaseUI/OAuth (12.3.0):
-    - FirebaseOAuthUI (~> 12.0)
+    - FirebaseAuthUI (< 14.0, >= 12.0.2)
+  - FirebaseUI/Auth (13.0.0):
+    - FirebaseAuthUI (~> 13.0)
+  - FirebaseUI/Email (13.0.0):
+    - FirebaseEmailAuthUI (~> 13.0)
+  - FirebaseUI/OAuth (13.0.0):
+    - FirebaseOAuthUI (~> 13.0)
   - fmt (6.2.1)
   - glog (0.3.5)
   - GoogleDataTransport (9.2.1):
@@ -679,15 +679,15 @@ SPEC CHECKSUMS:
   FBReactNativeSpec: 225fb0f0ab00493ce0731f954da3658638d9b191
   Firebase: f13680471b021937f2230ea8503c7809d8c29806
   FirebaseAuth: 743e5cd568af59d6d99a91ea9300843672515cf7
-  FirebaseAuthUI: 9fa83d7dd7bad0f0eb20a9682f7e649c98e8f644
+  FirebaseAuthUI: 870e22bebf5d9844cab1ded173c68e06041f90c8
   FirebaseCore: fa80ad16a62d52f67274b5b88304c3a318bbf9a4
   FirebaseCoreExtension: 318e5ee9ad4092b00423c2bddd51c3f5c3585973
   FirebaseCoreInternal: 8845798510aae74703467480f71ac613788d0696
-  FirebaseEmailAuthUI: 93c49123133a5ff934e05d15c51462ed0f12ee0a
+  FirebaseEmailAuthUI: 940ed59d732cef15d5fc69cb326d40eedac2b062
   FirebaseInstallations: 59c0e4c7a816a0f76710d83f77e5369b3e45eb96
   FirebaseMessaging: fd93783258c53ae5cdb9b41bf0c51606a677f2d5
-  FirebaseOAuthUI: 7df89aca072aaba79a63f8cabb0183a2e818c3d3
-  FirebaseUI: e9a2dd42f5b593cd8b6e64c11d30ded38f30e48c
+  FirebaseOAuthUI: 367cc8ce062fefbe6b362801f966da98d056f2d7
+  FirebaseUI: 2453fbe76553b738ae3642eb12bf2891c12485ea
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
   glog: 04b94705f318337d7ead9e6d17c019bd9b1f6b1b
   GoogleDataTransport: ea169759df570f4e37bdee1623ec32a7e64e67c4

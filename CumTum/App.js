@@ -42,6 +42,7 @@ import {View, Text, TouchableOpacity} from 'react-native';
 import ManagerFood from './src/app/features/admin/screens/manager/manageFood/ManagerFood';
 import CartNoItem from './src/app/features/customer/screens/carts/cart/cartWithNoItem/CartNoItem';
 
+
 const App = () => {
   const Stack = createNativeStackNavigator();
 

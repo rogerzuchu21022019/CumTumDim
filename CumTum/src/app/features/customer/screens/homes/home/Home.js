@@ -40,6 +40,7 @@ import {
 import DropdownPicker from '../../../../../shared/utils/DropdownPicker';
 import {cartSelector} from '../../../../carts/sliceOrder';
 
+
 const HomeCustomer = ({navigation}) => {
   const log = LOG.extend('HOME_CUSTOMER.js');
   const dispatch = useDispatch();
@@ -61,7 +62,6 @@ const HomeCustomer = ({navigation}) => {
 
   const onDisplayNotification = async () => {
     // Request permissions (required for iOS)
-    
 
     // Create a channel (required for Android)
     const channelId = await notifee.createChannel({
@@ -79,6 +79,8 @@ const HomeCustomer = ({navigation}) => {
     // Display a notification
     showNotifyLocal(dataMap);
   };
+
+  
 
   useEffect(() => {
     dispatch(fetchCategories());
