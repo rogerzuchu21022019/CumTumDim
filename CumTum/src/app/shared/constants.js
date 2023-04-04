@@ -1,4 +1,7 @@
 export const constants = {
+  ITEM:{
+
+  },
   COLOR: {
     PRIMARY: '#252121',
     ORANGE: '#FE724C',
@@ -37,7 +40,7 @@ export const constants = {
     SourceSansProSemiBold: 'SourceSansProSemiBold',
   },
   BASE_URL: {
-    MAIN: 'http://192.168.1.205:3000/api',
+    MAIN: 'http://192.168.1.4:3000/api',
     SECOND: 'https://cumtumdim.becofoodstore.click/api',
   },
   ROLE: {

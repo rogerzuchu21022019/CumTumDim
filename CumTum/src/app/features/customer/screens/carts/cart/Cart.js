@@ -33,6 +33,7 @@ import Router from '../../../../../navigation/Router';
 import {authSelector} from '../../../../admin/sliceAuth';
 import {createHistoryCart} from '../../../../carts/sliceOrder';
 
+
 const log = LOG.extend('CART.JS');
 const Cart = ({navigation}) => {
   const data = useSelector(productSelector);
@@ -266,7 +267,6 @@ const Cart = ({navigation}) => {
   const solveMoneyToPaid = () => {
     let total = 0;
     total += moneyPaidForMainDish();
-
     total += moneyPaidForExtraDish();
     total += moneyPaidForToppings();
     total += moneyPaidForAnother();

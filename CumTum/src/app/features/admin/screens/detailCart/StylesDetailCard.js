@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import { constants } from '../../../shared/constants';
+import { constants } from '../../../../shared/constants';
 
 const StylesDetailCard = StyleSheet.create({
     container: {
@@ -32,94 +32,144 @@ const StylesDetailCard = StyleSheet.create({
 
     // /*Body*/ 
     body: {
-        flex:12,
-        backgroundColor: '#252121',
-        alignItems:'center',
-        
-        
-    },
-    itemFinal:{
-        paddingBottom:20,
-    },
-    itemEat:{
-        backgroundColor:'#2F2D2D',
+        flex: 12,
+        marginTop: 2,
+        width: '100%',
+        height: '100%',
+        backgroundColor: constants.COLOR.BLACK,
+        marginBottom: 2,
+        overflow: 'hidden',
+      },
+    
+      divideLine: {
+        height: 2,
+        width: '100%',
+        backgroundColor: constants.COLOR.WHITE,
+        marginTop: 20,
+        marginBottom: 20,
+      },
+    
+      viewScrollList: {
+        flex: 1,
+        width: '100%',
+        minHeight: 500,
+        alignItems: 'center',
+        // backgroundColor: constants.COLOR.ORANGE,
+      },
+      scrollView: {
+        flexGrow: 1,
+      },
+      viewFlashList: {
+        flex: 10,
+        width: '100%',
+        minHeight: 300,
+        // backgroundColor: constants.COLOR.WHITE,
+      },
+    
+      viewMainDishes: {
+        flex: 1,
+        width: '100%',
+        minHeight: 300,
+        // backgroundColor: constants.COLOR.AQUA,
+      },
+    
+      viewExtraDishes: {
+        flex: 1,
+        width: '100%',
+        minHeight: 300,
+        // backgroundColor: constants.COLOR.AQUA,
+      },
+    
+      viewToppings: {
+        flex: 1,
+        width: '100%',
+        minHeight: 300,
+    
+        // backgroundColor: constants.COLOR.AQUA,
+      },
+      viewAnother: {
+        flex: 1,
+        width: '100%',
+        minHeight: 300,
+        // backgroundColor: constants.COLOR.AQUA,
+      },
+      viewTextHeader: {
+        paddingLeft: '5%',
+        paddingRight: '5%',
+      },
+      viewTextTotalMoney: {
+        // backgroundColor: constants.COLOR.AQUA,
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+        flexDirection: 'row',
+        marginEnd:20
+    
+      },
+    
+      viewTotal: {
+        minHeight: 200,
+        // backgroundColor: constants.COLOR.YELLOW,
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        width: '100%',
+        paddingLeft: '5%',
+        paddingRight: '5%',
+        // flex: 1,
+      },
+      viewBoxShowInfoBill: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        width: '100%',
+        // backgroundColor: constants.COLOR.WHITE,
+      },
+      viewBoxShowSubInfoBill: {
+        paddingLeft: 20,
+      },
+      textInfo: {
+        color: constants.COLOR.WHITE,
+        fontSize: 16,
+        lineHeight: 30,
+      },
+      updateSubText: {
+        fontSize: 16,
+      },
+      updateMoney: {
+        fontSize: 14,
+        color: constants.COLOR.WHITE,
+      },
+      updateTextInfo: {
+        fontSize: 24,
+      },
+      itemDelete:{
+        marginEnd:10,
+        alignItems: 'center',
+      },
+      itemPriceFood:{
+        width:50,
         flexDirection:'row',
-        alignItems:'center',
-        height:80,
-        width:350,
-        borderRadius:10,
-        paddingStart:5,
-        marginBottom:10,
-
+        justifyContent: "flex-end",
     },
-    itemNumber:{
-        paddingEnd:10,
-        
+    viewButton:{
+      backgroundColor:constants.COLOR.ORANGE,
+      height:40,
+      width:150,
+      alignItems: 'center',
+      justifyContent: "center",
+      borderRadius:10
+      
     },
-   
-
-    numberItem:{
-        color:'white'
-
+    textButton:{
+      color:constants.COLOR.WHITE,
+      fontSize:16,
+      fontWeight:'500',
     },
-    itemQuantity:{
-        flexDirection:'row',
-        justifyContent:'space-between',
-        alignItems:'center',
-        width:100,
-    },
-    itemImg:{
-        marginEnd:40,
-        marginStart:20     
-    },
-    image:{
-        width:60,
-        height:60,
-        borderRadius:10,
-
-    },
-    groupItem:{
-        paddingEnd:90,
-    },
-    itemName:{
-        paddingBottom:10,
-        color:'white',
-       
-
-    },
-    itemPrice:{
-  
-        color:'#FE724C'
-
-    },
-    nameTitle:{
-        color:'white',
-        fontSize:20,
-        paddingBottom:15,
-
-    },
-    itemAddress:{
-        marginBottom:10
-    },
-    textAddress:{
-        color:'white',
-        fontSize:18,
-        fontWeight:'600'
-    },
-    Line:{
-        height:1,
-        backgroundColor:'white'
-    },
-    finalBtn:{
-        justifyContent:'center,'
-    },
-    itemBtn:{
-        alignItems:'center',
-        justifyContent:'center',
-        backgroundColor:'#FFB703',
-        height:40,
-        width:150,
-        borderRadius:15
+    groupButton:{
+      flexDirection:'row',
+      justifyContent:'space-evenly',
+      width:'100%',
+      marginTop:20,
+      marginBottom:20,
     },
      /*Body*/ 
 

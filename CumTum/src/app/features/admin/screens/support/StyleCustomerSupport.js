@@ -58,17 +58,18 @@ const styles = StyleSheet.create({
   body: {
     flex: 12,
     backgroundColor: '#252121',
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
+    justifyContent: 'center',
     alignItems: 'center',
   },
   itemSupport: {
     marginBottom: 40,
-    flex: 1,
     backgroundColor: '#252121',
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     alignItems: 'center',
+  },
+  image:{
+    marginEnd:10,
   },
   itemSupport1: {
     gap: 55,
@@ -82,6 +83,21 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 20,
     fontWeight: '700',
+  },
+  viewButtonCreate: {
+    backgroundColor: constants.COLOR.YELLOW,
+    marginTop: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 10,
+    width: 150,
+    height: 50,
+  },
+  btnCreate: {
+    // backgroundColor: constants.COLOR.RED,
+    fontWeight: '700',
+    fontSize: 20,
+    color: constants.COLOR.WHITE,
   },
   //body
 });

@@ -39,6 +39,7 @@ import {
 } from '../../../../product/sliceProduct';
 import DropdownPicker from '../../../../../shared/utils/DropdownPicker';
 import {cartSelector} from '../../../../carts/sliceOrder';
+import Advertisement from '../../../../../shared/utils/Advertisement';
 
 const HomeCustomer = ({navigation}) => {
   const log = LOG.extend('HOME_CUSTOMER.js');
@@ -177,11 +178,8 @@ const HomeCustomer = ({navigation}) => {
               source={require('../../../../../../assets/headerImage.jpg')}
             />
             <View style={styles.positionInImageBackground}>
-              {/* thằng này sẽ set position của cha nó rồi set view tuỳ ý  */}
-
-              <Text></Text>
+              <Advertisement/>
             </View>
-            <View style={styles.divideLine}></View>
           </View>
           <View style={styles.divideLine}></View>
         </View>
@@ -201,7 +199,7 @@ const HomeCustomer = ({navigation}) => {
                   <View style={styles.viewImageDish}>
                     <FastImage
                       style={styles.imageLogo}
-                      source={require('../../../../../../assets/iconLogo_CumTumDim.jpg')}
+                      source={require('../../../../../../assets/cutleryIcon.png')}
                     />
                   </View>
                 </View>
@@ -219,7 +217,7 @@ const HomeCustomer = ({navigation}) => {
                   <View style={styles.viewImageDish}>
                     <FastImage
                       style={styles.imageLogo}
-                      source={require('../../../../../../assets/iconLogo_CumTumDim.jpg')}
+                      source={require('../../../../../../assets/cutleryIcon.png')}
                     />
                   </View>
                 </View>
@@ -237,7 +235,7 @@ const HomeCustomer = ({navigation}) => {
                   <View style={styles.viewImageDish}>
                     <FastImage
                       style={styles.imageLogo}
-                      source={require('../../../../../../assets/iconLogo_CumTumDim.jpg')}
+                      source={require('../../../../../../assets/cutleryIcon.png')}
                     />
                   </View>
                 </View>
@@ -255,7 +253,7 @@ const HomeCustomer = ({navigation}) => {
                   <View style={styles.viewImageDish}>
                     <FastImage
                       style={styles.imageLogo}
-                      source={require('../../../../../../assets/iconLogo_CumTumDim.jpg')}
+                      source={require('../../../../../../assets/cutleryIcon.png')}
                     />
                   </View>
                 </View>

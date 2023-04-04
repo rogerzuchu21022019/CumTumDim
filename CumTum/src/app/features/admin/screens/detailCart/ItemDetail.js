@@ -1,38 +1,116 @@
-import {StyleSheet, Text, View,Image} from 'react-native';
+import {StyleSheet, Text, View,Image,TouchableOpacity} from 'react-native';
 import React from 'react';
-import styles from './StylesDetailCard';
+import styles from './stylesItem';
+import SafeKeyComponent from '../../../../components/safe_area/SafeKeyComponent';
+import FastImage from 'react-native-fast-image';
 
-const ItemDetail = ({item}) => {
+const ItemDetail = ({item, index}) => {
+
+  const imageUrlOptions = {
+    uri: item.imageUrl,
+    priority: FastImage.priority.high,
+    cache: FastImage.cacheControl.immutable,
+  };
+  // mainDishCart
+  console.log("item", item);
+  
   return (
-      <View style={styles.itemFinal}>
-        <View style={styles.itemTitle}>
-          <Text style={styles.nameTitle}>{item.title}</Text>
-        </View>
-        <View style={styles.itemEat}>
-          <View style={styles.itemNumber}>
-            <Text style={styles.numberItem}>{item.number}</Text>
-          </View>
-          <View style={styles.itemImg}>
-            <Image
-              style={styles.image}
-              source={{
-                uri: 'https://cdn.daynauan.info.vn/wp-content/uploads/2015/06/com-tam-suon-bi-cha.jpg',
-              }}
-            />
-          </View>
-          <View style={styles.groupItem}>
-            <View>
-              <Text style={styles.itemName}>{item.name}</Text>
+    <SafeKeyComponent>
+    <View key={item._id.toString()} style={styles.container}>
+      <View style={styles.header}></View>
+      <View style={styles.body}>
+        <View style={styles.boxInfoDish}>
+          <View style={styles.boxShowImage}>
+            <View style={styles.boxIndex}>
+              <Text style={[styles.textName, styles.textNameUpdate]}>
+                {index + 1}
+              </Text>
             </View>
-            <View>
-              <Text style={styles.itemPrice}>{item.price}</Text>
-            </View>
+            <FastImage style={styles.imageDish} source={imageUrlOptions} />
           </View>
-          <View style={styles.itemQuantity}>
-            <Text style={styles.numberItem}>{item.quantity}</Text>
+          <View style={styles.boxShowNamePrice}>
+            {item.subCategory === 'Sườn mỡ' ? (
+              <View>
+                <Text style={[styles.textName, styles.textBoxNameUpdate]}>
+                  {item.name}
+                </Text>
+                <Text style={[styles.textName, styles.textBoxNameUpdate]}>
+                  ({item.subCategory})
+                </Text>
+              </View>
+            ) : (
+              <Text style={[styles.textName, styles.textBoxNameUpdate]}>
+                {item.name}
+              </Text>
+            )}
+            {item.price === 0 ? (
+              <Text style={[styles.textName, styles.textBoxNameUpdate]}>
+                Free
+              </Text>
+            ) : (
+              <View>
+                <Text style={[styles.textName, styles.textBoxNameUpdate]}>
+                  {item.price}K
+                </Text>
+
+                <Text
+                  style={[
+                    styles.textName,
+                    styles.textBoxNameUpdate,
+                    styles.updateColor,
+                  ]}>
+                  {item.price * item.amount}K
+                </Text>
+              </View>
+            )}
+          </View>
+          <View style={styles.boxHandleAmount}>
+           
+
+            <View style={styles.boxShowAmount}>
+              <Text style={[styles.textName, styles.textNameUpdate]}>
+                {item.amounts}
+              </Text>
+            </View>
+           
           </View>
         </View>
       </View>
+      {/* <View>
+        <Text
+          style={{
+            color: constants.COLOR.WHITE,
+          }}>
+          {itemNew._id}
+        </Text>
+        <Text
+          style={{
+            color: constants.COLOR.WHITE,
+          }}>
+          price : {amount === 0 ? 0 : itemNew.price}
+        </Text>
+        <Text
+          style={{
+            color: constants.COLOR.WHITE,
+          }}>
+          {amount === 0 ? 0 : itemNew.amount}
+        </Text>
+        <Text
+          style={{
+            color: constants.COLOR.WHITE,
+          }}>
+          {itemNew.name}
+        </Text>
+        <Text
+          style={{
+            color: constants.COLOR.WHITE,
+          }}>
+          {itemNew.createdAt}
+        </Text>
+      </View> */}
+      <View style={styles.footer}></View>
+    </View>
+  </SafeKeyComponent>
   );
 };
 
