@@ -15,6 +15,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     backgroundColor: constants.COLOR.PRIMARY,
+
   },
   leftHeader: {
     flex: 1,
@@ -31,7 +32,7 @@ const styles = StyleSheet.create({
   textTitle: {
     color: constants.COLOR.WHITE,
     fontWeight:'900',
-    fontSize:19,
+    fontSize:16,
     lineHeight:22
   },
   mainHeader: {
@@ -161,7 +162,7 @@ const styles = StyleSheet.create({
     flex: 2,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: constants.COLOR.PRIMARY,
+    backgroundColor: constants.COLOR.DARK_BROWN,
     // backgroundColor: constants.COLOR.YELLOW,
   },
   viewButtonNext: {

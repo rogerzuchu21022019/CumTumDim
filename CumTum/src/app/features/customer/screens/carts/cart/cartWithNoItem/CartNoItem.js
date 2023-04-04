@@ -13,6 +13,7 @@ const CartNoItem = ({navigation}) => {
   };
   return (
     <SafeKeyComponent>
+      
       <View style={styles.container}>
         <View style={styles.header}>
           <Text style={styles.textHeader}>Giỏ hàng</Text>

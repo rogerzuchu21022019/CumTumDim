@@ -96,7 +96,7 @@ const Cart = ({navigation}) => {
         userId: userId,
       };
       // console.log('🚀 ~ file: Cart.js:48 ~ onBuy ~ item:', order);
-      // handleCreateHistoryCart(order);
+      handleCreateHistoryCart(order);
       navigation.navigate(Router.PAYMENT, {order});
     } else {
       Alert.alert('Bạn phải có ít nhất 1 món chính trong bill! ');

@@ -33,6 +33,8 @@ const Router = {
   PAYMENT_PAID:"PaymentPaid",
   PAYMENT_ZALO:"PaymentZalo",
 
+
+  HISTORY_WHIH_NO_ITEM:"HistoryWithNoItem",
   HISTORY_TABS:'Histories',
   HISTORY_WITH_NO_ORDER:"HistoryOrderWithNoOder",
   HISTORY_WITH_ITEMS:"HistoryOrderItems",

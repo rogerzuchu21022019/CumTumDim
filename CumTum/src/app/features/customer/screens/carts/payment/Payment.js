@@ -1,22 +1,22 @@
-import {View, Text, TouchableOpacity} from 'react-native';
-import React, {useCallback, useEffect, useState} from 'react';
+import { View, Text, TouchableOpacity } from 'react-native';
+import React, { useCallback, useEffect, useState } from 'react';
 import SafeKeyComponent from '../../../../../components/safe_area/SafeKeyComponent';
 import styles from './StylesPayment';
-import {constants} from '../../../../../shared/constants';
+import { constants } from '../../../../../shared/constants';
 import FastImage from 'react-native-fast-image';
 import IconOcticons from 'react-native-vector-icons/Octicons';
 import Router from '../../../../../navigation/Router';
-import {useDispatch, useSelector} from 'react-redux';
-import {fetchCreateOrder, fetchNotification} from '../../../../carts/apiOrder';
-import {authSelector} from '../../../../admin/sliceAuth';
-import {cartSelector} from '../../../../carts/sliceOrder';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchCreateOrder, fetchNotification } from '../../../../carts/apiOrder';
+import { authSelector } from '../../../../admin/sliceAuth';
+import { cartSelector } from '../../../../carts/sliceOrder';
 import notifee from '@notifee/react-native';
-import {showNotifyLocal} from '../../../../../shared/utils/Notifies';
-import {LOG} from '../../../../../../../logger.config';
+import { showNotifyLocal } from '../../../../../shared/utils/Notifies';
+import { LOG } from '../../../../../../../logger.config';
 const log = LOG.extend(`PAYMENT.JS`);
 
-const Payment = ({navigation, route}) => {
-  const {order} = route.params;
+const Payment = ({ navigation, route }) => {
+  const { order } = route.params;
   const [checkedId, setCheckedId] = useState(null);
   const auth = useSelector(authSelector);
   // console.log('🚀 ~ file: Payment.js:16 ~ Payment ~ auth:', auth);
@@ -83,13 +83,14 @@ const Payment = ({navigation, route}) => {
                 <Text style={styles.textTitle}>Thanh toán</Text>
               </View>
             </View>
-            <View style={styles.divideLine}></View>
+
           </View>
         </View>
+        <View style={styles.divideLine}></View>
         <View style={styles.body}>
-          <Text style={styles.text}>Payment Method</Text>
+          <Text style={styles.text}>Phương thức thanh toán</Text>
           <Text style={styles.text1}>
-            Please choose one of the following methods :
+            Vui lòng chọn một trong các phương thức sau:
           </Text>
 
           <View style={styles.viewText}>
@@ -124,7 +125,7 @@ const Payment = ({navigation, route}) => {
                   />
                 </View>
                 <View style={styles.viewTextVisa}>
-                  <Text style={styles.textVisa}>Visa</Text>
+                  <Text style={styles.textVisa}>VISA</Text>
                 </View>
                 <View
                   style={[
