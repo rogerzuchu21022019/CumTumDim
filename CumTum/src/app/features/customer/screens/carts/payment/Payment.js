@@ -56,7 +56,7 @@ const Payment = ({navigation, route}) => {
 
   const handleCreateOrder = order => {
     dispatch(fetchCreateOrder(order));
-    dispatch(fetchNotification(data));
+    // dispatch(fetchNotification(data));
   };
 
   const onPay = () => {

@@ -80,7 +80,7 @@ const HomeCustomer = ({navigation}) => {
     showNotifyLocal(dataMap);
   };
 
-  
+    
 
   useEffect(() => {
     dispatch(fetchCategories());

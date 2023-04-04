@@ -8,7 +8,8 @@ const log = LOG.extend(`API_ORDER.JS`);
 export const fetchCreateOrder = createAsyncThunk(
   constants.FETCH.CREATE_ORDER,
   async order => {
-    const response = await AxiosInstance().post(`/products/create-order`, {
+    const response = await AxiosInstance().post(`/products/push-notification-rabbit`, {
+    // const response = await AxiosInstance().post(`/products/create-order`, {
       order,
     });
     return response.data;
@@ -19,6 +20,14 @@ export const fetchOrders = createAsyncThunk(
   constants.FETCH.FIND_ORDERS,
   async () => {
     const response = await AxiosInstance().get(`/products/find-orders`);
+    return response.data;
+  },
+);
+
+export const fetchNotifies = createAsyncThunk(
+  constants.FETCH.FIND_RABBIT,
+  async () => {
+    const response = await AxiosInstance().get(`/products/get-notification-rabbit`);
     return response.data;
   },
 );

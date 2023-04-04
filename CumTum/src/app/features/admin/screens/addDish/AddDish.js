@@ -46,6 +46,8 @@ import {constants} from '../../../../shared/constants';
 import BoxInputCus from '../../../../components/input/BoxInput';
 import Statistic from '../statistic/Statistic';
 import DropdownPicker from '../../../../shared/utils/DropdownPicker';
+import socket from '../../../../shared/utils/SocketConfig';
+import socketServices from '../../../../shared/utils/Socket';
 
 const AddDish = ({navigation}) => {
   const dispatch = useDispatch();
@@ -55,14 +57,8 @@ const AddDish = ({navigation}) => {
 
   // Dropdown states
   const [categoryId, setCategoryId] = useState('');
-  const [selected2nd, setSelected2nd] = useState('');
-  const [price, setPrice] = useState('');
-  const [selected4th, setSelected4th] = useState('');
   const [item, setItem] = useState([]);
   const [isIdMainDish, setIsIdMainDish] = useState(false);
-  const [isIdExtraDishes, setIsIdExtraDishes] = useState(false);
-  const [isIdToppings, setIsIdToppings] = useState(false);
-  const [isIdAnother, setIsIdAnother] = useState(false);
 
   // Dropdown Picker states
   const [open, setOpen] = useState(false);
@@ -197,6 +193,8 @@ const AddDish = ({navigation}) => {
 
   const moveTo = async () => {
     navigation.navigate(Router.LOGIN);
+    socket.disconnect()
+    console.log("🚀 ~ file: AddDish.js:197 ~ moveTo ~ socket:", socket)
   };
 
   // xử lý dropdown chọn categories

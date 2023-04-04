@@ -11,10 +11,18 @@ import IconOcticons from 'react-native-vector-icons/Octicons';
 import {useDispatch, useSelector} from 'react-redux';
 import {cartSelector} from '../../../carts/sliceOrder';
 import {LOG} from '../../../../../../logger.config';
-import {fetchFindNotifications, fetchOrders} from '../../../carts/apiOrder';
+import {
+  fetchFindNotifications,
+  fetchNotifies,
+  fetchOrders,
+} from '../../../carts/apiOrder';
 import {authSelector} from '../../sliceAuth';
 import {fetchUserById} from '../../apiAdmin';
+import socketServices from '../../../../shared/utils/Socket';
+import socket from '../../../../shared/utils/SocketConfig';
+import ConfigSocket from '../../../../shared/utils/SocketConfig';
 const log = LOG.extend(`HOME_ADMIN.JS`);
+
 const HomeAdmin = ({navigation}) => {
   const dispatch = useDispatch();
   const data = useSelector(cartSelector);
@@ -22,18 +30,24 @@ const HomeAdmin = ({navigation}) => {
   // log.info('🚀 ~ file: HomeAdmin.js:19 ~ HomeAdmin ~ data:', data);
 
   useEffect(() => {
-    dispatch(fetchOrders());
-    dispatch(fetchFindNotifications());
-  }, [dispatch]);
+    socket.on('connect')
+    console.log('connect', socket);
+  }, []);
 
   useEffect(() => {
-    const time = setTimeout(() => {
-      dispatch(fetchUserById(user.user._id));
-    }, 15000);
-    return () => {
-      clearTimeout(time);
-    };
-  }, [user.user.notifications]);
+    dispatch(fetchOrders());
+    // dispatch(fetchNotifies());
+    // dispatch(fetchFindNotifications());
+  }, [dispatch]);
+
+  // useEffect(() => {
+  //   const time = setTimeout(() => {
+  //     dispatch(fetchUserById(user.user._id));
+  //   }, 15000);
+  //   return () => {
+  //     clearTimeout(time);
+  //   };
+  // }, [user.user.notifications]);
 
   return (
     <SafeKeyComponent>
