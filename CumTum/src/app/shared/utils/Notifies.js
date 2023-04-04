@@ -46,8 +46,8 @@ export const showNotifyLocal = async data => {
     },
 
     android: {
-      channelId: channelId,
-      // smallIcon: 'name-of-a-small-icon', // optional, defaults to 'ic_launcher'.
+      channelId: data.channelId,
+      smallIcon: 'ic_launcher', // optional, defaults to 'ic_launcher'.
       // pressAction is needed if you want the notification to open the app when pressed
       pressAction: {
         id: 'default',

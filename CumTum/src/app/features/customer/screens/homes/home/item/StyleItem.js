@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
 
   textName: {
     color: constants.COLOR.WHITE,
-    fontSize:14,
+    fontSize:12,
   },
   updateColor: {
     color: constants.COLOR.ORANGE,
@@ -65,11 +65,11 @@ const styles = StyleSheet.create({
   },
 
   textNameUpdate: {
-    fontSize: 16,
+    fontSize: 14,
   },
 
   textBoxNameUpdate: {
-    fontSize: 14,
+    fontSize: 12,
   },
   imageDish: {
     width: 60,

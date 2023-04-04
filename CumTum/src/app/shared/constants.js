@@ -1,4 +1,7 @@
 export const constants = {
+  ITEM:{
+
+  },
   COLOR: {
     PRIMARY: '#252121',
     ORANGE: '#FE724C',

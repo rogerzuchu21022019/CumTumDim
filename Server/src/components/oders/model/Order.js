@@ -4,6 +4,10 @@ const OrderSchema = new mongoose.Schema(
   {
     mainDishCart: [
       {
+        productName:{
+          type: 'string',
+          required: true,
+        },
         productId: {
           type: mongoose.Schema.Types.ObjectId,
           ref: "Product",
@@ -22,6 +26,10 @@ const OrderSchema = new mongoose.Schema(
 
     extraDishCart: [
       {
+        productName:{
+          type: 'string',
+          required: true,
+        },
         productId: {
           type: mongoose.Schema.Types.ObjectId,
           ref: "Product",
@@ -40,6 +48,10 @@ const OrderSchema = new mongoose.Schema(
 
     toppingsCart: [
       {
+        productName:{
+          type: 'string',
+          required: true,
+        },
         productId: {
           type: mongoose.Schema.Types.ObjectId,
           ref: "Product",
@@ -58,6 +70,10 @@ const OrderSchema = new mongoose.Schema(
 
     anotherCart: [
       {
+        productName:{
+          type: 'string',
+          required: true,
+        },
         productId: {
           type: mongoose.Schema.Types.ObjectId,
           ref: "Product",

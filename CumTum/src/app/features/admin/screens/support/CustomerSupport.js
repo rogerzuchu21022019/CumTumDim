@@ -1,11 +1,27 @@
-import {View, Text, Image, Button} from 'react-native';
+import {View, Text, Image, Button,TouchableOpacity} from 'react-native';
 import React from 'react';
 import styles from './StyleCustomerSupport';
 import SafeKeyComponent from '../../../../components/safe_area/SafeKeyComponent';
 import FastImage from 'react-native-fast-image';
 import {constants} from '../../../../shared/constants';
+import {fetchSignOut} from '../../apiAdmin';
+import {useEffect, useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import Router from '../../../../navigation/Router';
 
-const CustomerSupport = () => {
+const CustomerSupport = ({navigation}) => {
+const dispatch = useDispatch();
+
+
+const signOut = async () => {
+  dispatch(fetchSignOut());
+  moveTo();
+};
+
+const moveTo = async () => {
+  navigation.navigate(Router.LOGIN);
+};
+
   return (
     <SafeKeyComponent>
       <View style={styles.container}>
@@ -54,7 +70,15 @@ const CustomerSupport = () => {
               </View>
             </View>
           </View>
+          <View>
+          <TouchableOpacity onPress={signOut}>
+              <View style={styles.viewButtonCreate}>
+                <Text style={styles.btnCreate}>Đăng xuất</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
         </View>
+      
       </View>
     </SafeKeyComponent>
   );
