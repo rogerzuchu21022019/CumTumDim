@@ -1,7 +1,6 @@
-import { constants } from '../../../../../shared/constants';
+import {constants} from '../../../../../shared/constants';
 
 const {StyleSheet} = require('react-native');
-
 
 const styles = StyleSheet.create({
   container: {},
@@ -47,12 +46,14 @@ const styles = StyleSheet.create({
     color: constants.COLOR.WHITE,
     fontSize: 15,
   },
-  statusItemText:{
+  statusItemText: {
     color: constants.COLOR.RED,
   },
   /* Body */
   /* Footer */
-  footer: {},
+  footer: {
+    marginBottom: 20,
+  },
   /* Footer */
 });
 

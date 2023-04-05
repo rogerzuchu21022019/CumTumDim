@@ -1,6 +1,14 @@
-import {Text, View,Image,FlatList,TouchableOpacity,ScrollView,TouchableNativeFeedback} from 'react-native'
-import React,{useEffect}  from 'react'
-import styles from './StylesDetailCard'
+import {
+  Text,
+  View,
+  Image,
+  FlatList,
+  TouchableOpacity,
+  ScrollView,
+  TouchableNativeFeedback,
+} from 'react-native';
+import React,{useEffect} , { useEffect } from 'react';
+import styles from './StylesDetailCard';
 import ItemDetail from './ItemDetail';
 import { FlashList } from '@shopify/flash-list';
 import Router from '../../../../navigation/Router';

@@ -11,6 +11,7 @@ export const showNotifyLocal = async data => {
   await notifee.displayNotification({
     title: data.title,
     body: data.content,
+    
     subtitle: 'Messages',
 
     ios: {
@@ -46,7 +47,7 @@ export const showNotifyLocal = async data => {
     },
 
     android: {
-      channelId: data.channelId,
+      channelId: channelId,
       smallIcon: 'ic_launcher', // optional, defaults to 'ic_launcher'.
       // pressAction is needed if you want the notification to open the app when pressed
       pressAction: {

@@ -1,5 +1,14 @@
-import {Text, View, Image, ScrollView, FlatList,TouchableOpacity} from 'react-native';
-import React, {useEffect} from 'react';
+//HomeAdmin.js
+import {
+  Text,
+  View,
+  Image,
+  ScrollView,
+  FlatList,
+  TouchableOpacity,
+  RefreshControl,
+} from 'react-native';
+import React, {useEffect, useState} from 'react';
 import styles from './StylesHome';
 import SafeKeyComponent from '../../../../components/safe_area/SafeKeyComponent';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -20,30 +29,57 @@ import {
 import {authSelector} from '../../sliceAuth';
 import {fetchUserById} from '../../apiAdmin';
 import socketServices from '../../../../shared/utils/Socket';
-import socket from '../../../../shared/utils/SocketConfig';
-import ConfigSocket from '../../../../shared/utils/SocketConfig';
-const log = LOG.extend(`HOME_ADMIN.JS`);
+import io from 'socket.io-client';
 
+import ConfigSocket from '../../../../shared/utils/SocketConfig';
+import {showNotifyLocal} from '../../../../shared/utils/Notifies';
+import {formatTime} from '../../../../shared/utils/Moment';
+const log = LOG.extend(`HOME_ADMIN.JS`);
+const socket = io(constants.SOCKET.URL, {
+  transports: ['websocket'],
+});
 const HomeAdmin = ({navigation}) => {
   const dispatch = useDispatch();
   const data = useSelector(cartSelector);
   const user = useSelector(authSelector);
-  // log.info('🚀 ~ file: HomeAdmin.js:19 ~ HomeAdmin ~ data:', data);
+
+  const [isRefresh, setIsRefresh] = useState(false);
+
+  log.info('🚀 ~ file: HomeAdmin.js:19 ~ HomeAdmin ~ data:', data);
 
   useEffect(() => {
-    socket.on(constants.SOCKET.CONNECT);
-    socket.on(constants.SOCKET.CREATE_ORDER, orderData => {
-      log.error('create order', orderData);
+    socket.on(constants.SOCKET.CONNECT, () => {
+      console.log('connect', socket);
     });
-    console.log('connect', socket);
+    socket.on(constants.SOCKET.DISCONNECT, () => {
+      console.log('DISCONNECT');
+    });
+    socket.on(constants.SOCKET.CREATE_ORDER, orderData => {
+      // console.log('connect to create order', orderData);
+      log.error('create order success', orderData);
+      onDisplayNotification(orderData);
+      dispatch(fetchOrders());
+    });
 
-    const timeToRemove = setTimeout(() => {
-      socket.off();
-    }, 5000);
     return () => {
-      clearTimeout(timeToRemove);
+      socket.disconnect();
     };
-  }, []);
+  }, [dispatch]);
+
+  const onDisplayNotification = async orderData => {
+    const idOrder = orderData._id;
+    const total = orderData.moneyToPaid;
+
+    const title = 'Notification';
+    const content = `Đơn hàng số ${idOrder} có tổng giá tiền ${total} đang chờ bạn xác nhận!`;
+    // console.log("🚀 ~ file: Payment.js:45 ~ onDisplayNotification ~ content:", content)
+    const dataMap = {
+      title,
+      content,
+    };
+    // Display a notification
+    showNotifyLocal(dataMap);
+  };
 
   useEffect(() => {
     dispatch(fetchOrders());
@@ -60,13 +96,33 @@ const HomeAdmin = ({navigation}) => {
   //   };
   // }, [user.user.notifications]);
 
+  // get date , hour, time now
+  const getDate = () => {
+    const date = new Date();
+    let day = date.getDate();
+    let month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    if (day < 10) {
+      day = '0' + day;
+    }
+    if (month < 10) {
+      month = '0' + month;
+    }
+
+    return `${day}-${month}-${year}`;
+  };
+
+  const createDateOrder = () => {
+    const createdAt = data.orders[0].createdAt;
+    return createdAt;
+  };
+
   return (
     <SafeKeyComponent>
       <View style={styles.container}>
-      <View style={styles.header}>
+        <View style={styles.header}>
           <View style={styles.mainHeader}>
             <View style={styles.leftHeader}>
-             
               {/* Code back to HomeScreen */}
               <TouchableOpacity
                 onPress={() => {
@@ -75,7 +131,7 @@ const HomeAdmin = ({navigation}) => {
                 <View style={styles.viewLogo}>
                   <FastImage
                     style={styles.imageLogo}
-                    source={require("../../../../../assets/Logo_CumTumDim.png")}
+                    source={require('../../../../../assets/Logo_CumTumDim.png')}
                   />
                   <Text style={styles.textTitle}>Cum tứm đim</Text>
                 </View>
@@ -91,6 +147,12 @@ const HomeAdmin = ({navigation}) => {
           </View>
         </View>
         <View style={styles.body}>
+          <View>
+            <Text style={{color: 'white'}}>{getDate()}</Text>
+            <Text style={{color: 'white'}}>
+              {formatTime(createDateOrder())}
+            </Text>
+          </View>
           <View style={styles.viewFlashList}>
             <FlashList
               data={data.orders}
@@ -106,6 +168,17 @@ const HomeAdmin = ({navigation}) => {
                 );
               }}
               keyExtractor={(item, index) => index.toString()}
+              refreshControl={
+                <RefreshControl
+                  refreshing={isRefresh}
+                  onRefresh={() => {
+                    dispatch(fetchOrders());
+                  }}
+                  title="Pull to refresh..."
+                  titleColor={constants.COLOR.RED}
+                  tintColor={constants.COLOR.RED}
+                />
+              }
             />
           </View>
         </View>
