@@ -50,6 +50,7 @@ const ManagerRouter = (app, fixPublic) => {
   app.use(SUB_PRODUCTS, ApiProducts.pushNotification, fixPublic);
   app.use(SUB_PRODUCTS, ApiProducts.pushRabbit, fixPublic);
   app.use(SUB_PRODUCTS, ApiProducts.getRabbit, fixPublic);
+
   app.use(SUB_PRODUCTS, ApiProducts.findNotifications, fixPublic);
   //   app.use(SUB_PRODUCTS, ApiProduct.chartRouter, fixPublic);
   //   app.use(SUB_PRODUCTS, ApiProduct.dataTableRouter, fixPublic);

@@ -24,6 +24,7 @@ export const fetchOrders = createAsyncThunk(
   constants.FETCH.FIND_ORDERS,
   async () => {
     const response = await AxiosInstance().get(`/products/find-orders`);
+    // log.error("🚀 ~ file: apiOrder.js:28 ~ response:", response.data)
     return response.data;
   },
 );

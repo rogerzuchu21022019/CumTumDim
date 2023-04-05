@@ -74,6 +74,7 @@ const Cart = ({navigation}) => {
           productName: item.name,
           productId: item._id,
           productImageUrl: item.imageUrl,
+          subCategory :item.subCategory,
           amounts: item.amount,
           price: item.price,
         })),

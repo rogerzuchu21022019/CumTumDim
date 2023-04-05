@@ -28,37 +28,12 @@ const userSchema = new mongoose.Schema(
     imageUrl: {
       type: String,
     },
-    accessToken: {
-      type: String,
+    orders: {
+      type: [],
     },
-    fcmToken: {
-      type: String,
+    notifications: {
+      type: [],
     },
-    order: {
-      type: [
-        {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "Order",
-        },
-      ],
-    },
-    // notifications: [
-    //   {
-    //     notificationUUID: {
-    //       type: String,
-    //     },
-    //     title: {
-    //       type: String,
-    //     },
-    //     messageToCustomer: {
-    //       type: String,
-    //     },
-    //     messageToAdmin: {
-    //       type: String,
-    //     },
-    //   },
-    // ],
-
     address: {
       street: {
         type: String,

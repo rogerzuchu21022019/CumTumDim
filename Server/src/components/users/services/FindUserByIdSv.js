@@ -1,8 +1,22 @@
 const User = require("../model/User");
 
-const FindUserByIdSv = async (userId) => {
+const FindUserByIdSv = async (userId, order) => {
   try {
-    const user = await User.findById(userId);
+    const query = {
+      _id: userId,
+    };
+    const optionUpdate = {
+      $push: {
+        orders: {
+          $each: [order],
+          $position: 0,
+        },
+      },
+    };
+    const user = await User.findByIdAndUpdate(query, optionUpdate, {
+      new: true,
+      upsert: true,
+    });
 
     return user;
   } catch (error) {
