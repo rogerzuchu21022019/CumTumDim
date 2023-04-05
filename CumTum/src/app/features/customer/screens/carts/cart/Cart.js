@@ -33,9 +33,11 @@ import Router from '../../../../../navigation/Router';
 import {authSelector} from '../../../../admin/sliceAuth';
 import {createHistoryCart} from '../../../../carts/sliceOrder';
 
-
 const log = LOG.extend('CART.JS');
 const Cart = ({navigation}) => {
+
+  
+
   const data = useSelector(productSelector);
   const auth = useSelector(authSelector);
 
@@ -69,22 +71,30 @@ const Cart = ({navigation}) => {
     ) {
       const order = {
         mainDishCart: data.mainDishCart.map(item => ({
+          productName: item.name,
           productId: item._id,
+          productImageUrl: item.imageUrl,
           amounts: item.amount,
           price: item.price,
         })),
         extraDishCart: data.extraDishCart.map(item => ({
+          productName: item.name,
           productId: item._id,
+          productImageUrl: item.imageUrl,
           amounts: item.amount,
           price: item.price,
         })),
         toppingsCart: data.toppingsCart.map(item => ({
+          productName: item.name,
           productId: item._id,
+          productImageUrl: item.imageUrl,
           amounts: item.amount,
           price: item.price,
         })),
         anotherCart: data.anotherCart.map(item => ({
+          productName: item.name,
           productId: item._id,
+          productImageUrl: item.imageUrl,
           amounts: item.amount,
           price: item.price,
         })),
@@ -96,8 +106,8 @@ const Cart = ({navigation}) => {
         totalAmount: solveAmountDishes(),
         userId: userId,
       };
-      // console.log('🚀 ~ file: Cart.js:48 ~ onBuy ~ item:', order);
-      handleCreateHistoryCart(order);
+      log.error('🚀 ~ file: Cart.js:48 ~ onBuy ~ item:', order);
+      // handleCreateHistoryCart(order);
       navigation.navigate(Router.PAYMENT, {order});
     } else {
       Alert.alert('Bạn phải có ít nhất 1 món chính trong bill! ');

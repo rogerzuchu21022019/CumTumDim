@@ -1,7 +1,6 @@
 const amqp = require("amqplib");
-const connectRabbitPub = async (connection) => {
+const connectRabbitPub = async (connection,queueName) => {
   try {
-    const queueName = "orders";
 
     const channel = await connection.createChannel();
     await channel.assertQueue(queueName, { durable: true });

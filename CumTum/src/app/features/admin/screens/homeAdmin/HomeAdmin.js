@@ -30,8 +30,18 @@ const HomeAdmin = ({navigation}) => {
   // log.info('🚀 ~ file: HomeAdmin.js:19 ~ HomeAdmin ~ data:', data);
 
   useEffect(() => {
-    socket.on('connect')
+    socket.on(constants.SOCKET.CONNECT);
+    socket.on(constants.SOCKET.CREATE_ORDER, orderData => {
+      log.error('create order', orderData);
+    });
     console.log('connect', socket);
+
+    const timeToRemove = setTimeout(() => {
+      socket.off();
+    }, 5000);
+    return () => {
+      clearTimeout(timeToRemove);
+    };
   }, []);
 
   useEffect(() => {
