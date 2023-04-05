@@ -22,8 +22,10 @@ const styles = StyleSheet.create({
     marginLeft: 20,
   },
   imageLogo: {
-    width: 50,
-    height: 50,
+    width: 40,
+    height: 40,
+    borderRadius:20,
+
   },
   rightHeader: {
     flex: 1,

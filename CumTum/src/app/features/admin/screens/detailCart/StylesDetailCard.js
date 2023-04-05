@@ -7,25 +7,52 @@ const StylesDetailCard = StyleSheet.create({
     },
     // /*Header*/ 
     header: {
-        flex:1,
-        backgroundColor: '#252121',
-        justifyContent:'flex-end',
-    
+      flex: 1,
+      justifyContent: 'center',
+      backgroundColor: constants.COLOR.PRIMARY,
+      alignItems: 'center',
+      marginBottom: 2,
     },
-    groupItemHeader:{
-        flexDirection:'row',
-        alignItems:'center',
-        backgroundColor:'#252121',
-        paddingStart:10,
-
+    imageLogo: {
+      width: 40,
+      height: 40,
     },
-    strikethrough:{
-        height:2,
-        backgroundColor:'black',
-        marginTop:10,
+    leftHeader: {
+      flex: 1,
+      flexDirection: 'row',
+      alignItems: 'center',
+      // backgroundColor: constants.COLOR.WHITE,
+      // marginLeft: ,
     },
-    textTitle:{
-        color:'white',
+    rightHeader: {
+      flex: 1,
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'flex-end',
+      // backgroundColor: constants.COLOR.WHITE,
+      marginRight: 20,
+    },
+    divideLine: {
+      height: 2,
+      backgroundColor: constants.COLOR.BLACK,
+    },
+    textTitle: {
+      color: 'white',
+      marginLeft: 6,
+    },
+    viewLogo: {
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
+    imageReturn: {
+      // backgroundColor: constants.COLOR.WHITE,
+      marginLeft: 5,
+      marginRight: 5,
+    },
+    mainHeader: {
+      flexDirection: 'row',
+      // backgroundColor: constants.COLOR.WHITE,
+      alignItems: 'center',
     },
     
     // /*Header*/ 

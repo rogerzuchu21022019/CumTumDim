@@ -201,7 +201,7 @@ const HomeCustomer = ({navigation}) => {
                   <View style={styles.viewImageDish}>
                     <FastImage
                       style={styles.imageLogo}
-                      source={require('../../../../../../assets/cutleryIcon.png')}
+                      source={require('../../../../../../assets/logoMainDish.jpg')}
                     />
                   </View>
                 </View>
@@ -219,7 +219,7 @@ const HomeCustomer = ({navigation}) => {
                   <View style={styles.viewImageDish}>
                     <FastImage
                       style={styles.imageLogo}
-                      source={require('../../../../../../assets/cutleryIcon.png')}
+                      source={require('../../../../../../assets/logoExtraDish.png')}
                     />
                   </View>
                 </View>
@@ -237,7 +237,7 @@ const HomeCustomer = ({navigation}) => {
                   <View style={styles.viewImageDish}>
                     <FastImage
                       style={styles.imageLogo}
-                      source={require('../../../../../../assets/cutleryIcon.png')}
+                      source={require('../../../../../../assets/logoTopping.jpg')}
                     />
                   </View>
                 </View>
@@ -255,7 +255,7 @@ const HomeCustomer = ({navigation}) => {
                   <View style={styles.viewImageDish}>
                     <FastImage
                       style={styles.imageLogo}
-                      source={require('../../../../../../assets/cutleryIcon.png')}
+                      source={require('../../../../../../assets/logoKhac.jpg')}
                     />
                   </View>
                 </View>

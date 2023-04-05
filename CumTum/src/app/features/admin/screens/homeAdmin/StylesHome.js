@@ -11,8 +11,9 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     backgroundColor: constants.COLOR.PRIMARY,
+    alignItems: 'center',
+    marginBottom: 2,
   },
-
   imageLogo: {
     width: 40,
     height: 40,
@@ -21,8 +22,9 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
+    marginStart:10
     // backgroundColor: constants.COLOR.WHITE,
-    marginLeft: 20,
+    // marginLeft: ,
   },
   rightHeader: {
     flex: 1,
@@ -35,17 +37,26 @@ const styles = StyleSheet.create({
   divideLine: {
     height: 2,
     backgroundColor: constants.COLOR.BLACK,
-    // marginTop: 10,
   },
   textTitle: {
     color: 'white',
     marginLeft: 6,
+  },
+  viewLogo: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  imageReturn: {
+    // backgroundColor: constants.COLOR.WHITE,
+    marginLeft: 5,
+    marginRight: 5,
   },
   mainHeader: {
     flexDirection: 'row',
     // backgroundColor: constants.COLOR.WHITE,
     alignItems: 'center',
   },
+  
   /* Header */
 
   //body

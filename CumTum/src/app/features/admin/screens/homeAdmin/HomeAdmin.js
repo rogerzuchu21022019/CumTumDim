@@ -1,4 +1,4 @@
-import {Text, View, Image, ScrollView, FlatList} from 'react-native';
+import {Text, View, Image, ScrollView, FlatList,TouchableOpacity} from 'react-native';
 import React, {useEffect} from 'react';
 import styles from './StylesHome';
 import SafeKeyComponent from '../../../../components/safe_area/SafeKeyComponent';
@@ -11,6 +11,7 @@ import IconOcticons from 'react-native-vector-icons/Octicons';
 import {useDispatch, useSelector} from 'react-redux';
 import {cartSelector} from '../../../carts/sliceOrder';
 import {LOG} from '../../../../../../logger.config';
+import IconIonicons from 'react-native-vector-icons/Ionicons';
 import {
   fetchFindNotifications,
   fetchNotifies,
@@ -52,25 +53,33 @@ const HomeAdmin = ({navigation}) => {
   return (
     <SafeKeyComponent>
       <View style={styles.container}>
-        <View style={styles.header}>
+      <View style={styles.header}>
           <View style={styles.mainHeader}>
             <View style={styles.leftHeader}>
-              <FastImage
-                style={styles.imageLogo}
-                source={require('../../../../../assets/iconLogo_CumTumDim.jpg')}
-              />
-              <Text style={styles.textTitle}>Cum tứm đim</Text>
+             
+              {/* Code back to HomeScreen */}
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate(Router.HOME_ADMIN);
+                }}>
+                <View style={styles.viewLogo}>
+                  <FastImage
+                    style={styles.imageLogo}
+                    source={require("../../../../../assets/Logo_CumTumDim.png")}
+                  />
+                  <Text style={styles.textTitle}>Cum tứm đim</Text>
+                </View>
+              </TouchableOpacity>
             </View>
-            <View style={styles.rightHeader}>
+            {/* <View style={styles.rightHeader}>
               <IconOcticons
                 name="bell-fill"
                 color={constants.COLOR.RED}
                 size={20}
               />
-            </View>
+            </View> */}
           </View>
         </View>
-        <View style={styles.divideLine}></View>
         <View style={styles.body}>
           <View style={styles.viewFlashList}>
             <FlashList

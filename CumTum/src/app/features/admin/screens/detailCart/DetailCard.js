@@ -8,12 +8,13 @@ import { LOG } from '../../../../../../logger.config';
 import IconMaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { constants } from '../../../../shared/constants';
 import SafeKeyComponent from '../../../../components/safe_area/SafeKeyComponent';
+import IconIonicons from 'react-native-vector-icons/Ionicons';
 
 
 
 
 
-const DetailCard = ({route}) => {
+const DetailCard = ({route,navigation}) => {
   const log = LOG.extend("DETAILCART")
   const {item,index} = route.params
   log.info("item",item)
@@ -37,7 +38,9 @@ const DetailCard = ({route}) => {
   toppingsCart.forEach((cart)=>{
     log.info("cart",cart);
   })
-
+  const moveToHOme = ()=>{
+    navigation.navigate(Router.HOME_ADMIN)
+  }
  
 
 
@@ -52,27 +55,38 @@ const DetailCard = ({route}) => {
     item.toppingsCart.length ||
     item.anotherCart.length ? (
       <View style={styles.container}>
-        <View style={styles.header}>
-          <View style={styles.boxTextHeader}>
-            <Text style={styles.textHeader}>Giỏ hàng</Text>
-          </View>
-          {item.mainDishCart.length ||
-          item.extraDishCart ||
-          item.toppingsCart ||
-          item.anotherCart ? (
-            <View style={styles.boxButton}>
-              <TouchableOpacity >
-                <View style={styles.nnn}>
-                  <Text style={styles.textButton}>Reset</Text>
-                  <IconMaterialCommunityIcons
-                    name="delete"
-                    color={constants.COLOR.BLACK}
-                    size={30}
+         <View style={styles.header}>
+          <View style={styles.mainHeader}>
+            <View style={styles.leftHeader}>
+              <TouchableOpacity onPress={moveToHOme}
+               >
+                <IconIonicons
+                  style={styles.imageReturn}
+                  name="arrow-back"
+                  color={constants.COLOR.WHITE}
+                  size={20}
+                />
+              </TouchableOpacity>
+              {/* Code back to HomeScreen */}
+              <TouchableOpacity
+                onPress={moveToHOme}>
+                <View style={styles.viewLogo}>
+                  <Image
+                    style={styles.imageLogo}
+                    source={require("../../../../../assets/Logo_CumTumDim.png")}
                   />
+                  <Text style={styles.textTitle}>Cum tứm đim</Text>
                 </View>
               </TouchableOpacity>
             </View>
-          ) : null}
+            {/* <View style={styles.rightHeader}>
+              <IconOcticons
+                name="bell-fill"
+                color={constants.COLOR.RED}
+                size={20}
+              />
+            </View> */}
+          </View>
         </View>
         <View style={styles.body}>
           <ScrollView
