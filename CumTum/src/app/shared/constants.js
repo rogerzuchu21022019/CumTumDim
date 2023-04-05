@@ -1,7 +1,5 @@
 export const constants = {
-  ITEM:{
-
-  },
+  ITEM: {},
   COLOR: {
     PRIMARY: '#252121',
     ORANGE: '#FE724C',
@@ -17,10 +15,6 @@ export const constants = {
   BASE_URL: {
     MAIN: 'http://192.168.1.19:3000/api',
     SECOND: 'https://cumtumdim.becofoodstore.click/api',
-  },
-  SOCKET_URL: {
-    LOCAL: 'http://192.168.2.7:3000',
-    PRODUCTION: 'https://cumtumdim.becofoodstore.click',
   },
   ROLE: {
     ADMIN: 'admin',
@@ -60,5 +54,16 @@ export const constants = {
   },
   DISPATCH: {
     ADD_WISH_CART: 'addWishCart',
+  },
+  SOCKET: {
+    URL: 'http://192.168.2.7:3000',
+    CONNECTION: 'connection',
+    CONNECT: 'connect',
+    DISCONNECT: 'disconnect',
+    PUSH_NOTIFY: 'push-notify',
+    CREATE_ORDER: 'create-order',
+  },
+  RABBIT_MQ: {
+    QUEUE_NAME_ORDER: 'order',
   },
 };

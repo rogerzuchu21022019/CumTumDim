@@ -42,22 +42,22 @@ const userSchema = new mongoose.Schema(
         },
       ],
     },
-    notifications: [
-      {
-        notificationUUID: {
-          type: String,
-        },
-        title: {
-          type: String,
-        },
-        messageToCustomer: {
-          type: String,
-        },
-        messageToAdmin: {
-          type: String,
-        },
-      },
-    ],
+    // notifications: [
+    //   {
+    //     notificationUUID: {
+    //       type: String,
+    //     },
+    //     title: {
+    //       type: String,
+    //     },
+    //     messageToCustomer: {
+    //       type: String,
+    //     },
+    //     messageToAdmin: {
+    //       type: String,
+    //     },
+    //   },
+    // ],
 
     address: {
       street: {

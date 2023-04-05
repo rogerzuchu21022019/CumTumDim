@@ -4,14 +4,17 @@ const OrderSchema = new mongoose.Schema(
   {
     mainDishCart: [
       {
-        productName:{
-          type: 'string',
+        productName: {
+          type: String,
           required: true,
         },
         productId: {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "Product",
+          type: String,
           required: true,
+        },
+        productImageUrl: {
+          type: String,
+          require: true,
         },
         amounts: {
           type: Number,
@@ -26,14 +29,17 @@ const OrderSchema = new mongoose.Schema(
 
     extraDishCart: [
       {
-        productName:{
-          type: 'string',
+        productName: {
+          type: String,
           required: true,
         },
         productId: {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "Product",
+          type: String,
           required: true,
+        },
+        productImageUrl: {
+          type: String,
+          require: true,
         },
         amounts: {
           type: Number,
@@ -48,14 +54,17 @@ const OrderSchema = new mongoose.Schema(
 
     toppingsCart: [
       {
-        productName:{
-          type: 'string',
+        productName: {
+          type: String,
           required: true,
         },
         productId: {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "Product",
+          type: String,
           required: true,
+        },
+        productImageUrl: {
+          type: String,
+          require: true,
         },
         amounts: {
           type: Number,
@@ -70,14 +79,17 @@ const OrderSchema = new mongoose.Schema(
 
     anotherCart: [
       {
-        productName:{
-          type: 'string',
+        productName: {
+          type: String,
           required: true,
         },
         productId: {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "Product",
+          type: String,
           required: true,
+        },
+        productImageUrl: {
+          type: String,
+          require: true,
         },
         amounts: {
           type: Number,
