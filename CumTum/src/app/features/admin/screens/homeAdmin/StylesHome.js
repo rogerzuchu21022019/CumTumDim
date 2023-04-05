@@ -63,7 +63,6 @@ const styles = StyleSheet.create({
   body: {
     flex: 12,
     backgroundColor: constants.COLOR.BLACK,
-    marginTop: 2,
     // width:'100%'
   },
   groupItem: {},

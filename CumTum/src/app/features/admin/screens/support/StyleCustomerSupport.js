@@ -58,31 +58,29 @@ const styles = StyleSheet.create({
   body: {
     flex: 12,
     backgroundColor: '#252121',
-    justifyContent: 'center',
+    justifyContent: 'space-around',
     alignItems: 'center',
   },
-  itemSupport: {
-    marginBottom: 40,
-    backgroundColor: '#252121',
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
-    alignItems: 'center',
-  },
+  
   image:{
-    marginEnd:10,
+    width:40,
+    height:40,
+    borderRadius:18,
   },
-  itemSupport1: {
-    gap: 55,
-    flexDirection: 'column',
+  viewImage:{
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop:30
   },
-  itemSupport2: {
-    gap: 80,
-    flexDirection: 'column',
-  },
+  
   itemText: {
     color: 'white',
     fontSize: 20,
     fontWeight: '700',
+    marginStart: 20
+  },
+  itemSupport:{
+    marginBottom:50,
   },
   viewButtonCreate: {
     backgroundColor: constants.COLOR.YELLOW,
@@ -93,13 +91,29 @@ const styles = StyleSheet.create({
     width: 150,
     height: 50,
   },
+  groupBTN:{
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop:20,
+  },
   btnCreate: {
     // backgroundColor: constants.COLOR.RED,
     fontWeight: '700',
     fontSize: 20,
     color: constants.COLOR.WHITE,
   },
-  //body
+  cartToon:{
+   width:"100%"
+  },
+  imageCartToon:{
+    width:130,
+    height:130,
+  },
+  imageCartToonTop:{
+    width:"100%",
+    alignItems: "flex-end",
+  },
+    //body
 });
 
 export default styles;

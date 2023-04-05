@@ -38,44 +38,58 @@ const moveTo = async () => {
         </View>
         <View style={styles.divideLine}></View>
         <View style={styles.body}>
+          <View style={styles.imageCartToonTop}>
+            <Image
+            style={styles.imageCartToon}
+               source={require('../../../../../assets/cartToon.png')}
+            
+            />
+          </View>
           <View style={styles.itemSupport}>
-            <View style={styles.itemSupport1}>
-              <View style={styles.image}>
+          
+              <View style={styles.viewImage}>
                 <Image
+                style={styles.image}
                   source={require('../../../../../assets/ZaloImages.png')}
                 />
-              </View>
-              <View style={styles.image}>
-                <Image
-                  source={require('../../../../../assets/GmailImages.png')}
-                />
-              </View>
-              <View style={styles.image}>
-                <Image
-                  source={require('../../../../../assets/PhonesImages.png')}
-                />
-              </View>
-            </View>
-            <View style={styles.itemSupport2}>
-              <View>
+                <View>
                 <Text style={styles.itemText}>0879175310</Text>
               </View>
-              <View>
-                <Text style={styles.itemText}>
+              </View>
+              <View style={styles.viewImage}>
+                <Image
+                style={styles.image}
+                  source={require('../../../../../assets/GmailImages.png')}
+                />
+                 <Text style={styles.itemText}>
                   vuthanhnam21022019@gmail.com
                 </Text>
               </View>
-              <View>
+              <View style={styles.viewImage}>
+                <Image
+                style={styles.image}
+
+                  source={require('../../../../../assets/PhonesImages.png')}
+                />
+                 <View>
                 <Text style={styles.itemText}>0879175310</Text>
               </View>
             </View>
-          </View>
-          <View>
+        <View style={styles.groupBTN}>
           <TouchableOpacity onPress={signOut}>
               <View style={styles.viewButtonCreate}>
                 <Text style={styles.btnCreate}>Đăng xuất</Text>
               </View>
             </TouchableOpacity>
+            </View>
+          
+          </View>
+        
+          <View style={styles.cartToon}>
+          <Image style={styles.imageCartToon}
+               source={require('../../../../../assets/cartToon2.png')}
+            
+            />
           </View>
         </View>
       

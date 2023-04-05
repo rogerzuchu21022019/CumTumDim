@@ -1,5 +1,5 @@
 import {Text, View,Image,FlatList,TouchableOpacity,ScrollView,TouchableNativeFeedback} from 'react-native'
-import React from 'react'
+import React,{useEffect}  from 'react'
 import styles from './StylesDetailCard'
 import ItemDetail from './ItemDetail';
 import { FlashList } from '@shopify/flash-list';
@@ -41,11 +41,30 @@ const DetailCard = ({route,navigation}) => {
   const moveToHOme = ()=>{
     navigation.navigate(Router.HOME_ADMIN)
   }
- 
 
+  
+  const solveAmountSuonMo = () => {
+    let totalAmountDish = 0;
+    item.mainDishCart.forEach(item => {
+      if (item.subCategory === 'Sườn mỡ') {
+        totalAmountDish += item.amounts;
+      }
+    });
+    return totalAmountDish;
+  };
+  const solveAmountMainDish = () => {
+    let totalAmountDish = 0;
+    item.mainDishCart.forEach(item => {
+      totalAmountDish += item.amounts;
+    });
+    return totalAmountDish;
+  };
 
 
   
+  
+  
+  // item.totalMainDish
 
 
   return (
@@ -211,6 +230,40 @@ const DetailCard = ({route,navigation}) => {
                   </View>
                 ) : null}
                 <View style={styles.viewTotal}>
+
+                  <View style={styles.viewBoxShowInfoBill}>
+                    <Text style={styles.textAddress}>
+                      Số nhà :54
+                    </Text>
+                  </View>
+                  <View style={styles.viewBoxShowInfoBill}>
+                    <Text style={styles.textAddress}>
+                      Đường :14
+
+                    </Text>
+                  </View>
+                  <View style={styles.viewBoxShowInfoBill}>
+                    <Text style={styles.textAddress}>
+                      Phường : Đông Hưng Thuận
+                    </Text>
+                  </View>
+                  <View style={styles.viewBoxShowInfoBill}>
+                    <Text style={styles.textAddress}>
+                      Quận : 12
+                    </Text>
+                  </View>
+                  <View style={styles.viewBoxShowInfoBill}>
+                    <Text style={styles.textAddress}>
+                      Thành Phố : Hồ Chí Minh
+                    </Text>
+                  </View>
+                
+                  <View style={styles.divideLine}></View>
+                
+                </View>
+
+                
+                <View style={styles.viewTotal}>
                   <View style={styles.viewBoxShowInfoBill}>
                     <Text style={styles.textInfo}>Số lượng món chính:</Text>
                     <Text style={styles.textInfo}>
@@ -218,6 +271,7 @@ const DetailCard = ({route,navigation}) => {
                       {item.totalMainDish}
                     </Text>
                   </View>
+                 
 
                   <View
                     style={[
@@ -228,7 +282,7 @@ const DetailCard = ({route,navigation}) => {
                       + Số lượng Suờn mỡ:
                     </Text>
                     <Text style={[styles.textInfo, styles.updateSubText]}>
-                      {/* {solveAmountSuonMo()}  */}
+                      {solveAmountSuonMo()} 
                     </Text>
                   </View>
 
@@ -241,7 +295,7 @@ const DetailCard = ({route,navigation}) => {
                       + Số lượng Suờn :
                     </Text>
                     <Text style={[styles.textInfo, styles.updateSubText]}>
-                      {/* {solveAmountMainDish() - solveAmountSuonMo()} */}
+                      {solveAmountMainDish()-solveAmountSuonMo()}
                     </Text>
                   </View>
 

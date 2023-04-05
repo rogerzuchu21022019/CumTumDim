@@ -16,6 +16,9 @@ const OrderSchema = new mongoose.Schema(
           type: String,
           require: true,
         },
+        subCategory: {
+          type: String,
+        },
         amounts: {
           type: Number,
           required: true,

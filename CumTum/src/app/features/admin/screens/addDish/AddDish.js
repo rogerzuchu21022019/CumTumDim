@@ -186,10 +186,7 @@ const AddDish = ({navigation}) => {
     dispatch(fetchAddDish({dish: dish, categoryId: categoryId}));
   };
 
-  const signOut = async () => {
-    dispatch(fetchSignOut());
-    moveTo();
-  };
+ 
 
   const moveTo = async () => {
     navigation.navigate(Router.LOGIN);
@@ -337,7 +334,7 @@ const AddDish = ({navigation}) => {
                   placeholder={placeholderTypeMeal}
                   colorIconArrow={constants.COLOR.GREY}
                   colorCloseIcon={constants.COLOR.WHITE}
-                  colorPlaceholder={constants.COLOR.WHITE}
+                  colorPlaceholder={constants.COLOR.GREY}
                 />
               </View>
             ) : null}
@@ -356,6 +353,8 @@ const AddDish = ({navigation}) => {
               placeholder={placeholderNameDish}
               colorIconArrow={constants.COLOR.GREY}
               colorCloseIcon={constants.COLOR.WHITE}
+              colorPlaceholder={constants.COLOR.GREY}
+
             />
           </View>
 
@@ -372,6 +371,8 @@ const AddDish = ({navigation}) => {
               placeholder={placeholderPrice}
               colorIconArrow={constants.COLOR.GREY}
               colorCloseIcon={constants.COLOR.WHITE}
+              colorPlaceholder={constants.COLOR.GREY}
+
             />
           </View>
           <View style={styles.footer}>
@@ -381,11 +382,7 @@ const AddDish = ({navigation}) => {
               </View>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={signOut}>
-              <View style={styles.viewButtonCreate}>
-                <Text style={styles.btnCreate}>Đăng xuất</Text>
-              </View>
-            </TouchableOpacity>
+            
           </View>
         </View>
         {/* Xử lý camera */}

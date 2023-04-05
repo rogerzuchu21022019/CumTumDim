@@ -60,7 +60,6 @@ const StylesDetailCard = StyleSheet.create({
     // /*Body*/ 
     body: {
         flex: 12,
-        marginTop: 2,
         width: '100%',
         height: '100%',
         backgroundColor: constants.COLOR.BLACK,
@@ -197,6 +196,15 @@ const StylesDetailCard = StyleSheet.create({
       width:'100%',
       marginTop:20,
       marginBottom:20,
+    },
+
+    viewAddress:{
+      width:380,
+      marginTop:10
+    },
+    textAddress:{
+      color:constants.COLOR.WHITE,
+      fontSize:16,
     },
      /*Body*/ 
 

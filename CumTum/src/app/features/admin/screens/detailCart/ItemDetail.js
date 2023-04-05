@@ -3,11 +3,12 @@ import React from 'react';
 import styles from './stylesItem';
 import SafeKeyComponent from '../../../../components/safe_area/SafeKeyComponent';
 import FastImage from 'react-native-fast-image';
+import { LOG } from '../../../../../../logger.config';
 
 const ItemDetail = ({item, index}) => {
 
   const imageUrlOptions = {
-    uri: item.imageUrl,
+    uri: item.productImageUrl,
     priority: FastImage.priority.high,
     cache: FastImage.cacheControl.immutable,
   };
@@ -32,7 +33,7 @@ const ItemDetail = ({item, index}) => {
             {item.subCategory === 'Sườn mỡ' ? (
               <View>
                 <Text style={[styles.textName, styles.textBoxNameUpdate]}>
-                  {item.name}
+                  {item.productName}
                 </Text>
                 <Text style={[styles.textName, styles.textBoxNameUpdate]}>
                   ({item.subCategory})
@@ -40,27 +41,25 @@ const ItemDetail = ({item, index}) => {
               </View>
             ) : (
               <Text style={[styles.textName, styles.textBoxNameUpdate]}>
-                {item.name}
+                {item.productName}
               </Text>
             )}
-            {item.price === 0 ? (
-              <Text style={[styles.textName, styles.textBoxNameUpdate]}>
-                Free
-              </Text>
-            ) : (
-              <View>
+            {item.price === 0  ? (
                 <Text style={[styles.textName, styles.textBoxNameUpdate]}>
-                  {item.price}K
+                  Free
                 </Text>
+              
 
-                <Text
-                  style={[
-                    styles.textName,
-                    styles.textBoxNameUpdate,
-                    styles.updateColor,
-                  ]}>
-                  {item.price * item.amount}K
-                </Text>
+              ) : (
+                <View>
+                  <Text
+                    style={[
+                      styles.textName,
+                      styles.textBoxNameUpdate,
+                      styles.updateColor,
+                    ]}>
+                    {item.price * item.amounts}K
+                  </Text>
               </View>
             )}
           </View>
