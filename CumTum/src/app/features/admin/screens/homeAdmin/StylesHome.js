@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    marginStart:10
+    marginStart: 10,
     // backgroundColor: constants.COLOR.WHITE,
     // marginLeft: ,
   },
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     // backgroundColor: constants.COLOR.WHITE,
     alignItems: 'center',
   },
-  
+
   /* Header */
 
   //body
@@ -72,6 +72,17 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     paddingRight: 20,
     marginTop: 10,
+  },
+  viewToday: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    
+  },
+  textToday: {
+    lineHeight: 30,
+    color: constants.COLOR.WHITE,
+    fontSize: 20,
+    fontWeight: 'bold',
   },
 
   //body

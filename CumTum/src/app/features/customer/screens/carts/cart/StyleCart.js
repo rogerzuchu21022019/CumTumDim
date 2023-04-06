@@ -82,35 +82,35 @@ const styles = StyleSheet.create({
   viewFlashList: {
     flex: 10,
     width: '100%',
-    minHeight: 300,
+    minHeight: 100,
     // backgroundColor: constants.COLOR.WHITE,
   },
 
   viewMainDishes: {
     flex: 1,
     width: '100%',
-    minHeight: 300,
+    minHeight: 200,
     // backgroundColor: constants.COLOR.AQUA,
   },
 
   viewExtraDishes: {
     flex: 1,
     width: '100%',
-    minHeight: 300,
+    minHeight: 200,
     // backgroundColor: constants.COLOR.AQUA,
   },
 
   viewToppings: {
     flex: 1,
     width: '100%',
-    minHeight: 300,
+    minHeight: 200,
 
     // backgroundColor: constants.COLOR.AQUA,
   },
   viewAnother: {
     flex: 1,
     width: '100%',
-    minHeight: 300,
+    minHeight: 200,
     // backgroundColor: constants.COLOR.AQUA,
   },
   viewTextHeader: {

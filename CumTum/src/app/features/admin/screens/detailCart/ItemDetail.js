@@ -4,7 +4,7 @@ import styles from './stylesItem';
 import SafeKeyComponent from '../../../../components/safe_area/SafeKeyComponent';
 import FastImage from 'react-native-fast-image';
 import { LOG } from '../../../../../../logger.config';
-
+const log = LOG.extend("ITEM_DETAIL.js")
 const ItemDetail = ({item, index}) => {
 
   const imageUrlOptions = {
@@ -13,7 +13,7 @@ const ItemDetail = ({item, index}) => {
     cache: FastImage.cacheControl.immutable,
   };
   // mainDishCart
-  console.log("item", item);
+  // log.info("item", item);
   
   return (
     <SafeKeyComponent>
@@ -48,8 +48,6 @@ const ItemDetail = ({item, index}) => {
                 <Text style={[styles.textName, styles.textBoxNameUpdate]}>
                   Free
                 </Text>
-              
-
               ) : (
                 <View>
                   <Text

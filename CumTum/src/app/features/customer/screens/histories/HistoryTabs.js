@@ -5,13 +5,12 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import SafeKeyComponent from '../../../../components/safe_area/SafeKeyComponent';
 import History from './history/History';
 import { createHistoryCart } from '../../../carts/sliceOrder';
-import HistoryNoItems from './history/historynoitems/HistoryNoItems';
+import HistoryNoItems from './historyNoItem/HistoryNoItems';
 
 const HistoryTabs = () => {
   const Stack = createNativeStackNavigator();
 
   return (
-    <SafeKeyComponent>
       <Stack.Navigator>
         <Stack.Group>
           {/* <Stack.Screen
@@ -30,7 +29,6 @@ const HistoryTabs = () => {
           />
         </Stack.Group>
       </Stack.Navigator>
-    </SafeKeyComponent>
   );
 };
 

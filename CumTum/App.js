@@ -64,6 +64,8 @@ const App = () => {
     });
   }, []);
 
+  
+
   useEffect(() => {
     return notifee.onForegroundEvent(({type, detail}) => {
       switch (type) {

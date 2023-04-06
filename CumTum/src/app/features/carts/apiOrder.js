@@ -8,13 +8,12 @@ const log = LOG.extend(`API_ORDER.JS`);
 export const fetchCreateOrder = createAsyncThunk(
   constants.FETCH.CREATE_ORDER,
   async order => {
-    const response = await AxiosInstance().post(
-      `/products/push-notification-rabbit`,
-      {
-        // const response = await AxiosInstance().post(`/products/create-order`, {
-        order,
-      },
-    );
+    // const response = await AxiosInstance().post(
+    // `/products/push-notification-rabbit`,
+    // {
+    const response = await AxiosInstance().post(`/products/create-order`, {
+      order,
+    });
     log.info('🚀 ~ file: apiOrder.js:13 ~ response ~ response:', response.data);
     return response.data;
   },
@@ -54,6 +53,21 @@ export const fetchFindNotifications = createAsyncThunk(
   constants.FETCH.FIND_NOTIFICATIONS,
   async () => {
     const response = await AxiosInstance().get(`/products/find-notifications`);
+    return response.data;
+  },
+);
+
+export const fetchUpdateOrder = createAsyncThunk(
+  constants.FETCH.UPDATE_ORDER,
+  async data => {
+    log.error("🚀 ~ file: apiOrder.js:63 ~ data:", data)
+    const response = await AxiosInstance().post(
+      `/products/find-order-by-id/${data.orderId}`,
+      {
+        orderStatus: data.orderStatus,
+      },
+    );
+    console.log("🚀 ~ file: apiOrder.js:69 ~ response:", response.data)
     return response.data;
   },
 );

@@ -45,6 +45,7 @@ export const constants = {
     FIND_RABBIT: 'fetchRabbit',
     PUSH_NOTIFICATION: 'fetchNotification',
     FIND_NOTIFICATIONS: 'fetchNotifications',
+    UPDATE_ORDER: 'fetchUpdateOrder',
   },
   SLICE: {
     ADMIN: 'admin',
@@ -62,6 +63,7 @@ export const constants = {
     DISCONNECT: 'disconnect',
     PUSH_NOTIFY: 'push-notify',
     CREATE_ORDER: 'create-order',
+    UPDATE_ORDER: "update-order",
   },
   RABBIT_MQ: {
     QUEUE_NAME_ORDER: 'order',

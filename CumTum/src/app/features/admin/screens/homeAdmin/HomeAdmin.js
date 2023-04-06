@@ -29,15 +29,16 @@ import {
 import {authSelector} from '../../sliceAuth';
 import {fetchUserById} from '../../apiAdmin';
 import socketServices from '../../../../shared/utils/Socket';
-import io from 'socket.io-client';
+// import io from 'socket.io-client';
 
 import ConfigSocket from '../../../../shared/utils/SocketConfig';
 import {showNotifyLocal} from '../../../../shared/utils/Notifies';
 import {formatTime} from '../../../../shared/utils/Moment';
+import {format, isToday} from 'date-fns';
 const log = LOG.extend(`HOME_ADMIN.JS`);
-const socket = io(constants.SOCKET.URL, {
-  transports: ['websocket'],
-});
+// const socket = io(constants.SOCKET.URL, {
+//   transports: ['websocket'],
+// });
 const HomeAdmin = ({navigation}) => {
   const dispatch = useDispatch();
   const data = useSelector(cartSelector);
@@ -45,16 +46,20 @@ const HomeAdmin = ({navigation}) => {
 
   const [isRefresh, setIsRefresh] = useState(false);
 
-  log.info('🚀 ~ file: HomeAdmin.js:19 ~ HomeAdmin ~ data:', data);
+
+  // log.info('🚀 ~ file: HomeAdmin.js:19 ~ HomeAdmin ~ data:', data);
 
   useEffect(() => {
-    socket.on(constants.SOCKET.CONNECT, () => {
-      console.log('connect', socket);
-    });
-    socket.on(constants.SOCKET.DISCONNECT, () => {
-      console.log('DISCONNECT');
-    });
-    socket.on(constants.SOCKET.CREATE_ORDER, orderData => {
+    socketServices.initializeSocket();
+
+    // socketServices.socket.on(constants.SOCKET.CONNECT, () => {
+    //   console.log('connect', socket);
+    // });
+    // socketServices.socket.on(constants.SOCKET.DISCONNECT, () => {
+    //   console.log('DISCONNECT');
+    // });
+
+    socketServices.on(constants.SOCKET.CREATE_ORDER, orderData => {
       // console.log('connect to create order', orderData);
       log.error('create order success', orderData);
       onDisplayNotification(orderData);
@@ -62,7 +67,7 @@ const HomeAdmin = ({navigation}) => {
     });
 
     return () => {
-      socket.disconnect();
+      socketServices.socket.disconnect();
     };
   }, [dispatch]);
 
@@ -71,7 +76,7 @@ const HomeAdmin = ({navigation}) => {
     const total = orderData.moneyToPaid;
 
     const title = 'Notification';
-    const content = `Đơn hàng số ${idOrder} có tổng giá tiền ${total} đang chờ bạn xác nhận!`;
+    const content = `Đơn hàng số ${idOrder} có tổng giá tiền ${total}K đang chờ bạn xác nhận!`;
     // console.log("🚀 ~ file: Payment.js:45 ~ onDisplayNotification ~ content:", content)
     const dataMap = {
       title,
@@ -85,7 +90,7 @@ const HomeAdmin = ({navigation}) => {
     dispatch(fetchOrders());
     // dispatch(fetchNotifies());
     // dispatch(fetchFindNotifications());
-  }, [dispatch]);
+  }, [dispatch, data.orders.length]);
 
   // useEffect(() => {
   //   const time = setTimeout(() => {
@@ -96,26 +101,13 @@ const HomeAdmin = ({navigation}) => {
   //   };
   // }, [user.user.notifications]);
 
-  // get date , hour, time now
-  const getDate = () => {
+  const getCurrentTime = () => {
     const date = new Date();
-    let day = date.getDate();
-    let month = date.getMonth() + 1;
-    const year = date.getFullYear();
-    if (day < 10) {
-      day = '0' + day;
-    }
-    if (month < 10) {
-      month = '0' + month;
-    }
-
-    return `${day}-${month}-${year}`;
+    const time = format(date, 'dd-MM-yyyy');
+    return time;
   };
 
-  const createDateOrder = () => {
-    const createdAt = data.orders[0].createdAt;
-    return createdAt;
-  };
+ 
 
   return (
     <SafeKeyComponent>
@@ -148,14 +140,17 @@ const HomeAdmin = ({navigation}) => {
         </View>
         <View style={styles.body}>
           <View>
-            <Text style={{color: 'white'}}>{getDate()}</Text>
-            <Text style={{color: 'white'}}>
-              {formatTime(createDateOrder())}
-            </Text>
+            {/* <Text style={{color: 'white'}}>{timeDiffInDays()}</Text> */}
           </View>
           <View style={styles.viewFlashList}>
+            <View style={styles.viewToday}>
+              <Text style={styles.textToday}>Today: {getCurrentTime()}</Text>
+              <Text style={styles.textToday}>
+                Số lượng đơn: {data.orderToday.length}
+              </Text>
+            </View>
             <FlashList
-              data={data.orders}
+              data={data.orderToday}
               estimatedItemSize={200}
               showsHorizontalScrollIndicator={false}
               showsVerticalScrollIndicator={false}

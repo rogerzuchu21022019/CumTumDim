@@ -1,13 +1,13 @@
 import io from 'socket.io-client';
+import { constants } from '../constants';
 
-const SOCKET_URL = 'http://192.168.1.20:3000'
 
 class WSService {
 
     initializeSocket = async () => {
         try {
 
-            this.socket = io(SOCKET_URL, {
+            this.socket = io(constants.SOCKET.URL, {
                 transports: ['websocket']
             })
             console.log("initializing socket", this.socket)

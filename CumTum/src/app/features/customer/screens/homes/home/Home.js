@@ -20,17 +20,12 @@ import SafeKeyComponent from '../../../../../components/safe_area/SafeKeyCompone
 import {showNotifyLocal} from '../../../../../shared/utils/Notifies';
 import {fetchCategories, fetchDishes} from '../../../../product/apiProduct';
 import styles from './StyleHome';
-
 import FastImage from 'react-native-fast-image';
 import IconOcticons from 'react-native-vector-icons/Octicons';
 import {constants} from '../../../../../shared/constants';
-
-import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
 import {FlashList} from '@shopify/flash-list';
 import ItemView from './item/ItemView';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {mainDishOptionsData} from '../../../../admin/screens/addDish/DataDishes';
-import DropDownPicker from 'react-native-dropdown-picker';
 import {
   addDishToWishCartOrUpdate,
   productSelector,
@@ -38,9 +33,9 @@ import {
   updateAmount,
 } from '../../../../product/sliceProduct';
 import DropdownPicker from '../../../../../shared/utils/DropdownPicker';
-import {cartSelector} from '../../../../carts/sliceOrder';
+import {cartSelector, createHistoryCart} from '../../../../carts/sliceOrder';
 import Advertisement from '../../../../../shared/utils/Advertisement';
-
+import socketServices from '../../../../../shared/utils/Socket';
 
 const HomeCustomer = ({navigation}) => {
   const log = LOG.extend('HOME_CUSTOMER.js');
@@ -61,6 +56,50 @@ const HomeCustomer = ({navigation}) => {
   const placeholder = 'Chọn loại sườn';
   /* Fetch API and dispatch action type to store */
 
+  useEffect(() => {
+    socketServices.initializeSocket();
+
+    socketServices.on(constants.SOCKET.UPDATE_ORDER, data => {
+      log.error('🚀 ~ file: Home.js:82 ~ socketServices.on ~ data:', data);
+
+      onDisplayNotiAccepted(data);
+      // handleCreateHistoryCart(data);
+
+      // move to history
+    });
+
+    return () => {
+      socketServices.socket.disconnect();
+    };
+  }, []);
+
+  const onCreateHistoryCart = order => ({
+    type: createHistoryCart().type,
+    payload: order,
+  });
+
+  const handleCreateHistoryCart = order => {
+    dispatch(onCreateHistoryCart(order));
+  };
+
+  const onDisplayNotiAccepted = async data => {
+    const idOrder = data._id;
+    const total = data.moneyToPaid;
+    const status = data.orderStatus;
+
+    const title = 'Notification';
+    const contentAccepted = `Đơn hàng số ${idOrder} với số tiền ${total}K của bạn đã được ${status}`;
+    const contentDeny = `Đơn hàng số ${idOrder} với số tiền ${total}K của bạn đã bị ${status} bởi Admin`;
+
+    // console.log("🚀 ~ file: Payment.js:45 ~ onDisplayNotification ~ content:", content)
+    const dataMap = {
+      title,
+      content: status === 'Chấp nhận' ? contentAccepted : contentDeny,
+    };
+
+    showNotifyLocal(dataMap);
+  };
+
   const onDisplayNotification = async () => {
     // Request permissions (required for iOS)
 
@@ -80,8 +119,6 @@ const HomeCustomer = ({navigation}) => {
     // Display a notification
     showNotifyLocal(dataMap);
   };
-
-    
 
   useEffect(() => {
     dispatch(fetchCategories());
@@ -180,7 +217,7 @@ const HomeCustomer = ({navigation}) => {
               source={require('../../../../../../assets/headerImage.jpg')}
             />
             <View style={styles.positionInImageBackground}>
-              <Advertisement/>
+              <Advertisement />
             </View>
           </View>
           <View style={styles.divideLine}></View>

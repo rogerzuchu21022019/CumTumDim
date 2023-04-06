@@ -3,12 +3,15 @@ import {LOG} from '../../../../../../../logger.config';
 import SafeKeyComponent from '../../../../../components/safe_area/SafeKeyComponent';
 import Router from '../../../../../navigation/Router';
 import styles from './StyleItemView';
+import {useEffect} from 'react';
 const log = LOG.extend(`ITEM_VIEW.JS`);
 const ItemView = ({item, index, navigation}) => {
   //   log.info('🚀 ~ file: ItemView.js:9 ~ ItemView ~ item:', item);
   const moveToDetail = () => {
     navigation.navigate(Router.DETAIL_CART_ADMIN, {item});
   };
+
+
   return (
     <SafeKeyComponent>
       <TouchableOpacity onPress={moveToDetail}>
