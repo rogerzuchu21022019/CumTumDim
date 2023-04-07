@@ -127,7 +127,7 @@ const EditDish = ({ navigation }) => {
         </View>
         <View style={styles.divideLine}></View>
         <View style={styles.body}>
-          <View>
+          <View style={styles.groupFlatlist}>
             <FlatList
               data={data}
               renderItem={({ item }) => (

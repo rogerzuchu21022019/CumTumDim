@@ -9,6 +9,7 @@ const Router = {
   ADD_DISH:"AddDish",
   EDIT_DISH:"EditDish",
   MANAGER_FOOD:"ManagerFood",
+  RING_BELL_ADMIN:"RingBellAdmin",
   
   UPDATE_DISH:"UpdateDish",
   DELETE_DISH:"DeleteDish",
@@ -24,6 +25,7 @@ const Router = {
   OTP:"Otp",
   HOME_CUSTOMER_TABS:"HomeCustomerTabs",
   HOME_CUSTOMER:"HomeCustomer",
+  RING_BELL:"RingBell",
 
   CART_TABS:'Carts',
   CART_WITH_NO_ITEM:"CartWithNoItem",

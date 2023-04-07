@@ -113,6 +113,10 @@ const styles = StyleSheet.create({
     width:"100%",
     alignItems: "flex-end",
   },
+  imageCartToonHead:{
+    width:160,
+    height:160,
+  },
     //body
 });
 

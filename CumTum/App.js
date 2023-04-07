@@ -36,12 +36,13 @@ import Payment from './src/app/features/customer/screens/carts/payment/Payment';
 import EditProfile from './src/app/features/customer/screens/profiles/editProfile/EditProfile';
 import UploadImage from './src/app/features/customer/screens/profiles/uploadImage/UploadImage';
 import AddTypeFood from './src/app/features/admin/screens/manager/ManagerCategories/addTypeFood/AddTypeFood';
+import RingBell from './src/app/features/customer/screens/homes/ringBell/RingBell';
 
 let persistor = persistStore(Store);
 import {View, Text, TouchableOpacity} from 'react-native';
 import ManagerFood from './src/app/features/admin/screens/manager/manageFood/ManagerFood';
 import CartNoItem from './src/app/features/customer/screens/carts/cart/cartWithNoItem/CartNoItem';
-
+import RingBellAdmin from './src/app/features/admin/screens/homeAdmin/ringBellAdmin/RingBellAdmin';
 
 const App = () => {
   const Stack = createNativeStackNavigator();
@@ -191,6 +192,20 @@ const App = () => {
                 headerShown: false,
               }}
             />
+              <Stack.Screen
+            name={Router.RING_BELL}
+            component={RingBell}
+            options={{
+              headerShown: false,
+            }}
+          />
+             <Stack.Screen
+            name={Router.RING_BELL_ADMIN}
+            component={RingBellAdmin}
+            options={{
+              headerShown: false,
+            }}
+          />
           </Stack.Navigator>
         </NavigationContainer>
       </PersistGate>

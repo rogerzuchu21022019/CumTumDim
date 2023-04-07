@@ -25,9 +25,10 @@ import {StackActions} from '@react-navigation/native';
 import {fetchCategories, fetchDishes} from '../../product/apiProduct';
 
 const LoginScreen = ({navigation}) => {
-  const log = LOG.extend(`GOOGLE_SIGNIN.JS`);
+  const log = LOG.extend(`LOGIN.JS`);
   const data = useSelector(authSelector);
-  log.info('🚀 ~ file: GoogleSignIn.js:22 ~ GoogleSignIn ~ data:', data);
+  log.info("🚀 ~ file: Login.js:30 ~ LoginScreen ~ data:", data);
+  
   const isLoading = data?.isLoading;
 
   useEffect(() => {

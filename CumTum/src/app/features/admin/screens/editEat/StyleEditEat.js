@@ -61,6 +61,9 @@ const StyleEditEat = StyleSheet.create({
         
         
     },
+    groupFlatlist:{
+        marginTop:10
+    },
   
     itemEat:{
         backgroundColor:'#2F2D2D',

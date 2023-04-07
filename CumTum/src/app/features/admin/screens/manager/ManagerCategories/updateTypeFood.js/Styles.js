@@ -65,11 +65,15 @@ const Styles = StyleSheet.create({
       justifyContent:"space-evenly"
       
   },
+  viewFinal:{
+    width: '100%',
+  },
     viewTextInput:{
       backgroundColor: constants.COLOR.WHITE,
       height:40,
-      width:300,
       borderRadius:10,
+      marginStart:20,
+      marginEnd:20
     },
     textInput:{
       marginStart:10,

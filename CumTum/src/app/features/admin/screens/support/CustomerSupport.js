@@ -40,7 +40,7 @@ const moveTo = async () => {
         <View style={styles.body}>
           <View style={styles.imageCartToonTop}>
             <Image
-            style={styles.imageCartToon}
+            style={styles.imageCartToonHead}
                source={require('../../../../../assets/cartToon.png')}
             
             />

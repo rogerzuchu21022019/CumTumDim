@@ -25,6 +25,9 @@ header: {
     // backgroundColor: constants.COLOR.WHITE,
     // marginLeft: ,
   },
+  viewInput:{
+
+  },
   rightHeader: {
     flex: 1,
     flexDirection: 'row',
@@ -65,13 +68,19 @@ header: {
     
 },
   viewTextInput:{
+    width:"100%",
+  },
+  viewInput:{
     backgroundColor: constants.COLOR.WHITE,
     height:40,
-    width:300,
+    marginRight:20,
+    marginLeft:20,
     borderRadius:10,
+
   },
   textInput:{
-    marginStart:10,
+    width:"100%",
+    paddingLeft:20,
   },
   viewBTN:{
     backgroundColor: constants.COLOR.YELLOW,

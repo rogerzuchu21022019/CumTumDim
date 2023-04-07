@@ -40,7 +40,7 @@ import {
 import DropdownPicker from '../../../../../shared/utils/DropdownPicker';
 import {cartSelector} from '../../../../carts/sliceOrder';
 import Advertisement from '../../../../../shared/utils/Advertisement';
-
+import Router from '../../../../../navigation/Router';
 
 const HomeCustomer = ({navigation}) => {
   const log = LOG.extend('HOME_CUSTOMER.js');
@@ -146,6 +146,9 @@ const HomeCustomer = ({navigation}) => {
     setIsShowDropdown(false);
     setTabs(3);
   };
+  const movoRingBell = () => {
+    navigation.navigate(Router.RING_BELL)
+  }
   return (
     <SafeKeyComponent>
       <View style={styles.container}>
@@ -162,13 +165,23 @@ const HomeCustomer = ({navigation}) => {
               />
               <Text style={styles.textTitle}>Cum tứm đim</Text>
             </View>
-            <View style={styles.rightHeader}>
-              <IconOcticons
-                name="bell-fill"
-                color={constants.COLOR.RED}
-                size={20}
-              />
-            </View>
+            <TouchableOpacity onPress={movoRingBell}>
+              <View style={styles.rightHeader}>
+                <View>
+                  <IconOcticons
+                    name="bell-fill"
+                    color={constants.COLOR.WHITE}
+                    size={20}
+                  />
+                </View>
+                <View style={styles.viewTextRingBell}>
+                  <Text style={styles.textRingBell}>
+                    9
+                  </Text>
+                </View>
+              
+              </View>
+            </TouchableOpacity>
           </View>
           <View style={styles.bannerViewHeader}>
             {/* banner view thì set position của thằng cha nó là header */}
@@ -216,12 +229,14 @@ const HomeCustomer = ({navigation}) => {
                     }>
                     Món thêm
                   </Text>
+                  <TouchableOpacity>
                   <View style={styles.viewImageDish}>
                     <FastImage
                       style={styles.imageLogo}
                       source={require('../../../../../../assets/logoExtraDish.png')}
                     />
                   </View>
+                  </TouchableOpacity>
                 </View>
               </TouchableOpacity>
               <TouchableOpacity onPress={openTab3}>

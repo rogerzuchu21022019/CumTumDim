@@ -77,6 +77,9 @@ const StyleDelete = StyleSheet.create({
         paddingEnd:10,
         
     },
+    groupFlatlist:{
+        marginTop:10,
+    },
    
 
     numberItem:{

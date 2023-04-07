@@ -34,6 +34,7 @@ import io from 'socket.io-client';
 import ConfigSocket from '../../../../shared/utils/SocketConfig';
 import {showNotifyLocal} from '../../../../shared/utils/Notifies';
 import {formatTime} from '../../../../shared/utils/Moment';
+import Router from '../../../../navigation/Router';
 const log = LOG.extend(`HOME_ADMIN.JS`);
 const socket = io(constants.SOCKET.URL, {
   transports: ['websocket'],
@@ -113,37 +114,42 @@ const HomeAdmin = ({navigation}) => {
   };
 
   const createDateOrder = () => {
-    const createdAt = data.orders[0].createdAt;
+    const createdAt = data.orders[0]?.createdAt;
     return createdAt;
   };
+  const movoRingBell = () => {
+    navigation.navigate(Router.RING_BELL_ADMIN)
+  }
 
   return (
     <SafeKeyComponent>
       <View style={styles.container}>
-        <View style={styles.header}>
+      <View style={styles.header}>
           <View style={styles.mainHeader}>
             <View style={styles.leftHeader}>
-              {/* Code back to HomeScreen */}
-              <TouchableOpacity
-                onPress={() => {
-                  navigation.navigate(Router.HOME_ADMIN);
-                }}>
-                <View style={styles.viewLogo}>
-                  <FastImage
-                    style={styles.imageLogo}
-                    source={require('../../../../../assets/Logo_CumTumDim.png')}
-                  />
-                  <Text style={styles.textTitle}>Cum tứm đim</Text>
-                </View>
-              </TouchableOpacity>
-            </View>
-            {/* <View style={styles.rightHeader}>
-              <IconOcticons
-                name="bell-fill"
-                color={constants.COLOR.RED}
-                size={20}
+              <FastImage
+                style={styles.imageLogo}
+                source={require('../../../../../assets/iconLogo_CumTumDim.jpg')}
               />
-            </View> */}
+              <Text style={styles.textTitle}>Cum tứm đim</Text>
+            </View>
+            <TouchableOpacity onPress={movoRingBell}>
+              <View style={styles.rightHeader}>
+                <View>
+                  <IconOcticons
+                    name="bell-fill"
+                    color={constants.COLOR.WHITE}
+                    size={20}
+                  />
+                </View>
+                <View style={styles.viewTextRingBell}>
+                  <Text style={styles.textRingBell}>
+                    9
+                  </Text>
+                </View>
+              
+              </View>
+            </TouchableOpacity>
           </View>
         </View>
         <View style={styles.body}>

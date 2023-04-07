@@ -58,11 +58,15 @@ const UpdateTypeFood = ({navigation, route}) => {
           </View>
         </View>
         <View style={styles.body}>
-            <View style={styles.viewTextInput}>
+          <View style={styles.viewFinal}>
+          <View style={styles.viewTextInput}>
               <TextInput style={styles.textInput} placeholder="Nhập loại món ăn">
                 {item.name}
-                </TextInput>                
+              </TextInput>                
             </View>
+
+          </View>
+            
             <View style={styles.viewBTN}>
                 <Text style={styles.btn}>
                   Thêm

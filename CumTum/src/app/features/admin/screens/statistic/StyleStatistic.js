@@ -4,12 +4,14 @@ import { constants } from '../../../../shared/constants';
 const StyleStatistic = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor:constants.COLOR.WHITE,
   },
   // header
   header: {
     flex: 1,
     justifyContent: 'center',
     backgroundColor: constants.COLOR.PRIMARY,
+    marginBottom:2,
   },
 
   imageLogo: {

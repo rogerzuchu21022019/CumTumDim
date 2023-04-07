@@ -59,7 +59,10 @@ const AddTypeFood = ({navigation}) => {
         </View>
         <View style={styles.body}>
             <View style={styles.viewTextInput}>
-              <TextInput style={styles.textInput} placeholder="Nhập loại món ăn"/>                
+              <View style={styles.viewInput}>
+                <TextInput style={styles.textInput} placeholder="Nhập loại món ăn"/>                
+
+              </View>
             </View>
             <View style={styles.viewBTN}>
                 <Text style={styles.btn}>
