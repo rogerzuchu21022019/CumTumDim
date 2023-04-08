@@ -1,13 +1,14 @@
 const express = require(`express`);
-const FindUserByIdCon = require("../../../components/users/controllers/FindUserByIdCon");
+const UpdateUserByIdCon = require("../../../components/users/controllers/UpdateUserByIdCon");
 
 const route = express.Router();
 
 route.get(`/:userId/user-info`, async (req, res) => {
   try {
     const { userId } = req.params;
+    const { order } = req.body;
     console.log("🚀 ~ file: FindUserById.js:8 ~ route.get ~ userId:", userId);
-    const data = await FindUserByIdCon(userId);
+    const data = await UpdateUserByIdCon(userId, order);
 
     return res.status(200).json({
       isLoading: false,

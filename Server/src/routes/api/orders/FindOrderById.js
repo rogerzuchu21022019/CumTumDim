@@ -1,7 +1,7 @@
 const express = require(`express`);
 const CONSTANTS = require("../../../utils/Constant");
 const FindOrderByIdCon = require("../../../components/oders/controllers/FindOrderByIdCon");
-const FindUserByIdCon = require("../../../components/users/controllers/FindUserByIdCon");
+const UpdateUserByIdCon = require("../../../components/users/controllers/UpdateUserByIdCon");
 const router = express.Router();
 
 
@@ -13,7 +13,7 @@ router.post(`/find-order-by-id/:orderId`, async (req, res) => {
     console.log("🚀 ~ file: FindOrderById.js:12 ~ router.post ~ orderStatus:", orderStatus)
     const order = await FindOrderByIdCon(orderId, orderStatus);
     
-    await FindUserByIdCon(order.userId, order);
+    await UpdateUserByIdCon(order.userId, order);
     _io.emit(CONSTANTS.SOCKET.UPDATE_ORDER, order);
     res.status(200).json({
       message: "Find order by id successfully",

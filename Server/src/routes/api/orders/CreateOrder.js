@@ -2,7 +2,7 @@ const express = require(`express`);
 const CreateOrderCon = require("../../../components/oders/controllers/CreateOrderCon");
 const CONSTANTS = require("../../../utils/Constant");
 const amqp = require("amqplib");
-const FindUserByIdCon = require("../../../components/users/controllers/FindUserByIdCon");
+const FindUserByIdCon = require("../../../components/users/controllers/UpdateUserByIdCon");
 const { connectRabbitPub } = require("../../../utils/RabbitMq");
 require(`dotenv`).config();
 
