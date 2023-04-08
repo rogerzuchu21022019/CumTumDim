@@ -12,8 +12,15 @@ export const constants = {
     DARK_BROWN: '#2F2D2D',
     GREEN: 'green',
   },
+  PAYPAL: {
+    SANDBOX_PAYPAL: 'https://api-m.sandbox.paypal.com',
+    CLIENT_ID_PAYPAL:
+      'ATjzaFNR4InUFxsBZBtQPnNiu7gvhtVOmovA6IgU6D9wBzPp5FTHTOSr9sqSgd-90h7ALd_4od4QMfvJ',
+    SECRET_PAYPAL:
+      'EPscZ2cKSvwcybfeIbQksSxlCJVZDGuzAMy0skSzZJIJ2NL4yJUUuKaC6Ve2fi9kHzgnWZOpfSPPU_Oi',
+  },
   BASE_URL: {
-    MAIN: 'http://192.168.2.7:3000/api',
+    MAIN: 'http://172.20.10.2:3000/api',
     SECOND: 'https://cumtumdim.becofoodstore.click/api',
   },
   ROLE: {
@@ -46,6 +53,8 @@ export const constants = {
     PUSH_NOTIFICATION: 'fetchNotification',
     FIND_NOTIFICATIONS: 'fetchNotifications',
     UPDATE_ORDER: 'fetchUpdateOrder',
+    ACCESS_TOKEN_PAYPAL: 'fetchAccessTokenPaypal',
+    CREATE_ORDER_PAYPAL: 'fetchCreateOrderPaypal',
   },
   SLICE: {
     ADMIN: 'admin',
@@ -57,13 +66,13 @@ export const constants = {
     ADD_WISH_CART: 'addWishCart',
   },
   SOCKET: {
-    URL: 'http://192.168.2.7:3000',
+    URL: 'http://172.20.10.2:3000',
     CONNECTION: 'connection',
     CONNECT: 'connect',
     DISCONNECT: 'disconnect',
     PUSH_NOTIFY: 'push-notify',
     CREATE_ORDER: 'create-order',
-    UPDATE_ORDER: "update-order",
+    UPDATE_ORDER: 'update-order',
   },
   RABBIT_MQ: {
     QUEUE_NAME_ORDER: 'order',

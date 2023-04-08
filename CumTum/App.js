@@ -41,7 +41,7 @@ let persistor = persistStore(Store);
 import {View, Text, TouchableOpacity} from 'react-native';
 import ManagerFood from './src/app/features/admin/screens/manager/manageFood/ManagerFood';
 import CartNoItem from './src/app/features/customer/screens/carts/cart/cartWithNoItem/CartNoItem';
-
+import socketServices from './src/app/shared/utils/Socket';
 
 const App = () => {
   const Stack = createNativeStackNavigator();
@@ -51,6 +51,8 @@ const App = () => {
     // if (Platform.OS === 'android') {
     //   requestUserPermission();
     // }
+    return () => {
+    };
   }, []);
 
   const requestPermissionNoti = async () => {
@@ -63,8 +65,6 @@ const App = () => {
       // Handle the background event here
     });
   }, []);
-
-  
 
   useEffect(() => {
     return notifee.onForegroundEvent(({type, detail}) => {

@@ -27,7 +27,7 @@ import {fetchCategories, fetchDishes} from '../../product/apiProduct';
 const LoginScreen = ({navigation}) => {
   const log = LOG.extend(`GOOGLE_SIGNIN.JS`);
   const data = useSelector(authSelector);
-  log.info('🚀 ~ file: GoogleSignIn.js:22 ~ GoogleSignIn ~ data:', data);
+  // log.info('🚀 ~ file: GoogleSignIn.js:22 ~ GoogleSignIn ~ data:', data);
   const isLoading = data?.isLoading;
 
   useEffect(() => {
@@ -49,7 +49,6 @@ const LoginScreen = ({navigation}) => {
   const dispatch = useDispatch();
 
   const moveTo = async () => {
-    console.log('🚀 ~ file: Login.js:38 ~ moveTo ~ moveto:');
     if (data.user.role === constants.ROLE.ADMIN) {
       navigation.navigate(Router.ADMIN_STACK);
     } else {

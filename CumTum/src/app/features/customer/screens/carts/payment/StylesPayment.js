@@ -1,13 +1,16 @@
-import { constants } from '../../../../../shared/constants';
+import {constants} from '../../../../../shared/constants';
 
-const { StyleSheet } = require('react-native');
+const {StyleSheet} = require('react-native');
 
 const styles = StyleSheet.create({
-
-
   container: {
     flex: 1,
     backgroundColor: constants.COLOR.PRIMARY,
+  },
+
+  containerPaypal: {
+    flex: 1,
+    backgroundColor: constants.COLOR.WHITE,
   },
 
   /* Header */
@@ -15,7 +18,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     backgroundColor: constants.COLOR.PRIMARY,
-
   },
   leftHeader: {
     flex: 1,
@@ -31,9 +33,14 @@ const styles = StyleSheet.create({
   },
   textTitle: {
     color: constants.COLOR.WHITE,
-    fontWeight:'900',
-    fontSize:16,
-    lineHeight:22
+    fontWeight: '900',
+    fontSize: 16,
+    lineHeight: 22,
+  },
+  updateTitlePaypal: {
+    color: constants.COLOR.BLACK,
+    fontSize: 20,
+    marginLeft: 20,
   },
   mainHeader: {
     flexDirection: 'row',
@@ -49,7 +56,7 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   viewText: {
-  paddingTop:40
+    paddingTop: 40,
   },
   text: {
     fontStyle: 'normal',
@@ -64,7 +71,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     lineHeight: 20,
     color: constants.COLOR.WHITE,
-    paddingTop: 20
+    paddingTop: 20,
   },
   viewVnPay: {
     flexDirection: 'row',
@@ -100,7 +107,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   viewImage1: {
-    flex: 1
+    flex: 1,
   },
   checkbox: {
     width: 30,
@@ -110,22 +117,18 @@ const styles = StyleSheet.create({
     borderColor: constants.COLOR.ORANGE,
     justifyContent: 'center',
     alignItems: 'center',
-    marginRight: 10
-
-
+    marginRight: 10,
   },
   checkboxChecked: {
     backgroundColor: constants.COLOR.ORANGE,
-
-
   },
   checkmarkImage: {
     height: 54,
-    width: 54
+    width: 54,
   },
   viewTextPay: {
     marginLeft: 50,
-    flex: 1
+    flex: 1,
   },
   textVNPAY: {
     fontStyle: 'normal',
@@ -136,25 +139,25 @@ const styles = StyleSheet.create({
   },
   viewTextVisa: {
     marginLeft: 50,
-    flex: 1
+    flex: 1,
   },
   textVisa: {
     fontStyle: 'normal',
     fontWeight: '600',
     fontSize: 14,
     lineHeight: 22,
-    color: constants.COLOR.WHITE
+    color: constants.COLOR.WHITE,
   },
   viewTextZaloPay: {
     marginLeft: 50,
-    flex: 1
+    flex: 1,
   },
   textZaloPay: {
     fontStyle: 'normal',
     fontWeight: '600',
     fontSize: 14,
     lineHeight: 22,
-    color: constants.COLOR.WHITE
+    color: constants.COLOR.WHITE,
   },
 
   // footer
@@ -172,7 +175,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     height: 52,
     width: 342,
-   
   },
   btnNext: {
     // backgroundColor: constants.COLOR.RED,
@@ -180,8 +182,8 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: constants.COLOR.WHITE,
   },
-  viewFooter:{
+  viewFooter: {
     flex: 2,
-  }
+  },
 });
 export default styles;

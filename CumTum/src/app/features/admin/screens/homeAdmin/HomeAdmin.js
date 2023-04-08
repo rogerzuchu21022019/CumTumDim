@@ -2,38 +2,28 @@
 import {
   Text,
   View,
-  Image,
-  ScrollView,
-  FlatList,
   TouchableOpacity,
   RefreshControl,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import styles from './StylesHome';
 import SafeKeyComponent from '../../../../components/safe_area/SafeKeyComponent';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import ItemView from './item/ItemView';
 import {FlashList} from '@shopify/flash-list';
 import {constants} from '../../../../shared/constants';
 import FastImage from 'react-native-fast-image';
-import IconOcticons from 'react-native-vector-icons/Octicons';
 import {useDispatch, useSelector} from 'react-redux';
 import {cartSelector} from '../../../carts/sliceOrder';
 import {LOG} from '../../../../../../logger.config';
-import IconIonicons from 'react-native-vector-icons/Ionicons';
 import {
-  fetchFindNotifications,
-  fetchNotifies,
   fetchOrders,
 } from '../../../carts/apiOrder';
 import {authSelector} from '../../sliceAuth';
-import {fetchUserById} from '../../apiAdmin';
 import socketServices from '../../../../shared/utils/Socket';
 // import io from 'socket.io-client';
 
-import ConfigSocket from '../../../../shared/utils/SocketConfig';
 import {showNotifyLocal} from '../../../../shared/utils/Notifies';
-import {formatTime} from '../../../../shared/utils/Moment';
+
 import {format, isToday} from 'date-fns';
 const log = LOG.extend(`HOME_ADMIN.JS`);
 // const socket = io(constants.SOCKET.URL, {
@@ -50,8 +40,9 @@ const HomeAdmin = ({navigation}) => {
   // log.info('🚀 ~ file: HomeAdmin.js:19 ~ HomeAdmin ~ data:', data);
 
   useEffect(() => {
+    
+    
     socketServices.initializeSocket();
-
     // socketServices.socket.on(constants.SOCKET.CONNECT, () => {
     //   console.log('connect', socket);
     // });
@@ -82,24 +73,14 @@ const HomeAdmin = ({navigation}) => {
       title,
       content,
     };
-    // Display a notification
     showNotifyLocal(dataMap);
   };
 
   useEffect(() => {
     dispatch(fetchOrders());
-    // dispatch(fetchNotifies());
-    // dispatch(fetchFindNotifications());
   }, [dispatch, data.orders.length]);
 
-  // useEffect(() => {
-  //   const time = setTimeout(() => {
-  //     dispatch(fetchUserById(user.user._id));
-  //   }, 15000);
-  //   return () => {
-  //     clearTimeout(time);
-  //   };
-  // }, [user.user.notifications]);
+
 
   const getCurrentTime = () => {
     const date = new Date();

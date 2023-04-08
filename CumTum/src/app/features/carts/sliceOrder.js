@@ -5,7 +5,9 @@ import {sliceProduct, productSelector} from '../product/sliceProduct';
 import {format, isToday} from 'date-fns';
 
 import {
+  fetchAccessTokenPaypal,
   fetchCreateOrder,
+  fetchCreateOrderPaypal,
   fetchFindNotifications,
   fetchNotification,
   fetchOrders,
@@ -23,6 +25,8 @@ const initialState = {
   historyCart: [],
   notifications: [],
   orderToday: [],
+  accessTokenPaypal: '',
+  ordersPaypal: [],
 };
 
 const log = LOG.extend('SLICE_CART.JS');
@@ -128,6 +132,32 @@ export const sliceCart = createSlice({
       });
     });
     builder.addCase(fetchUpdateOrder.rejected, (state, action) => {
+      const data = action.payload;
+      state.isLoading = false;
+    });
+
+    /* Fetch AccessToken Paypal */
+    builder.addCase(fetchAccessTokenPaypal.pending, state => {
+      state.isLoading = true;
+    });
+    builder.addCase(fetchAccessTokenPaypal.fulfilled, (state, action) => {
+      const data = action.payload;
+      state.accessTokenPaypal = data.access_token;
+    });
+    builder.addCase(fetchAccessTokenPaypal.rejected, (state, action) => {
+      const data = action.payload;
+      state.isLoading = false;
+    });
+
+    /* Fetch Create Order Paypal */
+    builder.addCase(fetchCreateOrderPaypal.pending, state => {
+      state.isLoading = true;
+    });
+    builder.addCase(fetchCreateOrderPaypal.fulfilled, (state, action) => {
+      const data = action.payload;
+      state.ordersPaypal.unshift(data)
+    });
+    builder.addCase(fetchCreateOrderPaypal.rejected, (state, action) => {
       const data = action.payload;
       state.isLoading = false;
     });
