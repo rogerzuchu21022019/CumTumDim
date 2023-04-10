@@ -2,11 +2,16 @@ import {useSelector} from 'react-redux';
 import {LOG} from '../../../../logger.config';
 import {constants} from '../../shared/constants';
 import {sliceProduct, productSelector} from '../product/sliceProduct';
+import {format, isToday} from 'date-fns';
+
 import {
+  fetchAccessTokenPaypal,
   fetchCreateOrder,
+  fetchCreateOrderPaypal,
   fetchFindNotifications,
   fetchNotification,
   fetchOrders,
+  fetchUpdateOrder,
 } from './apiOrder';
 
 const {createSlice} = require('@reduxjs/toolkit');
@@ -19,6 +24,9 @@ const initialState = {
   orders: [],
   historyCart: [],
   notifications: [],
+  orderToday: [],
+  accessTokenPaypal: '',
+  ordersPaypal: [],
 };
 
 const log = LOG.extend('SLICE_CART.JS');
@@ -29,7 +37,7 @@ export const sliceCart = createSlice({
   reducers: {
     createHistoryCart: (state, action) => {
       const data = action.payload;
-      state.historyCart.push(data);
+      state.historyCart.unshift(data);
     },
   },
 
@@ -58,6 +66,14 @@ export const sliceCart = createSlice({
       state.error = data.error;
       state.message = data.message;
       state.orders = data.data;
+      state.orderToday = state.orders.filter(item => {
+        const createdAt = item.createdAt;
+        const newCreatedAt = new Date(createdAt);
+        const isTodayd = isToday(newCreatedAt);
+        if (isTodayd) {
+          return item;
+        }
+      });
     });
     builder.addCase(fetchOrders.rejected, (state, action) => {
       const data = action.payload;
@@ -100,6 +116,50 @@ export const sliceCart = createSlice({
       state.isLoading = data.isLoading;
       state.error = data.error;
       state.message = data.message;
+    });
+
+    /* Update Order */
+    builder.addCase(fetchUpdateOrder.pending, state => {
+      state.isLoading = true;
+    });
+    builder.addCase(fetchUpdateOrder.fulfilled, (state, action) => {
+      const data = action.payload;
+      state.message = data.message;
+      state.orderToday.filter(item => {
+        if (item._id === data.data._id) {
+          item.orderStatus = data.data.orderStatus;
+        }
+      });
+    });
+    builder.addCase(fetchUpdateOrder.rejected, (state, action) => {
+      const data = action.payload;
+      state.isLoading = false;
+    });
+
+    /* Fetch AccessToken Paypal */
+    builder.addCase(fetchAccessTokenPaypal.pending, state => {
+      state.isLoading = true;
+    });
+    builder.addCase(fetchAccessTokenPaypal.fulfilled, (state, action) => {
+      const data = action.payload;
+      state.accessTokenPaypal = data.access_token;
+    });
+    builder.addCase(fetchAccessTokenPaypal.rejected, (state, action) => {
+      const data = action.payload;
+      state.isLoading = false;
+    });
+
+    /* Fetch Create Order Paypal */
+    builder.addCase(fetchCreateOrderPaypal.pending, state => {
+      state.isLoading = true;
+    });
+    builder.addCase(fetchCreateOrderPaypal.fulfilled, (state, action) => {
+      const data = action.payload;
+      state.ordersPaypal.unshift(data)
+    });
+    builder.addCase(fetchCreateOrderPaypal.rejected, (state, action) => {
+      const data = action.payload;
+      state.isLoading = false;
     });
   },
 });

@@ -46,8 +46,6 @@ import {constants} from '../../../../shared/constants';
 import BoxInputCus from '../../../../components/input/BoxInput';
 import Statistic from '../statistic/Statistic';
 import DropdownPicker from '../../../../shared/utils/DropdownPicker';
-import socket from '../../../../shared/utils/SocketConfig';
-import socketServices from '../../../../shared/utils/Socket';
 
 const AddDish = ({navigation}) => {
   const dispatch = useDispatch();
@@ -186,12 +184,8 @@ const AddDish = ({navigation}) => {
     dispatch(fetchAddDish({dish: dish, categoryId: categoryId}));
   };
 
- 
-
   const moveTo = async () => {
     navigation.navigate(Router.LOGIN);
-    socket.disconnect()
-    console.log("🚀 ~ file: AddDish.js:197 ~ moveTo ~ socket:", socket)
   };
 
   // xử lý dropdown chọn categories
@@ -354,7 +348,6 @@ const AddDish = ({navigation}) => {
               colorIconArrow={constants.COLOR.GREY}
               colorCloseIcon={constants.COLOR.WHITE}
               colorPlaceholder={constants.COLOR.GREY}
-
             />
           </View>
 
@@ -372,7 +365,6 @@ const AddDish = ({navigation}) => {
               colorIconArrow={constants.COLOR.GREY}
               colorCloseIcon={constants.COLOR.WHITE}
               colorPlaceholder={constants.COLOR.GREY}
-
             />
           </View>
           <View style={styles.footer}>
@@ -381,8 +373,6 @@ const AddDish = ({navigation}) => {
                 <Text style={styles.btnCreate}>Thêm</Text>
               </View>
             </TouchableOpacity>
-
-            
           </View>
         </View>
         {/* Xử lý camera */}

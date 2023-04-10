@@ -7,11 +7,13 @@ export const showNotifyLocal = async data => {
   const channelId = await notifee.createChannel({
     id: 'default',
     name: 'Default Channel',
+    vibration: true,
+    vibrationPattern: [300, 500],
   });
   await notifee.displayNotification({
     title: data.title,
     body: data.content,
-    
+
     subtitle: 'Messages',
 
     ios: {
@@ -57,4 +59,6 @@ export const showNotifyLocal = async data => {
       showTimestamp: true,
     },
   });
+  
+  
 };

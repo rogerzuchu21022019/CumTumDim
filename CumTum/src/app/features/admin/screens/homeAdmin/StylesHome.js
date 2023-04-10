@@ -83,6 +83,17 @@ const styles = StyleSheet.create({
     paddingRight: 20,
     marginTop: 10,
   },
+  viewToday: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    
+  },
+  textToday: {
+    lineHeight: 30,
+    color: constants.COLOR.WHITE,
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
 
   //body
 });

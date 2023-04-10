@@ -1,11 +1,12 @@
 //Notify.js
 const express = require(`express`);
-const { publish, connectRabbitPub } = require("./RabbitMq");
+
 const amqp = require("amqplib");
 
 const CONSTANTS = require("../../../utils/Constant");
 const CreateOrderCon = require("../../../components/oders/controllers/CreateOrderCon");
 const FindUserByIdCon = require("../../../components/users/controllers/FindUserByIdCon");
+const { connectRabbitPub } = require("../../../utils/RabbitMq");
 
 require(`dotenv`).config();
 const route = express.Router();

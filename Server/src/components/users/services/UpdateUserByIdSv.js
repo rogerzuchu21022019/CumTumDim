@@ -1,6 +1,6 @@
 const User = require("../model/User");
 
-const FindUserByIdSv = async (userId, order) => {
+const UpdateUserByIdSv = async (userId, order) => {
   try {
     const query = {
       _id: userId,
@@ -26,4 +26,4 @@ const FindUserByIdSv = async (userId, order) => {
     );
   }
 };
-module.exports = FindUserByIdSv;
+module.exports = UpdateUserByIdSv;

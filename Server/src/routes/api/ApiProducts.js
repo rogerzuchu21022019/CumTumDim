@@ -5,8 +5,8 @@ module.exports = {
   findDishes: require(`../api/products/FindDishes`),
   uploadImage: require(`../api/media/UploadImage`),
   createOrder: require(`../api/orders/CreateOrder`),
+  updateOrder: require(`../api/orders/FindOrderById`),
   pushNotification: require(`../api/notifications/PushNotification`),
-  pushRabbit: require(`../api/rabbit/Notify`),
   getRabbit: require(`../api/rabbit/NotifyGet`),
   findNotifications: require(`../api/notifications/FindNotifications`),
   findOrders: require(`../api/orders/FindOrders`)

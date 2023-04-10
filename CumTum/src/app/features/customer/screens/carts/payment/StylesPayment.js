@@ -1,13 +1,16 @@
-import { constants } from '../../../../../shared/constants';
+import {constants} from '../../../../../shared/constants';
 
-const { StyleSheet } = require('react-native');
+const {StyleSheet} = require('react-native');
 
 const styles = StyleSheet.create({
-
-
   container: {
     flex: 1,
     backgroundColor: constants.COLOR.PRIMARY,
+  },
+
+  containerPaypal: {
+    flex: 1,
+    backgroundColor: constants.COLOR.WHITE,
   },
 
   /* Header */
@@ -15,7 +18,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     backgroundColor: constants.COLOR.PRIMARY,
-
   },
   leftHeader: {
     flex: 1,
@@ -31,14 +33,33 @@ const styles = StyleSheet.create({
   },
   textTitle: {
     color: constants.COLOR.WHITE,
-    fontWeight:'900',
-    fontSize:16,
-    lineHeight:22
+    fontWeight: '900',
+    fontSize: 16,
+    lineHeight: 22,
+  },
+  updateTitlePaypal: {
+    color: constants.COLOR.BLACK,
+    fontSize: 20,
+    marginLeft: 20,
   },
   mainHeader: {
     flexDirection: 'row',
     // backgroundColor: constants.COLOR.WHITE,
     alignItems: 'center',
+  },
+  icon:{
+    width: 40,
+    height: 40,
+    justifyContent:'center',
+    alignItems:'center',
+    // backgroundColor:'red',
+  },
+  icon:{
+    width: 40,
+    height: 40,
+    justifyContent:'center',
+    alignItems:'center',
+    // backgroundColor:'red',
   },
   /* Header */
 
@@ -49,7 +70,7 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   viewText: {
-  paddingTop:40
+    paddingTop: 40,
   },
   text: {
     fontStyle: 'normal',
@@ -64,15 +85,16 @@ const styles = StyleSheet.create({
     fontSize: 14,
     lineHeight: 20,
     color: constants.COLOR.WHITE,
-    paddingTop: 20
+    paddingTop: 20,
   },
-  viewVnPay: {
+  viewPaypal: {
     flexDirection: 'row',
     alignItems: 'center',
     borderWidth: 1,
-    borderColor: constants.COLOR.ORANGE,
-    width: 366,
-    height: 73,
+    // borderColor: constants.COLOR.YELLOW,
+    backgroundColor: constants.COLOR.YELLOW,
+    width: '100%',
+    height: 75,
     borderRadius: 10,
     paddingLeft: 10,
     marginTop: 10,
@@ -81,9 +103,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     borderWidth: 1,
-    borderColor: constants.COLOR.ORANGE,
-    width: 366,
-    height: 73,
+    borderColor: constants.COLOR.WHITE,
+    backgroundColor: constants.COLOR.WHITE,
+    width: '100%',
+    height: 75,
     borderRadius: 10,
     paddingLeft: 10,
     marginTop: 10,
@@ -92,69 +115,100 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     borderWidth: 1,
-    borderColor: constants.COLOR.ORANGE,
-    width: 366,
-    height: 73,
+    borderColor: constants.COLOR.LIGHT_BLUE,
+    backgroundColor:constants.COLOR.LIGHT_BLUE,
+    width: '100%',
+    height: 75,
+    borderRadius: 10,
+    paddingLeft: 10,
+    marginTop: 10,
+  },
+
+  viewMomo: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: constants.COLOR.PINK_MOMO,
+    backgroundColor:constants.COLOR.PINK_MOMO,
+    width: '100%',
+    height: 75,
+    borderRadius: 10,
+    paddingLeft: 10,
+    marginTop: 10,
+  },
+  viewLiveToPaid: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: constants.COLOR.GREEN,
+    backgroundColor:constants.COLOR.GREEN,
+    width: '100%',
+    height: 75,
     borderRadius: 10,
     paddingLeft: 10,
     marginTop: 10,
   },
   viewImage1: {
-    flex: 1
+    flex: 1/2,
   },
   checkbox: {
     width: 30,
     height: 30,
     borderRadius: 20,
     borderWidth: 1,
-    borderColor: constants.COLOR.ORANGE,
+    borderColor: constants.COLOR.PRIMARY,
     justifyContent: 'center',
     alignItems: 'center',
-    marginRight: 10
-
-
+    marginRight: 10,
   },
   checkboxChecked: {
     backgroundColor: constants.COLOR.ORANGE,
-
-
   },
-  checkmarkImage: {
+  checkMarkImage: {
     height: 54,
-    width: 54
+    width: 54,
+    justifyContent:'center',
+    alignItems:'center',
+    borderRadius: 10,
+  },
+
+  checkMarkVisa: {
+    height: 40,
+    width: 70,
+    justifyContent:'center',
+    alignItems:'center',
+    borderRadius: 10,
   },
   viewTextPay: {
-    marginLeft: 50,
-    flex: 1
+    flex: 1,
   },
-  textVNPAY: {
+  textPaypal: {
     fontStyle: 'normal',
-    fontWeight: '600',
-    fontSize: 14,
+    fontWeight: 'bold',
+    fontSize: 18,
     lineHeight: 22,
     color: constants.COLOR.WHITE,
   },
   viewTextVisa: {
-    marginLeft: 50,
-    flex: 1
+    flex: 1,
   },
   textVisa: {
     fontStyle: 'normal',
-    fontWeight: '600',
-    fontSize: 14,
+    fontWeight: 'bold',
+    fontSize: 18,
     lineHeight: 22,
-    color: constants.COLOR.WHITE
+    color: constants.COLOR.BLACK,
   },
   viewTextZaloPay: {
-    marginLeft: 50,
-    flex: 1
+    flex: 1,
+    // backgroundColor:constants.COLOR.GREEN
   },
   textZaloPay: {
     fontStyle: 'normal',
     fontWeight: '600',
-    fontSize: 14,
+    fontSize: 18,
     lineHeight: 22,
-    color: constants.COLOR.WHITE
+    color: constants.COLOR.WHITE,
   },
 
   // footer
@@ -172,7 +226,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     height: 52,
     width: 342,
-   
   },
   btnNext: {
     // backgroundColor: constants.COLOR.RED,
@@ -180,8 +233,8 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: constants.COLOR.WHITE,
   },
-  viewFooter:{
+  viewFooter: {
     flex: 2,
-  }
+  },
 });
 export default styles;

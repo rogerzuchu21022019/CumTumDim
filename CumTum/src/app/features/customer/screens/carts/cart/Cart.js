@@ -49,14 +49,7 @@ const Cart = ({navigation}) => {
     handleResetCart();
   };
 
-  const onCreateHistoryCart = order => ({
-    type: createHistoryCart().type,
-    payload: order,
-  });
 
-  const handleCreateHistoryCart = order => {
-    dispatch(onCreateHistoryCart(order));
-  };
 
   const onBuy = () => {
     if (data.mainDishCart.length === 0) {
@@ -108,7 +101,7 @@ const Cart = ({navigation}) => {
         userId: userId,
       };
       log.error('🚀 ~ file: Cart.js:48 ~ onBuy ~ item:', order);
-      // handleCreateHistoryCart(order);
+      
       navigation.navigate(Router.PAYMENT, {order});
     } else {
       Alert.alert('Bạn phải có ít nhất 1 món chính trong bill! ');

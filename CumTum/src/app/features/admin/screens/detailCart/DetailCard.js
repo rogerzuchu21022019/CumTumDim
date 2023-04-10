@@ -7,41 +7,26 @@ import {
   ScrollView,
   TouchableNativeFeedback,
 } from 'react-native';
-import React, {useEffect} from 'react';
+
+import React, {useEffect, useState} from 'react';
 import styles from './StylesDetailCard';
 import ItemDetail from './ItemDetail';
 import {FlashList} from '@shopify/flash-list';
 import Router from '../../../../navigation/Router';
 import {LOG} from '../../../../../../logger.config';
-import IconMaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+
 import {constants} from '../../../../shared/constants';
 import SafeKeyComponent from '../../../../components/safe_area/SafeKeyComponent';
 import IconIonicons from 'react-native-vector-icons/Ionicons';
+import {useDispatch} from 'react-redux';
+import {fetchUpdateOrder} from '../../../carts/apiOrder';
 
 const DetailCard = ({route, navigation}) => {
+  const dispatch = useDispatch();
   const log = LOG.extend('DETAILCART');
   const {item, index} = route.params;
   log.info('item', item);
 
-  let toppingsCart = [];
-  toppingsCart = item.toppingsCart;
-  console.log('====================================');
-  console.log('toppingsCart', toppingsCart);
-  console.log('====================================');
-
-  toppingsCart.forEach(cart => {
-    log.info('cart', cart);
-  });
-
-  let mainDishCart = [];
-  mainDishCart = item.mainDishCart;
-  console.log('====================================');
-  console.log('mainDishCart', mainDishCart);
-  console.log('====================================');
-
-  toppingsCart.forEach(cart => {
-    log.info('cart', cart);
-  });
   const moveToHOme = () => {
     navigation.navigate(Router.HOME_ADMIN);
   };
@@ -61,6 +46,25 @@ const DetailCard = ({route, navigation}) => {
       totalAmountDish += item.amounts;
     });
     return totalAmountDish;
+  };
+
+  const onAccept = async () => {
+    dispatch(
+      fetchUpdateOrder({
+        orderId: item._id,
+        orderStatus: 'Chấp nhận',
+      }),
+    );
+    navigation.goBack();
+  };
+  const onCancel = async () => {
+    dispatch(
+      fetchUpdateOrder({
+        orderId: item._id,
+        orderStatus: 'Từ chối',
+      }),
+    );
+    navigation.goBack();
   };
 
   // item.totalMainDish
@@ -105,9 +109,6 @@ const DetailCard = ({route, navigation}) => {
           </View>
           <View style={styles.body}>
             <ScrollView
-              // horizontal={true}
-              // removeClippedSubviews={true}
-              // initialScrollIndex={0}
               scrollEnabled={true}
               scrollEventThrottle={16}
               showsHorizontalScrollIndicator={false}
@@ -164,9 +165,6 @@ const DetailCard = ({route, navigation}) => {
                       <FlashList
                         data={item.toppingsCart}
                         renderItem={({item, index}) => {
-                          console.log('====================================');
-                          console.log('item', item);
-                          console.log('====================================');
                           return <ItemDetail index={index} item={item} />;
                         }}
                         key={'list3'}
@@ -301,19 +299,32 @@ const DetailCard = ({route, navigation}) => {
                       </Text>
                     </View>
                   </View>
-                  <View style={styles.groupButton}>
-                    <TouchableOpacity>
-                      <View style={styles.viewButton}>
+                  {item.orderStatus === 'Đang chờ' ? (
+                    <View style={styles.groupButton}>
+                      <TouchableOpacity onPress={onAccept}>
+                        <View style={styles.viewButton}>
+                          <Text style={styles.textButton}>Xác nhận</Text>
+                        </View>
+                      </TouchableOpacity>
+
+                      <TouchableOpacity onPress={onCancel}>
+                        <View style={styles.viewButton}>
+                          <Text style={styles.textButton}>Huỷ</Text>
+                        </View>
+                      </TouchableOpacity>
+                    </View>
+                  ) : (
+                    <View style={styles.groupButton}>
+                      <View
+                        style={[styles.viewButton, styles.viewButtonDisable]}>
                         <Text style={styles.textButton}>Xác nhận</Text>
                       </View>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity>
-                      <View style={styles.viewButton}>
+                      <View
+                        style={[styles.viewButton, styles.viewButtonDisable]}>
                         <Text style={styles.textButton}>Huỷ</Text>
                       </View>
-                    </TouchableOpacity>
-                  </View>
+                    </View>
+                  )}
                 </View>
               </TouchableNativeFeedback>
             </ScrollView>

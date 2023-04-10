@@ -28,6 +28,8 @@ const Styles = StyleSheet.create({
   },
   head: {
     height: 34,
+    // backgroundColor: constants.COLOR.BLACK,
+
   },
   text: {
     margin: 6,
@@ -42,6 +44,10 @@ const Styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 10,
+  },
+  textStore:{
+    fontWeight:'bold',
+    fontSize:20
   },
   text: {
     fontSize: 15,

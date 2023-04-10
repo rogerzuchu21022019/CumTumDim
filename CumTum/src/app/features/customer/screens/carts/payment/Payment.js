@@ -1,24 +1,44 @@
-import { View, Text, TouchableOpacity } from 'react-native';
-import React, { useCallback, useEffect, useState } from 'react';
+import {View, Text, TouchableOpacity, Modal, Alert} from 'react-native';
+import React, {useCallback, useEffect, useState} from 'react';
 import SafeKeyComponent from '../../../../../components/safe_area/SafeKeyComponent';
 import styles from './StylesPayment';
-import { constants } from '../../../../../shared/constants';
+import {constants} from '../../../../../shared/constants';
 import FastImage from 'react-native-fast-image';
 import IconOcticons from 'react-native-vector-icons/Octicons';
 import Router from '../../../../../navigation/Router';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchCreateOrder, fetchNotification } from '../../../../carts/apiOrder';
-import { authSelector } from '../../../../admin/sliceAuth';
-import { cartSelector } from '../../../../carts/sliceOrder';
-import notifee from '@notifee/react-native';
-import { showNotifyLocal } from '../../../../../shared/utils/Notifies';
-import { LOG } from '../../../../../../../logger.config';
-const log = LOG.extend(`PAYMENT.JS`);
+import {useDispatch, useSelector} from 'react-redux';
+import queryString from 'query-string';
 
-const Payment = ({ navigation, route }) => {
-  const { order } = route.params;
+import {
+  fetchAccessTokenPaypal,
+  fetchCreateOrder,
+  fetchCreateOrderPaypal,
+  fetchNotification,
+} from '../../../../carts/apiOrder';
+import {authSelector} from '../../../../admin/sliceAuth';
+import {cartSelector} from '../../../../carts/sliceOrder';
+import notifee from '@notifee/react-native';
+import {showNotifyLocal} from '../../../../../shared/utils/Notifies';
+import {LOG} from '../../../../../../../logger.config';
+import {
+  createOrderPaypal,
+  getDataPaypal,
+  verifyCaptureOrderPaypal,
+} from '../../../../../shared/utils/Paypal';
+import IconAntDesign from 'react-native-vector-icons/AntDesign';
+import WebView from 'react-native-webview';
+import Snackbar from 'react-native-snackbar';
+const log = LOG.extend(`PAYMENT.JS`);
+const Payment = ({navigation, route}) => {
+  const {order} = route.params;
+
+  /* State */
   const [checkedId, setCheckedId] = useState(null);
+  const [urlPaypalCheckout, setUrlPaypalCheckout] = useState(null);
+  const [accessToken, setAccessToken] = useState(null);
+
   const auth = useSelector(authSelector);
+  const cartData = useSelector(cartSelector);
   // console.log('🚀 ~ file: Payment.js:16 ~ Payment ~ auth:', auth);
   const name = auth.user.name;
   const userId = auth.user._id;
@@ -28,8 +48,7 @@ const Payment = ({ navigation, route }) => {
   const onDisplayNotification = async () => {
     // Create a channel (required for Android)
     const title = 'Notification';
-    const content =
-      `Cảm ơn bạn ${name} đã đặt hàng. Đơn hàng của bạn đang được chúng tôi xác nhận.....`;
+    const content = `Cảm ơn bạn ${name} đã đặt hàng. Đơn hàng của bạn đang được chúng tôi xác nhận.....`;
     // console.log("🚀 ~ file: Payment.js:45 ~ onDisplayNotification ~ content:", content)
     const dataMap = {
       title,
@@ -48,30 +67,132 @@ const Payment = ({ navigation, route }) => {
     }
   };
 
-  const data = {
-    name: name,
-    moneyToPaid: moneyToPaid,
-    userId: userId,
-  };
-
   const handleCreateOrder = order => {
     dispatch(fetchCreateOrder(order));
+
     // dispatch(fetchNotification(data));
   };
 
-  const onPay = () => {
+  const handleGetAccessToken = async order => {
+    // const response = await dispatch(fetchAccessTokenPaypal());
+    // setAccessToken(response.payload.access_token);
+    // const data = {
+    //   accessToken: response.payload.access_token,
+    //   order: setItemPaypal(order),
+    // };
+    // const res = dispatch(fetchCreateOrderPaypal(data));
+    // if (res.payload && res.payload.links != undefined) {
+    //   const url = res.payload.links.find(link => link.rel === 'approve');
+    //   setUrlPaypalCheckout(url.href);
+    // }
+
+    const response = await getDataPaypal();
+    console.log(
+      '🚀 ~ file: Payment.js:88 ~ handleGetAccessToken ~ response:',
+      response,
+    );
+    setAccessToken(response.access_token);
+
+    const res = await createOrderPaypal(response.access_token, order);
+    log.error('🚀 ~ file: Payment.js:91 ~ handleGetAccessToken ~ res:', res);
+    if (res.links != undefined) {
+      const url = res.links.find(link => link.rel === 'approve');
+      setUrlPaypalCheckout(url.href);
+    }
+  };
+
+  const onPay = async () => {
+    if (checkedId === null) {
+      Alert.alert('Thông báo', 'Bạn chưa chọn phương thức thanh toán', [
+        {text: 'OK', onPress: () => console.log('OK Pressed')},
+      ]);
+      return;
+    }
+
     if (checkedId === 1) {
-      console.log('VNPAY', checkedId);
+      console.log('PAYPAL', checkedId);
+      handleGetAccessToken(order);
     }
     if (checkedId === 2) {
       console.log('VISA', checkedId);
+
+      Snackbar.show({
+        text: 'Chức năng đang được tích hợp',
+        duration: Snackbar.LENGTH_SHORT,
+      });
+      return;
     }
     if (checkedId === 3) {
       console.log('Zalo Pay', checkedId);
-      handleCreateOrder(order);
-      onDisplayNotification();
-      // navigation.navigate(Router.PAYMENT_ZALO, {order});
+
+      Snackbar.show({
+        text: 'Chức năng đang được tích hợp',
+        duration: Snackbar.LENGTH_SHORT,
+      });
+      return;
     }
+
+    if (checkedId === 4) {
+      console.log('MOMO', checkedId);
+      Snackbar.show({
+        text: 'Chức năng đang được tích hợp',
+        duration: Snackbar.LENGTH_SHORT,
+      });
+      return;
+    }
+    if (checkedId === 5) {
+      console.log('Live To Paid', checkedId);
+      Snackbar.show({
+        text: 'Chức năng đang được tích hợp',
+        duration: Snackbar.LENGTH_SHORT,
+      });
+    }
+  };
+
+  const onUrlStateChange = async webViewState => {
+    log.info(
+      '🚀 ~ file: Payment.js:120 ~ onUrlStateChange ~ webViewState:',
+      webViewState,
+    );
+    if (webViewState.url.includes(`https://example.com/cancel`)) {
+      resetDataPaypal();
+      return;
+    }
+    if (webViewState.url.includes(`https://example.com/return`)) {
+      const urlValue = queryString.parseUrl(webViewState.url);
+      const id = urlValue.query.token;
+      if (!!id) {
+        paymentSuccess(id);
+      }
+    }
+  };
+  const paymentSuccess = async id => {
+    try {
+      const response = await verifyCaptureOrderPaypal(id, accessToken);
+      // log.error(
+      //   '🚀 ~ file: Payment.js:140 ~ paymentSuccess ~ paymentStatus:',
+      //   paymentStatus,
+      // );
+      if (response.status === 'COMPLETED') {
+        resetDataPaypal();
+        handleCreateOrder(order);
+        onDisplayNotification();
+        navigation.navigate(Router.PAYMENT_ZALO, {order});
+      } else {
+        return;
+      }
+    } catch (error) {
+      log.error('🚀 ~ file: Payment.js:148 ~ paymentSuccess ~ error:', error);
+    }
+  };
+
+  const moToBack = () => {
+    navigation.goBack();
+  };
+
+  const resetDataPaypal = () => {
+    setAccessToken(null);
+    setUrlPaypalCheckout(null);
   };
   return (
     <SafeKeyComponent>
@@ -79,40 +200,56 @@ const Payment = ({ navigation, route }) => {
         <View style={styles.header}>
           <View style={styles.header}>
             <View style={styles.mainHeader}>
+              <TouchableOpacity onPress={moToBack}>
+                <View style={styles.icon}>
+                  <IconAntDesign
+                    name="left"
+                    color={constants.COLOR.WHITE}
+                    size={20}
+                  />
+                </View>
+              </TouchableOpacity>
               <View style={styles.leftHeader}>
                 <Text style={styles.textTitle}>Thanh toán</Text>
+                {/* <Text style={styles.textTitle}>{urlPaypalCheckout}</Text> */}
               </View>
             </View>
-
           </View>
         </View>
         <View style={styles.divideLine}></View>
         <View style={styles.body}>
-          <Text style={styles.text}>Phương thức thanh toán</Text>
-          <Text style={styles.text1}>
-            Vui lòng chọn một trong các phương thức sau:
-          </Text>
+          <View>
+            <Text style={styles.text}>Địa chỉ nhận hàng</Text>
+            <Text style={styles.text1}>
+              Vui lòng chọn một trong các phương thức sau:
+            </Text>
+          </View>
+
+          <View>
+            <Text style={styles.text}>
+              Vui lòng chọn một trong các phương thức sau:
+            </Text>
+           
+          </View>
 
           <View style={styles.viewText}>
             {/* VN PAY */}
             <TouchableOpacity onPress={() => handleCheck(1)}>
-              <View style={styles.viewVnPay}>
+              <View style={styles.viewPaypal}>
                 <View style={styles.viewImage1}>
                   <FastImage
-                    source={require('../../../../../../assets/VnPay.png')}
-                    style={styles.checkmarkImage}
+                    source={require('../../../../../../assets/paypal.jpeg')}
+                    style={styles.checkMarkImage}
                   />
                 </View>
                 <View style={styles.viewTextPay}>
-                  <Text style={styles.textVNPAY}>VN PAY</Text>
+                  <Text style={styles.textPaypal}>PAYPAL</Text>
                 </View>
                 <View
                   style={[
                     styles.checkbox,
                     checkedId === 1 && styles.checkboxChecked,
-                  ]}>
-                  {checkedId === 1 && <Text style={styles.checkmark}></Text>}
-                </View>
+                  ]}></View>
               </View>
             </TouchableOpacity>
             {/* Visa */}
@@ -120,8 +257,8 @@ const Payment = ({ navigation, route }) => {
               <View style={styles.viewVisa}>
                 <View style={styles.viewImage1}>
                   <FastImage
-                    source={require('../../../../../../assets/VisaImages.png')}
-                    style={styles.checkmarkImage}
+                    source={require('../../../../../../assets/visa.jpeg')}
+                    style={styles.checkMarkVisa}
                   />
                 </View>
                 <View style={styles.viewTextVisa}>
@@ -131,9 +268,7 @@ const Payment = ({ navigation, route }) => {
                   style={[
                     styles.checkbox,
                     checkedId === 2 && styles.checkboxChecked,
-                  ]}>
-                  {checkedId === 1 && <Text style={styles.checkmark}></Text>}
-                </View>
+                  ]}></View>
               </View>
             </TouchableOpacity>
             {/* ZALO PAY */}
@@ -142,7 +277,7 @@ const Payment = ({ navigation, route }) => {
                 <View style={styles.viewImage1}>
                   <FastImage
                     source={require('../../../../../../assets/ZaloPayImages.png')}
-                    style={styles.checkmarkImage}
+                    style={styles.checkMarkImage}
                   />
                 </View>
                 <View style={styles.viewTextZaloPay}>
@@ -152,11 +287,65 @@ const Payment = ({ navigation, route }) => {
                   style={[
                     styles.checkbox,
                     checkedId === 3 && styles.checkboxChecked,
-                  ]}>
-                  {checkedId === 1 && <Text style={styles.checkmark}></Text>}
-                </View>
+                  ]}></View>
               </View>
             </TouchableOpacity>
+
+            <TouchableOpacity onPress={() => handleCheck(4)}>
+              <View style={styles.viewMomo}>
+                <View style={styles.viewImage1}>
+                  <FastImage
+                    source={require('../../../../../../assets/MomoImages.png')}
+                    style={styles.checkMarkImage}
+                  />
+                </View>
+                <View style={styles.viewTextZaloPay}>
+                  <Text style={styles.textZaloPay}>MOMO</Text>
+                </View>
+                <View
+                  style={[
+                    styles.checkbox,
+                    checkedId === 4 && styles.checkboxChecked,
+                  ]}></View>
+              </View>
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={() => handleCheck(5)}>
+              <View style={styles.viewLiveToPaid}>
+                <View style={styles.viewImage1}>
+                  <FastImage
+                    source={require('../../../../../../assets/MoneyPaid.jpeg')}
+                    style={styles.checkMarkImage}
+                  />
+                </View>
+                <View style={styles.viewTextZaloPay}>
+                  <Text style={styles.textZaloPay}>Thanh toán trực tiếp</Text>
+                </View>
+                <View
+                  style={[
+                    styles.checkbox,
+                    checkedId === 5 && styles.checkboxChecked,
+                  ]}></View>
+              </View>
+            </TouchableOpacity>
+            <Modal
+              animationType="slide"
+              transparent={true}
+              visible={!!urlPaypalCheckout}>
+              <SafeKeyComponent>
+                <View style={styles.containerPaypal}>
+                  <TouchableOpacity onPress={resetDataPaypal}>
+                    <Text style={[styles.textTitle, styles.updateTitlePaypal]}>
+                      Cancel
+                    </Text>
+                  </TouchableOpacity>
+                  <WebView
+                    source={{uri: urlPaypalCheckout}}
+                    onNavigationStateChange={onUrlStateChange}
+                  />
+                </View>
+              </SafeKeyComponent>
+            </Modal>
           </View>
         </View>
         <View style={styles.footer}>

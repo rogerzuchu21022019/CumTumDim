@@ -4,65 +4,61 @@ import SafeKeyComponent from '../../../../../components/safe_area/SafeKeyCompone
 import styles from './StylesEditProfile';
 import FastImage from 'react-native-fast-image';
 import Router from '../../../../../navigation/Router';
-import { constants } from '../../../../../shared/constants';
+import {constants} from '../../../../../shared/constants';
 import IconEntypo from 'react-native-vector-icons/Entypo';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
 
-
-
 const EditProfile = ({navigation}) => {
-  const moToBack =()=>{
-    navigation.navigate(Router.PROFILE)
-  }
-  const moveToEditImage =()=>{
-    navigation.navigate(Router.UPLOAD_IMAGE)
-  }
+  const moToBack = () => {
+    navigation.navigate(Router.PROFILE);
+  };
+  
+  const moveToEditImage = () => {
+    navigation.navigate(Router.UPLOAD_IMAGE);
+  };
   return (
     <SafeKeyComponent>
       <View style={styles.container}>
         <View style={styles.header}>
           <View style={styles.groupHeader}>
             <TouchableOpacity onPress={moToBack}>
-            <View>
-              <IconAntDesign
-              name="left"
-              color={constants.COLOR.WHITE}
-              size={20}/>
-            </View>
+              <View>
+                <IconAntDesign
+                  name="left"
+                  color={constants.COLOR.WHITE}
+                  size={20}
+                />
+              </View>
             </TouchableOpacity>
             <View style={styles.profile}>
               <Text style={styles.textProfile}>Sữa hồ sơ</Text>
             </View>
-            <View style={styles.groupHeader}>
-            </View>
+            <View style={styles.groupHeader}></View>
           </View>
         </View>
         <View style={styles.body}>
-        <View style={styles.viewFinal}>
-          <TouchableOpacity onPress={moveToEditImage}>
-          <View style={styles.viewImage}>
-              <FastImage
-                style={styles.imageProfile}
-                source={require('../../../../../../assets/logo.png')}
-              />
-            </View>
-            <View style={styles.iconCamera}>
-              <View 
-                    style={styles.iconCameraStyle}
-                    >
-              <IconEntypo
+          <View style={styles.viewFinal}>
+            <TouchableOpacity onPress={moveToEditImage}>
+              <View style={styles.viewImage}>
+                <FastImage
+                  style={styles.imageProfile}
+                  source={require('../../../../../../assets/logo.png')}
+                />
+              </View>
+              <View style={styles.iconCamera}>
+                <View style={styles.iconCameraStyle}>
+                  <IconEntypo
                     name="camera"
                     color={constants.COLOR.BLACK}
                     size={15}
                   />
+                </View>
               </View>
-        
-          </View>
             </TouchableOpacity>
-        </View>
-            
+          </View>
+
           <View style={styles.groupAll}>
-          <View style={styles.item}>
+            <View style={styles.item}>
               <View style={styles.viewTitle}>
                 <Text style={styles.textTitle}>Họ và tên</Text>
               </View>
@@ -103,14 +99,11 @@ const EditProfile = ({navigation}) => {
               </View>
             </View>
           </View>
-
-      
         </View>
         <View style={styles.footer}>
-
-        <View style={styles.btnSave}>
-              <Text style={styles.textSave}>Lưu</Text>
-            </View>
+          <View style={styles.btnSave}>
+            <Text style={styles.textSave}>Lưu</Text>
+          </View>
         </View>
       </View>
     </SafeKeyComponent>

@@ -6,6 +6,7 @@ import {fetchSignOut} from '../../../../admin/apiAdmin';
 import Router from '../../../../../navigation/Router';
 import styles from './StylesProfile';
 import FastImage from 'react-native-fast-image';
+import socketServices from '../../../../../shared/utils/Socket';
 const Profile = ({navigation}) => {
   const dispatch = useDispatch();
   const handleLogout = async () => {
@@ -14,11 +15,12 @@ const Profile = ({navigation}) => {
   };
   const moveTo = async () => {
     navigation.navigate(Router.LOGIN);
+    socketServices.socket.disconnect();
   };
   const moveToEdit = async () => {
     navigation.navigate(Router.EDIT_PROFILE);
   };
-  
+
   return (
     <SafeKeyComponent>
       <View style={styles.container}>
@@ -42,23 +44,22 @@ const Profile = ({navigation}) => {
                   source={require('../../../../../../assets/iconSignOut.png')}
                 />
               </View>
-            
             </TouchableOpacity>
           </View>
         </View>
         <View style={styles.body}>
-        <View style={styles.viewFinal}>
-          <View style={styles.viewImage}>
+          <View style={styles.viewFinal}>
+            <View style={styles.viewImage}>
               <FastImage
                 style={styles.imageProfile}
                 source={require('../../../../../../assets/Logo_CumTumDim.png')}
               />
             </View>
             <View style={styles.viewTextName}>
-                <Text style={styles.textProfile}>Phước</Text>
-              </View>
-        </View>
-            
+              <Text style={styles.textProfile}>Phước</Text>
+            </View>
+          </View>
+
           <View style={styles.groupAll}>
             <View style={styles.item}>
               <View style={styles.viewTitle}>

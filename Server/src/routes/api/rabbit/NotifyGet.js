@@ -1,9 +1,10 @@
 //Notify Gets
 const express = require(`express`);
-const { connectRabbitConsume, publish } = require("./RabbitMq");
+
 
 require(`dotenv`).config();
 const amqp = require("amqplib");
+const { connectRabbitConsume } = require("../../../utils/RabbitMq");
 const route = express.Router();
 
 route.get(`/get-notification-rabbit`, async (req, res) => {

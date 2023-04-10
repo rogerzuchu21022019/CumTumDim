@@ -37,5 +37,6 @@ export const Store = configureStore({
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: false, // bỏ qua kiểm tra tính immutability của state
+      immutableCheck: false
     }),
 });

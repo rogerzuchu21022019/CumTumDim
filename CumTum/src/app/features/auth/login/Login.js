@@ -50,7 +50,6 @@ const LoginScreen = ({navigation}) => {
   const dispatch = useDispatch();
 
   const moveTo = async () => {
-    console.log('🚀 ~ file: Login.js:38 ~ moveTo ~ moveto:');
     if (data.user.role === constants.ROLE.ADMIN) {
       navigation.navigate(Router.ADMIN_STACK);
     } else {

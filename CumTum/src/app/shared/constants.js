@@ -11,6 +11,17 @@ export const constants = {
     AQUA: 'aqua',
     DARK_BROWN: '#2F2D2D',
     GREEN: 'green',
+    BLUE: 'blue',
+    LIGHT_BLUE: '#03c2fc',
+    PINK_MOMO:"#ec1387",
+    LIVE_PAID:"#13ecea"
+  },
+  PAYPAL: {
+    SANDBOX_PAYPAL: 'https://api-m.sandbox.paypal.com',
+    CLIENT_ID_PAYPAL:
+      'ATjzaFNR4InUFxsBZBtQPnNiu7gvhtVOmovA6IgU6D9wBzPp5FTHTOSr9sqSgd-90h7ALd_4od4QMfvJ',
+    SECRET_PAYPAL:
+      'EPscZ2cKSvwcybfeIbQksSxlCJVZDGuzAMy0skSzZJIJ2NL4yJUUuKaC6Ve2fi9kHzgnWZOpfSPPU_Oi',
   },
   BASE_URL: {
     MAIN: 'http://192.168.1.5:3000/api',
@@ -45,6 +56,9 @@ export const constants = {
     FIND_RABBIT: 'fetchRabbit',
     PUSH_NOTIFICATION: 'fetchNotification',
     FIND_NOTIFICATIONS: 'fetchNotifications',
+    UPDATE_ORDER: 'fetchUpdateOrder',
+    ACCESS_TOKEN_PAYPAL: 'fetchAccessTokenPaypal',
+    CREATE_ORDER_PAYPAL: 'fetchCreateOrderPaypal',
   },
   SLICE: {
     ADMIN: 'admin',
@@ -56,12 +70,13 @@ export const constants = {
     ADD_WISH_CART: 'addWishCart',
   },
   SOCKET: {
-    URL: 'http://192.168.2.7:3000',
+    URL: 'http://192.168.2.9:3000',
     CONNECTION: 'connection',
     CONNECT: 'connect',
     DISCONNECT: 'disconnect',
     PUSH_NOTIFY: 'push-notify',
     CREATE_ORDER: 'create-order',
+    UPDATE_ORDER: 'update-order',
   },
   RABBIT_MQ: {
     QUEUE_NAME_ORDER: 'order',

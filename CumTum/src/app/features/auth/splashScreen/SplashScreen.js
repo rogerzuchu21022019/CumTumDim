@@ -9,7 +9,7 @@ const SplashScreen = props => {
     navigation.replace(Router.LOGIN);
   };
   useEffect(() => {
-    const time = setTimeout(nextScreen, 3000);
+    const time = setTimeout(nextScreen, 1500);
     return () => {
       clearTimeout(time);
     }

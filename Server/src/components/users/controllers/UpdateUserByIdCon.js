@@ -1,10 +1,9 @@
 const { findByIdAndUpdate } = require("../model/User");
-const FindUserByIdSv = require("../services/FindUserByIdSv");
+const UpdateUserByIdSv = require("../services/UpdateUserByIdSv");
 
-const FindUserByIdCon = async (userId,order) => {
+const UpdateUserByIdCon = async (userId,order) => {
   try {
-   
-    const user = await FindUserByIdSv(userId,order);
+    const user = await UpdateUserByIdSv(userId,order);
     return user;
   } catch (error) {
     console.log(
@@ -13,4 +12,4 @@ const FindUserByIdCon = async (userId,order) => {
     );
   }
 };
-module.exports = FindUserByIdCon;
+module.exports = UpdateUserByIdCon;
