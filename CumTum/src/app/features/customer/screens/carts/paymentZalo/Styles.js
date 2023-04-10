@@ -4,17 +4,17 @@ import {constants} from '../../../../../shared/constants';
 const Styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: constants.COLOR.PRIMARY,
+    backgroundColor: constants.COLOR.WHITE,
   },
 
   // header
   header: {
     flex: 1,
     backgroundColor: constants.COLOR.PRIMARY,
+    justifyContent: 'center',
+    marginBottom:2,
   },
   viewShowBill: {
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   textShowBill: {
     fontSize: 20,
@@ -22,9 +22,15 @@ const Styles = StyleSheet.create({
   },
   // body
   body: {
-    flex: 12,
+    flex: 14,
     backgroundColor: constants.COLOR.BLACK,
     alignItems: 'center',
+  },
+  groupHeader:{
+    flexDirection:'row',
+    justifyContent:"space-between",
+    marginStart:20,
+    marginEnd:20,
   },
   head: {
     height: 34,

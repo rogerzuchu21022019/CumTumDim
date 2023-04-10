@@ -8,6 +8,8 @@ import IconOcticons from 'react-native-vector-icons/Octicons';
 import Router from '../../../../../navigation/Router';
 import {useDispatch, useSelector} from 'react-redux';
 import queryString from 'query-string';
+import IconAntDesign from 'react-native-vector-icons/AntDesign';
+
 
 import {
   fetchAccessTokenPaypal,
@@ -25,7 +27,6 @@ import {
   getDataPaypal,
   verifyCaptureOrderPaypal,
 } from '../../../../../shared/utils/Paypal';
-import IconAntDesign from 'react-native-vector-icons/AntDesign';
 import WebView from 'react-native-webview';
 import Snackbar from 'react-native-snackbar';
 const log = LOG.extend(`PAYMENT.JS`);
@@ -218,18 +219,39 @@ const Payment = ({navigation, route}) => {
         </View>
         <View style={styles.divideLine}></View>
         <View style={styles.body}>
-          <View>
-            <Text style={styles.text}>Địa chỉ nhận hàng</Text>
-            <Text style={styles.text1}>
-              Vui lòng chọn một trong các phương thức sau:
-            </Text>
+          <View style={styles.groupText}>
+            <View style={styles.textTile}>
+              <Text style={styles.text}>Địa chỉ nhận hàng</Text>
+            </View>
+            <View style={styles.groupContent}>
+              <View style={styles.leftContent}>
+                <View>
+                  <Text style={styles.text1}>Võ Ngọc Phước | 0342128462</Text>
+                </View>
+                <View>
+                  <Text style={styles.text1}>562/39h Đường Nguyễn Kiệm</Text>
+                </View>
+                <View>
+                  <Text style={styles.text1}>
+                    Phường 4, quận Phú Nhuận,TP HCM
+                  </Text>
+                </View>
+              </View>
+              <View style={styles.rightContent}>
+              <IconAntDesign
+                name="right"
+                color={constants.COLOR.WHITE}
+                size={15}
+              />
+            </View>
+            </View>
+           
           </View>
 
           <View>
             <Text style={styles.text}>
               Vui lòng chọn một trong các phương thức sau:
             </Text>
-           
           </View>
 
           <View style={styles.viewText}>

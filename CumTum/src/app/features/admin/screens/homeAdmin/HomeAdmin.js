@@ -15,6 +15,10 @@ import FastImage from 'react-native-fast-image';
 import {useDispatch, useSelector} from 'react-redux';
 import {cartSelector} from '../../../carts/sliceOrder';
 import {LOG} from '../../../../../../logger.config';
+import IconOcticons from 'react-native-vector-icons/Octicons';
+
+
+
 import {
   fetchOrders,
 } from '../../../carts/apiOrder';

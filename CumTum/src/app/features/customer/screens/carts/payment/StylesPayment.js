@@ -70,7 +70,9 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   viewText: {
-    paddingTop: 40,
+  },
+  textTile:{
+    marginBottom:10
   },
   text: {
     fontStyle: 'normal',
@@ -85,7 +87,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     lineHeight: 20,
     color: constants.COLOR.WHITE,
-    paddingTop: 20,
   },
   viewPaypal: {
     flexDirection: 'row',
@@ -123,7 +124,9 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     marginTop: 10,
   },
-
+  groupText:{
+    marginBottom:20
+  },
   viewMomo: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -226,6 +229,17 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     height: 52,
     width: 342,
+  },
+  rightContent:{
+
+  },
+  leftContent:{
+
+  },
+  groupContent:{
+    flexDirection:'row',
+    justifyContent:"space-between",
+    alignItems: 'center',
   },
   btnNext: {
     // backgroundColor: constants.COLOR.RED,

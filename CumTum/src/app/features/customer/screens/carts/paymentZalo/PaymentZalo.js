@@ -1,4 +1,4 @@
-import {ScrollView, Text, View} from 'react-native';
+import {ScrollView, Text, View,TouchableOpacity} from 'react-native';
 import React, {useState, Component} from 'react';
 import SafeKeyComponent from '../../../../../components/safe_area/SafeKeyComponent';
 import {Table, Row, Rows, Col} from 'react-native-table-component';
@@ -7,8 +7,11 @@ import {useSelector} from 'react-redux';
 import {productSelector} from '../../../../product/sliceProduct';
 import {LOG} from '../../../../../../../logger.config';
 import {formatTime} from '../../../../../shared/utils/Moment';
+import IconAntDesign from 'react-native-vector-icons/AntDesign';
+import { constants } from '../../../../../shared/constants';
+
 const log = LOG.extend('PAYMENT_ZALO.JS');
-const PaymentZalo = ({route}) => {
+const PaymentZalo = ({route,navigation}) => {
   const data = route.params.item;
   log.info('🚀 ~ file: PaymentZalo.js:12 ~ PaymentZalo ~ data:', data);
   const [tableHead, setTableHead] = useState([
@@ -71,18 +74,23 @@ const PaymentZalo = ({route}) => {
     <SafeKeyComponent>
       <View style={styles.container}>
         <View style={styles.header}>
-          <TouchableOpacity onPress={moToBack}>
-            <View style={styles.icon}>
-              <IconAntDesign
-                name="left"
-                color={constants.COLOR.WHITE}
-                size={20}
-              />
+          <View style={styles.groupHeader}>
+            <TouchableOpacity onPress={moToBack}>
+              <View style={styles.icon}>
+                <IconAntDesign
+                  name="left"
+                  color={constants.COLOR.WHITE}
+                  size={20}
+                />
+              </View>
+            </TouchableOpacity>
+            <View style={styles.viewShowBill}>
+              <Text style={styles.textShowBill}>Show Bill</Text>
             </View>
-          </TouchableOpacity>
-          <View style={styles.viewShowBill}>
-            <Text style={styles.textShowBill}>Show Bill</Text>
+            <View>
+            </View>
           </View>
+        
         </View>
 
         <View style={styles.body}>
