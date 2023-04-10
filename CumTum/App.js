@@ -49,7 +49,6 @@ import RingBellAdmin from './src/app/features/admin/screens/homeAdmin/ringBellAd
 const App = () => {
   const Stack = createNativeStackNavigator();
 
-
   useEffect(() => {
     requestPermissionNoti();
     // if (Platform.OS === 'android') {

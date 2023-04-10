@@ -20,8 +20,8 @@ export const fetchLogin = createAsyncThunk(
 export const fetchUserById = createAsyncThunk(
   constants.FETCH.USER_BY_ID,
   async userId => {
-    const response = await AxiosInstance().get(`/${userId}/user-info`);
-    // log.info("🚀 ~ file: apiAdmin.js:8 ~ fetchLogin ~ response:", response.data)
+    const response = await AxiosInstance().get(`/users/${userId}/find-user-by-id`);
+    log.info("🚀 ~ file: apiAdmin.js:8 ~ fetchLogin ~ response:", response.data)
     return response.data;
   },
 );

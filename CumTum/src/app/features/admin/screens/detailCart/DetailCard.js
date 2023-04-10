@@ -20,12 +20,14 @@ import SafeKeyComponent from '../../../../components/safe_area/SafeKeyComponent'
 import IconIonicons from 'react-native-vector-icons/Ionicons';
 import {useDispatch} from 'react-redux';
 import {fetchUpdateOrder} from '../../../carts/apiOrder';
+import socketServices from '../../../../shared/utils/Socket';
 
 const DetailCard = ({route, navigation}) => {
   const dispatch = useDispatch();
   const log = LOG.extend('DETAILCART');
   const {item, index} = route.params;
   log.info('item', item);
+ 
 
   const moveToHOme = () => {
     navigation.navigate(Router.HOME_ADMIN);
@@ -55,6 +57,7 @@ const DetailCard = ({route, navigation}) => {
         orderStatus: 'Chấp nhận',
       }),
     );
+
     navigation.goBack();
   };
   const onCancel = async () => {
@@ -64,6 +67,7 @@ const DetailCard = ({route, navigation}) => {
         orderStatus: 'Từ chối',
       }),
     );
+
     navigation.goBack();
   };
 

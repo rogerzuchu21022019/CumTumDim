@@ -29,6 +29,7 @@ import {
 } from '../../../../../shared/utils/Paypal';
 import WebView from 'react-native-webview';
 import Snackbar from 'react-native-snackbar';
+import {resetCart} from '../../../../product/sliceProduct';
 const log = LOG.extend(`PAYMENT.JS`);
 const Payment = ({navigation, route}) => {
   const {order} = route.params;
@@ -149,7 +150,6 @@ const Payment = ({navigation, route}) => {
       });
     }
   };
-
   const onUrlStateChange = async webViewState => {
     log.info(
       '🚀 ~ file: Payment.js:120 ~ onUrlStateChange ~ webViewState:',
@@ -178,13 +178,21 @@ const Payment = ({navigation, route}) => {
         resetDataPaypal();
         handleCreateOrder(order);
         onDisplayNotification();
-        navigation.navigate(Router.PAYMENT_ZALO, {order});
+        handleResetCart();
+        navigation.goBack();
+        navigation.navigate(Router.HOME_CUSTOMER_TABS);
       } else {
         return;
       }
     } catch (error) {
       log.error('🚀 ~ file: Payment.js:148 ~ paymentSuccess ~ error:', error);
     }
+  };
+
+  const handleResetCart = () => {
+    dispatch({
+      type: resetCart().type,
+    });
   };
 
   const moToBack = () => {

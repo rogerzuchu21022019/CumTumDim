@@ -46,11 +46,7 @@ export const authSlice = createSlice({
     builder.addCase(fetchUserById.fulfilled, (state, action) => {
       const dataResponse = action.payload;
       state.isLoading = true;
-      state.message = dataResponse.message;
-      state.isLoggedIn = dataResponse.isLoggedIn;
-      state.error = dataResponse.error;
       state.user = dataResponse.data;
-
     });
     builder.addCase(fetchUserById.rejected, (state, action) => {
       state.isLoading = false;

@@ -15,6 +15,7 @@ router.post(`/find-order-by-id/:orderId`, async (req, res) => {
     
     await UpdateUserByIdCon(order.userId, order);
     _io.emit(CONSTANTS.SOCKET.UPDATE_ORDER, order);
+    _io.emit(CONSTANTS.SOCKET.FIND_ORDER_BY_USER_ID,order.userId);
     res.status(200).json({
       message: "Find order by id successfully",
       data: order,

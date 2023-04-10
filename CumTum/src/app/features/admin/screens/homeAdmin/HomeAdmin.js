@@ -1,10 +1,5 @@
 //HomeAdmin.js
-import {
-  Text,
-  View,
-  TouchableOpacity,
-  RefreshControl,
-} from 'react-native';
+import {Text, View, TouchableOpacity, RefreshControl} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import styles from './StylesHome';
 import SafeKeyComponent from '../../../../components/safe_area/SafeKeyComponent';
@@ -40,20 +35,10 @@ const HomeAdmin = ({navigation}) => {
 
   const [isRefresh, setIsRefresh] = useState(false);
 
-
   // log.info('🚀 ~ file: HomeAdmin.js:19 ~ HomeAdmin ~ data:', data);
 
   useEffect(() => {
-    
-    
     socketServices.initializeSocket();
-    // socketServices.socket.on(constants.SOCKET.CONNECT, () => {
-    //   console.log('connect', socket);
-    // });
-    // socketServices.socket.on(constants.SOCKET.DISCONNECT, () => {
-    //   console.log('DISCONNECT');
-    // });
-
     socketServices.on(constants.SOCKET.CREATE_ORDER, orderData => {
       // console.log('connect to create order', orderData);
       log.error('create order success', orderData);
@@ -83,8 +68,6 @@ const HomeAdmin = ({navigation}) => {
   useEffect(() => {
     dispatch(fetchOrders());
   }, [dispatch, data.orders.length]);
-
-
 
   const getCurrentTime = () => {
     const date = new Date();
