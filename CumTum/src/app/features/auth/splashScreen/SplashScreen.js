@@ -5,6 +5,8 @@ import styleSplashScreen from './StyleSplashScreen';
 
 const SplashScreen = props => {
   const {navigation} = props;
+
+  
   const nextScreen = () => {
     navigation.replace(Router.LOGIN);
   };

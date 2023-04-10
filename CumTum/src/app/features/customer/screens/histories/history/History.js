@@ -9,19 +9,33 @@ import React, {useEffect, useState} from 'react';
 import styles from './StylesHistory';
 import FastImage from 'react-native-fast-image';
 import {constants} from '../../../../../shared/constants';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {cartSelector} from '../../../../carts/sliceOrder';
 import {FlashList} from '@shopify/flash-list';
 import ItemView from './item/ItemView';
-
 import SafeKeyComponent from '../../../../../components/safe_area/SafeKeyComponent';
 // import HistoryNoItems from './historynoitems/HistoryNoItems';
 import {authSelector} from '../../../../admin/sliceAuth';
+import socketServices from '../../../../../shared/utils/Socket';
+import {LOG} from '../../../../../../../logger.config';
+import {fetchUserById} from '../../../../admin/apiAdmin';
+const log = LOG.extend(`HISTORY.JS`);
 const History = ({navigation}) => {
   // const data = useSelector(cartSelector);
   const user = useSelector(authSelector);
-  console.log('🚀 ~ file: History.js:17 ~ History ~ user:', user);
   const [isRefresh, setIsRefresh] = useState(false);
+  const dispatch = useDispatch();
+  let orderHistory = user.user.orders;
+
+  useEffect(() => {
+    socketServices.on(constants.SOCKET.FIND_ORDER_BY_USER_ID, userId => {
+      log.info('🚀 ~ file: History.js:17 ~ History ~ user:', userId);
+      dispatch(fetchUserById(userId));
+    });
+    return () => {
+      socketServices.socket.disconnect();
+    };
+  }, []);
 
   return (
     <SafeKeyComponent>
@@ -36,7 +50,7 @@ const History = ({navigation}) => {
               <FlashList
                 showsHorizontalScrollIndicator={false}
                 showsVerticalScrollIndicator={false}
-                data={user.user.orders}
+                data={orderHistory}
                 estimatedItemSize={200}
                 renderItem={({item, index}) => {
                   return (
@@ -52,7 +66,7 @@ const History = ({navigation}) => {
                   <RefreshControl
                     refreshing={isRefresh}
                     onRefresh={() => {
-                      // dispatch(fetchOrders());
+                      dispatch(fetchUserById(user.user._id));
                     }}
                     title="Pull to refresh..."
                     titleColor={constants.COLOR.RED}

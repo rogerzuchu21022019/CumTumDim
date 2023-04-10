@@ -1,10 +1,5 @@
 //HomeAdmin.js
-import {
-  Text,
-  View,
-  TouchableOpacity,
-  RefreshControl,
-} from 'react-native';
+import {Text, View, TouchableOpacity, RefreshControl} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import styles from './StylesHome';
 import SafeKeyComponent from '../../../../components/safe_area/SafeKeyComponent';
@@ -15,9 +10,7 @@ import FastImage from 'react-native-fast-image';
 import {useDispatch, useSelector} from 'react-redux';
 import {cartSelector} from '../../../carts/sliceOrder';
 import {LOG} from '../../../../../../logger.config';
-import {
-  fetchOrders,
-} from '../../../carts/apiOrder';
+import {fetchOrders} from '../../../carts/apiOrder';
 import {authSelector} from '../../sliceAuth';
 import socketServices from '../../../../shared/utils/Socket';
 // import io from 'socket.io-client';
@@ -36,20 +29,10 @@ const HomeAdmin = ({navigation}) => {
 
   const [isRefresh, setIsRefresh] = useState(false);
 
-
   // log.info('🚀 ~ file: HomeAdmin.js:19 ~ HomeAdmin ~ data:', data);
 
   useEffect(() => {
-    
-    
     socketServices.initializeSocket();
-    // socketServices.socket.on(constants.SOCKET.CONNECT, () => {
-    //   console.log('connect', socket);
-    // });
-    // socketServices.socket.on(constants.SOCKET.DISCONNECT, () => {
-    //   console.log('DISCONNECT');
-    // });
-
     socketServices.on(constants.SOCKET.CREATE_ORDER, orderData => {
       // console.log('connect to create order', orderData);
       log.error('create order success', orderData);
@@ -80,15 +63,11 @@ const HomeAdmin = ({navigation}) => {
     dispatch(fetchOrders());
   }, [dispatch, data.orders.length]);
 
-
-
   const getCurrentTime = () => {
     const date = new Date();
     const time = format(date, 'dd-MM-yyyy');
     return time;
   };
-
- 
 
   return (
     <SafeKeyComponent>

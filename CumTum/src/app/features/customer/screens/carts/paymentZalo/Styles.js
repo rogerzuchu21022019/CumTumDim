@@ -33,6 +33,7 @@ const Styles = StyleSheet.create({
   },
   text: {
     margin: 6,
+    
   },
   table: {
     borderWidth: 2,
@@ -67,9 +68,12 @@ const Styles = StyleSheet.create({
     fontSize: 15,
     color: constants.COLOR.BLACK,
     textAlign: 'center',
+    lineHeight:20
   },
   money: {
-    height: 30,
+    height: 50,
+    // width:'100%',
+    // flex:1
   },
   textTotalMoney: {
     fontSize: 18,
@@ -78,7 +82,7 @@ const Styles = StyleSheet.create({
     fontWeight: '500',
   },
   totalMoney: {
-    height: 35,
+    height: 50,
   },
 });
 

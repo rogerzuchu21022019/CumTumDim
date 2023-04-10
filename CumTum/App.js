@@ -47,7 +47,6 @@ import {authSelector} from './src/app/features/admin/sliceAuth';
 const App = () => {
   const Stack = createNativeStackNavigator();
 
-
   useEffect(() => {
     requestPermissionNoti();
     // if (Platform.OS === 'android') {

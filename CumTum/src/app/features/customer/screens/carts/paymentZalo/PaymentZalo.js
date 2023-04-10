@@ -1,14 +1,17 @@
-import {ScrollView, Text, View} from 'react-native';
+import {ScrollView, Text, TouchableOpacity, View} from 'react-native';
 import React, {useState, Component} from 'react';
 import SafeKeyComponent from '../../../../../components/safe_area/SafeKeyComponent';
 import {Table, Row, Rows, Col} from 'react-native-table-component';
 import styles from './Styles';
 import {useSelector} from 'react-redux';
+import IconAntDesign from 'react-native-vector-icons/AntDesign';
 import {productSelector} from '../../../../product/sliceProduct';
+
 import {LOG} from '../../../../../../../logger.config';
 import {formatTime} from '../../../../../shared/utils/Moment';
+import {constants} from '../../../../../shared/constants';
 const log = LOG.extend('PAYMENT_ZALO.JS');
-const PaymentZalo = ({route}) => {
+const PaymentZalo = ({route, navigation}) => {
   const data = route.params.item;
   log.info('🚀 ~ file: PaymentZalo.js:12 ~ PaymentZalo ~ data:', data);
   const [tableHead, setTableHead] = useState([
@@ -20,7 +23,7 @@ const PaymentZalo = ({route}) => {
 
   // const data = useSelector(productSelector);
   // log.error("🚀 ~ file: PaymentZalo.js:18 ~ PaymentZalo ~ data:", data)
-  const mainData = data.mainDishCart.map(item => {
+  const mainData = data?.mainDishCart.map(item => {
     return [
       item.productName,
       item.amounts,
@@ -29,7 +32,7 @@ const PaymentZalo = ({route}) => {
     ];
   });
 
-  const extraData = data.extraDishCart.map(item => {
+  const extraData = data?.extraDishCart.map(item => {
     return [
       item.productName,
       item.amounts,
@@ -38,7 +41,7 @@ const PaymentZalo = ({route}) => {
     ];
   });
 
-  const toppingData = data.toppingsCart.map(item => {
+  const toppingData = data?.toppingsCart.map(item => {
     return [
       item.productName,
       item.amounts,
@@ -47,7 +50,7 @@ const PaymentZalo = ({route}) => {
     ];
   });
 
-  const anotherData = data.anotherCart.map(item => {
+  const anotherData = data?.anotherCart.map(item => {
     return [
       item.productName,
       item.amounts,
@@ -60,7 +63,7 @@ const PaymentZalo = ({route}) => {
   const [tableToppingData, setTableToppingData] = useState(toppingData);
   const [tableAnotherData, setTableAnotherData] = useState(anotherData);
   const [tableDataFinal, setTableDataFinal] = useState([
-    [`Tổng tiền : ${data.moneyToPaid} K`],
+    [`Tổng tiền : ${data?.moneyToPaid} K`],
   ]);
 
   const moToBack = () => {
@@ -104,12 +107,12 @@ const PaymentZalo = ({route}) => {
               </View>
               <View style={styles.viewText}>
                 <Text style={styles.text}>
-                  Ngày : {formatTime(data.createdAt)}
+                  Ngày : {formatTime(data?.createdAt)}
                 </Text>
               </View>
               <View style={styles.viewText}>
                 <Text style={styles.text}>
-                  Trạng thái đơn hàng : {data.paymentStatus}
+                  Trạng thái đơn hàng : {data?.paymentStatus}
                 </Text>
               </View>
             </View>
