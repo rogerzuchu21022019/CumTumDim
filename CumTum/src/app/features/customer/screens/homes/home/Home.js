@@ -302,7 +302,6 @@ const HomeCustomer = ({navigation}) => {
                 <Image
                   source={{
                     uri: IMAGE_BG,
-                    priority: FastImage.priority.normal,
                   }}
                   style={StyleSheet.absoluteFillObject}
                   blurRadius={20}
@@ -352,6 +351,13 @@ const HomeCustomer = ({navigation}) => {
               </View>
             ) : (
               <View style={styles.boxFlashList}>
+               <Image
+                  source={{
+                    uri: IMAGE_BG,
+                  }}
+                  style={StyleSheet.absoluteFillObject}
+                  blurRadius={20}
+                />
                 {tabs === 1 ? (
                   <FlashList
                     data={data.extraDishes}

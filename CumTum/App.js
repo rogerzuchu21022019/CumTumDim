@@ -8,7 +8,7 @@ import Router from './src/app/navigation/Router';
 import {Store} from './src/app/app_store/Store';
 
 // import Provider
-import {Provider} from 'react-redux';
+import {Provider, useSelector} from 'react-redux';
 import AdminStack from './src/app/navigation/AdminStack';
 import DetailCard from './src/app/features/admin/screens/detailCart/DetailCard';
 import CustomerStack from './src/app/navigation/CustomerStack';
@@ -42,17 +42,18 @@ import {View, Text, TouchableOpacity} from 'react-native';
 import ManagerFood from './src/app/features/admin/screens/manager/manageFood/ManagerFood';
 import CartNoItem from './src/app/features/customer/screens/carts/cart/cartWithNoItem/CartNoItem';
 import socketServices from './src/app/shared/utils/Socket';
+import {authSelector} from './src/app/features/admin/sliceAuth';
 
 const App = () => {
   const Stack = createNativeStackNavigator();
+
 
   useEffect(() => {
     requestPermissionNoti();
     // if (Platform.OS === 'android') {
     //   requestUserPermission();
     // }
-    return () => {
-    };
+    return () => {};
   }, []);
 
   const requestPermissionNoti = async () => {

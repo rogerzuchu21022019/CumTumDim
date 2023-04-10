@@ -17,7 +17,7 @@ import ItemView from './item/ItemView';
 import SafeKeyComponent from '../../../../../components/safe_area/SafeKeyComponent';
 // import HistoryNoItems from './historynoitems/HistoryNoItems';
 import {authSelector} from '../../../../admin/sliceAuth';
-const History = navigation => {
+const History = ({navigation}) => {
   // const data = useSelector(cartSelector);
   const user = useSelector(authSelector);
   console.log('🚀 ~ file: History.js:17 ~ History ~ user:', user);

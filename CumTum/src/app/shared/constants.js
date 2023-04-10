@@ -11,6 +11,10 @@ export const constants = {
     AQUA: 'aqua',
     DARK_BROWN: '#2F2D2D',
     GREEN: 'green',
+    BLUE: 'blue',
+    LIGHT_BLUE: '#03c2fc',
+    PINK_MOMO:"#ec1387",
+    LIVE_PAID:"#13ecea"
   },
   PAYPAL: {
     SANDBOX_PAYPAL: 'https://api-m.sandbox.paypal.com',
@@ -20,7 +24,7 @@ export const constants = {
       'EPscZ2cKSvwcybfeIbQksSxlCJVZDGuzAMy0skSzZJIJ2NL4yJUUuKaC6Ve2fi9kHzgnWZOpfSPPU_Oi',
   },
   BASE_URL: {
-    MAIN: 'http://172.20.10.2:3000/api',
+    MAIN: 'http://192.168.2.9:3000/api',
     SECOND: 'https://cumtumdim.becofoodstore.click/api',
   },
   ROLE: {
@@ -66,7 +70,7 @@ export const constants = {
     ADD_WISH_CART: 'addWishCart',
   },
   SOCKET: {
-    URL: 'http://172.20.10.2:3000',
+    URL: 'http://192.168.2.9:3000',
     CONNECTION: 'connection',
     CONNECT: 'connect',
     DISCONNECT: 'disconnect',

@@ -160,7 +160,6 @@ export const createOrderPaypal = async (accessToken, order) => {
     const headers = {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${accessToken}`,
-      'PayPal-Request-ID': uuidv4(),
     };
 
     const response = await axios.post(
@@ -185,7 +184,6 @@ export const verifyCaptureOrderPaypal = async (id, accessToken) => {
   const headers = {
     'Content-Type': 'application/json',
     Authorization: `Bearer ${accessToken}`,
-    'PayPal-Request-ID': uuidv4(),
   };
   try {
     const response = await axios.post(
