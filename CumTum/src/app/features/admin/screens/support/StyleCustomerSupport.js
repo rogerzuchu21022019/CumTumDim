@@ -30,6 +30,11 @@ const styles = StyleSheet.create({
     // backgroundColor: constants.COLOR.WHITE,
     marginRight: 20,
   },
+  iconHeader:{
+    width:30,
+    height:30,
+    color: constants.COLOR.WHITE
+  },
   divideLine: {
     height: 2,
     backgroundColor: constants.COLOR.BLACK,
@@ -60,6 +65,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#252121',
     justifyContent: 'space-around',
     alignItems: 'center',
+    width: '100%',
   },
   
   image:{
@@ -83,18 +89,19 @@ const styles = StyleSheet.create({
     marginBottom:50,
   },
   viewButtonCreate: {
-    backgroundColor: constants.COLOR.YELLOW,
-    marginTop: 20,
-    alignItems: 'center',
+ 
     justifyContent: 'center',
+    alignItems: 'center',
     borderRadius: 10,
-    width: 150,
     height: 50,
+    backgroundColor: constants.COLOR.ORANGE,
+    marginTop: 20,
+    flexDirection:'row',
+  
   },
   groupBTN:{
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop:20,
+    width:"90%",
+  
   },
   btnCreate: {
     // backgroundColor: constants.COLOR.RED,
@@ -116,6 +123,9 @@ const styles = StyleSheet.create({
   imageCartToonHead:{
     width:160,
     height:160,
+  },
+  btnSignOut:{
+    marginEnd:20,
   },
     //body
 });

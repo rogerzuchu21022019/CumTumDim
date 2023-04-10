@@ -8,6 +8,8 @@ import {fetchSignOut} from '../../apiAdmin';
 import {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import Router from '../../../../navigation/Router';
+import IconFontAwesome from 'react-native-vector-icons/FontAwesome';
+
 
 const CustomerSupport = ({navigation}) => {
 const dispatch = useDispatch();
@@ -75,16 +77,29 @@ const moveTo = async () => {
                 <Text style={styles.itemText}>0879175310</Text>
               </View>
             </View>
-        <View style={styles.groupBTN}>
-          <TouchableOpacity onPress={signOut}>
-              <View style={styles.viewButtonCreate}>
-                <Text style={styles.btnCreate}>Đăng xuất</Text>
-              </View>
-            </TouchableOpacity>
-            </View>
+       
           
           </View>
-        
+
+            <View style={styles.groupBTN}>
+            <TouchableOpacity onPress={signOut}>
+
+              <View style={styles.viewButtonCreate}>
+              
+                <View style={styles.btnSignOut}><Text style={styles.btnCreate}>Đăng xuất</Text></View>
+                <View>
+                  <IconFontAwesome 
+                   name="sign-out"
+                   color={constants.COLOR.WHITE}
+                   size={20}
+                /></View>
+              </View>
+              
+              </TouchableOpacity>
+
+            </View>
+
+
           <View style={styles.cartToon}>
           <Image style={styles.imageCartToon}
                source={require('../../../../../assets/cartToon2.png')}

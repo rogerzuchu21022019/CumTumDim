@@ -270,7 +270,7 @@ const HomeCustomer = ({navigation}) => {
                   <View style={styles.viewImageDish}>
                     <FastImage
                       style={styles.imageLogo}
-                      source={require('../../../../../../assets/logoKhac.jpg')}
+                      source={require('../../../../../../assets/logoKhac.png')}
                     />
                   </View>
                 </View>

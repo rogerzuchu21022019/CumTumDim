@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     // backgroundColor: constants.COLOR.YELLOW,
   },
   viewButtonCreate: {
-    backgroundColor: constants.COLOR.YELLOW,
+    backgroundColor: constants.COLOR.ORANGE,
     marginTop: 20,
     alignItems: 'center',
     justifyContent: 'center',

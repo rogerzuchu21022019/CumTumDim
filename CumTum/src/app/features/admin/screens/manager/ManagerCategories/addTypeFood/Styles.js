@@ -83,7 +83,7 @@ header: {
     paddingLeft:20,
   },
   viewBTN:{
-    backgroundColor: constants.COLOR.YELLOW,
+    backgroundColor: constants.COLOR.ORANGE,
     height:40,
     width:150,
     borderRadius:10,
