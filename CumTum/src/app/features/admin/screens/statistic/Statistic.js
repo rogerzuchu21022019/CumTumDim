@@ -22,6 +22,7 @@ import DatePicker from 'react-native-date-picker';
 import {LineChart} from 'react-native-chart-kit';
 import {Dimensions} from 'react-native';
 import {FlashList} from '@shopify/flash-list';
+import {formatTime} from '../../../../shared/utils/Moment';
 
 const Statistic = ({navigation}) => {
   const [activeTab, setActiveTab] = useState('Tab 1');
@@ -30,15 +31,8 @@ const Statistic = ({navigation}) => {
   };
 
   const [selectedDate, setSelectedDate] = useState(new Date());
-  console.log(
-    '🚀 ~ file: Statistic.js:32 ~ Statistic ~ setSelectedDate:',
-    setSelectedDate,
-  );
   const [showDatePicker, setShowDatePicker] = useState(false); // Ẩn hoặc hiển thị date picker
-  console.log(
-    '🚀 ~ file: Statistic.js:33 ~ Statistic ~ showDatePicker:',
-    showDatePicker,
-  );
+
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
 
@@ -283,17 +277,23 @@ const Statistic = ({navigation}) => {
                   estimatedItemSize={100}
                   data={filteredProducts}
                   renderItem={({item}) => (
-                    <View style={styles.itemOder}>
-                      <View>
-                        <Text style={styles.itemText}>{item.id}</Text>
-                        <Text style={styles.itemText}>{item.datee}</Text>
-                        <Text style={styles.itemText1}>{item.time}</Text>
+                    <SafeKeyComponent>
+                      <View style={styles.itemOder}>
+                        <View>
+                          <Text style={styles.itemText}>{item._id}</Text>
+                          {/* <Text style={styles.itemText}>{item.datee}</Text> */}
+                          <Text style={styles.itemText1}>{item.createdAt}</Text>
+                        </View>
+                        <View style={styles.itemText1}>
+                          <Text style={styles.itemText}>
+                            {item.orderStatus}
+                          </Text>
+                          <Text style={styles.itemText1}>
+                            {item.moneyToPaid}
+                          </Text>
+                        </View>
                       </View>
-                      <View style={styles.itemText1}>
-                        <Text style={styles.itemText}>{item.done}</Text>
-                        <Text style={styles.itemText1}>{item.price}</Text>
-                      </View>
-                    </View>
+                    </SafeKeyComponent>
                   )}
                 />
               </TouchableNativeFeedback>
@@ -311,7 +311,7 @@ const Statistic = ({navigation}) => {
                   </TouchableOpacity>
                   <View style={styles.dateRangePickerText3}>
                     <Text style={styles.dateRangePickerText4}>
-                      {startDate.toLocaleDateString('vi-VN')}
+                      {formatTime(startDate)}
                     </Text>
                   </View>
                 </View>
@@ -323,7 +323,7 @@ const Statistic = ({navigation}) => {
                   </TouchableOpacity>
                   <View style={styles.dateRangePickerText3}>
                     <Text style={styles.dateRangePickerText4}>
-                      {endDate.toLocaleDateString('vi-VN')}
+                      {formatTime(endDate)}
                     </Text>
                   </View>
                 </View>

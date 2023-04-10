@@ -3,13 +3,10 @@ import React, {useState, Component} from 'react';
 import SafeKeyComponent from '../../../../../components/safe_area/SafeKeyComponent';
 import {Table, Row, Rows, Col} from 'react-native-table-component';
 import styles from './Styles';
-import {useSelector} from 'react-redux';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
-import {productSelector} from '../../../../product/sliceProduct';
 
 import {LOG} from '../../../../../../../logger.config';
 import {formatTime} from '../../../../../shared/utils/Moment';
-import IconAntDesign from 'react-native-vector-icons/AntDesign';
 import { constants } from '../../../../../shared/constants';
 
 const log = LOG.extend('PAYMENT_ZALO.JS');
