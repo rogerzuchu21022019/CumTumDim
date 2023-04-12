@@ -58,6 +58,12 @@ const AddTypeFood = ({navigation}) => {
         
         </View>
         <View style={styles.body}>
+        <View style={styles.imageCartToonTop}>
+            <Image
+              style={styles.imageCartToonHead}
+              source={require('../../../../../../../assets/cartToon.png')}
+            />
+          </View>
             <View style={styles.viewTextInput}>
               <View style={styles.viewInput}>
                 <TextInput style={styles.textInput} placeholder="Nhập loại món ăn"/>                
@@ -69,6 +75,13 @@ const AddTypeFood = ({navigation}) => {
                   Thêm
                 </Text>
             </View>
+            <View style={styles.cartToon}>
+            <Image
+              style={styles.imageCartToon}
+              source={require('../../../../../../../assets/cartToon2.png')}
+
+            />
+          </View>
 
         </View>
 

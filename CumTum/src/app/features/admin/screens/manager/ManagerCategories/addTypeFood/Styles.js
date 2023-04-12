@@ -95,6 +95,21 @@ header: {
     fontWeight:"600",
     fontSize:18
   },
+  cartToon: {
+    width: '100%',
+  },
+  imageCartToon: {
+    width: 160,
+    height: 160,
+  },
+  imageCartToonTop: {
+    width: '100%',
+    alignItems: 'flex-end',
+  },
+  imageCartToonHead: {
+    width: 200,
+    height: 200,
+  },
 
 
 })

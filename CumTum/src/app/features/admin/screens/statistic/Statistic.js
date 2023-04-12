@@ -11,6 +11,7 @@ import {
   TouchableNativeFeedback,
   RefreshControl,
   ActivityIndicator,
+  ViewBase,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import styles from './StyleStatistic';
@@ -155,7 +156,7 @@ const Statistic = ({navigation}) => {
                 style={[styles.tab1, activeTab === 'Tab 1' && styles.activeTab]}
                 onPress={() => handleTabPress('Tab 1')}>
                 <View>
-                  <Text style={styles.textTab}>Danh Thu</Text>
+                  <Text style={styles.textTab}>Doanh Thu</Text>
                 </View>
               </TouchableOpacity>
             </View>
@@ -231,12 +232,14 @@ const Statistic = ({navigation}) => {
               </View>
               <View style={styles.strikethrough}></View>
               <View style={styles.boxIncome}>
-                <Text style={styles.itemText1}>
-                  Doanh thu: {convertMoney(totalIncome)}
-                </Text>
-                <Text style={styles.itemText1}>
-                  Tổng đơn: {filteredProducts.length}
-                </Text>
+                  <Text style={styles.itemText1}>
+                    Doanh thu: {convertMoney(totalIncome)}
+                  </Text>
+                  <Text style={styles.itemText1}>
+                    Tổng đơn: {filteredProducts.length}
+                  </Text>
+               
+               
               </View>
               <TouchableNativeFeedback>
                 {isLoading ? (

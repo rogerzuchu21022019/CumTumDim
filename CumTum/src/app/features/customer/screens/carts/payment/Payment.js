@@ -9,6 +9,7 @@ import Router from '../../../../../navigation/Router';
 import {useDispatch, useSelector} from 'react-redux';
 import queryString from 'query-string';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
+import IconEntypo from 'react-native-vector-icons/Entypo';
 
 
 import {
@@ -232,18 +233,30 @@ const Payment = ({navigation, route}) => {
               <Text style={styles.text}>Địa chỉ nhận hàng</Text>
             </View>
             <View style={styles.groupContent}>
+            
               <View style={styles.leftContent}>
+              <View style={styles.iconLocation}>
+                <IconEntypo
+                 name="location-pin"
+                 color={constants.COLOR.ORANGE}
+                 size={20}
+                />
+              </View>
+              <View>
                 <View>
-                  <Text style={styles.text1}>Võ Ngọc Phước | 0342128462</Text>
-                </View>
-                <View>
-                  <Text style={styles.text1}>562/39h Đường Nguyễn Kiệm</Text>
-                </View>
-                <View>
-                  <Text style={styles.text1}>
-                    Phường 4, quận Phú Nhuận,TP HCM
-                  </Text>
-                </View>
+                    <Text style={styles.text1}>Võ Ngọc Phước | 0342128462</Text>
+                  </View>
+                  <View>
+                    <Text style={styles.text1}>562/39h Đường Nguyễn Kiệm</Text>
+                  </View>
+                  <View>
+                    <Text style={styles.text1}>
+                      Phường 4, quận Phú Nhuận,TP HCM
+                    </Text>
+                  </View>
+
+              </View>
+                
               </View>
               <View style={styles.rightContent}>
               <IconAntDesign
@@ -253,8 +266,8 @@ const Payment = ({navigation, route}) => {
               />
             </View>
             </View>
-           
-          </View>
+
+            </View>
 
           <View>
             <Text style={styles.text}>

@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
   text: {
     fontStyle: 'normal',
     fontWeight: '600',
-    fontSize: 20,
+    fontSize: 16,
     lineHeight: 20,
     color: constants.COLOR.WHITE,
   },
@@ -153,6 +153,9 @@ const styles = StyleSheet.create({
   },
   viewImage1: {
     flex: 1/2,
+  },
+  iconLocation:{
+    marginEnd:10,
   },
   checkbox: {
     width: 30,
@@ -234,12 +237,13 @@ const styles = StyleSheet.create({
 
   },
   leftContent:{
+    flexDirection: 'row',
 
   },
   groupContent:{
     flexDirection:'row',
-    justifyContent:"space-between",
     alignItems: 'center',
+    justifyContent:'space-between',
   },
   btnNext: {
     // backgroundColor: constants.COLOR.RED,

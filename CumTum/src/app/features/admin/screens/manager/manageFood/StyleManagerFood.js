@@ -59,7 +59,7 @@ const StyleManagerFood = StyleSheet.create({
   /*Body*/
   body: {
     flex: 12,
-    backgroundColor: constants.COLOR.GREY,
+    backgroundColor: constants.COLOR.PRIMARY,
   },
   groupBody: {
     marginLeft: 24,

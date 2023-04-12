@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
   //body
   body: {
     flex: 12,
-    backgroundColor: constants.COLOR.BLACK,
+    backgroundColor: constants.COLOR.PRIMARY,
     // width:'100%'
   },
   groupItem: {},

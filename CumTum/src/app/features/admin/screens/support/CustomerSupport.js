@@ -51,7 +51,7 @@ const CustomerSupport = ({navigation}) => {
                 source={require('../../../../../assets/zalo.png')}
               />
               <View>
-                <Text style={styles.itemText}>0879175310</Text>
+                <Text style={styles.itemText}>0879175310 : Roger Vũ Trụ</Text>
               </View>
             </View>
             <View style={styles.viewImage}>
@@ -67,7 +67,7 @@ const CustomerSupport = ({navigation}) => {
                 source={require('../../../../../assets/phone.png')}
               />
               <View>
-                <Text style={styles.itemText}>0879175310</Text>
+                <Text style={styles.itemText}>0879175310 : Vũ Thành Nam</Text>
               </View>
             </View>
           </View>
