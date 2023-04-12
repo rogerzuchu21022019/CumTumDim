@@ -3,7 +3,7 @@ const UpdateNotificationCon = require("../../../components/users/controllers/Upd
 
 const route = express.Router();
 
-route.get(`/:userId/update-notification`, async (req, res) => {
+route.post(`/:userId/update-notification`, async (req, res) => {
   try {
     const { userId } = req.params;
     const { notification } = req.body;
