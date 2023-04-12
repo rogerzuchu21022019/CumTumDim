@@ -265,14 +265,12 @@ const HomeCustomer = ({navigation}) => {
                     }>
                     Món thêm
                   </Text>
-                  <TouchableOpacity>
                   <View style={styles.viewImageDish}>
                     <FastImage
                       style={styles.imageLogo}
                       source={require('../../../../../../assets/logoExtraDish.png')}
                     />
                   </View>
-                  </TouchableOpacity>
                 </View>
               </TouchableOpacity>
               <TouchableOpacity onPress={openTab3}>

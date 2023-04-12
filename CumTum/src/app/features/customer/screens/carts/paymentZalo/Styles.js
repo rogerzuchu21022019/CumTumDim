@@ -17,8 +17,9 @@ const Styles = StyleSheet.create({
   viewShowBill: {
   },
   textShowBill: {
-    fontSize: 20,
+    fontSize: 16,
     color: constants.COLOR.WHITE,
+    fontWeight:"600,"
   },
   // body
   body: {
