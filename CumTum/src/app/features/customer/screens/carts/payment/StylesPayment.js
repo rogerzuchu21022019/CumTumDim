@@ -168,6 +168,12 @@ const styles = StyleSheet.create({
   iconLocation:{
     marginEnd:10,
   },
+  modal:{
+    backgroundColor:constants.COLOR.BLACK,
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
+  },
   checkbox: {
     width: 30,
     height: 30,

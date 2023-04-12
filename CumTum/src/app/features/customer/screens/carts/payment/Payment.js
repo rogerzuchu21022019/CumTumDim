@@ -31,6 +31,7 @@ import {
 import WebView from 'react-native-webview';
 import Snackbar from 'react-native-snackbar';
 import {resetCart} from '../../../../product/sliceProduct';
+import CheckModal from '../../../../../shared/utils/CheckModal';
 const log = LOG.extend(`PAYMENT.JS`);
 const Payment = ({navigation, route}) => {
   const {order} = route.params;
@@ -39,6 +40,7 @@ const Payment = ({navigation, route}) => {
   const [checkedId, setCheckedId] = useState(null);
   const [urlPaypalCheckout, setUrlPaypalCheckout] = useState(null);
   const [accessToken, setAccessToken] = useState(null);
+  const [isModalVisible, setModalVisible] = useState(false);
 
   const auth = useSelector(authSelector);
   const cartData = useSelector(cartSelector);
@@ -69,6 +71,7 @@ const Payment = ({navigation, route}) => {
       setCheckedId(id);
     }
   };
+
 
   const handleCreateOrder = order => {
     dispatch(fetchCreateOrder(order));
@@ -103,12 +106,20 @@ const Payment = ({navigation, route}) => {
       setUrlPaypalCheckout(url.href);
     }
   };
+  
 
   const onPay = async () => {
     if (checkedId === null) {
-      Alert.alert('Thông báo', 'Bạn chưa chọn phương thức thanh toán', [
-        {text: 'OK', onPress: () => console.log('OK Pressed')},
-      ]);
+      setModalVisible(true);
+
+
+
+
+      // Alert.alert('Thông báo', 'Bạn chưa chọn phương thức thanh toán', [
+      //   {text: 'OK', onPress: () => console.log('OK Pressed')},
+      // ]);
+
+
       return;
     }
 
@@ -118,7 +129,6 @@ const Payment = ({navigation, route}) => {
     }
     if (checkedId === 2) {
       console.log('VISA', checkedId);
-
       Snackbar.show({
         text: 'Chức năng đang được tích hợp',
         duration: Snackbar.LENGTH_SHORT,
@@ -206,7 +216,9 @@ const Payment = ({navigation, route}) => {
   };
   return (
     <SafeKeyComponent>
+
       <View style={styles.container}>
+
         <View style={styles.header}>
           <View style={styles.header}>
             <View style={styles.mainHeader}>
@@ -371,8 +383,11 @@ const Payment = ({navigation, route}) => {
                     styles.checkbox,
                     checkedId === 5 && styles.checkboxChecked,
                   ]}></View>
+
               </View>
             </TouchableOpacity>
+          
+
             <Modal
               animationType="slide"
               transparent={true}
@@ -402,7 +417,15 @@ const Payment = ({navigation, route}) => {
             </TouchableOpacity>
           </View>
         </View>
+        <View style={styles.modal}>
+              <CheckModal 
+              isModalVisible = {isModalVisible} 
+              setModalVisible={setModalVisible}
+              />
+              
       </View>
+      </View>
+     
     </SafeKeyComponent>
   );
 };
