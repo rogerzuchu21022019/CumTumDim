@@ -37,6 +37,7 @@ export const constants = {
     CREATE_ORDER: 'create-order',
     UPDATE_ORDER: 'update-order',
     FIND_ORDER_BY_USER_ID: 'find-order-by-user-id',
+    UPDATE_NOTIFICATION:"update-notification"
   },
   ROLE: {
     ADMIN: 'admin',

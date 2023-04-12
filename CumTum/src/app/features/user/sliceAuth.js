@@ -47,7 +47,7 @@ export const authSlice = createSlice({
     });
     builder.addCase(fetchUserById.fulfilled, (state, action) => {
       const dataResponse = action.payload;
-      state.isLoading = true;
+      state.isLoading = false;
       state.user = dataResponse.data;
     });
     builder.addCase(fetchUserById.rejected, (state, action) => {
@@ -61,7 +61,7 @@ export const authSlice = createSlice({
       });
       builder.addCase(fetchUpdateNotification.fulfilled, (state, action) => {
         const dataResponse = action.payload;
-        state.isLoading = true;
+        state.isLoading = false;
         state.user = dataResponse.data;
       });
       builder.addCase(fetchUpdateNotification.rejected, (state, action) => {

@@ -30,12 +30,16 @@ export const fetchUserById = createAsyncThunk(
 
 export const fetchUpdateNotification = createAsyncThunk(
   constants.FETCH.UPDATE_NOTIFICATION,
-  async userId => {
+  async data => {
+    log.error('🚀 ~ file: apiUser.js:34 ~ data:', data);
     const response = await AxiosInstance().post(
-      `/users/${userId}/update-notification`,
+      `/users/${data.userId}/update-notification`,
+      {
+        notification: data.notification,
+      },
     );
 
-    log.info('🚀 ~ file: apiUser.js:34 ~ response:', response.data);
+    log.error('🚀 ~ file: apiUser.js:34 ~ response:', response.data);
     return response.data;
   },
 );
