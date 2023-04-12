@@ -269,7 +269,9 @@ const Payment = ({navigation, route}) => {
 
             </View>
 
-          <View>
+        
+          <View style={styles.line}></View>
+          <View style={styles.viewText1}>
             <Text style={styles.text}>
               Vui lòng chọn một trong các phương thức sau:
             </Text>
