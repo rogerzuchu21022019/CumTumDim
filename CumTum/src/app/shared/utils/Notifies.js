@@ -59,6 +59,4 @@ export const showNotifyLocal = async data => {
       showTimestamp: true,
     },
   });
-  
-  
 };

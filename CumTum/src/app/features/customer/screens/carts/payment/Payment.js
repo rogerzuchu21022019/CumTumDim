@@ -178,8 +178,8 @@ const Payment = ({navigation, route}) => {
         resetDataPaypal();
         handleCreateOrder(order);
         onDisplayNotification();
-        handleResetCart();
-        navigation.goBack();
+        // handleResetCart();
+        // navigation.goBack();
         navigation.navigate(Router.HOME_CUSTOMER_TABS);
       } else {
         return;

@@ -125,6 +125,7 @@ export const sliceCart = createSlice({
     builder.addCase(fetchUpdateOrder.fulfilled, (state, action) => {
       const data = action.payload;
       state.message = data.message;
+      state.isLoading = false;
       state.orderToday.filter(item => {
         if (item._id === data.data._id) {
           item.orderStatus = data.data.orderStatus;
@@ -142,6 +143,7 @@ export const sliceCart = createSlice({
     });
     builder.addCase(fetchAccessTokenPaypal.fulfilled, (state, action) => {
       const data = action.payload;
+      state.isLoading = false;
       state.accessTokenPaypal = data.access_token;
     });
     builder.addCase(fetchAccessTokenPaypal.rejected, (state, action) => {
@@ -155,6 +157,7 @@ export const sliceCart = createSlice({
     });
     builder.addCase(fetchCreateOrderPaypal.fulfilled, (state, action) => {
       const data = action.payload;
+      state.isLoading = false;
       state.ordersPaypal.unshift(data)
     });
     builder.addCase(fetchCreateOrderPaypal.rejected, (state, action) => {

@@ -37,10 +37,14 @@ import {cartSelector, createHistoryCart} from '../../../../carts/sliceOrder';
 import Advertisement from '../../../../../shared/utils/Advertisement';
 import socketServices from '../../../../../shared/utils/Socket';
 import Router from '../../../../../navigation/Router';
+import formatCodeOrder from '../../../../../shared/utils/CreateCodeOrder';
+import { authSelector } from '../../../../admin/sliceAuth';
 
 const HomeCustomer = ({navigation}) => {
   const log = LOG.extend('HOME_CUSTOMER.js');
   const dispatch = useDispatch();
+  const user = useSelector(authSelector)
+  log.info("🚀 ~ file: Home.js:47 ~ HomeCustomer ~ notifications:", user.notifications)
   const cartSelect = useSelector(cartSelector);
   const IMAGE_BG =
     'https://cdn.britannica.com/38/111338-050-D23BE7C8/Stars-NGC-290-Hubble-Space-Telescope.jpg?w=400&h=300&c=crop';
@@ -82,7 +86,7 @@ const HomeCustomer = ({navigation}) => {
   };
 
   const onDisplayNotiAccepted = async data => {
-    const idOrder = data._id;
+    const idOrder = formatCodeOrder(data._id);
     const total = data.moneyToPaid;
     const status = data.orderStatus;
 
@@ -183,8 +187,8 @@ const HomeCustomer = ({navigation}) => {
     setTabs(3);
   };
   const movoRingBell = () => {
-    navigation.navigate(Router.RING_BELL)
-  }
+    navigation.navigate(Router.RING_BELL);
+  };
   return (
     <SafeKeyComponent>
       <View style={styles.container}>
@@ -211,11 +215,8 @@ const HomeCustomer = ({navigation}) => {
                   />
                 </View>
                 <View style={styles.viewTextRingBell}>
-                  <Text style={styles.textRingBell}>
-                    9
-                  </Text>
+                  <Text style={styles.textRingBell}>9</Text>
                 </View>
-              
               </View>
             </TouchableOpacity>
           </View>
@@ -266,12 +267,12 @@ const HomeCustomer = ({navigation}) => {
                     Món thêm
                   </Text>
                   <TouchableOpacity>
-                  <View style={styles.viewImageDish}>
-                    <FastImage
-                      style={styles.imageLogo}
-                      source={require('../../../../../../assets/logoExtraDish.png')}
-                    />
-                  </View>
+                    <View style={styles.viewImageDish}>
+                      <FastImage
+                        style={styles.imageLogo}
+                        source={require('../../../../../../assets/logoExtraDish.png')}
+                      />
+                    </View>
                   </TouchableOpacity>
                 </View>
               </TouchableOpacity>
@@ -367,7 +368,7 @@ const HomeCustomer = ({navigation}) => {
               </View>
             ) : (
               <View style={styles.boxFlashList}>
-               <Image
+                <Image
                   source={{
                     uri: IMAGE_BG,
                   }}

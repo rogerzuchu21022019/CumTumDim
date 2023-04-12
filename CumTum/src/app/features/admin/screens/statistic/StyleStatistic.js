@@ -88,9 +88,9 @@ const StyleStatistic = StyleSheet.create({
     justifyContent: 'center',
   },
   bodyTabRevenue: {
-    top: 30,
     width: '100%',
-    flex:1
+    flex:1,
+    marginVertical:20
   },
   dateRangePickerContainer:{
     
@@ -133,19 +133,24 @@ const StyleStatistic = StyleSheet.create({
     fontWeight: '500',
   },
   datePickerContainer: {
+    marginTop:50,
     height: 200,
     top: 100,
     alignItems: 'center',
     alignSelf: 'center',
     gap: 25,
     fontSize: 20,
-    mariginVertical: 20,
+    marginVertical: 20,
     marginHorizontal: 20,
     borderWidth: 1,
   },
+
+  boxButton:{
+    marginTop:100
+  },
   buttonTouch: {
     width: 310,
-    top: 110,
+    // top: 110,
     alignSelf: 'center',
     textAlign: 'center',
     fontSize: 20,
@@ -182,7 +187,6 @@ const StyleStatistic = StyleSheet.create({
   itemOder: {
     flexDirection: 'row',
     backgroundColor: constants.COLOR.DARK_BROWN,
-    width: 360,
     height: 95,
     justifyContent: 'space-around',
     alignItems: 'center',
@@ -194,6 +198,11 @@ const StyleStatistic = StyleSheet.create({
     color: constants.COLOR.ORANGE,
     fontSize: 15,
     marginVertical: 6,
+  },
+
+  boxIncome:{
+    // backgroundColor:constants.COLOR.GREEN,
+    marginHorizontal:20,
   },
 
   itemText: {

@@ -30,10 +30,10 @@ const styles = StyleSheet.create({
     // backgroundColor: constants.COLOR.WHITE,
     marginRight: 20,
   },
-  iconHeader:{
-    width:30,
-    height:30,
-    color: constants.COLOR.WHITE
+  iconHeader: {
+    width: 30,
+    height: 30,
+    color: constants.COLOR.WHITE,
   },
   divideLine: {
     height: 2,
@@ -64,70 +64,71 @@ const styles = StyleSheet.create({
     flex: 12,
     backgroundColor: '#252121',
     justifyContent: 'space-around',
-    alignItems: 'center',
     width: '100%',
   },
-  
-  image:{
-    width:40,
-    height:40,
-    borderRadius:18,
+
+  image: {
+    width: 40,
+    height: 40,
+    borderRadius: 10,
   },
-  viewImage:{
+  viewImage: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop:30
+    marginTop: 30,
   },
-  
+
   itemText: {
     color: 'white',
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: '700',
-    marginStart: 20
+    marginStart: 20,
   },
-  itemSupport:{
-    marginBottom:50,
+  itemSupport: {
+    marginBottom: 50,
+    // backgroundColor: constants.COLOR.ORANGE,
+    marginLeft: 20,
+    marginRight: 20,
   },
   viewButtonCreate: {
- 
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 10,
-    height: 50,
     backgroundColor: constants.COLOR.ORANGE,
     marginTop: 20,
-    flexDirection:'row',
-  
+    flexDirection: 'row',
+    marginLeft: 20,
+    marginRight: 20,
+    padding: 10,
   },
-  groupBTN:{
-    width:"90%",
-  
+  groupBTN: {
+    width: '100%',
   },
   btnCreate: {
     // backgroundColor: constants.COLOR.RED,
     fontWeight: '700',
-    fontSize: 20,
+    fontSize: 16,
     color: constants.COLOR.WHITE,
   },
-  cartToon:{
-   width:"100%"
+  cartToon: {
+    width: '100%',
   },
-  imageCartToon:{
-    width:130,
-    height:130,
+  imageCartToon: {
+    width: 130,
+    height: 130,
   },
-  imageCartToonTop:{
-    width:"100%",
-    alignItems: "flex-end",
+  imageCartToonTop: {
+    width: '100%',
+    alignItems: 'flex-end',
   },
-  imageCartToonHead:{
-    width:160,
-    height:160,
+  imageCartToonHead: {
+    width: 160,
+    height: 160,
   },
-  btnSignOut:{
-    marginEnd:20,
+  btnSignOut: {
+    marginEnd: 20,
   },
-    //body
+  //body
 });
 
 export default styles;

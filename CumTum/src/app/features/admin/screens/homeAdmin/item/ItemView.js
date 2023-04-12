@@ -4,6 +4,7 @@ import SafeKeyComponent from '../../../../../components/safe_area/SafeKeyCompone
 import Router from '../../../../../navigation/Router';
 import styles from './StyleItemView';
 import {useEffect} from 'react';
+import { convertMoney } from '../../../../../shared/utils/CreateCodeOrder';
 const log = LOG.extend(`ITEM_VIEW.JS`);
 const ItemView = ({item, index, navigation}) => {
   //   log.info('🚀 ~ file: ItemView.js:9 ~ ItemView ~ item:', item);
@@ -22,7 +23,7 @@ const ItemView = ({item, index, navigation}) => {
               <View style={styles.itemOrder}>
                 <Text style={styles.itemText}>Đơn hàng {index + 1}</Text>
                 <Text style={styles.itemText}>||</Text>
-                <Text style={styles.itemText}>{item.moneyToPaid} K</Text>
+                <Text style={styles.itemText}>{convertMoney(item.moneyToPaid)}</Text>
               </View>
               <View style={styles.boxStatus}>
                 <View style={styles.status1}>
