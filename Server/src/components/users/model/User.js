@@ -35,21 +35,25 @@ const userSchema = new mongoose.Schema(
       type: [],
     },
     address: {
-      street: {
-        type: String,
-      },
-      houseNumber: {
-        type: String,
-      },
-      district: {
-        type: String,
-      },
-      ward: {
-        type: String,
-      },
-      city: {
-        type: String,
-      },
+      type: [
+        {
+          street: {
+            type: String,
+          },
+          houseNumber: {
+            type: String,
+          },
+          district: {
+            type: String,
+          },
+          ward: {
+            type: String,
+          },
+          city: {
+            type: String,
+          },
+        },
+      ],
     },
   },
   {
