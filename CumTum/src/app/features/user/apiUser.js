@@ -20,8 +20,26 @@ export const fetchLogin = createAsyncThunk(
 export const fetchUserById = createAsyncThunk(
   constants.FETCH.USER_BY_ID,
   async userId => {
-    const response = await AxiosInstance().get(`/users/${userId}/find-user-by-id`);
-    log.info("🚀 ~ file: apiUser.js:8 ~ fetchLogin ~ response:", response.data)
+    const response = await AxiosInstance().get(
+      `/users/${userId}/find-user-by-id`,
+    );
+    log.info('🚀 ~ file: apiUser.js:8 ~ fetchLogin ~ response:', response.data);
+    return response.data;
+  },
+);
+
+export const fetchUpdateNotification = createAsyncThunk(
+  constants.FETCH.UPDATE_NOTIFICATION,
+  async data => {
+    log.error('🚀 ~ file: apiUser.js:34 ~ data:', data);
+    const response = await AxiosInstance().post(
+      `/users/${data.userId}/update-notification`,
+      {
+        notification: data.notification,
+      },
+    );
+
+    log.error('🚀 ~ file: apiUser.js:34 ~ response:', response.data);
     return response.data;
   },
 );

@@ -1,6 +1,6 @@
 import Router from '../../navigation/Router';
 import {constants} from '../../shared/constants';
-import {fetchLogin, fetchSignOut, fetchUserById} from './apiUser';
+import {fetchLogin, fetchSignOut, fetchUpdateNotification, fetchUserById} from './apiUser';
 
 const {createSlice} = require('@reduxjs/toolkit');
 import * as RootNavigation from '../../navigation/RootNavigation';
@@ -47,13 +47,27 @@ export const authSlice = createSlice({
     });
     builder.addCase(fetchUserById.fulfilled, (state, action) => {
       const dataResponse = action.payload;
-      state.isLoading = true;
+      state.isLoading = false;
       state.user = dataResponse.data;
     });
     builder.addCase(fetchUserById.rejected, (state, action) => {
       state.isLoading = false;
       state.error = true;
     });
+
+      // Update Notification  By UserId
+      builder.addCase(fetchUpdateNotification.pending, state => {
+        state.isLoading = true;
+      });
+      builder.addCase(fetchUpdateNotification.fulfilled, (state, action) => {
+        const dataResponse = action.payload;
+        state.isLoading = false;
+        state.user = dataResponse.data;
+      });
+      builder.addCase(fetchUpdateNotification.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = true;
+      });
 
     // Sign Out
     builder.addCase(fetchSignOut.pending, state => {

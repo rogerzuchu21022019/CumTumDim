@@ -3,13 +3,14 @@ const UpdateNotificationCon = require("../../../components/users/controllers/Upd
 
 const route = express.Router();
 
-route.get(`/:userId/update-notification`, async (req, res) => {
+route.post(`/:userId/update-notification`, async (req, res) => {
   try {
     const { userId } = req.params;
     const { notification } = req.body;
     console.log("🚀 ~ file: FindUserById.js:8 ~ route.get ~ userId:", userId);
     const data = await UpdateNotificationCon(userId, notification);
-
+    
+    _io.emit()
     return res.status(200).json({
       isLoading: false,
       message: "Get Notification success",

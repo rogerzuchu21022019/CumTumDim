@@ -14,7 +14,8 @@ const log = LOG.extend('ITEM_VIEW.JS');
 const ItemView = props => {
   const {item, index, handleAddDish, handleRemoveDish, tabs, valueSubMainDish} =
     props;
-  
+
+  const message = 'Hãy chọn loại sườn trước nè ! Hihi';
   const onDecrease = () => {
     if (tabs.toString() === '0') {
       if (valueSubMainDish.length != 0) {
@@ -23,7 +24,7 @@ const ItemView = props => {
         }
         handleRemoveDish(item);
       } else {
-        Alert.alert('Hãy chọn loại sườn trước nè ! Hihi');
+        Alert.alert(message);
         return;
       }
     } else {

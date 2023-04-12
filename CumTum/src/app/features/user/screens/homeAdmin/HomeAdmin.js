@@ -28,6 +28,7 @@ import {showNotifyLocal} from '../../../../shared/utils/Notifies';
 import {format, isToday} from 'date-fns';
 import {formatCodeOrder} from '../../../../shared/utils/CreateCodeOrder';
 import Router from '../../../../navigation/Router';
+import {fetchUpdateNotification} from '../../apiUser';
 const log = LOG.extend(`HOME_ADMIN.JS`);
 // const socket = io(constants.SOCKET.URL, {
 //   transports: ['websocket'],
@@ -40,10 +41,13 @@ const HomeAdmin = ({navigation}) => {
   const isLoading = data.isLoading;
 
   const user = useSelector(authSelector);
+  // console.log('🚀 ~ file: HomeAdmin.js:44 ~ HomeAdmin ~ user:', user);
   log.info(
     '🚀 ~ file: HomeAdmin.js:43 ~ HomeAdmin ~ notifications:',
     user.notifications,
   );
+
+  const userId = user.user._id;
 
   const [isRefresh, setIsRefresh] = useState(false);
 
@@ -66,12 +70,19 @@ const HomeAdmin = ({navigation}) => {
 
     const title = 'Notification';
     const content = `Đơn hàng số ${idOrder} có tổng giá tiền ${total}K đang chờ bạn xác nhận!`;
-    const dataMap = {
+
+    const notification = {
       title,
       content,
     };
-    
-    showNotifyLocal(dataMap);
+    const data = {
+      userId: userId,
+      notification: notification,
+    };
+
+    dispatch(fetchUpdateNotification(data));
+
+    showNotifyLocal(notification);
   };
 
   useEffect(() => {
