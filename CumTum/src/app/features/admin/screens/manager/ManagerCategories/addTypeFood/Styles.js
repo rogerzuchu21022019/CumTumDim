@@ -67,6 +67,7 @@ header: {
     justifyContent:"space-evenly"
     
 },
+
   viewTextInput:{
     width:"100%",
   },
