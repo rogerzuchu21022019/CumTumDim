@@ -5,7 +5,7 @@ const initSocket = (server) => {
   io = new Server(server);
 
   io.on(CONSTANTS.SOCKET.CONNECTION, (socket) => {
-    console.log("A user connected to socket.");
+    console.log(`A user connected to socket ${socket.id}`);
 
     socket.on(CONSTANTS.SOCKET.CONNECT, () => {
       console.log("A user connected to socket.");

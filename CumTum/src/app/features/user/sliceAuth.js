@@ -49,6 +49,7 @@ export const authSlice = createSlice({
       const dataResponse = action.payload;
       state.isLoading = false;
       state.user = dataResponse.data;
+      state.notifications = state.user.notifications;
     });
     builder.addCase(fetchUserById.rejected, (state, action) => {
       state.isLoading = false;

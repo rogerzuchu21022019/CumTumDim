@@ -7,7 +7,8 @@ const CONSTANTS = {
     CREATE_ORDER: "create-order",
     UPDATE_ORDER: "update-order",
     FIND_ORDER_BY_USER_ID: "find-order-by-user-id",
-    UPDATE_NOTIFICATION:"update-notification"
+    UPDATE_NOTIFICATION_ADMIN: "update-notification-admin",
+    UPDATE_NOTIFICATION_CUSTOMER: "update-notification-customer",
   },
   RABBIT_MQ: {
     QUEUE_NAME_ORDER: "order",
@@ -15,3 +16,4 @@ const CONSTANTS = {
 };
 
 module.exports = CONSTANTS;
+

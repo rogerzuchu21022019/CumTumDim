@@ -1,6 +1,7 @@
 import io from 'socket.io-client';
 import { constants } from '../constants';
-
+import { LOG } from '../../../../logger.config';
+const log = LOG.extend(`SOCKET.JS`)
 
 class WSService {
 
@@ -10,7 +11,7 @@ class WSService {
             this.socket = io(constants.SOCKET.URL, {
                 transports: ['websocket']
             })
-            console.log("initializing socket", this.socket)
+            log.error("initializing socket", this.socket)
 
             this.socket.on('connect', (data) => {
                 console.log("=== socket connected ====")

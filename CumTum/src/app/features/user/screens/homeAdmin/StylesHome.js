@@ -51,11 +51,11 @@ const styles = StyleSheet.create({
     color: 'white',
     marginLeft: 6,
   },
-  textRingBell:{
+  textTotalNotifies:{
     fontSize:10,
     color: constants.COLOR.WHITE,
   },
-  viewTextRingBell:{
+  viewTotalNotifies:{
     backgroundColor: constants.COLOR.RED,
     width:30,
     height:15,

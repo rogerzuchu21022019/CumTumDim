@@ -36,6 +36,7 @@ export const fetchUpdateNotification = createAsyncThunk(
       `/users/${data.userId}/update-notification`,
       {
         notification: data.notification,
+        order: data.orderData,
       },
     );
 

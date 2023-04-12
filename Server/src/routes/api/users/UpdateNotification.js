@@ -1,5 +1,6 @@
 const express = require(`express`);
 const UpdateNotificationCon = require("../../../components/users/controllers/UpdateNotificationCon");
+const CONSTANTS = require("../../../utils/Constant");
 
 const route = express.Router();
 
@@ -10,7 +11,10 @@ route.post(`/:userId/update-notification`, async (req, res) => {
     console.log("🚀 ~ file: FindUserById.js:8 ~ route.get ~ userId:", userId);
     const data = await UpdateNotificationCon(userId, notification);
     
-    _io.emit()
+
+    
+    _io.emit(CONSTANTS.SOCKET.UPDATE_NOTIFICATION_ADMIN, userId);
+    
     return res.status(200).json({
       isLoading: false,
       message: "Get Notification success",

@@ -28,7 +28,7 @@ import {showNotifyLocal} from '../../../../shared/utils/Notifies';
 import {format, isToday} from 'date-fns';
 import {formatCodeOrder} from '../../../../shared/utils/CreateCodeOrder';
 import Router from '../../../../navigation/Router';
-import {fetchUpdateNotification} from '../../apiUser';
+import {fetchUpdateNotification, fetchUserById} from '../../apiUser';
 const log = LOG.extend(`HOME_ADMIN.JS`);
 // const socket = io(constants.SOCKET.URL, {
 //   transports: ['websocket'],
@@ -48,6 +48,8 @@ const HomeAdmin = ({navigation}) => {
   );
 
   const userId = user.user._id;
+  console.log('🚀 ~ file: HomeAdmin.js:51 ~ HomeAdmin ~ userId:', userId);
+  const notifications = user.notifications;
 
   const [isRefresh, setIsRefresh] = useState(false);
 
@@ -58,6 +60,9 @@ const HomeAdmin = ({navigation}) => {
     socketServices.on(constants.SOCKET.CREATE_ORDER, orderData => {
       onDisplayNotification(orderData);
       dispatch(fetchOrders());
+    });
+    socketServices.on(constants.SOCKET.UPDATE_NOTIFICATION_ADMIN, data => {
+      dispatch(fetchUserById(data.userId));
     });
     return () => {
       socketServices.socket.disconnect();
@@ -87,7 +92,7 @@ const HomeAdmin = ({navigation}) => {
 
   useEffect(() => {
     dispatch(fetchOrders());
-  }, [dispatch, data.orders.length]);
+  }, [dispatch, data.orders.length, user.notifications.length]);
 
   const getCurrentTime = () => {
     const date = new Date();
@@ -120,8 +125,10 @@ const HomeAdmin = ({navigation}) => {
                     size={20}
                   />
                 </View>
-                <View style={styles.viewTextRingBell}>
-                  <Text style={styles.textRingBell}>9</Text>
+                <View style={styles.viewTotalNotifies}>
+                  <Text style={styles.textTotalNotifies}>
+                    {notifications.length}
+                  </Text>
                 </View>
               </View>
             </TouchableOpacity>
