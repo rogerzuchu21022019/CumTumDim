@@ -4,7 +4,7 @@ import styles from './StyleCustomerSupport';
 import SafeKeyComponent from '../../../../components/safe_area/SafeKeyComponent';
 import FastImage from 'react-native-fast-image';
 import {constants} from '../../../../shared/constants';
-import {fetchSignOut} from '../../apiAdmin';
+import {fetchSignOut} from '../../apiUser';
 import {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import Router from '../../../../navigation/Router';

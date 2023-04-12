@@ -21,7 +21,7 @@ import * as RootNavigation from '../../../../navigation/RootNavigation';
 import Router from '../../../../navigation/Router';
 import {onCamera, onGallery} from '../../../../shared/utils/Camera';
 import {androidCameraPermission} from '../../../../shared/utils/PermissionAndroid';
-import {fetchSignOut} from '../../apiAdmin';
+import {fetchSignOut} from '../../apiUser';
 import styles from './StyleAddDish';
 import {
   fetchAddDish,

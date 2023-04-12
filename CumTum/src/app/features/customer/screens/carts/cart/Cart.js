@@ -30,7 +30,7 @@ import ItemView from './item/ItemView';
 import {LOG} from '../../../../../../../logger.config';
 import {constants} from '../../../../../shared/constants';
 import Router from '../../../../../navigation/Router';
-import {authSelector} from '../../../../admin/sliceAuth';
+import {authSelector} from '../../../../user/sliceAuth';
 import {createHistoryCart} from '../../../../carts/sliceOrder';
 
 const log = LOG.extend('CART.JS');

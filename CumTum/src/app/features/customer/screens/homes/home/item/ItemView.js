@@ -4,7 +4,7 @@ import SafeKeyComponent from '../../../../../../components/safe_area/SafeKeyComp
 
 import FastImage from 'react-native-fast-image';
 import DropDownPicker from 'react-native-dropdown-picker';
-import {mainDishOptionsData} from '../../../../../admin/screens/addDish/DataDishes';
+import {mainDishOptionsData} from '../../../../../user/screens/addDish/DataDishes';
 import {constants} from '../../../../../../shared/constants';
 import styles from './StyleItem';
 import {LOG} from '../../../../../../../../logger.config';

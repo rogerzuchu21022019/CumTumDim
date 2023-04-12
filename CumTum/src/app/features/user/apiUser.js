@@ -12,7 +12,7 @@ export const fetchLogin = createAsyncThunk(
       idToken,
       accessToken,
     });
-    // log.info("🚀 ~ file: apiAdmin.js:8 ~ fetchLogin ~ response:", response.data)
+    // log.info("🚀 ~ file: apiUser.js:8 ~ fetchLogin ~ response:", response.data)
     return response.data;
   },
 );
@@ -21,7 +21,7 @@ export const fetchUserById = createAsyncThunk(
   constants.FETCH.USER_BY_ID,
   async userId => {
     const response = await AxiosInstance().get(`/users/${userId}/find-user-by-id`);
-    log.info("🚀 ~ file: apiAdmin.js:8 ~ fetchLogin ~ response:", response.data)
+    log.info("🚀 ~ file: apiUser.js:8 ~ fetchLogin ~ response:", response.data)
     return response.data;
   },
 );

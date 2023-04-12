@@ -17,7 +17,7 @@ import {
   fetchCreateOrderPaypal,
   fetchNotification,
 } from '../../../../carts/apiOrder';
-import {authSelector} from '../../../../admin/sliceAuth';
+import {authSelector} from '../../../../user/sliceAuth';
 import {cartSelector} from '../../../../carts/sliceOrder';
 import notifee from '@notifee/react-native';
 import {showNotifyLocal} from '../../../../../shared/utils/Notifies';

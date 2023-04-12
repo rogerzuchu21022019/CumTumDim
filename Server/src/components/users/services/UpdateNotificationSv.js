@@ -1,17 +1,16 @@
 const User = require("../model/User");
 
-const UpdateUserByIdSv = async (userId, order, ) => {
+const UpdateNotificationSv = async (userId, notification) => {
   try {
     const query = {
       _id: userId,
     };
     const optionUpdate = {
       $push: {
-        orders: {
-          $each: [order],
+        notifications: {
+          $each: [notification],
           $position: 0,
         },
-      
       },
     };
     const user = await User.findByIdAndUpdate(query, optionUpdate, {
@@ -22,9 +21,9 @@ const UpdateUserByIdSv = async (userId, order, ) => {
     return user;
   } catch (error) {
     console.log(
-      "🚀 ~ file: FindUserByIdSv.js:5 ~ FindUserByIdSv ~ error:",
+      "🚀 ~ file: UpdateNotificationSv.js:24 ~ UpdateNotificationSv ~ error:",
       error
     );
   }
 };
-module.exports = UpdateUserByIdSv;
+module.exports = UpdateNotificationSv;

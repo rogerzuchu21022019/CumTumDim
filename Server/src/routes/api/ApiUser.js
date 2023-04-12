@@ -4,5 +4,6 @@ module.exports = {
     verifyOtp:require(`./users/VerifyOtp`),
     updateUserById:require(`./users/UpdateUserById`),
     findUserById:require(`./users/FindUserById`),
+    updateNotification: require(`../api/users/UpdateNotification`),
     
 }
