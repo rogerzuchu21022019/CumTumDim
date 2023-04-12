@@ -37,7 +37,7 @@ import {cartSelector, createHistoryCart} from '../../../../carts/sliceOrder';
 import Advertisement from '../../../../../shared/utils/Advertisement';
 import socketServices from '../../../../../shared/utils/Socket';
 import Router from '../../../../../navigation/Router';
-import formatCodeOrder from '../../../../../shared/utils/CreateCodeOrder';
+import {formatCodeOrder} from '../../../../../shared/utils/CreateCodeOrder';
 import {authSelector} from '../../../../user/sliceAuth';
 
 const HomeCustomer = ({navigation}) => {

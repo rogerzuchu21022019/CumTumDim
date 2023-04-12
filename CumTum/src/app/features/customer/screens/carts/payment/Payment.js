@@ -170,16 +170,16 @@ const Payment = ({navigation, route}) => {
   const paymentSuccess = async id => {
     try {
       const response = await verifyCaptureOrderPaypal(id, accessToken);
-      // log.error(
-      //   '🚀 ~ file: Payment.js:140 ~ paymentSuccess ~ paymentStatus:',
-      //   paymentStatus,
-      // );
+      log.error(
+        '🚀 ~ file: Payment.js:140 ~ paymentSuccess ~ paymentStatus:',
+        response,
+      );
       if (response.status === 'COMPLETED') {
         resetDataPaypal();
         handleCreateOrder(order);
         onDisplayNotification();
-        // handleResetCart();
-        // navigation.goBack();
+        handleResetCart();
+        navigation.goBack();
         navigation.navigate(Router.HOME_CUSTOMER_TABS);
       } else {
         return;
