@@ -6,8 +6,6 @@ module.exports = {
   uploadImage: require(`../api/media/UploadImage`),
   createOrder: require(`../api/orders/CreateOrder`),
   updateOrder: require(`../api/orders/FindOrderById`),
-  pushNotification: require(`../api/notifications/PushNotification`),
   getRabbit: require(`../api/rabbit/NotifyGet`),
-  findNotifications: require(`../api/notifications/FindNotifications`),
   findOrders: require(`../api/orders/FindOrders`)
 };

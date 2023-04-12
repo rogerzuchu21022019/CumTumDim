@@ -15,8 +15,8 @@ import {useDispatch, useSelector} from 'react-redux';
 import SafeKeyComponent from '../../../components/safe_area/SafeKeyComponent';
 import Router from '../../../navigation/Router';
 import {constants} from '../../../shared/constants';
-import {fetchLogin} from '../../admin/apiAdmin';
-import {authSelector} from '../../admin/sliceAuth';
+import {fetchLogin} from '../../user/apiUser';
+import {authSelector} from '../../user/sliceAuth';
 import StyleLogin from './StyleLogin';
 
 import auth, {firebase} from '@react-native-firebase/auth';

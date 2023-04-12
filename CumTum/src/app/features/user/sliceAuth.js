@@ -1,6 +1,6 @@
 import Router from '../../navigation/Router';
 import {constants} from '../../shared/constants';
-import {fetchLogin, fetchSignOut, fetchUserById} from './apiAdmin';
+import {fetchLogin, fetchSignOut, fetchUserById} from './apiUser';
 
 const {createSlice} = require('@reduxjs/toolkit');
 import * as RootNavigation from '../../navigation/RootNavigation';

@@ -15,10 +15,10 @@ import {FlashList} from '@shopify/flash-list';
 import ItemView from './item/ItemView';
 import SafeKeyComponent from '../../../../../components/safe_area/SafeKeyComponent';
 // import HistoryNoItems from './historynoitems/HistoryNoItems';
-import {authSelector} from '../../../../admin/sliceAuth';
+import {authSelector} from '../../../../user/sliceAuth';
 import socketServices from '../../../../../shared/utils/Socket';
 import {LOG} from '../../../../../../../logger.config';
-import {fetchUserById} from '../../../../admin/apiAdmin';
+import {fetchUserById} from '../../../../user/apiUser';
 const log = LOG.extend(`HISTORY.JS`);
 const History = ({navigation}) => {
   // const data = useSelector(cartSelector);
