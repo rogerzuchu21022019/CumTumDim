@@ -18,7 +18,7 @@ import {
   fetchCreateOrderPaypal,
   fetchNotification,
 } from '../../../../carts/apiOrder';
-import {authSelector} from '../../../../admin/sliceAuth';
+import {authSelector} from '../../../../user/sliceAuth';
 import {cartSelector} from '../../../../carts/sliceOrder';
 import notifee from '@notifee/react-native';
 import {showNotifyLocal} from '../../../../../shared/utils/Notifies';
@@ -171,16 +171,16 @@ const Payment = ({navigation, route}) => {
   const paymentSuccess = async id => {
     try {
       const response = await verifyCaptureOrderPaypal(id, accessToken);
-      // log.error(
-      //   '🚀 ~ file: Payment.js:140 ~ paymentSuccess ~ paymentStatus:',
-      //   paymentStatus,
-      // );
+      log.error(
+        '🚀 ~ file: Payment.js:140 ~ paymentSuccess ~ paymentStatus:',
+        response,
+      );
       if (response.status === 'COMPLETED') {
         resetDataPaypal();
         handleCreateOrder(order);
         onDisplayNotification();
-        // handleResetCart();
-        // navigation.goBack();
+        handleResetCart();
+        navigation.goBack();
         navigation.navigate(Router.HOME_CUSTOMER_TABS);
       } else {
         return;

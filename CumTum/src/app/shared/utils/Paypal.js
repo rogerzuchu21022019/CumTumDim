@@ -28,7 +28,7 @@ export const getDataPaypal = async () => {
 };
 
 export const createOrderPaypal = async (accessToken, order) => {
-  console.log('🚀 ~ file: Paypal.js:32 ~ createOrderPaypal ~ order:', order);
+  // console.log('🚀 ~ file: Paypal.js:32 ~ createOrderPaypal ~ order:', order);
   try {
     const convertPrice = price => {
       const pricePattern = 23.442;
@@ -82,10 +82,10 @@ export const createOrderPaypal = async (accessToken, order) => {
       .concat(itemsExtraDish)
       .concat(itemsTopping)
       .concat(itemsAnother);
-    console.log(
-      '🚀 ~ file: Paypal.js:85 ~ createOrderPaypal ~ arrayItem:',
-      arrayItem,
-    );
+    // console.log(
+    //   '🚀 ~ file: Paypal.js:85 ~ createOrderPaypal ~ arrayItem:',
+    //   arrayItem,
+    // );
 
     const tax_total = 0.1;
     const handling = 0.1;
@@ -97,10 +97,10 @@ export const createOrderPaypal = async (accessToken, order) => {
     const itemTotal = arrayItem.reduce((acc, item) => {
       return acc + item.unit_amount.value * item.quantity;
     }, 0);
-    console.log(
-      '🚀 ~ file: Paypal.js:100 ~ itemTotal ~ itemTotal:',
-      itemTotal.toFixed(),
-    );
+    // console.log(
+    //   '🚀 ~ file: Paypal.js:100 ~ itemTotal ~ itemTotal:',
+    //   itemTotal.toFixed(),
+    // );
     const amount =
       itemTotal +
       tax_total +

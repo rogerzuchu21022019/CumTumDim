@@ -38,6 +38,8 @@ const ManagerRouter = (app, fixPublic) => {
   app.use(SUB_USERS, ApiUser.createOtp, fixPublic);
   app.use(SUB_USERS, ApiUser.verifyOtp, fixPublic);
   app.use(SUB_USERS, ApiUser.findUserById, fixPublic);
+  app.use(SUB_PRODUCTS, ApiUser.updateNotification, fixPublic);
+
   //   app.use(MAIN, ApiUser.logoutRouter, fixPublic);
   //   app.use(SUB_USERS, ApiUser.registerRouter, fixPublic);
 
@@ -49,10 +51,8 @@ const ManagerRouter = (app, fixPublic) => {
   app.use(SUB_PRODUCTS, ApiProducts.createOrder, fixPublic);
   app.use(SUB_PRODUCTS, ApiProducts.updateOrder, fixPublic);
   app.use(SUB_PRODUCTS, ApiProducts.findOrders, fixPublic);
-  app.use(SUB_PRODUCTS, ApiProducts.pushNotification, fixPublic);
   app.use(SUB_PRODUCTS, ApiProducts.getRabbit, fixPublic);
 
-  app.use(SUB_PRODUCTS, ApiProducts.findNotifications, fixPublic);
   //   app.use(SUB_PRODUCTS, ApiProduct.chartRouter, fixPublic);
   //   app.use(SUB_PRODUCTS, ApiProduct.dataTableRouter, fixPublic);
 };

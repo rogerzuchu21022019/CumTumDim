@@ -1,9 +1,9 @@
 const { findByIdAndUpdate } = require("../model/User");
 const UpdateUserByIdSv = require("../services/UpdateUserByIdSv");
 
-const UpdateUserByIdCon = async (userId,order,notification) => {
+const UpdateUserByIdCon = async (userId,order) => {
   try {
-    const user = await UpdateUserByIdSv(userId,order,notification);
+    const user = await UpdateUserByIdSv(userId,order);
     return user;
   } catch (error) {
     console.log(
