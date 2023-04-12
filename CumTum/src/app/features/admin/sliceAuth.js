@@ -12,6 +12,7 @@ const initialState = {
   error: null,
   isLoggedIn: false,
   message: null,
+  notifications: [],
 };
 
 export const authSlice = createSlice({
@@ -29,6 +30,7 @@ export const authSlice = createSlice({
       state.isLoggedIn = dataResponse.isLoggedIn;
       state.error = dataResponse.error;
       state.user = dataResponse.data;
+      state.notifications = state.user.notifications;
 
       // state.user.role === constants.ROLE.ADMIN
       //   ? RootNavigation.replace(Router.ADMIN_STACK)

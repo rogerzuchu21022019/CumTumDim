@@ -1,4 +1,4 @@
-import {View, Text, Image, Button,TouchableOpacity} from 'react-native';
+import {View, Text, Image, Button, TouchableOpacity} from 'react-native';
 import React from 'react';
 import styles from './StyleCustomerSupport';
 import SafeKeyComponent from '../../../../components/safe_area/SafeKeyComponent';
@@ -10,19 +10,17 @@ import {useDispatch, useSelector} from 'react-redux';
 import Router from '../../../../navigation/Router';
 import IconFontAwesome from 'react-native-vector-icons/FontAwesome';
 
-
 const CustomerSupport = ({navigation}) => {
-const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
+  const signOut = async () => {
+    dispatch(fetchSignOut());
+    moveTo();
+  };
 
-const signOut = async () => {
-  dispatch(fetchSignOut());
-  moveTo();
-};
-
-const moveTo = async () => {
-  navigation.navigate(Router.LOGIN);
-};
+  const moveTo = async () => {
+    navigation.navigate(Router.LOGIN);
+  };
 
   return (
     <SafeKeyComponent>
@@ -42,72 +40,62 @@ const moveTo = async () => {
         <View style={styles.body}>
           <View style={styles.imageCartToonTop}>
             <Image
-            style={styles.imageCartToonHead}
-               source={require('../../../../../assets/cartToon.png')}
-            
+              style={styles.imageCartToonHead}
+              source={require('../../../../../assets/cartToon.png')}
             />
           </View>
           <View style={styles.itemSupport}>
-          
-              <View style={styles.viewImage}>
-                <Image
+            <View style={styles.viewImage}>
+              <Image
                 style={styles.image}
-                  source={require('../../../../../assets/ZaloImages.png')}
-                />
-                <View>
-                <Text style={styles.itemText}>0879175310</Text>
-              </View>
-              </View>
-              <View style={styles.viewImage}>
-                <Image
-                style={styles.image}
-                  source={require('../../../../../assets/GmailImages.png')}
-                />
-                 <Text style={styles.itemText}>
-                  vuthanhnam21022019@gmail.com
-                </Text>
-              </View>
-              <View style={styles.viewImage}>
-                <Image
-                style={styles.image}
-
-                  source={require('../../../../../assets/PhonesImages.png')}
-                />
-                 <View>
+                source={require('../../../../../assets/zalo.png')}
+              />
+              <View>
                 <Text style={styles.itemText}>0879175310</Text>
               </View>
             </View>
-       
-          
+            <View style={styles.viewImage}>
+              <Image
+                style={styles.image}
+                source={require('../../../../../assets/gmail.png')}
+              />
+              <Text style={styles.itemText}>vuthanhnam21022019@gmail.com</Text>
+            </View>
+            <View style={styles.viewImage}>
+              <Image
+                style={styles.image}
+                source={require('../../../../../assets/phone.png')}
+              />
+              <View>
+                <Text style={styles.itemText}>0879175310</Text>
+              </View>
+            </View>
           </View>
 
-            <View style={styles.groupBTN}>
+          <View style={styles.groupBTN}>
             <TouchableOpacity onPress={signOut}>
-
               <View style={styles.viewButtonCreate}>
-              
-                <View style={styles.btnSignOut}><Text style={styles.btnCreate}>Đăng xuất</Text></View>
+                <View style={styles.btnSignOut}>
+                  <Text style={styles.btnCreate}>Đăng xuất</Text>
+                </View>
                 <View>
-                  <IconFontAwesome 
-                   name="sign-out"
-                   color={constants.COLOR.WHITE}
-                   size={20}
-                /></View>
+                  <IconFontAwesome
+                    name="sign-out"
+                    color={constants.COLOR.WHITE}
+                    size={20}
+                  />
+                </View>
               </View>
-              
-              </TouchableOpacity>
-
-            </View>
-
+            </TouchableOpacity>
+          </View>
 
           <View style={styles.cartToon}>
-          <Image style={styles.imageCartToon}
-               source={require('../../../../../assets/cartToon2.png')}
-            
+            <Image
+              style={styles.imageCartToon}
+              source={require('../../../../../assets/cartToon2.png')}
             />
           </View>
         </View>
-      
       </View>
     </SafeKeyComponent>
   );

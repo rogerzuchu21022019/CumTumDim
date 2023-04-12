@@ -25,7 +25,18 @@ export const constants = {
   },
   BASE_URL: {
     MAIN: 'http://192.168.1.99:3000/api',
+    MAIN: 'http://192.168.2.7:3000/api',
     SECOND: 'https://cumtumdim.becofoodstore.click/api',
+  },
+  SOCKET: {
+    URL: 'http://192.168.2.7:3000',
+    CONNECTION: 'connection',
+    CONNECT: 'connect',
+    DISCONNECT: 'disconnect',
+    PUSH_NOTIFY: 'push-notify',
+    CREATE_ORDER: 'create-order',
+    UPDATE_ORDER: 'update-order',
+    FIND_ORDER_BY_USER_ID:'find-order-by-user-id'
   },
   ROLE: {
     ADMIN: 'admin',
@@ -69,16 +80,7 @@ export const constants = {
   DISPATCH: {
     ADD_WISH_CART: 'addWishCart',
   },
-  SOCKET: {
-    URL: 'http://192.168.2.9:3000',
-    CONNECTION: 'connection',
-    CONNECT: 'connect',
-    DISCONNECT: 'disconnect',
-    PUSH_NOTIFY: 'push-notify',
-    CREATE_ORDER: 'create-order',
-    UPDATE_ORDER: 'update-order',
-    FIND_ORDER_BY_USER_ID:'find-order-by-user-id'
-  },
+
   RABBIT_MQ: {
     QUEUE_NAME_ORDER: 'order',
   },

@@ -1,6 +1,6 @@
 const User = require("../model/User");
 
-const UpdateUserByIdSv = async (userId, order) => {
+const UpdateUserByIdSv = async (userId, order, notification) => {
   try {
     const query = {
       _id: userId,
@@ -9,6 +9,10 @@ const UpdateUserByIdSv = async (userId, order) => {
       $push: {
         orders: {
           $each: [order],
+          $position: 0,
+        },
+        notifications: {
+          $each: [notification],
           $position: 0,
         },
       },

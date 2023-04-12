@@ -1,5 +1,11 @@
 //HomeAdmin.js
-import {Text, View, TouchableOpacity, RefreshControl} from 'react-native';
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  RefreshControl,
+  ActivityIndicator,
+} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import styles from './StylesHome';
 import SafeKeyComponent from '../../../../components/safe_area/SafeKeyComponent';
@@ -12,11 +18,7 @@ import {cartSelector} from '../../../carts/sliceOrder';
 import {LOG} from '../../../../../../logger.config';
 import IconOcticons from 'react-native-vector-icons/Octicons';
 
-
-
-import {
-  fetchOrders,
-} from '../../../carts/apiOrder';
+import {fetchOrders} from '../../../carts/apiOrder';
 import {authSelector} from '../../sliceAuth';
 import socketServices from '../../../../shared/utils/Socket';
 // import io from 'socket.io-client';
@@ -24,6 +26,8 @@ import socketServices from '../../../../shared/utils/Socket';
 import {showNotifyLocal} from '../../../../shared/utils/Notifies';
 
 import {format, isToday} from 'date-fns';
+import {formatCodeOrder} from '../../../../shared/utils/CreateCodeOrder';
+import Router from '../../../../navigation/Router';
 const log = LOG.extend(`HOME_ADMIN.JS`);
 // const socket = io(constants.SOCKET.URL, {
 //   transports: ['websocket'],
@@ -31,7 +35,15 @@ const log = LOG.extend(`HOME_ADMIN.JS`);
 const HomeAdmin = ({navigation}) => {
   const dispatch = useDispatch();
   const data = useSelector(cartSelector);
+  // log.info('🚀 ~ file: HomeAdmin.js:36 ~ HomeAdmin ~ data:', data);
+
+  const isLoading = data.isLoading;
+
   const user = useSelector(authSelector);
+  log.info(
+    '🚀 ~ file: HomeAdmin.js:43 ~ HomeAdmin ~ notifications:',
+    user.notifications,
+  );
 
   const [isRefresh, setIsRefresh] = useState(false);
 
@@ -40,28 +52,25 @@ const HomeAdmin = ({navigation}) => {
   useEffect(() => {
     socketServices.initializeSocket();
     socketServices.on(constants.SOCKET.CREATE_ORDER, orderData => {
-      // console.log('connect to create order', orderData);
-      log.error('create order success', orderData);
       onDisplayNotification(orderData);
       dispatch(fetchOrders());
     });
-
     return () => {
       socketServices.socket.disconnect();
     };
   }, [dispatch]);
 
   const onDisplayNotification = async orderData => {
-    const idOrder = orderData._id;
+    let idOrder = formatCodeOrder(orderData._id);
     const total = orderData.moneyToPaid;
 
     const title = 'Notification';
     const content = `Đơn hàng số ${idOrder} có tổng giá tiền ${total}K đang chờ bạn xác nhận!`;
-    // console.log("🚀 ~ file: Payment.js:45 ~ onDisplayNotification ~ content:", content)
     const dataMap = {
       title,
       content,
     };
+    
     showNotifyLocal(dataMap);
   };
 
@@ -75,15 +84,14 @@ const HomeAdmin = ({navigation}) => {
     return time;
   };
 
-  
-  const movoRingBell = () => {
-    navigation.navigate(Router.RING_BELL_ADMIN)
-  }
+  const moveRingBell = () => {
+    navigation.navigate(Router.RING_BELL_ADMIN);
+  };
 
   return (
     <SafeKeyComponent>
       <View style={styles.container}>
-      <View style={styles.header}>
+        <View style={styles.header}>
           <View style={styles.mainHeader}>
             <View style={styles.leftHeader}>
               <FastImage
@@ -92,7 +100,7 @@ const HomeAdmin = ({navigation}) => {
               />
               <Text style={styles.textTitle}>Cum tứm đim</Text>
             </View>
-            <TouchableOpacity onPress={movoRingBell}>
+            <TouchableOpacity onPress={moveRingBell}>
               <View style={styles.rightHeader}>
                 <View>
                   <IconOcticons
@@ -102,11 +110,8 @@ const HomeAdmin = ({navigation}) => {
                   />
                 </View>
                 <View style={styles.viewTextRingBell}>
-                  <Text style={styles.textRingBell}>
-                    9
-                  </Text>
+                  <Text style={styles.textRingBell}>9</Text>
                 </View>
-              
               </View>
             </TouchableOpacity>
           </View>
@@ -122,32 +127,40 @@ const HomeAdmin = ({navigation}) => {
                 Số lượng đơn: {data.orderToday.length}
               </Text>
             </View>
-            <FlashList
-              data={data.orderToday}
-              estimatedItemSize={200}
-              showsHorizontalScrollIndicator={false}
-              showsVerticalScrollIndicator={false}
-              // getItemType={(item, index) => {
-              //   return item.category;
-              // }}
-              renderItem={({item, index}) => {
-                return (
-                  <ItemView item={item} index={index} navigation={navigation} />
-                );
-              }}
-              keyExtractor={(item, index) => index.toString()}
-              refreshControl={
-                <RefreshControl
-                  refreshing={isRefresh}
-                  onRefresh={() => {
-                    dispatch(fetchOrders());
-                  }}
-                  title="Pull to refresh..."
-                  titleColor={constants.COLOR.RED}
-                  tintColor={constants.COLOR.RED}
-                />
-              }
-            />
+            {isLoading ? (
+              <ActivityIndicator size="large" color={constants.COLOR.WHITE} />
+            ) : (
+              <FlashList
+                data={data.orderToday}
+                estimatedItemSize={200}
+                showsHorizontalScrollIndicator={false}
+                showsVerticalScrollIndicator={false}
+                // getItemType={(item, index) => {
+                //   return item.category;
+                // }}
+                renderItem={({item, index}) => {
+                  return (
+                    <ItemView
+                      item={item}
+                      index={index}
+                      navigation={navigation}
+                    />
+                  );
+                }}
+                keyExtractor={(item, index) => index.toString()}
+                refreshControl={
+                  <RefreshControl
+                    refreshing={isRefresh}
+                    onRefresh={() => {
+                      dispatch(fetchOrders());
+                    }}
+                    title="Pull to refresh..."
+                    titleColor={constants.COLOR.RED}
+                    tintColor={constants.COLOR.RED}
+                  />
+                }
+              />
+            )}
           </View>
         </View>
       </View>
