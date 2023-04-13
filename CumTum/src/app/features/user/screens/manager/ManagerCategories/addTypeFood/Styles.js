@@ -77,6 +77,8 @@ header: {
     marginRight:20,
     marginLeft:20,
     borderRadius:10,
+    justifyContent:"center",
+    alignItems: "center",
 
   },
   textInput:{

@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     
     textProfile:{
         color:constants.COLOR.WHITE,
-        fontSize:20,
+        fontSize:16,
         fontWeight:'bold',
     },
     viewIcon:{
