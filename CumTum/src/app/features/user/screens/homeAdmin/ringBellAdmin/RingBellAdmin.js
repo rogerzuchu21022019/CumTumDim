@@ -1,5 +1,5 @@
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from './Styles.js';
 import {FlashList} from '@shopify/flash-list';
 import ListItem from './ListItem.js';
@@ -25,11 +25,10 @@ const RingBellAdmin = ({navigation}) => {
     data.user.notifications,
   );
 
+
   const notifications = data.user.notifications;
   const userId = data.user._id;
   const dispatch = useDispatch();
-
-  
 
   return (
     <SafeKeyComponent>
@@ -62,7 +61,11 @@ const RingBellAdmin = ({navigation}) => {
             data={notifications}
             estimatedItemSize={200}
             renderItem={({item, index}) => (
-              <ListItem item={item} index={index} />
+              <ListItem
+                item={item}
+                index={index}
+                navigation={navigation}
+              />
             )}
             keyExtractor={(item, index) => index.toString()}
           />

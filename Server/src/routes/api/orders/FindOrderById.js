@@ -21,7 +21,10 @@ router.post(`/find-order-by-id/:orderId`, async (req, res) => {
     await UpdateUserByIdCon(order.userId, order);
     _io.emit(CONSTANTS.SOCKET.UPDATE_ORDER, order);
     _io.emit(CONSTANTS.SOCKET.FIND_ORDER_BY_USER_ID, order.userId);
-    _io.emit(CONSTANTS.SOCKET.UPDATE_NOTIFICATION_CUSTOMER, order);
+    _io.on(CONSTANTS.SOCKET.CONNECTION, (socket) => {
+      console.log(`A user connected huhu to socket ${socket.id}`);
+      socket.emit(CONSTANTS.SOCKET.UPDATE_NOTIFICATION_CUSTOMER, order);
+    });
 
     res.status(200).json({
       message: "Find order by id successfully",

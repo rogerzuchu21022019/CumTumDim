@@ -61,8 +61,8 @@ const HomeAdmin = ({navigation}) => {
       onDisplayNotification(orderData);
       dispatch(fetchOrders());
     });
-    socketServices.on(constants.SOCKET.UPDATE_NOTIFICATION_ADMIN, data => {
-      dispatch(fetchUserById(data.userId));
+    socketServices.on(constants.SOCKET.UPDATE_NOTIFICATION_ADMIN, userId => {
+      dispatch(fetchUserById(userId));
     });
     return () => {
       socketServices.socket.disconnect();

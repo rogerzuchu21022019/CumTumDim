@@ -67,8 +67,6 @@ const HomeCustomer = ({navigation}) => {
   useEffect(() => {
     socketServices.initializeSocket();
 
-    const roomName = `user-${user.user._id}`;
-    socketServices.socket.emit('join', roomName);
   
     socketServices.on(constants.SOCKET.UPDATE_ORDER, data => {
       log.error('🚀 ~ file: Home.js:82 ~ socketServices.on ~ data:', data);
@@ -80,7 +78,6 @@ const HomeCustomer = ({navigation}) => {
 
     socketServices.on(constants.SOCKET.UPDATE_NOTIFICATION_CUSTOMER, data => {
       log.info("🚀 ~ file: Home.js:79 ~ useEffect ~ data:", data)
-      
     });
 
     return () => {
