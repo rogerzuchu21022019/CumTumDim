@@ -137,6 +137,11 @@ const HomeAdmin = ({navigation}) => {
               <Text style={styles.textToday}>
                 Số lượng đơn: {data.orderToday.length}
               </Text>
+             
+                  <Text style={styles.itemText1}>
+                    Doanh thu: 18000000
+                  </Text>
+          
             </View>
             {isLoading ? (
               <ActivityIndicator size="large" color={constants.COLOR.WHITE} />

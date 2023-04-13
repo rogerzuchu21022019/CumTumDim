@@ -83,6 +83,7 @@ const styles = StyleSheet.create({
     paddingRight: 20,
     marginTop: 10,
   },
+  
   viewToday: {
     justifyContent: 'center',
     alignItems: 'center',
@@ -91,8 +92,15 @@ const styles = StyleSheet.create({
   textToday: {
     lineHeight: 30,
     color: constants.COLOR.WHITE,
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: 'bold',
+  },
+  itemText1: {
+    color: constants.COLOR.ORANGE,
+    fontSize: 16,
+    marginVertical: 6,
+    fontWeight: 'bold',
+
   },
 
   //body
