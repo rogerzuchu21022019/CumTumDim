@@ -79,6 +79,8 @@ const HomeAdmin = ({navigation}) => {
     const notification = {
       title,
       content,
+      _id:orderData._id,
+      createdAt: orderData.createdAt,
     };
     const data = {
       userId: userId,
