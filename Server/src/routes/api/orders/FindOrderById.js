@@ -21,7 +21,12 @@ router.post(`/find-order-by-id/:orderId`, async (req, res) => {
     // await UpdateUserByIdCon(order.userId, order);
     const socketId = "exQn8kgRW22-ewpdAAAD";
     const socket = _io
-    console.log("🚀 ~ file: FindOrderById.js:24 ~ router.post ~ socket:", socket.sockets.adapter.rooms)
+    console.log("🚀 ~ file: FindOrderById.js:24 ~ router.post ~ socket:", socket)
+    console.log("🚀 ~ file: FindOrderById.js:24 ~ router.post ~ socket:", socket.sockets.sockets)
+    const mapSockets = socket.sockets.sockets
+    for (const key of mapSockets.keys()) {
+      console.log(`map key ${key}`);
+    }
     
     // _io.emit(CONSTANTS.SOCKET.UPDATE_ORDER, order);
     // _io.emit(CONSTANTS.SOCKET.FIND_ORDER_BY_USER_ID, order.userId);
