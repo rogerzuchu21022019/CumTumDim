@@ -12,15 +12,7 @@ const CheckModal = props => {
   };
 
   return (
-    <SafeKeyComponent>
-      <View
-        style={{
-          flex: 1,
-          justifyContent: 'center',
-          alignItems: 'center',
-          width: '100%',
-        }}>
-        {/* <Button title="Show modal" onPress={toggleModal} /> */}
+  
         <Modal
           isVisible={isModalVisible}
           animationType="slide"
@@ -50,8 +42,6 @@ const CheckModal = props => {
             </TouchableOpacity>
           </View>
         </Modal>
-      </View>
-    </SafeKeyComponent>
   );
 };
 
@@ -62,19 +52,22 @@ const {StyleSheet} = require('react-native');
 const styles = StyleSheet.create({
   body: {
     width: '100%',
-    height: 100,
     backgroundColor: 'white',
     alignItems: 'center',
     borderRadius: 15,
+    paddingTop:20,
+    paddingBottom:20,
   },
   title: {
     fontSize: 18,
     fontWeight: '700',
     color: 'black',
+    paddingBottom:5,
   },
   content: {
     fontSize: 16,
     color: 'black',
+    paddingBottom:10
   },
   btn: {
     backgroundColor: constants.COLOR.ORANGE,
@@ -90,6 +83,5 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   modal: {
-    marginBottom: 10,
   },
 });

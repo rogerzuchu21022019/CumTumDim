@@ -182,6 +182,8 @@ const AddDish = ({navigation}) => {
 
     console.log('🚀 ~ file: AddDish.js:127 ~ onCreateProduct ~ data:', dish);
     dispatch(fetchAddDish({dish: dish, categoryId: categoryId}));
+
+    
   };
 
   const moveTo = async () => {

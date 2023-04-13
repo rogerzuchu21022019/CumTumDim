@@ -9,13 +9,17 @@ import {constants} from '../../../../../../shared/constants';
 import styles from './StyleItem';
 import {LOG} from '../../../../../../../../logger.config';
 import {useSelector} from 'react-redux';
+CheckModal
 import {productSelector} from '../../../../../product/sliceProduct';
+import CheckModal from '../../../../../../shared/utils/CheckModal';
 const log = LOG.extend('ITEM_VIEW.JS');
 const ItemView = props => {
   const {item, index, handleAddDish, handleRemoveDish, tabs, valueSubMainDish} =
     props;
 
-  const message = 'Hãy chọn loại sườn trước nè ! Hihi';
+  const [isModalVisible, setModalVisible] = useState(false);
+
+  const message = 'Bạn phải chọn loại sườn !';
   const onDecrease = () => {
     if (tabs.toString() === '0') {
       if (valueSubMainDish.length != 0) {
@@ -42,7 +46,9 @@ const ItemView = props => {
         handleAddDish(item);
       } else {
         valueSubMainDish.length = 0;
-        Alert.alert('Hãy chọn loại sườn trước nè ! Hihi');
+
+        setModalVisible
+        setModalVisible(true);
         return;
       }
     } else {
@@ -123,6 +129,11 @@ const ItemView = props => {
         </View>
         <View style={styles.footer}></View>
       </View>
+      <CheckModal
+            isModalVisible={isModalVisible}
+            setModalVisible={setModalVisible}
+            message={message}
+          />
     </SafeKeyComponent>
   );
 };
