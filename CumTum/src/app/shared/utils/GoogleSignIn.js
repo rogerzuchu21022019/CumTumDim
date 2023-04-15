@@ -13,8 +13,8 @@ import {constants} from '../constants';
 import {saveToken} from './AsyncStorage';
 import {LOG} from '../../../../logger.config';
 import {useDispatch, useSelector} from 'react-redux';
-import {authSelector} from '../../features/user/sliceAuth';
-import {fetchLogin} from '../../features/user/apiUser';
+import {authSelector} from '../../features/admin/sliceAuth';
+import {fetchLogin} from '../../features/admin/apiUser';
 const log = LOG.extend(`GOOGLE_SIGNIN.JS`);
 
 const GoogleSignIn = ({navigation}) => {

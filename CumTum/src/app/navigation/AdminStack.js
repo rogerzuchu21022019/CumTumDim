@@ -2,17 +2,14 @@ import {View, Text, Image} from 'react-native';
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Router from './Router';
-import HomeAdmin from '../features/user/screens/homeAdmin/HomeAdmin';
-import AddDish from '../features/user/screens/addDish/AddDish';
+import HomeAdmin from '../features/admin/screens/homeAdmin/HomeAdmin';
 import {constants} from '../shared/constants';
-import Statistic from '../features/user/screens/statistic/Statistic';
-import Manager from '../features/user/screens/manager/Manager';
-import Manage from '../features/user/screens/manager/manageDish/ManageDish';
-import Support from '../features/user/screens/support/Support';
-import CustomerSupport from '../features/user/screens/support/CustomerSupport';
-const Tab = createBottomTabNavigator();
+import Statistic from '../features/admin/screens/statistic/Statistic';
+import CustomerSupport from '../features/admin/screens/support/CustomerSupport';
+import ManagerTabs from '../features/admin/screens/manager/ManagerTabs';
 
 const AdminStack = () => {
+  const Tab = createBottomTabNavigator();
   return (
     <Tab.Navigator
       screenOptions={{
@@ -97,8 +94,8 @@ const AdminStack = () => {
         }}
       />
       <Tab.Screen
-        name={Router.MANAGER}
-        component={Manager}
+        name={Router.MANAGE_TABS}
+        component={ManagerTabs}
         options={{
           headerShown: false,
           tabBarIcon: ({focused}) => (

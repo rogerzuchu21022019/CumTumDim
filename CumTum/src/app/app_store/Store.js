@@ -4,7 +4,7 @@ import {persistReducer} from 'reduxjs-toolkit-persist';
 
 import {combineReducers, configureStore} from '@reduxjs/toolkit';
 
-import sliceAuth from '../features/user/sliceAuth';
+import sliceAuth from '../features/admin/sliceAuth';
 
 import sliceProduct from '../features/product/sliceProduct';
 import {constants} from '../shared/constants';

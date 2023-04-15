@@ -30,7 +30,7 @@ import ItemView from './item/ItemView';
 import {LOG} from '../../../../../../../logger.config';
 import {constants} from '../../../../../shared/constants';
 import Router from '../../../../../navigation/Router';
-import {authSelector} from '../../../../user/sliceAuth';
+import {authSelector} from '../../../../admin/sliceAuth';
 import {createHistoryCart} from '../../../../carts/sliceOrder';
 import CheckModal from '../../../../../shared/utils/CheckModal';
 

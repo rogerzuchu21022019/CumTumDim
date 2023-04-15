@@ -8,7 +8,7 @@ import Router from '../../../../../navigation/Router.js';
 import { FlashList } from '@shopify/flash-list';
 import ListItem from './ListItem.js';
 import {useDispatch, useSelector} from 'react-redux';
-import { authSelector } from '../../../../user/sliceAuth.js';
+import { authSelector } from '../../../../admin/sliceAuth.js';
 import { LOG } from '../../../../../../../logger.config.js';
 const RingBell = ({navigation}) => {
   const moToBack =()=>{

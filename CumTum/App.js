@@ -10,7 +10,7 @@ import {Store} from './src/app/app_store/Store';
 // import Provider
 import {Provider, useSelector} from 'react-redux';
 import AdminStack from './src/app/navigation/AdminStack';
-import DetailCard from './src/app/features/user/screens/detailCart/DetailCard';
+import DetailCard from './src/app/features/admin/screens/homeAdmin/detailCart/DetailCard';
 import CustomerStack from './src/app/navigation/CustomerStack';
 
 // import RootNavigation
@@ -25,27 +25,16 @@ import LoginScreen from './src/app/features/auth/login/Login';
 import SplashScreen from './src/app/features/auth/splashScreen/SplashScreen';
 import UpdateInformation from './src/app/features/auth/updateInformation/UpdateInformation';
 
-import EditDish from './src/app/features/user/screens/editEat/EditDish';
-import UpdateDish from './src/app/features/user/screens/updateDish/UpdateDish';
-import DeleteDish from './src/app/features/user/screens/deleteDish/DeleteDish';
-import Manage from './src/app/features/user/screens/manager/manageDish/ManageDish';
-import ManagerCategories from './src/app/features/user/screens/manager/ManagerCategories/ManagerCategories';
-import {requestUserPermission} from './src/app/shared/utils/PermissionFCM';
-import {Platform} from 'react-native';
+
 import Payment from './src/app/features/customer/screens/carts/payment/Payment';
 import EditProfile from './src/app/features/customer/screens/profiles/editProfile/EditProfile';
 import UploadImage from './src/app/features/customer/screens/profiles/uploadImage/UploadImage';
-import AddTypeFood from './src/app/features/user/screens/manager/ManagerCategories/addTypeFood/AddTypeFood';
 import RingBell from './src/app/features/customer/screens/homes/ringBell/RingBell';
 
 let persistor = persistStore(Store);
-import {View, Text, TouchableOpacity} from 'react-native';
-import ManagerFood from './src/app/features/user/screens/manager/manageFood/ManagerFood';
 import CartNoItem from './src/app/features/customer/screens/carts/cart/cartWithNoItem/CartNoItem';
 import socketServices from './src/app/shared/utils/Socket';
-import {authSelector} from './src/app/features/user/sliceAuth';
-import RingBellAdmin from './src/app/features/user/screens/homeAdmin/ringBellAdmin/RingBellAdmin';
-
+import RingBellAdmin from './src/app/features/admin/screens/homeAdmin/ringBellAdmin/RingBellAdmin';
 const App = () => {
   const Stack = createNativeStackNavigator();
 
@@ -133,38 +122,7 @@ const App = () => {
                 presentation: 'modal',
               }}
             />
-            <Stack.Screen
-              name={Router.EDIT_DISH}
-              component={EditDish}
-              options={{
-                headerShown: false,
-                presentation: 'modal',
-              }}
-            />
-            <Stack.Screen
-              name={Router.UPDATE_DISH}
-              component={UpdateDish}
-              options={{
-                headerShown: false,
-                presentation: 'modal',
-              }}
-            />
-            <Stack.Screen
-              name={Router.DELETE_DISH}
-              component={DeleteDish}
-              options={{
-                headerShown: false,
-                presentation: 'modal',
-              }}
-            />
-            <Stack.Screen
-              name={Router.MANAGER_FOOD}
-              component={ManagerFood}
-              options={{
-                headerShown: false,
-                presentation: 'modal',
-              }}
-            />
+         
             <Stack.Screen
               name={Router.PAYMENT}
               component={Payment}
@@ -195,20 +153,20 @@ const App = () => {
                 headerShown: false,
               }}
             />
-              <Stack.Screen
-            name={Router.RING_BELL}
-            component={RingBell}
-            options={{
-              headerShown: false,
-            }}
-          />
-             <Stack.Screen
-            name={Router.RING_BELL_ADMIN}
-            component={RingBellAdmin}
-            options={{
-              headerShown: false,
-            }}
-          />
+            <Stack.Screen
+              name={Router.RING_BELL}
+              component={RingBell}
+              options={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name={Router.RING_BELL_ADMIN}
+              component={RingBellAdmin}
+              options={{
+                headerShown: false,
+              }}
+            />
           </Stack.Navigator>
         </NavigationContainer>
       </PersistGate>

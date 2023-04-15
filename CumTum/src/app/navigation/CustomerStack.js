@@ -8,7 +8,6 @@ import HistoryTabs from '../features/customer/screens/histories/HistoryTabs';
 import Profile from '../features/customer/screens/profiles/profile/Profile';
 import CartTabs from '../features/customer/screens/carts/CartTabs';
 import {constants} from '../shared/constants';
-import {StackActions, useNavigation} from '@react-navigation/native';
 import FastImage from 'react-native-fast-image';
 
 const CustomerStack = () => {

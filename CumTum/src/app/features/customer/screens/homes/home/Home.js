@@ -25,7 +25,7 @@ import IconOcticons from 'react-native-vector-icons/Octicons';
 import {constants} from '../../../../../shared/constants';
 import {FlashList} from '@shopify/flash-list';
 import ItemView from './item/ItemView';
-import {mainDishOptionsData} from '../../../../user/screens/addDish/DataDishes';
+import {mainDishOptionsData} from '../../../../admin/screens/manager/manageFood/addDish/DataDishes';
 import {
   addDishToWishCartOrUpdate,
   productSelector,
@@ -38,7 +38,7 @@ import Advertisement from '../../../../../shared/utils/Advertisement';
 import socketServices from '../../../../../shared/utils/Socket';
 import Router from '../../../../../navigation/Router';
 import {formatCodeOrder} from '../../../../../shared/utils/CreateCodeOrder';
-import {authSelector} from '../../../../user/sliceAuth';
+import {authSelector} from '../../../../admin/sliceAuth';
 
 const HomeCustomer = ({navigation}) => {
   const log = LOG.extend('HOME_CUSTOMER.js');
