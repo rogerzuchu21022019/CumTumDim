@@ -11,7 +11,7 @@ const VerifyUserSv = async (idToken) => {
     try {
       const existedUser = await User.findOne({ googleId: payload.sub });
 
-      console.log("🚀 ~ file: Login.js:27 ~ existedUser:", existedUser);
+      // console.log("🚀 ~ file: Login.js:27 ~ existedUser:", existedUser);
       if (existedUser) {
         return existedUser;
       } else {
@@ -31,7 +31,7 @@ const VerifyUserSv = async (idToken) => {
             imageUrl: payload.picture,
             role: "admin",
           });
-          console.log("🚀 ~ file: Login.js:39 ~ newUser:", newUser);
+          // console.log("🚀 ~ file: Login.js:39 ~ newUser:", newUser);
           await newUser.save();
           return newUser;
         } else {
@@ -41,7 +41,7 @@ const VerifyUserSv = async (idToken) => {
             email: payload.email,
             imageUrl: payload.picture,
           });
-          console.log("🚀 ~ file: Login.js:39 ~ newUser:", newUser);
+          // console.log("🚀 ~ file: Login.js:39 ~ newUser:", newUser);
           await newUser.save();
           return newUser;
         }

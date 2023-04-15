@@ -28,7 +28,7 @@ import {showNotifyLocal} from '../../../../shared/utils/Notifies';
 import {format, isToday} from 'date-fns';
 import {formatCodeOrder} from '../../../../shared/utils/CreateCodeOrder';
 import Router from '../../../../navigation/Router';
-import {fetchUpdateNotification} from '../../apiUser';
+import {fetchPushNotification, fetchUserById} from '../../apiUser';
 const log = LOG.extend(`HOME_ADMIN.JS`);
 // const socket = io(constants.SOCKET.URL, {
 //   transports: ['websocket'],
@@ -42,12 +42,14 @@ const HomeAdmin = ({navigation}) => {
 
   const user = useSelector(authSelector);
   // console.log('🚀 ~ file: HomeAdmin.js:44 ~ HomeAdmin ~ user:', user);
-  log.info(
-    '🚀 ~ file: HomeAdmin.js:43 ~ HomeAdmin ~ notifications:',
-    user.notifications,
-  );
+  // log.info(
+  //   '🚀 ~ file: HomeAdmin.js:43 ~ HomeAdmin ~ notifications:',
+  //   user.notifications,
+  // );
 
   const userId = user.user._id;
+  console.log('🚀 ~ file: HomeAdmin.js:51 ~ HomeAdmin ~ userId:', userId);
+  const notifications = user.notifications;
 
   const [isRefresh, setIsRefresh] = useState(false);
 
@@ -59,6 +61,9 @@ const HomeAdmin = ({navigation}) => {
       onDisplayNotification(orderData);
       dispatch(fetchOrders());
     });
+    socketServices.on(constants.SOCKET.PUSH_NOTIFICATION_ADMIN, userId => {
+      dispatch(fetchUserById(userId));
+    });
     return () => {
       socketServices.socket.disconnect();
     };
@@ -69,25 +74,28 @@ const HomeAdmin = ({navigation}) => {
     const total = orderData.moneyToPaid;
 
     const title = 'Notification';
-    const content = `Đơn hàng số ${idOrder} có tổng giá tiền ${total}K đang chờ bạn xác nhận!`;
+    const content = `Đơn hàng mã số ${idOrder} có tổng giá tiền ${total}K đang chờ bạn xác nhận!`;
 
     const notification = {
       title,
       content,
+      _id: orderData._id,
+      createdAt: orderData.createdAt,
+      isRead: false,
     };
     const data = {
       userId: userId,
       notification: notification,
     };
 
-    dispatch(fetchUpdateNotification(data));
+    dispatch(fetchPushNotification(data));
 
     showNotifyLocal(notification);
   };
 
   useEffect(() => {
     dispatch(fetchOrders());
-  }, [dispatch, data.orders.length]);
+  }, [dispatch, data.orders.length, user.notifications.length]);
 
   const getCurrentTime = () => {
     const date = new Date();
@@ -120,8 +128,10 @@ const HomeAdmin = ({navigation}) => {
                     size={20}
                   />
                 </View>
-                <View style={styles.viewTextRingBell}>
-                  <Text style={styles.textRingBell}>9</Text>
+                <View style={styles.viewTotalNotifies}>
+                  <Text style={styles.textTotalNotifies}>
+                    {notifications.length}
+                  </Text>
                 </View>
               </View>
             </TouchableOpacity>

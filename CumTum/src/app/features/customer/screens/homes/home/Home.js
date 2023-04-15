@@ -66,12 +66,18 @@ const HomeCustomer = ({navigation}) => {
 
   useEffect(() => {
     socketServices.initializeSocket();
+
+  
     socketServices.on(constants.SOCKET.UPDATE_ORDER, data => {
       log.error('🚀 ~ file: Home.js:82 ~ socketServices.on ~ data:', data);
       onDisplayNotiAccepted(data);
       // handleCreateHistoryCart(data);
 
       // move to history
+    });
+
+    socketServices.on(constants.SOCKET.UPDATE_NOTIFICATION_CUSTOMER, data => {
+      log.info("🚀 ~ file: Home.js:79 ~ useEffect ~ data:", data)
     });
 
     return () => {

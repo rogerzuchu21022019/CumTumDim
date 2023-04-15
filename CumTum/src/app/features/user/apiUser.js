@@ -28,6 +28,23 @@ export const fetchUserById = createAsyncThunk(
   },
 );
 
+export const fetchPushNotification = createAsyncThunk(
+  constants.FETCH.PUSH_NOTIFICATION,
+  async data => {
+    log.error('🚀 ~ file: apiUser.js:34 ~ data:', data);
+    const response = await AxiosInstance().post(
+      `/users/${data.userId}/push-notification`,
+      {
+        notification: data.notification,
+        order: data.orderData,
+      },
+    );
+
+    log.error('🚀 ~ file: apiUser.js:34 ~ response:', response.data);
+    return response.data;
+  },
+);
+
 export const fetchUpdateNotification = createAsyncThunk(
   constants.FETCH.UPDATE_NOTIFICATION,
   async data => {
@@ -38,8 +55,9 @@ export const fetchUpdateNotification = createAsyncThunk(
         notification: data.notification,
       },
     );
+    log.warning("🚀 ~ file: apiUser.js:58 ~ response:", response.data)
+    
 
-    log.error('🚀 ~ file: apiUser.js:34 ~ response:', response.data);
     return response.data;
   },
 );

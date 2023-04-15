@@ -1,19 +1,21 @@
 const User = require("../model/User");
 
-const UpdateNotificationSv = async (userId, notification) => {
+const PushNotificationSv = async (userId, notification) => {
   try {
     const query = {
       _id: userId,
     };
-
     const optionUpdate = {
-      $set: {
-        ...notification,
-        isRead: notification.isRead,
+      $push: {
+        notifications: {
+          $each: [notification],
+          $position: 0,
+        },
       },
     };
     const user = await User.findByIdAndUpdate(query, optionUpdate, {
       new: true,
+      upsert: true,
     });
 
     return user;
@@ -24,4 +26,4 @@ const UpdateNotificationSv = async (userId, notification) => {
     );
   }
 };
-module.exports = UpdateNotificationSv;
+module.exports = PushNotificationSv;
