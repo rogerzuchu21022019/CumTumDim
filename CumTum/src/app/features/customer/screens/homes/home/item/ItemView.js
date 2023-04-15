@@ -4,57 +4,57 @@ import SafeKeyComponent from '../../../../../../components/safe_area/SafeKeyComp
 
 import FastImage from 'react-native-fast-image';
 import DropDownPicker from 'react-native-dropdown-picker';
-import {mainDishOptionsData} from '../../../../../admin/screens/addDish/DataDishes';
+import {mainDishOptionsData} from '../../../../../admin/screens/manager/manageFood/addDish/DataDishes';
 import {constants} from '../../../../../../shared/constants';
 import styles from './StyleItem';
 import {LOG} from '../../../../../../../../logger.config';
+import {useSelector} from 'react-redux';
+CheckModal
+import {productSelector} from '../../../../../product/sliceProduct';
+import CheckModal from '../../../../../../shared/utils/CheckModal';
 const log = LOG.extend('ITEM_VIEW.JS');
 const ItemView = props => {
   const {item, index, handleAddDish, handleRemoveDish, tabs, valueSubMainDish} =
     props;
-  console.log(
-    '🚀 ~ file: ItemView.js:14 ~ ItemView ~ valueSubMainDish:',
-    valueSubMainDish,
-  );
-  const [amount, setAmount] = useState(item.amount);
-  const [price, setPrice] = useState(item.price);
-  const [itemNew, setItemNew] = useState(item);
+
+  const [isModalVisible, setModalVisible] = useState(false);
+
+  const message = 'Bạn phải chọn loại sườn !';
+  const onDecrease = () => {
+    if (tabs.toString() === '0') {
+      if (valueSubMainDish.length != 0) {
+        if (item.amount === 0) {
+          return;
+        }
+        handleRemoveDish(item);
+      } else {
+        Alert.alert(message);
+        return;
+      }
+    } else {
+      if (item.amount === 0) {
+        return;
+      }
+      handleRemoveDish(item);
+    }
+  };
 
   const onIncrease = () => {
     if (tabs.toString() === '0') {
       if (valueSubMainDish.length != 0) {
-        setAmount(amount + 1);
-
-        const itemAdd = {
-          ...itemNew,
-          amount: amount + 1,
-          price: price * (amount + 1),
-        };
-        setItemNew(itemAdd);
-        handleAddDish(itemAdd);
+        log.error('🚀 ~ file: ItemView.js:28 ~ onIncrease ~ item:', item);
+        handleAddDish(item);
       } else {
         valueSubMainDish.length = 0;
-        Alert.alert('Hãy chọn loại sườn trước nè ! Hihi');
+
+        setModalVisible
+        setModalVisible(true);
+        return;
       }
     } else {
-      console.log(`tabs`, tabs);
-      setAmount(amount + 1);
-
-      const itemAdd = {
-        ...itemNew,
-        amount: amount + 1,
-        price: price * (amount + 1),
-      };
-      setItemNew(itemAdd);
-      handleAddDish(itemAdd);
+      handleAddDish(item);
     }
   };
-
-  const onDecrease = () => {
-    handleRemoveDish(item);
-  };
-
-  useEffect(() => {}, [onIncrease, onDecrease]);
 
   const imageUrlOptions = {
     uri: item.imageUrl,
@@ -127,40 +127,13 @@ const ItemView = props => {
             </View>
           </View>
         </View>
-        {/* <View>
-          <Text
-            style={{
-              color: constants.COLOR.WHITE,
-            }}>
-            {itemNew._id}
-          </Text>
-          <Text
-            style={{
-              color: constants.COLOR.WHITE,
-            }}>
-            price : {amount === 0 ? 0 : itemNew.price}
-          </Text>
-          <Text
-            style={{
-              color: constants.COLOR.WHITE,
-            }}>
-            {amount === 0 ? 0 : itemNew.amount}
-          </Text>
-          <Text
-            style={{
-              color: constants.COLOR.WHITE,
-            }}>
-            {itemNew.name}
-          </Text>
-          <Text
-            style={{
-              color: constants.COLOR.WHITE,
-            }}>
-            {itemNew.createdAt}
-          </Text>
-        </View> */}
         <View style={styles.footer}></View>
       </View>
+      <CheckModal
+            isModalVisible={isModalVisible}
+            setModalVisible={setModalVisible}
+            message={message}
+          />
     </SafeKeyComponent>
   );
 };

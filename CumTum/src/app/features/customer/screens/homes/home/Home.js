@@ -12,89 +12,117 @@ import {
 
 import {useDispatch, useSelector} from 'react-redux';
 
-import {useEffect, useState} from 'react';
+import {useCallback, useEffect, useState} from 'react';
+import notifee from '@notifee/react-native';
 
 import {LOG} from '../../../../../../../logger.config';
 import SafeKeyComponent from '../../../../../components/safe_area/SafeKeyComponent';
 import {showNotifyLocal} from '../../../../../shared/utils/Notifies';
 import {fetchCategories, fetchDishes} from '../../../../product/apiProduct';
 import styles from './StyleHome';
-
 import FastImage from 'react-native-fast-image';
 import IconOcticons from 'react-native-vector-icons/Octicons';
 import {constants} from '../../../../../shared/constants';
-import notifee from '@notifee/react-native';
-
-import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
 import {FlashList} from '@shopify/flash-list';
 import ItemView from './item/ItemView';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import {mainDishOptionsData} from '../../../../admin/screens/addDish/DataDishes';
-import DropDownPicker from 'react-native-dropdown-picker';
+import {mainDishOptionsData} from '../../../../admin/screens/manager/manageFood/addDish/DataDishes';
 import {
-  addDishToWishCart,
+  addDishToWishCartOrUpdate,
   productSelector,
-  removeDishFromWishCart,
+  decreaseDishByID,
+  updateAmount,
 } from '../../../../product/sliceProduct';
+import DropdownPicker from '../../../../../shared/utils/DropdownPicker';
+import {cartSelector, createHistoryCart} from '../../../../carts/sliceOrder';
+import Advertisement from '../../../../../shared/utils/Advertisement';
+import socketServices from '../../../../../shared/utils/Socket';
+import Router from '../../../../../navigation/Router';
+import {formatCodeOrder} from '../../../../../shared/utils/CreateCodeOrder';
+import {authSelector} from '../../../../admin/sliceAuth';
 
 const HomeCustomer = ({navigation}) => {
   const log = LOG.extend('HOME_CUSTOMER.js');
   const dispatch = useDispatch();
+  const user = useSelector(authSelector);
+  log.info(
+    '🚀 ~ file: Home.js:47 ~ HomeCustomer ~ notifications:',
+    user.notifications,
+  );
+  const cartSelect = useSelector(cartSelector);
   const IMAGE_BG =
     'https://cdn.britannica.com/38/111338-050-D23BE7C8/Stars-NGC-290-Hubble-Space-Telescope.jpg?w=400&h=300&c=crop';
   const data = useSelector(productSelector);
 
   const [tabs, setTabs] = useState([0, 1, 2, 3]);
-  const [isShowDropdown, setIsShowDropdown] = useState(true);
 
   /* State Dropdown */
+  const [isShowDropdown, setIsShowDropdown] = useState(true);
   const [openSubMainDish, setOpenSubMainDish] = useState(false);
   const [valueSubMainDish, setValueSubMainDish] = useState([]);
   const [listSubMainDish, setListSubMainDish] = useState(mainDishOptionsData);
+  const style = styles.dropdownList;
+  const placeholder = 'Chọn loại sườn';
+  /* Fetch API and dispatch action type to store */
 
   useEffect(() => {
-    dispatch(fetchCategories());
-    dispatch(fetchDishes());
-    setTabs(0);
-    return () => {};
-  }, [dispatch, valueSubMainDish]);
+    socketServices.initializeSocket();
 
-  const addDish = dish => ({
-    type: addDishToWishCart().type,
-    payload: dish,
+  
+    socketServices.on(constants.SOCKET.UPDATE_ORDER, data => {
+      log.error('🚀 ~ file: Home.js:82 ~ socketServices.on ~ data:', data);
+      onDisplayNotiAccepted(data);
+      // handleCreateHistoryCart(data);
+
+      // move to history
+    });
+
+    socketServices.on(constants.SOCKET.UPDATE_NOTIFICATION_CUSTOMER, data => {
+      log.info("🚀 ~ file: Home.js:79 ~ useEffect ~ data:", data)
+    });
+
+    return () => {
+      socketServices.socket.disconnect();
+    };
+  }, []);
+
+  const onCreateHistoryCart = order => ({
+    type: createHistoryCart().type,
+    payload: order,
   });
 
-  const handleAddDish = dish => {
-    console.log('🚀 ~ file: Home.js:61 ~ handleAddDish ~ dish:', dish);
-    dispatch(addDish(dish));
+  const handleCreateHistoryCart = order => {
+    dispatch(onCreateHistoryCart(order));
   };
 
-  const removeDish = dish => ({
-    type: removeDishFromWishCart().type,
-    payload: dish,
-  });
+  const onDisplayNotiAccepted = async data => {
+    const idOrder = formatCodeOrder(data._id);
+    const total = data.moneyToPaid;
+    const status = data.orderStatus;
 
-  const handleRemoveDish = dish => {
-    log.error('🚀 ~ file: Home.js:75 ~ handleRemoveDish ~ dish:', dish);
-    dispatch(removeDish(dish));
+    const title = 'Notification';
+    const contentAccepted = `Đơn hàng số ${idOrder} với số tiền ${total}K của bạn đã được ${status}`;
+    const contentDeny = `Đơn hàng số ${idOrder} với số tiền ${total}K của bạn đã bị ${status} bởi Admin`;
+
+    // console.log("🚀 ~ file: Payment.js:45 ~ onDisplayNotification ~ content:", content)
+    const dataMap = {
+      title,
+      content: status === 'Chấp nhận' ? contentAccepted : contentDeny,
+    };
+
+    showNotifyLocal(dataMap);
   };
 
-  /* State Tab view */
-
-  /* custom tab bar icon */
-
-  /* show notifications */
   const onDisplayNotification = async () => {
     // Request permissions (required for iOS)
-    await notifee.requestPermission();
 
     // Create a channel (required for Android)
     const channelId = await notifee.createChannel({
       id: 'default',
       name: 'Default Channel',
     });
-    const title = data.message;
-    const content = 'show notifies content';
+    const title = 'Notification';
+    const content = 'Chào mừng bạn đến với dịch vụ của CumTumDim.';
+    // console.log("🚀 ~ file: Payment.js:45 ~ onDisplayNotification ~ content:", content)
     const dataMap = {
       title,
       content,
@@ -103,6 +131,45 @@ const HomeCustomer = ({navigation}) => {
     // Display a notification
     showNotifyLocal(dataMap);
   };
+
+  useEffect(() => {
+    dispatch(fetchCategories());
+    dispatch(fetchDishes());
+    onDisplayNotification();
+    setTabs(0);
+    return () => {};
+  }, [dispatch]);
+
+  /* Dispatch function */
+  const addDish = dish => ({
+    type: addDishToWishCartOrUpdate().type,
+    payload: dish,
+  });
+
+  const updateQuantity = dish => ({
+    type: updateAmount().type,
+    payload: dish,
+  });
+
+  /* Dispatch  */
+  const handleAddDish = dish => {
+    // console.log('🚀 ~ file: Home.js:61 ~ handleAddDish ~ dish:', dish);
+    dispatch(addDish(dish));
+    dispatch(updateQuantity(dish));
+  };
+
+  const removeDish = dish => ({
+    type: decreaseDishByID().type,
+    payload: dish,
+  });
+
+  const handleRemoveDish = dish => {
+    // log.error('🚀 ~ file: Home.js:75 ~ handleRemoveDish ~ dish:', dish);
+    dispatch(removeDish(dish));
+    dispatch(updateQuantity(dish));
+  };
+
+  // i want to use useCallback to call onDisplayNotification
 
   const imageUrlOptions = {
     uri: '',
@@ -128,6 +195,9 @@ const HomeCustomer = ({navigation}) => {
     setIsShowDropdown(false);
     setTabs(3);
   };
+  const movoRingBell = () => {
+    navigation.navigate(Router.RING_BELL);
+  };
   return (
     <SafeKeyComponent>
       <View style={styles.container}>
@@ -144,13 +214,20 @@ const HomeCustomer = ({navigation}) => {
               />
               <Text style={styles.textTitle}>Cum tứm đim</Text>
             </View>
-            <View style={styles.rightHeader}>
-              <IconOcticons
-                name="bell-fill"
-                color={constants.COLOR.RED}
-                size={20}
-              />
-            </View>
+            <TouchableOpacity onPress={movoRingBell}>
+              <View style={styles.rightHeader}>
+                <View>
+                  <IconOcticons
+                    name="bell-fill"
+                    color={constants.COLOR.WHITE}
+                    size={20}
+                  />
+                </View>
+                <View style={styles.viewTextRingBell}>
+                  <Text style={styles.textRingBell}>9</Text>
+                </View>
+              </View>
+            </TouchableOpacity>
           </View>
           <View style={styles.bannerViewHeader}>
             {/* banner view thì set position của thằng cha nó là header */}
@@ -162,11 +239,8 @@ const HomeCustomer = ({navigation}) => {
               source={require('../../../../../../assets/headerImage.jpg')}
             />
             <View style={styles.positionInImageBackground}>
-              {/* thằng này sẽ set position của cha nó rồi set view tuỳ ý  */}
-
-              <Text></Text>
+              <Advertisement />
             </View>
-            <View style={styles.divideLine}></View>
           </View>
           <View style={styles.divideLine}></View>
         </View>
@@ -186,7 +260,7 @@ const HomeCustomer = ({navigation}) => {
                   <View style={styles.viewImageDish}>
                     <FastImage
                       style={styles.imageLogo}
-                      source={require('../../../../../../assets/iconLogo_CumTumDim.jpg')}
+                      source={require('../../../../../../assets/logoMainDish.jpg')}
                     />
                   </View>
                 </View>
@@ -204,7 +278,7 @@ const HomeCustomer = ({navigation}) => {
                   <View style={styles.viewImageDish}>
                     <FastImage
                       style={styles.imageLogo}
-                      source={require('../../../../../../assets/iconLogo_CumTumDim.jpg')}
+                      source={require('../../../../../../assets/logoExtraDish.png')}
                     />
                   </View>
                 </View>
@@ -222,7 +296,7 @@ const HomeCustomer = ({navigation}) => {
                   <View style={styles.viewImageDish}>
                     <FastImage
                       style={styles.imageLogo}
-                      source={require('../../../../../../assets/iconLogo_CumTumDim.jpg')}
+                      source={require('../../../../../../assets/logoTopping.jpg')}
                     />
                   </View>
                 </View>
@@ -240,7 +314,7 @@ const HomeCustomer = ({navigation}) => {
                   <View style={styles.viewImageDish}>
                     <FastImage
                       style={styles.imageLogo}
-                      source={require('../../../../../../assets/iconLogo_CumTumDim.jpg')}
+                      source={require('../../../../../../assets/logoKhac.png')}
                     />
                   </View>
                 </View>
@@ -252,87 +326,36 @@ const HomeCustomer = ({navigation}) => {
                 <Image
                   source={{
                     uri: IMAGE_BG,
-                    priority: FastImage.priority.normal,
                   }}
                   style={StyleSheet.absoluteFillObject}
                   blurRadius={20}
                 />
                 <View style={styles.boxDropdownList}>
-                  <DropDownPicker
-                    style={styles.dropdownList}
-                    open={openSubMainDish}
-                    value={valueSubMainDish}
-                    items={listSubMainDish}
-                    setOpen={setOpenSubMainDish}
-                    setValue={setValueSubMainDish}
-                    setItems={setListSubMainDish}
-                    // custom color text
-                    placeholder="Chọn loại sườn"
-                    placeholderStyle={{
-                      marginLeft: 10,
-                      color: constants.COLOR.WHITE,
-                    }}
-                    textStyle={{
-                      color: constants.COLOR.WHITE,
-                    }}
-                    //multi
-                    multiple={true}
-                    min={1}
-                    max={1}
-                    // result after choose
-                    mode="BADGE"
-                    showBadgeDot={true}
-                    badgeProps={{
-                      activeOpacity: 0.5,
-                    }}
-                    badgeColors={['red', 'blue', 'orange']}
-                    badgeDotColors={['yellow', 'grey', 'aqua']}
-                    //search
-                    searchable={true}
-                    searchPlaceholder="Tìm kiếm hoặc chọn lựa tên "
-                    searchWithRegionalAccents={true}
-                    searchContainerStyle={{
-                      borderBottomColor: '#dfdfdf',
-                    }}
-                    searchTextInputStyle={{
-                      color: constants.COLOR.WHITE,
-                    }}
-                    searchPlaceholderTextColor={constants.COLOR.WHITE}
-                    customItemLabelStyle={{
-                      fontStyle: 'italic',
-                    }}
-                    // show type of list item
-                    listMode="MODAL"
-                    modalTitle="Select an item"
-                    bottomOffset={100}
-                    dropDownDirection="AUTO"
-                    modalContentContainerStyle={{
-                      backgroundColor: constants.COLOR.PRIMARY,
-                    }}
-                    modalAnimationType="slide"
-                    //icon
-                    TickIconComponent={() => (
-                      <MaterialIcons
-                        name="done"
-                        style={{
-                          marginRight: 4,
-                        }}
-                        color={constants.COLOR.WHITE}
-                        size={20}
-                      />
-                    )}
-                    ArrowDownIconComponent={() => (
-                      <MaterialIcons
-                        name="keyboard-arrow-down"
-                        color={constants.COLOR.WHITE}
-                        size={20}
-                      />
-                    )}
+                  <DropdownPicker
+                    style={style}
+                    openSubMainDish={openSubMainDish}
+                    valueSubMainDish={valueSubMainDish}
+                    listSubMainDish={listSubMainDish}
+                    setOpenSubMainDish={setOpenSubMainDish}
+                    setValueSubMainDish={setValueSubMainDish}
+                    setListSubMainDish={setListSubMainDish}
+                    placeholder={placeholder}
+                    colorIconArrow={constants.COLOR.WHITE}
+                    colorCloseIcon={constants.COLOR.WHITE}
+                    colorPlaceholder={constants.COLOR.WHITE}
                   />
                 </View>
 
                 <FlashList
-                  data={data.mainDishes}
+                  data={
+                    valueSubMainDish[0] === 'Sườn mỡ'
+                      ? data.mainDishes.filter(
+                          item => item.subCategory === 'Sườn mỡ',
+                        )
+                      : data.mainDishes.filter(
+                          item => item.subCategory === 'Sườn',
+                        )
+                  }
                   renderItem={({item, index}) => (
                     <ItemView
                       item={item}
@@ -341,6 +364,7 @@ const HomeCustomer = ({navigation}) => {
                       handleAddDish={handleAddDish}
                       handleRemoveDish={handleRemoveDish}
                       valueSubMainDish={valueSubMainDish}
+                      mainDishCart={data.mainDishCart}
                     />
                   )}
                   keyExtractor={(item, index) => index.toString()}
@@ -351,6 +375,13 @@ const HomeCustomer = ({navigation}) => {
               </View>
             ) : (
               <View style={styles.boxFlashList}>
+                <Image
+                  source={{
+                    uri: IMAGE_BG,
+                  }}
+                  style={StyleSheet.absoluteFillObject}
+                  blurRadius={20}
+                />
                 {tabs === 1 ? (
                   <FlashList
                     data={data.extraDishes}

@@ -25,5 +25,3 @@ router.post(`/:categoryId/add-dish`, async (req, res) => {
 });
 
 module.exports = router;
-
-module.exports = router;

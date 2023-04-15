@@ -6,9 +6,13 @@ import FastImage from 'react-native-fast-image';
 import Router from '../../../../../navigation/Router';
 import {constants} from '../../../../../shared/constants';
 import IconEntypo from 'react-native-vector-icons/Entypo';
-import IconIonicons from 'react-native-vector-icons/Ionicons';
+import IconAntDesign from 'react-native-vector-icons/AntDesign';
 
 const EditProfile = ({navigation}) => {
+  const moToBack = () => {
+    navigation.navigate(Router.PROFILE);
+  };
+  
   const moveToEditImage = () => {
     navigation.navigate(Router.UPLOAD_IMAGE);
   };
@@ -16,17 +20,21 @@ const EditProfile = ({navigation}) => {
     <SafeKeyComponent>
       <View style={styles.container}>
         <View style={styles.header}>
-          <View>
-            <IconIonicons
-              name="arrow-back"
-              color={constants.COLOR.WHITE}
-              size={20}
-            />
+          <View style={styles.groupHeader}>
+            <TouchableOpacity onPress={moToBack}>
+              <View>
+                <IconAntDesign
+                  name="left"
+                  color={constants.COLOR.WHITE}
+                  size={20}
+                />
+              </View>
+            </TouchableOpacity>
+            <View style={styles.profile}>
+              <Text style={styles.textProfile}>Sữa hồ sơ</Text>
+            </View>
+            <View style={styles.groupHeader}></View>
           </View>
-          <View style={styles.profile}>
-            <Text style={styles.textProfile}>Sữa hồ sơ</Text>
-          </View>
-          <View style={styles.groupHeader}></View>
         </View>
         <View style={styles.body}>
           <View style={styles.viewFinal}>
@@ -50,6 +58,14 @@ const EditProfile = ({navigation}) => {
           </View>
 
           <View style={styles.groupAll}>
+            <View style={styles.item}>
+              <View style={styles.viewTitle}>
+                <Text style={styles.textTitle}>Họ và tên</Text>
+              </View>
+              <View style={styles.viewInput}>
+                <TextInput style={styles.textInput}>Võ Ngọc Phước</TextInput>
+              </View>
+            </View>
             <View style={styles.item}>
               <View style={styles.viewTitle}>
                 <Text style={styles.textTitle}>Số điện thoại</Text>
@@ -82,21 +98,11 @@ const EditProfile = ({navigation}) => {
                 <TextInput style={styles.textInput}>413</TextInput>
               </View>
             </View>
-            <View style={styles.item}>
-              <View style={styles.viewTitle}>
-                <Text style={styles.textTitle}>Số nhà</Text>
-              </View>
-              <View style={styles.viewInput}>
-                <TextInput style={styles.textInput}>413</TextInput>
-              </View>
-            </View>
           </View>
         </View>
         <View style={styles.footer}>
-          <View style={styles.viewBtnSave}>
-            <View style={styles.btnSave}>
-              <Text style={styles.textSave}>Lưu</Text>
-            </View>
+          <View style={styles.btnSave}>
+            <Text style={styles.textSave}>Lưu</Text>
           </View>
         </View>
       </View>

@@ -15,7 +15,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import SafeKeyComponent from '../../../components/safe_area/SafeKeyComponent';
 import Router from '../../../navigation/Router';
 import {constants} from '../../../shared/constants';
-import {fetchLogin} from '../../admin/apiAdmin';
+import {fetchLogin} from '../../admin/apiUser';
 import {authSelector} from '../../admin/sliceAuth';
 import StyleLogin from './StyleLogin';
 
@@ -25,9 +25,10 @@ import {StackActions} from '@react-navigation/native';
 import {fetchCategories, fetchDishes} from '../../product/apiProduct';
 
 const LoginScreen = ({navigation}) => {
-  const log = LOG.extend(`GOOGLE_SIGNIN.JS`);
+  const log = LOG.extend(`LOGIN.JS`);
   const data = useSelector(authSelector);
-  log.info('🚀 ~ file: GoogleSignIn.js:22 ~ GoogleSignIn ~ data:', data);
+  // log.info("🚀 ~ file: Login.js:30 ~ LoginScreen ~ data:", data);
+  
   const isLoading = data?.isLoading;
 
   useEffect(() => {
@@ -49,7 +50,6 @@ const LoginScreen = ({navigation}) => {
   const dispatch = useDispatch();
 
   const moveTo = async () => {
-    console.log('🚀 ~ file: Login.js:38 ~ moveTo ~ moveto:');
     if (data.user.role === constants.ROLE.ADMIN) {
       navigation.navigate(Router.ADMIN_STACK);
     } else {
@@ -63,7 +63,7 @@ const LoginScreen = ({navigation}) => {
     try {
       await GoogleSignin.hasPlayServices({showPlayServicesUpdateDialog: true});
       const {idToken} = await GoogleSignin.signIn();
-      log.info('🚀 ~ file: Login.js:38 ~ signIn ~ idToken:', idToken);
+      // log.info('🚀 ~ file: Login.js:38 ~ signIn ~ idToken:', idToken);
 
       const {accessToken} = await GoogleSignin.getTokens();
 

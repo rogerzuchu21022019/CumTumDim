@@ -21,10 +21,8 @@ mongoose
   });
 const app = express();
 
-
-
 const publicDir = path.join(__dirname, "public");
-const fixPublic = express.static(publicDir)
+const fixPublic = express.static(publicDir);
 app.use(fixPublic);
 ManagerMiddleware(app);
 

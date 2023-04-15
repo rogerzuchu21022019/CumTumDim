@@ -42,8 +42,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     flexDirection: 'row',
     // width: '0%',
-    // backgroundColor: constants.COLOR.YELLOW,
-    alignItems: 'flex-start',
+    alignItems: 'center',
+    justifyContent:'center',
   },
   boxIcon: {
     flex: 1,
@@ -52,6 +52,7 @@ const styles = StyleSheet.create({
 
   textName: {
     color: constants.COLOR.WHITE,
+    fontSize:12,
   },
   updateColor: {
     color: constants.COLOR.ORANGE,
@@ -64,11 +65,11 @@ const styles = StyleSheet.create({
   },
 
   textNameUpdate: {
-    fontSize: 20,
+    fontSize: 14,
   },
 
   textBoxNameUpdate: {
-    fontSize: 16,
+    fontSize: 12,
   },
   imageDish: {
     width: 60,

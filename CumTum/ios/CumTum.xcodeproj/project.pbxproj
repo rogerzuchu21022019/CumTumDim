@@ -13,6 +13,8 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		95CAA89729B86E76004A7B29 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 95CAA89629B86E76004A7B29 /* GoogleService-Info.plist */; };
+		95D87EA029D0C98A00ABED0E /* zpdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95D87E9F29D0C98A00ABED0E /* zpdk.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		95D87EA329D0EBD900ABED0E /* PayZaloBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 95D87EA229D0EBD900ABED0E /* PayZaloBridge.m */; };
 		A6AC35ABE128BBF7E978E2D4 /* libPods-CumTum.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 428EF232544E7CE410CA89B6 /* libPods-CumTum.a */; };
 		B776FB4682402C9E908471EA /* libPods-CumTum-CumTumTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 59FABB3E2C330C51A0F9C8FC /* libPods-CumTum-CumTumTests.a */; };
 /* End PBXBuildFile section */
@@ -26,6 +28,19 @@
 			remoteInfo = CumTum;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		95AF214329D0C69C00624B59 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		00E356EE1AD99517003FC87E /* CumTumTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CumTumTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -45,6 +60,9 @@
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = CumTum/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		95097CC329C7CFC7005DAA90 /* CumTumDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = CumTumDebug.entitlements; path = CumTum/CumTumDebug.entitlements; sourceTree = "<group>"; };
 		95CAA89629B86E76004A7B29 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		95D87E9F29D0C98A00ABED0E /* zpdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = zpdk.framework; sourceTree = "<group>"; };
+		95D87EA129D0EBD900ABED0E /* PayZaloBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayZaloBridge.h; sourceTree = "<group>"; };
+		95D87EA229D0EBD900ABED0E /* PayZaloBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayZaloBridge.m; sourceTree = "<group>"; };
 		DF8C6F4282C55AC09B16B655 /* Pods-CumTum-CumTumTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CumTum-CumTumTests.release.xcconfig"; path = "Target Support Files/Pods-CumTum-CumTumTests/Pods-CumTum-CumTumTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -62,6 +80,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95D87EA029D0C98A00ABED0E /* zpdk.framework in Frameworks */,
 				A6AC35ABE128BBF7E978E2D4 /* libPods-CumTum.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -89,6 +108,8 @@
 		13B07FAE1A68108700A75B9A /* CumTum */ = {
 			isa = PBXGroup;
 			children = (
+				95D87EA129D0EBD900ABED0E /* PayZaloBridge.h */,
+				95D87EA229D0EBD900ABED0E /* PayZaloBridge.m */,
 				95097CC329C7CFC7005DAA90 /* CumTumDebug.entitlements */,
 				95CAA89629B86E76004A7B29 /* GoogleService-Info.plist */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -104,6 +125,7 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				95D87E9F29D0C98A00ABED0E /* zpdk.framework */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				428EF232544E7CE410CA89B6 /* libPods-CumTum.a */,
 				59FABB3E2C330C51A0F9C8FC /* libPods-CumTum-CumTumTests.a */,
@@ -188,6 +210,7 @@
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				CAEF4BD1BC92AE48FDDDCFE8 /* [CP] Copy Pods Resources */,
 				45D9998FC416A5D6A3708336 /* [CP-User] [RNFB] Core Configuration */,
+				95AF214329D0C69C00624B59 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -399,6 +422,7 @@
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				95D87EA329D0EBD900ABED0E /* PayZaloBridge.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -474,12 +498,22 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = CTSPPPL89T;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = CumTum/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(SDKROOT)/usr/lib/swift",
+					"$(inherited)",
+					"$(PROJECT_DIR)/zpdk.framework",
+				);
 				MARKETING_VERSION = 1.0;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -501,12 +535,22 @@
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = CTSPPPL89T;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = CumTum/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(SDKROOT)/usr/lib/swift",
+					"$(inherited)",
+					"$(PROJECT_DIR)/zpdk.framework",
+				);
 				MARKETING_VERSION = 1.0;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",

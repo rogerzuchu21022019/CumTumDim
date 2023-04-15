@@ -3,6 +3,7 @@ import Router from '../../../../navigation/Router';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import SafeKeyComponent from '../../../../components/safe_area/SafeKeyComponent';
 import HomeCustomer from './home/Home';
+import RingBell from './ringBell/RingBell';
 
 const HomeCustomerTabs = () => {
   const Stack = createNativeStackNavigator();
@@ -17,6 +18,8 @@ const HomeCustomerTabs = () => {
               headerShown: false,
             }}
           />
+          
+       
         </Stack.Group>
       </Stack.Navigator>
   );

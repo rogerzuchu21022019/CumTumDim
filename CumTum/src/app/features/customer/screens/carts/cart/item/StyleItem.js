@@ -6,10 +6,15 @@ const styles = StyleSheet.create({
     flex: 1,
     // backgroundColor: constants.COLOR.WHITE,
   },
-  header: {},
+  header: {
+    flex: 1,
+
+  },
 
   /* Body */
-  body: {},
+  body: {
+    flex: 1,
+  },
 
   boxInfoDish: {
     flex: 1,
@@ -43,7 +48,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     // width: '0%',
     // backgroundColor: constants.COLOR.YELLOW,
-    alignItems: 'flex-start',
+    alignItems: 'center',
   },
   boxIcon: {
     flex: 1,
@@ -64,11 +69,11 @@ const styles = StyleSheet.create({
   },
 
   textNameUpdate: {
-    fontSize: 20,
+    fontSize: 16,
   },
 
   textBoxNameUpdate: {
-    fontSize: 16,
+    fontSize: 12,
   },
   imageDish: {
     width: 60,

@@ -1,6 +1,5 @@
 const VerifyUserSv = require("../services/VerifyUserService");
 
-
 const VerifyUserCon = async (idToken) => {
   try {
     const User = await VerifyUserSv(idToken);

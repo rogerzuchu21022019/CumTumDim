@@ -1,15 +1,17 @@
 import {StyleSheet} from 'react-native';
 import {constants} from '../../../../shared/constants';
 
-const StylesHome = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 10,
+    backgroundColor: constants.COLOR.WHITE,
   },
   /* Header */
   header: {
     flex: 1,
     justifyContent: 'center',
     backgroundColor: constants.COLOR.PRIMARY,
+    marginBottom: 2,
   },
 
   imageLogo: {
@@ -21,7 +23,7 @@ const StylesHome = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     // backgroundColor: constants.COLOR.WHITE,
-    marginLeft: 20,
+    marginStart:20,
   },
   rightHeader: {
     flex: 1,
@@ -45,35 +47,62 @@ const StylesHome = StyleSheet.create({
     // backgroundColor: constants.COLOR.WHITE,
     alignItems: 'center',
   },
+  textTitle: {
+    color: 'white',
+    marginLeft: 6,
+  },
+  textTotalNotifies:{
+    fontSize:10,
+    color: constants.COLOR.WHITE,
+  },
+  viewTotalNotifies:{
+    backgroundColor: constants.COLOR.RED,
+    width:30,
+    height:15,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius:10,
+    bottom:8,
+    right:10,
+  },
+
+  
   /* Header */
 
   //body
   body: {
     flex: 12,
-    backgroundColor: constants.COLOR.GREY,
-    alignItems: 'center',
+    backgroundColor: constants.COLOR.PRIMARY,
+    // width:'100%'
   },
   groupItem: {},
   viewFlashList: {
     flex: 1,
-    // backgroundColor: 'green',
-    width: '100%',
-  },
-  itemOder: {
-    flexDirection: 'row',
-    backgroundColor: '#2F2D2D',
-    width: 350,
-    height: 40,
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    borderRadius: 5,
+    // backgroundColor: constants.COLOR.GREEN,
+    paddingLeft: 20,
+    paddingRight: 20,
     marginTop: 10,
   },
-  itemText: {
-    color: 'white',
-    fontSize: 15,
+  
+  viewToday: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    
+  },
+  textToday: {
+    lineHeight: 30,
+    color: constants.COLOR.WHITE,
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  itemText1: {
+    color: constants.COLOR.ORANGE,
+    fontSize: 16,
+    marginVertical: 6,
+    fontWeight: 'bold',
+
   },
 
   //body
 });
-export default StylesHome;
+export default styles;

@@ -5,7 +5,6 @@ const logger = require("morgan");
 const bodyParser = require("body-parser");
 const express = require("express");
 require(`dotenv`).config();
-
 const cors = require(`cors`);
 const Multer = require("../utils/Multer");
 
@@ -16,7 +15,7 @@ const ManagerMiddleware = (app) => {
   app.set("views", path.join(__dirname, "../views"));
   app.set("view engine", "ejs");
   var corsOptions = {
-    origin: "http://localhost:3000",
+    origin: "http://192.168.1.20:3000",
     optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
     method: "GET,HEAD,PUT,PATCH,POST,DELETE",
   };
@@ -42,9 +41,13 @@ const ManagerMiddleware = (app) => {
   //   credential: admin.credential.cert(serviceAccount),
   // });
 
+  
+
   const publicDir = path.join(__dirname, "public");
   const fixPublic = express.static(publicDir);
   app.use(fixPublic);
+
+ 
 };
 
 module.exports = ManagerMiddleware;

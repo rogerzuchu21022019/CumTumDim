@@ -1,7 +1,6 @@
 // User.js
 const mongoose = require("mongoose");
 
-
 const userSchema = new mongoose.Schema(
   {
     name: {
@@ -29,8 +28,11 @@ const userSchema = new mongoose.Schema(
     imageUrl: {
       type: String,
     },
-    accessToken: {
-      type: String,
+    orders: {
+      type: [],
+    },
+    notifications: {
+      type: [],
     },
     fcmToken:{
       type: String,
@@ -44,21 +46,25 @@ const userSchema = new mongoose.Schema(
       ]
     },
     address: {
-      street: {
-        type: String,
-      },
-      houseNumber: {
-        type: String,
-      },
-      district: {
-        type: String,
-      },
-      ward: {
-        type: String,
-      },
-      city: {
-        type: String,
-      },
+      type: [
+        {
+          street: {
+            type: String,
+          },
+          houseNumber: {
+            type: String,
+          },
+          district: {
+            type: String,
+          },
+          ward: {
+            type: String,
+          },
+          city: {
+            type: String,
+          },
+        },
+      ],
     },
     
   },

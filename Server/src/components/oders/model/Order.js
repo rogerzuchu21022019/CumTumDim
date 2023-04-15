@@ -2,20 +2,22 @@ const mongoose = require("mongoose");
 
 const OrderSchema = new mongoose.Schema(
   {
-    totalAmount: {
-      type: Number,
-      required: true,
-    },
-    totalPrice: {
-      type: Number,
-      required: true,
-    },
-    products: [
+    mainDishCart: [
       {
-        productId: {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "Product",
+        productName: {
+          type: String,
           required: true,
+        },
+        productId: {
+          type: String,
+          required: true,
+        },
+        productImageUrl: {
+          type: String,
+          require: true,
+        },
+        subCategory: {
+          type: String,
         },
         amounts: {
           type: Number,
@@ -27,15 +29,90 @@ const OrderSchema = new mongoose.Schema(
         },
       },
     ],
-    // paymentStatus: {
-    //   type: String,
-    //   enum: ["pending", "paid", "failed"],
-    //   required: true,
-    // },
+
+    extraDishCart: [
+      {
+        productName: {
+          type: String,
+          required: true,
+        },
+        productId: {
+          type: String,
+          required: true,
+        },
+        productImageUrl: {
+          type: String,
+          require: true,
+        },
+        amounts: {
+          type: Number,
+          required: true,
+        },
+        price: {
+          type: Number,
+          required: true,
+        },
+      },
+    ],
+
+    toppingsCart: [
+      {
+        productName: {
+          type: String,
+          required: true,
+        },
+        productId: {
+          type: String,
+          required: true,
+        },
+        productImageUrl: {
+          type: String,
+          require: true,
+        },
+        amounts: {
+          type: Number,
+          required: true,
+        },
+        price: {
+          type: Number,
+          required: true,
+        },
+      },
+    ],
+
+    anotherCart: [
+      {
+        productName: {
+          type: String,
+          required: true,
+        },
+        productId: {
+          type: String,
+          required: true,
+        },
+        productImageUrl: {
+          type: String,
+          require: true,
+        },
+        amounts: {
+          type: Number,
+          required: true,
+        },
+        price: {
+          type: Number,
+          required: true,
+        },
+      },
+    ],
+    paymentStatus: {
+      type: String,
+      enum: ["Đang chờ", "Đã thanh toán", "Chưa thanh toán"],
+      default: "Đang chờ",
+    },
     orderStatus: {
       type: String,
-      enum: ["accepted", "denied", "pending"],
-      default: "pending",
+      enum: ["Chấp nhận", "Từ chối", "Đang chờ"],
+      default: "Đang chờ",
     },
     totalMainDish: {
       type: Number,
@@ -50,6 +127,14 @@ const OrderSchema = new mongoose.Schema(
       required: true,
     },
     totalAnother: {
+      type: Number,
+      required: true,
+    },
+    totalAmount: {
+      type: Number,
+      required: true,
+    },
+    moneyToPaid: {
       type: Number,
       required: true,
     },

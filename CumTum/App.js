@@ -8,9 +8,9 @@ import Router from './src/app/navigation/Router';
 import {Store} from './src/app/app_store/Store';
 
 // import Provider
-import {Provider} from 'react-redux';
+import {Provider, useSelector} from 'react-redux';
 import AdminStack from './src/app/navigation/AdminStack';
-import DetailCard from './src/app/features/admin/screens/detailCart/DetailCard';
+import DetailCard from './src/app/features/admin/screens/homeAdmin/detailCart/DetailCard';
 import CustomerStack from './src/app/navigation/CustomerStack';
 
 // import RootNavigation
@@ -25,24 +25,36 @@ import LoginScreen from './src/app/features/auth/login/Login';
 import SplashScreen from './src/app/features/auth/splashScreen/SplashScreen';
 import UpdateInformation from './src/app/features/auth/updateInformation/UpdateInformation';
 
-import EditDish from './src/app/features/admin/screens/editEat/EditDish';
-import UpdateDish from './src/app/features/admin/screens/updateDish/UpdateDish';
-import {requestUserPermission} from './src/app/shared/utils/PermissionFCM';
-import {Platform} from 'react-native';
+
 import Payment from './src/app/features/customer/screens/carts/payment/Payment';
-import CartNoItem from './src/app/features/customer/screens/carts/cart/cartWithNoItem/CartNoItem';
 import EditProfile from './src/app/features/customer/screens/profiles/editProfile/EditProfile';
 import UploadImage from './src/app/features/customer/screens/profiles/uploadImage/UploadImage';
+import RingBell from './src/app/features/customer/screens/homes/ringBell/RingBell';
 
 let persistor = persistStore(Store);
-
+import CartNoItem from './src/app/features/customer/screens/carts/cart/cartWithNoItem/CartNoItem';
+import socketServices from './src/app/shared/utils/Socket';
+import RingBellAdmin from './src/app/features/admin/screens/homeAdmin/ringBellAdmin/RingBellAdmin';
 const App = () => {
   const Stack = createNativeStackNavigator();
 
   useEffect(() => {
-    if (Platform.OS === 'android') {
-      requestUserPermission();
-    }
+    requestPermissionNoti();
+    // if (Platform.OS === 'android') {
+    //   requestUserPermission();
+    // }
+    return () => {};
+  }, []);
+
+  const requestPermissionNoti = async () => {
+    await notifee.requestPermission();
+  };
+  useEffect(() => {
+    return notifee.onBackgroundEvent(async ({type, detail}) => {
+      console.log(`Received background event: ${type}`, detail);
+
+      // Handle the background event here
+    });
   }, []);
 
   useEffect(() => {
@@ -110,22 +122,7 @@ const App = () => {
                 presentation: 'modal',
               }}
             />
-            <Stack.Screen
-              name={Router.EDIT_DISH}
-              component={EditDish}
-              options={{
-                headerShown: false,
-                presentation: 'modal',
-              }}
-            />
-            <Stack.Screen
-              name={Router.UPDATE_DISH}
-              component={UpdateDish}
-              options={{
-                headerShown: false,
-                presentation: 'modal',
-              }}
-            />
+         
             <Stack.Screen
               name={Router.PAYMENT}
               component={Payment}
@@ -152,6 +149,20 @@ const App = () => {
             <Stack.Screen
               name={Router.UPLOAD_IMAGE}
               component={UploadImage}
+              options={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name={Router.RING_BELL}
+              component={RingBell}
+              options={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name={Router.RING_BELL_ADMIN}
+              component={RingBellAdmin}
               options={{
                 headerShown: false,
               }}

@@ -9,7 +9,7 @@ const log = LOG.extend('apiProduct.js');
 export const fetchUploadImage = createAsyncThunk(
   constants.FETCH.UPLOAD_IMAGE,
   async path => {
-    log.info('🚀 ~ file: apiProduct.js:8 ~ path:', path);
+    // log.info('🚀 ~ file: apiProduct.js:8 ~ path:', path);
     const headers = {
       'Content-Type': 'multipart/form-data',
       Accept: 'application/json',
@@ -20,15 +20,30 @@ export const fetchUploadImage = createAsyncThunk(
       type: 'image/jpeg',
       name: 'image.jpg',
     });
-    log.info('🚀 ~ file: apiProduct.js:19 ~ data:', data);
+    // log.info('🚀 ~ file: apiProduct.js:19 ~ data:', data);
 
     const response = await AxiosInstance().post('/upload-image', data, {
       headers: headers,
     });
+    // log.info(
+    //   '🚀 ~ file: apiProduct.js:12 ~ fetchUploadImage ~ response:',
+    //   response,
+    // );
+    return response.data;
+  },
+);
+
+export const fetchAddCategory = createAsyncThunk(
+  constants.FETCH.ADD_CATEGORY,
+  async name => {
+    const response = await AxiosInstance().post('/products/create-cate', {
+      name: name,
+    });
     log.info(
-      '🚀 ~ file: apiProduct.js:12 ~ fetchUploadImage ~ response:',
-      response,
+      '🚀 ~ file: apiProduct.js:40 ~ response ~ response:',
+      response.data,
     );
+
     return response.data;
   },
 );
@@ -39,7 +54,7 @@ export const fetchCategories = createAsyncThunk(
     const response = await AxiosInstance().get('/products/categories');
     // log.info(
     //   '🚀 ~ file: apiProduct.js:12 ~ fetchCategories ~ response:',
-    //   response.data,
+    //   response.data.data,
     // );
     return response.data;
   },
@@ -48,13 +63,14 @@ export const fetchCategories = createAsyncThunk(
 export const fetchAddDish = createAsyncThunk(
   constants.FETCH.ADD_DISH,
   async ({categoryId, dish}) => {
-    log.info('🚀 ~ file: apiProduct.js:49 ~ dish:', dish);
+    // log.info('🚀 ~ file: apiProduct.js:49 ~ dish:', dish);
     const response = await AxiosInstance().post(
       `/products/${categoryId}/add-dish`,
       {
         dish: dish,
       },
     );
+    // console.log("🚀 ~ file: apiProduct.js:58 ~ response:", response)
 
     return response.data;
   },

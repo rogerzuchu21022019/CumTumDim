@@ -19,7 +19,8 @@ buildscript {
         classpath("com.facebook.react:react-native-gradle-plugin")
         
         classpath 'com.google.gms:google-services:4.3.14'
-        
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.0'
+
     }
     
     
@@ -37,5 +38,6 @@ allprojects {
 
       // ADD THIS
       maven { url "https://www.jitpack.io" }
+      
     }
 }

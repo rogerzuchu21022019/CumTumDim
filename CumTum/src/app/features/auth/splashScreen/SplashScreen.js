@@ -5,11 +5,16 @@ import styleSplashScreen from './StyleSplashScreen';
 
 const SplashScreen = props => {
   const {navigation} = props;
+
+  
   const nextScreen = () => {
     navigation.replace(Router.LOGIN);
   };
   useEffect(() => {
-    setTimeout(nextScreen, 3000);
+    const time = setTimeout(nextScreen, 1500);
+    return () => {
+      clearTimeout(time);
+    }
   }, []);
   return (
     <View style={styleSplashScreen.container}>

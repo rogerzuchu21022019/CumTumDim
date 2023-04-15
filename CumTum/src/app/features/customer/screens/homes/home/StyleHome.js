@@ -24,6 +24,8 @@ const styles = StyleSheet.create({
   imageLogo: {
     width: 40,
     height: 40,
+    borderRadius:10,
+
   },
   rightHeader: {
     flex: 1,
@@ -74,6 +76,21 @@ const styles = StyleSheet.create({
     height: '100%',
     marginTop: 56,
   },
+  textRingBell:{
+    fontSize:10,
+    color: constants.COLOR.WHITE,
+  },
+  viewTextRingBell:{
+    backgroundColor: constants.COLOR.RED,
+    width:30,
+    height:15,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius:10,
+    bottom:8,
+    right:10,
+  },
+
   /* imageBackground */
 
   /* Header */

@@ -14,7 +14,7 @@ import {saveToken} from './AsyncStorage';
 import {LOG} from '../../../../logger.config';
 import {useDispatch, useSelector} from 'react-redux';
 import {authSelector} from '../../features/admin/sliceAuth';
-import {fetchLogin} from '../../features/admin/apiAdmin';
+import {fetchLogin} from '../../features/admin/apiUser';
 const log = LOG.extend(`GOOGLE_SIGNIN.JS`);
 
 const GoogleSignIn = ({navigation}) => {
@@ -45,7 +45,7 @@ const GoogleSignIn = ({navigation}) => {
 
 
       const {idToken} = await GoogleSignin.signIn();
-      log.info('🚀 ~ file: GoogleSignIn.js:34 ~ signIn ~ idToken:', idToken);
+      // log.info('🚀 ~ file: GoogleSignIn.js:34 ~ signIn ~ idToken:', idToken);
 
       const {accessToken} = await GoogleSignin.getTokens();
       dispatch(fetchLogin(idToken, accessToken));

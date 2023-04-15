@@ -8,8 +8,12 @@ import {
   Button,
   ScrollView,
   StyleSheet,
+  TouchableNativeFeedback,
+  RefreshControl,
+  ActivityIndicator,
+  ViewBase,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from './StyleStatistic';
 import SafeKeyComponent from '../../../../components/safe_area/SafeKeyComponent';
 
@@ -21,141 +25,72 @@ import DatePicker from 'react-native-date-picker';
 import {LineChart} from 'react-native-chart-kit';
 import {Dimensions} from 'react-native';
 import {FlashList} from '@shopify/flash-list';
+import {formatTime} from '../../../../shared/utils/Moment';
+import {useDispatch, useSelector} from 'react-redux';
+import {cartSelector} from '../../../carts/sliceOrder';
+import {LOG} from '../../../../../../logger.config';
+import {
+  formatCodeOrder,
+  convertMoney,
+} from '../../../../shared/utils/CreateCodeOrder';
+import socketServices from '../../../../shared/utils/Socket';
+import {fetchOrders} from '../../../carts/apiOrder';
+const log = LOG.extend(`STATISTIC.JS`);
 
 const Statistic = ({navigation}) => {
+  const dispatch = useDispatch();
   const [activeTab, setActiveTab] = useState('Tab 1');
   const handleTabPress = tabName => {
     setActiveTab(tabName);
   };
 
-  const [selectedDate, setSelectedDate] = useState(new Date());
-  console.log(
-    '🚀 ~ file: Statistic.js:32 ~ Statistic ~ setSelectedDate:',
-    setSelectedDate,
-  );
+  const cartSelect = useSelector(cartSelector);
+  // log.info(
+  //   '🚀 ~ file: Statistic.js:36 ~ Statistic ~ cartSelector:',
+  //   cartSelect,
+  // );
+
+  const {isLoading} = cartSelect;
+
+  let orders = cartSelect.orders;
+  // console.log('🚀 ~ file: Statistic.js:43 ~ Statistic ~ orders:', orders);
+
   const [showDatePicker, setShowDatePicker] = useState(false); // Ẩn hoặc hiển thị date picker
-  console.log(
-    '🚀 ~ file: Statistic.js:33 ~ Statistic ~ showDatePicker:',
-    showDatePicker,
-  );
+
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
+  const [isRefresh, setIsRefresh] = useState(false);
 
-  const [productList, setProductList] = useState([
-    {
-      id: 'ID21220554',
-      time: '09:53',
-      datee: '03/03/2023',
-      price: '20k',
-      done: 'Hoàn thành',
-      date: new Date('2023-03-21'),
-    },
-    {
-      id: 'ID21220555',
-      time: '09:53',
-      datee: '03/03/2023',
-      price: '30k',
-      done: 'Hoàn thành',
-      date: new Date('2023-03-22'),
-    },
-    {
-      id: 'ID21220556',
-      time: '09:53',
-      datee: '03/03/2023',
-      price: '40k',
-      done: 'Hoàn thành',
-      date: new Date('2023-03-23'),
-    },
-    {
-      id: 'ID21220557',
-      time: '09:53',
-      datee: '03/03/2023',
-      price: '40k',
-      done: 'Hoàn thành',
-      date: new Date('2023-03-23'),
-    },
-    {
-      id: 'ID21220558',
-      time: '09:53',
-      datee: '03/03/2023',
-      price: '40k',
-      done: 'Hoàn thành',
-      date: new Date('2023-03-23'),
-    },
-    {
-      id: 'ID21220559',
-      time: '09:53',
-      datee: '03/03/2023',
-      price: '40k',
-      done: 'Hoàn thành',
-      date: new Date('2023-03-23'),
-    },
-    {
-      id: 'ID21220560',
-      time: '09:53',
-      datee: '03/03/2023',
-      price: '40k',
-      done: 'Hoàn thành',
-      date: new Date('2023-03-23'),
-    },
-    {
-      id: 'ID21220561',
-      time: '09:53',
-      datee: '03/03/2023',
-      price: '40k',
-      done: 'Hoàn thành',
-      date: new Date('2023-03-23'),
-    },
-    {
-      id: 'ID21220562',
-      time: '09:53',
-      datee: '03/03/2023',
-      price: '40k',
-      done: 'Hoàn thành',
-      date: new Date('2023-03-23'),
-    },
-    {
-      id: 'ID21220563',
-      time: '09:53',
-      datee: '03/03/2023',
-      price: '40k',
-      done: 'Hoàn thành',
-      date: new Date('2023-03-23'),
-    },
-    {
-      id: 'ID21220564',
-      time: '09:54',
-      datee: '03/03/2023',
-      price: '40k',
-      done: 'Hoàn thành',
-      date: new Date('2023-03-23'),
-    },
-    {
-      id: 'ID21220565',
-      time: '09:53',
-      datee: '03/03/2023',
-      price: '40k',
-      done: 'Hoàn thành',
-      date: new Date('2023-03-23'),
-    },
-    {
-      id: 'ID21220566',
-      time: '09:53',
-      datee: '03/03/2023',
-      price: '40k',
-      done: 'Hoàn thành',
-      date: new Date('2023-03-23'),
-    },
-  ]);
+  // const isLoading = cartSelect
 
-  const filteredProducts = productList.filter(product => {
-    return product.date >= startDate && product.date <= endDate;
+  const filteredProducts = orders.filter(product => {
+    const timeCreated = new Date(product.createdAt);
+
+    /* get day month year time created to compare */
+    const timeCreatedYear = timeCreated.getFullYear();
+    const timeCreatedMonth = timeCreated.getMonth();
+    const timeCreatedDay = timeCreated.getDate();
+
+    /* get day month year start date to compare */
+    const startDateYear = startDate.getFullYear();
+    const startDateMonth = startDate.getMonth();
+    const startDateDay = startDate.getDate();
+
+    /* get day month year end date to compare */
+    const endDateYear = endDate.getFullYear();
+    const endDateMonth = endDate.getMonth();
+    const endDateDay = endDate.getDate();
+
+    return (
+      timeCreatedYear >= startDateYear &&
+      timeCreatedYear <= endDateYear &&
+      timeCreatedMonth >= startDateMonth &&
+      timeCreatedMonth <= endDateMonth &&
+      timeCreatedDay >= startDateDay &&
+      timeCreatedDay <= endDateDay
+    );
   });
 
-  const handleDateChange = date => {
-    setSelectedDate(date);
-    setShowDatePicker(false);
-  };
   const screenWidth = Dimensions.get('window').width;
 
   const chartConfig = {
@@ -175,9 +110,30 @@ const Statistic = ({navigation}) => {
         color: (opacity = 2) => `rgba(30,144,255, ${opacity})`, // optional
       },
     ],
-    legend: ['Danh Thu'], // optional
+    legend: ['Doanh Thu'], // optional
   };
 
+  const totalIncome = filteredProducts.reduce((total, order) => {
+    if (order.orderStatus === 'Chấp nhận') {
+      return total + order.moneyToPaid;
+    } else {
+      return total;
+    }
+  }, 0);
+
+  useEffect(() => {
+    socketServices.on(constants.SOCKET.FIND_ORDER_BY_USER_ID, userId => {
+      console.log('🚀 ~ file: Statistic.js:119 ~ useEffect ~ userId:', userId);
+      // log.info('🚀 ~ file: History.js:17 ~ History ~ user:', userId);
+      dispatch(fetchOrders());
+    });
+    return () => {
+      socketServices.socket.disconnect();
+    };
+  }, []);
+
+  const [openStart, setOpenStart] = useState(false);
+  const [openEnd, setOpenEnd] = useState(false);
   return (
     <SafeKeyComponent>
       <View style={styles.container}>
@@ -190,13 +146,6 @@ const Statistic = ({navigation}) => {
               />
               <Text style={styles.textTitle}>Cum tứm đim</Text>
             </View>
-            <View style={styles.rightHeader}>
-              <IconOcticons
-                name="bell-fill"
-                color={constants.COLOR.RED}
-                size={20}
-              />
-            </View>
           </View>
         </View>
         <View style={styles.body}>
@@ -207,7 +156,7 @@ const Statistic = ({navigation}) => {
                 style={[styles.tab1, activeTab === 'Tab 1' && styles.activeTab]}
                 onPress={() => handleTabPress('Tab 1')}>
                 <View>
-                  <Text style={styles.textTab}>Danh Thu</Text>
+                  <Text style={styles.textTab}>Doanh Thu</Text>
                 </View>
               </TouchableOpacity>
             </View>
@@ -225,75 +174,123 @@ const Statistic = ({navigation}) => {
           {activeTab === 'Tab 1' && (
             <View style={styles.bodyTabRevenue}>
               <View style={styles.dateRangePickerContainer}>
+                {/* Tu ngay */}
                 <View style={styles.dateRangePickerText}>
-                  <TouchableOpacity onPress={() => setShowDatePicker(true)}>
+                  <TouchableOpacity onPress={() => setOpenStart(true)}>
                     <View style={styles.dateRangePickerText1}>
                       <Text style={styles.dateRangePickerText2}>Từ ngày</Text>
+                      <DatePicker
+                        modal
+                        open={openStart}
+                        date={startDate}
+                        onConfirm={date => {
+                          setOpenStart(false);
+                          setStartDate(date);
+                        }}
+                        onCancel={() => {
+                          setOpenStart(false);
+                        }}
+                        locale="vi-VN"
+                        mode="date"
+                      />
                     </View>
                   </TouchableOpacity>
                   <View style={styles.dateRangePickerText3}>
                     <Text style={styles.dateRangePickerText4}>
-                      {startDate.toLocaleDateString('vi-VN')}
+                      {formatTime(startDate)}
                     </Text>
                   </View>
                 </View>
+
+                {/* Den ngay */}
                 <View style={styles.dateRangePickerText}>
-                  <TouchableOpacity onPress={() => setShowDatePicker(true)}>
+                  <TouchableOpacity onPress={() => setOpenEnd(true)}>
                     <View style={styles.dateRangePickerText1}>
                       <Text style={styles.dateRangePickerText2}>Đến ngày</Text>
+                      <DatePicker
+                        modal
+                        open={openEnd}
+                        date={endDate}
+                        onConfirm={date => {
+                          setOpenEnd(false);
+                          setEndDate(date);
+                        }}
+                        onCancel={() => {
+                          setOpenEnd(false);
+                        }}
+                        locale="vi-VN"
+                        mode="date"
+                      />
                     </View>
                   </TouchableOpacity>
                   <View style={styles.dateRangePickerText3}>
                     <Text style={styles.dateRangePickerText4}>
-                      {endDate.toLocaleDateString('vi-VN')}
+                      {formatTime(endDate)}
                     </Text>
                   </View>
-                </View>
-                <View>
-                  <Modal visible={showDatePicker}>
-                    <View>
-                      <View style={styles.datePickerContainer}>
-                        <DatePicker
-                          date={startDate}
-                          mode="date"
-                          onDateChange={date => setStartDate(date)}
-                          locale="vi-VN"
-                        />
-                      </View>
-                      <View style={styles.datePickerContainer}>
-                        <DatePicker
-                          date={endDate}
-                          mode="date"
-                          onDateChange={date => setEndDate(date)}
-                          locale="vi-VN"
-                        />
-                      </View>
-                      <TouchableOpacity
-                        onPress={() => setShowDatePicker(false)}>
-                        <Text style={styles.buttonTouch}>OK</Text>
-                      </TouchableOpacity>
-                    </View>
-                  </Modal>
                 </View>
               </View>
               <View style={styles.strikethrough}></View>
-              <FlashList
-                estimatedItemSize={100}
-                data={filteredProducts}
-                renderItem={({item}) => (
-                  <View style={styles.itemOder}>
-                    <View>
-                      <Text style={styles.itemText}>{item.id}</Text>
-                      <Text style={styles.itemText}>{item.datee}</Text>
-                      <Text style={styles.itemText1}>{item.time}</Text>
-                    </View>
-                    <View style={styles.itemText1}>
-                      <Text style={styles.itemText}>{item.done}</Text>
-                      <Text style={styles.itemText1}>{item.price}</Text>
-                    </View>
-                  </View>
+              <View style={styles.boxIncome}>
+                  <Text style={styles.itemText1}>
+                    Doanh thu: {convertMoney(totalIncome)}
+                  </Text>
+                  <Text style={styles.itemText1}>
+                    Tổng đơn: {filteredProducts.length}
+                  </Text>
+               
+               
+              </View>
+              <TouchableNativeFeedback>
+                {isLoading ? (
+                  <ActivityIndicator
+                    size="large"
+                    color={constants.COLOR.WHITE}
+                  />
+                ) : (
+                  <FlashList
+                    estimatedItemSize={100}
+                    data={filteredProducts}
+                    refreshControl={
+                      <RefreshControl
+                        refreshing={isRefresh}
+                        onRefresh={() => {
+                          dispatch(fetchOrders());
+                        }}
+                        title="Pull to refresh..."
+                        titleColor={constants.COLOR.RED}
+                        tintColor={constants.COLOR.RED}
+                      />
+                    }
+                    renderItem={({item, index}) => (
+                      <SafeKeyComponent>
+                        <View style={styles.itemOder}>
+                          <View>
+                            <Text style={styles.itemText}>{index + 1}</Text>
+                            {/* <Text style={styles.itemText}>{item.datee}</Text> */}
+                          </View>
+                          <View>
+                            <Text style={styles.itemText}>
+                              Mã đơn: {formatCodeOrder(item._id)}
+                            </Text>
+                            <Text style={styles.itemText1}>
+                              Ngày mua : {formatTime(item.createdAt)}
+                            </Text>
+                          </View>
+                          <View style={styles.itemText1}>
+                            <Text style={styles.itemText}>
+                              {item.orderStatus}
+                            </Text>
+                            <Text style={styles.itemText1}>
+                              {convertMoney(item.moneyToPaid)}
+                            </Text>
+                          </View>
+                        </View>
+                      </SafeKeyComponent>
+                    )}
+                  />
                 )}
-              />
+              </TouchableNativeFeedback>
             </View>
           )}
           {/* bieu do */}
@@ -308,7 +305,7 @@ const Statistic = ({navigation}) => {
                   </TouchableOpacity>
                   <View style={styles.dateRangePickerText3}>
                     <Text style={styles.dateRangePickerText4}>
-                      {startDate.toLocaleDateString('vi-VN')}
+                      {formatTime(startDate)}
                     </Text>
                   </View>
                 </View>
@@ -320,36 +317,11 @@ const Statistic = ({navigation}) => {
                   </TouchableOpacity>
                   <View style={styles.dateRangePickerText3}>
                     <Text style={styles.dateRangePickerText4}>
-                      {endDate.toLocaleDateString('vi-VN')}
+                      {formatTime(endDate)}
                     </Text>
                   </View>
                 </View>
-                <View>
-                  <Modal visible={showDatePicker}>
-                    <View>
-                      <View style={styles.datePickerContainer}>
-                        <DatePicker
-                          date={startDate}
-                          mode="date"
-                          onDateChange={date => setStartDate(date)}
-                          locale="vi-VN"
-                        />
-                      </View>
-                      <View style={styles.datePickerContainer}>
-                        <DatePicker
-                          date={endDate}
-                          mode="date"
-                          onDateChange={date => setEndDate(date)}
-                          locale="vi-VN"
-                        />
-                      </View>
-                      <TouchableOpacity
-                        onPress={() => setShowDatePicker(false)}>
-                        <Text style={styles.buttonTouch}>OK</Text>
-                      </TouchableOpacity>
-                    </View>
-                  </Modal>
-                </View>
+                <View></View>
               </View>
               <View>
                 <LineChart

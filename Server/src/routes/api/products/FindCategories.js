@@ -5,10 +5,10 @@ const router = express.Router();
 router.get(`/categories`, async (req, res) => {
   try {
     const categories = await FindCategoriesCon();
-    console.log(
-      "🚀 ~ file: FindCategories.js:9 ~ router.get ~ categories:",
-      categories
-    );
+    // console.log(
+    //   "🚀 ~ file: FindCategories.js:9 ~ router.get ~ categories:",
+    //   categories
+    // );
     res.json({
       message: "success",
       status: "200",
