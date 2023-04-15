@@ -414,5 +414,3 @@ const Payment = ({navigation, route}) => {
 };
 
 export default Payment;
-
-export default Payment

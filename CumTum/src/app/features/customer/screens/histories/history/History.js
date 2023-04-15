@@ -83,5 +83,3 @@ const History = ({navigation}) => {
 };
 
 export default History;
-
-export default History
