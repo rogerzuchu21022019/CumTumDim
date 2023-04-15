@@ -13,7 +13,7 @@ import sliceCart from '../features/carts/sliceOrder';
 let persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  // whiteList: [],
+  whiteList: [constants.SLICE.PRODUCT],
   // blacklist: [constants.SLICE.ADMIN],
 };
 
@@ -37,6 +37,6 @@ export const Store = configureStore({
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: false, // bỏ qua kiểm tra tính immutability của state
-      immutableCheck: false
+      immutableCheck: false,
     }),
 });

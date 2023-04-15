@@ -29,6 +29,12 @@ const initSocket = (server) => {
       }
     });
 
+    socket.on(
+      CONSTANTS.SOCKET.UPDATE_NOTIFICATION_CUSTOMER,() => { 
+        
+       }
+    )
+
     // socket.on(CONSTANTS.SOCKET.CREATE_ORDER, (data) => {
     //   console.log("A user created an order.");
     //   // io.emit(CONSTANTS.SOCKET.CREATE_ORDER, data);

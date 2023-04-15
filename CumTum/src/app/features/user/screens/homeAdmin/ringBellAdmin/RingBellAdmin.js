@@ -5,12 +5,12 @@ import {FlashList} from '@shopify/flash-list';
 import ListItem from './ListItem.js';
 import {useDispatch, useSelector} from 'react-redux';
 import {LOG} from '../../../../../../../logger.config.js';
-import {authSelector} from '../../../sliceAuth.js';
+import {authSelector, updateIsRead} from '../../../sliceAuth.js';
 import Router from '../../../../../navigation/Router.js';
 import SafeKeyComponent from '../../../../../components/safe_area/SafeKeyComponent.js';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
 import {constants} from '../../../../../shared/constants.js';
-import {fetchUserById} from '../../../apiUser.js';
+import {fetchUpdateNotification, fetchUserById} from '../../../apiUser.js';
 import socketServices from '../../../../../shared/utils/Socket.js';
 
 const RingBellAdmin = ({navigation}) => {
@@ -20,15 +20,36 @@ const RingBellAdmin = ({navigation}) => {
   const log = LOG.extend(`RING_BELL.JS`);
 
   const data = useSelector(authSelector);
-  log.info(
-    '🚀 ~ file: RingBell.js:21 ~ RingBell ~ data:',
-    data.user.notifications,
-  );
+  // log.info(
+  //   '🚀 ~ file: RingBell.js:21 ~ RingBell ~ data:',
+  //   data.user.notifications,
+  // );
 
+  const notifications = data.notifications;
 
-  const notifications = data.user.notifications;
   const userId = data.user._id;
   const dispatch = useDispatch();
+
+  const onDisable = item => {
+    const data = {
+      userId: userId,
+      notification: item,
+    };
+    dispatch(fetchUpdateNotification(data));
+    // notifications.map(notification => {
+    //   if (notification._id === item._id) {
+    //     // console.log(
+    //     //   '🚀 ~ file: RingBellAdmin.js:41 ~ onDisable ~ notification:',
+    //     //   notification,
+    //     // );
+    //     // console.log('🚀 ~ file: RingBellAdmin.js:41 ~ onDisable ~ item:', item);
+    //     if (notification.isRead != undefined) {
+    //       notification.isRead = item.isRead;
+
+    //     }
+    //   }
+    // });
+  };
 
   return (
     <SafeKeyComponent>
@@ -65,6 +86,7 @@ const RingBellAdmin = ({navigation}) => {
                 item={item}
                 index={index}
                 navigation={navigation}
+                onDisable={onDisable}
               />
             )}
             keyExtractor={(item, index) => index.toString()}

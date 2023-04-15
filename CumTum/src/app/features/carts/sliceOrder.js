@@ -82,42 +82,6 @@ export const sliceCart = createSlice({
       state.message = data.message;
     });
 
-    /* Push Notification */
-    builder.addCase(fetchNotification.pending, state => {
-      state.isLoading = true;
-    });
-    builder.addCase(fetchNotification.fulfilled, (state, action) => {
-      const data = action.payload;
-      state.isLoading = data.isLoading;
-      state.error = data.error;
-      state.message = data.message;
-      state.notifications.unshift(data.data);
-    });
-    builder.addCase(fetchNotification.rejected, (state, action) => {
-      const data = action.payload;
-      state.isLoading = data.isLoading;
-      state.error = data.error;
-      state.message = data.message;
-    });
-
-    /* Notifications */
-    builder.addCase(fetchFindNotifications.pending, state => {
-      state.isLoading = true;
-    });
-    builder.addCase(fetchFindNotifications.fulfilled, (state, action) => {
-      const data = action.payload;
-      state.isLoading = data.isLoading;
-      state.error = data.error;
-      state.message = data.message;
-      state.notifications = data.data;
-    });
-    builder.addCase(fetchFindNotifications.rejected, (state, action) => {
-      const data = action.payload;
-      state.isLoading = data.isLoading;
-      state.error = data.error;
-      state.message = data.message;
-    });
-
     /* Update Order */
     builder.addCase(fetchUpdateOrder.pending, state => {
       state.isLoading = true;

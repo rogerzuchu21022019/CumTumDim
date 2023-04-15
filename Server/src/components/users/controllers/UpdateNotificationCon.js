@@ -1,5 +1,7 @@
 const UpdateNotificationSv = require("../services/UpdateNotificationSv");
 
+
+
 const UpdateNotificationCon = async (userId,notification) => {
   try {
     const user = await UpdateNotificationSv(userId,notification);

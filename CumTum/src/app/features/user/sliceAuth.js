@@ -1,6 +1,12 @@
 import Router from '../../navigation/Router';
 import {constants} from '../../shared/constants';
-import {fetchLogin, fetchSignOut, fetchUpdateNotification, fetchUserById} from './apiUser';
+import {
+  fetchLogin,
+  fetchSignOut,
+  fetchPushNotification,
+  fetchUserById,
+  fetchUpdateNotification,
+} from './apiUser';
 
 const {createSlice} = require('@reduxjs/toolkit');
 import * as RootNavigation from '../../navigation/RootNavigation';
@@ -18,7 +24,21 @@ const initialState = {
 export const authSlice = createSlice({
   name: constants.SLICE.AUTH,
   initialState: initialState,
-  reducers: {},
+  reducers: {
+    updateIsRead: (state, action) => {
+      const data = action.payload;
+      console.log('🚀 ~ file: sliceAuth.js:29 ~ data:', data);
+      state.notifications = state.notifications.map(notification => {
+        if (notification._id === data._id) {
+          return {
+            ...notification,
+            isRead: data.isRead,
+          };
+        }
+        return notification;
+      });
+    },
+  },
   extraReducers: builder => {
     builder.addCase(fetchLogin.pending, state => {
       state.isLoading = true;
@@ -56,19 +76,33 @@ export const authSlice = createSlice({
       state.error = true;
     });
 
-      // Update Notification  By UserId
-      builder.addCase(fetchUpdateNotification.pending, state => {
-        state.isLoading = true;
-      });
-      builder.addCase(fetchUpdateNotification.fulfilled, (state, action) => {
-        const dataResponse = action.payload;
-        state.isLoading = false;
-        state.user = dataResponse.data;
-      });
-      builder.addCase(fetchUpdateNotification.rejected, (state, action) => {
-        state.isLoading = false;
-        state.error = true;
-      });
+    // Push Notification  By UserId
+    builder.addCase(fetchPushNotification.pending, state => {
+      state.isLoading = true;
+    });
+    builder.addCase(fetchPushNotification.fulfilled, (state, action) => {
+      const dataResponse = action.payload;
+      state.isLoading = false;
+      state.user = dataResponse.data;
+    });
+    builder.addCase(fetchPushNotification.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = true;
+    });
+
+     // Update Notification  By UserId
+     builder.addCase(fetchUpdateNotification.pending, state => {
+      state.isLoading = true;
+    });
+    builder.addCase(fetchUpdateNotification.fulfilled, (state, action) => {
+      const dataResponse = action.payload;
+      state.isLoading = false;
+      state.user = dataResponse.data;
+    });
+    builder.addCase(fetchUpdateNotification.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = true;
+    });
 
     // Sign Out
     builder.addCase(fetchSignOut.pending, state => {
@@ -83,5 +117,7 @@ export const authSlice = createSlice({
     });
   },
 });
+
 export const authSelector = state => state.auth;
+export const {updateIsRead} = authSlice.actions;
 export default authSlice.reducer;

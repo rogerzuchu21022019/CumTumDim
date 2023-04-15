@@ -33,13 +33,28 @@ export const fetchUploadImage = createAsyncThunk(
   },
 );
 
+export const fetchAddCategory = createAsyncThunk(
+  constants.FETCH.ADD_CATEGORY,
+  async name => {
+    const response = await AxiosInstance().post('/products/create-cate', {
+      name: name,
+    });
+    log.info(
+      '🚀 ~ file: apiProduct.js:40 ~ response ~ response:',
+      response.data,
+    );
+
+    return response.data;
+  },
+);
+
 export const fetchCategories = createAsyncThunk(
   constants.FETCH.FIND_CATEGORIES,
   async () => {
     const response = await AxiosInstance().get('/products/categories');
     // log.info(
     //   '🚀 ~ file: apiProduct.js:12 ~ fetchCategories ~ response:',
-    //   response.data,
+    //   response.data.data,
     // );
     return response.data;
   },

@@ -8,11 +8,11 @@ const CategorySchema = new Schema(
       unique:true,
       required: true,
     },
-    type: {
-      type: String,
-      enum: [`Main Dishes`, `Extra Dishes`, `Toppings`, `Another`],
-      required: true,
-    },
+    // type: {
+    //   type: String,
+    //   enum: [`Main Dishes`, `Extra Dishes`, `Toppings`, `Another`],
+    //   required: true,
+    // },
   },
   {
     timestamps: true,

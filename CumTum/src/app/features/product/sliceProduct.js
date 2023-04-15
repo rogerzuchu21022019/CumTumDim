@@ -1,6 +1,7 @@
 import {LOG} from '../../../../logger.config';
 import {constants} from '../../shared/constants';
 import {
+  fetchAddCategory,
   fetchAddDish,
   fetchCategories,
   fetchDishes,
@@ -11,7 +12,7 @@ const {createSlice} = require('@reduxjs/toolkit');
 
 const initialState = {
   data: null,
-  loading: false,
+  isLoading: false,
   error: null,
   success: null,
   message: null,
@@ -311,82 +312,166 @@ export const sliceProduct = createSlice({
     },
   },
   extraReducers: builder => {
+
+    /* Add Category */
+    builder.addCase(fetchAddCategory.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(fetchAddCategory.fulfilled, (state, action) => {
+      const dataResponse = action.payload;
+      state.isLoading = dataResponse.isLoading;
+      state.success = dataResponse.success;
+      state.message = dataResponse.message;
+      state.data = dataResponse.data;
+    });
+    builder.addCase(fetchAddCategory.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = true;
+      state.message = action.payload;
+    });
+
+    /* Upload image */
     builder.addCase(fetchUploadImage.pending, (state, action) => {
-      state.loading = true;
+      state.isLoading = true;
     });
     builder.addCase(fetchUploadImage.fulfilled, (state, action) => {
       const dataResponse = action.payload;
-      state.loading = false;
+      state.isLoading = false;
       state.success = dataResponse.success;
       state.message = dataResponse.message;
       state.data = dataResponse.data;
     });
     builder.addCase(fetchUploadImage.rejected, (state, action) => {
-      state.loading = false;
+      state.isLoading = false;
       state.error = true;
       state.message = action.payload;
     });
     builder.addCase(fetchCategories.pending, state => {
-      state.loading = true;
+      state.isLoading = true;
     });
     builder.addCase(fetchCategories.fulfilled, (state, action) => {
       const dataResponse = action.payload;
-      state.loading = false;
+      state.isLoading = false;
       state.success = dataResponse.success;
       state.message = dataResponse.message;
       state.categories = dataResponse.data;
     });
     builder.addCase(fetchCategories.rejected, (state, action) => {
-      state.loading = false;
+      state.isLoading = false;
       state.error = true;
       state.message = action.payload;
     });
 
     builder.addCase(fetchAddDish.pending, state => {
-      state.loading = true;
+      state.isLoading = true;
     });
     builder.addCase(fetchAddDish.fulfilled, (state, action) => {
       const dataResponse = action.payload;
-      state.loading = false;
+      state.isLoading = false;
       state.success = dataResponse.success;
       state.message = dataResponse.message;
       state.dish = dataResponse.data;
     });
     builder.addCase(fetchAddDish.rejected, (state, action) => {
-      state.loading = false;
+      state.isLoading = false;
       state.error = true;
       state.message = action.payload;
     });
     //
     builder.addCase(fetchDishes.pending, state => {
-      state.loading = true;
+      state.isLoading = true;
     });
 
     builder.addCase(fetchDishes.fulfilled, (state, action) => {
       const dataResponse = action.payload;
-      state.loading = false;
+      state.isLoading = false;
       state.success = dataResponse.success;
       state.message = dataResponse.message;
       state.dishes = dataResponse.data;
 
-      state.extraDishes = dataResponse.data.filter(
-        dish => dish.categoryId === state.categories[0]._id,
+      const dataListExtra = state.categories.filter(
+        item => item.name === 'Món ăn thêm',
       );
 
+      const dataListMain = state.categories.filter(
+        item => item.name === 'Món chính',
+      );
+
+      const dataListTopping = state.categories.filter(
+        item => item.name === 'Toppings',
+      );
+
+      const dataListAnother = state.categories.filter(
+        item => item.name === 'Khác',
+      );
+
+      state.extraDishes = dataResponse.data.filter(
+        item => item.categoryId === dataListExtra[0]._id,
+      );
+
+      // state.mainDishes.map(item => (item.amount = 0));
+      // state.extraDishes.map(item => (item.amount = 0));
+      // state.toppings.map(item => (item.amount = 0));
+      // state.another.map(item => (item.amount = 0));
+
       state.toppings = dataResponse.data.filter(
-        dish => dish.categoryId === state.categories[1]._id,
+        dish => dish.categoryId === dataListTopping[0]._id,
       );
 
       state.another = dataResponse.data.filter(
-        dish => dish.categoryId === state.categories[2]._id,
+        dish => dish.categoryId === dataListAnother[0]._id,
       );
 
       state.mainDishes = dataResponse.data.filter(
-        dish => dish.categoryId === state.categories[3]._id,
+        dish => dish.categoryId === dataListMain[0]._id,
       );
+
+      // Handle data when app crash or turn off app will get amount of home screen to exactly === amount in cart
+      if (
+        state.mainDishCart.length > 0 ||
+        state.extraDishCart.length > 0 ||
+        state.toppingsCart.length > 0 ||
+        state.anotherCart.length > 0
+      ) {
+
+        // 
+        state.mainDishCart.forEach(item => {
+          state.mainDishes.forEach(dish => {
+            if (item._id === dish._id) {
+              dish.amount = item.amount;
+            }
+          });
+        });
+        state.extraDishCart.forEach(item => {
+          state.extraDishes.forEach(dish => {
+            if (item._id === dish._id) {
+              dish.amount = item.amount;
+            }
+          });
+        });
+        state.toppingsCart.forEach(item => {
+          state.toppings.forEach(dish => {
+            if (item._id === dish._id) {
+              dish.amount = item.amount;
+            }
+          });
+        });
+        state.anotherCart.forEach(item => {
+          state.another.forEach(dish => {
+            if (item._id === dish._id) {
+              dish.amount = item.amount;
+            }
+          });
+        });
+      } else {
+        state.mainDishes.map(item => (item.amount = 0));
+        state.extraDishes.map(item => (item.amount = 0));
+        state.toppings.map(item => (item.amount = 0));
+        state.another.map(item => (item.amount = 0));
+      }
     });
     builder.addCase(fetchDishes.rejected, (state, action) => {
-      state.loading = false;
+      state.isLoading = false;
       state.error = true;
       state.message = action.payload;
     });

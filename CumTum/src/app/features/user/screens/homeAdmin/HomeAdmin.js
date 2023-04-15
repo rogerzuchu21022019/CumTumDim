@@ -28,7 +28,7 @@ import {showNotifyLocal} from '../../../../shared/utils/Notifies';
 import {format, isToday} from 'date-fns';
 import {formatCodeOrder} from '../../../../shared/utils/CreateCodeOrder';
 import Router from '../../../../navigation/Router';
-import {fetchUpdateNotification, fetchUserById} from '../../apiUser';
+import {fetchPushNotification, fetchUserById} from '../../apiUser';
 const log = LOG.extend(`HOME_ADMIN.JS`);
 // const socket = io(constants.SOCKET.URL, {
 //   transports: ['websocket'],
@@ -42,10 +42,10 @@ const HomeAdmin = ({navigation}) => {
 
   const user = useSelector(authSelector);
   // console.log('🚀 ~ file: HomeAdmin.js:44 ~ HomeAdmin ~ user:', user);
-  log.info(
-    '🚀 ~ file: HomeAdmin.js:43 ~ HomeAdmin ~ notifications:',
-    user.notifications,
-  );
+  // log.info(
+  //   '🚀 ~ file: HomeAdmin.js:43 ~ HomeAdmin ~ notifications:',
+  //   user.notifications,
+  // );
 
   const userId = user.user._id;
   console.log('🚀 ~ file: HomeAdmin.js:51 ~ HomeAdmin ~ userId:', userId);
@@ -61,7 +61,7 @@ const HomeAdmin = ({navigation}) => {
       onDisplayNotification(orderData);
       dispatch(fetchOrders());
     });
-    socketServices.on(constants.SOCKET.UPDATE_NOTIFICATION_ADMIN, userId => {
+    socketServices.on(constants.SOCKET.PUSH_NOTIFICATION_ADMIN, userId => {
       dispatch(fetchUserById(userId));
     });
     return () => {
@@ -74,20 +74,21 @@ const HomeAdmin = ({navigation}) => {
     const total = orderData.moneyToPaid;
 
     const title = 'Notification';
-    const content = `Đơn hàng số ${idOrder} có tổng giá tiền ${total}K đang chờ bạn xác nhận!`;
+    const content = `Đơn hàng mã số ${idOrder} có tổng giá tiền ${total}K đang chờ bạn xác nhận!`;
 
     const notification = {
       title,
       content,
-      _id:orderData._id,
+      _id: orderData._id,
       createdAt: orderData.createdAt,
+      isRead: false,
     };
     const data = {
       userId: userId,
       notification: notification,
     };
 
-    dispatch(fetchUpdateNotification(data));
+    dispatch(fetchPushNotification(data));
 
     showNotifyLocal(notification);
   };

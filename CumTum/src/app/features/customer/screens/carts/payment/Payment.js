@@ -15,7 +15,6 @@ import {
   fetchAccessTokenPaypal,
   fetchCreateOrder,
   fetchCreateOrderPaypal,
-  fetchNotification,
 } from '../../../../carts/apiOrder';
 import {authSelector} from '../../../../user/sliceAuth';
 import {cartSelector} from '../../../../carts/sliceOrder';

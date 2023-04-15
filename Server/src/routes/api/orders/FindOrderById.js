@@ -16,9 +16,9 @@ router.post(`/find-order-by-id/:orderId`, async (req, res) => {
       "🚀 ~ file: FindOrderById.js:12 ~ router.post ~ orderStatus:",
       orderStatus
     );
-    // const order = await FindOrderByIdCon(orderId, orderStatus);
+    const order = await FindOrderByIdCon(orderId, orderStatus);
 
-    // await UpdateUserByIdCon(order.userId, order);
+    await UpdateUserByIdCon(order.userId, order);
     const socketId = "exQn8kgRW22-ewpdAAAD";
     const socket = _io
     console.log("🚀 ~ file: FindOrderById.js:24 ~ router.post ~ socket:", socket)
@@ -28,8 +28,8 @@ router.post(`/find-order-by-id/:orderId`, async (req, res) => {
       console.log(`map key ${key}`);
     }
     
-    // _io.emit(CONSTANTS.SOCKET.UPDATE_ORDER, order);
-    // _io.emit(CONSTANTS.SOCKET.FIND_ORDER_BY_USER_ID, order.userId);
+    _io.emit(CONSTANTS.SOCKET.UPDATE_ORDER, order);
+    _io.emit(CONSTANTS.SOCKET.FIND_ORDER_BY_USER_ID, order.userId);
     // _io.on(CONSTANTS.SOCKET.CONNECTION, (socket) => {
     //   console.log(`A user connected huhu to socket ${socket.id}`);
     //   socket.emit(CONSTANTS.SOCKET.UPDATE_NOTIFICATION_CUSTOMER, order);
