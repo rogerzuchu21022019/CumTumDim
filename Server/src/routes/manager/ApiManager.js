@@ -46,8 +46,11 @@ const ManagerRouter = (app, fixPublic) => {
 
   //   /* Products */
   app.use(SUB_PRODUCTS, ApiProducts.createCategory, fixPublic);
+  app.use(SUB_PRODUCTS, ApiProducts.updateCategoryById, fixPublic);
+  app.use(SUB_PRODUCTS, ApiProducts.deleteCategory, fixPublic);
   app.use(SUB_PRODUCTS, ApiProducts.findCategories, fixPublic);
   app.use(SUB_PRODUCTS, ApiProducts.addDish, fixPublic);
+  app.use(SUB_PRODUCTS, ApiProducts.updateDishById, fixPublic);
   app.use(SUB_PRODUCTS, ApiProducts.findDishes, fixPublic);
   app.use(SUB_PRODUCTS, ApiProducts.createOrder, fixPublic);
   app.use(SUB_PRODUCTS, ApiProducts.updateOrder, fixPublic);
