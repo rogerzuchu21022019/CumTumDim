@@ -4,7 +4,9 @@ import {
   fetchAddCategory,
   fetchAddDish,
   fetchCategories,
+  fetchDeleteCategory,
   fetchDishes,
+  fetchUpdateCategory,
   fetchUploadImage,
 } from './apiProduct';
 
@@ -312,7 +314,6 @@ export const sliceProduct = createSlice({
     },
   },
   extraReducers: builder => {
-
     /* Add Category */
     builder.addCase(fetchAddCategory.pending, (state, action) => {
       state.isLoading = true;
@@ -325,6 +326,41 @@ export const sliceProduct = createSlice({
       state.data = dataResponse.data;
     });
     builder.addCase(fetchAddCategory.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = true;
+      state.message = action.payload;
+    });
+
+    /* Upload Category */
+    builder.addCase(fetchUpdateCategory.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(fetchUpdateCategory.fulfilled, (state, action) => {
+      const dataResponse = action.payload;
+      state.isLoading = dataResponse.isLoading;
+      state.message = dataResponse.message;
+      state.error = dataResponse.error;
+      state.categories = state.categories.forEach(item =>
+        item._id === dataResponse.data._id ? dataResponse.data : item,
+      );
+    });
+    builder.addCase(fetchUpdateCategory.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = true;
+      state.message = action.payload;
+    });
+
+    /* Delete Category */
+    builder.addCase(fetchDeleteCategory.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(fetchDeleteCategory.fulfilled, (state, action) => {
+      const dataResponse = action.payload;
+      state.isLoading = dataResponse.isLoading;
+      state.message = dataResponse.message;
+      state.error = dataResponse.error;
+    });
+    builder.addCase(fetchDeleteCategory.rejected, (state, action) => {
       state.isLoading = false;
       state.error = true;
       state.message = action.payload;
@@ -371,6 +407,7 @@ export const sliceProduct = createSlice({
       state.success = dataResponse.success;
       state.message = dataResponse.message;
       state.dish = dataResponse.data;
+      state.dishes.unshift(dataResponse.data);
     });
     builder.addCase(fetchAddDish.rejected, (state, action) => {
       state.isLoading = false;
@@ -433,8 +470,7 @@ export const sliceProduct = createSlice({
         state.toppingsCart.length > 0 ||
         state.anotherCart.length > 0
       ) {
-
-        // 
+        //
         state.mainDishCart.forEach(item => {
           state.mainDishes.forEach(dish => {
             if (item._id === dish._id) {

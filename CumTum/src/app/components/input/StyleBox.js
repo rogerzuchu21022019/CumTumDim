@@ -1,22 +1,44 @@
+import {constants} from '../../shared/constants';
+
 const {StyleSheet} = require('react-native');
 
 const styleBox = StyleSheet.create({
-  box: {
-    marginTop: 5,
+  container: {
+    marginVertical: 10,
+    // backgroundColor: constants.COLOR.RED,
+    width: '100%',
+    paddingHorizontal: 20,
   },
 
-  container: {
+  body: {
     flexDirection: 'row',
     borderWidth: 1,
     alignItems: 'center',
-    borderRadius: 6,
-    paddingLeft: 10,
-    height: 52,
+    borderRadius: 10,
+    height: 50,
+    width: '100%',
+    borderWidth: 1,
+    borderColor: constants.COLOR.WHITE,
+    backgroundColor: constants.COLOR.WHITE,
   },
-  title: {},
+  boxTitle: {
+    marginBottom: 10,
+  },
+  textTitle: {
+    fontSize: 16,
+    color: constants.COLOR.WHITE,
+  },
+  boxInput: {
+    width: '100%',
+    // borderWidth:1,
+    // borderColor: constants.COLOR.WHITE,
+  },
   input: {
     width: '100%',
-    marginLeft: 10,
+    // backgroundColor: constants.COLOR.RED,
+    paddingLeft: 20,
+    flex: 1,
+    color: constants.COLOR.BLACK,
   },
   image: {
     width: 16,

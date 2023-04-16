@@ -11,7 +11,7 @@ class WSService {
             this.socket = io(constants.SOCKET.URL, {
                 transports: ['websocket']
             })
-            log.error("initializing socket", this.socket)
+            // log.error("initializing socket", this.socket)
 
             this.socket.on('connect', (data) => {
                 console.log("=== socket connected ====")

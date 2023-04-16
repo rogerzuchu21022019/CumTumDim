@@ -46,6 +46,9 @@ import {constants} from '../../../../../../shared/constants';
 import BoxInputCus from '../../../../../../components/input/BoxInput';
 import Statistic from '../../../statistic/Statistic';
 import DropdownPicker from '../../../../../../shared/utils/DropdownPicker';
+import {LOG} from '../../../../../../../../logger.config';
+import CheckModal from '../../../../../../shared/utils/CheckModal';
+const log = LOG.extend(`ADD_DISH.JS `);
 
 const AddDish = ({navigation}) => {
   const dispatch = useDispatch();
@@ -75,6 +78,19 @@ const AddDish = ({navigation}) => {
   let data = useSelector(productSelector);
   console.log('🚀 ~ file: AddDish.js:27 ~ AddDish ~ data:', data);
 
+  const dataMainList = data.categories.filter(
+    item => item.name === 'Món chính',
+  );
+
+  const dataExtraList = data.categories.filter(
+    item => item.name === 'Món ăn thêm',
+  );
+
+  const dataToppingList = data.categories.filter(
+    item => item.name === 'Toppings',
+  );
+
+  const dataAnotherList = data.categories.filter(item => item.name === 'Khác');
   // Xử lý call api
   useEffect(() => {
     dispatch(fetchCategories());
@@ -167,7 +183,7 @@ const AddDish = ({navigation}) => {
     const name = nameValue[0];
     const price = namePrice[0];
     const subCategory = valueSubMainDish[0];
-    if (categoryId === data.categories[3]._id && !subCategory) {
+    if (categoryId === dataMainList[0]._id && !subCategory) {
       Alert.alert(`Bạn quên chưa nhập loại sườn. Hãy thêm đủ các trường nhé !`);
       return;
     }
@@ -182,6 +198,7 @@ const AddDish = ({navigation}) => {
 
     console.log('🚀 ~ file: AddDish.js:127 ~ onCreateProduct ~ data:', dish);
     dispatch(fetchAddDish({dish: dish, categoryId: categoryId}));
+    goBack();
   };
 
   const moveTo = async () => {
@@ -191,10 +208,12 @@ const AddDish = ({navigation}) => {
   // xử lý dropdown chọn categories
   const onHandleSelect = async itemId => {
     console.log('🚀 ~ file: AddDish.js:127 ~ onHandleSelect ~ itemId:', itemId);
-    const idMainDishes = '64110dac70044fadf9e61acc';
-    const idExtraDishes = '64110a0284f37debf359d572';
-    const idToppings = '64110a1184f37debf359d574';
-    const idAnother = '64110a2084f37debf359d576';
+
+    const idMainDishes = dataMainList[0]._id;
+    const idExtraDishes = dataExtraList[0]._id;
+    const idToppings = dataToppingList[0]._id;
+    const idAnother = dataAnotherList[0]._id;
+
     setCategoryId(itemId);
 
     if (itemId === idMainDishes) {
@@ -376,6 +395,7 @@ const AddDish = ({navigation}) => {
         </View>
         {/* Xử lý camera */}
         <View style={styles.divideLine}></View>
+        <CheckModal/>
       </View>
     </SafeKeyComponent>
   );

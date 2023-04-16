@@ -33,7 +33,6 @@ export const mainDishOptionsData = [
 
 export const nameDishes = [
   {label: 'Sườn', value: 'Sườn'},
-  {label: 'Sườn mỡ', value: 'Sườn mỡ'},
   {label: 'Sườn bì', value: 'Sườn bì'},
   {label: 'Sườn chả', value: 'Sườn chả'},
   {label: 'Sườn trứng', value: 'Sườn trứng'},

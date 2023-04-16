@@ -48,6 +48,12 @@ header: {
     flexDirection: 'row',
     alignItems: 'center',
   },
+  imageBack: {
+    width: 40,
+    height: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   imageReturn: {
     // backgroundColor: constants.COLOR.WHITE,
     marginLeft: 5,

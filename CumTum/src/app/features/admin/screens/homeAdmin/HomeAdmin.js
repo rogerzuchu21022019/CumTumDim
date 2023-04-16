@@ -48,7 +48,7 @@ const HomeAdmin = ({navigation}) => {
   // );
 
   const userId = user.user._id;
-  console.log('🚀 ~ file: HomeAdmin.js:51 ~ HomeAdmin ~ userId:', userId);
+  // console.log('🚀 ~ file: HomeAdmin.js:51 ~ HomeAdmin ~ userId:', userId);
   const notifications = user.notifications;
 
   const [isRefresh, setIsRefresh] = useState(false);

@@ -72,7 +72,7 @@ const StyleUpdateDish = StyleSheet.create({
     viewImage:{
         width:200,
         height:200,
-        backgroundColor:'red',
+        // backgroundColor:'red',
         borderRadius:10,
         marginTop:15,
         marginBottom:100,
@@ -84,6 +84,7 @@ const StyleUpdateDish = StyleSheet.create({
     },
     groupItem:{
         marginBottom:10,
+        width:'100%'
     },
     viewNameEat:{
     },
