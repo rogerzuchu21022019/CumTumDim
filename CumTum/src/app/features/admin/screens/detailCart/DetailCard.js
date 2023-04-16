@@ -27,7 +27,6 @@ const DetailCard = ({route, navigation}) => {
   const log = LOG.extend('DETAILCART');
   const {item, index} = route.params;
   log.info('item', item);
- 
 
   const moveToHOme = () => {
     navigation.navigate(Router.HOME_ADMIN);
@@ -120,6 +119,139 @@ const DetailCard = ({route, navigation}) => {
               decelerationRate={'fast'}>
               <TouchableNativeFeedback>
                 <View style={styles.viewScrollList}>
+                  {/* Button */}
+                  {item.orderStatus === 'Đang chờ' ? (
+                    <View style={styles.groupButton}>
+                      <TouchableOpacity onPress={onAccept}>
+                        <View style={styles.viewButton}>
+                          <Text style={styles.textButton}>Xác nhận</Text>
+                        </View>
+                      </TouchableOpacity>
+
+                      <TouchableOpacity onPress={onCancel}>
+                        <View style={styles.viewButton}>
+                          <Text style={styles.textButton}>Huỷ</Text>
+                        </View>
+                      </TouchableOpacity>
+                    </View>
+                  ) : (
+                    <View style={styles.groupButton}>
+                      <View
+                        style={[styles.viewButton, styles.viewButtonDisable]}>
+                        <Text style={styles.textButton}>Xác nhận</Text>
+                      </View>
+                      <View
+                        style={[styles.viewButton, styles.viewButtonDisable]}>
+                        <Text style={styles.textButton}>Huỷ</Text>
+                      </View>
+                    </View>
+                  )}
+                  {/*  số lượng món chính  */}
+                  <View style={styles.viewTotal}>
+                    {/* Tổng tiền  */}
+                    <View style={styles.viewBoxShowInfoBill}>
+                      <Text style={[styles.textInfo, styles.updateTextInfo]}>
+                        Tổng Tiền:
+                      </Text>
+                      <Text style={[styles.textInfo, styles.updateTextInfo]}>
+                        {/* {solveMoneyToPaid()} K */}
+                        {item.moneyToPaid}
+                      </Text>
+                    </View>
+                    <View style={styles.divideLine}></View>
+
+                    <View style={styles.viewBoxShowInfoBill}>
+                      <Text style={styles.textInfo}>Số lượng món chính:</Text>
+                      <Text style={styles.textInfo}>
+                        {/* {solveAmountMainDish()}  */}
+                        {item.totalMainDish}
+                      </Text>
+                    </View>
+
+                    <View
+                      style={[
+                        styles.viewBoxShowInfoBill,
+                        styles.viewBoxShowSubInfoBill,
+                      ]}>
+                      <Text style={[styles.textInfo, styles.updateSubText]}>
+                        + Số lượng Suờn mỡ:
+                      </Text>
+                      <Text style={[styles.textInfo, styles.updateSubText]}>
+                        {solveAmountSuonMo()}
+                      </Text>
+                    </View>
+
+                    <View
+                      style={[
+                        styles.viewBoxShowInfoBill,
+                        styles.viewBoxShowSubInfoBill,
+                      ]}>
+                      <Text style={[styles.textInfo, styles.updateSubText]}>
+                        + Số lượng Suờn :
+                      </Text>
+                      <Text style={[styles.textInfo, styles.updateSubText]}>
+                        {solveAmountMainDish() - solveAmountSuonMo()}
+                      </Text>
+                    </View>
+
+                    <View style={styles.viewBoxShowInfoBill}>
+                      <Text style={styles.textInfo}>Số lượng món thêm:</Text>
+                      <Text style={styles.textInfo}>
+                        {/* {solveAmountExtraDish()} */}
+                        {item.totalExtraDish}
+                      </Text>
+                    </View>
+                    <View style={styles.viewBoxShowInfoBill}>
+                      <Text style={styles.textInfo}>Số lượng món topping:</Text>
+                      <Text style={styles.textInfo}>
+                        {/* {solveAmountToppings()} */}
+                        {item.totalTopping}
+                      </Text>
+                    </View>
+
+                    <View style={styles.viewBoxShowInfoBill}>
+                      <Text style={styles.textInfo}>Số lượng món khác:</Text>
+                      <Text style={styles.textInfo}>
+                        {/* {solveAmountAnotherDish()} */}
+                        {item.totalAnother}
+                      </Text>
+                    </View>
+
+                    <View style={styles.viewBoxShowInfoBill}>
+                      <Text style={styles.textInfo}>Tổng Số lượng:</Text>
+                      <Text style={styles.textInfo}>
+                        {/* {solveAmountDishes()} */}
+                        {item.totalAmount}
+                      </Text>
+                    </View>
+                    <View style={styles.divideLine}></View>
+                  </View>
+                  {/*  Đỉa chỉ*/}
+                  <View style={styles.viewTotal}>
+                    <View style={styles.viewBoxShowInfoBill}>
+                      <Text style={styles.textAddress}>Số nhà :54</Text>
+                    </View>
+                    <View style={styles.viewBoxShowInfoBill}>
+                      <Text style={styles.textAddress}>Đường :14</Text>
+                    </View>
+                    <View style={styles.viewBoxShowInfoBill}>
+                      <Text style={styles.textAddress}>
+                        Phường : Đông Hưng Thuận
+                      </Text>
+                    </View>
+                    <View style={styles.viewBoxShowInfoBill}>
+                      <Text style={styles.textAddress}>Quận : 12</Text>
+                    </View>
+                    <View style={styles.viewBoxShowInfoBill}>
+                      <Text style={styles.textAddress}>
+                        Thành Phố : Hồ Chí Minh
+                      </Text>
+                    </View>
+
+                    <View style={styles.divideLine}></View>
+                  </View>
+
+                  {/*Món chính  */}
                   {item.mainDishCart.length ? (
                     <View style={styles.viewMainDishes}>
                       <View style={styles.viewTextHeader}>
@@ -198,137 +330,10 @@ const DetailCard = ({route, navigation}) => {
                       />
 
                       <View style={styles.viewTextHeader}>
-                        <View style={styles.divideLine}></View>
                       </View>
                     </View>
                   ) : null}
-                  <View style={styles.viewTotal}>
-                    <View style={styles.viewBoxShowInfoBill}>
-                      <Text style={styles.textAddress}>Số nhà :54</Text>
-                    </View>
-                    <View style={styles.viewBoxShowInfoBill}>
-                      <Text style={styles.textAddress}>Đường :14</Text>
-                    </View>
-                    <View style={styles.viewBoxShowInfoBill}>
-                      <Text style={styles.textAddress}>
-                        Phường : Đông Hưng Thuận
-                      </Text>
-                    </View>
-                    <View style={styles.viewBoxShowInfoBill}>
-                      <Text style={styles.textAddress}>Quận : 12</Text>
-                    </View>
-                    <View style={styles.viewBoxShowInfoBill}>
-                      <Text style={styles.textAddress}>
-                        Thành Phố : Hồ Chí Minh
-                      </Text>
-                    </View>
-
-                    <View style={styles.divideLine}></View>
-                  </View>
-
-                  <View style={styles.viewTotal}>
-                    <View style={styles.viewBoxShowInfoBill}>
-                      <Text style={styles.textInfo}>Số lượng món chính:</Text>
-                      <Text style={styles.textInfo}>
-                        {/* {solveAmountMainDish()}  */}
-                        {item.totalMainDish}
-                      </Text>
-                    </View>
-
-                    <View
-                      style={[
-                        styles.viewBoxShowInfoBill,
-                        styles.viewBoxShowSubInfoBill,
-                      ]}>
-                      <Text style={[styles.textInfo, styles.updateSubText]}>
-                        + Số lượng Suờn mỡ:
-                      </Text>
-                      <Text style={[styles.textInfo, styles.updateSubText]}>
-                        {solveAmountSuonMo()}
-                      </Text>
-                    </View>
-
-                    <View
-                      style={[
-                        styles.viewBoxShowInfoBill,
-                        styles.viewBoxShowSubInfoBill,
-                      ]}>
-                      <Text style={[styles.textInfo, styles.updateSubText]}>
-                        + Số lượng Suờn :
-                      </Text>
-                      <Text style={[styles.textInfo, styles.updateSubText]}>
-                        {solveAmountMainDish() - solveAmountSuonMo()}
-                      </Text>
-                    </View>
-
-                    <View style={styles.viewBoxShowInfoBill}>
-                      <Text style={styles.textInfo}>Số lượng món thêm:</Text>
-                      <Text style={styles.textInfo}>
-                        {/* {solveAmountExtraDish()} */}
-                        {item.totalExtraDish}
-                      </Text>
-                    </View>
-                    <View style={styles.viewBoxShowInfoBill}>
-                      <Text style={styles.textInfo}>Số lượng món topping:</Text>
-                      <Text style={styles.textInfo}>
-                        {/* {solveAmountToppings()} */}
-                        {item.totalTopping}
-                      </Text>
-                    </View>
-
-                    <View style={styles.viewBoxShowInfoBill}>
-                      <Text style={styles.textInfo}>Số lượng món khác:</Text>
-                      <Text style={styles.textInfo}>
-                        {/* {solveAmountAnotherDish()} */}
-                        {item.totalAnother}
-                      </Text>
-                    </View>
-
-                    <View style={styles.viewBoxShowInfoBill}>
-                      <Text style={styles.textInfo}>Tổng Số lượng:</Text>
-                      <Text style={styles.textInfo}>
-                        {/* {solveAmountDishes()} */}
-                        {item.totalAmount}
-                      </Text>
-                    </View>
-                    <View style={styles.divideLine}></View>
-
-                    <View style={styles.viewBoxShowInfoBill}>
-                      <Text style={[styles.textInfo, styles.updateTextInfo]}>
-                        Tổng Tiền:
-                      </Text>
-                      <Text style={[styles.textInfo, styles.updateTextInfo]}>
-                        {/* {solveMoneyToPaid()} K */}
-                        {item.moneyToPaid}
-                      </Text>
-                    </View>
-                  </View>
-                  {item.orderStatus === 'Đang chờ' ? (
-                    <View style={styles.groupButton}>
-                      <TouchableOpacity onPress={onAccept}>
-                        <View style={styles.viewButton}>
-                          <Text style={styles.textButton}>Xác nhận</Text>
-                        </View>
-                      </TouchableOpacity>
-
-                      <TouchableOpacity onPress={onCancel}>
-                        <View style={styles.viewButton}>
-                          <Text style={styles.textButton}>Huỷ</Text>
-                        </View>
-                      </TouchableOpacity>
-                    </View>
-                  ) : (
-                    <View style={styles.groupButton}>
-                      <View
-                        style={[styles.viewButton, styles.viewButtonDisable]}>
-                        <Text style={styles.textButton}>Xác nhận</Text>
-                      </View>
-                      <View
-                        style={[styles.viewButton, styles.viewButtonDisable]}>
-                        <Text style={styles.textButton}>Huỷ</Text>
-                      </View>
-                    </View>
-                  )}
+                 
                 </View>
               </TouchableNativeFeedback>
             </ScrollView>

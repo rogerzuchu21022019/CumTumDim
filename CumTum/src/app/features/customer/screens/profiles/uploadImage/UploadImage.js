@@ -43,12 +43,12 @@ const UploadImage = ({navigation}) => {
         <View style={styles.groupAll}>
             <View style={styles.item}>
               <View style={styles.viewInput}>
-                <TextInput style={styles.textInput}>Chọn ảnh từ thư viện</TextInput>
+                <Text style={styles.textInput}>Chọn ảnh từ thư viện</Text>
               </View>
             </View>
             <View style={styles.item}>
               <View style={styles.viewInput}>
-                <TextInput style={styles.textInput}>Chụp ảnh mới</TextInput>
+                <Text style={styles.textInput}>Chụp ảnh mới</Text>
               </View>
             </View>
             

@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
   text: {
     fontStyle: 'normal',
     fontWeight: '600',
-    fontSize: 20,
+    fontSize: 16,
     lineHeight: 20,
     color: constants.COLOR.WHITE,
   },
@@ -216,7 +216,7 @@ const styles = StyleSheet.create({
 
   // footer
   footer: {
-    flex: 2,
+    flex: 1.5,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: constants.COLOR.DARK_BROWN,

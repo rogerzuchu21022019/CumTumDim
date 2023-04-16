@@ -35,6 +35,10 @@ const Router = {
   PAYMENT_PAID:"PaymentPaid",
   PAYMENT_ZALO:"PaymentZalo",
 
+  DELIVERY_ADDREES:"DeliveryAddress",
+  Edit_DELIVERY_ADDREES:"EditDeliveryAddrees",
+  ADD_DELIVERY_ADDREES:"AddDeliveryAddrees",
+
 
   HISTORY_WHIH_NO_ITEM:"HistoryWithNoItem",
   HISTORY_TABS:'Histories',

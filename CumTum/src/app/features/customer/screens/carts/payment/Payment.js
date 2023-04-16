@@ -10,7 +10,6 @@ import {useDispatch, useSelector} from 'react-redux';
 import queryString from 'query-string';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
 
-
 import {
   fetchAccessTokenPaypal,
   fetchCreateOrder,
@@ -33,7 +32,10 @@ import {resetCart} from '../../../../product/sliceProduct';
 const log = LOG.extend(`PAYMENT.JS`);
 const Payment = ({navigation, route}) => {
   const {order} = route.params;
-
+// Chuyên trang
+const DeliveryAddress = () => {
+  navigation.navigate(Router.DELIVERY_ADDREES);
+};
   /* State */
   const [checkedId, setCheckedId] = useState(null);
   const [urlPaypalCheckout, setUrlPaypalCheckout] = useState(null);
@@ -228,6 +230,7 @@ const Payment = ({navigation, route}) => {
         <View style={styles.divideLine}></View>
         <View style={styles.body}>
           <View style={styles.groupText}>
+          <TouchableOpacity onPress={DeliveryAddress}>
             <View style={styles.textTile}>
               <Text style={styles.text}>Địa chỉ nhận hàng</Text>
             </View>
@@ -245,25 +248,28 @@ const Payment = ({navigation, route}) => {
                   </Text>
                 </View>
               </View>
-              <View style={styles.rightContent}>
-              <IconAntDesign
-                name="right"
-                color={constants.COLOR.WHITE}
-                size={15}
-              />
+            
+                <View style={styles.rightContent}>
+                  <IconAntDesign
+                    name="right"
+                    color={constants.COLOR.WHITE}
+                    size={15}
+                  />
+                </View>
+            
             </View>
-            </View>
-           
+            </TouchableOpacity>
           </View>
-
+    
           <View>
+            
             <Text style={styles.text}>
               Vui lòng chọn một trong các phương thức sau:
             </Text>
           </View>
 
           <View style={styles.viewText}>
-            {/* VN PAY */}
+            {/* paypal */}
             <TouchableOpacity onPress={() => handleCheck(1)}>
               <View style={styles.viewPaypal}>
                 <View style={styles.viewImage1}>
@@ -320,7 +326,7 @@ const Payment = ({navigation, route}) => {
                   ]}></View>
               </View>
             </TouchableOpacity>
-
+            {/* MoMo */}
             <TouchableOpacity onPress={() => handleCheck(4)}>
               <View style={styles.viewMomo}>
                 <View style={styles.viewImage1}>
@@ -339,7 +345,7 @@ const Payment = ({navigation, route}) => {
                   ]}></View>
               </View>
             </TouchableOpacity>
-
+            {/* Thanh toán trức tiếp */}
             <TouchableOpacity onPress={() => handleCheck(5)}>
               <View style={styles.viewLiveToPaid}>
                 <View style={styles.viewImage1}>

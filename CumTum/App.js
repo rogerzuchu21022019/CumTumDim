@@ -45,7 +45,6 @@ import CartNoItem from './src/app/features/customer/screens/carts/cart/cartWithN
 import socketServices from './src/app/shared/utils/Socket';
 import {authSelector} from './src/app/features/admin/sliceAuth';
 import RingBellAdmin from './src/app/features/admin/screens/homeAdmin/ringBellAdmin/RingBellAdmin';
-
 const App = () => {
   const Stack = createNativeStackNavigator();
 
@@ -209,6 +208,7 @@ const App = () => {
               headerShown: false,
             }}
           />
+
           </Stack.Navigator>
         </NavigationContainer>
       </PersistGate>
