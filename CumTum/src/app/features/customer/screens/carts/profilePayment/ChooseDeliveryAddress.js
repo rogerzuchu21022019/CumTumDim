@@ -18,8 +18,9 @@ import {FlashList} from '@shopify/flash-list';
 import ItemViewPayment from './item/itemViewDeliveryAddress';
 import Router from '../../../../../navigation/Router';
 import AddDeliveryAddrees from './AddDeliveryAddrees/AddDeliveryAddrees';
-
-const DeliveryAddress = ({navigation }) => {
+import {LOG} from '../../../../../../../logger.config';
+const log = LOG.extend(`CHOOSE_DELIVERY_ADDRESS.JS`);
+const DeliveryAddress = ({navigation}) => {
   const [isRefresh, setIsRefresh] = useState(false);
   const goBack = () => {
     navigation.goBack();
@@ -28,20 +29,13 @@ const DeliveryAddress = ({navigation }) => {
     navigation.navigate(Router.ADD_DELIVERY_ADDREES);
   };
 
-  
-
-  const [contacts, setContacts] = useState([
-    {
-      id: 1,
-      name: 'Vũ Đức Hải',
-      phone: '0867704364',
-      street: '62',
-      houseNumber: '16',
-      district: 'sada',
-      ward: 'Thảo Điền',
-      city: 'Hồ Chí Minh',
-    },
-  ]);
+  const handleCheck = id => {
+    if (checkedId === id) {
+      setCheckedId(0);
+    } else {
+      setCheckedId(id);
+    }
+  };
 
   const array = [
     {
@@ -64,7 +58,27 @@ const DeliveryAddress = ({navigation }) => {
       ward: 'Thảo Điền',
       city: 'Hồ Chí Minh',
     },
+    {
+      id: 3,
+      name: 'Vũ Đức Hải',
+      phone: '0867704364',
+      street: '62',
+      houseNumber: '16',
+      district: '',
+      ward: 'Thảo Điền',
+      city: 'Hồ Chí Minh',
+    },
   ];
+
+  const [checkedId, setCheckedId] = useState(
+    array.map((item, index) => {
+      return index;
+    }),
+  );
+  log.info(
+    '🚀 ~ file: ChooseDeliveryAddress.js:75 ~ DeliveryAddress ~ checkedId:',
+    checkedId,
+  );
 
   return (
     <SafeKeyComponent>

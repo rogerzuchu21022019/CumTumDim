@@ -3,18 +3,18 @@ import React from 'react';
 import SafeKeyComponent from '../../../../../../components/safe_area/SafeKeyComponent';
 
 import FastImage from 'react-native-fast-image';
-import { constants } from '../../../../../../shared/constants';
+import {constants} from '../../../../../../shared/constants';
 import IconEntypo from 'react-native-vector-icons/Entypo';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
 import styles from './StylesEditDeliveryAddrees';
 import {FlashList} from '@shopify/flash-list';
 import ItemDeliveryAddrees from '../item/ItemEditDeliveryAddrees';
 import ItemEditDeliveryAddrees from '../item/ItemEditDeliveryAddrees';
-
+import ButtonCus from '../../../../../../components/button/ButtonCus';
 
 const EditDeliveryAddrees = ({navigation}) => {
   const moToBack = () => {
-    navigation.goBack()
+    navigation.goBack();
   };
   const array = [
     {
@@ -43,36 +43,33 @@ const EditDeliveryAddrees = ({navigation}) => {
               </View>
             </TouchableOpacity>
             <View style={styles.profile}>
-              <Text style={styles.textProfile}>Sữa địa chỉ giao hàng
-              </Text>
+              <Text style={styles.textProfile}>Sữa địa chỉ giao hàng</Text>
             </View>
             <View style={styles.groupHeader}></View>
           </View>
         </View>
         <View style={styles.body}>
-        <View style={styles.viewFlashList}>
-          <FlashList
-            showsHorizontalScrollIndicator={false}
-            showsVerticalScrollIndicator={false}
-            data={array}
-            estimatedItemSize={200}
-            renderItem={({item, index}) => {
-              return (
-                <ItemEditDeliveryAddrees
-                  item={item}
-                  index={index}
-                  navigation={navigation}
-                />
-              );
-            }}
-            keyExtractor={(item, index) => index.toString()}
-          />
-        </View>
+          <View style={styles.viewFlashList}>
+            <FlashList
+              showsHorizontalScrollIndicator={false}
+              showsVerticalScrollIndicator={false}
+              data={array}
+              estimatedItemSize={200}
+              renderItem={({item, index}) => {
+                return (
+                  <ItemEditDeliveryAddrees
+                    item={item}
+                    index={index}
+                    navigation={navigation}
+                  />
+                );
+              }}
+              keyExtractor={(item, index) => index.toString()}
+            />
+          </View>
         </View>
         <View style={styles.footer}>
-          <View style={styles.btnSave}>
-            <Text style={styles.textSave}>Lưu</Text>
-          </View>
+          <ButtonCus title="Lưu" />
         </View>
       </View>
     </SafeKeyComponent>

@@ -4,17 +4,18 @@ import styles from './stylesDeliveryAddress';
 import SafeKeyComponent from '../../../../../../components/safe_area/SafeKeyComponent';
 import Router from '../../../../../../navigation/Router';
 import React, {useState} from 'react';
-
+import { LOG } from '../../../../../../../../logger.config';
+const log = LOG.extend(`ITEM_VIEW_DETAIL_DELIVERY_ADDRESS.JS`)
 
 const ItemViewPayment = ({item, navigation, index}) => {
-  console.log('🚀 ~ file: ItemView.js:11 ~ ItemView ~ item:', item);
-  const [checkedId, setCheckedId] = useState(0);
+  log.error('🚀 ~ file: ItemView.js:11 ~ ItemView ~ item:', item);
   const handleEditContact = contact => {
     // handle edit contact
   };
   const EditDeliveryAddrees = () => {
     navigation.navigate(Router.Edit_DELIVERY_ADDREES);
   };
+  const [checkedId, setCheckedId] = useState();
   const handleCheck = id => {
     if (checkedId === id) {
       setCheckedId(0);
