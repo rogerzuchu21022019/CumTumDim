@@ -13,8 +13,8 @@ export const constants = {
     GREEN: 'green',
     BLUE: 'blue',
     LIGHT_BLUE: '#03c2fc',
-    PINK_MOMO:"#ec1387",
-    LIVE_PAID:"#13ecea"
+    PINK_MOMO: '#ec1387',
+    LIVE_PAID: '#13ecea',
   },
   PAYPAL: {
     SANDBOX_PAYPAL: 'https://api-m.sandbox.paypal.com',
@@ -24,18 +24,23 @@ export const constants = {
       'EPscZ2cKSvwcybfeIbQksSxlCJVZDGuzAMy0skSzZJIJ2NL4yJUUuKaC6Ve2fi9kHzgnWZOpfSPPU_Oi',
   },
   BASE_URL: {
-    MAIN: 'http://192.168.1.10:3000/api',
+    MAIN: 'http://192.168.0.113:3000/api',
+    // MAIN: 'http://192.168.2.7:3000/api',
     SECOND: 'https://cumtumdim.becofoodstore.click/api',
   },
   SOCKET: {
-    URL: 'http://192.168.1.10:3000',
+    URL: 'http://192.168.0.113:3000',
     CONNECTION: 'connection',
     CONNECT: 'connect',
     DISCONNECT: 'disconnect',
     PUSH_NOTIFY: 'push-notify',
     CREATE_ORDER: 'create-order',
     UPDATE_ORDER: 'update-order',
-    FIND_ORDER_BY_USER_ID:'find-order-by-user-id'
+    FIND_ORDER_BY_USER_ID: 'find-order-by-user-id',
+    PUSH_NOTIFICATION_ADMIN: 'push-notification-admin',
+    UPDATE_NOTIFICATION_ADMIN: 'update-notification-admin',
+    PUSH_NOTIFICATION_CUSTOMER: 'push-notification-customer',
+    UPDATE_NOTIFICATION_CUSTOMER: 'update-notification-customer',
   },
   ROLE: {
     ADMIN: 'admin',
@@ -58,6 +63,9 @@ export const constants = {
     USER_BY_ID: 'fetchUserById',
     UPLOAD_IMAGE: 'fetchUploadImage',
     SIGN_OUT: 'fetchSignOut',
+    ADD_CATEGORY: 'fetchAddCategory',
+    UPDATE_CATEGORY_BY_ID: 'fetchUpdateCategoryById',
+    DELETE_CATEGORY_BY_ID: 'fetchDeleteCategoryById',
     FIND_CATEGORIES: 'fetchCategories',
     ADD_DISH: 'fetchAddDish',
     FIND_DISHES: 'fetchDishes',
@@ -69,6 +77,8 @@ export const constants = {
     UPDATE_ORDER: 'fetchUpdateOrder',
     ACCESS_TOKEN_PAYPAL: 'fetchAccessTokenPaypal',
     CREATE_ORDER_PAYPAL: 'fetchCreateOrderPaypal',
+    PUSH_NOTIFICATION: 'fetchPushNotification',
+    UPDATE_NOTIFICATION: 'fetchUpdateNotification',
   },
   SLICE: {
     ADMIN: 'admin',

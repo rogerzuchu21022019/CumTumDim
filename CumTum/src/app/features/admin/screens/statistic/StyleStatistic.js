@@ -4,7 +4,6 @@ import { constants } from '../../../../shared/constants';
 const StyleStatistic = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor:constants.COLOR.WHITE,
   },
   // header
   header: {
@@ -52,13 +51,12 @@ const StyleStatistic = StyleSheet.create({
   //body
   body: {
     flex: 12,
-    backgroundColor: constants.COLOR.BLACK,
+    backgroundColor: constants.COLOR.PRIMARY,
     alignItems: 'center',
   },
   tabsIncome: {
     width: '100%',
     top: 10,
-    backgroundColor: constants.COLOR.BLACK,
     flexDirection: 'row',
     justifyContent: 'space-evenly',
   },
@@ -66,6 +64,7 @@ const StyleStatistic = StyleSheet.create({
     width: 197,
     height: 50,
     backgroundColor: constants.COLOR.DARK_BROWN,
+    borderRadius:10,
   },
   tab1: {
     height: 50,
@@ -80,6 +79,8 @@ const StyleStatistic = StyleSheet.create({
     width: 191,
     height: 50,
     backgroundColor: constants.COLOR.DARK_BROWN,
+    borderRadius:10,
+
   },
   tab2: {
     width: 200,
@@ -109,7 +110,7 @@ const StyleStatistic = StyleSheet.create({
     marginHorizontal: 20,
     borderRadius: 9,
     borderWidth: 1,
-    backgroundColor: constants.COLOR.DARK_BROWN,
+    backgroundColor: constants.COLOR.ORANGE,
   },
   dateRangePickerText3: {
     backgroundColor: constants.COLOR.DARK_BROWN,
@@ -177,6 +178,11 @@ const StyleStatistic = StyleSheet.create({
   bodyTabBieuDo: {
     backgroundColor: 'blue',
   },
+  viewItem1:{
+    backgroundColor: constants.COLOR.WHITE,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   item: {
     flexDirection: 'row',
     justifyContent: 'space-evenly',
@@ -203,6 +209,8 @@ const StyleStatistic = StyleSheet.create({
   boxIncome:{
     // backgroundColor:constants.COLOR.GREEN,
     marginHorizontal:20,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 
   itemText: {

@@ -3,16 +3,13 @@ import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Router from './Router';
 import HomeAdmin from '../features/admin/screens/homeAdmin/HomeAdmin';
-import AddDish from '../features/admin/screens/addDish/AddDish';
 import {constants} from '../shared/constants';
 import Statistic from '../features/admin/screens/statistic/Statistic';
-import Manager from '../features/admin/screens/manager/Manager';
-import Manage from '../features/admin/screens/manager/manageDish/ManageDish';
-import Support from '../features/admin/screens/support/Support';
 import CustomerSupport from '../features/admin/screens/support/CustomerSupport';
-const Tab = createBottomTabNavigator();
+import ManagerTabs from '../features/admin/screens/manager/ManagerTabs';
 
 const AdminStack = () => {
+  const Tab = createBottomTabNavigator();
   return (
     <Tab.Navigator
       screenOptions={{
@@ -97,8 +94,8 @@ const AdminStack = () => {
         }}
       />
       <Tab.Screen
-        name={Router.MANAGER}
-        component={Manager}
+        name={Router.MANAGE_TABS}
+        component={ManagerTabs}
         options={{
           headerShown: false,
           tabBarIcon: ({focused}) => (

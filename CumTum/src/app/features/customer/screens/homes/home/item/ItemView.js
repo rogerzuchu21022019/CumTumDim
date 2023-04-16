@@ -4,17 +4,22 @@ import SafeKeyComponent from '../../../../../../components/safe_area/SafeKeyComp
 
 import FastImage from 'react-native-fast-image';
 import DropDownPicker from 'react-native-dropdown-picker';
-import {mainDishOptionsData} from '../../../../../admin/screens/addDish/DataDishes';
+import {mainDishOptionsData} from '../../../../../admin/screens/manager/manageFood/addDish/DataDishes';
 import {constants} from '../../../../../../shared/constants';
 import styles from './StyleItem';
 import {LOG} from '../../../../../../../../logger.config';
 import {useSelector} from 'react-redux';
+CheckModal
 import {productSelector} from '../../../../../product/sliceProduct';
+import CheckModal from '../../../../../../shared/utils/CheckModal';
 const log = LOG.extend('ITEM_VIEW.JS');
 const ItemView = props => {
   const {item, index, handleAddDish, handleRemoveDish, tabs, valueSubMainDish} =
     props;
-  
+
+  const [isModalVisible, setModalVisible] = useState(false);
+
+  const message = 'Bạn phải chọn loại sườn !';
   const onDecrease = () => {
     if (tabs.toString() === '0') {
       if (valueSubMainDish.length != 0) {
@@ -23,7 +28,7 @@ const ItemView = props => {
         }
         handleRemoveDish(item);
       } else {
-        Alert.alert('Hãy chọn loại sườn trước nè ! Hihi');
+        Alert.alert(message);
         return;
       }
     } else {
@@ -41,7 +46,9 @@ const ItemView = props => {
         handleAddDish(item);
       } else {
         valueSubMainDish.length = 0;
-        Alert.alert('Hãy chọn loại sườn trước nè ! Hihi');
+
+        setModalVisible
+        setModalVisible(true);
         return;
       }
     } else {
@@ -122,6 +129,11 @@ const ItemView = props => {
         </View>
         <View style={styles.footer}></View>
       </View>
+      <CheckModal
+            isModalVisible={isModalVisible}
+            setModalVisible={setModalVisible}
+            message={message}
+          />
     </SafeKeyComponent>
   );
 };

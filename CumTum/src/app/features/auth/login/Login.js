@@ -15,7 +15,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import SafeKeyComponent from '../../../components/safe_area/SafeKeyComponent';
 import Router from '../../../navigation/Router';
 import {constants} from '../../../shared/constants';
-import {fetchLogin} from '../../admin/apiAdmin';
+import {fetchLogin} from '../../admin/apiUser';
 import {authSelector} from '../../admin/sliceAuth';
 import StyleLogin from './StyleLogin';
 
@@ -27,8 +27,8 @@ import {fetchCategories, fetchDishes} from '../../product/apiProduct';
 const LoginScreen = ({navigation}) => {
   const log = LOG.extend(`LOGIN.JS`);
   const data = useSelector(authSelector);
-  log.info("🚀 ~ file: Login.js:30 ~ LoginScreen ~ data:", data);
-  
+  // log.info("🚀 ~ file: Login.js:30 ~ LoginScreen ~ data:", data);
+
   const isLoading = data?.isLoading;
 
   useEffect(() => {
@@ -52,6 +52,8 @@ const LoginScreen = ({navigation}) => {
   const moveTo = async () => {
     if (data.user.role === constants.ROLE.ADMIN) {
       navigation.navigate(Router.ADMIN_STACK);
+      dispatch(fetchCategories());
+      dispatch(fetchDishes());
     } else {
       navigation.navigate(Router.CUSTOMER_STACK);
       dispatch(fetchCategories());

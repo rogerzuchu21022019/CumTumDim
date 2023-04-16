@@ -2,7 +2,7 @@ import {View, Text, Button, TextInput, TouchableOpacity} from 'react-native';
 import React from 'react';
 import SafeKeyComponent from '../../../../../components/safe_area/SafeKeyComponent';
 import {useDispatch} from 'react-redux';
-import {fetchSignOut} from '../../../../admin/apiAdmin';
+import {fetchSignOut} from '../../../../admin/apiUser';
 import Router from '../../../../../navigation/Router';
 import styles from './StylesProfile';
 import FastImage from 'react-native-fast-image';

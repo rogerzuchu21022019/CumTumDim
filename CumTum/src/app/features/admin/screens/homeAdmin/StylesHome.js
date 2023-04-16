@@ -51,11 +51,11 @@ const styles = StyleSheet.create({
     color: 'white',
     marginLeft: 6,
   },
-  textRingBell:{
+  textTotalNotifies:{
     fontSize:10,
     color: constants.COLOR.WHITE,
   },
-  viewTextRingBell:{
+  viewTotalNotifies:{
     backgroundColor: constants.COLOR.RED,
     width:30,
     height:15,
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
   //body
   body: {
     flex: 12,
-    backgroundColor: constants.COLOR.BLACK,
+    backgroundColor: constants.COLOR.PRIMARY,
     // width:'100%'
   },
   groupItem: {},
@@ -83,6 +83,7 @@ const styles = StyleSheet.create({
     paddingRight: 20,
     marginTop: 10,
   },
+  
   viewToday: {
     justifyContent: 'center',
     alignItems: 'center',
@@ -91,8 +92,15 @@ const styles = StyleSheet.create({
   textToday: {
     lineHeight: 30,
     color: constants.COLOR.WHITE,
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: 'bold',
+  },
+  itemText1: {
+    color: constants.COLOR.ORANGE,
+    fontSize: 16,
+    marginVertical: 6,
+    fontWeight: 'bold',
+
   },
 
   //body

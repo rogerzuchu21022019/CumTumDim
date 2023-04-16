@@ -9,12 +9,12 @@ import Router from '../../../../../navigation/Router';
 import {useDispatch, useSelector} from 'react-redux';
 import queryString from 'query-string';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
+import IconEntypo from 'react-native-vector-icons/Entypo';
 
 import {
   fetchAccessTokenPaypal,
   fetchCreateOrder,
   fetchCreateOrderPaypal,
-  fetchNotification,
 } from '../../../../carts/apiOrder';
 import {authSelector} from '../../../../admin/sliceAuth';
 import {cartSelector} from '../../../../carts/sliceOrder';
@@ -29,6 +29,7 @@ import {
 import WebView from 'react-native-webview';
 import Snackbar from 'react-native-snackbar';
 import {resetCart} from '../../../../product/sliceProduct';
+import CheckModal from '../../../../../shared/utils/CheckModal';
 const log = LOG.extend(`PAYMENT.JS`);
 const Payment = ({navigation, route}) => {
   const {order} = route.params;
@@ -40,6 +41,7 @@ const DeliveryAddress = () => {
   const [checkedId, setCheckedId] = useState(null);
   const [urlPaypalCheckout, setUrlPaypalCheckout] = useState(null);
   const [accessToken, setAccessToken] = useState(null);
+  const [isModalVisible, setModalVisible] = useState(false);
 
   const auth = useSelector(authSelector);
   const cartData = useSelector(cartSelector);
@@ -49,6 +51,7 @@ const DeliveryAddress = () => {
   const moneyToPaid = order.moneyToPaid;
   // console.log('🚀 ~ file: Payment.js:11 ~ Payment ~ order:', order);
 
+  const message = 'Bạn chưa chọn phương thức thanh toán!';
   const onDisplayNotification = async () => {
     // Create a channel (required for Android)
     const title = 'Notification';
@@ -107,9 +110,12 @@ const DeliveryAddress = () => {
 
   const onPay = async () => {
     if (checkedId === null) {
-      Alert.alert('Thông báo', 'Bạn chưa chọn phương thức thanh toán', [
-        {text: 'OK', onPress: () => console.log('OK Pressed')},
-      ]);
+      setModalVisible(true);
+
+      // Alert.alert('Thông báo', 'Bạn chưa chọn phương thức thanh toán', [
+      //   {text: 'OK', onPress: () => console.log('OK Pressed')},
+      // ]);
+
       return;
     }
 
@@ -119,7 +125,6 @@ const DeliveryAddress = () => {
     }
     if (checkedId === 2) {
       console.log('VISA', checkedId);
-
       Snackbar.show({
         text: 'Chức năng đang được tích hợp',
         duration: Snackbar.LENGTH_SHORT,
@@ -172,16 +177,16 @@ const DeliveryAddress = () => {
   const paymentSuccess = async id => {
     try {
       const response = await verifyCaptureOrderPaypal(id, accessToken);
-      // log.error(
-      //   '🚀 ~ file: Payment.js:140 ~ paymentSuccess ~ paymentStatus:',
-      //   paymentStatus,
-      // );
+      log.error(
+        '🚀 ~ file: Payment.js:140 ~ paymentSuccess ~ paymentStatus:',
+        response,
+      );
       if (response.status === 'COMPLETED') {
         resetDataPaypal();
         handleCreateOrder(order);
         onDisplayNotification();
-        // handleResetCart();
-        // navigation.goBack();
+        handleResetCart();
+        navigation.goBack();
         navigation.navigate(Router.HOME_CUSTOMER_TABS);
       } else {
         return;
@@ -236,33 +241,40 @@ const DeliveryAddress = () => {
             </View>
             <View style={styles.groupContent}>
               <View style={styles.leftContent}>
-                <View>
-                  <Text style={styles.text1}>Võ Ngọc Phước | 0342128462</Text>
-                </View>
-                <View>
-                  <Text style={styles.text1}>562/39h Đường Nguyễn Kiệm</Text>
-                </View>
-                <View>
-                  <Text style={styles.text1}>
-                    Phường 4, quận Phú Nhuận,TP HCM
-                  </Text>
-                </View>
-              </View>
-            
-                <View style={styles.rightContent}>
-                  <IconAntDesign
-                    name="right"
-                    color={constants.COLOR.WHITE}
-                    size={15}
+                <View style={styles.iconLocation}>
+                  <IconEntypo
+                    name="location-pin"
+                    color={constants.COLOR.ORANGE}
+                    size={20}
                   />
                 </View>
-            
+                <View>
+                  <View>
+                    <Text style={styles.text1}>Võ Ngọc Phước | 0342128462</Text>
+                  </View>
+                  <View>
+                    <Text style={styles.text1}>562/39h Đường Nguyễn Kiệm</Text>
+                  </View>
+                  <View>
+                    <Text style={styles.text1}>
+                      Phường 4, quận Phú Nhuận,TP HCM
+                    </Text>
+                  </View>
+                </View>
+              </View>
+              <View style={styles.rightContent}>
+                <IconAntDesign
+                  name="right"
+                  color={constants.COLOR.WHITE}
+                  size={15}
+                />
+              </View>
             </View>
             </TouchableOpacity>
           </View>
-    
-          <View>
-            
+
+          <View style={styles.line}></View>
+          <View style={styles.viewText1}>
             <Text style={styles.text}>
               Vui lòng chọn một trong các phương thức sau:
             </Text>
@@ -364,6 +376,7 @@ const DeliveryAddress = () => {
                   ]}></View>
               </View>
             </TouchableOpacity>
+
             <Modal
               animationType="slide"
               transparent={true}
@@ -392,6 +405,13 @@ const DeliveryAddress = () => {
               </View>
             </TouchableOpacity>
           </View>
+        </View>
+        <View style={styles.modal}>
+          <CheckModal
+            isModalVisible={isModalVisible}
+            setModalVisible={setModalVisible}
+            message={message}
+          />
         </View>
       </View>
     </SafeKeyComponent>

@@ -3,7 +3,7 @@ import SafeKeyComponent from '../../../../components/safe_area/SafeKeyComponent'
 
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Router from '../../../../navigation/Router';
-import DetailCard from '../detailCart/DetailCard';
+import DetailCard from '../homeAdmin/detailCart/DetailCard';
 import CustomerSupport from './CustomerSupport';
 
 const Support = ({navigation}) => {

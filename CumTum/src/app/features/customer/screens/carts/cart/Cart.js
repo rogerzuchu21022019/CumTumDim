@@ -6,7 +6,7 @@ import {
   Alert,
   TouchableNativeFeedback,
 } from 'react-native';
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect, useRef,useState} from 'react';
 import SafeKeyComponent from '../../../../../components/safe_area/SafeKeyComponent';
 import styles from './StyleCart';
 import {useDispatch, useSelector} from 'react-redux';
@@ -32,6 +32,7 @@ import {constants} from '../../../../../shared/constants';
 import Router from '../../../../../navigation/Router';
 import {authSelector} from '../../../../admin/sliceAuth';
 import {createHistoryCart} from '../../../../carts/sliceOrder';
+import CheckModal from '../../../../../shared/utils/CheckModal';
 
 const log = LOG.extend('CART.JS');
 const Cart = ({navigation}) => {
@@ -40,6 +41,9 @@ const Cart = ({navigation}) => {
 
   const data = useSelector(productSelector);
   const auth = useSelector(authSelector);
+  const [isModalVisible, setModalVisible] = useState(false);
+  const message = 'Bạn phải đặt tối thiểu 1 món ăn chính trong giỏ hàng! ';
+
 
   // log.info("🚀 ~ file: Cart.js:38 ~ Cart ~ auth:", auth.user)
   const userId = auth.user._id;
@@ -53,7 +57,7 @@ const Cart = ({navigation}) => {
 
   const onBuy = () => {
     if (data.mainDishCart.length === 0) {
-      Alert.alert('Bạn phải đặt tối thiểu 1 món ăn chính trong giỏ hàng! ');
+      setModalVisible(true);
       return;
     }
     if (
@@ -593,6 +597,11 @@ const Cart = ({navigation}) => {
       ) : (
         <CartNoItem navigation={navigation} />
       )}
+        <CheckModal
+            isModalVisible={isModalVisible}
+            setModalVisible={setModalVisible}
+            message={message}
+          />
     </SafeKeyComponent>
   );
 };

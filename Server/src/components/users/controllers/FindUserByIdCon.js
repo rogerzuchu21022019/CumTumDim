@@ -1,4 +1,3 @@
-const { findByIdAndUpdate } = require("../model/User");
 const FindUserByIdSv = require("../services/FindUserByIDSv");
 
 

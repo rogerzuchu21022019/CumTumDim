@@ -67,9 +67,10 @@ const styles = StyleSheet.create({
   body: {
     flex: 12,
     backgroundColor: constants.COLOR.GREY,
-    padding: 20,
   },
   viewText: {
+    padding:20,
+
   },
   textTile:{
     marginBottom:10
@@ -87,6 +88,10 @@ const styles = StyleSheet.create({
     fontSize: 14,
     lineHeight: 20,
     color: constants.COLOR.WHITE,
+  },
+  viewText1:{
+    marginTop:20,
+    marginStart:20
   },
   viewPaypal: {
     flexDirection: 'row',
@@ -125,7 +130,8 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   groupText:{
-    marginBottom:20
+    padding: 20,
+
   },
   viewMomo: {
     flexDirection: 'row',
@@ -151,8 +157,22 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     marginTop: 10,
   },
+  line:{
+    width: '100%',
+    height:2,
+    backgroundColor:constants.COLOR.BLACK,
+  },
   viewImage1: {
     flex: 1/2,
+  },
+  iconLocation:{
+    marginEnd:10,
+  },
+  modal:{
+    backgroundColor:constants.COLOR.BLACK,
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
   },
   checkbox: {
     width: 30,
@@ -234,12 +254,13 @@ const styles = StyleSheet.create({
 
   },
   leftContent:{
+    flexDirection: 'row',
 
   },
   groupContent:{
     flexDirection:'row',
-    justifyContent:"space-between",
     alignItems: 'center',
+    justifyContent:'space-between',
   },
   btnNext: {
     // backgroundColor: constants.COLOR.RED,
@@ -247,8 +268,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: constants.COLOR.WHITE,
   },
-  viewFooter: {
-    flex: 2,
-  },
+ 
 });
 export default styles;

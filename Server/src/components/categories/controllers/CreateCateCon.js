@@ -1,4 +1,4 @@
-const CreateCateSv = require("../services/CreateCate");
+const CreateCateSv = require("../services/CreateCateSv");
 
 const CreateCateCon = async (name, type) => {
   try {

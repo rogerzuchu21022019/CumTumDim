@@ -42,24 +42,6 @@ export const fetchNotifies = createAsyncThunk(
   },
 );
 
-export const fetchNotification = createAsyncThunk(
-  constants.FETCH.PUSH_NOTIFICATION,
-  async data => {
-    const response = await AxiosInstance().post(`/products/push-notification`, {
-      data,
-    });
-    log.info('🚀 ~ file: apiOrder.js:28 ~ response ~ response:', response.data);
-    return response.data;
-  },
-);
-
-export const fetchFindNotifications = createAsyncThunk(
-  constants.FETCH.FIND_NOTIFICATIONS,
-  async () => {
-    const response = await AxiosInstance().get(`/products/find-notifications`);
-    return response.data;
-  },
-);
 
 export const fetchUpdateOrder = createAsyncThunk(
   constants.FETCH.UPDATE_ORDER,

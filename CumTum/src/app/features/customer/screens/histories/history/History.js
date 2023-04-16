@@ -18,7 +18,7 @@ import SafeKeyComponent from '../../../../../components/safe_area/SafeKeyCompone
 import {authSelector} from '../../../../admin/sliceAuth';
 import socketServices from '../../../../../shared/utils/Socket';
 import {LOG} from '../../../../../../../logger.config';
-import {fetchUserById} from '../../../../admin/apiAdmin';
+import {fetchUserById} from '../../../../admin/apiUser';
 const log = LOG.extend(`HISTORY.JS`);
 const History = ({navigation}) => {
   // const data = useSelector(cartSelector);

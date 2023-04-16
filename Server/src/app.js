@@ -5,7 +5,6 @@ const mongoose = require("mongoose");
 const ManagerMiddleware = require("./middlewares/ManageMiddleware");
 const HandlerError = require("./middlewares/HandleError");
 
-
 const ApiManagerRouter = require("./routes/manager/ApiManager");
 // const WebManagerRouter = require("./routes/manager/WebManager");
 mongoose.set("strictQuery", false);

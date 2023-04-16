@@ -3,20 +3,25 @@ const Router = {
   HOME_ADMIN: 'Trang chủ',
   DETAIL_CART_ADMIN:"DetailCartAdmin",
   SHOW_BILL_ADMIN:"ShowBillAdmin",
-  MANAGER:"Quản lý",
+  MANAGE_TABS:"ManageTabs",
   MANAGE:"Manage",
   CRUD_MENU:"CrudMenu",
   ADD_DISH:"AddDish",
   EDIT_DISH:"EditDish",
-  MANAGER_FOOD:"ManagerFood",
+  EDIT_TYPE_FOOD:"EditTypeFood",
+  DELETE_TYPE_FOOD:"DeleteTypeFood",
+  UPDATE_TYPE_FOOD:"UpdateTypeFood",
+  MANAGE_FOOD:"ManageFood",
+  MANAGE_CATEGORIES:"ManageCategories",
   RING_BELL_ADMIN:"RingBellAdmin",
+
+  ADD_TYPE_FOOD:"AddTypeFood",
   
   UPDATE_DISH:"UpdateDish",
   DELETE_DISH:"DeleteDish",
   SUPPORT:"Support",
   INCOME:"Income",
   STATISTIC:"thống kê",
-  DELETE_DISH:"DeleteDish",
 
   /* Customer */
   SPLASH_SCREEN:"Splash",

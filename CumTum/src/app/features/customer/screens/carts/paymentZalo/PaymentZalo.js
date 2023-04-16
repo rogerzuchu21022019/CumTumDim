@@ -79,7 +79,7 @@ const PaymentZalo = ({route,navigation}) => {
                 <IconAntDesign
                   name="left"
                   color={constants.COLOR.WHITE}
-                  size={20}
+                  size={15}
                 />
               </View>
             </TouchableOpacity>

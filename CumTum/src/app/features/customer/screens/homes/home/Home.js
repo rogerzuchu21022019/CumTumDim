@@ -25,7 +25,7 @@ import IconOcticons from 'react-native-vector-icons/Octicons';
 import {constants} from '../../../../../shared/constants';
 import {FlashList} from '@shopify/flash-list';
 import ItemView from './item/ItemView';
-import {mainDishOptionsData} from '../../../../admin/screens/addDish/DataDishes';
+import {mainDishOptionsData} from '../../../../admin/screens/manager/manageFood/addDish/DataDishes';
 import {
   addDishToWishCartOrUpdate,
   productSelector,
@@ -37,14 +37,17 @@ import {cartSelector, createHistoryCart} from '../../../../carts/sliceOrder';
 import Advertisement from '../../../../../shared/utils/Advertisement';
 import socketServices from '../../../../../shared/utils/Socket';
 import Router from '../../../../../navigation/Router';
-import formatCodeOrder from '../../../../../shared/utils/CreateCodeOrder';
-import { authSelector } from '../../../../admin/sliceAuth';
+import {formatCodeOrder} from '../../../../../shared/utils/CreateCodeOrder';
+import {authSelector} from '../../../../admin/sliceAuth';
 
 const HomeCustomer = ({navigation}) => {
   const log = LOG.extend('HOME_CUSTOMER.js');
   const dispatch = useDispatch();
-  const user = useSelector(authSelector)
-  log.info("🚀 ~ file: Home.js:47 ~ HomeCustomer ~ notifications:", user.notifications)
+  const user = useSelector(authSelector);
+  log.info(
+    '🚀 ~ file: Home.js:47 ~ HomeCustomer ~ notifications:',
+    user.notifications,
+  );
   const cartSelect = useSelector(cartSelector);
   const IMAGE_BG =
     'https://cdn.britannica.com/38/111338-050-D23BE7C8/Stars-NGC-290-Hubble-Space-Telescope.jpg?w=400&h=300&c=crop';
@@ -63,12 +66,18 @@ const HomeCustomer = ({navigation}) => {
 
   useEffect(() => {
     socketServices.initializeSocket();
+
+  
     socketServices.on(constants.SOCKET.UPDATE_ORDER, data => {
       log.error('🚀 ~ file: Home.js:82 ~ socketServices.on ~ data:', data);
       onDisplayNotiAccepted(data);
       // handleCreateHistoryCart(data);
 
       // move to history
+    });
+
+    socketServices.on(constants.SOCKET.UPDATE_NOTIFICATION_CUSTOMER, data => {
+      log.info("🚀 ~ file: Home.js:79 ~ useEffect ~ data:", data)
     });
 
     return () => {
@@ -266,14 +275,12 @@ const HomeCustomer = ({navigation}) => {
                     }>
                     Món thêm
                   </Text>
-                  <TouchableOpacity>
-                    <View style={styles.viewImageDish}>
-                      <FastImage
-                        style={styles.imageLogo}
-                        source={require('../../../../../../assets/logoExtraDish.png')}
-                      />
-                    </View>
-                  </TouchableOpacity>
+                  <View style={styles.viewImageDish}>
+                    <FastImage
+                      style={styles.imageLogo}
+                      source={require('../../../../../../assets/logoExtraDish.png')}
+                    />
+                  </View>
                 </View>
               </TouchableOpacity>
               <TouchableOpacity onPress={openTab3}>

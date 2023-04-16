@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
   /* Body */
   body: {},
   boxItem: {
-    marginTop: 20,
+    marginTop: 10,
     backgroundColor: constants.COLOR.GREY,
     flex: 1,
     width: '100%',
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
   // },
   itemText: {
     color: constants.COLOR.WHITE,
-    fontSize: 15,
+    fontSize: 14,
   },
   statusItemText: {
     color: constants.COLOR.RED,
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
   /* Body */
   /* Footer */
   footer: {
-    marginBottom: 20,
+    marginBottom: 10,
   },
   /* Footer */
 });

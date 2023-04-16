@@ -96,20 +96,20 @@ const RingBell = ({navigation}) => {
               <IconAntDesign
               name="left"
               color={constants.COLOR.WHITE}
-              size={20}
+              size={18}
               
               />
             </TouchableOpacity>
 
             </View>
             <View style={styles.profile}>
-              <Text style={styles.textProfile}>Sữa hồ sơ</Text>
+              <Text style={styles.textProfile}>Thông báo</Text>
             </View> 
             <View style={styles.viewIcon}>
               <IconAntDesign
               name="delete"
               color={constants.COLOR.WHITE}
-              size={20}/>
+              size={18}/>
             </View>
           </View>
         </View>

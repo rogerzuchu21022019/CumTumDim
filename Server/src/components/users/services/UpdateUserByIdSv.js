@@ -1,6 +1,6 @@
 const User = require("../model/User");
 
-const UpdateUserByIdSv = async (userId, order, notification) => {
+const UpdateUserByIdSv = async (userId, order, ) => {
   try {
     const query = {
       _id: userId,
@@ -11,10 +11,7 @@ const UpdateUserByIdSv = async (userId, order, notification) => {
           $each: [order],
           $position: 0,
         },
-        notifications: {
-          $each: [notification],
-          $position: 0,
-        },
+      
       },
     };
     const user = await User.findByIdAndUpdate(query, optionUpdate, {
