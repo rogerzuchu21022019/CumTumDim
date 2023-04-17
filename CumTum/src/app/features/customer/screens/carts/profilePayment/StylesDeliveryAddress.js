@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
   },
   leftHeader: {
     flex: 1,
-
+    paddingRight:10,
     justifyContent: 'center',
     alignItems: 'center',
     // backgroundColor: constants.COLOR.WHITE,
