@@ -24,12 +24,12 @@ export const constants = {
       'EPscZ2cKSvwcybfeIbQksSxlCJVZDGuzAMy0skSzZJIJ2NL4yJUUuKaC6Ve2fi9kHzgnWZOpfSPPU_Oi',
   },
   BASE_URL: {
-    MAIN: 'http://192.168.20.47:3000/api',
+    MAIN: 'http://172.20.10.2:3000/api',
     // MAIN: 'http://192.168.2.7:3000/api',
     SECOND: 'https://cumtumdim.becofoodstore.click/api',
   },
   SOCKET: {
-    URL: 'http://192.168.20.47:3000',
+    URL: 'http://172.20.10.2:3000',
     CONNECTION: 'connection',
     CONNECT: 'connect',
     DISCONNECT: 'disconnect',
