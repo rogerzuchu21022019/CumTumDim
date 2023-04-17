@@ -7,7 +7,7 @@ import Cart from './cart/Cart';
 import Payment from './payment/Payment';
 import DetailPaymentCartZalo from '../../../../shared/utils/DetailPaymentZalo';
 import PaymentZalo from './paymentZalo/PaymentZalo';
-import DeliveryAddress from './profilePayment/DeliveryAddress';
+import DeliveryAddress from './profilePayment/ChooseDeliveryAddress';
 import EditDeliveryAddrees from './profilePayment/EditDeliveryAddrees/EditDeliveryAddrees';
 import AddDeliveryAddrees from './profilePayment/AddDeliveryAddrees/AddDeliveryAddrees';
 const CartTabs = () => {
