@@ -39,6 +39,7 @@ const ChooseDeliveryAddress = ({navigation}) => {
       district: ' Hóc Môn',
       ward: 'Trung Mỹ Tây',
       city: 'Hồ Chí Minh',
+      addressDefault: false
     },
     {
       id: '3423234',
@@ -49,6 +50,7 @@ const ChooseDeliveryAddress = ({navigation}) => {
       district: '',
       ward: 'Thảo Điền',
       city: 'Hồ Chí Minh',
+      addressDefault: false
     },
     {
       id: '4324234324',
@@ -59,27 +61,7 @@ const ChooseDeliveryAddress = ({navigation}) => {
       district: 'Q12',
       ward: 'Trung Mỹ Tây',
       city: 'Hồ Chí Minh',
-    },
-    {
-      id: '432423432423',
-      name: 'Vũ Thành Nam',
-      phone: '0879175310',
-      street: '111',
-      houseNumber: '22',
-      district: 'Q12',
-      ward: 'Trung Mỹ Tây',
-      city: 'Hồ Chí Minh',
-    },
-
-    {
-      id: '432423423',
-      name: 'Vũ Thành Nam',
-      phone: '0879175310',
-      street: '111',
-      houseNumber: '22',
-      district: 'Q12',
-      ward: 'Trung Mỹ Tây',
-      city: 'Hồ Chí Minh',
+      addressDefault: false
     },
   ];
 

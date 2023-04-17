@@ -17,8 +17,8 @@ const ItemViewPayment = ({
   handleCheckedItem,
   checkedItem,
 }) => {
-  // log.error('🚀 ~ file: ItemView.js:11 ~ ItemView ~ item:', item);
-  
+  log.error('🚀 ~ file: ItemView.js:11 ~ ItemView ~ item:', item);
+
   const EditDeliveryAddrees = () => {
     navigation.navigate(Router.Edit_DELIVERY_ADDREES);
   };
@@ -31,8 +31,11 @@ const ItemViewPayment = ({
 
   const handleSetDefaultIndex = () => {
     handleCheckedItem();
-    log.info("🚀 ~ file: itemViewDeliveryAddress.js:38 ~ handleSetDefaultIndex ~ item:", item)
-    // call api for update 
+    log.info(
+      '🚀 ~ file: itemViewDeliveryAddress.js:38 ~ handleSetDefaultIndex ~ item:',
+      item,
+    );
+    // call api for update
     navigation.goBack();
   };
 
@@ -76,6 +79,11 @@ const ItemViewPayment = ({
                   title="Set địa chỉ mặc định"
                   onHandleClick={handleSetDefaultIndex}
                 />
+                {item.addressDefault
+                  ? {
+                      // View
+                    }
+                  : null}
               </View>
             </View>
           </View>
