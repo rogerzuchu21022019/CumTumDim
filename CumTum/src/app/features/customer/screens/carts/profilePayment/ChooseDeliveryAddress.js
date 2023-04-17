@@ -6,7 +6,7 @@ import {
   FlatList,
   RefreshControl,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from './StylesDeliveryAddress';
 import SafeKeyComponent from '../../../../../components/safe_area/SafeKeyComponent';
 import IconIonicons from 'react-native-vector-icons/Ionicons';
@@ -20,8 +20,8 @@ import Router from '../../../../../navigation/Router';
 import AddDeliveryAddrees from './AddDeliveryAddrees/AddDeliveryAddrees';
 import {LOG} from '../../../../../../../logger.config';
 const log = LOG.extend(`CHOOSE_DELIVERY_ADDRESS.JS`);
-const DeliveryAddress = ({navigation}) => {
-  const [isRefresh, setIsRefresh] = useState(false);
+const ChooseDeliveryAddress = ({navigation}) => {
+  const [checkedItem, setCheckedItem] = useState(0);
   const goBack = () => {
     navigation.goBack();
   };
@@ -29,17 +29,9 @@ const DeliveryAddress = ({navigation}) => {
     navigation.navigate(Router.ADD_DELIVERY_ADDREES);
   };
 
-  const handleCheck = id => {
-    if (checkedId === id) {
-      setCheckedId(0);
-    } else {
-      setCheckedId(id);
-    }
-  };
-
   const array = [
     {
-      id: 1,
+      id: '234234234',
       name: 'Võ Ngọc Phước',
       phone: '0342128462',
       street: 'Tô Ký',
@@ -49,7 +41,7 @@ const DeliveryAddress = ({navigation}) => {
       city: 'Hồ Chí Minh',
     },
     {
-      id: 2,
+      id: '3423234',
       name: 'Vũ Đức Hải',
       phone: '0867704364',
       street: '62',
@@ -59,26 +51,48 @@ const DeliveryAddress = ({navigation}) => {
       city: 'Hồ Chí Minh',
     },
     {
-      id: 3,
-      name: 'Vũ Đức Hải',
-      phone: '0867704364',
-      street: '62',
-      houseNumber: '16',
-      district: '',
-      ward: 'Thảo Điền',
+      id: '4324234324',
+      name: 'Vũ Thành Nam',
+      phone: '0879175310',
+      street: '111',
+      houseNumber: '22',
+      district: 'Q12',
+      ward: 'Trung Mỹ Tây',
+      city: 'Hồ Chí Minh',
+    },
+    {
+      id: '432423432423',
+      name: 'Vũ Thành Nam',
+      phone: '0879175310',
+      street: '111',
+      houseNumber: '22',
+      district: 'Q12',
+      ward: 'Trung Mỹ Tây',
+      city: 'Hồ Chí Minh',
+    },
+
+    {
+      id: '432423423',
+      name: 'Vũ Thành Nam',
+      phone: '0879175310',
+      street: '111',
+      houseNumber: '22',
+      district: 'Q12',
+      ward: 'Trung Mỹ Tây',
       city: 'Hồ Chí Minh',
     },
   ];
 
-  const [checkedId, setCheckedId] = useState(
-    array.map((item, index) => {
-      return index;
-    }),
-  );
-  log.info(
-    '🚀 ~ file: ChooseDeliveryAddress.js:75 ~ DeliveryAddress ~ checkedId:',
-    checkedId,
-  );
+  const radioButtonsData = array.map((item, index) => {
+    return {
+      ...item,
+      idAuto: index,
+    };
+  });
+
+  const handleCheckedItem = index => {
+    setCheckedItem(index);
+  };
 
   return (
     <SafeKeyComponent>
@@ -110,7 +124,7 @@ const DeliveryAddress = ({navigation}) => {
           <FlashList
             showsHorizontalScrollIndicator={false}
             showsVerticalScrollIndicator={false}
-            data={array}
+            data={radioButtonsData}
             estimatedItemSize={200}
             renderItem={({item, index}) => {
               return (
@@ -118,6 +132,8 @@ const DeliveryAddress = ({navigation}) => {
                   item={item}
                   index={index}
                   navigation={navigation}
+                  handleCheckedItem={() => handleCheckedItem(index)}
+                  checkedItem={checkedItem}
                 />
               );
             }}
@@ -138,4 +154,4 @@ const DeliveryAddress = ({navigation}) => {
   );
 };
 
-export default DeliveryAddress;
+export default ChooseDeliveryAddress;
