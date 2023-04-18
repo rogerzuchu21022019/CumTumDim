@@ -34,36 +34,39 @@ const userSchema = new mongoose.Schema(
     notifications: {
       type: [],
     },
-    address: {
-      type: [
-        {
-          street: {
-            type: String,
-            required: true,
-          },
-          houseNumber: {
-            type: String,
-            required: true,
-          },
-          district: {
-            type: String,
-            required: true,
-          },
-          ward: {
-            type: String,
-            required: true,
-          },
-          city: {
-            type: String,
-            required: true,
-          },
-          addressDefault: {
-            type: Boolean,
-            default: false,
-          },
-        },
-      ],
+    addresses: {
+      type: [],
     },
+    // address: {
+    //   type: [
+    //     {
+    //       street: {
+    //         type: String,
+    //         required: true,
+    //       },
+    //       houseNumber: {
+    //         type: String,
+    //         required: true,
+    //       },
+    //       district: {
+    //         type: String,
+    //         required: true,
+    //       },
+    //       ward: {
+    //         type: String,
+    //         required: true,
+    //       },
+    //       city: {
+    //         type: String,
+    //         required: true,
+    //       },
+    //       addressDefault: {
+    //         type: Boolean,
+    //         default: false,
+    //       },
+    //     },
+    //   ],
+    // },
   },
   {
     timestamps: true,
