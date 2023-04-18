@@ -8,9 +8,9 @@ import IconEntypo from 'react-native-vector-icons/Entypo';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
 import styles from './StylesAddDeliveryAddress';
 import { FlashList } from '@shopify/flash-list';
-import ItemAddDeliveryAddrees from '../item/itemAddDeliveryAddress';
+import ItemAddDeliveryAddress from '../item/itemAddDeliveryAddress';
 
-const AddDeliveryAddrees = ({navigation}) => {
+const AddDeliveryAddress = ({navigation}) => {
   const moveToBack = () => {
     navigation.goBack();
   };
@@ -56,7 +56,7 @@ const AddDeliveryAddrees = ({navigation}) => {
               estimatedItemSize={200}
               renderItem={({item, index}) => {
                 return (
-                  <ItemAddDeliveryAddrees
+                  <ItemAddDeliveryAddress
                     item={item}
                     index={index}
                     navigation={navigation}
@@ -79,4 +79,4 @@ const AddDeliveryAddrees = ({navigation}) => {
   );
 };
 
-export default AddDeliveryAddrees;
+export default AddDeliveryAddress;

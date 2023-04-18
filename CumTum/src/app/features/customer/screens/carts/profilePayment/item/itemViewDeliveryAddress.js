@@ -20,7 +20,7 @@ const ItemViewPayment = ({
   log.error('🚀 ~ file: ItemView.js:11 ~ ItemView ~ item:', item);
 
   const EditDeliveryAddrees = () => {
-    navigation.navigate(Router.EDIT_DELIVERY_ADDRESS);
+    navigation.navigate(Router.EDIT_DELIVERY_ADDRESS, {item});
   };
 
   const [isShowVisible, setIsShowVisible] = useState(false);
