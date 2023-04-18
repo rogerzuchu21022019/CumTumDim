@@ -17,8 +17,10 @@ import HomeAdmin from '../../../../admin/screens/homeAdmin/HomeAdmin';
 import {FlashList} from '@shopify/flash-list';
 import ItemViewPayment from './item/itemViewDeliveryAddress';
 import Router from '../../../../../navigation/Router';
-import AddDeliveryAddrees from './addDeliveryAddress/AddDeliveryAddress';
+import AddDeliveryAddress from './addDeliveryAddress/AddDeliveryAddress';
 import {LOG} from '../../../../../../../logger.config';
+import {useSelector} from 'react-redux';
+import {authSelector} from '../../../../admin/sliceAuth';
 const log = LOG.extend(`CHOOSE_DELIVERY_ADDRESS.JS`);
 const ChooseDeliveryAddress = ({navigation}) => {
   const [checkedItem, setCheckedItem] = useState(0);
@@ -29,43 +31,10 @@ const ChooseDeliveryAddress = ({navigation}) => {
     navigation.navigate(Router.ADD_DELIVERY_ADDRESS);
   };
 
-  const array = [
-    {
-      id: '234234234',
-      name: 'Võ Ngọc Phước',
-      phone: '0342128462',
-      street: 'Tô Ký',
-      houseNumber: '413',
-      district: ' Hóc Môn',
-      ward: 'Trung Mỹ Tây',
-      city: 'Hồ Chí Minh',
-      addressDefault: false
-    },
-    {
-      id: '3423234',
-      name: 'Vũ Đức Hải',
-      phone: '0867704364',
-      street: '62',
-      houseNumber: '16',
-      district: '',
-      ward: 'Thảo Điền',
-      city: 'Hồ Chí Minh',
-      addressDefault: false
-    },
-    {
-      id: '4324234324',
-      name: 'Vũ Thành Nam',
-      phone: '0879175310',
-      street: '111',
-      houseNumber: '22',
-      district: 'Q12',
-      ward: 'Trung Mỹ Tây',
-      city: 'Hồ Chí Minh',
-      addressDefault: false
-    },
-  ];
+  const authSelect = useSelector(authSelector);
+  const addressArray = authSelect.user.address;
 
-  const radioButtonsData = array.map((item, index) => {
+  const radioButtonsData = addressArray.map((item, index) => {
     return {
       ...item,
       idAuto: index,

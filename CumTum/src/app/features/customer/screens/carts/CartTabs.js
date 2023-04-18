@@ -9,7 +9,7 @@ import DetailPaymentCartZalo from '../../../../shared/utils/DetailPaymentZalo';
 import PaymentZalo from './paymentZalo/PaymentZalo';
 import ChooseDeliveryAddress from './profilePayment/ChooseDeliveryAddress';
 import EditDeliveryAddress from './profilePayment/editDeliveryAddress/EditDeliveryAddress';
-import AddDeliveryAddrees from './profilePayment/addDeliveryAddress/AddDeliveryAddress';
+import AddDeliveryAddress from './profilePayment/addDeliveryAddress/AddDeliveryAddress';
 const CartTabs = () => {
   const Stack = createNativeStackNavigator();
 
@@ -61,7 +61,7 @@ const CartTabs = () => {
           />
           <Stack.Screen
             name={Router.ADD_DELIVERY_ADDRESS}
-            component={AddDeliveryAddrees}
+            component={AddDeliveryAddress}
             options={{
               headerShown: false,
             }}
