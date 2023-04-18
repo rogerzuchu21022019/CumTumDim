@@ -8,6 +8,7 @@ router.post(`/update-dish-by-id/:dishId`, async (req, res) => {
     const { dishId } = req.params;
     console.log("🚀 ~ file: UpdateDishByID.js:9 ~ router.post ~ dishId:", dishId)
     const { dish } = req.body;
+    console.log("🚀 ~ file: UpdateDishByID.js:11 ~ router.post ~ dish:", dish)
     const _dish = await UpdateDishByIDCon(dishId,dish);
     res.status(200).json({
       isLoading: false,

@@ -33,30 +33,31 @@ import CheckModal from '../../../../../shared/utils/CheckModal';
 const log = LOG.extend(`PAYMENT.JS`);
 const Payment = ({navigation, route}) => {
   const {order} = route.params;
-// Chuyên trang
-const DeliveryAddress = () => {
-  navigation.navigate(Router.DELIVERY_ADDREES);
-};
+
+  const DeliveryAddress = () => {
+    navigation.navigate(Router.DELIVERY_ADDRESS);
+  };
+
   /* State */
   const [checkedId, setCheckedId] = useState(null);
   const [urlPaypalCheckout, setUrlPaypalCheckout] = useState(null);
   const [accessToken, setAccessToken] = useState(null);
   const [isModalVisible, setModalVisible] = useState(false);
 
-  const auth = useSelector(authSelector);
+  /* Selector */
+  const authSelect = useSelector(authSelector);
   const cartData = useSelector(cartSelector);
-  // console.log('🚀 ~ file: Payment.js:16 ~ Payment ~ auth:', auth);
-  const name = auth.user.name;
-  const userId = auth.user._id;
-  const moneyToPaid = order.moneyToPaid;
-  // console.log('🚀 ~ file: Payment.js:11 ~ Payment ~ order:', order);
 
+  /* Variables */
+  const name = authSelect.user.name;
+  const userId = authSelect.user._id;
+  const moneyToPaid = order.moneyToPaid;
   const message = 'Bạn chưa chọn phương thức thanh toán!';
+
   const onDisplayNotification = async () => {
     // Create a channel (required for Android)
     const title = 'Notification';
     const content = `Cảm ơn bạn ${name} đã đặt hàng. Đơn hàng của bạn đang được chúng tôi xác nhận.....`;
-    // console.log("🚀 ~ file: Payment.js:45 ~ onDisplayNotification ~ content:", content)
     const dataMap = {
       title,
       content,
@@ -74,8 +75,6 @@ const DeliveryAddress = () => {
     }
   };
 
-  
-
   const handleCreateOrder = order => {
     dispatch(fetchCreateOrder(order));
 
@@ -83,18 +82,6 @@ const DeliveryAddress = () => {
   };
 
   const handleGetAccessToken = async order => {
-    // const response = await dispatch(fetchAccessTokenPaypal());
-    // setAccessToken(response.payload.access_token);
-    // const data = {
-    //   accessToken: response.payload.access_token,
-    //   order: setItemPaypal(order),
-    // };
-    // const res = dispatch(fetchCreateOrderPaypal(data));
-    // if (res.payload && res.payload.links != undefined) {
-    //   const url = res.payload.links.find(link => link.rel === 'approve');
-    //   setUrlPaypalCheckout(url.href);
-    // }
-
     const response = await getDataPaypal();
     console.log(
       '🚀 ~ file: Payment.js:88 ~ handleGetAccessToken ~ response:',
@@ -204,7 +191,7 @@ const DeliveryAddress = () => {
     });
   };
 
-  const moToBack = () => {
+  const moveToBack = () => {
     navigation.goBack();
   };
 
@@ -218,7 +205,7 @@ const DeliveryAddress = () => {
         <View style={styles.header}>
           <View style={styles.header}>
             <View style={styles.mainHeader}>
-              <TouchableOpacity onPress={moToBack}>
+              <TouchableOpacity onPress={moveToBack}>
                 <View style={styles.icon}>
                   <IconAntDesign
                     name="left"
@@ -237,41 +224,45 @@ const DeliveryAddress = () => {
         <View style={styles.divideLine}></View>
         <View style={styles.body}>
           <View style={styles.groupText}>
-          <TouchableOpacity onPress={DeliveryAddress}>
-            <View style={styles.textTile}>
-              <Text style={styles.text}>Địa chỉ nhận hàng</Text>
-            </View>
-            <View style={styles.groupContent}>
-              <View style={styles.leftContent}>
-                <View style={styles.iconLocation}>
-                  <IconEntypo
-                    name="location-pin"
-                    color={constants.COLOR.ORANGE}
-                    size={20}
+            <TouchableOpacity onPress={DeliveryAddress}>
+              <View style={styles.textTile}>
+                <Text style={styles.text}>Địa chỉ nhận hàng</Text>
+              </View>
+              <View style={styles.groupContent}>
+                <View style={styles.leftContent}>
+                  <View style={styles.iconLocation}>
+                    <IconEntypo
+                      name="location-pin"
+                      color={constants.COLOR.ORANGE}
+                      size={20}
+                    />
+                  </View>
+                  <View>
+                    <View>
+                      <Text style={styles.text1}>
+                        {authSelect.user.name} | 0342128462
+                      </Text>
+                    </View>
+                    <View>
+                      <Text style={styles.text1}>
+                        562/39h Đường Nguyễn Kiệm
+                      </Text>
+                    </View>
+                    <View>
+                      <Text style={styles.text1}>
+                        Phường 4, quận Phú Nhuận,TP HCM
+                      </Text>
+                    </View>
+                  </View>
+                </View>
+                <View style={styles.rightContent}>
+                  <IconAntDesign
+                    name="right"
+                    color={constants.COLOR.WHITE}
+                    size={15}
                   />
                 </View>
-                <View>
-                  <View>
-                    <Text style={styles.text1}>Võ Ngọc Phước | 0342128462</Text>
-                  </View>
-                  <View>
-                    <Text style={styles.text1}>562/39h Đường Nguyễn Kiệm</Text>
-                  </View>
-                  <View>
-                    <Text style={styles.text1}>
-                      Phường 4, quận Phú Nhuận,TP HCM
-                    </Text>
-                  </View>
-                </View>
               </View>
-              <View style={styles.rightContent}>
-                <IconAntDesign
-                  name="right"
-                  color={constants.COLOR.WHITE}
-                  size={15}
-                />
-              </View>
-            </View>
             </TouchableOpacity>
           </View>
 

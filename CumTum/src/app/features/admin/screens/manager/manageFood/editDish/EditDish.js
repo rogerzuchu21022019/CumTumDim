@@ -3,9 +3,9 @@ import {
   Text,
   View,
   Image,
-  FlatList,
   TouchableOpacity,
   ScrollView,
+  FlatList,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import SafeKeyComponent from '../../../../../../components/safe_area/SafeKeyComponent';
@@ -21,6 +21,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import ItemEditDish from './item/ItemEditDish';
 import DropdownCus from '../../../../../../components/dropdown/DropdownCus';
+
 const EditDish = ({navigation}) => {
   const moveToScreen = nameScreen => {
     navigation.navigate(nameScreen);
@@ -79,12 +80,6 @@ const EditDish = ({navigation}) => {
     return () => {};
   }, [dispatch]);
 
-  const pressHandler = id => {
-    setData(itemData => {
-      return itemData.filter(data => data.id != id);
-    });
-  };
-
   const handleShowHide = (name, setName) => {
     setName(!name);
   };
@@ -126,131 +121,144 @@ const EditDish = ({navigation}) => {
         <View style={styles.divideLine}></View>
         <View style={styles.body}>
           <View style={styles.boxFlashList}>
-            {/* Main Dishes Sườn */}
-            <DropdownCus
-              handleShowHide={() =>
-                handleShowHide(
-                  showHideMainDishesSuon,
-                  setShowHideMainDishesSuon,
-                )
-              }
-              title="Món chính (Sườn)"
-              showHide={showHideMainDishesSuon}
-            />
-            {showHideMainDishesSuon ? (
-              <FlatList
-                data={mainDishesSuon}
-                renderItem={({item, index}) => (
-                  <ItemEditDish
-                    item={item}
-                    index={index}
-                    navigation={navigation}
-                  />
-                )}
-                keyExtractor={(item, index) => {
-                  return index.toString();
-                }}
-              />
-            ) : null}
+            <ScrollView
+              removeClippedSubviews={true}
+              scrollEnabled={true}
+              scrollEventThrottle={16}
+              showsHorizontalScrollIndicator={false}
+              showsVerticalScrollIndicator={false}
+              decelerationRate={'fast'}>
+              {/* Main Dishes Sườn */}
 
-            {/* Main Dishes Sườn Mỡ */}
-            <DropdownCus
-              handleShowHide={() =>
-                handleShowHide(
-                  showHideMainDishesSuonMo,
-                  setShowHideMainDishesSuonMo,
-                )
-              }
-              title="Món chính (Sườn mỡ)"
-              showHide={showHideMainDishesSuonMo}
-            />
-            {showHideMainDishesSuonMo ? (
-              <FlatList
-                data={mainDishesSuonMo}
-                renderItem={({item, index}) => (
-                  <ItemEditDish
-                    item={item}
-                    index={index}
-                    navigation={navigation}
-                  />
-                )}
-                keyExtractor={(item, index) => {
-                  return index.toString();
-                }}
+              <DropdownCus
+                handleShowHide={() =>
+                  handleShowHide(
+                    showHideMainDishesSuon,
+                    setShowHideMainDishesSuon,
+                  )
+                }
+                title="Món chính (Sườn)"
+                showHide={showHideMainDishesSuon}
               />
-            ) : null}
+              {showHideMainDishesSuon ? (
+                <FlatList
+                  data={mainDishesSuon}
+                  scrollEnabled={false}
+                  renderItem={({item, index}) => (
+                    <ItemEditDish
+                      item={item}
+                      index={index}
+                      navigation={navigation}
+                    />
+                  )}
+                  keyExtractor={(item, index) => {
+                    return index.toString();
+                  }}
+                />
+              ) : null}
 
-            {/* Extra Dishes */}
-            <DropdownCus
-              handleShowHide={() =>
-                handleShowHide(showHideExtraDishes, setShowHideExtraDishes)
-              }
-              title="Món ăn thêm"
-              showHide={showHideExtraDishes}
-            />
-            {showHideExtraDishes ? (
-              <FlatList
-                data={extraDishes}
-                renderItem={({item, index}) => (
-                  <ItemEditDish
-                    item={item}
-                    index={index}
-                    navigation={navigation}
-                  />
-                )}
-                keyExtractor={(item, index) => {
-                  return index.toString();
-                }}
+              {/* Main Dishes Sườn Mỡ */}
+              <DropdownCus
+                handleShowHide={() =>
+                  handleShowHide(
+                    showHideMainDishesSuonMo,
+                    setShowHideMainDishesSuonMo,
+                  )
+                }
+                title="Món chính (Sườn mỡ)"
+                showHide={showHideMainDishesSuonMo}
               />
-            ) : null}
+              {showHideMainDishesSuonMo ? (
+                <FlatList
+                  scrollEnabled={false}
+                  data={mainDishesSuonMo}
+                  renderItem={({item, index}) => (
+                    <ItemEditDish
+                      item={item}
+                      index={index}
+                      navigation={navigation}
+                    />
+                  )}
+                  keyExtractor={(item, index) => {
+                    return index.toString();
+                  }}
+                />
+              ) : null}
 
-            {/* Toppings Dishes */}
-            <DropdownCus
-              handleShowHide={() =>
-                handleShowHide(showHideToppings, setShowHideToppings)
-              }
-              title="Toppings"
-              showHide={showHideToppings}
-            />
-            {showHideToppings ? (
-              <FlatList
-                data={toppingsDishes}
-                renderItem={({item, index}) => (
-                  <ItemEditDish
-                    item={item}
-                    index={index}
-                    navigation={navigation}
-                  />
-                )}
-                keyExtractor={(item, index) => {
-                  return index.toString();
-                }}
+              {/* Extra Dishes */}
+              <DropdownCus
+                handleShowHide={() =>
+                  handleShowHide(showHideExtraDishes, setShowHideExtraDishes)
+                }
+                title="Món ăn thêm"
+                showHide={showHideExtraDishes}
               />
-            ) : null}
+              {showHideExtraDishes ? (
+                <FlatList
+                  scrollEnabled={false}
+                  data={extraDishes}
+                  renderItem={({item, index}) => (
+                    <ItemEditDish
+                      item={item}
+                      index={index}
+                      navigation={navigation}
+                    />
+                  )}
+                  keyExtractor={(item, index) => {
+                    return index.toString();
+                  }}
+                />
+              ) : null}
 
-            {/* Toppings Dishes */}
-            <DropdownCus
-              handleShowHide={() =>
-                handleShowHide(showHideAnother, setShowHideAnother)
-              }
-              title="Khác"
-              showHide={showHideAnother}
-            />
-            {showHideAnother ? (
-              <FlatList
-                data={anotherDishes}
-                renderItem={({item, index}) => (
-                  <ItemEditDish
-                    item={item}
-                    index={index}
-                    navigation={navigation}
-                  />
-                )}
-                keyExtractor={(item, index) => {
-                  return index.toString();
-                }}
+              {/* Toppings Dishes */}
+              <DropdownCus
+                handleShowHide={() =>
+                  handleShowHide(showHideToppings, setShowHideToppings)
+                }
+                title="Toppings"
+                showHide={showHideToppings}
               />
-            ) : null}
+              {showHideToppings ? (
+                <FlatList
+                  scrollEnabled={false}
+                  data={toppingsDishes}
+                  renderItem={({item, index}) => (
+                    <ItemEditDish
+                      item={item}
+                      index={index}
+                      navigation={navigation}
+                    />
+                  )}
+                  keyExtractor={(item, index) => {
+                    return index.toString();
+                  }}
+                />
+              ) : null}
+              {/* Toppings Dishes */}
+              <DropdownCus
+                handleShowHide={() =>
+                  handleShowHide(showHideAnother, setShowHideAnother)
+                }
+                title="Khác"
+                showHide={showHideAnother}
+              />
+              {showHideAnother ? (
+                <FlatList
+                  scrollEnabled={false}
+                  data={anotherDishes}
+                  renderItem={({item, index}) => (
+                    <ItemEditDish
+                      item={item}
+                      index={index}
+                      navigation={navigation}
+                    />
+                  )}
+                  keyExtractor={(item, index) => {
+                    return index.toString();
+                  }}
+                />
+              ) : null}
+            </ScrollView>
           </View>
         </View>
       </View>

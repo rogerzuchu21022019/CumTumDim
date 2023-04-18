@@ -9,14 +9,14 @@ import { constants } from '../../../../../shared/constants';
 
 
 const UploadImage = ({navigation}) => {
-  const moToBack =()=>{
+  const moveToBack =()=>{
     navigation.navigate(Router.EDIT_PROFILE)
   }
   return (
     <View style={styles.container}>
         <View style={styles.header}>
         <View style={styles.groupHeader}>
-            <TouchableOpacity onPress={moToBack}>
+            <TouchableOpacity onPress={moveToBack}>
             <View>
               <IconAntDesign
               name="left"

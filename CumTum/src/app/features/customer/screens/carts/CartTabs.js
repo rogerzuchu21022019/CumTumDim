@@ -8,8 +8,8 @@ import Payment from './payment/Payment';
 import DetailPaymentCartZalo from '../../../../shared/utils/DetailPaymentZalo';
 import PaymentZalo from './paymentZalo/PaymentZalo';
 import ChooseDeliveryAddress from './profilePayment/ChooseDeliveryAddress';
-import EditDeliveryAddrees from './profilePayment/EditDeliveryAddrees/EditDeliveryAddrees';
-import AddDeliveryAddrees from './profilePayment/AddDeliveryAddrees/AddDeliveryAddrees';
+import EditDeliveryAddress from './profilePayment/editDeliveryAddress/EditDeliveryAddress';
+import AddDeliveryAddrees from './profilePayment/addDeliveryAddress/AddDeliveryAddress';
 const CartTabs = () => {
   const Stack = createNativeStackNavigator();
 
@@ -46,21 +46,21 @@ const CartTabs = () => {
             }}
           />
           <Stack.Screen
-            name={Router.DELIVERY_ADDREES}
+            name={Router.DELIVERY_ADDRESS}
             component={ChooseDeliveryAddress}
             options={{
               headerShown: false,
             }}
           />
           <Stack.Screen
-            name={Router.Edit_DELIVERY_ADDREES}
-            component={EditDeliveryAddrees}
+            name={Router.EDIT_DELIVERY_ADDRESS}
+            component={EditDeliveryAddress}
             options={{
               headerShown: false,
             }}
           />
           <Stack.Screen
-            name={Router.ADD_DELIVERY_ADDREES}
+            name={Router.ADD_DELIVERY_ADDRESS}
             component={AddDeliveryAddrees}
             options={{
               headerShown: false,

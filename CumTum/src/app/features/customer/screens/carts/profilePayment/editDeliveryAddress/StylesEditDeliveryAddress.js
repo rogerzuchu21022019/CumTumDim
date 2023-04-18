@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderTopStartRadius: 35,
     borderTopEndRadius: 35,
-    
+    marginBottom: 2,
   },
 
   // body
@@ -63,12 +63,38 @@ const styles = StyleSheet.create({
     flex: 1,
     // backgroundColor: constants.COLOR.GREEN,
     width: '100%',
-    height: '100%',
-    paddingRight: 20,
-    paddingLeft: 20,
-    paddingBottom: 20,
-    paddingTop: 15,
   },
- 
+
+  /* Dropdown */
+  styleBorderWidth: {
+    marginHorizontal:20,
+    paddingVertical: 20,
+    // backgroundColor:'white'
+  },
+  stylesLabel: {
+    position: 'absolute',
+    backgroundColor: constants.COLOR.YELLOW,
+    left: 20,
+    top: 8,
+    zIndex: 999,
+    paddingHorizontal: 8,
+    fontSize: 14,
+    borderRadius: 8,
+  },
+  styleMain: {
+    height: 50,
+    borderColor: constants.COLOR.WHITE,
+    borderWidth: 0.5,
+    borderRadius: 8,
+    paddingHorizontal: 8,
+    backgroundColor: constants.COLOR.WHITE,
+  },
+  placeholderStyle: {
+    // backgroundColor: constants.COLOR.WHITE,
+  },
+  itemContainerStyle: {
+    backgroundColor: constants.COLOR.WHITE,
+  },
+  /* Dropdown */
 });
 export default styles;

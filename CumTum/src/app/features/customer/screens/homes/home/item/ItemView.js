@@ -9,28 +9,22 @@ import {constants} from '../../../../../../shared/constants';
 import styles from './StyleItem';
 import {LOG} from '../../../../../../../../logger.config';
 import {useSelector} from 'react-redux';
-CheckModal
+CheckModal;
 import {productSelector} from '../../../../../product/sliceProduct';
 import CheckModal from '../../../../../../shared/utils/CheckModal';
 const log = LOG.extend('ITEM_VIEW.JS');
 const ItemView = props => {
-  const {item, index, handleAddDish, handleRemoveDish, tabs, valueSubMainDish} =
-    props;
+  const {item, index, handleAddDish, handleRemoveDish, tabs} = props;
 
   const [isModalVisible, setModalVisible] = useState(false);
 
   const message = 'Bạn phải chọn loại sườn !';
   const onDecrease = () => {
     if (tabs.toString() === '0') {
-      if (valueSubMainDish.length != 0) {
-        if (item.amount === 0) {
-          return;
-        }
-        handleRemoveDish(item);
-      } else {
-        Alert.alert(message);
+      if (item.amount === 0) {
         return;
       }
+      handleRemoveDish(item);
     } else {
       if (item.amount === 0) {
         return;
@@ -41,16 +35,7 @@ const ItemView = props => {
 
   const onIncrease = () => {
     if (tabs.toString() === '0') {
-      if (valueSubMainDish.length != 0) {
-        log.error('🚀 ~ file: ItemView.js:28 ~ onIncrease ~ item:', item);
-        handleAddDish(item);
-      } else {
-        valueSubMainDish.length = 0;
-
-        setModalVisible
-        setModalVisible(true);
-        return;
-      }
+      handleAddDish(item);
     } else {
       handleAddDish(item);
     }
@@ -130,10 +115,10 @@ const ItemView = props => {
         <View style={styles.footer}></View>
       </View>
       <CheckModal
-            isModalVisible={isModalVisible}
-            setModalVisible={setModalVisible}
-            message={message}
-          />
+        isModalVisible={isModalVisible}
+        setModalVisible={setModalVisible}
+        message={message}
+      />
     </SafeKeyComponent>
   );
 };

@@ -1,11 +1,9 @@
-import {View, Text, TouchableOpacity, TextInput} from 'react-native';
-import React from 'react';
-import styles from './stylesItemEditDeliveryAddress';
-import SafeKeyComponent from '../../../../../../components/safe_area/SafeKeyComponent';
-const ItemEditDeliveryAddrees = ({item, navigation, index}) => {
+import { View, Text,TextInput } from 'react-native'
+import React from 'react'
+import styles from  './stylesItemAddDeliveryAddress'
+const itemAddDeliveryAddrees = ({item, navigation, index}) => {
   return (
-    <SafeKeyComponent>
-     <View style={styles.groupAll}>
+    <View style={styles.groupAll}>
             <View style={styles.item}>
               <View style={styles.viewTitle1}>
                 <Text style={styles.textTitle1}>Thông tin liên hệ</Text>
@@ -54,8 +52,5 @@ const ItemEditDeliveryAddrees = ({item, navigation, index}) => {
               </View>
             </View>
           </View>
-    </SafeKeyComponent>
-  );
-};
-
-export default ItemEditDeliveryAddrees;
+  )
+}

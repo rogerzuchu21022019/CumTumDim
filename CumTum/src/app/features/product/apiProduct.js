@@ -114,6 +114,40 @@ export const fetchAddDish = createAsyncThunk(
   },
 );
 
+export const fetchDeleteDish = createAsyncThunk(
+  constants.FETCH.DELETE_DISH,
+  async dishId => {
+    const response = await AxiosInstance().post(
+      `/products/delete-dish/${dishId}`,
+    );
+    log.info(
+      '🚀 ~ file: apiProduct.js:128 ~ response ~ response:',
+      response.data,
+    );
+
+    return response.data;
+  },
+);
+
+export const fetchUpdateDish = createAsyncThunk(
+  constants.FETCH.UPDATE_DISH,
+  async data => {
+    log.error('🚀 ~ file: apiProduct.js:120 ~ data:', data);
+    const response = await AxiosInstance().post(
+      `/products/update-dish-by-id/${data.dishId}`,
+      {
+        dish: data.dish,
+      },
+    );
+    log.info(
+      '🚀 ~ file: apiProduct.js:128 ~ response ~ response:',
+      response.data,
+    );
+
+    return response.data;
+  },
+);
+
 export const fetchDishes = createAsyncThunk(
   constants.FETCH.FIND_DISHES,
   async () => {

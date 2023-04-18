@@ -17,7 +17,7 @@ import HomeAdmin from '../../../../admin/screens/homeAdmin/HomeAdmin';
 import {FlashList} from '@shopify/flash-list';
 import ItemViewPayment from './item/itemViewDeliveryAddress';
 import Router from '../../../../../navigation/Router';
-import AddDeliveryAddrees from './AddDeliveryAddrees/AddDeliveryAddrees';
+import AddDeliveryAddrees from './addDeliveryAddress/AddDeliveryAddress';
 import {LOG} from '../../../../../../../logger.config';
 const log = LOG.extend(`CHOOSE_DELIVERY_ADDRESS.JS`);
 const ChooseDeliveryAddress = ({navigation}) => {
@@ -26,7 +26,7 @@ const ChooseDeliveryAddress = ({navigation}) => {
     navigation.goBack();
   };
   const add = () => {
-    navigation.navigate(Router.ADD_DELIVERY_ADDREES);
+    navigation.navigate(Router.ADD_DELIVERY_ADDRESS);
   };
 
   const array = [

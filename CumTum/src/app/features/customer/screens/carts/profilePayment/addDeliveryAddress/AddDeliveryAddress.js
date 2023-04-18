@@ -6,14 +6,12 @@ import FastImage from 'react-native-fast-image';
 import {constants} from '../../../../../../shared/constants';
 import IconEntypo from 'react-native-vector-icons/Entypo';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
-import styles from './StylesEditDeliveryAddrees';
-import {FlashList} from '@shopify/flash-list';
-import ItemDeliveryAddrees from '../item/ItemEditDeliveryAddrees';
-import ItemEditDeliveryAddrees from '../item/ItemEditDeliveryAddrees';
-import ButtonCus from '../../../../../../components/button/ButtonCus';
+import styles from './StylesAddDeliveryAddress';
+import { FlashList } from '@shopify/flash-list';
+import ItemAddDeliveryAddrees from '../item/itemAddDeliveryAddress';
 
-const EditDeliveryAddrees = ({navigation}) => {
-  const moToBack = () => {
+const AddDeliveryAddrees = ({navigation}) => {
+  const moveToBack = () => {
     navigation.goBack();
   };
   const array = [
@@ -33,7 +31,7 @@ const EditDeliveryAddrees = ({navigation}) => {
       <View style={styles.container}>
         <View style={styles.header}>
           <View style={styles.groupHeader}>
-            <TouchableOpacity onPress={moToBack}>
+            <TouchableOpacity onPress={moveToBack}>
               <View>
                 <IconAntDesign
                   name="left"
@@ -43,11 +41,12 @@ const EditDeliveryAddrees = ({navigation}) => {
               </View>
             </TouchableOpacity>
             <View style={styles.profile}>
-              <Text style={styles.textProfile}>Sửa địa chỉ giao hàng</Text>
+              <Text style={styles.textProfile}>Thêm địa chỉ giao hàng</Text>
             </View>
             <View style={styles.groupHeader}></View>
           </View>
         </View>
+        <View style={styles.divideLine}></View>
         <View style={styles.body}>
           <View style={styles.viewFlashList}>
             <FlashList
@@ -57,7 +56,7 @@ const EditDeliveryAddrees = ({navigation}) => {
               estimatedItemSize={200}
               renderItem={({item, index}) => {
                 return (
-                  <ItemEditDeliveryAddrees
+                  <ItemAddDeliveryAddrees
                     item={item}
                     index={index}
                     navigation={navigation}
@@ -69,11 +68,15 @@ const EditDeliveryAddrees = ({navigation}) => {
           </View>
         </View>
         <View style={styles.footer}>
-          <ButtonCus title="Lưu" />
+          <TouchableOpacity>
+            <View style={styles.btnSave}>
+              <Text style={styles.textSave}>Lưu</Text>
+            </View>
+          </TouchableOpacity>
         </View>
       </View>
     </SafeKeyComponent>
   );
 };
 
-export default EditDeliveryAddrees;
+export default AddDeliveryAddrees;

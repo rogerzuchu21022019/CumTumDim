@@ -65,7 +65,7 @@ const PaymentZalo = ({route,navigation}) => {
     [`Tổng tiền : ${data?.moneyToPaid} K`],
   ]);
 
-  const moToBack = () => {
+  const moveToBack = () => {
     navigation.goBack();
   };
 
@@ -74,7 +74,7 @@ const PaymentZalo = ({route,navigation}) => {
       <View style={styles.container}>
         <View style={styles.header}>
           <View style={styles.groupHeader}>
-            <TouchableOpacity onPress={moToBack}>
+            <TouchableOpacity onPress={moveToBack}>
               <View style={styles.icon}>
                 <IconAntDesign
                   name="left"

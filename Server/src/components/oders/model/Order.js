@@ -143,6 +143,7 @@ const OrderSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
+    address: [],
   },
   {
     timestamps: true,

@@ -41,6 +41,7 @@
     "react-native-date-picker": "^4.2.9",
     "react-native-dropdown-picker": "^5.4.6",
     "react-native-dropdown-select-list": "^2.0.4",
+    "react-native-element-dropdown": "^2.9.0",
     "react-native-fast-image": "^8.6.3",
     "react-native-image-crop-picker": "^0.39.0",
     "react-native-logs": "^5.0.1",

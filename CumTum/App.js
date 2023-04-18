@@ -25,7 +25,6 @@ import LoginScreen from './src/app/features/auth/login/Login';
 import SplashScreen from './src/app/features/auth/splashScreen/SplashScreen';
 import UpdateInformation from './src/app/features/auth/updateInformation/UpdateInformation';
 
-
 import Payment from './src/app/features/customer/screens/carts/payment/Payment';
 import EditProfile from './src/app/features/customer/screens/profiles/editProfile/EditProfile';
 import UploadImage from './src/app/features/customer/screens/profiles/uploadImage/UploadImage';
@@ -35,6 +34,7 @@ let persistor = persistStore(Store);
 import CartNoItem from './src/app/features/customer/screens/carts/cart/cartWithNoItem/CartNoItem';
 import socketServices from './src/app/shared/utils/Socket';
 import RingBellAdmin from './src/app/features/admin/screens/homeAdmin/ringBellAdmin/RingBellAdmin';
+import EditDeliveryAddress from './src/app/features/customer/screens/carts/profilePayment/editDeliveryAddress/EditDeliveryAddress';
 const App = () => {
   const Stack = createNativeStackNavigator();
 
@@ -122,7 +122,7 @@ const App = () => {
                 presentation: 'modal',
               }}
             />
-         
+
             <Stack.Screen
               name={Router.PAYMENT}
               component={Payment}
@@ -133,6 +133,13 @@ const App = () => {
             <Stack.Screen
               name={Router.CART_WITH_NO_ITEM}
               component={CartNoItem}
+              options={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name={Router.EDIT_DELIVERY_ADDRESS}
+              component={EditDeliveryAddress}
               options={{
                 headerShown: false,
               }}

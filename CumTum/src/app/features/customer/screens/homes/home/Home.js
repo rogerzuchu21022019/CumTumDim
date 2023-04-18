@@ -39,15 +39,28 @@ import socketServices from '../../../../../shared/utils/Socket';
 import Router from '../../../../../navigation/Router';
 import {formatCodeOrder} from '../../../../../shared/utils/CreateCodeOrder';
 import {authSelector} from '../../../../admin/sliceAuth';
+import ModalNotify from '../../../../../components/modal/ModalNotify';
+import DropdownElement from '../../../../../components/dropdownElement/DropdownElement';
 
 const HomeCustomer = ({navigation}) => {
   const log = LOG.extend('HOME_CUSTOMER.js');
   const dispatch = useDispatch();
-  const user = useSelector(authSelector);
+  const authSelect = useSelector(authSelector);
   log.info(
     '🚀 ~ file: Home.js:47 ~ HomeCustomer ~ notifications:',
-    user.notifications,
+    authSelect.notifications,
   );
+
+  const userInfo = {
+    name: authSelect.user.name,
+    phone: authSelect.user.phone,
+    address: authSelect.user.address,
+  };
+
+  const message1 = `Bạn chưa cập nhật địa chỉ giao hàng!!`;
+  const message2 = `Vui lòng cập nhật địa chỉ`;
+  const message3 = `để chúng tôi có thể giao hàng cho bạn`;
+
   const cartSelect = useSelector(cartSelector);
   const IMAGE_BG =
     'https://cdn.britannica.com/38/111338-050-D23BE7C8/Stars-NGC-290-Hubble-Space-Telescope.jpg?w=400&h=300&c=crop';
@@ -59,7 +72,20 @@ const HomeCustomer = ({navigation}) => {
   const [isShowDropdown, setIsShowDropdown] = useState(true);
   const [openSubMainDish, setOpenSubMainDish] = useState(false);
   const [valueSubMainDish, setValueSubMainDish] = useState([]);
-  const [listSubMainDish, setListSubMainDish] = useState(mainDishOptionsData);
+  const [value, setValue] = useState(mainDishOptionsData[0].value);
+  // const [listSubMainDish, setListSubMainDish] = useState(mainDishOptionsData);
+
+  /* State Modal Address */
+  const [isShowModal, setIsShowModal] = useState(false);
+  const [isCancel, setIsCancel] = useState(false);
+  const [isAddress, setIsAddress] = useState(false);
+
+  const address = authSelect.user.address;
+  const handleClick = () => {
+    setIsShowModal(!isShowModal);
+    setIsAddress(!isAddress);
+  };
+
   const style = styles.dropdownList;
   const placeholder = 'Chọn loại sườn';
   /* Fetch API and dispatch action type to store */
@@ -67,7 +93,6 @@ const HomeCustomer = ({navigation}) => {
   useEffect(() => {
     socketServices.initializeSocket();
 
-  
     socketServices.on(constants.SOCKET.UPDATE_ORDER, data => {
       log.error('🚀 ~ file: Home.js:82 ~ socketServices.on ~ data:', data);
       onDisplayNotiAccepted(data);
@@ -77,12 +102,18 @@ const HomeCustomer = ({navigation}) => {
     });
 
     socketServices.on(constants.SOCKET.UPDATE_NOTIFICATION_CUSTOMER, data => {
-      log.info("🚀 ~ file: Home.js:79 ~ useEffect ~ data:", data)
+      log.info('🚀 ~ file: Home.js:79 ~ useEffect ~ data:', data);
     });
 
     return () => {
       socketServices.socket.disconnect();
     };
+  }, []);
+
+  useEffect(() => {
+    if (address.length === 0) {
+      handleClick();
+    }
   }, []);
 
   const onCreateHistoryCart = order => ({
@@ -331,24 +362,26 @@ const HomeCustomer = ({navigation}) => {
                   blurRadius={20}
                 />
                 <View style={styles.boxDropdownList}>
-                  <DropdownPicker
-                    style={style}
-                    openSubMainDish={openSubMainDish}
-                    valueSubMainDish={valueSubMainDish}
-                    listSubMainDish={listSubMainDish}
-                    setOpenSubMainDish={setOpenSubMainDish}
-                    setValueSubMainDish={setValueSubMainDish}
-                    setListSubMainDish={setListSubMainDish}
-                    placeholder={placeholder}
-                    colorIconArrow={constants.COLOR.WHITE}
-                    colorCloseIcon={constants.COLOR.WHITE}
-                    colorPlaceholder={constants.COLOR.WHITE}
+                  <DropdownElement
+                    data={mainDishOptionsData}
+                    value={value}
+                    setValue={setValue}
+                    title="Chọn loại sườn"
+                    placeholder="Chọn loại sườn"
+                    styleBorderWidth={styles.styleBorderWidth}
+                    selectedTextStyle={styles.selectedTextStyle}
+                    stylesLabel={styles.stylesLabel}
+                    style={styles.styleMain}
+                    placeholderStyle={styles.placeholderStyle}
+                    itemContainerStyle={styles.itemContainerStyle}
+                    defaultColor={constants.COLOR.WHITE}
+                    styleTextTitle={styles.styleTextTitle}
                   />
                 </View>
 
                 <FlashList
                   data={
-                    valueSubMainDish[0] === 'Sườn mỡ'
+                    value === 'Sườn mỡ'
                       ? data.mainDishes.filter(
                           item => item.subCategory === 'Sườn mỡ',
                         )
@@ -363,8 +396,6 @@ const HomeCustomer = ({navigation}) => {
                       tabs={tabs}
                       handleAddDish={handleAddDish}
                       handleRemoveDish={handleRemoveDish}
-                      valueSubMainDish={valueSubMainDish}
-                      mainDishCart={data.mainDishCart}
                     />
                   )}
                   keyExtractor={(item, index) => index.toString()}
@@ -439,6 +470,17 @@ const HomeCustomer = ({navigation}) => {
           </View>
         </View>
         <View style={styles.divideLine}></View>
+        <ModalNotify
+          message1={message1}
+          message2={message2}
+          message3={message3}
+          isShowModal={isShowModal}
+          isCancel={isCancel}
+          handleClick={handleClick}
+          navigation={navigation}
+          isAddress={isAddress}
+          item={userInfo}
+        />
         {/* <View style={styles.footer}></View> */}
       </View>
     </SafeKeyComponent>

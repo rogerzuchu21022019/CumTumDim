@@ -24,12 +24,12 @@ export const constants = {
       'EPscZ2cKSvwcybfeIbQksSxlCJVZDGuzAMy0skSzZJIJ2NL4yJUUuKaC6Ve2fi9kHzgnWZOpfSPPU_Oi',
   },
   BASE_URL: {
-    MAIN: 'http://192.168.1.2:3000/api',
+    MAIN: 'http://192.168.2.12:3000/api',
     // MAIN: 'http://192.168.2.7:3000/api',
     SECOND: 'https://cumtumdim.becofoodstore.click/api',
   },
   SOCKET: {
-    URL: 'http://192.168.1.2:3000',
+    URL: 'http://192.168.2.12:3000',
     CONNECTION: 'connection',
     CONNECT: 'connect',
     DISCONNECT: 'disconnect',
@@ -41,6 +41,7 @@ export const constants = {
     UPDATE_NOTIFICATION_ADMIN: 'update-notification-admin',
     PUSH_NOTIFICATION_CUSTOMER: 'push-notification-customer',
     UPDATE_NOTIFICATION_CUSTOMER: 'update-notification-customer',
+    LISTEN_FROM_EDIT_DELIVERY_ADDRESS:'listenFromEditDeliveryAddress'
   },
   ROLE: {
     ADMIN: 'admin',
@@ -63,12 +64,17 @@ export const constants = {
     USER_BY_ID: 'fetchUserById',
     UPLOAD_IMAGE: 'fetchUploadImage',
     SIGN_OUT: 'fetchSignOut',
+
     ADD_CATEGORY: 'fetchAddCategory',
     UPDATE_CATEGORY_BY_ID: 'fetchUpdateCategoryById',
     DELETE_CATEGORY_BY_ID: 'fetchDeleteCategoryById',
     FIND_CATEGORIES: 'fetchCategories',
+
     ADD_DISH: 'fetchAddDish',
+    UPDATE_DISH: 'fetchUpdateDish',
+    DELETE_DISH: 'fetchDeleteDish',
     FIND_DISHES: 'fetchDishes',
+
     CREATE_ORDER: 'fetchCreateOrder',
     FIND_ORDERS: 'fetchOrders',
     FIND_RABBIT: 'fetchRabbit',

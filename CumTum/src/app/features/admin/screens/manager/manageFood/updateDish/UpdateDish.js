@@ -8,7 +8,7 @@ import {
   Platform,
   Alert,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import styles from './StyleUpdateDish';
 import SafeKeyComponent from '../../../../../../components/safe_area/SafeKeyComponent';
 import FastImage from 'react-native-fast-image';
@@ -19,6 +19,12 @@ import {androidCameraPermission} from '../../../../../../shared/utils/Permission
 import {onCamera, onGallery} from '../../../../../../shared/utils/Camera';
 import ButtonCus from '../../../../../../components/button/ButtonCus';
 import BoxInputCus from '../../../../../../components/input/BoxInput';
+import {useDispatch} from 'react-redux';
+import {
+  fetchDishes,
+  fetchUpdateDish,
+  fetchUploadImage,
+} from '../../../../../product/apiProduct';
 
 const UpdateDish = ({navigation, route}) => {
   const {item} = route.params;
@@ -27,8 +33,37 @@ const UpdateDish = ({navigation, route}) => {
   const [isPicked, setIsPicked] = useState(false);
   const [name, setName] = useState(item.name);
   const [price, setPrice] = useState(item.price);
-  const handleSave = () => {
-    navigation.goBack();
+  const nameRef = useRef(item.name);
+  const priceRef = useRef(item.price);
+  const dispatch = useDispatch();
+  const handleNameChange = text => {
+    setName(text);
+    nameRef.current = text;
+  };
+
+  const handlePriceChange = text => {
+    setPrice(text);
+    priceRef.current = text;
+  };
+
+  const handleSave = async () => {
+    const newName = nameRef.current;
+    const newPrice = priceRef.current;
+
+    const res = await dispatch(fetchUploadImage(avatar));
+    const imageUrl = res.payload.data;
+    const dish = {
+      name: newName,
+      price: newPrice,
+      imageUrl: imageUrl,
+    };
+
+    const data = {
+      dishId: item._id,
+      dish: dish,
+    };
+    dispatch(fetchUpdateDish(data));
+    navigation.navigate(Router.MANAGE_FOOD);
   };
 
   const moveToScreen = name => {
@@ -113,7 +148,7 @@ const UpdateDish = ({navigation, route}) => {
                 <FastImage
                   style={styles.itemImage}
                   source={{
-                    uri: item.imageUrl,
+                    uri: avatar ? avatar : item.imageUrl,
                   }}
                 />
               </TouchableOpacity>
@@ -123,13 +158,13 @@ const UpdateDish = ({navigation, route}) => {
                 value={name}
                 icon={null}
                 title="Tên món ăn"
-                onChangeText={textName => setName(textName)}
+                onChangeText={handleNameChange}
               />
               <BoxInputCus
                 value={`${price}`}
                 icon={null}
                 title="Giá (K)"
-                onChangeText={textPrice => setPrice(textPrice)}
+                onChangeText={handlePriceChange}
               />
             </View>
           </View>

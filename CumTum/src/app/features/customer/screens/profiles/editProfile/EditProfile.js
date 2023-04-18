@@ -9,7 +9,7 @@ import IconEntypo from 'react-native-vector-icons/Entypo';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
 
 const EditProfile = ({navigation}) => {
-  const moToBack = () => {
+  const moveToBack = () => {
     navigation.navigate(Router.PROFILE);
   };
   
@@ -21,7 +21,7 @@ const EditProfile = ({navigation}) => {
       <View style={styles.container}>
         <View style={styles.header}>
           <View style={styles.groupHeader}>
-            <TouchableOpacity onPress={moToBack}>
+            <TouchableOpacity onPress={moveToBack}>
               <View>
                 <IconAntDesign
                   name="left"

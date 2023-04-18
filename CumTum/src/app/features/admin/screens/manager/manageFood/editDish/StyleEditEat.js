@@ -4,6 +4,7 @@ const StyleEditEat = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'black',
+    width: '100%',
   },
   // header
   header: {
@@ -58,12 +59,15 @@ const StyleEditEat = StyleSheet.create({
     flex: 12,
     backgroundColor: '#252121',
     alignItems: 'center',
+    width: '100%',
+    height: '100%',
   },
   boxFlashList: {
     marginTop: 10,
     width: '100%',
     paddingHorizontal: 20,
   },
+
   nameTitle: {
     color: 'white',
     fontSize: 20,

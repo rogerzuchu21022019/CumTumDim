@@ -60,17 +60,17 @@ const UpdateTypeFood = ({navigation, route}) => {
     const newName = nameRef.current
     console.log("🚀 ~ file: UpdateTypeFood.js:61 ~ handleSave ~ newName:", newName)
 
-    // if (name === item.name) {
-    //   return;
-    // }
+    if (newName === item.name) {
+      return;
+    }
 
-    // if (name === '' || name === undefined) {
-    //   handleClick();
-    //   return;
-    // } else {
-    //   dispatch(fetchUpdateCategory(data));
-    //   handleSuccess();
-    // }
+    if (newName === '' || newName === undefined) {
+      handleClick();
+      return;
+    } else {
+      dispatch(fetchUpdateCategory(data));
+      handleSuccess();
+    }
   };
 
   const handleClick = () => {

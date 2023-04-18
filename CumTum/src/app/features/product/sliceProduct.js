@@ -5,8 +5,10 @@ import {
   fetchAddDish,
   fetchCategories,
   fetchDeleteCategory,
+  fetchDeleteDish,
   fetchDishes,
   fetchUpdateCategory,
+  fetchUpdateDish,
   fetchUploadImage,
 } from './apiProduct';
 
@@ -326,12 +328,13 @@ export const sliceProduct = createSlice({
       state.data = dataResponse.data;
     });
     builder.addCase(fetchAddCategory.rejected, (state, action) => {
-      state.isLoading = false;
-      state.error = true;
-      state.message = action.payload;
+      const dataResponse = action.payload;
+      state.isLoading = dataResponse.isLoading;
+      state.error = dataResponse.error;
+      state.message = dataResponse.message;
     });
 
-    /* Upload Category */
+    /* Update Category */
     builder.addCase(fetchUpdateCategory.pending, (state, action) => {
       state.isLoading = true;
     });
@@ -345,9 +348,10 @@ export const sliceProduct = createSlice({
       );
     });
     builder.addCase(fetchUpdateCategory.rejected, (state, action) => {
-      state.isLoading = false;
-      state.error = true;
-      state.message = action.payload;
+      const dataResponse = action.payload;
+      state.isLoading = dataResponse.isLoading;
+      state.error = dataResponse.error;
+      state.message = dataResponse.message;
     });
 
     /* Delete Category */
@@ -361,9 +365,10 @@ export const sliceProduct = createSlice({
       state.error = dataResponse.error;
     });
     builder.addCase(fetchDeleteCategory.rejected, (state, action) => {
-      state.isLoading = false;
-      state.error = true;
-      state.message = action.payload;
+      const dataResponse = action.payload;
+      state.isLoading = dataResponse.isLoading;
+      state.error = dataResponse.error;
+      state.message = dataResponse.message;
     });
 
     /* Upload image */
@@ -378,10 +383,13 @@ export const sliceProduct = createSlice({
       state.data = dataResponse.data;
     });
     builder.addCase(fetchUploadImage.rejected, (state, action) => {
-      state.isLoading = false;
-      state.error = true;
-      state.message = action.payload;
+      const dataResponse = action.payload;
+      state.isLoading = dataResponse.isLoading;
+      state.error = dataResponse.error;
+      state.message = dataResponse.message;
     });
+
+    /* Categories */
     builder.addCase(fetchCategories.pending, state => {
       state.isLoading = true;
     });
@@ -393,11 +401,13 @@ export const sliceProduct = createSlice({
       state.categories = dataResponse.data;
     });
     builder.addCase(fetchCategories.rejected, (state, action) => {
-      state.isLoading = false;
-      state.error = true;
-      state.message = action.payload;
+      const dataResponse = action.payload;
+      state.isLoading = dataResponse.isLoading;
+      state.error = dataResponse.error;
+      state.message = dataResponse.message;
     });
 
+    /* Add Dish */
     builder.addCase(fetchAddDish.pending, state => {
       state.isLoading = true;
     });
@@ -410,15 +420,53 @@ export const sliceProduct = createSlice({
       state.dishes.unshift(dataResponse.data);
     });
     builder.addCase(fetchAddDish.rejected, (state, action) => {
-      state.isLoading = false;
-      state.error = true;
-      state.message = action.payload;
+      const dataResponse = action.payload;
+      state.isLoading = dataResponse.isLoading;
+      state.error = dataResponse.error;
+      state.message = dataResponse.message;
     });
-    //
+
+    /* Update DISH */
+    builder.addCase(fetchUpdateDish.pending, state => {
+      state.isLoading = true;
+    });
+    builder.addCase(fetchUpdateDish.fulfilled, (state, action) => {
+      const dataResponse = action.payload;
+      state.isLoading = dataResponse.isLoading;
+      state.message = dataResponse.message;
+      state.error = dataResponse.error;
+      state.dishes.forEach(item =>
+        item._id === dataResponse.data._id ? dataResponse.data : item,
+      );
+    });
+    builder.addCase(fetchUpdateDish.rejected, (state, action) => {
+      const dataResponse = action.payload;
+      state.isLoading = dataResponse.isLoading;
+      state.error = dataResponse.error;
+      state.message = dataResponse.message;
+    });
+
+    /* Delete Dish */
+    builder.addCase(fetchDeleteDish.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(fetchDeleteDish.fulfilled, (state, action) => {
+      const dataResponse = action.payload;
+      state.isLoading = dataResponse.isLoading;
+      state.message = dataResponse.message;
+      state.error = dataResponse.error;
+    });
+    builder.addCase(fetchDeleteDish.rejected, (state, action) => {
+      const dataResponse = action.payload;
+      state.isLoading = dataResponse.isLoading;
+      state.error = dataResponse.error;
+      state.message = dataResponse.message;
+    });
+
+    /* Dishes */
     builder.addCase(fetchDishes.pending, state => {
       state.isLoading = true;
     });
-
     builder.addCase(fetchDishes.fulfilled, (state, action) => {
       const dataResponse = action.payload;
       state.isLoading = false;
