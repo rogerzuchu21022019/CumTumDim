@@ -1,5 +1,14 @@
-import {View, Text, TextInput, TouchableOpacity} from 'react-native';
-import React from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  ScrollView,
+  TouchableNativeFeedback,
+  Alert,
+  Switch,
+} from 'react-native';
+import React, {useEffect, useState} from 'react';
 import SafeKeyComponent from '../../../../../../components/safe_area/SafeKeyComponent';
 
 import FastImage from 'react-native-fast-image';
@@ -7,25 +16,81 @@ import {constants} from '../../../../../../shared/constants';
 import IconEntypo from 'react-native-vector-icons/Entypo';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
 import styles from './StylesAddDeliveryAddress';
-import { FlashList } from '@shopify/flash-list';
-import ItemAddDeliveryAddrees from '../item/itemAddDeliveryAddress';
+import {FlashList} from '@shopify/flash-list';
+import ItemEditDeliveryAddress from '../item/ItemEditDeliveryAddress';
+import ButtonCus from '../../../../../../components/button/ButtonCus';
+import {LOG} from '../../../../../../../../logger.config';
+import Router from '../../../../../../navigation/Router';
+import {useDispatch} from 'react-redux';
+import {fetchDishes} from '../../../../../product/apiProduct';
+import socketServices from '../../../../../../shared/utils/Socket';
+import BoxInputCus from '../../../../../../components/input/BoxInput';
+import DropdownElement from '../../../../../../components/dropdownElement/DropdownElement';
+import {LIST_STREET, WARDS} from '../../../../../../shared/utils/DataAddress';
+import ModalNotify from '../../../../../../components/modal/ModalNotify';
 
-const AddDeliveryAddrees = ({navigation}) => {
+const log = LOG.extend(`EDIT_DELIVERY_ADDRESS.JS`);
+const AddDeliveryAddress = ({navigation}) => {
+  
+
+  /* States user info*/
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [ward, setWard] = useState('');
+  const [district, setDistrict] = useState('12');
+  const [city, setCity] = useState('Hồ Chí Minh');
+  const [street, setStreet] = useState('');
+
+  const [isShowModal, setIsShowModal] = useState(false);
+  const [houseNumber, setHouseNumber] = useState('');
+  const dispatch = useDispatch();
   const moveToBack = () => {
+    if (
+      name === '' ||
+      name === undefined ||
+      phone === '' ||
+      phone === undefined ||
+      ward === '' ||
+      ward === undefined ||
+      district === '' ||
+      district === undefined ||
+      city === '' ||
+      city === undefined ||
+      street === '' ||
+      street === undefined ||
+      houseNumber === '' ||
+      houseNumber === undefined
+    ) {
+      handleClick();
+      return;
+    } else {
+      const newAddress = {
+        name: name,
+        phone: phone,
+        ward: ward,
+        district: district,
+        city: city,
+        street: street,
+        houseNumber: houseNumber,
+      };
+      log.info(
+        '🚀 ~ file: EditDeliveryAddress.js:52 ~ moveToBack ~ newAddress:',
+        newAddress,
+      );
+    }
     navigation.goBack();
   };
-  const array = [
-    {
-      id: 1,
-      name: 'Võ Ngọc Phước',
-      phone: '0342128462',
-      street: 'Tô Ký',
-      houseNumber: '413',
-      district: ' Hóc Môn',
-      ward: 'Trung Mỹ Tây',
-      city: 'Hồ Chí Minh',
-    },
-  ];
+
+  const handleClick = () => {
+    setIsShowModal(!isShowModal);
+  };
+
+  const [isEnabled, setIsEnabled] = useState(false);
+
+  const toggleSwitch = () => {
+    setIsEnabled(previousState => !previousState);
+  };
+
   return (
     <SafeKeyComponent>
       <View style={styles.container}>
@@ -46,37 +111,109 @@ const AddDeliveryAddrees = ({navigation}) => {
             <View style={styles.groupHeader}></View>
           </View>
         </View>
-        <View style={styles.divideLine}></View>
         <View style={styles.body}>
-          <View style={styles.viewFlashList}>
-            <FlashList
-              showsHorizontalScrollIndicator={false}
-              showsVerticalScrollIndicator={false}
-              data={array}
-              estimatedItemSize={200}
-              renderItem={({item, index}) => {
-                return (
-                  <ItemAddDeliveryAddrees
-                    item={item}
-                    index={index}
-                    navigation={navigation}
+          {/*  I need  import ScrollView as file i imported */}
+          <ScrollView
+            scrollEnabled={true}
+            scrollEventThrottle={16}
+            showsHorizontalScrollIndicator={false}
+            showsVerticalScrollIndicator={false}
+            decelerationRate={'fast'}>
+            <TouchableNativeFeedback>
+              <View style={styles.viewFlashList}>
+                <BoxInputCus
+                  title="Họ và tên người nhận"
+                  value={name}
+                  keyboardType="ascii-capable"
+                  onChangeText={text => setName(text)}
+                  placeholder="Nhập họ và tên người nhận"
+                />
+
+                <BoxInputCus
+                  title="Số điện thoại người nhận"
+                  value={phone}
+                  keyboardType="numeric"
+                  onChangeText={text => setPhone(text)}
+                  placeholder="Nhập số điện thoại người nhận"
+                />
+
+                <DropdownElement
+                  data={WARDS}
+                  value={ward}
+                  setValue={setWard}
+                  title="Chọn phường"
+                  placeholder="Chọn phường"
+                  styleBorderWidth={styles.styleBorderWidth}
+                  stylesLabel={styles.stylesLabel}
+                  style={styles.styleMain}
+                  placeholderStyle={styles.placeholderStyle}
+                  itemContainerStyle={styles.itemContainerStyle}
+                />
+
+                <View>
+                  <BoxInputCus
+                    title="Số nhà"
+                    value={houseNumber}
+                    onChangeText={text => setHouseNumber(text)}
+                    placeholder="Nhập số nhà"
                   />
-                );
-              }}
-              keyExtractor={(item, index) => index.toString()}
-            />
-          </View>
+                </View>
+
+                <DropdownElement
+                  data={LIST_STREET}
+                  value={street}
+                  setValue={setStreet}
+                  title="Chọn đường"
+                  placeholder="Chọn đường"
+                  styleBorderWidth={styles.styleBorderWidth}
+                  stylesLabel={styles.stylesLabel}
+                  style={styles.styleMain}
+                  placeholderStyle={styles.placeholderStyle}
+                  itemContainerStyle={styles.itemContainerStyle}
+                />
+
+                <BoxInputCus
+                  title="Quận"
+                  value={district}
+                  editable={false}
+                  onChangeText={text => setDistrict(text)}
+                />
+
+                <BoxInputCus
+                  title="Thành phố"
+                  value={city}
+                  editable={false}
+                  onChangeText={text => setCity(text)}
+                />
+                <View style={styles.viewAll}>
+                  <View style={styles.viewText}>
+                    <Text style={styles.text}>Đặt làm địa chỉ mặc định</Text>
+                  </View>
+                  <View style={styles.viewSwitch}>
+                    <Switch
+                      trackColor={{false: constants.COLOR.WHITE, true: constants.COLOR.WHITE}}
+                      thumbColor={isEnabled ? constants.COLOR.ORANGE : constants.COLOR.ORANGE}
+                      ios_backgroundColor="#3e3e3e"
+                      onValueChange={toggleSwitch}
+                      value={isEnabled}
+                    />
+                  </View>
+                </View>
+              </View>
+            </TouchableNativeFeedback>
+          </ScrollView>
         </View>
         <View style={styles.footer}>
-          <TouchableOpacity>
-            <View style={styles.btnSave}>
-              <Text style={styles.textSave}>Lưu</Text>
-            </View>
-          </TouchableOpacity>
+          <ButtonCus title="Lưu" onHandleClick={moveToBack} />
         </View>
+        <ModalNotify
+          message1="Bạn vui lòng điền đầy đủ thông tin"
+          isShowModal={isShowModal}
+          handleClick={handleClick}
+        />
       </View>
     </SafeKeyComponent>
   );
 };
 
-export default AddDeliveryAddrees;
+export default AddDeliveryAddress;

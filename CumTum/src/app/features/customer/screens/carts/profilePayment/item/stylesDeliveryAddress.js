@@ -94,6 +94,7 @@ const styles = StyleSheet.create({
     flex:1,
   },
   boxPrice: {
+
     flexDirection:'row',
     flex: 1,
   

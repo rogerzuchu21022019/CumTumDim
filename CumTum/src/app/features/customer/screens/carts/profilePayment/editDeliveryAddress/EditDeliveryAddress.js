@@ -6,6 +6,7 @@ import {
   ScrollView,
   TouchableNativeFeedback,
   Alert,
+  Switch,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import SafeKeyComponent from '../../../../../../components/safe_area/SafeKeyComponent';
@@ -25,7 +26,7 @@ import {fetchDishes} from '../../../../../product/apiProduct';
 import socketServices from '../../../../../../shared/utils/Socket';
 import BoxInputCus from '../../../../../../components/input/BoxInput';
 import DropdownElement from '../../../../../../components/dropdownElement/DropdownElement';
-import {LIST_STREET, WARDS} from './dataAddress/DataAddress';
+import {LIST_STREET, WARDS} from '../../../../../../shared/utils/DataAddress';
 import ModalNotify from '../../../../../../components/modal/ModalNotify';
 
 const log = LOG.extend(`EDIT_DELIVERY_ADDRESS.JS`);
@@ -77,10 +78,17 @@ const EditDeliveryAddress = ({navigation, route}) => {
         newAddress,
       );
     }
+    navigation.goBack();
   };
 
   const handleClick = () => {
     setIsShowModal(!isShowModal);
+  };
+
+  const [isEnabled, setIsEnabled] = useState(false);
+
+  const toggleSwitch = () => {
+    setIsEnabled(previousState => !previousState);
   };
 
   return (
@@ -177,6 +185,20 @@ const EditDeliveryAddress = ({navigation, route}) => {
                   editable={false}
                   onChangeText={text => setCity(text)}
                 />
+                <View style={styles.viewAll}>
+                  <View style={styles.viewText}>
+                    <Text style={styles.text}>Đặt làm địa chỉ mặc định</Text>
+                  </View>
+                  <View style={styles.viewSwitch}>
+                    <Switch
+                      trackColor={{false: constants.COLOR.WHITE, true: constants.COLOR.WHITE}}
+                      thumbColor={isEnabled ? constants.COLOR.ORANGE : constants.COLOR.ORANGE}
+                      ios_backgroundColor="#3e3e3e"
+                      onValueChange={toggleSwitch}
+                      value={isEnabled}
+                    />
+                  </View>
+                </View>
               </View>
             </TouchableNativeFeedback>
           </ScrollView>

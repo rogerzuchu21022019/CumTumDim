@@ -56,6 +56,7 @@ const ItemEditDeliveryAddrees = ({item, navigation, index}) => {
           value={city}
           onChangeText={text => setCity(text)}
         />
+      
       </View>
     </SafeKeyComponent>
   );

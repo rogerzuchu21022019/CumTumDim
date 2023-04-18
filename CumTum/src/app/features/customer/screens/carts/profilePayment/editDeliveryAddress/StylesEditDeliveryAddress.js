@@ -39,7 +39,27 @@ const styles = StyleSheet.create({
     borderTopEndRadius: 35,
     marginBottom: 2,
   },
-
+  viewAll:{
+    flex:1,
+    paddingLeft:24,
+    paddingRight:24,
+    justifyContent:'center',
+    flexDirection:'row',
+    paddingTop:5,
+    paddingBottom:5
+  },
+  viewSwitch:{
+    flex:1,
+  },
+  viewText:{
+    flex:2
+  },
+  text:{
+    color: constants.COLOR.WHITE,
+    fontSize: 16,
+    fontWeight:'400'
+    
+  },
   // body
 
   // footer

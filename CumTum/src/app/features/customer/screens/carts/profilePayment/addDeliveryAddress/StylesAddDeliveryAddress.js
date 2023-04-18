@@ -4,7 +4,7 @@ import {constants} from '../../../../../../shared/constants';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: constants.COLOR.PRIMARY,
+    backgroundColor: constants.COLOR.BLACK,
   },
   // header:
   header: {
@@ -29,47 +29,46 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   // header:
-  divideLine: {
-    height: 2,
-    backgroundColor: constants.COLOR.BLACK,
-    // marginTop: 10,
-  },
+
   //body
   body: {
-    flex: 12,
-    backgroundColor: constants.COLOR.PRIMARY,
+    flex: 6,
+    backgroundColor: constants.COLOR.GREY,
     alignItems: 'center',
+    borderTopStartRadius: 35,
+    borderTopEndRadius: 35,
+    marginBottom: 2,
   },
-  viewFlashList: {
-    flex: 1,
-    // backgroundColor: constants.COLOR.GREEN,
-    width: '100%',
-    height: '100%',
-    paddingRight: 20,
-    paddingLeft: 20,
-    paddingBottom: 20,
+  viewAll:{
+    flex:1,
+    paddingLeft:24,
+    paddingRight:24,
+    justifyContent:'center',
+    flexDirection:'row',
     paddingTop:5,
+    paddingBottom:5
   },
-
+  viewSwitch:{
+    flex:1,
+  },
+  viewText:{
+    flex:2
+  },
+  text:{
+    color: constants.COLOR.WHITE,
+    fontSize: 16,
+    fontWeight:'400'
+    
+  },
+  // body
 
   // footer
-
   footer: {
-    flex: 1.4,
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: constants.COLOR.PRIMARY,
-
+    backgroundColor: constants.COLOR.GREY,
   },
-  btnSave: {
-    width: 200,
-    height: 50,
-    backgroundColor: constants.COLOR.ORANGE,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 20,
-  },
-
   textSave: {
     fontSize: 18,
     color: constants.COLOR.WHITE,
@@ -80,5 +79,42 @@ const styles = StyleSheet.create({
     height: 2,
     backgroundColor: constants.COLOR.BLACK,
   },
+  viewFlashList: {
+    flex: 1,
+    // backgroundColor: constants.COLOR.GREEN,
+    width: '100%',
+  },
+
+  /* Dropdown */
+  styleBorderWidth: {
+    marginHorizontal:20,
+    paddingVertical: 20,
+    // backgroundColor:'white'
+  },
+  stylesLabel: {
+    position: 'absolute',
+    backgroundColor: constants.COLOR.YELLOW,
+    left: 20,
+    top: 8,
+    zIndex: 999,
+    paddingHorizontal: 8,
+    fontSize: 14,
+    borderRadius: 8,
+  },
+  styleMain: {
+    height: 50,
+    borderColor: constants.COLOR.WHITE,
+    borderWidth: 0.5,
+    borderRadius: 8,
+    paddingHorizontal: 8,
+    backgroundColor: constants.COLOR.WHITE,
+  },
+  placeholderStyle: {
+    // backgroundColor: constants.COLOR.WHITE,
+  },
+  itemContainerStyle: {
+    backgroundColor: constants.COLOR.WHITE,
+  },
+  /* Dropdown */
 });
 export default styles;

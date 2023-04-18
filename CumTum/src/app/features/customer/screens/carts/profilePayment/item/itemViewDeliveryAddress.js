@@ -20,7 +20,8 @@ const ItemViewPayment = ({
   log.error('🚀 ~ file: ItemView.js:11 ~ ItemView ~ item:', item);
 
   const EditDeliveryAddrees = () => {
-    navigation.navigate(Router.EDIT_DELIVERY_ADDRESS);
+    navigation.navigate(Router.EDIT_DELIVERY_ADDRESS,{item});
+
   };
 
   const [isShowVisible, setIsShowVisible] = useState(false);
@@ -66,14 +67,20 @@ const ItemViewPayment = ({
 
               <View style={styles.boxStatus2}>
                 <View style={styles.boxPrice}>
-                  <Text style={styles.textItem}>Số {item.houseNumber}</Text>
-                  <Text style={styles.textItem}> đường {item.street}</Text>
-                  <Text style={styles.textItem}> phường {item.ward}</Text>
+                  <Text numberOfLines={2} style={styles.textItem}>
+                    Số {item.houseNumber}
+                  </Text>
+                  <Text numberOfLines={2} style={styles.textItem}>
+                    Đường {item.street}
+                  </Text>
+                  <Text numberOfLines={2} style={styles.textItem}>
+                    Phường {item.ward}
+                  </Text>
                 </View>
 
                 <View style={styles.boxPrice2}>
-                  <Text style={styles.textItem}>thành phố {item.city}</Text>
-                  <Text style={styles.textItem}> huyện {item.district}</Text>
+                <Text numberOfLines={2} style={styles.textItem}>thành phố {item.city}</Text>
+                <Text numberOfLines={2} style={styles.textItem}> huyện {item.district}</Text>
                 </View>
                 <TouchableOpacity onPress={handleSetDefaultIndex}>
                   {checkedItem === index ? (
@@ -89,6 +96,7 @@ const ItemViewPayment = ({
                     }
                   : null} */}
               </View>
+              
             </View>
           </View>
         </View>
