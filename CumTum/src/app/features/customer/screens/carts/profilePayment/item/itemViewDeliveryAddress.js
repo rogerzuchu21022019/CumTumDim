@@ -75,15 +75,19 @@ const ItemViewPayment = ({
                   <Text style={styles.textItem}>thành phố {item.city}</Text>
                   <Text style={styles.textItem}> huyện {item.district}</Text>
                 </View>
-                <ButtonCus
-                  title="Set địa chỉ mặc định"
-                  onHandleClick={handleSetDefaultIndex}
-                />
-                {item.addressDefault
+                <TouchableOpacity onPress={handleSetDefaultIndex}>
+                  {checkedItem === index ? (
+                    <View style={styles.viewDefault}>
+                      <Text style={styles.btnDefault}>Mặc định</Text>
+                    </View>
+                  ) : null}
+                </TouchableOpacity>
+
+                {/* {item.addressDefault
                   ? {
                       // View
                     }
-                  : null}
+                  : null} */}
               </View>
             </View>
           </View>

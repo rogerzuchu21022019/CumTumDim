@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
         marginBottom:5,
     },
     viewTitle1:{
-        marginTop:15,
+        marginTop:14,
         marginBottom:15,
     },
     viewInput:{
@@ -65,6 +65,21 @@ const styles = StyleSheet.create({
         borderRadius:20,
         marginTop:10
     },
+    ViewSwitch:{
+        flex:1,
+   
+        flexDirection:'row'
+    },
+    ViewSwitchRight:{
+      
+    
+
+    },
+    ViewSwitchLeft:{
+        flex:1,
+     
+
+    }
 
 });
 

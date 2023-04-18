@@ -86,7 +86,7 @@ viewFlashList: {
 },
 footer:{
 
-  flex:4,
+  flex:1.5,
   backgroundColor: constants.COLOR.PRIMARY,
   justifyContent: 'center',
   alignItems: 'center'

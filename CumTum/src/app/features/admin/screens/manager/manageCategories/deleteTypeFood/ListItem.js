@@ -10,6 +10,8 @@ import React, {useState} from 'react';
 import styles from './Styles';
 import ModalNotify from '../../../../../../components/modal/ModalNotify';
 import {useDispatch} from 'react-redux';
+import IconFeather from 'react-native-vector-icons/Feather';
+
 import {
   fetchCategories,
   fetchDeleteCategory,
@@ -39,17 +41,16 @@ const ItemEditEat = ({item, navigation, index}) => {
           <View style={styles.itemNumber}>
             <Text style={styles.numberItem}>{index + 1}</Text>
           </View>
-          <View>
+          <View style={styles.viewName}>
             <Text style={styles.itemName}>{item.name}</Text>
           </View>
           <View style={styles.itemQuantity}>
             <TouchableOpacity onPress={onDelete}>
-              <View>
-                <Image
-                  style={styles.itemImage}
-                  source={require('../../../../../../../assets/DeleteImages.png')}
-                />
-              </View>
+              
+                <View style={styles.imageEdit}>
+                  <IconFeather name="trash-2" size={20} />
+                </View>
+            
             </TouchableOpacity>
           </View>
         </View>

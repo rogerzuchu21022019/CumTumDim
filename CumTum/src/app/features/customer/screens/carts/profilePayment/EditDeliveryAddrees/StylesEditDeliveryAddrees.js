@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderTopStartRadius: 35,
     borderTopEndRadius: 35,
-    marginBottom: 2,
+    
   },
 
   // body
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
     paddingRight: 20,
     paddingLeft: 20,
     paddingBottom: 20,
-    paddingTop: 5,
+    paddingTop: 15,
   },
  
 });

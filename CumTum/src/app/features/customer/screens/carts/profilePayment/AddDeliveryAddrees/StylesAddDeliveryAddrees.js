@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
   // footer
 
   footer: {
-    flex: 2,
+    flex: 1.4,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: constants.COLOR.PRIMARY,

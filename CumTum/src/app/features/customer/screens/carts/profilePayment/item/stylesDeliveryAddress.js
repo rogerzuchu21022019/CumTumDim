@@ -65,6 +65,19 @@ const styles = StyleSheet.create({
   viewCheck:{
     justifyContent:'center',
   },
+  viewDefault:{
+    borderColor:constants.COLOR.ORANGE,
+    borderWidth:1,
+    width:'30%',
+    justifyContent:'center',
+    marginTop:5
+  },
+  btnDefault:{
+    lineHeight:22,
+    fontWeight:'700',
+    color:constants.COLOR.ORANGE,
+    textAlign:'center'
+  },
   boxStatus: {
     flex:1,
     
@@ -76,6 +89,7 @@ const styles = StyleSheet.create({
 
   },
   boxStatus2: {
+    
     marginBottom:10,
     flex:1,
   },

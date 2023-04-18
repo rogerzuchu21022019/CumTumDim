@@ -43,7 +43,7 @@ const EditDeliveryAddrees = ({navigation}) => {
               </View>
             </TouchableOpacity>
             <View style={styles.profile}>
-              <Text style={styles.textProfile}>Sữa địa chỉ giao hàng</Text>
+              <Text style={styles.textProfile}>Sửa địa chỉ giao hàng</Text>
             </View>
             <View style={styles.groupHeader}></View>
           </View>

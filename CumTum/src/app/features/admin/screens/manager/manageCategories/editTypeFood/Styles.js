@@ -3,7 +3,7 @@ import {constants} from '../../../../../../shared/constants';
 const Styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'black',
+    color: constants.COLOR.BLACK,
   },
   // header
   header: {
@@ -36,7 +36,7 @@ const Styles = StyleSheet.create({
     backgroundColor: constants.COLOR.BLACK,
   },
   textTitle: {
-    color: 'white',
+    color: constants.COLOR.WHITE,
     marginLeft: 6,
   },
   viewLogo: {
@@ -76,32 +76,49 @@ const Styles = StyleSheet.create({
     marginBottom: 15,
     marginTop: 10,
   },
-  itemNumber: {},
+  itemNumber: {
+    flex: 1,
+    justifyContent: 'center',
+  },
 
   numberItem: {
-    color: 'white',
+    color: constants.COLOR.WHITE,
     fontSize: 15,
     fontWeight: '500',
+    textAlign: 'center',
   },
-  itemQuantity: {},
-
+  itemQuantity: {
+    flex: 1,
+  },
+  viewName: {
+    flex: 3,
+  },
   groupItem: {
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
   },
   itemName: {
-    color: 'white',
+    color: constants.COLOR.WHITE,
     fontSize: 15,
     fontWeight: '500',
+    justifyContent: 'center',
+    textAlign:'center'
   },
 
   nameTitle: {
-    color: 'white',
+    color: constants.COLOR.WHITE,
     fontSize: 20,
     paddingBottom: 15,
   },
-
+  imageEdit: {
+    justifyContent: 'center',
+    backgroundColor: constants.COLOR.ORANGE,
+    width: 50,
+    height: 50,
+    alignItems: 'center',
+    borderRadius: 25,
+  },
   itemImage: {
     height: 25,
     width: 25,
