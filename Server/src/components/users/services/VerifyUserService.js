@@ -16,13 +16,10 @@ const VerifyUserSv = async (idToken) => {
         return existedUser;
       } else {
         if (
-          payload.email === emailAdminNam 
-          ||
+          payload.email === emailAdminNam ||
           payload.email === emailAdminHai ||
           payload.email === emailAdminPhuoc ||
           payload.email === emailAdminHoang
-          
-          
         ) {
           const newUser = await User.create({
             googleId: payload.sub,

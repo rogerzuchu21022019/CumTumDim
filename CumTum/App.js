@@ -35,6 +35,7 @@ import CartNoItem from './src/app/features/customer/screens/carts/cart/cartWithN
 import socketServices from './src/app/shared/utils/Socket';
 import RingBellAdmin from './src/app/features/admin/screens/homeAdmin/ringBellAdmin/RingBellAdmin';
 import EditDeliveryAddress from './src/app/features/customer/screens/carts/profilePayment/editDeliveryAddress/EditDeliveryAddress';
+import AddDeliveryAddress from './src/app/features/customer/screens/carts/profilePayment/addDeliveryAddress/AddDeliveryAddress';
 const App = () => {
   const Stack = createNativeStackNavigator();
 
@@ -138,8 +139,8 @@ const App = () => {
               }}
             />
             <Stack.Screen
-              name={Router.EDIT_DELIVERY_ADDRESS}
-              component={EditDeliveryAddress}
+              name={Router.ADD_DELIVERY_ADDRESS}
+              component={AddDeliveryAddress}
               options={{
                 headerShown: false,
               }}

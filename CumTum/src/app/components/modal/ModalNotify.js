@@ -4,7 +4,6 @@ import {constants} from '../../shared/constants';
 
 import {Button, Text, TouchableOpacity, View} from 'react-native';
 import Modal from 'react-native-modal';
-import SafeKeyComponent from '../../components/safe_area/SafeKeyComponent';
 import ButtonCus from '../button/ButtonCus';
 import Router from '../../navigation/Router';
 
@@ -34,7 +33,7 @@ const ModalNotify = props => {
 
   const onHandleAddress = () => {
     handleClick();
-    navigation.navigate(Router.EDIT_DELIVERY_ADDRESS, {item});
+    navigation.navigate(Router.ADD_DELIVERY_ADDRESS);
   };
 
   const onHandleCancel = () => {

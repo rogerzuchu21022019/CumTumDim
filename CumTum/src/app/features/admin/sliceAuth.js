@@ -6,6 +6,8 @@ import {
   fetchPushNotification,
   fetchUserById,
   fetchUpdateNotification,
+  fetchAddAddress,
+  fetchUpdateAddress,
 } from './apiUser';
 
 const {createSlice} = require('@reduxjs/toolkit');
@@ -19,6 +21,7 @@ const initialState = {
   isLoggedIn: false,
   message: null,
   notifications: [],
+  addresses: [],
 };
 
 export const authSlice = createSlice({
@@ -70,6 +73,7 @@ export const authSlice = createSlice({
       state.isLoading = false;
       state.user = dataResponse.data;
       state.notifications = state.user.notifications;
+      state.addresses = state.user.addresses;
     });
     builder.addCase(fetchUserById.rejected, (state, action) => {
       state.isLoading = false;
@@ -83,6 +87,8 @@ export const authSlice = createSlice({
     builder.addCase(fetchPushNotification.fulfilled, (state, action) => {
       const dataResponse = action.payload;
       state.isLoading = false;
+      state.message = dataResponse.message;
+      state.error = dataResponse.error;
       state.user = dataResponse.data;
     });
     builder.addCase(fetchPushNotification.rejected, (state, action) => {
@@ -90,16 +96,50 @@ export const authSlice = createSlice({
       state.error = true;
     });
 
-     // Update Notification  By UserId
-     builder.addCase(fetchUpdateNotification.pending, state => {
+    // Update Notification  By UserId
+    builder.addCase(fetchUpdateNotification.pending, state => {
       state.isLoading = true;
     });
     builder.addCase(fetchUpdateNotification.fulfilled, (state, action) => {
       const dataResponse = action.payload;
       state.isLoading = false;
+      state.message = dataResponse.message;
+      state.error = dataResponse.error;
       state.user = dataResponse.data;
     });
     builder.addCase(fetchUpdateNotification.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = true;
+    });
+
+    // Add Address
+    builder.addCase(fetchAddAddress.pending, state => {
+      state.isLoading = true;
+    });
+    builder.addCase(fetchAddAddress.fulfilled, (state, action) => {
+      const dataResponse = action.payload;
+      state.isLoading = dataResponse.isLoading;
+      state.message = dataResponse.message;
+      state.error = dataResponse.error;
+      state.user = dataResponse.data;
+    });
+    builder.addCase(fetchAddAddress.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = true;
+    });
+
+    // Update Address
+    builder.addCase(fetchUpdateAddress.pending, state => {
+      state.isLoading = true;
+    });
+    builder.addCase(fetchUpdateAddress.fulfilled, (state, action) => {
+      const dataResponse = action.payload;
+      state.isLoading = dataResponse.isLoading;
+      state.message = dataResponse.message;
+      state.error = dataResponse.error;
+      state.user = dataResponse.data;
+    });
+    builder.addCase(fetchUpdateAddress.rejected, (state, action) => {
       state.isLoading = false;
       state.error = true;
     });

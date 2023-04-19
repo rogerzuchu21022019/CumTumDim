@@ -26,7 +26,10 @@ import socketServices from '../../../../shared/utils/Socket';
 import {showNotifyLocal} from '../../../../shared/utils/Notifies';
 
 import {format, isToday} from 'date-fns';
-import {formatCodeOrder} from '../../../../shared/utils/CreateCodeOrder';
+import {
+  convertMoney,
+  formatCodeOrder,
+} from '../../../../shared/utils/CreateCodeOrder';
 import Router from '../../../../navigation/Router';
 import {fetchPushNotification, fetchUserById} from '../../apiUser';
 const log = LOG.extend(`HOME_ADMIN.JS`);
@@ -52,6 +55,14 @@ const HomeAdmin = ({navigation}) => {
   const notifications = user.notifications;
 
   const [isRefresh, setIsRefresh] = useState(false);
+
+  const totalIncome = data.orderToday.reduce((total, order) => {
+    if (order.orderStatus === 'Chấp nhận') {
+      return total + order.moneyToPaid;
+    } else {
+      return total;
+    }
+  }, 0);
 
   // log.info('🚀 ~ file: HomeAdmin.js:19 ~ HomeAdmin ~ data:', data);
 
@@ -147,11 +158,10 @@ const HomeAdmin = ({navigation}) => {
               <Text style={styles.textToday}>
                 Số lượng đơn: {data.orderToday.length}
               </Text>
-             
-                  <Text style={styles.itemText1}>
-                    Doanh thu: 18000000
-                  </Text>
-          
+
+              <Text style={styles.itemText1}>
+                Doanh thu: {convertMoney(totalIncome)}
+              </Text>
             </View>
             {isLoading ? (
               <ActivityIndicator size="large" color={constants.COLOR.WHITE} />

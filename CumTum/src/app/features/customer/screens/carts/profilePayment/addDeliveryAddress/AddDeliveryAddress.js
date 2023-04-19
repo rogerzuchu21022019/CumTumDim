@@ -21,18 +21,21 @@ import ItemEditDeliveryAddress from '../item/ItemEditDeliveryAddress';
 import ButtonCus from '../../../../../../components/button/ButtonCus';
 import {LOG} from '../../../../../../../../logger.config';
 import Router from '../../../../../../navigation/Router';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {fetchDishes} from '../../../../../product/apiProduct';
 import socketServices from '../../../../../../shared/utils/Socket';
 import BoxInputCus from '../../../../../../components/input/BoxInput';
 import DropdownElement from '../../../../../../components/dropdownElement/DropdownElement';
 import {LIST_STREET, WARDS} from '../../../../../../shared/utils/DataAddress';
 import ModalNotify from '../../../../../../components/modal/ModalNotify';
+import {fetchAddAddress, fetchUserById} from '../../../../../admin/apiUser';
+import { authSelector } from '../../../../../admin/sliceAuth';
 
 const log = LOG.extend(`EDIT_DELIVERY_ADDRESS.JS`);
 const AddDeliveryAddress = ({navigation}) => {
   
-
+  const authSelect = useSelector(authSelector);
+  const userId = authSelect.user._id;
   /* States user info*/
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
@@ -44,7 +47,10 @@ const AddDeliveryAddress = ({navigation}) => {
   const [isShowModal, setIsShowModal] = useState(false);
   const [houseNumber, setHouseNumber] = useState('');
   const dispatch = useDispatch();
-  const moveToBack = () => {
+  const goBack = () => {
+    navigation.goBack();
+  };
+  const onAddAddress = () => {
     if (
       name === '' ||
       name === undefined ||
@@ -72,11 +78,18 @@ const AddDeliveryAddress = ({navigation}) => {
         city: city,
         street: street,
         houseNumber: houseNumber,
+        addressDefault: isEnabled,
       };
       log.info(
         '🚀 ~ file: EditDeliveryAddress.js:52 ~ moveToBack ~ newAddress:',
         newAddress,
       );
+      const data = {
+        userId: userId,
+        address: newAddress,
+      };
+      dispatch(fetchAddAddress(data));
+      dispatch(fetchUserById(userId));
     }
     navigation.goBack();
   };
@@ -88,7 +101,7 @@ const AddDeliveryAddress = ({navigation}) => {
   const [isEnabled, setIsEnabled] = useState(false);
 
   const toggleSwitch = () => {
-    setIsEnabled(previousState => !previousState);
+    setIsEnabled(!isEnabled);
   };
 
   return (
@@ -96,7 +109,7 @@ const AddDeliveryAddress = ({navigation}) => {
       <View style={styles.container}>
         <View style={styles.header}>
           <View style={styles.groupHeader}>
-            <TouchableOpacity onPress={moveToBack}>
+            <TouchableOpacity onPress={goBack}>
               <View>
                 <IconAntDesign
                   name="left"
@@ -121,6 +134,28 @@ const AddDeliveryAddress = ({navigation}) => {
             decelerationRate={'fast'}>
             <TouchableNativeFeedback>
               <View style={styles.viewFlashList}>
+                <View style={styles.viewAddressDefault}>
+                  <View style={styles.viewText}>
+                    <Text style={styles.text}>Đặt làm địa chỉ mặc định</Text>
+                  </View>
+                  <View style={styles.viewSwitch}>
+                    <Switch
+                      trackColor={{
+                        false: constants.COLOR.WHITE,
+                        true: constants.COLOR.WHITE,
+                      }}
+                      thumbColor={
+                        isEnabled
+                          ? constants.COLOR.ORANGE
+                          : constants.COLOR.ORANGE
+                      }
+                      ios_backgroundColor="#3e3e3e"
+                      onValueChange={toggleSwitch}
+                      value={isEnabled}
+                    />
+                  </View>
+                </View>
+
                 <BoxInputCus
                   title="Họ và tên người nhận"
                   value={name}
@@ -185,26 +220,17 @@ const AddDeliveryAddress = ({navigation}) => {
                   editable={false}
                   onChangeText={text => setCity(text)}
                 />
-                <View style={styles.viewAll}>
-                  <View style={styles.viewText}>
-                    <Text style={styles.text}>Đặt làm địa chỉ mặc định</Text>
-                  </View>
-                  <View style={styles.viewSwitch}>
-                    <Switch
-                      trackColor={{false: constants.COLOR.WHITE, true: constants.COLOR.WHITE}}
-                      thumbColor={isEnabled ? constants.COLOR.ORANGE : constants.COLOR.ORANGE}
-                      ios_backgroundColor="#3e3e3e"
-                      onValueChange={toggleSwitch}
-                      value={isEnabled}
-                    />
-                  </View>
+                <View style={styles.btnDelete}>
+                  <ButtonCus title="Xoá" onHandleClick={onAddAddress} styleBtn={styles.btnDelete} />
                 </View>
               </View>
             </TouchableNativeFeedback>
           </ScrollView>
         </View>
+        <View style={styles.line}></View>
+
         <View style={styles.footer}>
-          <ButtonCus title="Lưu" onHandleClick={moveToBack} />
+          <ButtonCus  title="Thêm" onHandleClick={onAddAddress} />
         </View>
         <ModalNotify
           message1="Bạn vui lòng điền đầy đủ thông tin"

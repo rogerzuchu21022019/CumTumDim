@@ -1,14 +1,29 @@
 import {View, Text, Button, TextInput, TouchableOpacity} from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import SafeKeyComponent from '../../../../../components/safe_area/SafeKeyComponent';
-import {useDispatch} from 'react-redux';
-import {fetchSignOut} from '../../../../admin/apiUser';
+import {useDispatch, useSelector} from 'react-redux';
+import {fetchSignOut, fetchUserById} from '../../../../admin/apiUser';
 import Router from '../../../../../navigation/Router';
 import styles from './StylesProfile';
 import FastImage from 'react-native-fast-image';
 import socketServices from '../../../../../shared/utils/Socket';
+import {authSelector} from '../../../../admin/sliceAuth';
 const Profile = ({navigation}) => {
   const dispatch = useDispatch();
+
+  const authSelect = useSelector(authSelector);
+  const userId = authSelect.user._id;
+  const addresses = authSelect.user.addresses.filter(
+    item => item.addressDefault === true,
+  );
+  const address = addresses[0];
+
+  useEffect(() => {
+    dispatch(fetchUserById(userId));
+
+    return () => {};
+  }, []);
+
   const handleLogout = async () => {
     dispatch(fetchSignOut());
     moveTo();
@@ -18,7 +33,7 @@ const Profile = ({navigation}) => {
     socketServices.socket.disconnect();
   };
   const moveToEdit = async () => {
-    navigation.navigate(Router.EDIT_PROFILE);
+    navigation.navigate(Router.EDIT_PROFILE, {item: address});
   };
 
   return (
@@ -56,7 +71,7 @@ const Profile = ({navigation}) => {
               />
             </View>
             <View style={styles.viewTextName}>
-              <Text style={styles.textProfile}>Phước</Text>
+              <Text style={styles.textProfile}>{address.name}</Text>
             </View>
           </View>
 
@@ -66,7 +81,7 @@ const Profile = ({navigation}) => {
                 <Text style={styles.textTitle}>Số điện thoại</Text>
               </View>
               <View style={styles.viewInput}>
-                <Text style={styles.textInput}>0342128462</Text>
+                <Text style={styles.textInput}>{address.phone}</Text>
               </View>
             </View>
             <View style={styles.item}>
@@ -74,7 +89,7 @@ const Profile = ({navigation}) => {
                 <Text style={styles.textTitle}>Phường</Text>
               </View>
               <View style={styles.viewInput}>
-                <Text style={styles.textInput}>Trung Mỹ Tây</Text>
+                <Text style={styles.textInput}>{address.ward}</Text>
               </View>
             </View>
             <View style={styles.item}>
@@ -82,7 +97,7 @@ const Profile = ({navigation}) => {
                 <Text style={styles.textTitle}>Đường</Text>
               </View>
               <View style={styles.viewInput}>
-                <Text style={styles.textInput}>Tô Ký</Text>
+                <Text style={styles.textInput}>{address.street}</Text>
               </View>
             </View>
             <View style={styles.item}>
@@ -90,7 +105,7 @@ const Profile = ({navigation}) => {
                 <Text style={styles.textTitle}>Số nhà</Text>
               </View>
               <View style={styles.viewInput}>
-                <Text style={styles.textInput}>413</Text>
+                <Text style={styles.textInput}>{address.houseNumber}</Text>
               </View>
             </View>
           </View>

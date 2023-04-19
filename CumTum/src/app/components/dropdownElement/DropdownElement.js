@@ -1,7 +1,9 @@
 import React, {useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {Dropdown} from 'react-native-element-dropdown';
-import AntDesign from 'react-native-vector-icons/AntDesign';
+import IconEntypo from 'react-native-vector-icons/Entypo';
+import IconIonicons from 'react-native-vector-icons/Ionicons';
+import IconMaterial from 'react-native-vector-icons/MaterialCommunityIcons';
 import {constants} from '../../shared/constants';
 import styles from './StyleDropdown';
 
@@ -20,9 +22,27 @@ const DropdownElement = props => {
     itemContainerStyle,
     defaultColor,
     styleTextTitle,
+    iconFoods,
   } = props;
 
   const [isFocus, setIsFocus] = useState(false);
+  const iconFood = () => (
+    <IconMaterial
+      style={styles.icon}
+      color={isFocus ? constants.COLOR.RED : defaultColor}
+      name="food-steak"
+      size={20}
+    />
+  )
+
+  const iconAddress = () => (
+    <IconEntypo
+      style={styles.icon}
+      color={isFocus ? constants.COLOR.RED : defaultColor}
+      name="address"
+      size={20}
+    />
+  )
 
   const renderLabel = () => {
     if (value || isFocus) {
@@ -64,14 +84,7 @@ const DropdownElement = props => {
           setValue(item.value);
           setIsFocus(false);
         }}
-        renderLeftIcon={() => (
-          <AntDesign
-            style={styles.icon}
-            color={isFocus ? constants.COLOR.BLUE : defaultColor}
-            name="Safety"
-            size={20}
-          />
-        )}
+        renderLeftIcon={iconFoods ? iconFood : iconAddress}
       />
     </View>
   );

@@ -19,20 +19,31 @@ import ItemViewPayment from './item/itemViewDeliveryAddress';
 import Router from '../../../../../navigation/Router';
 import AddDeliveryAddress from './addDeliveryAddress/AddDeliveryAddress';
 import {LOG} from '../../../../../../../logger.config';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {authSelector} from '../../../../admin/sliceAuth';
+import {fetchUserById} from '../../../../admin/apiUser';
 const log = LOG.extend(`CHOOSE_DELIVERY_ADDRESS.JS`);
 const ChooseDeliveryAddress = ({navigation}) => {
+  const authSelect = useSelector(authSelector);
+  const userId = authSelect.user._id;
   const [checkedItem, setCheckedItem] = useState(0);
   const goBack = () => {
     navigation.goBack();
   };
-  const add = () => {
-    navigation.navigate(Router.ADD_DELIVERY_ADDRESS);
+  const dispatch = useDispatch();
+  const moveToScreen = () => {
+    navigation.navigate(Router.ADD_DELIVERY_ADDRESS, {
+      userId,
+    });
   };
 
-  const authSelect = useSelector(authSelector);
-  const addressArray = authSelect.user.address;
+  useEffect(() => {
+    dispatch(fetchUserById(userId));
+
+    return () => {};
+  }, [dispatch]);
+
+  const addressArray = authSelect.user.addresses;
 
   const radioButtonsData = addressArray.map((item, index) => {
     return {
@@ -94,7 +105,7 @@ const ChooseDeliveryAddress = ({navigation}) => {
       </View>
       <View style={styles.footer}>
         <View style={styles.viewFooter}>
-          <TouchableOpacity onPress={add}>
+          <TouchableOpacity onPress={moveToScreen}>
             <View style={styles.viewButtonNext}>
               <Text style={styles.btnNext}>Thêm địa chỉ giao hàng</Text>
             </View>
