@@ -1,5 +1,4 @@
 import {
-  NativeModules,
   NativeEventEmitter,
   KeyboardAvoidingView,
   ScrollView,
@@ -8,12 +7,8 @@ import {
   StyleSheet,
 } from 'react-native';
 
-import CryptoJS from 'crypto-js';
 
-const PayZaloBridge = NativeModules.PayZaloBridge;
-console.log('🚀 ~ file: PaymentZalo.js:14 ~ PayZaloBridge:', PayZaloBridge);
 
-const payZaloBridgeEmitter = new NativeEventEmitter(PayZaloBridge);
 
 import {View, Text} from 'react-native';
 import React, {useState} from 'react';
@@ -26,10 +21,6 @@ const PaymentCart = ({route}) => {
   const [token, setToken] = useState('');
   const [returncode, setReturnCode] = useState('');
 
-  const payOrder = () => {
-    var payZP = NativeModules.PayZaloBridge;
-    payZP.payOrder(token);
-  };
 
   return (
     <ScrollView>
@@ -54,9 +45,7 @@ const PaymentCart = ({route}) => {
           <Button
             title="Pay order"
             type="outline"
-            onPress={() => {
-              payOrder();
-            }}
+           
           />
         ) : null}
       </KeyboardAvoidingView>
