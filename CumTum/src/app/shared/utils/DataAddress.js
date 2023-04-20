@@ -1087,6 +1087,88 @@ export const STREETS13 = [
   },
 ];
 
+
+export const STREETS_TMT = [
+  {
+    label: 'Trung Mỹ Tây 13',
+    value: 'Trung Mỹ Tây 13',
+  },
+  {
+    label: 'Trung Mỹ Tây 2A',
+    value: 'Trung Mỹ Tây 2A',
+  },
+  {
+    label: 'TL 27',
+    value: 'TL 27',
+  },
+  {
+    label: 'TMT 09',
+    value: 'TMT 09',
+  },
+  {
+    label: 'Tô Ký',
+    value: 'Tô Ký',
+  },
+  {
+    label: 'Tô Ngọc Vân',
+    value: 'Tô Ngọc Vân',
+  },
+  {
+    label: 'Trung Mỹ Tây',
+    value: 'Trung Mỹ Tây',
+  },
+  {
+    label: 'Trung Mỹ Tây 05',
+    value: 'Trung Mỹ Tây 05',
+  },
+  {
+    label: 'Trung Mỹ Tây 08',
+    value: 'Trung Mỹ Tây 08',
+  },
+  {
+    label: 'Trung Mỹ Tây 1',
+    value: 'Trung Mỹ Tây 1',
+  },
+  {
+    label: 'Trung Mỹ Tây 12',
+    value: 'Trung Mỹ Tây 12',
+  },
+  {
+    label: 'Trung Mỹ Tây 13',
+    value: 'Trung Mỹ Tây 13',
+  },
+  {
+    label: 'Trung Mỹ Tây 18A',
+    value: 'Trung Mỹ Tây 18A',
+  },
+  {
+    label: 'Trung Mỹ Tây 2A',
+    value: 'Trung Mỹ Tây 2A',
+  },
+  {
+    label: 'Trung Mỹ Tây 5',
+    value: 'Trung Mỹ Tây 5',
+  },
+  {
+    label: 'Trung Mỹ Tây 6A',
+    value: 'Trung Mỹ Tây 6A',
+  },
+  {
+    label: 'Trung Mỹ Tây 9A',
+    value: 'Trung Mỹ Tây 9A',
+  },
+  {
+    label: 'Trường Chinh',
+    value: 'Trường Chinh',
+  },
+  {
+    label: 'Vườn Lài',
+    value: 'Vườn Lài',
+  },
+];
+
+
+
 export const LIST_STREET = STREETS1.concat(
   STREETS2,
   STREETS3,
