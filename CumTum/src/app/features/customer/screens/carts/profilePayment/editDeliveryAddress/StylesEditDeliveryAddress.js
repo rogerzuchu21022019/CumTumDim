@@ -63,6 +63,26 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '400',
   },
+  boxDelete: {
+    width: '100%',
+    paddingHorizontal: 20,
+    marginVertical: 10,
+  },
+  btnDelete: {
+    flex: 1,
+    justifyContent: 'center',
+    width: '100%',
+    backgroundColor: constants.COLOR.ORANGE,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 15,
+    borderRadius: 10,
+  },
+  styleText: {
+    color: constants.COLOR.WHITE,
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
   // body
 
   // footer

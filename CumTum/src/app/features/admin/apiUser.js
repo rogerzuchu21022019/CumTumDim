@@ -95,6 +95,23 @@ export const fetchUpdateAddress = createAsyncThunk(
   },
 );
 
+/* Address */
+export const fetchDeleteAddress = createAsyncThunk(
+  constants.FETCH.DELETE_ADDRESS,
+  async data => {
+    log.info('🚀 ~ file: apiUser.js:102 ~ data:', data);
+    const response = await AxiosInstance().post(
+      `/users/delete-address/${data.userId}`,
+      {
+        address: data.address,
+      },
+    );
+
+    log.error('🚀 ~ file: apiUser.js:110 ~ response:', response.data);
+    return response.data;
+  },
+);
+
 export const fetchSignOut = createAsyncThunk(
   constants.FETCH.SIGN_OUT,
   async () => {

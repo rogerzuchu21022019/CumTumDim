@@ -46,10 +46,10 @@ const HomeCustomer = ({navigation}) => {
   const log = LOG.extend('HOME_CUSTOMER.js');
   const dispatch = useDispatch();
   const authSelect = useSelector(authSelector);
-  log.info(
-    '🚀 ~ file: Home.js:47 ~ HomeCustomer ~ notifications:',
-    authSelect.notifications,
-  );
+  // log.info(
+  //   '🚀 ~ file: Home.js:47 ~ HomeCustomer ~ notifications:',
+  //   authSelect.notifications,
+  // );
 
   const userInfo = {
     name: authSelect.user.name,
@@ -170,7 +170,10 @@ const HomeCustomer = ({navigation}) => {
     dispatch(fetchDishes());
     onDisplayNotification();
     setTabs(0);
-    return () => {};
+    return () => {
+      dispatch(fetchCategories());
+      dispatch(fetchDishes());
+    };
   }, [dispatch]);
 
   /* Dispatch function */

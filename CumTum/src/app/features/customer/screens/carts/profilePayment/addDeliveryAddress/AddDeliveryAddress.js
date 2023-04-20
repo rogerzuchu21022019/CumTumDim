@@ -71,6 +71,7 @@ const AddDeliveryAddress = ({navigation}) => {
       return;
     } else {
       const newAddress = {
+        
         name: name,
         phone: phone,
         ward: ward,
@@ -220,9 +221,7 @@ const AddDeliveryAddress = ({navigation}) => {
                   editable={false}
                   onChangeText={text => setCity(text)}
                 />
-                <View style={styles.btnDelete}>
-                  <ButtonCus title="Xoá" onHandleClick={onAddAddress} styleBtn={styles.btnDelete} />
-                </View>
+                
               </View>
             </TouchableNativeFeedback>
           </ScrollView>

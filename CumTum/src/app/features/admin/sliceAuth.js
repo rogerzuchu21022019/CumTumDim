@@ -8,6 +8,7 @@ import {
   fetchUpdateNotification,
   fetchAddAddress,
   fetchUpdateAddress,
+  fetchDeleteAddress,
 } from './apiUser';
 
 const {createSlice} = require('@reduxjs/toolkit');
@@ -140,6 +141,22 @@ export const authSlice = createSlice({
       state.user = dataResponse.data;
     });
     builder.addCase(fetchUpdateAddress.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = true;
+    });
+
+    // Delete Address
+    builder.addCase(fetchDeleteAddress.pending, state => {
+      state.isLoading = true;
+    });
+    builder.addCase(fetchDeleteAddress.fulfilled, (state, action) => {
+      const dataResponse = action.payload;
+      state.isLoading = dataResponse.isLoading;
+      state.message = dataResponse.message;
+      state.error = dataResponse.error;
+      state.user = dataResponse.data;
+    });
+    builder.addCase(fetchDeleteAddress.rejected, (state, action) => {
       state.isLoading = false;
       state.error = true;
     });

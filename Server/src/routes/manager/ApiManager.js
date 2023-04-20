@@ -45,6 +45,7 @@ const ManagerRouter = (app, fixPublic) => {
 
   app.use(SUB_USERS, ApiUser.addAddress, fixPublic);
   app.use(SUB_USERS, ApiUser.updateAddress, fixPublic);
+  app.use(SUB_USERS, ApiUser.deleteAddress, fixPublic);
 
   //   app.use(MAIN, ApiUser.logoutRouter, fixPublic);
   //   app.use(SUB_USERS, ApiUser.registerRouter, fixPublic);

@@ -14,6 +14,7 @@ const UpdateAddressSv = async (userId, address) => {
       },
       {
         new: true,
+        upsert: true,
       }
     );
 
@@ -29,6 +30,7 @@ const UpdateAddressSv = async (userId, address) => {
       },
       {
         new: true,
+        upsert: true,
       }
     );
     return _user;

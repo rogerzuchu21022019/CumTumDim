@@ -29,7 +29,10 @@ import DropdownElement from '../../../../../../components/dropdownElement/Dropdo
 import {LIST_STREET, WARDS} from '../../../../../../shared/utils/DataAddress';
 import ModalNotify from '../../../../../../components/modal/ModalNotify';
 import {authSelector} from '../../../../../admin/sliceAuth';
-import {fetchUpdateAddress} from '../../../../../admin/apiUser';
+import {
+  fetchDeleteAddress,
+  fetchUpdateAddress,
+} from '../../../../../admin/apiUser';
 
 const log = LOG.extend(`EDIT_DELIVERY_ADDRESS.JS`);
 const EditDeliveryAddress = ({navigation, route}) => {
@@ -53,13 +56,57 @@ const EditDeliveryAddress = ({navigation, route}) => {
   const [houseNumber, setHouseNumber] = useState(item.houseNumber);
 
   const [isShowModal, setIsShowModal] = useState(false);
-  
+
   const dispatch = useDispatch();
   const goBack = () => {
     navigation.goBack();
   };
   const onSave = () => {
-  
+    if (
+      name === '' ||
+      name === undefined ||
+      phone === '' ||
+      phone === undefined ||
+      ward === '' ||
+      ward === undefined ||
+      district === '' ||
+      district === undefined ||
+      city === '' ||
+      city === undefined ||
+      street === '' ||
+      street === undefined ||
+      houseNumber === '' ||
+      houseNumber === undefined
+    ) {
+      handleClick();
+      return;
+    } else {
+      console.log(
+        '🚀 ~ file: EditDeliveryAddress.js:38 ~ EditDeliveryAddress ~ userId:',
+        userId,
+      );
+      const newAddress = {
+        _id: item._id,
+        name: name,
+        phone: phone,
+        ward: ward,
+        district: district,
+        city: city,
+        street: street,
+        houseNumber: houseNumber,
+        addressDefault: true,
+      };
+      log.info(
+        '🚀 ~ file: EditDeliveryAddress.js:52 ~ moveToBack ~ newAddress:',
+        newAddress,
+      );
+      const data = {
+        userId: userId,
+        address: newAddress,
+      };
+      dispatch(fetchUpdateAddress(data));
+      navigation.goBack();
+    }
   };
 
   const handleClick = () => {
@@ -68,6 +115,36 @@ const EditDeliveryAddress = ({navigation, route}) => {
 
   const toggleSwitch = () => {
     setIsEnabled(!isEnabled);
+  };
+
+  const onAgree = () => {
+    const data = {
+      userId: userId,
+      address: item,
+    };
+    dispatch(fetchDeleteAddress(data));
+  };
+  const onCancel = () => {
+    console.log('Cancel Pressed');
+  };
+
+  const onDeleteAddress = () => {
+    Alert.alert(
+      'Thông báo',
+      'Bạn có muốn xóa địa chỉ này không?',
+      [
+        {
+          text: 'Đồng ý',
+          onPress: () => onAgree(),
+        },
+        {
+          text: 'Hủy',
+          onPress: () => onCancel(),
+          style: 'cancel',
+        },
+      ],
+      {cancelable: false},
+    );
   };
 
   return (
@@ -185,6 +262,15 @@ const EditDeliveryAddress = ({navigation, route}) => {
                   editable={false}
                   onChangeText={text => setCity(text)}
                 />
+
+                <View style={styles.boxDelete}>
+                  <ButtonCus
+                    title="Xoá"
+                    onHandleClick={onDeleteAddress}
+                    styleBtn={styles.btnDelete}
+                    styleText={styles.styleText}
+                  />
+                </View>
               </View>
             </TouchableNativeFeedback>
           </ScrollView>
