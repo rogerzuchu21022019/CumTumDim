@@ -13,8 +13,6 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		95CAA89729B86E76004A7B29 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 95CAA89629B86E76004A7B29 /* GoogleService-Info.plist */; };
-		95D87EA029D0C98A00ABED0E /* zpdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95D87E9F29D0C98A00ABED0E /* zpdk.framework */; settings = {ATTRIBUTES = (Required, ); }; };
-		95D87EA329D0EBD900ABED0E /* PayZaloBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 95D87EA229D0EBD900ABED0E /* PayZaloBridge.m */; };
 		A6AC35ABE128BBF7E978E2D4 /* libPods-CumTum.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 428EF232544E7CE410CA89B6 /* libPods-CumTum.a */; };
 		B776FB4682402C9E908471EA /* libPods-CumTum-CumTumTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 59FABB3E2C330C51A0F9C8FC /* libPods-CumTum-CumTumTests.a */; };
 /* End PBXBuildFile section */
@@ -60,9 +58,6 @@
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = CumTum/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		95097CC329C7CFC7005DAA90 /* CumTumDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = CumTumDebug.entitlements; path = CumTum/CumTumDebug.entitlements; sourceTree = "<group>"; };
 		95CAA89629B86E76004A7B29 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		95D87E9F29D0C98A00ABED0E /* zpdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = zpdk.framework; sourceTree = "<group>"; };
-		95D87EA129D0EBD900ABED0E /* PayZaloBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayZaloBridge.h; sourceTree = "<group>"; };
-		95D87EA229D0EBD900ABED0E /* PayZaloBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayZaloBridge.m; sourceTree = "<group>"; };
 		DF8C6F4282C55AC09B16B655 /* Pods-CumTum-CumTumTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CumTum-CumTumTests.release.xcconfig"; path = "Target Support Files/Pods-CumTum-CumTumTests/Pods-CumTum-CumTumTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -80,7 +75,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				95D87EA029D0C98A00ABED0E /* zpdk.framework in Frameworks */,
 				A6AC35ABE128BBF7E978E2D4 /* libPods-CumTum.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -108,8 +102,6 @@
 		13B07FAE1A68108700A75B9A /* CumTum */ = {
 			isa = PBXGroup;
 			children = (
-				95D87EA129D0EBD900ABED0E /* PayZaloBridge.h */,
-				95D87EA229D0EBD900ABED0E /* PayZaloBridge.m */,
 				95097CC329C7CFC7005DAA90 /* CumTumDebug.entitlements */,
 				95CAA89629B86E76004A7B29 /* GoogleService-Info.plist */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -125,7 +117,6 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				95D87E9F29D0C98A00ABED0E /* zpdk.framework */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				428EF232544E7CE410CA89B6 /* libPods-CumTum.a */,
 				59FABB3E2C330C51A0F9C8FC /* libPods-CumTum-CumTumTests.a */,
@@ -422,7 +413,6 @@
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
-				95D87EA329D0EBD900ABED0E /* PayZaloBridge.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -13,12 +13,19 @@ const styles = StyleSheet.create({
   boxBtnSave: {
     backgroundColor: constants.COLOR.ORANGE,
     borderRadius: 20,
-    paddingVertical:10,
+    paddingVertical: 10,
     paddingHorizontal: 50,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+  },
+  icon: {
+    marginRight: 10,
   },
   textSave: {
     color: constants.COLOR.WHITE,
-    fontSize:18
+    fontWeight: 'bold',
+    fontSize: 18,
   },
   /* Body */
   /* Footer */

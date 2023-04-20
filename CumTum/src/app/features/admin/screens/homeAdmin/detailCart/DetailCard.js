@@ -229,22 +229,22 @@ const DetailCard = ({route, navigation}) => {
                   {/*  Đỉa chỉ*/}
                   <View style={styles.viewTotal}>
                     <View style={styles.viewBoxShowInfoBill}>
-                      <Text style={styles.textAddress}>Số nhà :54</Text>
+                      <Text style={styles.textAddress}>Số nhà :{item.address.houseNumber}</Text>
                     </View>
                     <View style={styles.viewBoxShowInfoBill}>
-                      <Text style={styles.textAddress}>Đường :14</Text>
+                      <Text style={styles.textAddress}>Đường :{item.address.street}</Text>
                     </View>
                     <View style={styles.viewBoxShowInfoBill}>
                       <Text style={styles.textAddress}>
-                        Phường : Đông Hưng Thuận
+                        Phường : {item.address.ward}
                       </Text>
                     </View>
                     <View style={styles.viewBoxShowInfoBill}>
-                      <Text style={styles.textAddress}>Quận : 12</Text>
+                      <Text style={styles.textAddress}>Quận : {item.address.district}</Text>
                     </View>
                     <View style={styles.viewBoxShowInfoBill}>
                       <Text style={styles.textAddress}>
-                        Thành Phố : Hồ Chí Minh
+                        Thành Phố : {item.address.city}
                       </Text>
                     </View>
 

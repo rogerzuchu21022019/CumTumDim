@@ -37,34 +37,57 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderTopStartRadius: 35,
     borderTopEndRadius: 35,
-    marginBottom: 2,
   },
-  viewAll:{
-    flex:1,
-    paddingLeft:24,
-    paddingRight:24,
-    justifyContent:'center',
-    flexDirection:'row',
-    paddingTop:5,
-    paddingBottom:5
+  viewAddressDefault: {
+    flex: 1,
+    justifyContent: 'center',
+    flexDirection: 'row',
+    marginHorizontal: 20,
+    height: 52,
+    marginTop: 10,
+    justifyContent: 'center',
+    // backgroundColor: constants.COLOR.WHITE,
   },
-  viewSwitch:{
-    flex:1,
+  viewSwitch: {
+    flex: 1,
+    // backgroundColor: constants.COLOR.RED,
+    alignItems: 'flex-end',
+    justifyContent: 'center',
   },
-  viewText:{
-    flex:2
+  viewText: {
+    flex: 2,
+    justifyContent: 'center',
   },
-  text:{
+  text: {
     color: constants.COLOR.WHITE,
     fontSize: 16,
-    fontWeight:'400'
-    
+    fontWeight: '400',
+  },
+  boxDelete: {
+    width: '100%',
+    paddingHorizontal: 20,
+    marginVertical: 10,
+  },
+  btnDelete: {
+    flex: 1,
+    justifyContent: 'center',
+    width: '100%',
+    backgroundColor: constants.COLOR.ORANGE,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 15,
+    borderRadius: 10,
+  },
+  styleText: {
+    color: constants.COLOR.WHITE,
+    fontSize: 16,
+    fontWeight: 'bold',
   },
   // body
 
   // footer
   footer: {
-    flex: 1,
+    flex: 1 / 2,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: constants.COLOR.GREY,
@@ -77,7 +100,7 @@ const styles = StyleSheet.create({
   line: {
     width: '100%',
     height: 2,
-    backgroundColor: constants.COLOR.BLACK,
+    backgroundColor: constants.COLOR.GREY,
   },
   viewFlashList: {
     flex: 1,
@@ -87,7 +110,7 @@ const styles = StyleSheet.create({
 
   /* Dropdown */
   styleBorderWidth: {
-    marginHorizontal:20,
+    marginHorizontal: 20,
     paddingVertical: 20,
     // backgroundColor:'white'
   },

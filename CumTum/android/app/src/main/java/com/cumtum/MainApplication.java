@@ -3,7 +3,6 @@ package com.cumtum;
 import android.app.Application;
 import android.content.Intent;
 
-import com.cumtum.zpmodule.PayZaloBridge;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactNativeHost;
@@ -16,7 +15,6 @@ import com.oblador.vectoricons.VectorIconsPackage;
 
 import java.util.List;
 
-import vn.zalopay.sdk.ZaloPaySDK;
 
 
 public class MainApplication extends Application implements ReactApplication {
@@ -36,7 +34,6 @@ public class MainApplication extends Application implements ReactApplication {
                     // packages.add(new MyReactNativePackage());
                     new RNGoogleSigninPackage();
                     new VectorIconsPackage();
-                    new PayZaloBridge();
 
                     return packages;
                 }

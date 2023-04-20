@@ -1,8 +1,6 @@
 #import "AppDelegate.h"
 #import <Firebase.h>
 #import <React/RCTBundleURLProvider.h>
-#import <zpdk/zpdk.h>
-
 
 @implementation AppDelegate
 
@@ -14,19 +12,8 @@
   // They will be passed down to the ViewController used by React Native.
   self.initialProps = @{};
 
-  [super application:application didFinishLaunchingWithOptions:launchOptions];
-  [[ZaloPaySDK sharedInstance] initWithAppId:2554 uriScheme:@"cumtum://" environment:ZPZPIEnvironment_Sandbox];
-  return YES;
-  
+  return [super application:application didFinishLaunchingWithOptions:launchOptions];
 }
-
-- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options{
-  return [[ZaloPaySDK sharedInstance] application:app openURL:url sourceApplication:@"vn.com.vng.zalopay" annotation:nil];
-}
-
-
-
-
 
 - (NSURL *)sourceURLForBridge:(RCTBridge *)bridge
 {

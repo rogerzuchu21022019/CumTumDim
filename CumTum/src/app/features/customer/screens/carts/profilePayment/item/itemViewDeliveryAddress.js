@@ -72,22 +72,23 @@ const ItemViewPayment = ({
                 </View>
 
                 <View style={styles.boxPrice2}>
-                  <Text style={styles.textItem}>Thành phố {item.city} </Text>
-                  <Text style={styles.textItem}> quận {item.district}</Text>
+                  <Text numberOfLines={2} style={styles.textItem}>
+                    thành phố {item.city}
+                  </Text>
+                  <Text numberOfLines={2} style={styles.textItem}>
+                    {' '}
+                    huyện {item.district}
+                  </Text>
                 </View>
-                <TouchableOpacity onPress={handleSetDefaultIndex}>
-                  {checkedItem === index ? (
+             
+
+                {item.addressDefault
+                  ? (
                     <View style={styles.viewDefault}>
                       <Text style={styles.btnDefault}>Mặc định</Text>
                     </View>
-                  ) : null}
-                </TouchableOpacity>
-
-                {/* {item.addressDefault
-                  ? {
-                      // View
-                    }
-                  : null} */}
+                  )
+                  : null}
               </View>
             </View>
           </View>

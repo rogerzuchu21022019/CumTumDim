@@ -37,14 +37,14 @@ PODS:
     - GoogleUtilities/Logger (~> 7.8)
   - FirebaseCoreExtension (10.6.0):
     - FirebaseCore (~> 10.0)
-  - FirebaseCoreInternal (10.7.0):
+  - FirebaseCoreInternal (10.8.0):
     - "GoogleUtilities/NSData+zlib (~> 7.8)"
   - FirebaseEmailAuthUI (13.0.0):
     - FirebaseAuth
     - FirebaseAuthUI
     - FirebaseCore
     - GoogleUtilities/UserDefaults
-  - FirebaseInstallations (10.7.0):
+  - FirebaseInstallations (10.8.0):
     - FirebaseCore (~> 10.0)
     - GoogleUtilities/Environment (~> 7.8)
     - GoogleUtilities/UserDefaults (~> 7.8)
@@ -687,9 +687,9 @@ SPEC CHECKSUMS:
   FirebaseAuthUI: 870e22bebf5d9844cab1ded173c68e06041f90c8
   FirebaseCore: fa80ad16a62d52f67274b5b88304c3a318bbf9a4
   FirebaseCoreExtension: 318e5ee9ad4092b00423c2bddd51c3f5c3585973
-  FirebaseCoreInternal: 8845798510aae74703467480f71ac613788d0696
+  FirebaseCoreInternal: fa2899eb1f340054858d289e5a0fb935a0a74e52
   FirebaseEmailAuthUI: 940ed59d732cef15d5fc69cb326d40eedac2b062
-  FirebaseInstallations: 59c0e4c7a816a0f76710d83f77e5369b3e45eb96
+  FirebaseInstallations: b2a05a3fe707df764345d68685534d07d0664af3
   FirebaseMessaging: fd93783258c53ae5cdb9b41bf0c51606a677f2d5
   FirebaseOAuthUI: 367cc8ce062fefbe6b362801f966da98d056f2d7
   FirebaseUI: 2453fbe76553b738ae3642eb12bf2891c12485ea

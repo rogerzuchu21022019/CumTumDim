@@ -30,12 +30,12 @@ import WebView from 'react-native-webview';
 import Snackbar from 'react-native-snackbar';
 import {resetCart} from '../../../../product/sliceProduct';
 import CheckModal from '../../../../../shared/utils/CheckModal';
+import ModalNotify from '../../../../../components/modal/ModalNotify';
 const log = LOG.extend(`PAYMENT.JS`);
 const Payment = ({navigation, route}) => {
-  const {order} = route.params;
+  let {order} = route.params;
 
   const editDeliveryAddress = () => {
-    
     navigation.navigate(Router.DELIVERY_ADDRESS);
   };
 
@@ -45,6 +45,8 @@ const Payment = ({navigation, route}) => {
   const [accessToken, setAccessToken] = useState(null);
   const [isModalVisible, setModalVisible] = useState(false);
 
+  const [isEditAddress, setIsEditAddress] = useState(false);
+
   /* Selector */
   const authSelect = useSelector(authSelector);
   const cartData = useSelector(cartSelector);
@@ -53,6 +55,19 @@ const Payment = ({navigation, route}) => {
   const name = authSelect.user.name;
   const userId = authSelect.user._id;
   const moneyToPaid = order.moneyToPaid;
+  const address = authSelect.user.addresses;
+
+  const getAddressDefault = address.filter(item => {
+    return item.addressDefault === true;
+  });
+  const dispatch = useDispatch();
+
+  const addressDefault = getAddressDefault[0];
+  log.info(
+    '🚀 ~ file: Payment.js:75 ~ Payment ~ addressDefault:',
+    addressDefault,
+  );
+
   const message = 'Bạn chưa chọn phương thức thanh toán!';
 
   const onDisplayNotification = async () => {
@@ -67,7 +82,6 @@ const Payment = ({navigation, route}) => {
     showNotifyLocal(dataMap);
   };
 
-  const dispatch = useDispatch();
   const handleCheck = id => {
     if (checkedId === id) {
       setCheckedId(null);
@@ -76,8 +90,16 @@ const Payment = ({navigation, route}) => {
     }
   };
 
-  const handleCreateOrder = order => {
-    dispatch(fetchCreateOrder(order));
+  const handleClick = () => {
+    setModalVisible(!isModalVisible);
+  };
+
+  const handleCreateOrder = (order, address) => {
+    const newOrder = {
+      ...order,
+      address: address,
+    };
+    dispatch(fetchCreateOrder(newOrder));
 
     // dispatch(fetchNotification(data));
   };
@@ -111,7 +133,15 @@ const Payment = ({navigation, route}) => {
 
     if (checkedId === 1) {
       console.log('PAYPAL', checkedId);
-      handleGetAccessToken(order);
+      if (addressDefault) {
+        handleGetAccessToken(order, addressDefault);
+      } else {
+        Snackbar.show({
+          text: 'Bạn chưa có địa chỉ nhận hàng',
+          duration: Snackbar.LENGTH_SHORT,
+        });
+        setIsEditAddress(true);
+      }
     }
     if (checkedId === 2) {
       console.log('VISA', checkedId);
@@ -173,7 +203,7 @@ const Payment = ({navigation, route}) => {
       );
       if (response.status === 'COMPLETED') {
         resetDataPaypal();
-        handleCreateOrder(order);
+        handleCreateOrder(order, addressDefault);
         onDisplayNotification();
         handleResetCart();
         navigation.goBack();
@@ -228,42 +258,56 @@ const Payment = ({navigation, route}) => {
             <TouchableOpacity onPress={editDeliveryAddress}>
               <View style={styles.textTile}>
                 <Text style={styles.text}>Địa chỉ nhận hàng</Text>
+                {isEditAddress ? (
+                  <Text style={styles.text}>Click me</Text>
+                ) : null}
               </View>
-              <View style={styles.groupContent}>
-                <View style={styles.leftContent}>
-                  <View style={styles.iconLocation}>
-                    <IconEntypo
-                      name="location-pin"
-                      color={constants.COLOR.ORANGE}
-                      size={20}
+              {addressDefault ? (
+                <View style={styles.groupContent}>
+                  <View style={styles.leftContent}>
+                    <View style={styles.iconLocation}>
+                      <IconEntypo
+                        name="location-pin"
+                        color={constants.COLOR.ORANGE}
+                        size={20}
+                      />
+                    </View>
+                    <View>
+                      <View>
+                        <Text style={styles.text1}>
+                          {addressDefault.name} | {addressDefault.phone}
+                        </Text>
+                      </View>
+                      <View>
+                        <Text style={styles.text1}>
+                          {addressDefault.houseNumber} Đường{' '}
+                          {addressDefault.street}
+                        </Text>
+                      </View>
+                      <View>
+                        <Text style={styles.text1}>
+                          Phường {addressDefault.ward}
+                        </Text>
+
+                        <Text style={styles.text1}>
+                          Quận {addressDefault.district}
+                        </Text>
+
+                        <Text style={styles.text1}>
+                          Thành phố {addressDefault.city}
+                        </Text>
+                      </View>
+                    </View>
+                  </View>
+                  <View style={styles.rightContent}>
+                    <IconAntDesign
+                      name="right"
+                      color={constants.COLOR.WHITE}
+                      size={15}
                     />
                   </View>
-                  <View>
-                    <View>
-                      <Text style={styles.text1}>
-                        {authSelect.user.name} | 0342128462
-                      </Text>
-                    </View>
-                    <View>
-                      <Text style={styles.text1}>
-                        562/39h Đường Nguyễn Kiệm
-                      </Text>
-                    </View>
-                    <View>
-                      <Text style={styles.text1}>
-                        Phường 4, quận Phú Nhuận,TP HCM
-                      </Text>
-                    </View>
-                  </View>
                 </View>
-                <View style={styles.rightContent}>
-                  <IconAntDesign
-                    name="right"
-                    color={constants.COLOR.WHITE}
-                    size={15}
-                  />
-                </View>
-              </View>
+              ) : null}
             </TouchableOpacity>
           </View>
 
@@ -401,11 +445,16 @@ const Payment = ({navigation, route}) => {
           </View>
         </View>
         <View style={styles.modal}>
-          <CheckModal
+          <ModalNotify
+            isShowModal={isModalVisible}
+            message1={message}
+            handleClick={handleClick}
+          />
+          {/* <CheckModal
             isModalVisible={isModalVisible}
             setModalVisible={setModalVisible}
             message={message}
-          />
+          /> */}
         </View>
       </View>
     </SafeKeyComponent>

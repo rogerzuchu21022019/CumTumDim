@@ -46,15 +46,15 @@ const HomeCustomer = ({navigation}) => {
   const log = LOG.extend('HOME_CUSTOMER.js');
   const dispatch = useDispatch();
   const authSelect = useSelector(authSelector);
-  log.info(
-    '🚀 ~ file: Home.js:47 ~ HomeCustomer ~ notifications:',
-    authSelect.notifications,
-  );
+  // log.info(
+  //   '🚀 ~ file: Home.js:47 ~ HomeCustomer ~ notifications:',
+  //   authSelect.notifications,
+  // );
 
   const userInfo = {
     name: authSelect.user.name,
     phone: authSelect.user.phone,
-    address: authSelect.user.address,
+    address: authSelect.user.addresses,
   };
 
   const message1 = `Bạn chưa cập nhật địa chỉ giao hàng!!`;
@@ -80,7 +80,9 @@ const HomeCustomer = ({navigation}) => {
   const [isCancel, setIsCancel] = useState(false);
   const [isAddress, setIsAddress] = useState(false);
 
-  const address = authSelect.user.address;
+  const [iconFoods, setIconFoods] = useState(true);
+
+  const address = authSelect.user.addresses;
   const handleClick = () => {
     setIsShowModal(!isShowModal);
     setIsAddress(!isAddress);
@@ -168,7 +170,10 @@ const HomeCustomer = ({navigation}) => {
     dispatch(fetchDishes());
     onDisplayNotification();
     setTabs(0);
-    return () => {};
+    return () => {
+      dispatch(fetchCategories());
+      dispatch(fetchDishes());
+    };
   }, [dispatch]);
 
   /* Dispatch function */
@@ -199,8 +204,6 @@ const HomeCustomer = ({navigation}) => {
     dispatch(removeDish(dish));
     dispatch(updateQuantity(dish));
   };
-
-  // i want to use useCallback to call onDisplayNotification
 
   const imageUrlOptions = {
     uri: '',
@@ -376,6 +379,7 @@ const HomeCustomer = ({navigation}) => {
                     itemContainerStyle={styles.itemContainerStyle}
                     defaultColor={constants.COLOR.WHITE}
                     styleTextTitle={styles.styleTextTitle}
+                    iconFoods={iconFoods}
                   />
                 </View>
 

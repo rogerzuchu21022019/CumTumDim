@@ -4,7 +4,7 @@ const {createAsyncThunk} = require('@reduxjs/toolkit');
 const {LOG} = require('../../../../logger.config');
 const {constants} = require('../../shared/constants');
 const {AxiosInstance} = require('../../shared/utils/AxiosInstance');
-const log = LOG.extend(`API_ADMIN.JS`);
+const log = LOG.extend(`API_USER.JS`);
 export const fetchLogin = createAsyncThunk(
   constants.FETCH.LOGIN,
   async (idToken, accessToken) => {
@@ -55,9 +55,59 @@ export const fetchUpdateNotification = createAsyncThunk(
         notification: data.notification,
       },
     );
-    log.warning("🚀 ~ file: apiUser.js:58 ~ response:", response.data)
-    
+    log.warning('🚀 ~ file: apiUser.js:58 ~ response:', response.data);
 
+    return response.data;
+  },
+);
+
+/* Address */
+export const fetchAddAddress = createAsyncThunk(
+  constants.FETCH.ADD_ADDRESS,
+  async data => {
+    log.info('🚀 ~ file: apiUser.js:70 ~ data:', data);
+    const response = await AxiosInstance().post(
+      `/users/add-address/${data.userId}`,
+      {
+        address: data.address,
+      },
+    );
+
+    log.error('🚀 ~ file: apiUser.js:76 ~ response:', response.data);
+    return response.data;
+  },
+);
+
+/* Address */
+export const fetchUpdateAddress = createAsyncThunk(
+  constants.FETCH.UPDATE_ADDRESS,
+  async data => {
+    log.info('🚀 ~ file: apiUser.js:70 ~ data:', data);
+    const response = await AxiosInstance().post(
+      `/users/update-address/${data.userId}`,
+      {
+        address: data.address,
+      },
+    );
+
+    log.error('🚀 ~ file: apiUser.js:76 ~ response:', response.data);
+    return response.data;
+  },
+);
+
+/* Address */
+export const fetchDeleteAddress = createAsyncThunk(
+  constants.FETCH.DELETE_ADDRESS,
+  async data => {
+    log.info('🚀 ~ file: apiUser.js:102 ~ data:', data);
+    const response = await AxiosInstance().post(
+      `/users/delete-address/${data.userId}`,
+      {
+        address: data.address,
+      },
+    );
+
+    log.error('🚀 ~ file: apiUser.js:110 ~ response:', response.data);
     return response.data;
   },
 );
