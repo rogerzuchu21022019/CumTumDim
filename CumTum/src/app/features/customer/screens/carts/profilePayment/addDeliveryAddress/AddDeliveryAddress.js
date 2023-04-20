@@ -29,11 +29,10 @@ import DropdownElement from '../../../../../../components/dropdownElement/Dropdo
 import {LIST_STREET, WARDS} from '../../../../../../shared/utils/DataAddress';
 import ModalNotify from '../../../../../../components/modal/ModalNotify';
 import {fetchAddAddress, fetchUserById} from '../../../../../admin/apiUser';
-import { authSelector } from '../../../../../admin/sliceAuth';
+import {authSelector} from '../../../../../admin/sliceAuth';
 
 const log = LOG.extend(`EDIT_DELIVERY_ADDRESS.JS`);
 const AddDeliveryAddress = ({navigation}) => {
-  
   const authSelect = useSelector(authSelector);
   const userId = authSelect.user._id;
   /* States user info*/
@@ -43,6 +42,7 @@ const AddDeliveryAddress = ({navigation}) => {
   const [district, setDistrict] = useState('12');
   const [city, setCity] = useState('Hồ Chí Minh');
   const [street, setStreet] = useState('');
+  const [icon, setIcon] = useState(true);
 
   const [isShowModal, setIsShowModal] = useState(false);
   const [houseNumber, setHouseNumber] = useState('');
@@ -71,7 +71,6 @@ const AddDeliveryAddress = ({navigation}) => {
       return;
     } else {
       const newAddress = {
-        
         name: name,
         phone: phone,
         ward: ward,
@@ -221,7 +220,6 @@ const AddDeliveryAddress = ({navigation}) => {
                   editable={false}
                   onChangeText={text => setCity(text)}
                 />
-                
               </View>
             </TouchableNativeFeedback>
           </ScrollView>
@@ -229,7 +227,7 @@ const AddDeliveryAddress = ({navigation}) => {
         <View style={styles.line}></View>
 
         <View style={styles.footer}>
-          <ButtonCus  title="Thêm" onHandleClick={onAddAddress} />
+          <ButtonCus title="Thêm" onHandleClick={onAddAddress} icon={icon} />
         </View>
         <ModalNotify
           message1="Bạn vui lòng điền đầy đủ thông tin"

@@ -23,6 +23,8 @@ import {useDispatch, useSelector} from 'react-redux';
 import {authSelector} from '../../../../admin/sliceAuth';
 import {fetchUserById} from '../../../../admin/apiUser';
 const log = LOG.extend(`CHOOSE_DELIVERY_ADDRESS.JS`);
+import IconMaterialIcons from 'react-native-vector-icons/MaterialIcons';
+
 const ChooseDeliveryAddress = ({navigation}) => {
   const authSelect = useSelector(authSelector);
   const userId = authSelect.user._id;
@@ -107,6 +109,11 @@ const ChooseDeliveryAddress = ({navigation}) => {
         <View style={styles.viewFooter}>
           <TouchableOpacity onPress={moveToScreen}>
             <View style={styles.viewButtonNext}>
+              <IconMaterialIcons
+                name="add-circle-outline"
+                size={25}
+                color={constants.COLOR.WHITE}
+              />
               <Text style={styles.btnNext}>Thêm địa chỉ giao hàng</Text>
             </View>
           </TouchableOpacity>
