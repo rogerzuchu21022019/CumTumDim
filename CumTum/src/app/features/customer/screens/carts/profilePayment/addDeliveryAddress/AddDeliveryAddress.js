@@ -28,11 +28,10 @@ import BoxInputCus from '../../../../../../components/input/BoxInput';
 import DropdownElement from '../../../../../../components/dropdownElement/DropdownElement';
 import {LIST_STREET, WARDS} from '../../../../../../shared/utils/DataAddress';
 import ModalNotify from '../../../../../../components/modal/ModalNotify';
+import IconMaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 const log = LOG.extend(`EDIT_DELIVERY_ADDRESS.JS`);
 const AddDeliveryAddress = ({navigation}) => {
-  
-
   /* States user info*/
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
@@ -73,10 +72,6 @@ const AddDeliveryAddress = ({navigation}) => {
         street: street,
         houseNumber: houseNumber,
       };
-      log.info(
-        '🚀 ~ file: EditDeliveryAddress.js:52 ~ moveToBack ~ newAddress:',
-        newAddress,
-      );
     }
     navigation.goBack();
   };
@@ -191,8 +186,15 @@ const AddDeliveryAddress = ({navigation}) => {
                   </View>
                   <View style={styles.viewSwitch}>
                     <Switch
-                      trackColor={{false: constants.COLOR.WHITE, true: constants.COLOR.WHITE}}
-                      thumbColor={isEnabled ? constants.COLOR.ORANGE : constants.COLOR.ORANGE}
+                      trackColor={{
+                        false: constants.COLOR.WHITE,
+                        true: constants.COLOR.WHITE,
+                      }}
+                      thumbColor={
+                        isEnabled
+                          ? constants.COLOR.ORANGE
+                          : constants.COLOR.ORANGE
+                      }
                       ios_backgroundColor="#3e3e3e"
                       onValueChange={toggleSwitch}
                       value={isEnabled}
@@ -204,7 +206,21 @@ const AddDeliveryAddress = ({navigation}) => {
           </ScrollView>
         </View>
         <View style={styles.footer}>
-          <ButtonCus title="Lưu" onHandleClick={moveToBack} />
+          {/* <IconMaterialIcons name="add-circle-outline" size={30} /> */}
+          <TouchableOpacity>
+            <View style={styles.viewFooter}>
+              <View style={styles.viewIcon}>
+                <IconMaterialIcons name="add-circle-outline" size={25} />
+              </View>
+              <View style={styles.viewTextBtn}>
+                <Text style={styles.TextAdd}>Thêm địa chỉ </Text>
+              </View>
+            </View>
+          </TouchableOpacity>
+
+          
+
+          {/* <ButtonCus title="Thêm" onHandleClick={moveToBack}></ButtonCus> */}
         </View>
         <ModalNotify
           message1="Bạn vui lòng điền đầy đủ thông tin"

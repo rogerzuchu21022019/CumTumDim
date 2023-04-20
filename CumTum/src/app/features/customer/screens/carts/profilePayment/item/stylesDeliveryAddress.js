@@ -21,8 +21,21 @@ const styles = StyleSheet.create({
     fontSize:14,
     lineHeight:22,
     fontStyle:'normal',
-    fontWeight:'500'
+    fontWeight:'500',
+    flexWrap: 'wrap',
+     textAlign: 'justify',
+     numberOfLines: 2,
   },
+  textItem1: {
+
+     textAlign: 'left' 
+  },
+
+textItem2: {
+
+   textAlign: 'right' 
+
+},
   textItem1: {
     flex:1,
     color: constants.COLOR.WHITE,
@@ -89,19 +102,18 @@ const styles = StyleSheet.create({
 
   },
   boxStatus2: {
-    
     marginBottom:10,
     flex:1,
-  },
-  boxPrice: {
+    // backgroundColor: constants.COLOR.ORANGE,
 
-    flexDirection:'row',
-    flex: 1,
+  },
+  box: {
   
   },
   boxPrice2: {
-    flexDirection:'row',
     flex: 1,
+    alignItems: 'center',
+    flexDirection:'row'
   },
 
   checkboxChecked: {

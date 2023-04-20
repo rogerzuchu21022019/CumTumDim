@@ -85,6 +85,34 @@ const styles = StyleSheet.create({
     width: '100%',
   },
 
+  viewFooter:{
+    flexDirection:'row',
+    backgroundColor: constants.COLOR.ORANGE,
+    borderRadius: 10,
+    marginTop:5,
+    width:210,
+    height:50
+  },
+  viewIcon:{
+    flex:1,
+    justifyContent:'center',
+    paddingLeft:15,
+
+  
+  },
+  viewTextBtn:{
+    justifyContent:'center',
+    flex:3,
+  },
+  TextAdd:{
+    color:constants.COLOR.BLACK,
+    fontSize:20,
+    fontWeight:'400',
+    fontStyle:'normal',
+  
+
+  },
+
   /* Dropdown */
   styleBorderWidth: {
     marginHorizontal:20,

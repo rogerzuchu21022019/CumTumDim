@@ -131,6 +131,7 @@ const ChooseDeliveryAddress = ({navigation}) => {
             </View>
           </TouchableOpacity>
         </View>
+
       </View>
     </SafeKeyComponent>
   );
