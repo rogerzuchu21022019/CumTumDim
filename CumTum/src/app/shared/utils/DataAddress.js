@@ -1087,87 +1087,156 @@ export const STREETS13 = [
   },
 ];
 
-
 export const STREETS_TMT = [
   {
     label: 'Trung Mỹ Tây 13',
     value: 'Trung Mỹ Tây 13',
   },
   {
-    label: 'Trung Mỹ Tây 2A',
-    value: 'Trung Mỹ Tây 2A',
-  },
-  {
-    label: 'TL 27',
-    value: 'TL 27',
-  },
-  {
-    label: 'TMT 09',
-    value: 'TMT 09',
-  },
-  {
-    label: 'Tô Ký',
-    value: 'Tô Ký',
-  },
-  {
-    label: 'Tô Ngọc Vân',
-    value: 'Tô Ngọc Vân',
-  },
-  {
-    label: 'Trung Mỹ Tây',
-    value: 'Trung Mỹ Tây',
-  },
-  {
-    label: 'Trung Mỹ Tây 05',
-    value: 'Trung Mỹ Tây 05',
-  },
-  {
-    label: 'Trung Mỹ Tây 08',
-    value: 'Trung Mỹ Tây 08',
-  },
-  {
     label: 'Trung Mỹ Tây 1',
     value: 'Trung Mỹ Tây 1',
   },
   {
-    label: 'Trung Mỹ Tây 12',
-    value: 'Trung Mỹ Tây 12',
-  },
-  {
-    label: 'Trung Mỹ Tây 13',
-    value: 'Trung Mỹ Tây 13',
-  },
-  {
-    label: 'Trung Mỹ Tây 18A',
-    value: 'Trung Mỹ Tây 18A',
-  },
-  {
-    label: 'Trung Mỹ Tây 2A',
-    value: 'Trung Mỹ Tây 2A',
+    label: 'Trung Mỹ Tây 3',
+    value: 'Trung Mỹ Tây 3',
   },
   {
     label: 'Trung Mỹ Tây 5',
     value: 'Trung Mỹ Tây 5',
   },
   {
-    label: 'Trung Mỹ Tây 6A',
-    value: 'Trung Mỹ Tây 6A',
-  },
-  {
     label: 'Trung Mỹ Tây 9A',
     value: 'Trung Mỹ Tây 9A',
   },
   {
-    label: 'Trường Chinh',
-    value: 'Trường Chinh',
+    label: 'Trung Mỹ Tây 14A',
+    value: 'Trung Mỹ Tây 14A',
   },
   {
-    label: 'Vườn Lài',
-    value: 'Vườn Lài',
+    label: 'Trung Mỹ Tây 2A',
+    value: 'Trung Mỹ Tây 2A',
   },
+  {
+    label: 'Trung Mỹ Tây 6A',
+    value: 'Trung Mỹ Tây 6A',
+  },
+  {
+    label: 'Trung Mỹ Tây 7A',
+    value: 'Trung Mỹ Tây 7A',
+  },
+  {
+    label: 'Trung Mỹ Tây 9',
+    value: 'Trung Mỹ Tây 9',
+  },
+  {
+    label: 'Tô Ký',
+    value: 'Tô Ký',
+  },
+  {
+    label: 'Hà Thị Khéo',
+    value: 'Hà Thị Khéo',
+  },
+  {
+    label: 'Hà Thị khiêm',
+    value: 'Hà Thị khiêm',
+  },
+  {
+    label: 'Hà Đặc',
+    value: 'Hà Đặc',
+  },
+  {
+    label: 'Quốc Lộ 1',
+    value: 'Quốc Lộ 1',
+  },
+  {
+    label: 'Quốc Lộ 22',
+    value: 'Quốc Lộ 22',
+  },
+  {
+    label: 'Dường T13A',
+    value: 'Dường T13A',
+  },
+  {
+    label: 'Quán Tre',
+    value: 'Quán Tre',
+  },
+  {
+    label: 'Song Hành',
+    value: 'Song Hành',
+  },
+  {
+    label: 'Song Hành QL22',
+    value: 'Song Hành QL22',
+  },
+  {
+    label: 'Hoàng Tăng Bí',
+    value: 'Hoàng Tăng Bí',
+  },
+  {
+    label: 'Nguyễn Ảnh Thủ',
+    value: 'Hoàng Tăng Bí',
+  },
+  // {
+  //   label: 'Tô Ký',
+  //   value: 'Tô Ký',
+  // },
+  // {
+  //   label: 'Tô Ngọc Vân',
+  //   value: 'Tô Ngọc Vân',
+  // },
+  // {
+  //   label: 'Trung Mỹ Tây',
+  //   value: 'Trung Mỹ Tây',
+  // },
+  // {
+  //   label: 'Trung Mỹ Tây 05',
+  //   value: 'Trung Mỹ Tây 05',
+  // },
+  // {
+  //   label: 'Trung Mỹ Tây 08',
+  //   value: 'Trung Mỹ Tây 08',
+  // },
+  // {
+  //   label: 'Trung Mỹ Tây 1',
+  //   value: 'Trung Mỹ Tây 1',
+  // },
+  // {
+  //   label: 'Trung Mỹ Tây 12',
+  //   value: 'Trung Mỹ Tây 12',
+  // },
+  // {
+  //   label: 'Trung Mỹ Tây 13',
+  //   value: 'Trung Mỹ Tây 13',
+  // },
+  // {
+  //   label: 'Trung Mỹ Tây 18A',
+  //   value: 'Trung Mỹ Tây 18A',
+  // },
+  // {
+  //   label: 'Trung Mỹ Tây 2A',
+  //   value: 'Trung Mỹ Tây 2A',
+  // },
+  // {
+  //   label: 'Trung Mỹ Tây 5',
+  //   value: 'Trung Mỹ Tây 5',
+  // },
+  // {
+  //   label: 'Trung Mỹ Tây 6A',
+  //   value: 'Trung Mỹ Tây 6A',
+  // },
+  // {
+  //   label: 'Trung Mỹ Tây 9A',
+  //   value: 'Trung Mỹ Tây 9A',
+  // },
+  // {
+  //   label: 'Trường Chinh',
+  //   value: 'Trường Chinh',
+  // },
+  // {
+  //   label: 'Vườn Lài',
+  //   value: 'Vườn Lài',
+  // },
 ];
-
-
 
 export const LIST_STREET = STREETS1.concat(
   STREETS2,

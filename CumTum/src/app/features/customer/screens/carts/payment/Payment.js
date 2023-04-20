@@ -290,11 +290,7 @@ const Payment = ({navigation, route}) => {
                         </Text>
 
                         <Text style={styles.text1}>
-                          Quận {addressDefault.district}
-                        </Text>
-
-                        <Text style={styles.text1}>
-                          Thành phố {addressDefault.city}
+                          Quận {addressDefault.district}  Thành phố {addressDefault.city}
                         </Text>
                       </View>
                     </View>

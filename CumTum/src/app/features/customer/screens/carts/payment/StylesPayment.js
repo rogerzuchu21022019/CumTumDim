@@ -167,6 +167,7 @@ const styles = StyleSheet.create({
   },
   iconLocation:{
     marginEnd:10,
+    justifyContent:'center'
   },
   modal:{
     backgroundColor:constants.COLOR.BLACK,

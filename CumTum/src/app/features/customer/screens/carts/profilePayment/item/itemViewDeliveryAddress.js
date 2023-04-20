@@ -52,43 +52,39 @@ const ItemViewPayment = ({
               )}
             </View>
 
-            <View style={styles.boxStatus}>
-              <View style={styles.boxStatus1}>
-                <Text style={styles.textItem1}>{item.name}</Text>
-                <Text style={styles.textItem3}>| </Text>
-                <Text style={styles.textItem2}>{item.phone} </Text>
-                <View style={styles.viewbtn}>
+            <View style={styles.viewProfile}>
+              <View style={styles.viewProfile1}>
+                <View>
+                  <Text style={styles.textItem1}>
+                    {item.name} | {item.phone}
+                  </Text>
+                </View>
+                <Text style={styles.textItem2}> </Text>
+                <View style={styles.viewButton}>
                   <TouchableOpacity onPress={EditDeliveryAddrees}>
                     <Text style={styles.textItem3}>Sửa</Text>
                   </TouchableOpacity>
                 </View>
               </View>
 
-              <View style={styles.boxStatus2}>
+              <View style={styles.viewProfile2}>
                 <View style={styles.box}>
-                  <Text style={styles.textItem}>
-                    {item.houseNumber} đường {item.street} phường {item.ward}
-                  </Text>
+                  <Text style={styles.textItem}>{item.houseNumber}</Text>
+                  <Text style={styles.textItem}> | Đường {item.street}</Text>
+                </View>
+                <View>
+                  <Text style={styles.textItem}>Phường {item.ward}</Text>
+                </View>
+                <View style={styles.box}>
+                  <Text style={styles.textItem}>Thành Phố {item.city}</Text>
+                  <Text style={styles.textItem}>  | Quận {item.district}</Text>
                 </View>
 
-                <View style={styles.boxPrice2}>
-                  <Text numberOfLines={2} style={styles.textItem}>
-                    thành phố {item.city}
-                  </Text>
-                  <Text numberOfLines={2} style={styles.textItem}>
-                    {' '}
-                    huyện {item.district}
-                  </Text>
-                </View>
-             
-
-                {item.addressDefault
-                  ? (
-                    <View style={styles.viewDefault}>
-                      <Text style={styles.btnDefault}>Mặc định</Text>
-                    </View>
-                  )
-                  : null}
+                {item.addressDefault ? (
+                  <View style={styles.viewDefault}>
+                    <Text style={styles.btnDefault}>Mặc định</Text>
+                  </View>
+                ) : null}
               </View>
             </View>
           </View>

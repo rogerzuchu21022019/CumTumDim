@@ -15,105 +15,94 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
 
-
   textItem: {
     color: constants.COLOR.WHITE,
-    fontSize:14,
-    lineHeight:22,
-    fontStyle:'normal',
-    fontWeight:'500',
+    fontSize: 12,
+    lineHeight: 22,
+    fontStyle: 'normal',
+    fontWeight: '500',
     flexWrap: 'wrap',
-     textAlign: 'justify',
-     numberOfLines: 2,
+    textAlign: 'justify',
+    numberOfLines: 2,
   },
   textItem1: {
-
-     textAlign: 'left' 
+    textAlign: 'left',
   },
 
-textItem2: {
-
-   textAlign: 'right' 
-
-},
+  textItem2: {
+    textAlign: 'right',
+  },
   textItem1: {
-    flex:1,
+    flex: 1,
     color: constants.COLOR.WHITE,
     // backgroundColor: constants.COLOR.BLACK,
-
   },
   textItem2: {
-    flex:1,
+    flex: 1,
     // backgroundColor:constants.COLOR.GREEN,
     color: constants.COLOR.WHITE,
   },
   textItem1: {
-    flex:1,
+    flex: 1,
     color: constants.COLOR.WHITE,
     // backgroundColor: constants.COLOR.BLACK,
-
   },
   textItem3: {
     // backgroundColor: constants.COLOR.BLACK,
     color: constants.COLOR.RED,
-    fontStyle:'normal',
-    fontSize:14,
-    fontWeight:'700'
-
+    fontStyle: 'normal',
+    fontSize: 14,
+    fontWeight: '700',
   },
-  viewbtn:{
+  viewButton: {
     // backgroundColor:constants.COLOR.BLUE
   },
   textItemPaid: {
     color: constants.COLOR.RED,
   },
   boxView: {
-    flex:1,
-    flexDirection:'row',
-    paddingLeft:10,
+    flex: 1,
+    flexDirection: 'row',
+    paddingLeft: 10,
     marginRight: 20,
     // backgroundColor: constants.COLOR.RED,
-
   },
-  viewCheck:{
-    justifyContent:'center',
+  viewCheck: {
+    justifyContent: 'center',
   },
-  viewDefault:{
-    borderColor:constants.COLOR.ORANGE,
-    borderWidth:1,
-    width:'30%',
-    justifyContent:'center',
-    marginTop:5
+  viewDefault: {
+    borderColor: constants.COLOR.ORANGE,
+    borderWidth: 1,
+    width: '30%',
+    justifyContent: 'center',
+    marginTop: 5,
   },
-  btnDefault:{
-    lineHeight:22,
-    fontWeight:'700',
-    color:constants.COLOR.ORANGE,
-    textAlign:'center'
+  btnDefault: {
+    lineHeight: 22,
+    fontWeight: '700',
+    color: constants.COLOR.ORANGE,
+    textAlign: 'center',
   },
-  boxStatus: {
-    flex:1,
-    
+  viewProfile: {
+    flex: 1,
   },
-  boxStatus1: {
-    marginTop:15,
-    flexDirection:'row',
-    flex:1,
-
+  viewProfile1: {
+    marginTop: 15,
+    flexDirection: 'row',
+    flex: 1,
   },
-  boxStatus2: {
-    marginBottom:10,
-    flex:1,
+  viewProfile2: {
+    marginBottom: 10,
+    flex: 1,
     // backgroundColor: constants.COLOR.ORANGE,
-
   },
   box: {
-  
+    flexDirection: 'row',
   },
   boxPrice2: {
     flex: 1,
     alignItems: 'center',
-    flexDirection:'row'
+    flexDirection: 'row',
   },
 
   checkboxChecked: {
@@ -129,7 +118,6 @@ textItem2: {
     alignItems: 'center',
     marginRight: 10,
   },
-
 });
 
 export default styles;
