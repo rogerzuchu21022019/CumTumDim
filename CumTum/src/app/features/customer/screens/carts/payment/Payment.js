@@ -34,7 +34,8 @@ const log = LOG.extend(`PAYMENT.JS`);
 const Payment = ({navigation, route}) => {
   const {order} = route.params;
 
-  const DeliveryAddress = () => {
+  const editDeliveryAddress = () => {
+    
     navigation.navigate(Router.DELIVERY_ADDRESS);
   };
 
@@ -224,7 +225,7 @@ const Payment = ({navigation, route}) => {
         <View style={styles.divideLine}></View>
         <View style={styles.body}>
           <View style={styles.groupText}>
-            <TouchableOpacity onPress={DeliveryAddress}>
+            <TouchableOpacity onPress={editDeliveryAddress}>
               <View style={styles.textTile}>
                 <Text style={styles.text}>Địa chỉ nhận hàng</Text>
               </View>
