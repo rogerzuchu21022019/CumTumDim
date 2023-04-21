@@ -43,6 +43,7 @@ const AddDeliveryAddress = ({navigation}) => {
   const [city, setCity] = useState('Hồ Chí Minh');
   const [street, setStreet] = useState('');
   const [icon, setIcon] = useState(true);
+  const [hem, setHem] = useState('');
 
   const [isShowModal, setIsShowModal] = useState(false);
   const [houseNumber, setHouseNumber] = useState('');
@@ -77,7 +78,7 @@ const AddDeliveryAddress = ({navigation}) => {
         district: district,
         city: city,
         street: street,
-        houseNumber: houseNumber,
+        houseNumber: `${houseNumber}/${hem}`,
         addressDefault: isEnabled,
       };
       log.info(
@@ -185,12 +186,24 @@ const AddDeliveryAddress = ({navigation}) => {
                   itemContainerStyle={styles.itemContainerStyle}
                 />
 
-                <View>
+                <View style={styles.boxHouse}>
                   <BoxInputCus
                     title="Số nhà"
                     value={houseNumber}
+                    keyboardType="numeric"
                     onChangeText={text => setHouseNumber(text)}
                     placeholder="Nhập số nhà"
+                  />
+                     <View style={styles.boxSec}>
+                    <Text style={styles.textSec}>{'/'}</Text>
+                  </View>
+
+                  <BoxInputCus
+                    title="Hẻm"
+                    value={hem}
+                    keyboardType="numeric"
+                    onChangeText={text => setHem(text)}
+                    placeholder="Nhập số của hẻm"
                   />
                 </View>
 

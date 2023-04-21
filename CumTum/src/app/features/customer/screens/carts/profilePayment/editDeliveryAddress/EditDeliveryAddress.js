@@ -46,6 +46,10 @@ const EditDeliveryAddress = ({navigation, route}) => {
   );
 
   /* States user info*/
+  const arrHouseNumber = item.houseNumber.split(`/`)
+  log.info("🚀 ~ file: EditDeliveryAddress.js:61 ~ EditDeliveryAddress ~ newT:", arrHouseNumber)
+
+
   const [name, setName] = useState(item.name);
   const [phone, setPhone] = useState(item.phone);
   const [ward, setWard] = useState(item.ward);
@@ -53,7 +57,9 @@ const EditDeliveryAddress = ({navigation, route}) => {
   const [city, setCity] = useState('Hồ Chí Minh');
   const [street, setStreet] = useState(item.street);
   const [isEnabled, setIsEnabled] = useState(false);
-  const [houseNumber, setHouseNumber] = useState(item.houseNumber);
+  const [houseNumber, setHouseNumber] = useState(arrHouseNumber[0]);
+  const [hem, setHem] = useState(arrHouseNumber[1]);
+
 
   const [isShowModal, setIsShowModal] = useState(false);
 
@@ -93,7 +99,7 @@ const EditDeliveryAddress = ({navigation, route}) => {
         district: district,
         city: city,
         street: street,
-        houseNumber: houseNumber,
+        houseNumber: `${houseNumber}/${hem}`,
         addressDefault: true,
       };
       log.info(
@@ -227,12 +233,24 @@ const EditDeliveryAddress = ({navigation, route}) => {
                   itemContainerStyle={styles.itemContainerStyle}
                 />
 
-                <View>
+                <View style={styles.boxHouse}>
                   <BoxInputCus
                     title="Số nhà"
                     value={houseNumber}
+                    keyboardType="numeric"
                     onChangeText={text => setHouseNumber(text)}
                     placeholder="Nhập số nhà"
+                  />
+                  <View style={styles.boxSec}>
+                    <Text style={styles.textSec}>{'/'}</Text>
+                  </View>
+
+                  <BoxInputCus
+                    title="Hẻm"
+                    value={hem}
+                    keyboardType="numeric"
+                    onChangeText={text => setHem(text)}
+                    placeholder="Nhập số của hẻm"
                   />
                 </View>
 

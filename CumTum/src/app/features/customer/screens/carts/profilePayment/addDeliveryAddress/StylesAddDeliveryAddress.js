@@ -94,6 +94,18 @@ const styles = StyleSheet.create({
     // backgroundColor: constants.COLOR.GREEN,
     width: '100%',
   },
+  boxHouse: {
+    flexDirection: 'row',
+  },
+  boxSec: {
+    justifyContent: 'center',
+    marginTop: 25,
+
+  },
+  textSec: {
+    color: constants.COLOR.WHITE,
+    fontWeight: 'bold',
+  },
 
   /* Dropdown */
   styleBorderWidth: {
