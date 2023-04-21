@@ -1,6 +1,6 @@
 import {Text, TouchableOpacity, View} from 'react-native';
 import {formatTime} from '../../../../../../shared/utils/Moment';
-import styles from './stylesDeliveryAddress';
+import styles from './stylesItemChooseDeliveryAddress';
 import SafeKeyComponent from '../../../../../../components/safe_area/SafeKeyComponent';
 import Router from '../../../../../../navigation/Router';
 import React, {useState} from 'react';
