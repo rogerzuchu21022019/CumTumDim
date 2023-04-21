@@ -44,6 +44,8 @@ const BoxInputCus = props => {
             />
           </View>
         </View>
+
+        
       </View>
     </SafeKeyComponent>
   );

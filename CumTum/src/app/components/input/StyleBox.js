@@ -33,6 +33,9 @@ const styleBox = StyleSheet.create({
     // borderWidth:1,
     // borderColor: constants.COLOR.WHITE,
   },
+  isHem: {
+    flexDirection: 'row',
+  },
   input: {
     width: '100%',
     // backgroundColor: constants.COLOR.RED,
