@@ -1007,7 +1007,6 @@ export const STREETS12 = [
     value: 'Tỉnh Lộ 29',
   },
 ];
-
 export const STREETS13 = [
   {
     label: 'Tỉnh Lộ 31',
@@ -1087,6 +1086,7 @@ export const STREETS13 = [
   },
 ];
 
+// phường Trung Mỹ Tây(xong)
 export const STREETS_TMT = [
   {
     label: 'Trung Mỹ Tây 13',
@@ -1176,19 +1176,464 @@ export const STREETS_TMT = [
     label: 'Nguyễn Ảnh Thủ',
     value: 'Hoàng Tăng Bí',
   },
+  // {
+  //   label: 'Tô Ký',
+  //   value: 'Tô Ký',
+  // },
+  // {
+  //   label: 'Tô Ngọc Vân',
+  //   value: 'Tô Ngọc Vân',
+  // },
+  // {
+  //   label: 'Trung Mỹ Tây',
+  //   value: 'Trung Mỹ Tây',
+  // },
+  // {
+  //   label: 'Trung Mỹ Tây 05',
+  //   value: 'Trung Mỹ Tây 05',
+  // },
+  // {
+  //   label: 'Trung Mỹ Tây 08',
+  //   value: 'Trung Mỹ Tây 08',
+  // },
+  // {
+  //   label: 'Trung Mỹ Tây 1',
+  //   value: 'Trung Mỹ Tây 1',
+  // },
+  // {
+  //   label: 'Trung Mỹ Tây 12',
+  //   value: 'Trung Mỹ Tây 12',
+  // },
+  // {
+  //   label: 'Trung Mỹ Tây 13',
+  //   value: 'Trung Mỹ Tây 13',
+  // },
+  // {
+  //   label: 'Trung Mỹ Tây 18A',
+  //   value: 'Trung Mỹ Tây 18A',
+  // },
+  // {
+  //   label: 'Trung Mỹ Tây 2A',
+  //   value: 'Trung Mỹ Tây 2A',
+  // },
+  // {
+  //   label: 'Trung Mỹ Tây 5',
+  //   value: 'Trung Mỹ Tây 5',
+  // },
+  // {
+  //   label: 'Trung Mỹ Tây 6A',
+  //   value: 'Trung Mỹ Tây 6A',
+  // },
+  // {
+  //   label: 'Trung Mỹ Tây 9A',
+  //   value: 'Trung Mỹ Tây 9A',
+  // },
+  // {
+  //   label: 'Trường Chinh',
+  //   value: 'Trường Chinh',
+  // },
+  // {
+  //   label: 'Vườn Lài',
+  //   value: 'Vườn Lài',
+  // },
 ];
 
-export const LIST_STREET = STREETS1.concat(
-  STREETS2,
-  STREETS3,
-  STREETS4,
-  STREETS5,
-  STREETS6,
-  STREETS7,
-  STREETS8,
-  STREETS9,
-  STREETS10,
-  STREETS11,
-  STREETS12,
-  STREETS13,
-);
+// phường Tân Thới Nhất(Xong)
+export const STREETS_TTN = [
+  {
+    label: '8',
+    value: '8',
+  },
+  {
+    label: '9',
+    value: '9',
+  },
+  {
+    label: '10',
+    value: '10',
+  },
+  {
+    label: '11',
+    value: '11',
+  },
+  {
+    label: '12',
+    value: '12',
+  },
+  {
+    label: '13',
+    value: '13',
+  },
+  {
+    label: '14',
+    value: '14',
+  },
+  {
+    label: 'Dương Thị Giang',
+    value: 'Dương Thị Giang',
+  },
+  {
+    label: 'C1',
+    value: 'C1',
+  },
+  {
+    label: 'C2',
+    value: 'C2',
+  },
+  {
+    label: 'C3',
+    value: 'C3',
+  },
+  {
+    label: 'C4',
+    value: 'C4',
+  },
+  {
+    label: 'D',
+    value: 'D',
+  },
+  {
+    label: 'D1',
+    value: 'D1',
+  },
+  {
+    label: 'D2',
+    value: 'D2',
+  },
+  {
+    label: 'D3',
+    value: 'D3',
+  },
+  {
+    label: 'Tân Thới Nhất 1',
+    value: 'Tân Thới Nhất 1',
+  },
+  {
+    label: 'Tân Thới Nhất 2',
+    value: 'Tân Thới Nhất 2',
+  },
+  {
+    label: 'Tân Thới Nhất 5',
+    value: 'Tân Thới Nhất 5',
+  },
+  {
+    label: 'Tân Thới Nhất 6',
+    value: 'Tân Thới Nhất 6',
+  },
+  {
+    label: 'Tân Thới Nhất 11',
+    value: 'Tân Thới Nhất 11',
+  },
+  {
+    label: 'Tân Thới Nhất 8',
+    value: 'Tân Thới Nhất 8',
+  },
+  {
+    label: 'Tân Thới Nhất 17',
+    value: 'Tân Thới Nhất 17',
+  },
+  {
+    label: 'Tân Thới Nhất 13',
+    value: 'Tân Thới Nhất 17',
+  },
+  {
+    label: 'Tân Thới Nhất 13b',
+    value: 'Tân Thới Nhất 13b',
+  },
+  {
+    label: 'Phan Văn Hớn',
+    value: 'Phan Văn Hớn',
+  },
+  {
+    label: 'F',
+    value: 'F',
+  },
+];
+// phường Đông Hưng Thuận (Xong)
+export const STREETS_DHT = [
+  {
+    label: 'Trường Chinh',
+    value: 'Trường Chinh',
+  },
+  {
+    label: 'Nguyễn Văn Qúa',
+    value: 'Nguyễn Văn Qúa',
+  },
+  {
+    label: 'Đông Hưng Thuận 2',
+    value: 'Đông Hưng Thuận 2',
+  },
+  {
+    label: 'Đông Hưng Thuận 8',
+    value: 'Đông Hưng Thuận 8',
+  },
+  {
+    label: 'Đông Hưng Thuận 9',
+    value: 'Đông Hưng Thuận 9',
+  },
+  {
+    label: 'Đông Hưng Thuận 10',
+    value: 'Đông Hưng Thuận 10',
+  },
+  {
+    label: 'Đông Hưng Thuận 11',
+    value: 'Đông Hưng Thuận 11',
+  },
+  {
+    label: 'Đông Hưng Thuận 12',
+    value: 'Đông Hưng Thuận 12',
+  },
+  {
+    label: 'Đông Hưng Thuận 13',
+    value: 'Đông Hưng Thuận 13',
+  },
+  {
+    label: 'Đông Hưng Thuận 17',
+    value: 'Đông Hưng Thuận 17',
+  },
+  {
+    label: 'Đông Hưng Thuận 26',
+    value: 'Đông Hưng Thuận 26',
+  },
+  {
+    label: 'Đông Hưng Thuận 27',
+    value: 'Đông Hưng Thuận 27',
+  },
+  {
+    label: 'Đông Hưng Thuận 14B',
+    value: 'Đông Hưng Thuận 14B',
+  },
+  {
+    label: 'Tô Ký',
+    value: 'Tô Ký',
+  },
+  {
+    label: 'Quang Trung',
+    value: 'Quang Trung',
+  },
+  {
+    label: 'Đường ĐHT23',
+    value: 'Đường ĐHT23',
+  },
+  {
+    label: 'Đường DN7',
+    value: 'Đường DN7',
+  },
+  {
+    label: 'Đường DN6',
+    value: 'Đường DN6',
+  },
+  {
+    label: 'Đường Số 1',
+    value: 'Đường Số 1',
+  },
+  {
+    label: 'Đường Số 2',
+    value: 'Đường Số 2',
+  },
+  {
+    label: 'Nguyễn Thị Gạch',
+    value: 'Nguyễn Thị Gạch',
+  },
+  {
+    label: 'Song hành QL22',
+    value: 'Song hành QL22',
+  },
+  {
+    label: 'Ngõ 1 Song Hành',
+    value: 'Ngõ 1 Song Hành',
+  },
+  {
+    label: 'Đương Tham Lương',
+    value: 'Đương Tham Lương',
+  },
+  {
+    label: 'Hẻm 26',
+    value: 'Hẻm 26',
+  },
+  {
+    label: 'Hẻm 39 Đông Hưng Thuận',
+    value: 'Hẻm 39 Đông Hưng Thuận',
+  },
+];
+// phường Tân Hưng Thuận(Xong)
+export const STREETS_THT = [
+  {
+    label: 'Đông Hưng Thuận 2',
+    value: 'Đông Hưng Thuận 2',
+  },
+  {
+    label: 'Đông Hưng Thuận 3',
+    value: 'Đông Hưng Thuận 3',
+  },
+  {
+    label: 'Đông Hưng Thuận 5',
+    value: 'Đông Hưng Thuận 5',
+  },
+  {
+    label: 'Đông Hưng Thuận 6',
+    value: 'Đông Hưng Thuận 6',
+  },
+  {
+    label: 'Đông Hưng Thuận 32',
+    value: 'Đông Hưng Thuận 32',
+  },
+  {
+    label: 'Đông Hưng Thuận 39',
+    value: 'Đông Hưng Thuận 39',
+  },
+  {
+    label: 'Đông Hưng Thuận 40',
+    value: 'Đông Hưng Thuận 40',
+  },
+  {
+    label: 'Đông Hưng Thuận 45',
+    value: 'Đông Hưng Thuận 45',
+  },
+  {
+    label: 'Đông Hưng Thuận 31',
+    value: 'Đông Hưng Thuận 31',
+  },
+  {
+    label: 'Đông Hưng Thuận 07',
+    value: 'Đông Hưng Thuận 07',
+  },
+  {
+    label: 'Trường Chinh',
+    value: 'Trường Chinh',
+  },
+  {
+    label: 'Nguyễn Văn Qúa',
+    value: 'Nguyễn Văn Qúa',
+  },
+  {
+    label: 'Song hành QL22',
+    value: 'Song hành QL22',
+  },
+  {
+    label: 'DCT15',
+    value: 'DCT15',
+  },
+  {
+    label: 'DD2',
+    value: 'DD2',
+  },
+  {
+    label: 'DD4',
+    value: 'DD4',
+  },
+  {
+    label: 'DD4-2',
+    value: 'DD4-2',
+  },
+  {
+    label: 'DD5',
+    value: 'DD5',
+  },
+  {
+    label: 'DD6',
+    value: 'DD6',
+  },
+  {
+    label: 'DD7',
+    value: 'DD7',
+  },
+  {
+    label: 'DD9',
+    value: 'DD9',
+  },
+  {
+    label: 'DD7-1',
+    value: 'DD7-1',
+  },
+  {
+    label: 'DD11',
+    value: 'DD11',
+  },
+  {
+    label: 'DD12',
+    value: 'DD12',
+  },
+  {
+    label: 'DN13',
+    value: 'DN13',
+  },
+  {
+    label: 'DN12',
+    value: 'DN12',
+  },
+  {
+    label: 'ĐHT 03',
+    value: 'ĐHT 03',
+  },
+  {
+    label: 'Bht 33',
+    value: 'Bht 33',
+  },
+  {
+    label: 'Nguyễn Thị Gạch',
+    value: 'Nguyễn Thị Gạch',
+  },
+  {
+    label: 'Tô Ký',
+    value: 'Tô Ký',
+  },
+  {
+    label: 'Xa lộ Đại Hàn',
+    value: 'Xa lộ Đại Hàn',
+  },
+  {
+    label: 'Quốc lộ 1',
+    value: 'Quốc lộ 1',
+  },
+  {
+    label: 'DNS',
+    value: 'DNS',
+  },
+  {
+    label: 'DN4',
+    value: 'DN4',
+  },
+  {
+    label: 'DN6',
+    value: 'DN6',
+  },
+  {
+    label: 'DN8',
+    value: 'DN8',
+  },
+  {
+    label: 'DN9',
+    value: 'DN9',
+  },
+  {
+    label: 'DN10',
+    value: 'DN10',
+  },
+  {
+    label: 'DN11',
+    value: 'DN11',
+  },
+  {
+    label: 'DN12',
+    value: 'DN12',
+  },
+  {
+    label: 'DN13',
+    value: 'DN13',
+  },
+  {
+    label: 'Dct8',
+    value: 'Dct8',
+  },
+  {
+    label: 'Dct11',
+    value: 'Dct11',
+  },
+  {
+    label: 'Bht 33',
+    value: 'Bht 33',
+  },
+];
+
+export const LIST_STREET = STREETS1.concat();
