@@ -17,7 +17,6 @@ import IconEntypo from 'react-native-vector-icons/Entypo';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
 import styles from './StylesEditDeliveryAddress';
 import {FlashList} from '@shopify/flash-list';
-import ItemEditDeliveryAddress from '../item/ItemEditDeliveryAddress';
 import ButtonCus from '../../../../../../components/button/ButtonCus';
 import {LOG} from '../../../../../../../../logger.config';
 import Router from '../../../../../../navigation/Router';
@@ -46,20 +45,25 @@ const EditDeliveryAddress = ({navigation, route}) => {
   );
 
   /* States user info*/
-  const arrHouseNumber = item.houseNumber.split(`/`)
-  log.info("🚀 ~ file: EditDeliveryAddress.js:61 ~ EditDeliveryAddress ~ newT:", arrHouseNumber)
-
+  const arrHouseNumber = item.houseNumber.split(`/`);
+  log.info(
+    '🚀 ~ file: EditDeliveryAddress.js:61 ~ EditDeliveryAddress ~ newT:',
+    arrHouseNumber,
+  );
 
   const [name, setName] = useState(item.name);
   const [phone, setPhone] = useState(item.phone);
+  const [isPhone, setIsPhone] = useState(true);
+
   const [ward, setWard] = useState(item.ward);
   const [district, setDistrict] = useState('12');
   const [city, setCity] = useState('Hồ Chí Minh');
   const [street, setStreet] = useState(item.street);
   const [isEnabled, setIsEnabled] = useState(false);
-  const [houseNumber, setHouseNumber] = useState(arrHouseNumber[0]);
-  const [hem, setHem] = useState(arrHouseNumber[1]);
-
+  const [houseNumber, setHouseNumber] = useState(
+    `${arrHouseNumber[0]}/${arrHouseNumber[1]}`,
+  );
+  const [hem, setHem] = useState(arrHouseNumber[2]);
 
   const [isShowModal, setIsShowModal] = useState(false);
 
@@ -129,6 +133,7 @@ const EditDeliveryAddress = ({navigation, route}) => {
       address: item,
     };
     dispatch(fetchDeleteAddress(data));
+    navigation.goBack();
   };
   const onCancel = () => {
     console.log('Cancel Pressed');
@@ -214,6 +219,7 @@ const EditDeliveryAddress = ({navigation, route}) => {
 
                 <BoxInputCus
                   title="Số điện thoại người nhận"
+                  isPhone={isPhone}
                   value={phone}
                   keyboardType="numeric"
                   onChangeText={text => setPhone(text)}

@@ -18,6 +18,7 @@ const BoxInputCus = props => {
     keyboardType,
     inputRef,
     editable,
+    isPhone,
   } = props;
   return (
     <SafeKeyComponent>
@@ -28,6 +29,7 @@ const BoxInputCus = props => {
         <View style={styleBox.body}>
           <View>{icon}</View>
           <View style={styleBox.boxInput}>
+            {isPhone ? <Text style={styleBox.textIsPhone}>(+84)</Text> : null}
             <TextInput
               ref={inputRef}
               style={styleBox.input}
@@ -44,8 +46,6 @@ const BoxInputCus = props => {
             />
           </View>
         </View>
-
-        
       </View>
     </SafeKeyComponent>
   );

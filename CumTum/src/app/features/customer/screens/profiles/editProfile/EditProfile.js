@@ -40,16 +40,19 @@ const EditProfile = ({navigation, route}) => {
   /* States user info*/
   const [name, setName] = useState(item.name);
   const [phone, setPhone] = useState(item.phone);
+  const [isPhone, setIsPhone] = useState(true);
   const [ward, setWard] = useState(item.ward);
   const [district, setDistrict] = useState('12');
   const [city, setCity] = useState('Hồ Chí Minh');
   const [street, setStreet] = useState(item.street);
 
-  const arrHouseNumber = item.houseNumber.split(`/`)
-  log.info("🚀 ~ file: EditDeliveryAddress.js:61 ~ EditDeliveryAddress ~ newT:", arrHouseNumber)
+  const arrHouseNumber = item.houseNumber.split(`/`);
+  log.info(
+    '🚀 ~ file: EditDeliveryAddress.js:61 ~ EditDeliveryAddress ~ newT:',
+    arrHouseNumber,
+  );
   const [houseNumber, setHouseNumber] = useState(arrHouseNumber[0]);
   const [hem, setHem] = useState(arrHouseNumber[1]);
-
 
   /* States show modal */
   const [isShowModal, setIsShowModal] = useState(false);
@@ -206,6 +209,7 @@ const EditProfile = ({navigation, route}) => {
                   />
 
                   <BoxInputCus
+                    isPhone={isPhone}
                     title="Số điện thoại người nhận"
                     value={phone}
                     keyboardType="numeric"
