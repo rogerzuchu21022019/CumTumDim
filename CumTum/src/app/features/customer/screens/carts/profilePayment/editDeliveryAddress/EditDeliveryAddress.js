@@ -32,6 +32,7 @@ import {
   fetchDeleteAddress,
   fetchUpdateAddress,
 } from '../../../../../admin/apiUser';
+import {validateName} from '../../../../../../shared/utils/Validate';
 
 const log = LOG.extend(`EDIT_DELIVERY_ADDRESS.JS`);
 const EditDeliveryAddress = ({navigation, route}) => {
@@ -51,9 +52,18 @@ const EditDeliveryAddress = ({navigation, route}) => {
     arrHouseNumber,
   );
 
+  const messageCommon = 'Bạn vui lòng điền đầy đủ thông tin';
+  const messagePhone = 'Bạn vui lòng nhập đúng số điện thoại';
+  const messageName = 'Tên không được chứa kí tự đặc biệt hoặc số';
+  const handleName = () => {
+    setIsShowModalName(!isShowModalName);
+  };
+
   const [name, setName] = useState(item.name);
+  const [isName, setIsName] = useState(true);
   const [phone, setPhone] = useState(item.phone);
   const [isPhone, setIsPhone] = useState(true);
+  const [isFailValue, setIsFailValue] = useState(true);
 
   const [ward, setWard] = useState(item.ward);
   const [district, setDistrict] = useState('12');
@@ -61,17 +71,31 @@ const EditDeliveryAddress = ({navigation, route}) => {
   const [street, setStreet] = useState(item.street);
   const [isEnabled, setIsEnabled] = useState(false);
   const [houseNumber, setHouseNumber] = useState(
-    `${arrHouseNumber[0]}/${arrHouseNumber[1]}`,
+    arrHouseNumber[1] ? `${arrHouseNumber[0]}` : `${arrHouseNumber[0]}`,
   );
-  const [hem, setHem] = useState(arrHouseNumber[2]);
+  const [hem, setHem] = useState(
+    arrHouseNumber[1] ? `${arrHouseNumber[1]}` : '',
+  );
 
+  /* States modal */
   const [isShowModal, setIsShowModal] = useState(false);
+  const [isShowModalName, setIsShowModalName] = useState(false);
 
   const dispatch = useDispatch();
   const goBack = () => {
     navigation.goBack();
   };
   const onSave = () => {
+    let validateString = validateName(name);
+    if (validateString.error) {
+      handleName();
+      return;
+    }
+
+    if (phone.length != 10) {
+      handleClick();
+      return;
+    }
     if (
       name === '' ||
       name === undefined ||
@@ -103,8 +127,8 @@ const EditDeliveryAddress = ({navigation, route}) => {
         district: district,
         city: city,
         street: street,
-        houseNumber: `${houseNumber}/${hem}`,
-        addressDefault: true,
+        houseNumber: hem ? `${houseNumber}/${hem}` : `${houseNumber}`,
+        addressDefault: isEnabled,
       };
       log.info(
         '🚀 ~ file: EditDeliveryAddress.js:52 ~ moveToBack ~ newAddress:',
@@ -162,7 +186,7 @@ const EditDeliveryAddress = ({navigation, route}) => {
     <SafeKeyComponent>
       <View style={styles.container}>
         <View style={styles.header}>
-          <View style={styles.groupHeader}>
+          <View style={styles.boxHeader}>
             <TouchableOpacity onPress={goBack}>
               <View>
                 <IconAntDesign
@@ -173,9 +197,9 @@ const EditDeliveryAddress = ({navigation, route}) => {
               </View>
             </TouchableOpacity>
             <View style={styles.profile}>
-              <Text style={styles.textProfile}>Sửa địa chỉ giao hàng</Text>
+              <Text style={styles.textTitle}>Sửa địa chỉ giao hàng</Text>
             </View>
-            <View style={styles.groupHeader}></View>
+            <View style={styles.boxHeader}></View>
           </View>
         </View>
         <View style={styles.body}>
@@ -215,6 +239,12 @@ const EditDeliveryAddress = ({navigation, route}) => {
                   keyboardType="ascii-capable"
                   onChangeText={text => setName(text)}
                   placeholder="Nhập họ và tên người nhận"
+                  isName={isName}
+                  isFailValue={
+                    name.length < 3 || name.length > 50
+                      ? isFailValue
+                      : !isFailValue
+                  }
                 />
 
                 <BoxInputCus
@@ -224,6 +254,7 @@ const EditDeliveryAddress = ({navigation, route}) => {
                   keyboardType="numeric"
                   onChangeText={text => setPhone(text)}
                   placeholder="Nhập số điện thoại người nhận"
+                  isFailValue={phone.length != 10 ? isFailValue : !isFailValue}
                 />
 
                 <DropdownElement
@@ -305,9 +336,15 @@ const EditDeliveryAddress = ({navigation, route}) => {
         </View>
 
         <ModalNotify
-          message1="Bạn vui lòng điền đầy đủ thông tin"
+          message1={phone.length != 10 ? messagePhone : messageCommon}
           isShowModal={isShowModal}
           handleClick={handleClick}
+        />
+
+        <ModalNotify
+          message1={validateName(name).error ? messageName : messageCommon}
+          isShowModal={isShowModalName}
+          handleClick={handleName}
         />
       </View>
     </SafeKeyComponent>

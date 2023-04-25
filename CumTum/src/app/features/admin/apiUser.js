@@ -23,7 +23,7 @@ export const fetchUserById = createAsyncThunk(
     const response = await AxiosInstance().get(
       `/users/${userId}/find-user-by-id`,
     );
-    log.info('🚀 ~ file: apiUser.js:8 ~ fetchLogin ~ response:', response.data);
+    // log.info('🚀 ~ file: apiUser.js:8 ~ fetchLogin ~ response:', response.data);
     return response.data;
   },
 );
@@ -39,7 +39,7 @@ export const fetchUpdateUserInfo = createAsyncThunk(
         address: data.address,
       },
     );
-    log.info("🚀 ~ file: apiUser.js:41 ~ response:", response.data)
+    // log.info("🚀 ~ file: apiUser.js:41 ~ response:", response.data)
     
     return response.data;
   },
@@ -57,7 +57,7 @@ export const fetchPushNotification = createAsyncThunk(
       },
     );
 
-    log.error('🚀 ~ file: apiUser.js:59 ~ response:', response.data);
+    // log.error('🚀 ~ file: apiUser.js:59 ~ response:', response.data);
     return response.data;
   },
 );
@@ -72,7 +72,7 @@ export const fetchUpdateNotification = createAsyncThunk(
         notification: data.notification,
       },
     );
-    log.warning('🚀 ~ file: apiUser.js:74 ~ response:', response.data);
+    // log.warning('🚀 ~ file: apiUser.js:74 ~ response:', response.data);
 
     return response.data;
   },
@@ -90,7 +90,7 @@ export const fetchAddAddress = createAsyncThunk(
       },
     );
 
-    log.error('🚀 ~ file: apiUser.js:76 ~ response:', response.data);
+    // log.error('🚀 ~ file: apiUser.js:76 ~ response:', response.data);
     return response.data;
   },
 );
@@ -107,7 +107,7 @@ export const fetchUpdateAddress = createAsyncThunk(
       },
     );
 
-    log.error('🚀 ~ file: apiUser.js:76 ~ response:', response.data);
+    // log.error('🚀 ~ file: apiUser.js:76 ~ response:', response.data);
     return response.data;
   },
 );
@@ -124,7 +124,7 @@ export const fetchDeleteAddress = createAsyncThunk(
       },
     );
 
-    log.error('🚀 ~ file: apiUser.js:126 ~ response:', response.data);
+    // log.error('🚀 ~ file: apiUser.js:126 ~ response:', response.data);
     return response.data;
   },
 );
