@@ -17,7 +17,6 @@ import IconEntypo from 'react-native-vector-icons/Entypo';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
 import styles from './StylesAddDeliveryAddress';
 import {FlashList} from '@shopify/flash-list';
-import ItemEditDeliveryAddress from '../item/ItemEditDeliveryAddress';
 import ButtonCus from '../../../../../../components/button/ButtonCus';
 import {LOG} from '../../../../../../../../logger.config';
 import Router from '../../../../../../navigation/Router';
@@ -38,6 +37,8 @@ const AddDeliveryAddress = ({navigation}) => {
   /* States user info*/
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
+  const [isPhone, setIsPhone] = useState(true);
+
   const [ward, setWard] = useState('');
   const [district, setDistrict] = useState('12');
   const [city, setCity] = useState('Hồ Chí Minh');
@@ -168,6 +169,7 @@ const AddDeliveryAddress = ({navigation}) => {
                 <BoxInputCus
                   title="Số điện thoại người nhận"
                   value={phone}
+                  isPhone={isPhone}
                   keyboardType="numeric"
                   onChangeText={text => setPhone(text)}
                   placeholder="Nhập số điện thoại người nhận"

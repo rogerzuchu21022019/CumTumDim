@@ -30,8 +30,13 @@ const styleBox = StyleSheet.create({
   },
   boxInput: {
     width: '100%',
+    flexDirection: 'row',
     // borderWidth:1,
     // borderColor: constants.COLOR.WHITE,
+  },
+  textIsPhone: {
+    marginLeft: 20,
+    color: constants.COLOR.RED,
   },
   isHem: {
     flexDirection: 'row',
