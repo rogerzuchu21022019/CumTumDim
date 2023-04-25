@@ -1,0 +1,493 @@
+import {
+  View,
+  Text,
+  Button,
+  ActivityIndicator,
+  Image,
+  useWindowDimensions,
+  ScrollView,
+  TouchableOpacity,
+  StyleSheet,
+} from 'react-native';
+
+import {useDispatch, useSelector} from 'react-redux';
+
+import {useCallback, useEffect, useState} from 'react';
+import notifee from '@notifee/react-native';
+
+import {LOG} from '../../../../../../../logger.config';
+import SafeKeyComponent from '../../../../../components/safe_area/SafeKeyComponent';
+import {showNotifyLocal} from '../../../../../shared/utils/Notifies';
+import {fetchCategories, fetchDishes} from '../../../../product/apiProduct';
+import styles from './StyleHome';
+import FastImage from 'react-native-fast-image';
+import IconOcticons from 'react-native-vector-icons/Octicons';
+import {constants} from '../../../../../shared/constants';
+import {FlashList} from '@shopify/flash-list';
+import ItemView from './item/ItemView';
+import {mainDishOptionsData} from '../../../../admin/screens/manager/manageFood/addDish/DataDishes';
+import {
+  addDishToWishCartOrUpdate,
+  productSelector,
+  decreaseDishByID,
+  updateAmount,
+} from '../../../../product/sliceProduct';
+import DropdownPicker from '../../../../../shared/utils/DropdownPicker';
+import {cartSelector, createHistoryCart} from '../../../../carts/sliceOrder';
+import Advertisement from '../../../../../shared/utils/Advertisement';
+import socketServices from '../../../../../shared/utils/Socket';
+import Router from '../../../../../navigation/Router';
+import {formatCodeOrder} from '../../../../../shared/utils/CreateCodeOrder';
+import {authSelector} from '../../../../admin/sliceAuth';
+import ModalNotify from '../../../../../components/modal/ModalNotify';
+import DropdownElement from '../../../../../components/dropdownElement/DropdownElement';
+
+const HomeCustomer = ({navigation}) => {
+  const log = LOG.extend('HOME_CUSTOMER.js');
+  const dispatch = useDispatch();
+  const authSelect = useSelector(authSelector);
+  // log.info(
+  //   '🚀 ~ file: Home.js:47 ~ HomeCustomer ~ notifications:',
+  //   authSelect.notifications,
+  // );
+
+  const userInfo = {
+    name: authSelect.user.name,
+    phone: authSelect.user.phone,
+    address: authSelect.user.addresses,
+  };
+
+  const message1 = `Bạn chưa cập nhật địa chỉ giao hàng!!`;
+  const message2 = `Vui lòng cập nhật địa chỉ`;
+  const message3 = `để chúng tôi có thể giao hàng cho bạn`;
+
+  const cartSelect = useSelector(cartSelector);
+  const IMAGE_BG =
+    'https://cdn.britannica.com/38/111338-050-D23BE7C8/Stars-NGC-290-Hubble-Space-Telescope.jpg?w=400&h=300&c=crop';
+  const data = useSelector(productSelector);
+
+  const [tabs, setTabs] = useState([0, 1, 2, 3]);
+
+  /* State Dropdown */
+  const [isShowDropdown, setIsShowDropdown] = useState(true);
+  const [openSubMainDish, setOpenSubMainDish] = useState(false);
+  const [valueSubMainDish, setValueSubMainDish] = useState([]);
+  const [value, setValue] = useState(mainDishOptionsData[0].value);
+  // const [listSubMainDish, setListSubMainDish] = useState(mainDishOptionsData);
+
+  /* State Modal Address */
+  const [isShowModal, setIsShowModal] = useState(false);
+  const [isCancel, setIsCancel] = useState(false);
+  const [isAddress, setIsAddress] = useState(false);
+
+  const [iconFoods, setIconFoods] = useState(true);
+
+  const address = authSelect.user.addresses;
+  const handleClick = () => {
+    setIsShowModal(!isShowModal);
+    setIsAddress(!isAddress);
+  };
+
+  const style = styles.dropdownList;
+  const placeholder = 'Chọn loại sườn';
+  /* Fetch API and dispatch action type to store */
+
+  useEffect(() => {
+    socketServices.initializeSocket();
+
+    socketServices.on(constants.SOCKET.UPDATE_ORDER, data => {
+      log.error('🚀 ~ file: Home.js:82 ~ socketServices.on ~ data:', data);
+      onDisplayNotiAccepted(data);
+      // handleCreateHistoryCart(data);
+
+      // move to history
+    });
+
+    socketServices.on(constants.SOCKET.UPDATE_NOTIFICATION_CUSTOMER, data => {
+      log.info('🚀 ~ file: Home.js:79 ~ useEffect ~ data:', data);
+    });
+
+    return () => {
+      socketServices.socket.disconnect();
+    };
+  }, []);
+
+  useEffect(() => {
+    if (address.length === 0) {
+      handleClick();
+    }
+  }, []);
+
+  const onCreateHistoryCart = order => ({
+    type: createHistoryCart().type,
+    payload: order,
+  });
+
+  const handleCreateHistoryCart = order => {
+    dispatch(onCreateHistoryCart(order));
+  };
+
+  const onDisplayNotiAccepted = async data => {
+    const idOrder = formatCodeOrder(data._id);
+    const total = data.moneyToPaid;
+    const status = data.orderStatus;
+
+    const title = 'Notification';
+    const contentAccepted = `Đơn hàng số ${idOrder} với số tiền ${total}K của bạn đã được ${status}`;
+    const contentDeny = `Đơn hàng số ${idOrder} với số tiền ${total}K của bạn đã bị ${status} bởi Admin`;
+
+    // console.log("🚀 ~ file: Payment.js:45 ~ onDisplayNotification ~ content:", content)
+    const dataMap = {
+      title,
+      content: status === 'Chấp nhận' ? contentAccepted : contentDeny,
+    };
+
+    showNotifyLocal(dataMap);
+  };
+
+  const onDisplayNotification = async () => {
+    // Request permissions (required for iOS)
+
+    // Create a channel (required for Android)
+    const channelId = await notifee.createChannel({
+      id: 'default',
+      name: 'Default Channel',
+    });
+    const title = 'Notification';
+    const content = 'Chào mừng bạn đến với dịch vụ của CumTumDim.';
+    // console.log("🚀 ~ file: Payment.js:45 ~ onDisplayNotification ~ content:", content)
+    const dataMap = {
+      title,
+      content,
+      channelId,
+    };
+    // Display a notification
+    showNotifyLocal(dataMap);
+  };
+
+  useEffect(() => {
+    dispatch(fetchCategories());
+    dispatch(fetchDishes());
+    onDisplayNotification();
+    setTabs(0);
+    return () => {
+      dispatch(fetchCategories());
+      dispatch(fetchDishes());
+    };
+  }, [dispatch]);
+
+  /* Dispatch function */
+  const addDish = dish => ({
+    type: addDishToWishCartOrUpdate().type,
+    payload: dish,
+  });
+
+  const updateQuantity = dish => ({
+    type: updateAmount().type,
+    payload: dish,
+  });
+
+  /* Dispatch  */
+  const handleAddDish = dish => {
+    // console.log('🚀 ~ file: Home.js:61 ~ handleAddDish ~ dish:', dish);
+    dispatch(addDish(dish));
+    dispatch(updateQuantity(dish));
+  };
+
+  const removeDish = dish => ({
+    type: decreaseDishByID().type,
+    payload: dish,
+  });
+
+  const handleRemoveDish = dish => {
+    // log.error('🚀 ~ file: Home.js:75 ~ handleRemoveDish ~ dish:', dish);
+    dispatch(removeDish(dish));
+    dispatch(updateQuantity(dish));
+  };
+
+  const imageUrlOptions = {
+    uri: '',
+    priority: FastImage.priority.normal,
+    cache: FastImage.cacheControl.immutable,
+  };
+
+  const openTab1 = () => {
+    setIsShowDropdown(true);
+    setTabs(0);
+  };
+
+  const openTab2 = () => {
+    setIsShowDropdown(false);
+    setTabs(1);
+  };
+
+  const openTab3 = () => {
+    setIsShowDropdown(false);
+    setTabs(2);
+  };
+  const openTab4 = () => {
+    setIsShowDropdown(false);
+    setTabs(3);
+  };
+  const movoRingBell = () => {
+    navigation.navigate(Router.RING_BELL);
+  };
+  return (
+    <SafeKeyComponent>
+      <View style={styles.container}>
+        <View style={styles.header}>
+          {/* Header chia 2 view main và banner  theo vertical*/}
+          {/* main chiếm 1/6 */}
+          {/* banner thì set position cho nguyên cái view header */}
+          <View style={styles.mainViewHeader}>
+            {/* main thì chia 2 view theo horizontal*/}
+            <View style={styles.leftHeader}>
+              <FastImage
+                style={styles.imageLogo}
+                source={require('../../../../../../assets/iconLogo_CumTumDim.jpg')}
+              />
+              <Text style={styles.textTitle}>Cum tứm đim</Text>
+            </View>
+            <TouchableOpacity onPress={movoRingBell}>
+              <View style={styles.rightHeader}>
+                <View>
+                  <IconOcticons
+                    name="bell-fill"
+                    color={constants.COLOR.WHITE}
+                    size={20}
+                  />
+                </View>
+                <View style={styles.viewTextRingBell}>
+                  <Text style={styles.textRingBell}>9</Text>
+                </View>
+              </View>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.bannerViewHeader}>
+            {/* banner view thì set position của thằng cha nó là header */}
+            {/* không set flex được vì đang sử dụng position */}
+            {/* nên xài width,height theo % */}
+            {/* image này cần hiện full từ status bar xuống nên sẽ để flex:1 cho nó full vì banner view đang 100% width height */}
+            <FastImage
+              style={styles.imageBackgroundHeader}
+              source={require('../../../../../../assets/headerImage.jpg')}
+            />
+            <View style={styles.positionInImageBackground}>
+              <Advertisement />
+            </View>
+          </View>
+          <View style={styles.divideLine}></View>
+        </View>
+        <View style={styles.body}>
+          <View style={styles.firstBody}>
+            <View style={styles.boxTabs}>
+              <TouchableOpacity onPress={openTab1}>
+                <View style={styles.boxMainDishes}>
+                  <Text
+                    style={
+                      tabs === 0
+                        ? styles.textNameDishesChoosing
+                        : styles.textNameDishes
+                    }>
+                    Món chính
+                  </Text>
+                  <View style={styles.viewImageDish}>
+                    <FastImage
+                      style={styles.imageLogo}
+                      source={require('../../../../../../assets/logoMainDish.jpg')}
+                    />
+                  </View>
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={openTab2}>
+                <View style={styles.boxMainDishes}>
+                  <Text
+                    style={
+                      tabs === 1
+                        ? styles.textNameDishesChoosing
+                        : styles.textNameDishes
+                    }>
+                    Món thêm
+                  </Text>
+                  <View style={styles.viewImageDish}>
+                    <FastImage
+                      style={styles.imageLogo}
+                      source={require('../../../../../../assets/logoExtraDish.png')}
+                    />
+                  </View>
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={openTab3}>
+                <View style={styles.boxMainDishes}>
+                  <Text
+                    style={
+                      tabs === 2
+                        ? styles.textNameDishesChoosing
+                        : styles.textNameDishes
+                    }>
+                    Toppings
+                  </Text>
+                  <View style={styles.viewImageDish}>
+                    <FastImage
+                      style={styles.imageLogo}
+                      source={require('../../../../../../assets/logoTopping.jpg')}
+                    />
+                  </View>
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={openTab4}>
+                <View style={styles.boxMainDishes}>
+                  <Text
+                    style={
+                      tabs === 3
+                        ? styles.textNameDishesChoosing
+                        : styles.textNameDishes
+                    }>
+                    Món khác
+                  </Text>
+                  <View style={styles.viewImageDish}>
+                    <FastImage
+                      style={styles.imageLogo}
+                      source={require('../../../../../../assets/logoKhac.png')}
+                    />
+                  </View>
+                </View>
+              </TouchableOpacity>
+            </View>
+
+            {isShowDropdown ? (
+              <View style={styles.boxFlashList}>
+                <Image
+                  source={{
+                    uri: IMAGE_BG,
+                  }}
+                  style={StyleSheet.absoluteFillObject}
+                  blurRadius={20}
+                />
+                <View style={styles.boxDropdownList}>
+                  <DropdownElement
+                    data={mainDishOptionsData}
+                    value={value}
+                    setValue={setValue}
+                    title="Chọn loại sườn"
+                    placeholder="Chọn loại sườn"
+                    styleBorderWidth={styles.styleBorderWidth}
+                    selectedTextStyle={styles.selectedTextStyle}
+                    stylesLabel={styles.stylesLabel}
+                    style={styles.styleMain}
+                    placeholderStyle={styles.placeholderStyle}
+                    itemContainerStyle={styles.itemContainerStyle}
+                    defaultColor={constants.COLOR.WHITE}
+                    styleTextTitle={styles.styleTextTitle}
+                    iconFoods={iconFoods}
+                  />
+                </View>
+
+                <FlashList
+                  data={
+                    value === 'Sườn mỡ'
+                      ? data.mainDishes.filter(
+                          item => item.subCategory === 'Sườn mỡ',
+                        )
+                      : data.mainDishes.filter(
+                          item => item.subCategory === 'Sườn',
+                        )
+                  }
+                  renderItem={({item, index}) => (
+                    <ItemView
+                      item={item}
+                      index={index}
+                      tabs={tabs}
+                      handleAddDish={handleAddDish}
+                      handleRemoveDish={handleRemoveDish}
+                    />
+                  )}
+                  keyExtractor={(item, index) => index.toString()}
+                  estimatedItemSize={100}
+                  showsVerticalScrollIndicator={false}
+                  showsHorizontalScrollIndicator={false}
+                />
+              </View>
+            ) : (
+              <View style={styles.boxFlashList}>
+                <Image
+                  source={{
+                    uri: IMAGE_BG,
+                  }}
+                  style={StyleSheet.absoluteFillObject}
+                  blurRadius={20}
+                />
+                {tabs === 1 ? (
+                  <FlashList
+                    data={data.extraDishes}
+                    renderItem={({item, index}) => (
+                      <ItemView
+                        item={item}
+                        index={index}
+                        tabs={tabs}
+                        handleAddDish={handleAddDish}
+                        handleRemoveDish={handleRemoveDish}
+                      />
+                    )}
+                    keyExtractor={(item, index) => index.toString()}
+                    estimatedItemSize={100}
+                    showsVerticalScrollIndicator={false}
+                    showsHorizontalScrollIndicator={false}
+                  />
+                ) : tabs === 2 ? (
+                  <FlashList
+                    data={data.toppings}
+                    renderItem={({item, index}) => (
+                      <ItemView
+                        item={item}
+                        index={index}
+                        tabs={tabs}
+                        handleAddDish={handleAddDish}
+                        handleRemoveDish={handleRemoveDish}
+                      />
+                    )}
+                    keyExtractor={(item, index) => index.toString()}
+                    estimatedItemSize={100}
+                    showsVerticalScrollIndicator={false}
+                    showsHorizontalScrollIndicator={false}
+                  />
+                ) : tabs === 3 ? (
+                  <FlashList
+                    data={data.another}
+                    renderItem={({item, index}) => (
+                      <ItemView
+                        item={item}
+                        index={index}
+                        tabs={tabs}
+                        handleAddDish={handleAddDish}
+                        handleRemoveDish={handleRemoveDish}
+                      />
+                    )}
+                    keyExtractor={(item, index) => index.toString()}
+                    estimatedItemSize={100}
+                    showsVerticalScrollIndicator={false}
+                    showsHorizontalScrollIndicator={false}
+                  />
+                ) : null}
+              </View>
+            )}
+          </View>
+        </View>
+        <View style={styles.divideLine}></View>
+        <ModalNotify
+          message1={message1}
+          message2={message2}
+          message3={message3}
+          isShowModal={isShowModal}
+          isCancel={isCancel}
+          handleClick={handleClick}
+          navigation={navigation}
+          isAddress={isAddress}
+          item={userInfo}
+        />
+        {/* <View style={styles.footer}></View> */}
+      </View>
+    </SafeKeyComponent>
+  );
+};
+export default HomeCustomer;

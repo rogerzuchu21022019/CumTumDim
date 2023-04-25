@@ -26,7 +26,8 @@ const SafeKeyComponent = props => {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <KeyboardAvoidingView
           style={styles.container}
-          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+          // behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          >
           <>
             {/* Bắt buộc === false mới chạy được UI */}
             {orientation.portrait === false ? (

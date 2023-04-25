@@ -1,63 +1,108 @@
 import {StyleSheet} from 'react-native';
+import {constants} from '../../../../shared/constants';
 
-const StylesHome = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 10,
+    backgroundColor: constants.COLOR.WHITE,
   },
-  // header
+  /* Header */
   header: {
     flex: 1,
-    backgroundColor: '#252121',
-    justifyContent: 'flex-end',
+    justifyContent: 'center',
+    backgroundColor: constants.COLOR.PRIMARY,
+    marginBottom: 2,
   },
-  groupItemHeader: {
+
+  imageLogo: {
+    width: 40,
+    height: 40,
+  },
+  leftHeader: {
+    flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-
-    justifyContent: 'space-evenly',
-    paddingEnd: 220,
+    // backgroundColor: constants.COLOR.WHITE,
+    marginStart:20,
   },
-  strikethrough: {
+  rightHeader: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    // backgroundColor: constants.COLOR.WHITE,
+    marginRight: 20,
+  },
+  divideLine: {
     height: 2,
-    backgroundColor: 'black',
-    marginTop: 10,
+    backgroundColor: constants.COLOR.BLACK,
+    // marginTop: 10,
   },
   textTitle: {
     color: 'white',
+    marginLeft: 6,
   },
-  groupFinal: {
+  mainHeader: {
     flexDirection: 'row',
+    // backgroundColor: constants.COLOR.WHITE,
     alignItems: 'center',
   },
-  //header
+  textTitle: {
+    color: 'white',
+    marginLeft: 6,
+  },
+  textTotalNotifies:{
+    fontSize:10,
+    color: constants.COLOR.WHITE,
+  },
+  viewTotalNotifies:{
+    backgroundColor: constants.COLOR.RED,
+    width:30,
+    height:15,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius:10,
+    bottom:8,
+    right:10,
+  },
+
+  
+  /* Header */
 
   //body
   body: {
-    flex: 10,
-    backgroundColor: '#252121',
-    alignItems: 'center',
+    flex: 12,
+    backgroundColor: constants.COLOR.PRIMARY,
+    // width:'100%'
   },
   groupItem: {},
   viewFlashList: {
     flex: 1,
-    // backgroundColor: 'green',
-    width: '100%',
-  },
-  itemOder: {
-    flexDirection: 'row',
-    backgroundColor: '#2F2D2D',
-    width: 350,
-    height: 40,
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    borderRadius: 5,
+    // backgroundColor: constants.COLOR.GREEN,
+    paddingLeft: 20,
+    paddingRight: 20,
     marginTop: 10,
   },
-  itemText: {
-    color: 'white',
-    fontSize: 15,
+  
+  viewToday: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    
+  },
+  textToday: {
+    lineHeight: 30,
+    color: constants.COLOR.WHITE,
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  itemText1: {
+    color: constants.COLOR.ORANGE,
+    fontSize: 16,
+    marginVertical: 6,
+    fontWeight: 'bold',
+
   },
 
   //body
 });
-export default StylesHome;
+export default styles;

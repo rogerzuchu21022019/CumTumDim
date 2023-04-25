@@ -20,11 +20,6 @@
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
-	
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Tôi có thể sử dụng Thư viện ảnh không? </string>
-	<key>NSCameraUsageDescription</key>
-	<string>Tôi có thể sử dụng Camera không? </string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -38,6 +33,12 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>zalo</string>
+		<string>zalopay</string>
+		<string>zalopay.api.v2</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -51,8 +52,12 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>Tôi có thể sử dụng Camera không? </string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Tôi có thể sử dụng Thư viện ảnh không? </string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>AntDesign.ttf</string>
@@ -79,7 +84,7 @@
 		<string>armv7</string>
 	</array>
 	<key>UIStatusBarStyle</key>
-	<string></string>
+	<string>UIStatusBarStyleDarkContent</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
@@ -92,5 +97,9 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>ZPAppID</key>
+	<string>2554</string>
+	<key>ZPAppKey</key>
+	<string>sdngKKJmqEMzvh5QQcdD2A9XBSKUNaYn</string>
 </dict>
 </plist>

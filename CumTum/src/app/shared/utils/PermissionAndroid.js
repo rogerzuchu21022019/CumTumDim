@@ -25,3 +25,4 @@ export const androidCameraPermission = async () => {
     return false;
   }
 };
+

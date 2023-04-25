@@ -2,9 +2,9 @@ import React from 'react';
 import SafeKeyComponent from '../../../../components/safe_area/SafeKeyComponent';
 
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import Statistic from '../statistic/Statistic';
 import Router from '../../../../navigation/Router';
-import DetailCard from '../detailCart/DetailCard';
+import DetailCard from '../homeAdmin/detailCart/DetailCard';
+import CustomerSupport from './CustomerSupport';
 
 const Support = ({navigation}) => {
   const Stack = createNativeStackNavigator();
@@ -14,15 +14,8 @@ const Support = ({navigation}) => {
       <Stack.Navigator>
         <Stack.Group>
           <Stack.Screen
-            name="Statistic"
-            component={Statistic}
-            options={{
-              headerShown: false,
-            }}
-          />
-          <Stack.Screen
-            name={Router.DETAIL_CART_ADMIN}
-            component={DetailCard}
+            name={Router.SUPPORT}
+            component={CustomerSupport}
             options={{
               headerShown: false,
             }}
