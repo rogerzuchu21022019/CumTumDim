@@ -9,6 +9,7 @@ import {
   fetchAddAddress,
   fetchUpdateAddress,
   fetchDeleteAddress,
+  fetchUpdateUserInfo,
 } from './apiUser';
 
 const {createSlice} = require('@reduxjs/toolkit');
@@ -77,6 +78,22 @@ export const authSlice = createSlice({
       state.addresses = state.user.addresses;
     });
     builder.addCase(fetchUserById.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = true;
+    });
+
+    // Update User Info
+    builder.addCase(fetchUpdateUserInfo.pending, state => {
+      state.isLoading = true;
+    });
+    builder.addCase(fetchUpdateUserInfo.fulfilled, (state, action) => {
+      const dataResponse = action.payload;
+      state.isLoading = false;
+      state.message = dataResponse.message;
+      state.error = dataResponse.error;
+      state.user = dataResponse.data;
+    });
+    builder.addCase(fetchUpdateUserInfo.rejected, (state, action) => {
       state.isLoading = false;
       state.error = true;
     });

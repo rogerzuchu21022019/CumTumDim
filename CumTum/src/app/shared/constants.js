@@ -62,6 +62,8 @@ export const constants = {
   FETCH: {
     LOGIN: 'fetchLogin',
     USER_BY_ID: 'fetchUserById',
+    UPDATE_USER_INFO: 'fetchUpdateUserInfo',
+
     UPLOAD_IMAGE: 'fetchUploadImage',
     SIGN_OUT: 'fetchSignOut',
 

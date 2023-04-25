@@ -1,12 +1,13 @@
 const User = require("../model/User");
 
-const UpdateUserInfoSv = async (userId, imageUrl) => {
+const UpdateUserInfoSv = async (userId, imageUrl, name) => {
   try {
     const query = {
       _id: userId,
     };
     const optionUpdate = {
       $set: {
+        name: name,
         imageUrl: imageUrl,
       },
     };

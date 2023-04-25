@@ -25,15 +25,17 @@ import {authSelector} from '../../../../admin/sliceAuth';
 import {LOG} from '../../../../../../../logger.config';
 import {onCamera, onGallery} from '../../../../../shared/utils/Camera';
 import ModalPickImage from '../../../../../components/modalPickImage/ModalPickImage';
-import { fetchUploadImage } from '../../../../product/apiProduct';
+import {fetchUploadImage} from '../../../../product/apiProduct';
+import {fetchUpdateUserInfo} from '../../../../admin/apiUser';
 const log = LOG.extend(`EDIT_PROFILE.JS`);
 
 const EditProfile = ({navigation, route}) => {
   const {item} = route.params;
 
   const authSelect = useSelector(authSelector);
+  const user = authSelect.user;
   const userId = authSelect.user._id;
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   /* States user info*/
   const [name, setName] = useState(item.name);
@@ -42,7 +44,12 @@ const EditProfile = ({navigation, route}) => {
   const [district, setDistrict] = useState('12');
   const [city, setCity] = useState('Hồ Chí Minh');
   const [street, setStreet] = useState(item.street);
-  const [houseNumber, setHouseNumber] = useState(item.houseNumber);
+
+  const arrHouseNumber = item.houseNumber.split(`/`)
+  log.info("🚀 ~ file: EditDeliveryAddress.js:61 ~ EditDeliveryAddress ~ newT:", arrHouseNumber)
+  const [houseNumber, setHouseNumber] = useState(arrHouseNumber[0]);
+  const [hem, setHem] = useState(arrHouseNumber[1]);
+
 
   /* States show modal */
   const [isShowModal, setIsShowModal] = useState(false);
@@ -67,7 +74,7 @@ const EditProfile = ({navigation, route}) => {
     navigation.navigate(Router.UPLOAD_IMAGE);
   };
 
-  const onSave = async() => {
+  const onSave = async () => {
     if (phone.length != 10) {
       console.log(
         '🚀 ~ file: EditProfile.js:64 ~ onSave ~ phone.length:',
@@ -97,10 +104,6 @@ const EditProfile = ({navigation, route}) => {
       handleClick();
       return;
     } else {
-      console.log(
-        '🚀 ~ file: EditDeliveryAddress.js:38 ~ EditDeliveryAddress ~ userId:',
-        userId,
-      );
       const newAddress = {
         _id: item._id,
         name: name,
@@ -109,19 +112,20 @@ const EditProfile = ({navigation, route}) => {
         district: district,
         city: city,
         street: street,
-        houseNumber: houseNumber,
+        houseNumber: `${houseNumber}/${hem}`,
         addressDefault: true,
       };
-      log.info(
-        '🚀 ~ file: EditDeliveryAddress.js:116 ~ moveToBack ~ newAddress:',
-        newAddress,
-      );
 
-      // const result = await dispatch(fetchUploadImage(avatar))
-      // const imageUrl = result.payload.data
-      
-    
-      // navigation.goBack();
+      const result = await dispatch(fetchUploadImage(avatar));
+      const imageUrl = result.payload.data;
+      const data = {
+        userId: userId,
+        imageUrl: imageUrl,
+        address: newAddress,
+      };
+
+      dispatch(fetchUpdateUserInfo(data));
+      navigation.goBack();
     }
   };
 
@@ -137,7 +141,7 @@ const EditProfile = ({navigation, route}) => {
   };
 
   const imageUrlOptions = {
-    uri: avatar,
+    uri: avatar ? avatar : user.imageUrl,
     priority: FastImage.priority.high,
     cache: FastImage.cacheControl.immutable,
   };
@@ -169,7 +173,7 @@ const EditProfile = ({navigation, route}) => {
               <View style={styles.viewImage}>
                 <FastImage
                   style={styles.imageProfile}
-                  source={avatar ? imageUrlOptions : urlHardCode}
+                  source={user.imageUrl ? imageUrlOptions : urlHardCode}
                 />
               </View>
               <View style={styles.iconCamera}>
@@ -222,12 +226,24 @@ const EditProfile = ({navigation, route}) => {
                     itemContainerStyle={styles.itemContainerStyle}
                   />
 
-                  <View>
+                  <View style={styles.boxHouse}>
                     <BoxInputCus
                       title="Số nhà"
                       value={houseNumber}
+                      keyboardType="numeric"
                       onChangeText={text => setHouseNumber(text)}
                       placeholder="Nhập số nhà"
+                    />
+                    <View style={styles.boxSec}>
+                      <Text style={styles.textSec}>{'/'}</Text>
+                    </View>
+
+                    <BoxInputCus
+                      title="Hẻm"
+                      value={hem}
+                      keyboardType="numeric"
+                      onChangeText={text => setHem(text)}
+                      placeholder="Nhập số của hẻm"
                     />
                   </View>
 

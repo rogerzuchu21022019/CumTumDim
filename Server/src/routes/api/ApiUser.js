@@ -10,5 +10,6 @@ module.exports = {
   addAddress: require(`./users/AddAddress`),
   updateAddress: require(`./users/UpdateAddress`),
   deleteAddress: require(`./users/DeleteAddress`),
+  updateUserInfo: require(`./users/UpdateUserInfo`),
 
 };

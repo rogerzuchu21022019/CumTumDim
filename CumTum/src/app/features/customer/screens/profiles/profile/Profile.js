@@ -39,6 +39,15 @@ const Profile = ({navigation}) => {
     console.log('🚀 ~ file: Profile.js:38 ~ moveToEdit ~ address:', address);
   };
 
+  // xử lý options FastImage
+  const imageUrlOptions = {
+    uri: user.imageUrl,
+    priority: FastImage.priority.high,
+    cache: FastImage.cacheControl.immutable,
+  };
+
+  const urlHardCode = require('../../../../../../assets/Logo_CumTumDim.png');
+
   return (
     <SafeKeyComponent>
       <View style={styles.container}>
@@ -70,7 +79,7 @@ const Profile = ({navigation}) => {
             <View style={styles.viewImage}>
               <FastImage
                 style={styles.imageProfile}
-                source={require('../../../../../../assets/Logo_CumTumDim.png')}
+                source={user.imageUrl ? imageUrlOptions : urlHardCode}
               />
             </View>
             <View style={styles.viewTextName}>

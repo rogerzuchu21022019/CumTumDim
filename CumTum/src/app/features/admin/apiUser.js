@@ -28,6 +28,23 @@ export const fetchUserById = createAsyncThunk(
   },
 );
 
+export const fetchUpdateUserInfo = createAsyncThunk(
+  constants.FETCH.UPDATE_USER_INFO,
+  async data => {
+    log.error("🚀 ~ file: apiUser.js:34 ~ data:", data)
+    const response = await AxiosInstance().post(
+      `/users/${data.userId}/update-user-info`,
+      {
+        imageUrl: data.imageUrl,
+        address: data.address,
+      },
+    );
+    log.info("🚀 ~ file: apiUser.js:41 ~ response:", response.data)
+    
+    return response.data;
+  },
+);
+
 export const fetchPushNotification = createAsyncThunk(
   constants.FETCH.PUSH_NOTIFICATION,
   async data => {
@@ -40,7 +57,7 @@ export const fetchPushNotification = createAsyncThunk(
       },
     );
 
-    log.error('🚀 ~ file: apiUser.js:34 ~ response:', response.data);
+    log.error('🚀 ~ file: apiUser.js:59 ~ response:', response.data);
     return response.data;
   },
 );
@@ -55,7 +72,7 @@ export const fetchUpdateNotification = createAsyncThunk(
         notification: data.notification,
       },
     );
-    log.warning('🚀 ~ file: apiUser.js:58 ~ response:', response.data);
+    log.warning('🚀 ~ file: apiUser.js:74 ~ response:', response.data);
 
     return response.data;
   },
@@ -65,7 +82,7 @@ export const fetchUpdateNotification = createAsyncThunk(
 export const fetchAddAddress = createAsyncThunk(
   constants.FETCH.ADD_ADDRESS,
   async data => {
-    log.info('🚀 ~ file: apiUser.js:70 ~ data:', data);
+    log.info('🚀 ~ file: apiUser.js:84 ~ data:', data);
     const response = await AxiosInstance().post(
       `/users/add-address/${data.userId}`,
       {
@@ -82,7 +99,7 @@ export const fetchAddAddress = createAsyncThunk(
 export const fetchUpdateAddress = createAsyncThunk(
   constants.FETCH.UPDATE_ADDRESS,
   async data => {
-    log.info('🚀 ~ file: apiUser.js:70 ~ data:', data);
+    log.info('🚀 ~ file: apiUser.js:101 ~ data:', data);
     const response = await AxiosInstance().post(
       `/users/update-address/${data.userId}`,
       {
@@ -99,7 +116,7 @@ export const fetchUpdateAddress = createAsyncThunk(
 export const fetchDeleteAddress = createAsyncThunk(
   constants.FETCH.DELETE_ADDRESS,
   async data => {
-    log.info('🚀 ~ file: apiUser.js:102 ~ data:', data);
+    log.info('🚀 ~ file: apiUser.js:118 ~ data:', data);
     const response = await AxiosInstance().post(
       `/users/delete-address/${data.userId}`,
       {
@@ -107,7 +124,7 @@ export const fetchDeleteAddress = createAsyncThunk(
       },
     );
 
-    log.error('🚀 ~ file: apiUser.js:110 ~ response:', response.data);
+    log.error('🚀 ~ file: apiUser.js:126 ~ response:', response.data);
     return response.data;
   },
 );

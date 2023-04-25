@@ -57,9 +57,7 @@ export const sliceProduct = createSlice({
 
       if (itemMainCart) {
         itemMainCart.amount += 1;
-        log.error("🚀 ~ file: sliceProduct.js:59 ~ itemMainCart:", itemMainCart)
-        
-
+        // log.error("🚀 ~ file: sliceProduct.js:59 ~ itemMainCart:", itemMainCart)
       } else {
         data = {
           ...data,
