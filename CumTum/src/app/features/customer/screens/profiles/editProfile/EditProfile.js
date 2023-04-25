@@ -28,12 +28,15 @@ import ModalPickImage from '../../../../../components/modalPickImage/ModalPickIm
 import {fetchUploadImage} from '../../../../product/apiProduct';
 import {fetchUpdateUserInfo} from '../../../../admin/apiUser';
 import {validateName} from '../../../../../shared/utils/Validate';
+import ModalLoading from '../../../../../components/modalLoading/ModalLoading';
 const log = LOG.extend(`EDIT_PROFILE.JS`);
 
 const EditProfile = ({navigation, route}) => {
   const {item} = route.params;
 
   const authSelect = useSelector(authSelector);
+  const isLoading = authSelect.isLoading;
+
   const user = authSelect.user;
   const userId = authSelect.user._id;
   const dispatch = useDispatch();
@@ -68,10 +71,16 @@ const EditProfile = ({navigation, route}) => {
   const [isShowEditImage, setIsShowEditImage] = useState(false);
   const [isFailValue, setIsFailValue] = useState(true);
 
+  const [isShowLoading, setIsShowLoading] = useState(false);
+
   const [avatar, setAvatar] = useState(user.imageUrl);
   const [isPicked, setIsPicked] = useState(false);
   const handleClick = () => {
     setIsShowModal(!isShowModal);
+  };
+
+  const handleShowLoading = () => {
+    setIsShowLoading(!isShowLoading);
   };
 
   const handleName = () => {
@@ -133,22 +142,32 @@ const EditProfile = ({navigation, route}) => {
 
       if (avatar != user.imageUrl) {
         const result = await dispatch(fetchUploadImage(avatar));
+        handleShowLoading();
         const imageUrl = result.payload.data;
         const data = {
           userId: userId,
           imageUrl: imageUrl,
           address: newAddress,
         };
-        navigation.goBack();
+
         dispatch(fetchUpdateUserInfo(data));
+        const timeOut = setTimeout(() => {
+          navigation.goBack();
+          clearTimeout(timeOut);
+        }, 1000);
       } else {
         const data = {
           userId: userId,
           imageUrl: user.imageUrl,
           address: newAddress,
         };
-        navigation.goBack();
+        handleShowLoading();
+        // navigation.goBack();
         dispatch(fetchUpdateUserInfo(data));
+        const timeOut = setTimeout(() => {
+          navigation.goBack();
+          clearTimeout(timeOut);
+        }, 1000);
       }
     }
   };
@@ -336,6 +355,12 @@ const EditProfile = ({navigation, route}) => {
         handleGallery={handleGallery}
         navigation={navigation}
         handleShowPickImage={handleShowPickImage}
+      />
+
+      <ModalLoading
+        isShowModal={isShowLoading}
+        isLoading={isLoading}
+        handleShowLoading={handleShowLoading}
       />
     </SafeKeyComponent>
   );

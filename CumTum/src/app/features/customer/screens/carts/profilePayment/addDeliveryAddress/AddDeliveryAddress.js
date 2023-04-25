@@ -30,6 +30,7 @@ import ModalNotify from '../../../../../../components/modal/ModalNotify';
 import {fetchAddAddress, fetchUserById} from '../../../../../admin/apiUser';
 import {authSelector} from '../../../../../admin/sliceAuth';
 import {validateName} from '../../../../../../shared/utils/Validate';
+import ModalLoading from '../../../../../../components/modalLoading/ModalLoading';
 
 const log = LOG.extend(`EDIT_DELIVERY_ADDRESS.JS`);
 const AddDeliveryAddress = ({navigation}) => {
@@ -56,11 +57,17 @@ const AddDeliveryAddress = ({navigation}) => {
   const goBack = () => {
     navigation.goBack();
   };
+  const isLoading = authSelect.isLoading;
+  const [isShowLoading, setIsShowLoading] = useState(false);
   const messageCommon = 'Bạn vui lòng điền đầy đủ thông tin';
   const messagePhone = 'Bạn vui lòng nhập đúng số điện thoại';
   const messageName = 'Tên không được chứa kí tự đặc biệt hoặc số';
   const handleName = () => {
     setIsShowModalName(!isShowModalName);
+  };
+
+  const handleShowLoading = () => {
+    setIsShowLoading(!isShowLoading);
   };
 
   const onAddAddress = () => {
@@ -104,10 +111,7 @@ const AddDeliveryAddress = ({navigation}) => {
         houseNumber: hem ? `${houseNumber}/${hem}` : `${houseNumber}`,
         addressDefault: isEnabled,
       };
-      log.info(
-        '🚀 ~ file: EditDeliveryAddress.js:52 ~ moveToBack ~ newAddress:',
-        newAddress,
-      );
+      l;
       const data = {
         userId: userId,
         address: newAddress,
@@ -115,7 +119,10 @@ const AddDeliveryAddress = ({navigation}) => {
       dispatch(fetchAddAddress(data));
       dispatch(fetchUserById(userId));
     }
-    navigation.goBack();
+    const timeOut = setTimeout(() => {
+      navigation.goBack();
+      clearTimeout(timeOut);
+    }, 1500);
   };
 
   const handleClick = () => {
@@ -282,6 +289,12 @@ const AddDeliveryAddress = ({navigation}) => {
           message1={validateName(name).error ? messageName : messageCommon}
           isShowModal={isShowModalName}
           handleClick={handleName}
+        />
+
+        <ModalLoading
+          isShowModal={isShowLoading}
+          isLoading={isLoading}
+          handleShowLoading={handleShowLoading}
         />
       </View>
     </SafeKeyComponent>

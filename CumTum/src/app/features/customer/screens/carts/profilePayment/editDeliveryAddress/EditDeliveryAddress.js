@@ -33,11 +33,14 @@ import {
   fetchUpdateAddress,
 } from '../../../../../admin/apiUser';
 import {validateName} from '../../../../../../shared/utils/Validate';
+import ModalLoading from '../../../../../../components/modalLoading/ModalLoading';
 
 const log = LOG.extend(`EDIT_DELIVERY_ADDRESS.JS`);
 const EditDeliveryAddress = ({navigation, route}) => {
   const {item} = route.params;
   const authSelect = useSelector(authSelector);
+  const isLoading = authSelect.isLoading;
+
   const userId = authSelect.user._id;
 
   log.error(
@@ -76,10 +79,15 @@ const EditDeliveryAddress = ({navigation, route}) => {
   const [hem, setHem] = useState(
     arrHouseNumber[1] ? `${arrHouseNumber[1]}` : '',
   );
+  
+  const handleShowLoading = () => {
+    setIsShowLoading(!isShowLoading);
+  };
 
   /* States modal */
   const [isShowModal, setIsShowModal] = useState(false);
   const [isShowModalName, setIsShowModalName] = useState(false);
+  const [isShowLoading, setIsShowLoading] = useState(false);
 
   const dispatch = useDispatch();
   const goBack = () => {
@@ -138,8 +146,12 @@ const EditDeliveryAddress = ({navigation, route}) => {
         userId: userId,
         address: newAddress,
       };
+      handleShowLoading();
       dispatch(fetchUpdateAddress(data));
-      navigation.goBack();
+      const timeOut = setTimeout(() => {
+        navigation.goBack();
+        clearTimeout(timeOut);
+      }, 1500);
     }
   };
 
@@ -345,6 +357,11 @@ const EditDeliveryAddress = ({navigation, route}) => {
           message1={validateName(name).error ? messageName : messageCommon}
           isShowModal={isShowModalName}
           handleClick={handleName}
+        />
+        <ModalLoading
+          isShowModal={isShowLoading}
+          isLoading={isLoading}
+          handleShowLoading={handleShowLoading}
         />
       </View>
     </SafeKeyComponent>
