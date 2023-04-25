@@ -6,6 +6,7 @@ import {Button, Text, TouchableOpacity, View} from 'react-native';
 import Modal from 'react-native-modal';
 import ButtonCus from '../button/ButtonCus';
 import Router from '../../navigation/Router';
+import UploadImage from '../../features/customer/screens/profiles/uploadImage/UploadImage';
 
 const ModalNotify = props => {
   const {
@@ -18,6 +19,7 @@ const ModalNotify = props => {
     navigation,
     id,
     isAddress,
+    isAvatar,
     item,
   } = props;
 

@@ -10,7 +10,7 @@ import {formatTime} from '../../../../../shared/utils/Moment';
 import { constants } from '../../../../../shared/constants';
 
 const log = LOG.extend('PAYMENT_ZALO.JS');
-const PaymentZalo = ({route,navigation}) => {
+const ShowBill = ({route,navigation}) => {
   const data = route.params.item;
   log.info('🚀 ~ file: PaymentZalo.js:12 ~ PaymentZalo ~ data:', data);
   const [tableHead, setTableHead] = useState([
@@ -198,4 +198,4 @@ const PaymentZalo = ({route,navigation}) => {
   );
 };
 
-export default PaymentZalo;
+export default ShowBill;

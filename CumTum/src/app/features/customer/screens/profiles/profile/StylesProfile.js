@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
   header: {
     flex: 2,
     alignItems: 'center',
-    justifyContent: 'space-evenly',
+    justifyContent: 'space-around',
   },
   iconHeader: {
     width: 25,

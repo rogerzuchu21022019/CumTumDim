@@ -6,7 +6,7 @@ import SafeKeyComponent from '../../../../components/safe_area/SafeKeyComponent'
 import Cart from './cart/Cart';
 import Payment from './payment/Payment';
 import DetailPaymentCartZalo from '../../../../shared/utils/DetailPaymentZalo';
-import PaymentZalo from './paymentZalo/PaymentZalo';
+import ShowBill from './showBill/ShowBill';
 import ChooseDeliveryAddress from './profilePayment/ChooseDeliveryAddress';
 import EditDeliveryAddress from './profilePayment/editDeliveryAddress/EditDeliveryAddress';
 import AddDeliveryAddress from './profilePayment/addDeliveryAddress/AddDeliveryAddress';
@@ -40,7 +40,7 @@ const CartTabs = () => {
           />
           <Stack.Screen
             name={Router.PAYMENT_ZALO}
-            component={PaymentZalo}
+            component={ShowBill}
             options={{
               headerShown: false,
             }}

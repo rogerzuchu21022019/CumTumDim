@@ -20,9 +20,12 @@ import DropdownElement from '../../../../../components/dropdownElement/DropdownE
 import {LIST_STREET, WARDS} from '../../../../../shared/utils/DataAddress';
 import ButtonCus from '../../../../../components/button/ButtonCus';
 import ModalNotify from '../../../../../components/modal/ModalNotify';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {authSelector} from '../../../../admin/sliceAuth';
 import {LOG} from '../../../../../../../logger.config';
+import {onCamera, onGallery} from '../../../../../shared/utils/Camera';
+import ModalPickImage from '../../../../../components/modalPickImage/ModalPickImage';
+import { fetchUploadImage } from '../../../../product/apiProduct';
 const log = LOG.extend(`EDIT_PROFILE.JS`);
 
 const EditProfile = ({navigation, route}) => {
@@ -30,6 +33,7 @@ const EditProfile = ({navigation, route}) => {
 
   const authSelect = useSelector(authSelector);
   const userId = authSelect.user._id;
+  const dispatch = useDispatch()
 
   /* States user info*/
   const [name, setName] = useState(item.name);
@@ -40,9 +44,13 @@ const EditProfile = ({navigation, route}) => {
   const [street, setStreet] = useState(item.street);
   const [houseNumber, setHouseNumber] = useState(item.houseNumber);
 
+  /* States show modal */
   const [isShowModal, setIsShowModal] = useState(false);
   const [isShowPhoneNotify, setIsShowPhoneNotify] = useState(false);
+  const [isShowEditImage, setIsShowEditImage] = useState(false);
 
+  const [avatar, setAvatar] = useState('');
+  const [isPicked, setIsPicked] = useState(false);
   const handleClick = () => {
     setIsShowModal(!isShowModal);
   };
@@ -52,14 +60,14 @@ const EditProfile = ({navigation, route}) => {
   };
 
   const moveToBack = () => {
-    navigation.navigate(Router.PROFILE);
+    navigation.goBack();
   };
 
   const moveToEditImage = () => {
     navigation.navigate(Router.UPLOAD_IMAGE);
   };
 
-  const onSave = () => {
+  const onSave = async() => {
     if (phone.length != 10) {
       console.log(
         '🚀 ~ file: EditProfile.js:64 ~ onSave ~ phone.length:',
@@ -82,7 +90,9 @@ const EditProfile = ({navigation, route}) => {
       street === '' ||
       street === undefined ||
       houseNumber === '' ||
-      houseNumber === undefined
+      houseNumber === undefined ||
+      avatar === '' ||
+      avatar === undefined
     ) {
       handleClick();
       return;
@@ -103,12 +113,36 @@ const EditProfile = ({navigation, route}) => {
         addressDefault: true,
       };
       log.info(
-        '🚀 ~ file: EditDeliveryAddress.js:52 ~ moveToBack ~ newAddress:',
+        '🚀 ~ file: EditDeliveryAddress.js:116 ~ moveToBack ~ newAddress:',
         newAddress,
       );
-      navigation.goBack();
+
+      // const result = await dispatch(fetchUploadImage(avatar))
+      // const imageUrl = result.payload.data
+      
+    
+      // navigation.goBack();
     }
   };
+
+  const handleCamera = () => {
+    onCamera(setAvatar, setIsPicked);
+  };
+  const handleGallery = () => {
+    onGallery(setAvatar, setIsPicked);
+  };
+
+  const handleShowPickImage = () => {
+    setIsShowEditImage(!isShowEditImage);
+  };
+
+  const imageUrlOptions = {
+    uri: avatar,
+    priority: FastImage.priority.high,
+    cache: FastImage.cacheControl.immutable,
+  };
+  const urlHardCode = require('../../../../../../assets/logo.png');
+
   return (
     <SafeKeyComponent>
       <View style={styles.container}>
@@ -131,11 +165,11 @@ const EditProfile = ({navigation, route}) => {
         </View>
         <View style={styles.body}>
           <View style={styles.boxImage}>
-            <TouchableOpacity onPress={moveToEditImage}>
+            <TouchableOpacity onPress={handleShowPickImage}>
               <View style={styles.viewImage}>
                 <FastImage
                   style={styles.imageProfile}
-                  source={require('../../../../../../assets/logo.png')}
+                  source={avatar ? imageUrlOptions : urlHardCode}
                 />
               </View>
               <View style={styles.iconCamera}>
@@ -242,6 +276,15 @@ const EditProfile = ({navigation, route}) => {
         message1="Bạn vui lòng nhập đúng số điện thoại"
         isShowModal={isShowPhoneNotify}
         handleClick={handleClickPhone}
+      />
+
+      <ModalPickImage
+        isShowModal={isShowEditImage}
+        isAvatar={avatar}
+        handleCamera={handleCamera}
+        handleGallery={handleGallery}
+        navigation={navigation}
+        handleShowPickImage={handleShowPickImage}
       />
     </SafeKeyComponent>
   );

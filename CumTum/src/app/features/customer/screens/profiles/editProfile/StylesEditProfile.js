@@ -41,8 +41,9 @@ const styles = StyleSheet.create({
     marginBottom: 2,
   },
   imageProfile: {
-    width: 80,
-    height: 80,
+    width: 90,
+    height: 90,
+    borderRadius:100
   },
   textTitle: {
     color: constants.COLOR.WHITE,

@@ -1,17 +1,13 @@
 const User = require("../model/User");
 
-const UpdateUserByIdSv = async (userId, order, ) => {
+const UpdateUserInfoSv = async (userId, imageUrl) => {
   try {
     const query = {
       _id: userId,
     };
     const optionUpdate = {
-      $push: {
-        orders: {
-          $each: [order],
-          $position: 0,
-        },
-      
+      $set: {
+        imageUrl: imageUrl,
       },
     };
     const user = await User.findByIdAndUpdate(query, optionUpdate, {
@@ -27,4 +23,4 @@ const UpdateUserByIdSv = async (userId, order, ) => {
     );
   }
 };
-module.exports = UpdateUserByIdSv;
+module.exports = UpdateUserInfoSv;

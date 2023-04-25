@@ -12,7 +12,9 @@ const Profile = ({navigation}) => {
   const dispatch = useDispatch();
 
   const authSelect = useSelector(authSelector);
-  const userId = authSelect.user._id;
+  const user = authSelect.user;
+  console.log('🚀 ~ file: Profile.js:16 ~ Profile ~ user:', user);
+  const userId = user._id;
   const addresses = authSelect.user.addresses.filter(
     item => item.addressDefault === true,
   );
@@ -34,6 +36,7 @@ const Profile = ({navigation}) => {
   };
   const moveToEdit = async () => {
     navigation.navigate(Router.EDIT_PROFILE, {item: address});
+    console.log('🚀 ~ file: Profile.js:38 ~ moveToEdit ~ address:', address);
   };
 
   return (
@@ -71,7 +74,9 @@ const Profile = ({navigation}) => {
               />
             </View>
             <View style={styles.viewTextName}>
-              <Text style={styles.textProfile}>{address.name}</Text>
+              <Text style={styles.textProfile}>
+                {address ? address.name : user.name}
+              </Text>
             </View>
           </View>
 
@@ -81,7 +86,9 @@ const Profile = ({navigation}) => {
                 <Text style={styles.textTitle}>Số điện thoại</Text>
               </View>
               <View style={styles.viewInput}>
-                <Text style={styles.textInput}>{address.phone}</Text>
+                <Text style={styles.textInput}>
+                  {address ? address.phone : null}
+                </Text>
               </View>
             </View>
             <View style={styles.item}>
@@ -89,7 +96,9 @@ const Profile = ({navigation}) => {
                 <Text style={styles.textTitle}>Phường</Text>
               </View>
               <View style={styles.viewInput}>
-                <Text style={styles.textInput}>{address.ward}</Text>
+                <Text style={styles.textInput}>
+                  {address ? address.ward : null}
+                </Text>
               </View>
             </View>
             <View style={styles.item}>
@@ -97,7 +106,9 @@ const Profile = ({navigation}) => {
                 <Text style={styles.textTitle}>Đường</Text>
               </View>
               <View style={styles.viewInput}>
-                <Text style={styles.textInput}>{address.street}</Text>
+                <Text style={styles.textInput}>
+                  {address ? address.street : null}
+                </Text>
               </View>
             </View>
             <View style={styles.item}>
@@ -105,7 +116,9 @@ const Profile = ({navigation}) => {
                 <Text style={styles.textTitle}>Số nhà</Text>
               </View>
               <View style={styles.viewInput}>
-                <Text style={styles.textInput}>{address.houseNumber}</Text>
+                <Text style={styles.textInput}>
+                  {address ? address.houseNumber : null}
+                </Text>
               </View>
             </View>
           </View>

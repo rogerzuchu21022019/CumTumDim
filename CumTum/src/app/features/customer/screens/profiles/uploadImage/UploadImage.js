@@ -4,64 +4,98 @@ import {
   View,
   TextInput,
   TouchableOpacity,
+  Platform,
 } from 'react-native';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from './StylesUploadImage';
 import FastImage from 'react-native-fast-image';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
 import Router from '../../../../../navigation/Router';
 import {constants} from '../../../../../shared/constants';
 import SafeKeyComponent from '../../../../../components/safe_area/SafeKeyComponent';
+import {androidCameraPermission} from '../../../../../shared/utils/PermissionAndroid';
 
-const UploadImage = ({navigation}) => {
-  const moveToBack = () => {
-    navigation.navigate(Router.EDIT_PROFILE);
+const UploadImage = props => {
+  const {
+    navigation,
+    onHandleCamera,
+    onHandleGallery,
+    avatar,
+    handleShowPickImage,
+  } = props;
+  const acceptedPermission = async () => {
+    await androidCameraPermission();
+  };
+
+
+  useEffect(() => {
+    Platform.OS == 'ios' ? null : acceptedPermission();
+
+    return () => {};
+  }, []);
+
+  const imageUrlOptions = {
+    uri: avatar,
+    priority: FastImage.priority.high,
+    cache: FastImage.cacheControl.immutable,
+  };
+  const urlHardCode = require('../../../../../../assets/logo.png');
+
+  const openGallery = () => {
+    onHandleGallery();
+  };
+  const openCamera = () => {
+    onHandleCamera();
+  };
+  const goBack = () => {
+    handleShowPickImage();
   };
   return (
     <SafeKeyComponent>
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <View style={styles.groupHeader}>
-          <TouchableOpacity onPress={moveToBack}>
-            <View>
-              <IconAntDesign
-                name="left"
-                color={constants.COLOR.WHITE}
-                size={20}
-              />
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <View style={styles.groupHeader}>
+            <TouchableOpacity onPress={goBack}>
+              <View>
+                <IconAntDesign
+                  name="left"
+                  color={constants.COLOR.WHITE}
+                  size={20}
+                />
+              </View>
+            </TouchableOpacity>
+            <View style={styles.profile}>
+              <Text style={styles.textProfile}>Chỉnh Sửa ảnh</Text>
             </View>
-          </TouchableOpacity>
-          <View style={styles.profile}>
-            <Text style={styles.textProfile}>Chỉnh Sửa ảnh</Text>
+            <View style={styles.groupHeader}></View>
           </View>
-          <View style={styles.groupHeader}></View>
         </View>
-      </View>
-      <View style={styles.body}>
-        <View style={styles.viewImage}>
-          <FastImage
-            style={styles.itemImage}
-            source={require('../../../../../../assets/logo.png')}
-          />
-        </View>
+        <View style={styles.body}>
+          <View style={styles.viewImage}>
+            <FastImage
+              style={styles.itemImage}
+              source={avatar ? imageUrlOptions : urlHardCode}
+            />
+          </View>
 
-        <View style={styles.groupAll}>
-          <View style={styles.item}>
-            <View style={styles.viewInput}>
-              <Text style={styles.textInput}>Chọn ảnh từ thư viện</Text>
+          <View style={styles.boxChooseImage}>
+            <View style={styles.item}>
+              <TouchableOpacity onPress={() => openGallery()}>
+                <View style={styles.viewInput}>
+                  <Text style={styles.textInput}>Chọn ảnh từ thư viện</Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.item}>
+              <TouchableOpacity onPress={() => openCamera()}>
+                <View style={styles.viewInput}>
+                  <Text style={styles.textInput}>Chụp ảnh mới</Text>
+                </View>
+              </TouchableOpacity>
             </View>
           </View>
-          <View style={styles.item}>
-            <View style={styles.viewInput}>
-              <Text style={styles.textInput}>Chụp ảnh mới</Text>
-            </View>
-          </View>
-        </View>
-        <View style={styles.btnSave}>
-          <Text style={styles.textSave}>Lưu</Text>
         </View>
       </View>
-    </View>
     </SafeKeyComponent>
   );
 };
