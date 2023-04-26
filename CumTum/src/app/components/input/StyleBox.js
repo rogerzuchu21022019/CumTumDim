@@ -21,12 +21,29 @@ const styleBox = StyleSheet.create({
     borderColor: constants.COLOR.WHITE,
     backgroundColor: constants.COLOR.WHITE,
   },
+  bodyFail: {
+    flexDirection: 'row',
+    borderWidth: 1,
+    alignItems: 'center',
+    borderRadius: 10,
+    height: 50,
+    width: '100%',
+    borderWidth: 1,
+    borderColor: constants.COLOR.RED,
+    backgroundColor: constants.COLOR.WHITE,
+  },
   boxTitle: {
     marginBottom: 10,
   },
   textTitle: {
     fontSize: 16,
     color: constants.COLOR.WHITE,
+  },
+  boxLengthPhone: {
+    marginTop:5
+  },
+  textLengthPhone: {
+    color: constants.COLOR.RED,
   },
   boxInput: {
     width: '100%',

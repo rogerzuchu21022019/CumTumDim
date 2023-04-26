@@ -17,23 +17,23 @@ route.post(`/create-order`, async (req, res) => {
     _io.emit(CONSTANTS.SOCKET.CREATE_ORDER, orderData);
     // console.log("🚀 ~ file: Notify.js:17 ~ route.post ~ orderData:", orderData);
 
-    // const amqpUrl = process.env.AMQP_URL;
-    // const message = order.moneyToPaid;
+    const amqpUrl = process.env.AMQP_URL;
+    const message = order.moneyToPaid;
 
-    // const connection = await amqp.connect(amqpUrl);
+    const connection = await amqp.connect(amqpUrl);
 
-    // const channel = await connectRabbitPub(
-    //   connection,
-    //   CONSTANTS.RABBIT_MQ.QUEUE_NAME_ORDER
-    // );
+    const channel = await connectRabbitPub(
+      connection,
+      CONSTANTS.RABBIT_MQ.QUEUE_NAME_ORDER
+    );
 
-    // await channel.sendToQueue(
-    //   CONSTANTS.RABBIT_MQ.QUEUE_NAME_ORDER,
-    //   Buffer.from(JSON.stringify(message)),
-    //   {
-    //     persistent: true,
-    //   }
-    // );
+    await channel.sendToQueue(
+      CONSTANTS.RABBIT_MQ.QUEUE_NAME_ORDER,
+      Buffer.from(JSON.stringify(message)),
+      {
+        persistent: true,
+      }
+    );
     return res.status(200).json({
       isLoading: false,
       message: "Push notification success",

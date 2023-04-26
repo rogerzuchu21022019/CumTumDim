@@ -8,17 +8,29 @@ import styles from './StylesProfile';
 import FastImage from 'react-native-fast-image';
 import socketServices from '../../../../../shared/utils/Socket';
 import {authSelector} from '../../../../admin/sliceAuth';
+import {LOG} from '../../../../../../../logger.config';
+const log = LOG.extend(`PROFILE.JS`);
 const Profile = ({navigation}) => {
   const dispatch = useDispatch();
 
   const authSelect = useSelector(authSelector);
   const user = authSelect.user;
-  console.log('🚀 ~ file: Profile.js:16 ~ Profile ~ user:', user);
+  log.info('🚀 ~ file: Profile.js:16 ~ Profile ~ user:', user);
   const userId = user._id;
-  const addresses = authSelect.user.addresses.filter(
+  const addresses = authSelect.user.addresses?.filter(
     item => item.addressDefault === true,
   );
-  const address = addresses[0];
+  let address = {};
+  let houseNumber = '';
+  let hem = '';
+  if (addresses[0]) {
+    address = addresses[0];
+    const arrHouseNumber = address.houseNumber.split(`/`);
+    houseNumber = arrHouseNumber[0];
+    hem = arrHouseNumber[1];
+  } else {
+    address = null;
+  }
 
   useEffect(() => {
     dispatch(fetchUserById(userId));
@@ -35,7 +47,11 @@ const Profile = ({navigation}) => {
     socketServices.socket.disconnect();
   };
   const moveToEdit = async () => {
-    navigation.navigate(Router.EDIT_PROFILE, {item: address});
+    if (address) {
+      navigation.navigate(Router.EDIT_PROFILE, {item: address});
+    } else {
+      navigation.navigate(Router.ADD_DELIVERY_ADDRESS);
+    }
     console.log('🚀 ~ file: Profile.js:38 ~ moveToEdit ~ address:', address);
   };
 
@@ -128,6 +144,15 @@ const Profile = ({navigation}) => {
                 <Text style={styles.textInput}>
                   {address ? address.houseNumber : null}
                 </Text>
+              </View>
+            </View>
+
+            <View style={styles.item}>
+              <View style={styles.viewTitle}>
+                <Text style={styles.textTitle}>Hẻm</Text>
+              </View>
+              <View style={styles.viewInput}>
+                <Text style={styles.textInput}>{address ? hem : null}</Text>
               </View>
             </View>
           </View>
