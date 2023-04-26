@@ -203,6 +203,7 @@ const AddDeliveryAddress = ({navigation}) => {
                   title="Số điện thoại người nhận"
                   value={phone}
                   isPhone={isPhone}
+                  isPhone={isPhone}
                   keyboardType="numeric"
                   onChangeText={text => setPhone(text)}
                   placeholder="Nhập số điện thoại người nhận"

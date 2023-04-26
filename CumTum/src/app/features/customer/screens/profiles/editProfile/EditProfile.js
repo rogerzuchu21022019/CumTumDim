@@ -53,6 +53,7 @@ const EditProfile = ({navigation, route}) => {
   const [isName, setIsName] = useState(true);
   const [phone, setPhone] = useState(item.phone);
   const [isPhone, setIsPhone] = useState(true);
+  const [isPhone, setIsPhone] = useState(true);
   const [ward, setWard] = useState(item.ward);
   const [district, setDistrict] = useState('12');
   const [city, setCity] = useState('Hồ Chí Minh');

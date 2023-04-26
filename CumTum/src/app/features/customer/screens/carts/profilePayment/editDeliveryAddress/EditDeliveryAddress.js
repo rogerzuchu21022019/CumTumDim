@@ -170,6 +170,7 @@ const EditDeliveryAddress = ({navigation, route}) => {
     };
     dispatch(fetchDeleteAddress(data));
     navigation.goBack();
+    navigation.goBack();
   };
   const onCancel = () => {
     console.log('Cancel Pressed');
@@ -261,6 +262,7 @@ const EditDeliveryAddress = ({navigation, route}) => {
 
                 <BoxInputCus
                   title="Số điện thoại người nhận"
+                  isPhone={isPhone}
                   isPhone={isPhone}
                   value={phone}
                   keyboardType="numeric"
