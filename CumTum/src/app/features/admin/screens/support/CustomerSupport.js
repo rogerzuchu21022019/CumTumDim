@@ -102,5 +102,3 @@ const CustomerSupport = ({navigation}) => {
 };
 
 export default CustomerSupport;
-
-export default CustomerSupport
