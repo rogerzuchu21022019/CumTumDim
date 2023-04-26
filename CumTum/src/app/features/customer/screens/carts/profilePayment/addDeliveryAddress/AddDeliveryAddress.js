@@ -104,6 +104,12 @@ const AddDeliveryAddress = ({navigation}) => {
     setIsEnabled(!isEnabled);
   };
 
+  const validatePhoneNumber = phoneNumber => {
+    const regex = /^\d{10}$/;
+    return regex.test(phoneNumber);
+  };
+
+
   return (
     <SafeKeyComponent>
       <View style={styles.container}>
@@ -168,7 +174,11 @@ const AddDeliveryAddress = ({navigation}) => {
                   title="Số điện thoại người nhận"
                   value={phone}
                   keyboardType="numeric"
-                  onChangeText={text => setPhone(text)}
+                  onChangeText={text => {
+                    if (validatePhoneNumber(text)) {
+                      setPhone(text);
+                    }
+                  }}
                   placeholder="Nhập số điện thoại người nhận"
                 />
 
