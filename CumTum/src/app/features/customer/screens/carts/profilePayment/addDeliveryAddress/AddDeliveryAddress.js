@@ -49,7 +49,6 @@ const AddDeliveryAddress = ({navigation}) => {
   const [street, setStreet] = useState('');
   const [icon, setIcon] = useState(true);
   const [hem, setHem] = useState('');
-  const [hem, setHem] = useState('');
 
   const [isShowModal, setIsShowModal] = useState(false);
   const [isShowModalName, setIsShowModalName] = useState(false);
@@ -112,7 +111,6 @@ const AddDeliveryAddress = ({navigation}) => {
         houseNumber: hem ? `${houseNumber}/${hem}` : `${houseNumber}`,
         addressDefault: isEnabled,
       };
-      l;
       const data = {
         userId: userId,
         address: newAddress,
@@ -228,7 +226,6 @@ const AddDeliveryAddress = ({navigation}) => {
                   <BoxInputCus
                     title="Số nhà"
                     value={houseNumber}
-                    keyboardType="numeric"
                     keyboardType="numeric"
                     onChangeText={text => setHouseNumber(text)}
                     placeholder="Nhập số nhà"
