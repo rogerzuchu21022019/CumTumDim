@@ -19,8 +19,8 @@ const Advertisement = () => {
       return () => clearInterval(interval);
     }, [imageIndex]);
   return (
-    <View style={{  alignItems:'center',justifyContent:'center',}}>
-      <Image source={images[imageIndex]} style={{ width: "90%", height: "80%",borderRadius:10}} />
+    <View style={{  alignItems:'center',marginTop:5}}>
+      <Image source={images[imageIndex]} style={{ width: "90%", height: "85%",borderRadius:20}} />
     </View>
   )
 }
