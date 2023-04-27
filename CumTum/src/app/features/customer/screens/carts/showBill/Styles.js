@@ -1,5 +1,5 @@
-import {StyleSheet} from 'react-native';
-import {constants} from '../../../../../shared/constants';
+import { StyleSheet } from 'react-native';
+import { constants } from '../../../../../shared/constants';
 
 const Styles = StyleSheet.create({
   container: {
@@ -39,6 +39,8 @@ const Styles = StyleSheet.create({
   textTitle: {
     color: 'white',
     marginLeft: 6,
+    fontSize: 18,
+    fontWeight: '400',
   },
   viewLogo: {
     flexDirection: 'row',
@@ -71,6 +73,13 @@ const Styles = StyleSheet.create({
     height: 2,
     width: '100%',
     backgroundColor: constants.COLOR.WHITE,
+    marginTop: 18,
+    marginBottom: 20,
+  },
+   divideLine1: {
+    height: 2,
+    width: '90%',
+    backgroundColor: constants.COLOR.WHITE,
     marginTop: 20,
     marginBottom: 20,
   },
@@ -80,8 +89,12 @@ const Styles = StyleSheet.create({
     width: '100%',
     minHeight: 500,
     alignItems: 'center',
+
     // backgroundColor: constants.COLOR.ORANGE,
   },
+  // groupText: {
+  //   backgroundColor: constants.COLOR.WHITE,
+  // },
   scrollView: {
     flexGrow: 1,
   },
@@ -151,10 +164,50 @@ const Styles = StyleSheet.create({
   viewBoxShowSubInfoBill: {
     paddingLeft: 20,
   },
+  groupText:{
+    gap: 2,
+  },
+  viewText:{
+    marginRight: 35,
+  },
+  textlogo:{
+    color: constants.COLOR.WHITE,
+    fontSize: 16,
+    lineHeight: 30,
+    textAlign:'center',
+  },
+  textbill:{
+    color: constants.COLOR.WHITE,
+    fontSize: 18,
+    lineHeight: 30,
+    textAlign:'center',
+    fontWeight: '700',
+  },
+  textpayment:{
+    color: constants.COLOR.WHITE,
+    fontSize: 16,
+    lineHeight: 30,
+  },
   textInfo: {
     color: constants.COLOR.WHITE,
     fontSize: 16,
     lineHeight: 30,
+    fontWeight:'700',
+  },
+  head:{
+    backgroundColor: constants.COLOR.WHITE,
+  },
+  text:{
+    backgroundColor: constants.COLOR.WHITE,
+  },
+  textName:{
+    color: constants.COLOR.WHITE,
+    fontWeight:'700',
+    fontSize: 16,
+    lineHeight: 25,
+    textAlign:'center',
+    marginTop: 15,
+    marginLeft: 0,
   },
   updateSubText: {
     fontSize: 16,
@@ -165,6 +218,11 @@ const Styles = StyleSheet.create({
   },
   updateTextInfo: {
     fontSize: 24,
+    marginLeft: 20,
+  },
+  updateMoneyInfo:{
+    fontSize: 24,
+    marginRight: 20,
   },
   itemDelete: {
     marginEnd: 10,

@@ -1,21 +1,21 @@
 import { Text, View, Image, TouchableOpacity, ScrollView, TouchableNativeFeedback, } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import styles from './Styles';
-import ItemDetail from '../../../../admin/screens/homeAdmin/detailCart/ItemDetail';
-import { FlashList } from '@shopify/flash-list';
-import Router from '../../../../../navigation/Router';
 import { LOG } from '../../../../../../../logger.config';
 import { constants } from '../../../../../shared/constants';
 import SafeKeyComponent from '../../../../../components/safe_area/SafeKeyComponent';
 import IconIonicons from 'react-native-vector-icons/Ionicons';
 import { useDispatch } from 'react-redux';
-import { fetchUpdateOrder } from '../../../../carts/apiOrder';
-import socketServices from '../../../../../shared/utils/Socket';
 
-const Showbill = ({ route, navigation }) => {
+import { formatTime } from '../../../../../shared/utils/Moment';
+
+const ShowBill = ({ route, navigation }) => {
   const dispatch = useDispatch();
   const log = LOG.extend('DETAILCART');
   const { item, index } = route.params;
+  const data = route.params.item;
+  log.info('🚀 ~ file: PaymentZalo.js:12 ~ PaymentZalo ~ data:', data);
+
   log.info('item', item);
 
   const moveToHOme = () => {
@@ -75,90 +75,37 @@ const Showbill = ({ route, navigation }) => {
               showsVerticalScrollIndicator={false}
               decelerationRate={'fast'}>
               <TouchableNativeFeedback>
-
                 <View style={styles.viewScrollList}>
-                  {/*Món chính  */}
-                  {item.mainDishCart.length ? (
-                    <View style={styles.viewMainDishes}>
-                      <View style={styles.viewTextHeader}>
-                        <Text style={styles.textInfo}>Món Chính</Text>
-                      </View>
-                      <FlashList
-                        data={item.mainDishCart}
-                        renderItem={({ item, index }) => {
-                          return <ItemDetail index={index} item={item} />;
-                        }}
-                        keyExtractor={(item, index) => index.toString()}
-                        estimatedItemSize={100}
-                        key={'list1'}
-                      />
-
-                      <View style={styles.viewTextHeader}>
-                        <View style={styles.divideLine}></View>
-                      </View>
+                  <View style={styles.groupText}>
+                    <View style={styles.viewText}>
+                      <Text style={styles.textName}>Cum Túm Đim</Text>
                     </View>
-                  ) : null}
-                  {item.extraDishCart.length ? (
-                    <View style={styles.viewExtraDishes}>
-                      <View style={styles.viewTextHeader}>
-                        <Text style={styles.textInfo}>Món thêm</Text>
-                      </View>
-                      <FlashList
-                        data={item.extraDishCart}
-                        renderItem={({ item, index }) => {
-                          return <ItemDetail index={index} item={item} />;
-                        }}
-                        key={'list2'}
-                        keyExtractor={(item, index) => index.toString()}
-                        estimatedItemSize={100}
-                      />
-
-                      <View style={styles.viewTextHeader}>
-                        <View style={styles.divideLine}></View>
-                      </View>
+                    <View style={styles.viewText}>
+                      <Text style={styles.textlogo}>
+                         110 Tô Ký, P.Trung Mỹ Tây, Quận 12
+                      </Text>
                     </View>
-                  ) : null}
-
-                  {item.toppingsCart.length ? (
-                    <View style={styles.viewToppings}>
-                      <View style={styles.viewTextHeader}>
-                        <Text style={styles.textInfo}>Toppings</Text>
-                      </View>
-                      <FlashList
-                        data={item.toppingsCart}
-                        renderItem={({ item, index }) => {
-                          return <ItemDetail index={index} item={item} />;
-                        }}
-                        key={'list3'}
-                        keyExtractor={(item, index) => index.toString()}
-                        estimatedItemSize={100}
-                      />
-
-                      <View style={styles.viewTextHeader}>
-                        <View style={styles.divideLine}></View>
-                      </View>
+                    <View style={styles.viewText}>
+                      <Text style={styles.textlogo}> 0879175310 </Text>
                     </View>
-                  ) : null}
-
-                  {item.anotherCart.length ? (
-                    <View style={styles.viewAnother}>
-                      <View style={styles.viewTextHeader}>
-                        <Text style={styles.textInfo}>Khác</Text>
-                      </View>
-                      <FlashList
-                        data={item.anotherCart}
-                        renderItem={({ item, index }) => {
-                          return <ItemDetail index={index} item={item} />;
-                        }}
-                        keyExtractor={(item, index) => index.toString()}
-                        estimatedItemSize={100}
-                        key={'list4'}
-                      />
-
-                      <View style={styles.viewTextHeader}>
-                      </View>
+                    <View style={styles.viewText}>
+                      <Text style={styles.textbill}>Hoá Đơn Thanh Toán</Text>
                     </View>
-                  ) : null}
+                    <View style={styles.viewText}>
+                      <Text style={styles.textlogo}>
+                        Ngày : {formatTime(data?.createdAt)}
+                      </Text>
+                    </View>
+                    <View style={styles.viewText}>
+                      <Text style={styles.textpayment}>
+                        {'Trạng thái đơn hàng : '}
+                        <Text style={{ color: '#16FF00' }}>
+                          {data?.paymentStatus}
+                        </Text>
+                      </Text>
+                    </View>
+                  </View>
+                  <View style={styles.divideLine1}></View>
                   {/*  số lượng món chính  */}
                   <View style={styles.viewTotal}>
                     <View style={styles.viewBoxShowInfoBill}>
@@ -174,7 +121,7 @@ const Showbill = ({ route, navigation }) => {
                         styles.viewBoxShowSubInfoBill,
                       ]}>
                       <Text style={[styles.textInfo, styles.updateSubText]}>
-                        + Số lượng Suờn mỡ:
+                        + Suờn mỡ:
                       </Text>
                       <Text style={[styles.textInfo, styles.updateSubText]}>
                         {solveAmountSuonMo()}
@@ -186,13 +133,13 @@ const Showbill = ({ route, navigation }) => {
                         styles.viewBoxShowSubInfoBill,
                       ]}>
                       <Text style={[styles.textInfo, styles.updateSubText]}>
-                        + Số lượng Suờn :
+                        + Suờn :
                       </Text>
                       <Text style={[styles.textInfo, styles.updateSubText]}>
                         {solveAmountMainDish() - solveAmountSuonMo()}
                       </Text>
                     </View>
-
+                    <View style={styles.divideLine}></View>
                     <View style={styles.viewBoxShowInfoBill}>
                       <Text style={styles.textInfo}>Số lượng món thêm:</Text>
                       <Text style={styles.textInfo}>
@@ -200,6 +147,7 @@ const Showbill = ({ route, navigation }) => {
                         {item.totalExtraDish}
                       </Text>
                     </View>
+                    <View style={styles.divideLine}></View>
                     <View style={styles.viewBoxShowInfoBill}>
                       <Text style={styles.textInfo}>Số lượng món topping:</Text>
                       <Text style={styles.textInfo}>
@@ -207,7 +155,7 @@ const Showbill = ({ route, navigation }) => {
                         {item.totalTopping}
                       </Text>
                     </View>
-
+                    <View style={styles.divideLine}></View>
                     <View style={styles.viewBoxShowInfoBill}>
                       <Text style={styles.textInfo}>Số lượng món khác:</Text>
                       <Text style={styles.textInfo}>
@@ -215,7 +163,7 @@ const Showbill = ({ route, navigation }) => {
                         {item.totalAnother}
                       </Text>
                     </View>
-
+                    <View style={styles.divideLine}></View>
                     <View style={styles.viewBoxShowInfoBill}>
                       <Text style={styles.textInfo}>Tổng Số lượng:</Text>
                       <Text style={styles.textInfo}>
@@ -223,6 +171,7 @@ const Showbill = ({ route, navigation }) => {
                         {item.totalAmount}
                       </Text>
                     </View>
+                    
                     <View style={styles.divideLine}></View>
                   </View>
                   {/*  Đỉa chỉ*/}
@@ -246,7 +195,6 @@ const Showbill = ({ route, navigation }) => {
                         Thành Phố : {item.address.city}
                       </Text>
                     </View>
-
                     <View style={styles.divideLine}></View>
                   </View>
                   {/* Tổng tiền  */}
@@ -254,15 +202,13 @@ const Showbill = ({ route, navigation }) => {
                     <Text style={[styles.textInfo, styles.updateTextInfo]}>
                       Tổng Tiền:
                     </Text>
-                    <Text style={[styles.textInfo, styles.updateTextInfo]}>
+                    <Text style={[styles.textInfo, styles.updateMoneyInfo]}>
                       {/* {solveMoneyToPaid()} K */}
                       {item.moneyToPaid}
                     </Text>
-                  </View>
+                  </View>     
                 </View>
-
               </TouchableNativeFeedback>
-
             </ScrollView>
           </View>
           <View style={styles.footer}></View>
@@ -273,5 +219,4 @@ const Showbill = ({ route, navigation }) => {
     </SafeKeyComponent>
   );
 };
-
-export default Showbill;
+export default ShowBill;
