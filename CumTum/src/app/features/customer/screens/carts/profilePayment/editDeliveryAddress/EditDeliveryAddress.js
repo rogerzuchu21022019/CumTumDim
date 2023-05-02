@@ -11,18 +11,12 @@ import {
 import React, {useEffect, useState} from 'react';
 import SafeKeyComponent from '../../../../../../components/safe_area/SafeKeyComponent';
 
-import FastImage from 'react-native-fast-image';
 import {constants} from '../../../../../../shared/constants';
-import IconEntypo from 'react-native-vector-icons/Entypo';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
 import styles from './StylesEditDeliveryAddress';
-import {FlashList} from '@shopify/flash-list';
 import ButtonCus from '../../../../../../components/button/ButtonCus';
 import {LOG} from '../../../../../../../../logger.config';
-import Router from '../../../../../../navigation/Router';
 import {useDispatch, useSelector} from 'react-redux';
-import {fetchDishes} from '../../../../../product/apiProduct';
-import socketServices from '../../../../../../shared/utils/Socket';
 import BoxInputCus from '../../../../../../components/input/BoxInput';
 import DropdownElement from '../../../../../../components/dropdownElement/DropdownElement';
 import {LIST_STREET, WARDS} from '../../../../../../shared/utils/DataAddress';
@@ -33,7 +27,6 @@ import {
   fetchUpdateAddress,
 } from '../../../../../admin/apiUser';
 import {validateName} from '../../../../../../shared/utils/Validate';
-import ModalLoading from '../../../../../../components/modalLoading/ModalLoading';
 
 const log = LOG.extend(`EDIT_DELIVERY_ADDRESS.JS`);
 const EditDeliveryAddress = ({navigation, route}) => {
@@ -263,7 +256,6 @@ const EditDeliveryAddress = ({navigation, route}) => {
                 <BoxInputCus
                   title="Số điện thoại người nhận"
                   isPhone={isPhone}
-                  isPhone={isPhone}
                   value={phone}
                   keyboardType="numeric"
                   onChangeText={text => setPhone(text)}
@@ -360,11 +352,7 @@ const EditDeliveryAddress = ({navigation, route}) => {
           isShowModal={isShowModalName}
           handleClick={handleName}
         />
-        <ModalLoading
-          isShowModal={isShowLoading}
-          isLoading={isLoading}
-          handleShowLoading={handleShowLoading}
-        />
+    
       </View>
     </SafeKeyComponent>
   );

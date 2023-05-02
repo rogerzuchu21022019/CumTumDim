@@ -30,7 +30,6 @@ import ModalNotify from '../../../../../../components/modal/ModalNotify';
 import {fetchAddAddress, fetchUserById} from '../../../../../admin/apiUser';
 import {authSelector} from '../../../../../admin/sliceAuth';
 import {validateName} from '../../../../../../shared/utils/Validate';
-import ModalLoading from '../../../../../../components/modalLoading/ModalLoading';
 
 const log = LOG.extend(`EDIT_DELIVERY_ADDRESS.JS`);
 const AddDeliveryAddress = ({navigation}) => {
@@ -57,8 +56,6 @@ const AddDeliveryAddress = ({navigation}) => {
   const goBack = () => {
     navigation.goBack();
   };
-  const isLoading = authSelect.isLoading;
-  const [isShowLoading, setIsShowLoading] = useState(false);
   const messageCommon = 'Bạn vui lòng điền đầy đủ thông tin';
   const messagePhone = 'Bạn vui lòng nhập đúng số điện thoại';
   const messageName = 'Tên không được chứa kí tự đặc biệt hoặc số';
@@ -203,7 +200,6 @@ const AddDeliveryAddress = ({navigation}) => {
                   title="Số điện thoại người nhận"
                   value={phone}
                   isPhone={isPhone}
-                  isPhone={isPhone}
                   keyboardType="numeric"
                   onChangeText={text => setPhone(text)}
                   placeholder="Nhập số điện thoại người nhận"
@@ -289,12 +285,6 @@ const AddDeliveryAddress = ({navigation}) => {
           message1={validateName(name).error ? messageName : messageCommon}
           isShowModal={isShowModalName}
           handleClick={handleName}
-        />
-
-        <ModalLoading
-          isShowModal={isShowLoading}
-          isLoading={isLoading}
-          handleShowLoading={handleShowLoading}
         />
       </View>
     </SafeKeyComponent>

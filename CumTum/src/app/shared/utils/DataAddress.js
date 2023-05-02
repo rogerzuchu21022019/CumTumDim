@@ -1636,4 +1636,8 @@ export const STREETS_THT = [
   },
 ];
 
-export const LIST_STREET = STREETS1.concat();
+export const LIST_STREET = STREETS_TMT.concat(
+  STREETS_THT,
+  STREETS_DHT,
+  STREETS_TTN,
+);

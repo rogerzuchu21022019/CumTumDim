@@ -15,6 +15,7 @@ router.post(`/login`, async (req, res) => {
     // user = { ...user, fcmToken: fcmToken };
     return res.json({
       isLoggedIn: true,
+      isLoading: false,
       message: "Success",
       error: false,
       data: user,
@@ -23,6 +24,7 @@ router.post(`/login`, async (req, res) => {
     console.log("🚀 ~ file: Login.js:23 ~ router.post ~ error:", error);
     res.json({
       isLoggedIn: false,
+      isLoading: false,
       message: error.message,
       error: true,
     });
