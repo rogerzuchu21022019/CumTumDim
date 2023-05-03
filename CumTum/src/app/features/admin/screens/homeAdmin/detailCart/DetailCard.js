@@ -292,7 +292,6 @@ const DetailCard = ({route, navigation}) => {
                       </View>
                     </View>
                   ) : null}
-
                   {item.toppingsCart.length ? (
                     <View style={styles.viewToppings}>
                       <View style={styles.viewTextHeader}>
@@ -307,13 +306,11 @@ const DetailCard = ({route, navigation}) => {
                         keyExtractor={(item, index) => index.toString()}
                         estimatedItemSize={100}
                       />
-
                       <View style={styles.viewTextHeader}>
                         <View style={styles.divideLine}></View>
                       </View>
                     </View>
                   ) : null}
-
                   {item.anotherCart.length ? (
                     <View style={styles.viewAnother}>
                       <View style={styles.viewTextHeader}>
@@ -328,12 +325,10 @@ const DetailCard = ({route, navigation}) => {
                         estimatedItemSize={100}
                         key={'list4'}
                       />
-
                       <View style={styles.viewTextHeader}>
                       </View>
                     </View>
                   ) : null}
-                 
                 </View>
               </TouchableNativeFeedback>
             </ScrollView>

@@ -8,6 +8,8 @@ import IconIonicons from 'react-native-vector-icons/Ionicons';
 import { useDispatch } from 'react-redux';
 
 import { formatTime } from '../../../../../shared/utils/Moment';
+import ItemDetail from '../../../../admin/screens/homeAdmin/detailCart/ItemDetail';
+import { FlashList } from '@shopify/flash-list';
 
 const ShowBill = ({ route, navigation }) => {
   const dispatch = useDispatch();
@@ -55,13 +57,13 @@ const ShowBill = ({ route, navigation }) => {
                     style={styles.imageReturn}
                     name="arrow-back"
                     color={constants.COLOR.WHITE}
-                    size={20}
+                    size={23}
                   />
                 </TouchableOpacity>
                 {/* Code back to HomeScreen */}
                 <TouchableOpacity onPress={moveToHOme}>
                   <View style={styles.viewLogo}>
-                    <Text style={styles.textTitle}>Show Bill</Text>
+                    <Text style={styles.textTitle}>Chi tiết đơn hàng</Text>
                   </View>
                 </TouchableOpacity>
               </View>
@@ -82,7 +84,7 @@ const ShowBill = ({ route, navigation }) => {
                     </View>
                     <View style={styles.viewText}>
                       <Text style={styles.textlogo}>
-                         110 Tô Ký, P.Trung Mỹ Tây, Quận 12
+                        110 Tô Ký, P.Trung Mỹ Tây, Quận 12
                       </Text>
                     </View>
                     <View style={styles.viewText}>
@@ -139,6 +141,14 @@ const ShowBill = ({ route, navigation }) => {
                         {solveAmountMainDish() - solveAmountSuonMo()}
                       </Text>
                     </View>
+                    {item.mainDishCart.reduce((total, item) => total + item.price * item.amounts, 0) !== 0 &&
+                      <View style={styles.totalprice}>
+                        <Text style={styles.textInfo}>Tổng tiền món chính:</Text>
+                        <Text style={styles.textInfo}>
+                          {item.mainDishCart.reduce((total, item) => total + item.price * item.amounts, 0)}K
+                        </Text>
+                      </View>
+                    }
                     <View style={styles.divideLine}></View>
                     <View style={styles.viewBoxShowInfoBill}>
                       <Text style={styles.textInfo}>Số lượng món thêm:</Text>
@@ -147,6 +157,14 @@ const ShowBill = ({ route, navigation }) => {
                         {item.totalExtraDish}
                       </Text>
                     </View>
+                    {item.extraDishCart.reduce((total, item) => total + item.price * item.amounts, 0) !== 0 &&
+                      <View style={styles.totalprice}>
+                        <Text style={styles.textInfo}>Tổng tiền món thêm:</Text>
+                        <Text style={styles.textInfo}>
+                          {item.extraDishCart.reduce((total, item) => total + item.price * item.amounts, 0)}K
+                        </Text>
+                      </View>
+                    }
                     <View style={styles.divideLine}></View>
                     <View style={styles.viewBoxShowInfoBill}>
                       <Text style={styles.textInfo}>Số lượng món topping:</Text>
@@ -155,6 +173,14 @@ const ShowBill = ({ route, navigation }) => {
                         {item.totalTopping}
                       </Text>
                     </View>
+                    {item.toppingsCart.reduce((total, item) => total + item.price * item.amounts, 0) !== 0 &&
+                      <View style={styles.totalprice}>
+                        <Text style={styles.textInfo}>Tổng tiền món topping:</Text>
+                        <Text style={styles.textInfo}>
+                          {item.toppingsCart.reduce((total, item) => total + item.price * item.amounts, 0)}K
+                        </Text>
+                      </View>
+                    }
                     <View style={styles.divideLine}></View>
                     <View style={styles.viewBoxShowInfoBill}>
                       <Text style={styles.textInfo}>Số lượng món khác:</Text>
@@ -163,6 +189,14 @@ const ShowBill = ({ route, navigation }) => {
                         {item.totalAnother}
                       </Text>
                     </View>
+                    {item.anotherDishCart && item.anotherDishCart.reduce((total, item) => total + item.price * item.amounts, 0) !== 0 &&
+                      <View style={styles.totalprice}>
+                        <Text style={styles.textInfo}>Tổng tiền món khác:</Text>
+                        <Text style={styles.textInfo}>
+                          {item.anotherDishCart.reduce((total, item) => total + item.price * item.amounts, 0)}K
+                        </Text>
+                      </View>
+                    }
                     <View style={styles.divideLine}></View>
                     <View style={styles.viewBoxShowInfoBill}>
                       <Text style={styles.textInfo}>Tổng Số lượng:</Text>
@@ -171,7 +205,7 @@ const ShowBill = ({ route, navigation }) => {
                         {item.totalAmount}
                       </Text>
                     </View>
-                    
+
                     <View style={styles.divideLine}></View>
                   </View>
                   {/*  Đỉa chỉ*/}
@@ -206,7 +240,7 @@ const ShowBill = ({ route, navigation }) => {
                       {/* {solveMoneyToPaid()} K */}
                       {item.moneyToPaid}
                     </Text>
-                  </View>     
+                  </View>
                 </View>
               </TouchableNativeFeedback>
             </ScrollView>

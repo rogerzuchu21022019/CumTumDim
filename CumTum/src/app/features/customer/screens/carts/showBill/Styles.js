@@ -44,12 +44,13 @@ const Styles = StyleSheet.create({
   },
   viewLogo: {
     flexDirection: 'row',
-    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
+    left: 14,
   },
   imageReturn: {
     // backgroundColor: constants.COLOR.WHITE,
-    marginLeft: 5,
-    marginRight: 5,
+    marginLeft: 10,
   },
   mainHeader: {
     flexDirection: 'row',
@@ -76,7 +77,7 @@ const Styles = StyleSheet.create({
     marginTop: 18,
     marginBottom: 20,
   },
-   divideLine1: {
+  divideLine1: {
     height: 2,
     width: '90%',
     backgroundColor: constants.COLOR.WHITE,
@@ -164,48 +165,54 @@ const Styles = StyleSheet.create({
   viewBoxShowSubInfoBill: {
     paddingLeft: 20,
   },
-  groupText:{
+  groupText: {
     gap: 2,
   },
-  viewText:{
+  viewText: {
     marginRight: 35,
   },
-  textlogo:{
+  textlogo: {
     color: constants.COLOR.WHITE,
     fontSize: 16,
     lineHeight: 30,
-    textAlign:'center',
+    textAlign: 'center',
   },
-  textbill:{
+  textbill: {
     color: constants.COLOR.WHITE,
     fontSize: 18,
     lineHeight: 30,
-    textAlign:'center',
+    textAlign: 'center',
     fontWeight: '700',
   },
-  textpayment:{
+  textpayment: {
     color: constants.COLOR.WHITE,
     fontSize: 16,
     lineHeight: 30,
+  },
+  totalprice:{
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '100%',
   },
   textInfo: {
     color: constants.COLOR.WHITE,
-    fontSize: 16,
+    fontSize: 17,
     lineHeight: 30,
-    fontWeight:'700',
+    fontWeight: '700',
   },
-  head:{
+  head: {
     backgroundColor: constants.COLOR.WHITE,
   },
-  text:{
+  text: {
     backgroundColor: constants.COLOR.WHITE,
   },
-  textName:{
+  textName: {
     color: constants.COLOR.WHITE,
-    fontWeight:'700',
-    fontSize: 16,
+    fontWeight: '700',
+    fontSize: 18,
     lineHeight: 25,
-    textAlign:'center',
+    textAlign: 'center',
     marginTop: 15,
     marginLeft: 0,
   },
@@ -220,7 +227,7 @@ const Styles = StyleSheet.create({
     fontSize: 24,
     marginLeft: 20,
   },
-  updateMoneyInfo:{
+  updateMoneyInfo: {
     fontSize: 24,
     marginRight: 20,
   },
