@@ -7,10 +7,11 @@ const {AxiosInstance} = require('../../shared/utils/AxiosInstance');
 const log = LOG.extend(`API_USER.JS`);
 export const fetchLogin = createAsyncThunk(
   constants.FETCH.LOGIN,
-  async (idToken, accessToken) => {
+  async data => {
     const response = await AxiosInstance().post(`/login`, {
-      idToken,
-      accessToken,
+      idToken: data.idToken,
+      accessToken: data.accessToken,
+      fcmTokenDevice: data.fcmTokenDevice,
     });
     // log.info("🚀 ~ file: apiUser.js:8 ~ fetchLogin ~ response:", response.data)
     return response.data;
@@ -31,7 +32,7 @@ export const fetchUserById = createAsyncThunk(
 export const fetchUpdateUserInfo = createAsyncThunk(
   constants.FETCH.UPDATE_USER_INFO,
   async data => {
-    log.error("🚀 ~ file: apiUser.js:34 ~ data:", data)
+    log.error('🚀 ~ file: apiUser.js:34 ~ data:', data);
     const response = await AxiosInstance().post(
       `/users/${data.userId}/update-user-info`,
       {
@@ -40,7 +41,7 @@ export const fetchUpdateUserInfo = createAsyncThunk(
       },
     );
     // log.info("🚀 ~ file: apiUser.js:41 ~ response:", response.data)
-    
+
     return response.data;
   },
 );

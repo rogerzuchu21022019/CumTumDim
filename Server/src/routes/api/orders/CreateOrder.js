@@ -9,8 +9,9 @@ const route = express.Router();
 
 route.post(`/create-order`, async (req, res) => {
   try {
-    const { order } = req.body;
-    console.log("🚀 ~ file: CreateOrder.js:14 ~ route.post ~ order:", order)
+    const { order,fcmTokenDevice } = req.body;
+    // console.log("🚀 ~ file: CreateOrder.js:14 ~ route.post ~ order:", order)
+    // console.log("🚀 ~ file: CreateOrder.js:13 ~ route.post ~ fcmTokenDevice:", fcmTokenDevice)
     // console.log("🚀 ~ file: Notify.js:9 ~ io:", _io);
 
     const orderData = await CreateOrderCon(order); //orderData with status pending

@@ -38,6 +38,8 @@ import Snackbar from 'react-native-snackbar';
 import {resetCart} from '../../../../product/sliceProduct';
 import CheckModal from '../../../../../shared/utils/CheckModal';
 import ModalNotify from '../../../../../components/modal/ModalNotify';
+import messaging from '@react-native-firebase/messaging';
+
 const log = LOG.extend(`PAYMENT.JS`);
 const Payment = ({navigation, route}) => {
   let {order} = route.params;
@@ -101,12 +103,21 @@ const Payment = ({navigation, route}) => {
     setModalVisible(!isModalVisible);
   };
 
-  const handleCreateOrder = (order, address) => {
+  const handleCreateOrder = async (order, address) => {
+    const fcmTokenDevice = await messaging().getToken();
+    log.info(
+      '🚀 ~ file: Payment.js:108 ~ handleCreateOrder ~ tokenDevice:',
+      fcmTokenDevice,
+    );
     const newOrder = {
       ...order,
       address: address,
     };
-    dispatch(fetchCreateOrder(newOrder));
+    const data = {
+      newOrder,
+      fcmTokenDevice,
+    };
+    dispatch(fetchCreateOrder(data));
 
     // dispatch(fetchNotification(data));
   };

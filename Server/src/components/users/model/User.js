@@ -73,6 +73,9 @@ const userSchema = new mongoose.Schema(
         },
       ],
     },
+    fcmTokenDevice: {
+      type: String,
+    },
   },
   {
     timestamps: true,

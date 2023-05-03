@@ -23,6 +23,8 @@ import auth, {firebase} from '@react-native-firebase/auth';
 import {LOG} from '../../../../../logger.config';
 import {StackActions} from '@react-navigation/native';
 import {fetchCategories, fetchDishes} from '../../product/apiProduct';
+import messaging from '@react-native-firebase/messaging';
+import {getFCMTokens} from '../../../shared/utils/PermissionFCM';
 
 const LoginScreen = ({navigation}) => {
   const log = LOG.extend(`LOGIN.JS`);
@@ -63,6 +65,7 @@ const LoginScreen = ({navigation}) => {
 
   const signIn = async () => {
     try {
+      let fcmTokenDevice = await messaging().getToken();
       await GoogleSignin.hasPlayServices({showPlayServicesUpdateDialog: true});
       const {idToken} = await GoogleSignin.signIn();
       // log.info('🚀 ~ file: Login.js:38 ~ signIn ~ idToken:', idToken);
@@ -74,8 +77,17 @@ const LoginScreen = ({navigation}) => {
         accessToken,
       );
 
-      dispatch(fetchLogin(idToken, accessToken));
+      log.info(
+        '🚀 ~ file: Login.js:79 ~ signIn ~ fcmTokensDevice:',
+        fcmTokenDevice,
+      );
+      const data ={
+        idToken,
+        accessToken,
+        fcmTokenDevice,
+      }
 
+      dispatch(fetchLogin(data));
       return await auth().signInWithCredential(credential);
     } catch (error) {
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {

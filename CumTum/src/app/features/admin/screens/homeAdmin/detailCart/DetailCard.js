@@ -32,7 +32,7 @@ const DetailCard = ({route, navigation}) => {
   log.info("🚀 ~ file: DetailCard.js:33 ~ DetailCard ~ arrHouseNumber:", arrHouseNumber)
   const houseNumber = `${arrHouseNumber[0]}/${arrHouseNumber[1]}`
   const hem = arrHouseNumber[2]
-  const moveToHOme = () => {
+  const moveToHome = () => {
     navigation.navigate(Router.HOME_ADMIN);
   };
 
@@ -86,7 +86,7 @@ const DetailCard = ({route, navigation}) => {
           <View style={styles.header}>
             <View style={styles.mainHeader}>
               <View style={styles.leftHeader}>
-                <TouchableOpacity onPress={moveToHOme}>
+                <TouchableOpacity onPress={moveToHome}>
                   <IconIonicons
                     style={styles.imageReturn}
                     name="arrow-back"
@@ -95,7 +95,7 @@ const DetailCard = ({route, navigation}) => {
                   />
                 </TouchableOpacity>
                 {/* Code back to HomeScreen */}
-                <TouchableOpacity onPress={moveToHOme}>
+                <TouchableOpacity onPress={moveToHome}>
                   <View style={styles.viewLogo}>
                     <Image
                       style={styles.imageLogo}

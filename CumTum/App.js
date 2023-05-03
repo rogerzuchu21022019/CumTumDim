@@ -36,14 +36,15 @@ import socketServices from './src/app/shared/utils/Socket';
 import RingBellAdmin from './src/app/features/admin/screens/homeAdmin/ringBellAdmin/RingBellAdmin';
 import EditDeliveryAddress from './src/app/features/customer/screens/carts/profilePayment/editDeliveryAddress/EditDeliveryAddress';
 import AddDeliveryAddress from './src/app/features/customer/screens/carts/profilePayment/addDeliveryAddress/AddDeliveryAddress';
+import { requestUserPermission } from './src/app/shared/utils/PermissionFCM';
 const App = () => {
   const Stack = createNativeStackNavigator();
 
   useEffect(() => {
     requestPermissionNoti();
-    // if (Platform.OS === 'android') {
-    //   requestUserPermission();
-    // }
+    if (Platform.OS === 'android') {
+      requestUserPermission()
+    }
     return () => {};
   }, []);
 
@@ -92,7 +93,7 @@ const App = () => {
             />
 
             <Stack.Screen
-              name={Router.UPDATE_INFO1}
+              name={Router.UPDATE_INFO}
               component={UpdateInformation}
               options={{
                 headerShown: false,

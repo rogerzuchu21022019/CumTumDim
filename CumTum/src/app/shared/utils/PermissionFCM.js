@@ -8,20 +8,20 @@ export const requestUserPermission = async () => {
     authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
     authStatus === messaging.AuthorizationStatus.PROVISIONAL;
 
-  if (enabled) {
-    log.error('Authorization status:', authStatus);
-    getFCMTokens();
-  }
+  // if (enabled) {
+  //   log.error('Authorization status:', authStatus);
+  //   getFCMTokens();
+  // }
 };
 
-const getFCMTokens = async () => {
+export const getFCMTokens = async () => {
   try {
     messaging().onMessage(remoteMessage => {
-      console.log(
+      log.info(
         'Received push notification: ',
         remoteMessage.notification.title,
       );
-      console.log(
+      log.info(
         'Received push notification: ',
         remoteMessage.notification.body,
       );
@@ -30,12 +30,12 @@ const getFCMTokens = async () => {
     });
 
     const tokens = await messaging().getToken();
-    console.log(
+    log.info(
       '🚀 ~ file: PermissionFCM.js:19 ~ getFCMTokens ~ tokens:',
       tokens,
     );
   } catch (error) {
-    console.log(
+    log.info(
       '🚀 ~ file: PermissionFCM.js:20 ~ getFCMTokens ~ error:',
       error,
     );
