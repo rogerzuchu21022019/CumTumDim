@@ -9,6 +9,7 @@ import {
   Image,
   TouchableOpacity,
   ActivityIndicator,
+  Platform,
 } from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 
@@ -65,30 +66,55 @@ const LoginScreen = ({navigation}) => {
 
   const signIn = async () => {
     try {
-      let fcmTokenDevice = await messaging().getToken();
-      await GoogleSignin.hasPlayServices({showPlayServicesUpdateDialog: true});
-      const {idToken} = await GoogleSignin.signIn();
-      // log.info('🚀 ~ file: Login.js:38 ~ signIn ~ idToken:', idToken);
+      if (Platform.OS === 'android') {
+        let fcmTokenDevice = await messaging().getToken();
+        await GoogleSignin.hasPlayServices({
+          showPlayServicesUpdateDialog: true,
+        });
+        const {idToken} = await GoogleSignin.signIn();
+        // log.info('🚀 ~ file: Login.js:38 ~ signIn ~ idToken:', idToken);
 
-      const {accessToken} = await GoogleSignin.getTokens();
+        const {accessToken} = await GoogleSignin.getTokens();
 
-      const credential = auth.GoogleAuthProvider.credential(
-        idToken,
-        accessToken,
-      );
+        const credential = auth.GoogleAuthProvider.credential(
+          idToken,
+          accessToken,
+        );
 
-      log.info(
-        '🚀 ~ file: Login.js:79 ~ signIn ~ fcmTokensDevice:',
-        fcmTokenDevice,
-      );
-      const data ={
-        idToken,
-        accessToken,
-        fcmTokenDevice,
+        log.info(
+          '🚀 ~ file: Login.js:79 ~ signIn ~ fcmTokensDevice:',
+          fcmTokenDevice,
+        );
+        const data = {
+          idToken,
+          accessToken,
+          fcmTokenDevice,
+        };
+
+        dispatch(fetchLogin(data));
+        return await auth().signInWithCredential(credential);
+      } else {
+        await GoogleSignin.hasPlayServices({
+          showPlayServicesUpdateDialog: true,
+        });
+        const {idToken} = await GoogleSignin.signIn();
+        // log.info('🚀 ~ file: Login.js:38 ~ signIn ~ idToken:', idToken);
+
+        const {accessToken} = await GoogleSignin.getTokens();
+
+        const credential = auth.GoogleAuthProvider.credential(
+          idToken,
+          accessToken,
+        );
+
+        const data = {
+          idToken,
+          accessToken,
+        };
+
+        dispatch(fetchLogin(data));
+        return await auth().signInWithCredential(credential);
       }
-
-      dispatch(fetchLogin(data));
-      return await auth().signInWithCredential(credential);
     } catch (error) {
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
         log.error(

@@ -11,13 +11,12 @@ const log = LOG.extend(`API_ORDER.JS`);
 
 export const fetchCreateOrder = createAsyncThunk(
   constants.FETCH.CREATE_ORDER,
-  async data => {
+  async newOrder => {
     // const response = await AxiosInstance().post(
     // `/products/push-notification-rabbit`,
     // {
     const response = await AxiosInstance().post(`/products/create-order`, {
-      order:data.newOrder,
-      fcmTokenDevice:data.fcmTokenDevice
+      order: newOrder,
     });
     log.info('🚀 ~ file: apiOrder.js:13 ~ response ~ response:', response.data);
     return response.data;
@@ -42,7 +41,6 @@ export const fetchNotifies = createAsyncThunk(
     return response.data;
   },
 );
-
 
 export const fetchUpdateOrder = createAsyncThunk(
   constants.FETCH.UPDATE_ORDER,

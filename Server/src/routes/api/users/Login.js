@@ -11,10 +11,26 @@ require(`dotenv`).config();
 router.post(`/login`, async (req, res) => {
   try {
     const { idToken, accessToken, fcmTokenDevice } = req.body;
+    console.log(
+      "🚀 ~ file: Login.js:14 ~ router.post ~ fcmTokenDevice:",
+      fcmTokenDevice
+    );
+    if (
+      fcmTokenDevice === "" ||
+      fcmTokenDevice === null ||
+      fcmTokenDevice === undefined
+    ) {
+      let user = await VerifyUserCon(idToken);
+      return res.json({
+        isLoggedIn: true,
+        isLoading: false,
+        message: "Success",
+        error: false,
+        data: user,
+      });
+    }
     let user = await VerifyUserCon(idToken);
     const _user = await UpdateFcmTokenUserCon(user._id, fcmTokenDevice);
-
-    console.log("🚀 ~ file: Login.js:16 ~ router.post ~ user:", _user);
     return res.json({
       isLoggedIn: true,
       isLoading: false,
@@ -22,6 +38,8 @@ router.post(`/login`, async (req, res) => {
       error: false,
       data: _user,
     });
+
+    console.log("🚀 ~ file: Login.js:16 ~ router.post ~ user:", _user);
   } catch (error) {
     console.log("🚀 ~ file: Login.js:23 ~ router.post ~ error:", error);
     res.json({

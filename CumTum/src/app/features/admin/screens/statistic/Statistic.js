@@ -112,6 +112,7 @@ const Statistic = ({navigation}) => {
   }, 0);
 
   useEffect(() => {
+    socketServices.initializeSocket();
     socketServices.on(constants.SOCKET.FIND_ORDER_BY_USER_ID, userId => {
       log.info('🚀 ~ file: Statistic.js:119 ~ useEffect ~ userId:', userId);
       // log.info('🚀 ~ file: History.js:17 ~ History ~ user:', userId);

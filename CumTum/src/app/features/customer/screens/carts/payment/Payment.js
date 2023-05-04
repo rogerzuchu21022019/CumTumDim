@@ -104,20 +104,13 @@ const Payment = ({navigation, route}) => {
   };
 
   const handleCreateOrder = async (order, address) => {
-    const fcmTokenDevice = await messaging().getToken();
-    log.info(
-      '🚀 ~ file: Payment.js:108 ~ handleCreateOrder ~ tokenDevice:',
-      fcmTokenDevice,
-    );
+  
     const newOrder = {
       ...order,
       address: address,
     };
-    const data = {
-      newOrder,
-      fcmTokenDevice,
-    };
-    dispatch(fetchCreateOrder(data));
+   
+    dispatch(fetchCreateOrder(newOrder));
 
     // dispatch(fetchNotification(data));
   };
