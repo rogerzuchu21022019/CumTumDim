@@ -31,6 +31,7 @@
     "currency-converter-lt": "^2.0.0-beta.0",
     "currency.js": "^2.0.4",
     "date-fns": "^2.29.3",
+    "joi": "^17.9.2",
     "moment": "^2.29.4",
     "query-string": "^8.1.0",
     "querystring": "^0.2.1",

@@ -25,38 +25,62 @@ import {authSelector} from '../../../../admin/sliceAuth';
 import {LOG} from '../../../../../../../logger.config';
 import {onCamera, onGallery} from '../../../../../shared/utils/Camera';
 import ModalPickImage from '../../../../../components/modalPickImage/ModalPickImage';
-import { fetchUploadImage } from '../../../../product/apiProduct';
+import {fetchUploadImage} from '../../../../product/apiProduct';
+import {fetchUpdateUserInfo} from '../../../../admin/apiUser';
+import {validateName} from '../../../../../shared/utils/Validate';
 const log = LOG.extend(`EDIT_PROFILE.JS`);
 
 const EditProfile = ({navigation, route}) => {
   const {item} = route.params;
 
   const authSelect = useSelector(authSelector);
+  const user = authSelect.user;
   const userId = authSelect.user._id;
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+
+  const messageCommon = 'Bạn vui lòng điền đầy đủ thông tin';
+  const messagePhone = 'Bạn vui lòng nhập đúng số điện thoại';
+  const messageName = 'Tên không được chứa kí tự đặc biệt hoặc số';
+
+  /* Regular Expression */
+  const namePattern = /^[a-zA-Z\s]+$/;
 
   /* States user info*/
   const [name, setName] = useState(item.name);
+  const [isName, setIsName] = useState(true);
   const [phone, setPhone] = useState(item.phone);
+  const [isPhone, setIsPhone] = useState(true);
   const [ward, setWard] = useState(item.ward);
   const [district, setDistrict] = useState('12');
   const [city, setCity] = useState('Hồ Chí Minh');
   const [street, setStreet] = useState(item.street);
-  const [houseNumber, setHouseNumber] = useState(item.houseNumber);
+  const arrHouseNumber = item.houseNumber.split(`/`);
+  // log.info(
+  //   '🚀 ~ file: EditDeliveryAddress.js:61 ~ EditDeliveryAddress ~ newT:',
+  //   arrHouseNumber,
+  // );
+  const [houseNumber, setHouseNumber] = useState(arrHouseNumber[0]);
+  const [hem, setHem] = useState(arrHouseNumber[1] ? arrHouseNumber[1] : '');
 
   /* States show modal */
   const [isShowModal, setIsShowModal] = useState(false);
-  const [isShowPhoneNotify, setIsShowPhoneNotify] = useState(false);
+  const [isShowModalName, setIsShowModalName] = useState(false);
   const [isShowEditImage, setIsShowEditImage] = useState(false);
+  const [isFailValue, setIsFailValue] = useState(true);
 
-  const [avatar, setAvatar] = useState('');
+
+  const [avatar, setAvatar] = useState(user.imageUrl);
   const [isPicked, setIsPicked] = useState(false);
   const handleClick = () => {
     setIsShowModal(!isShowModal);
   };
 
-  const handleClickPhone = () => {
-    setIsShowPhoneNotify(!isShowPhoneNotify);
+  const handleShowLoading = () => {
+    setIsShowLoading(!isShowLoading);
+  };
+
+  const handleName = () => {
+    setIsShowModalName(!isShowModalName);
   };
 
   const moveToBack = () => {
@@ -67,14 +91,17 @@ const EditProfile = ({navigation, route}) => {
     navigation.navigate(Router.UPLOAD_IMAGE);
   };
 
-  const onSave = async() => {
-    if (phone.length != 10) {
-      console.log(
-        '🚀 ~ file: EditProfile.js:64 ~ onSave ~ phone.length:',
-        phone.length,
-      );
+  const onSave = async () => {
+    let validateString = validateName(name);
 
-      handleClickPhone();
+    if (validateString.error) {
+      handleName();
+      return;
+    }
+
+    if (phone.length != 10) {
+      handleClick();
+      return;
     }
     if (
       name === '' ||
@@ -97,10 +124,6 @@ const EditProfile = ({navigation, route}) => {
       handleClick();
       return;
     } else {
-      console.log(
-        '🚀 ~ file: EditDeliveryAddress.js:38 ~ EditDeliveryAddress ~ userId:',
-        userId,
-      );
       const newAddress = {
         _id: item._id,
         name: name,
@@ -109,19 +132,39 @@ const EditProfile = ({navigation, route}) => {
         district: district,
         city: city,
         street: street,
-        houseNumber: houseNumber,
+        houseNumber: `${houseNumber}/${hem}`,
         addressDefault: true,
       };
-      log.info(
-        '🚀 ~ file: EditDeliveryAddress.js:116 ~ moveToBack ~ newAddress:',
-        newAddress,
-      );
 
-      // const result = await dispatch(fetchUploadImage(avatar))
-      // const imageUrl = result.payload.data
-      
-    
-      // navigation.goBack();
+      if (avatar != user.imageUrl) {
+        const result = await dispatch(fetchUploadImage(avatar));
+        handleShowLoading();
+        const imageUrl = result.payload.data;
+        const data = {
+          userId: userId,
+          imageUrl: imageUrl,
+          address: newAddress,
+        };
+
+        dispatch(fetchUpdateUserInfo(data));
+        const timeOut = setTimeout(() => {
+          navigation.goBack();
+          clearTimeout(timeOut);
+        }, 1000);
+      } else {
+        const data = {
+          userId: userId,
+          imageUrl: user.imageUrl,
+          address: newAddress,
+        };
+        handleShowLoading();
+        // navigation.goBack();
+        dispatch(fetchUpdateUserInfo(data));
+        const timeOut = setTimeout(() => {
+          navigation.goBack();
+          clearTimeout(timeOut);
+        }, 1000);
+      }
     }
   };
 
@@ -137,7 +180,7 @@ const EditProfile = ({navigation, route}) => {
   };
 
   const imageUrlOptions = {
-    uri: avatar,
+    uri: avatar ? avatar : user.imageUrl,
     priority: FastImage.priority.high,
     cache: FastImage.cacheControl.immutable,
   };
@@ -169,7 +212,7 @@ const EditProfile = ({navigation, route}) => {
               <View style={styles.viewImage}>
                 <FastImage
                   style={styles.imageProfile}
-                  source={avatar ? imageUrlOptions : urlHardCode}
+                  source={user.imageUrl ? imageUrlOptions : urlHardCode}
                 />
               </View>
               <View style={styles.iconCamera}>
@@ -199,9 +242,19 @@ const EditProfile = ({navigation, route}) => {
                     keyboardType="ascii-capable"
                     onChangeText={text => setName(text)}
                     placeholder="Nhập họ và tên người nhận"
+                    isName={isName}
+                    isFailValue={
+                      name.length < 3 || name.length > 50
+                        ? isFailValue
+                        : !isFailValue
+                    }
                   />
 
                   <BoxInputCus
+                    isPhone={isPhone}
+                    isFailValue={
+                      phone.length != 10 ? isFailValue : !isFailValue
+                    }
                     title="Số điện thoại người nhận"
                     value={phone}
                     keyboardType="numeric"
@@ -222,12 +275,24 @@ const EditProfile = ({navigation, route}) => {
                     itemContainerStyle={styles.itemContainerStyle}
                   />
 
-                  <View>
+                  <View style={styles.boxHouse}>
                     <BoxInputCus
                       title="Số nhà"
                       value={houseNumber}
+                      keyboardType="numeric"
                       onChangeText={text => setHouseNumber(text)}
                       placeholder="Nhập số nhà"
+                    />
+                    <View style={styles.boxSec}>
+                      <Text style={styles.textSec}>{'/'}</Text>
+                    </View>
+
+                    <BoxInputCus
+                      title="Hẻm"
+                      value={hem}
+                      keyboardType="numeric"
+                      onChangeText={text => setHem(text)}
+                      placeholder="Nhập số của hẻm"
                     />
                   </View>
 
@@ -266,16 +331,17 @@ const EditProfile = ({navigation, route}) => {
       <View style={styles.footer}>
         <ButtonCus title="Lưu" onHandleClick={onSave} />
       </View>
+
       <ModalNotify
-        message1="Bạn vui lòng điền đầy đủ thông tin"
+        message1={isPhone.length != 10 ? messagePhone : messageCommon}
         isShowModal={isShowModal}
         handleClick={handleClick}
       />
 
       <ModalNotify
-        message1="Bạn vui lòng nhập đúng số điện thoại"
-        isShowModal={isShowPhoneNotify}
-        handleClick={handleClickPhone}
+        message1={validateName(name).error ? messageName : messageCommon}
+        isShowModal={isShowModalName}
+        handleClick={handleName}
       />
 
       <ModalPickImage
@@ -286,6 +352,8 @@ const EditProfile = ({navigation, route}) => {
         navigation={navigation}
         handleShowPickImage={handleShowPickImage}
       />
+
+     
     </SafeKeyComponent>
   );
 };

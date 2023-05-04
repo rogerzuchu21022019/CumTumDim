@@ -1,8 +1,8 @@
 const UpdateUserInfoSv = require("../services/UpdateInfoUserSv");
 
-const UpdateUserInfoCon = async (userId, imageUrl) => {
+const UpdateUserInfoCon = async (userId, imageUrl,name) => {
   try {
-    const user = await UpdateUserInfoSv(userId,imageUrl);
+    const user = await UpdateUserInfoSv(userId,imageUrl,name);
     return user;
   } catch (error) {
     console.log(

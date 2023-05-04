@@ -28,7 +28,11 @@ const DetailCard = ({route, navigation}) => {
   const {item, index} = route.params;
   log.info('item', item);
 
-  const moveToHOme = () => {
+  const arrHouseNumber = item.address.houseNumber.split(`/`)
+  log.info("🚀 ~ file: DetailCard.js:33 ~ DetailCard ~ arrHouseNumber:", arrHouseNumber)
+  const houseNumber = `${arrHouseNumber[0]}/${arrHouseNumber[1]}`
+  const hem = arrHouseNumber[2]
+  const moveToHome = () => {
     navigation.navigate(Router.HOME_ADMIN);
   };
 
@@ -82,7 +86,7 @@ const DetailCard = ({route, navigation}) => {
           <View style={styles.header}>
             <View style={styles.mainHeader}>
               <View style={styles.leftHeader}>
-                <TouchableOpacity onPress={moveToHOme}>
+                <TouchableOpacity onPress={moveToHome}>
                   <IconIonicons
                     style={styles.imageReturn}
                     name="arrow-back"
@@ -91,7 +95,7 @@ const DetailCard = ({route, navigation}) => {
                   />
                 </TouchableOpacity>
                 {/* Code back to HomeScreen */}
-                <TouchableOpacity onPress={moveToHOme}>
+                <TouchableOpacity onPress={moveToHome}>
                   <View style={styles.viewLogo}>
                     <Image
                       style={styles.imageLogo}
@@ -229,7 +233,8 @@ const DetailCard = ({route, navigation}) => {
                   {/*  Đỉa chỉ*/}
                   <View style={styles.viewTotal}>
                     <View style={styles.viewBoxShowInfoBill}>
-                      <Text style={styles.textAddress}>Số nhà :{item.address.houseNumber}</Text>
+                      <Text style={styles.textAddress}>Số nhà :{houseNumber}</Text>
+                      <Text style={styles.textAddress}>Hẻm :{hem}</Text>
                     </View>
                     <View style={styles.viewBoxShowInfoBill}>
                       <Text style={styles.textAddress}>Đường :{item.address.street}</Text>

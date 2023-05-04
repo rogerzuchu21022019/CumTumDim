@@ -9,31 +9,32 @@ const route = express.Router();
 
 route.post(`/create-order`, async (req, res) => {
   try {
-    const { order } = req.body;
-    console.log("🚀 ~ file: CreateOrder.js:14 ~ route.post ~ order:", order)
+    const { order,fcmTokenDevice } = req.body;
+    // console.log("🚀 ~ file: CreateOrder.js:14 ~ route.post ~ order:", order)
+    // console.log("🚀 ~ file: CreateOrder.js:13 ~ route.post ~ fcmTokenDevice:", fcmTokenDevice)
     // console.log("🚀 ~ file: Notify.js:9 ~ io:", _io);
 
     const orderData = await CreateOrderCon(order); //orderData with status pending
     _io.emit(CONSTANTS.SOCKET.CREATE_ORDER, orderData);
     // console.log("🚀 ~ file: Notify.js:17 ~ route.post ~ orderData:", orderData);
 
-    // const amqpUrl = process.env.AMQP_URL;
-    // const message = order.moneyToPaid;
+    const amqpUrl = process.env.AMQP_URL;
+    const message = order.moneyToPaid;
 
-    // const connection = await amqp.connect(amqpUrl);
+    const connection = await amqp.connect(amqpUrl);
 
-    // const channel = await connectRabbitPub(
-    //   connection,
-    //   CONSTANTS.RABBIT_MQ.QUEUE_NAME_ORDER
-    // );
+    const channel = await connectRabbitPub(
+      connection,
+      CONSTANTS.RABBIT_MQ.QUEUE_NAME_ORDER
+    );
 
-    // await channel.sendToQueue(
-    //   CONSTANTS.RABBIT_MQ.QUEUE_NAME_ORDER,
-    //   Buffer.from(JSON.stringify(message)),
-    //   {
-    //     persistent: true,
-    //   }
-    // );
+    await channel.sendToQueue(
+      CONSTANTS.RABBIT_MQ.QUEUE_NAME_ORDER,
+      Buffer.from(JSON.stringify(message)),
+      {
+        persistent: true,
+      }
+    );
     return res.status(200).json({
       isLoading: false,
       message: "Push notification success",

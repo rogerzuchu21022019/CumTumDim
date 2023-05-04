@@ -1,4 +1,11 @@
-import {View, Text, TouchableOpacity, Modal, Alert} from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Modal,
+  Alert,
+  ScrollView,
+} from 'react-native';
 import React, {useCallback, useEffect, useState} from 'react';
 import SafeKeyComponent from '../../../../../components/safe_area/SafeKeyComponent';
 import styles from './StylesPayment';
@@ -31,6 +38,8 @@ import Snackbar from 'react-native-snackbar';
 import {resetCart} from '../../../../product/sliceProduct';
 import CheckModal from '../../../../../shared/utils/CheckModal';
 import ModalNotify from '../../../../../components/modal/ModalNotify';
+import messaging from '@react-native-firebase/messaging';
+
 const log = LOG.extend(`PAYMENT.JS`);
 const Payment = ({navigation, route}) => {
   let {order} = route.params;
@@ -94,11 +103,13 @@ const Payment = ({navigation, route}) => {
     setModalVisible(!isModalVisible);
   };
 
-  const handleCreateOrder = (order, address) => {
+  const handleCreateOrder = async (order, address) => {
+  
     const newOrder = {
       ...order,
       address: address,
     };
+   
     dispatch(fetchCreateOrder(newOrder));
 
     // dispatch(fetchNotification(data));
@@ -290,7 +301,8 @@ const Payment = ({navigation, route}) => {
                         </Text>
 
                         <Text style={styles.text1}>
-                          Quận {addressDefault.district}  Thành phố {addressDefault.city}
+                          Quận {addressDefault.district} Thành phố{' '}
+                          {addressDefault.city}
                         </Text>
                       </View>
                     </View>
@@ -313,123 +325,125 @@ const Payment = ({navigation, route}) => {
               Vui lòng chọn một trong các phương thức sau:
             </Text>
           </View>
+          <ScrollView>
+            <View style={styles.viewText}>
+              {/* paypal */}
+              <TouchableOpacity onPress={() => handleCheck(1)}>
+                <View style={styles.viewPaypal}>
+                  <View style={styles.viewImage1}>
+                    <FastImage
+                      source={require('../../../../../../assets/paypal.jpeg')}
+                      style={styles.checkMarkImage}
+                    />
+                  </View>
+                  <View style={styles.viewTextPay}>
+                    <Text style={styles.textPaypal}>PAYPAL</Text>
+                  </View>
+                  <View
+                    style={[
+                      styles.checkbox,
+                      checkedId === 1 && styles.checkboxChecked,
+                    ]}></View>
+                </View>
+              </TouchableOpacity>
+              {/* Visa */}
+              <TouchableOpacity onPress={() => handleCheck(2)}>
+                <View style={styles.viewVisa}>
+                  <View style={styles.viewImage1}>
+                    <FastImage
+                      source={require('../../../../../../assets/visa.jpeg')}
+                      style={styles.checkMarkVisa}
+                    />
+                  </View>
+                  <View style={styles.viewTextVisa}>
+                    <Text style={styles.textVisa}>VISA</Text>
+                  </View>
+                  <View
+                    style={[
+                      styles.checkbox,
+                      checkedId === 2 && styles.checkboxChecked,
+                    ]}></View>
+                </View>
+              </TouchableOpacity>
+              {/* ZALO PAY */}
+              <TouchableOpacity onPress={() => handleCheck(3)}>
+                <View style={styles.viewZaloPay}>
+                  <View style={styles.viewImage1}>
+                    <FastImage
+                      source={require('../../../../../../assets/ZaloPayImages.png')}
+                      style={styles.checkMarkImage}
+                    />
+                  </View>
+                  <View style={styles.viewTextZaloPay}>
+                    <Text style={styles.textZaloPay}>ZALO PAY</Text>
+                  </View>
+                  <View
+                    style={[
+                      styles.checkbox,
+                      checkedId === 3 && styles.checkboxChecked,
+                    ]}></View>
+                </View>
+              </TouchableOpacity>
+              {/* MoMo */}
+              <TouchableOpacity onPress={() => handleCheck(4)}>
+                <View style={styles.viewMomo}>
+                  <View style={styles.viewImage1}>
+                    <FastImage
+                      source={require('../../../../../../assets/MomoImages.png')}
+                      style={styles.checkMarkImage}
+                    />
+                  </View>
+                  <View style={styles.viewTextZaloPay}>
+                    <Text style={styles.textZaloPay}>MOMO</Text>
+                  </View>
+                  <View
+                    style={[
+                      styles.checkbox,
+                      checkedId === 4 && styles.checkboxChecked,
+                    ]}></View>
+                </View>
+              </TouchableOpacity>
+              {/* Thanh toán trức tiếp */}
+              <TouchableOpacity onPress={() => handleCheck(5)}>
+                <View style={styles.viewLiveToPaid}>
+                  <View style={styles.viewImage1}>
+                    <FastImage
+                      source={require('../../../../../../assets/MoneyPaid.jpeg')}
+                      style={styles.checkMarkImage}
+                    />
+                  </View>
+                  <View style={styles.viewTextZaloPay}>
+                    <Text style={styles.textZaloPay}>Thanh toán trực tiếp</Text>
+                  </View>
+                  <View
+                    style={[
+                      styles.checkbox,
+                      checkedId === 5 && styles.checkboxChecked,
+                    ]}></View>
+                </View>
+              </TouchableOpacity>
 
-          <View style={styles.viewText}>
-            {/* paypal */}
-            <TouchableOpacity onPress={() => handleCheck(1)}>
-              <View style={styles.viewPaypal}>
-                <View style={styles.viewImage1}>
-                  <FastImage
-                    source={require('../../../../../../assets/paypal.jpeg')}
-                    style={styles.checkMarkImage}
-                  />
-                </View>
-                <View style={styles.viewTextPay}>
-                  <Text style={styles.textPaypal}>PAYPAL</Text>
-                </View>
-                <View
-                  style={[
-                    styles.checkbox,
-                    checkedId === 1 && styles.checkboxChecked,
-                  ]}></View>
-              </View>
-            </TouchableOpacity>
-            {/* Visa */}
-            <TouchableOpacity onPress={() => handleCheck(2)}>
-              <View style={styles.viewVisa}>
-                <View style={styles.viewImage1}>
-                  <FastImage
-                    source={require('../../../../../../assets/visa.jpeg')}
-                    style={styles.checkMarkVisa}
-                  />
-                </View>
-                <View style={styles.viewTextVisa}>
-                  <Text style={styles.textVisa}>VISA</Text>
-                </View>
-                <View
-                  style={[
-                    styles.checkbox,
-                    checkedId === 2 && styles.checkboxChecked,
-                  ]}></View>
-              </View>
-            </TouchableOpacity>
-            {/* ZALO PAY */}
-            <TouchableOpacity onPress={() => handleCheck(3)}>
-              <View style={styles.viewZaloPay}>
-                <View style={styles.viewImage1}>
-                  <FastImage
-                    source={require('../../../../../../assets/ZaloPayImages.png')}
-                    style={styles.checkMarkImage}
-                  />
-                </View>
-                <View style={styles.viewTextZaloPay}>
-                  <Text style={styles.textZaloPay}>ZALO PAY</Text>
-                </View>
-                <View
-                  style={[
-                    styles.checkbox,
-                    checkedId === 3 && styles.checkboxChecked,
-                  ]}></View>
-              </View>
-            </TouchableOpacity>
-            {/* MoMo */}
-            <TouchableOpacity onPress={() => handleCheck(4)}>
-              <View style={styles.viewMomo}>
-                <View style={styles.viewImage1}>
-                  <FastImage
-                    source={require('../../../../../../assets/MomoImages.png')}
-                    style={styles.checkMarkImage}
-                  />
-                </View>
-                <View style={styles.viewTextZaloPay}>
-                  <Text style={styles.textZaloPay}>MOMO</Text>
-                </View>
-                <View
-                  style={[
-                    styles.checkbox,
-                    checkedId === 4 && styles.checkboxChecked,
-                  ]}></View>
-              </View>
-            </TouchableOpacity>
-            {/* Thanh toán trức tiếp */}
-            <TouchableOpacity onPress={() => handleCheck(5)}>
-              <View style={styles.viewLiveToPaid}>
-                <View style={styles.viewImage1}>
-                  <FastImage
-                    source={require('../../../../../../assets/MoneyPaid.jpeg')}
-                    style={styles.checkMarkImage}
-                  />
-                </View>
-                <View style={styles.viewTextZaloPay}>
-                  <Text style={styles.textZaloPay}>Thanh toán trực tiếp</Text>
-                </View>
-                <View
-                  style={[
-                    styles.checkbox,
-                    checkedId === 5 && styles.checkboxChecked,
-                  ]}></View>
-              </View>
-            </TouchableOpacity>
-
-            <Modal
-              animationType="slide"
-              transparent={true}
-              visible={!!urlPaypalCheckout}>
-              <SafeKeyComponent>
-                <View style={styles.containerPaypal}>
-                  <TouchableOpacity onPress={resetDataPaypal}>
-                    <Text style={[styles.textTitle, styles.updateTitlePaypal]}>
-                      Cancel
-                    </Text>
-                  </TouchableOpacity>
-                  <WebView
-                    source={{uri: urlPaypalCheckout}}
-                    onNavigationStateChange={onUrlStateChange}
-                  />
-                </View>
-              </SafeKeyComponent>
-            </Modal>
-          </View>
+              <Modal
+                animationType="slide"
+                transparent={true}
+                visible={!!urlPaypalCheckout}>
+                <SafeKeyComponent>
+                  <View style={styles.containerPaypal}>
+                    <TouchableOpacity onPress={resetDataPaypal}>
+                      <Text
+                        style={[styles.textTitle, styles.updateTitlePaypal]}>
+                        Cancel
+                      </Text>
+                    </TouchableOpacity>
+                    <WebView
+                      source={{uri: urlPaypalCheckout}}
+                      onNavigationStateChange={onUrlStateChange}
+                    />
+                  </View>
+                </SafeKeyComponent>
+              </Modal>
+            </View>
+          </ScrollView>
         </View>
         <View style={styles.footer}>
           <View style={styles.viewFooter}>

@@ -188,6 +188,17 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     backgroundColor: constants.COLOR.WHITE,
   },
+
+  boxHouse: {
+    flexDirection: 'row',
+  },
+  boxSec: {
+    justifyContent: 'center',
+    marginTop: 20,
+  },
+  textSec:{
+    color: constants.COLOR.WHITE,
+  },
   placeholderStyle: {
     // backgroundColor: constants.COLOR.WHITE,
   },
