@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   ScrollView,
   TouchableNativeFeedback,
+  Modal,
 } from 'react-native';
 
 import React, {useEffect, useState} from 'react';
@@ -21,17 +22,30 @@ import IconIonicons from 'react-native-vector-icons/Ionicons';
 import {useDispatch} from 'react-redux';
 import {fetchUpdateOrder} from '../../../../carts/apiOrder';
 import socketServices from '../../../../../shared/utils/Socket';
+import {
+  authorizeOrder,
+  getDataPaypal,
+  refundOrderPaypal,
+  verifyCaptureOrderPaypal,
+} from '../../../../../shared/utils/Paypal';
+import WebView from 'react-native-webview';
 
 const DetailCard = ({route, navigation}) => {
   const dispatch = useDispatch();
   const log = LOG.extend('DETAILCART');
   const {item, index} = route.params;
+  const [urlPaypalCheckout, setUrlPaypalCheckout] = useState(false);
+  const [isCancelOrder, setIsCancelOrder] = useState(false);
+
   log.info('item', item);
 
-  const arrHouseNumber = item.address.houseNumber.split(`/`)
-  log.info("🚀 ~ file: DetailCard.js:33 ~ DetailCard ~ arrHouseNumber:", arrHouseNumber)
-  const houseNumber = `${arrHouseNumber[0]}/${arrHouseNumber[1]}`
-  const hem = arrHouseNumber[2]
+  const arrHouseNumber = item.address.houseNumber.split(`/`);
+  log.info(
+    '🚀 ~ file: DetailCard.js:33 ~ DetailCard ~ arrHouseNumber:',
+    arrHouseNumber,
+  );
+  const houseNumber = `${arrHouseNumber[0]}/${arrHouseNumber[1]}`;
+  const hem = arrHouseNumber[2];
   const moveToHome = () => {
     navigation.navigate(Router.HOME_ADMIN);
   };
@@ -64,14 +78,30 @@ const DetailCard = ({route, navigation}) => {
     navigation.goBack();
   };
   const onCancel = async () => {
+    setUrlPaypalCheckout(true);
+  };
+  const resetDataPaypal = () => {
+    setUrlPaypalCheckout(null);
+  };
+  const handleAcceptedOrderCancel = () => {
     dispatch(
       fetchUpdateOrder({
         orderId: item._id,
         orderStatus: 'Từ chối',
       }),
     );
-
+    resetDataPaypal();
     navigation.goBack();
+  };
+
+  const onUrlStateChange = async webViewState => {
+    // log.info(
+    //   '🚀 ~ file:  DetailCard.js:116 ~ onUrlStateChange ~ webViewState:',
+    //   webViewState,
+    // );
+    if (webViewState.title === 'Refund Complete - PayPal') {
+      handleAcceptedOrderCancel();
+    }
   };
 
   // item.totalMainDish
@@ -151,6 +181,41 @@ const DetailCard = ({route, navigation}) => {
                     </View>
                   )}
                   {/*  số lượng món chính  */}
+
+                  <Modal
+                    animationType="slide"
+                    transparent={true}
+                    visible={urlPaypalCheckout}>
+                    <SafeKeyComponent>
+                      <View style={styles.containerPaypal}>
+                        <TouchableOpacity onPress={resetDataPaypal}>
+                          <Text
+                            style={[
+                              styles.textTitle,
+                              styles.updateTitlePaypal,
+                            ]}>
+                            Cancel
+                          </Text>
+                        </TouchableOpacity>
+
+                        {/* <TouchableOpacity onPress={handleAcceptedOrderCancel}>
+                          <Text
+                            style={[
+                              styles.textTitle,
+                              styles.updateTitlePaypal,
+                            ]}>
+                            Accepted Cancel Order
+                          </Text>
+                        </TouchableOpacity> */}
+                        <WebView
+                          source={{
+                            uri: constants.PAYPAL.SANDBOX_PAYPAL_SIGN_IN,
+                          }}
+                          onNavigationStateChange={onUrlStateChange}
+                        />
+                      </View>
+                    </SafeKeyComponent>
+                  </Modal>
                   <View style={styles.viewTotal}>
                     {/* Tổng tiền  */}
                     <View style={styles.viewBoxShowInfoBill}>
@@ -233,11 +298,15 @@ const DetailCard = ({route, navigation}) => {
                   {/*  Đỉa chỉ*/}
                   <View style={styles.viewTotal}>
                     <View style={styles.viewBoxShowInfoBill}>
-                      <Text style={styles.textAddress}>Số nhà :{houseNumber}</Text>
+                      <Text style={styles.textAddress}>
+                        Số nhà :{houseNumber}
+                      </Text>
                       <Text style={styles.textAddress}>Hẻm :{hem}</Text>
                     </View>
                     <View style={styles.viewBoxShowInfoBill}>
-                      <Text style={styles.textAddress}>Đường :{item.address.street}</Text>
+                      <Text style={styles.textAddress}>
+                        Đường :{item.address.street}
+                      </Text>
                     </View>
                     <View style={styles.viewBoxShowInfoBill}>
                       <Text style={styles.textAddress}>
@@ -245,7 +314,9 @@ const DetailCard = ({route, navigation}) => {
                       </Text>
                     </View>
                     <View style={styles.viewBoxShowInfoBill}>
-                      <Text style={styles.textAddress}>Quận : {item.address.district}</Text>
+                      <Text style={styles.textAddress}>
+                        Quận : {item.address.district}
+                      </Text>
                     </View>
                     <View style={styles.viewBoxShowInfoBill}>
                       <Text style={styles.textAddress}>
@@ -330,8 +401,7 @@ const DetailCard = ({route, navigation}) => {
                         estimatedItemSize={100}
                         key={'list4'}
                       />
-                      <View style={styles.viewTextHeader}>
-                      </View>
+                      <View style={styles.viewTextHeader}></View>
                     </View>
                   ) : null}
                 </View>

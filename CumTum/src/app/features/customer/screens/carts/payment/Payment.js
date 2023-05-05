@@ -104,12 +104,11 @@ const Payment = ({navigation, route}) => {
   };
 
   const handleCreateOrder = async (order, address) => {
-  
     const newOrder = {
       ...order,
       address: address,
     };
-   
+
     dispatch(fetchCreateOrder(newOrder));
 
     // dispatch(fetchNotification(data));
@@ -208,10 +207,15 @@ const Payment = ({navigation, route}) => {
   const paymentSuccess = async id => {
     try {
       const response = await verifyCaptureOrderPaypal(id, accessToken);
-      log.error(
-        '🚀 ~ file: Payment.js:140 ~ paymentSuccess ~ paymentStatus:',
-        response,
-      );
+      // log.error(
+      //   '🚀 ~ file: Payment.js:140 ~ paymentSuccess ~ paymentStatus:',
+      //   response,
+      // );
+      const captureId = response.purchase_units[0].payments.captures[0].id;
+      const valueAmount =
+        response.purchase_units[0].payments.captures[0].amount.value;
+   
+     
       if (response.status === 'COMPLETED') {
         resetDataPaypal();
         handleCreateOrder(order, addressDefault);

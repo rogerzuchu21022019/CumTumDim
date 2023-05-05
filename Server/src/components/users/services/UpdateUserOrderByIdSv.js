@@ -2,10 +2,6 @@ const User = require("../model/User");
 
 const UpdateUserOrderByIdSv = async (userId, order, ) => {
   try {
-
-
-
-
     const query = {
       _id: userId,
     };

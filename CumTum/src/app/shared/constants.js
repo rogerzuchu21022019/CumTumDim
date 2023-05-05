@@ -18,6 +18,7 @@ export const constants = {
   },
   PAYPAL: {
     SANDBOX_PAYPAL: 'https://api-m.sandbox.paypal.com',
+    SANDBOX_PAYPAL_SIGN_IN: 'https://www.sandbox.paypal.com/signin',
     CLIENT_ID_PAYPAL:
       'ATjzaFNR4InUFxsBZBtQPnNiu7gvhtVOmovA6IgU6D9wBzPp5FTHTOSr9sqSgd-90h7ALd_4od4QMfvJ',
     SECRET_PAYPAL:

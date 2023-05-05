@@ -81,10 +81,10 @@ const LoginScreen = ({navigation}) => {
           accessToken,
         );
 
-        log.info(
-          '🚀 ~ file: Login.js:79 ~ signIn ~ fcmTokensDevice:',
-          fcmTokenDevice,
-        );
+        // log.info(
+        //   '🚀 ~ file: Login.js:79 ~ signIn ~ fcmTokensDevice:',
+        //   fcmTokenDevice,
+        // );
         const data = {
           idToken,
           accessToken,
