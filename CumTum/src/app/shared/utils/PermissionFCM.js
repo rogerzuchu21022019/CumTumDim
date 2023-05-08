@@ -16,12 +16,32 @@ export const requestUserPermission = async () => {
   }
 };
 
-const onDisplayNotiAccepted = async (title, body) => {
-  const dataMap = {
+const onDisplayNotiAccepted = async (
+  title,
+  order,
+  orderStatus,
+  moneyToPaid,
+) => {
+  log.info(
+    '🚀 ~ file: PermissionFCM.js:20 ~ onDisplayNotiAccepted ~ order:',
+    order,
+  );
+  let stringAccepted = `Đơn hàng của bạn có tổng tiền là : ${moneyToPaid}K đã được ${orderStatus}`;
+  let stringDeny = `Đơn hàng của bạn có tổng tiền là : ${moneyToPaid}K đã bị ${orderStatus}`;
+  const notification = {
     title: title,
-    content: body,
+    content: orderStatus ? stringAccepted : stringDeny,
+    _id: order._id,
+    createdAt: order.createdAt,
+    isRead: false,
   };
-  showNotifyLocal(dataMap);
+
+  const data = {
+    userId: order.userId,
+    notification: notification,
+  };
+
+  showNotifyLocal(notification);
 };
 
 export const getFCMTokens = async () => {
@@ -29,7 +49,13 @@ export const getFCMTokens = async () => {
     messaging().onMessage(remoteMessage => {
       const title = remoteMessage.notification.title;
       const body = remoteMessage.notification.body;
-      onDisplayNotiAccepted(title, body);
+      console.log("🚀 ~ file: PermissionFCM.js:52 ~ messaging ~ body:", body)
+      const data = remoteMessage.data;
+      console.log("🚀 ~ file: PermissionFCM.js:53 ~ messaging ~ data:", data)
+      const orderStatus = data.orderStatus;
+      const order = data.order;
+      const moneyToPaid = data.moneyToPaid;
+      onDisplayNotiAccepted(title, order, orderStatus, moneyToPaid);
       // Perform any necessary actions in your app based on the push notification data
     });
 

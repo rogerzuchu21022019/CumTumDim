@@ -22,12 +22,7 @@ import IconIonicons from 'react-native-vector-icons/Ionicons';
 import {useDispatch} from 'react-redux';
 import {fetchUpdateOrder} from '../../../../carts/apiOrder';
 import socketServices from '../../../../../shared/utils/Socket';
-import {
-  authorizeOrder,
-  getDataPaypal,
-  refundOrderPaypal,
-  verifyCaptureOrderPaypal,
-} from '../../../../../shared/utils/Paypal';
+
 import WebView from 'react-native-webview';
 
 const DetailCard = ({route, navigation}) => {
@@ -35,7 +30,6 @@ const DetailCard = ({route, navigation}) => {
   const log = LOG.extend('DETAILCART');
   const {item, index} = route.params;
   const [urlPaypalCheckout, setUrlPaypalCheckout] = useState(false);
-  const [isCancelOrder, setIsCancelOrder] = useState(false);
 
   log.info('item', item);
 
@@ -45,7 +39,7 @@ const DetailCard = ({route, navigation}) => {
     arrHouseNumber,
   );
   const houseNumber = `${arrHouseNumber[0]}/${arrHouseNumber[1]}`;
-  const hem = arrHouseNumber[2];
+  const hem = arrHouseNumber[1];
   const moveToHome = () => {
     navigation.navigate(Router.HOME_ADMIN);
   };
@@ -74,7 +68,6 @@ const DetailCard = ({route, navigation}) => {
         orderStatus: 'Chấp nhận',
       }),
     );
-
     navigation.goBack();
   };
   const onCancel = async () => {
@@ -224,7 +217,7 @@ const DetailCard = ({route, navigation}) => {
                       </Text>
                       <Text style={[styles.textInfo, styles.updateTextInfo]}>
                         {/* {solveMoneyToPaid()} K */}
-                        {item.moneyToPaid}
+                        {item.moneyToPaid} K 
                       </Text>
                     </View>
                     <View style={styles.divideLine}></View>

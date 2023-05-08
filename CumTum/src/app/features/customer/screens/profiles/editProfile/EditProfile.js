@@ -27,7 +27,6 @@ import {onCamera, onGallery} from '../../../../../shared/utils/Camera';
 import ModalPickImage from '../../../../../components/modalPickImage/ModalPickImage';
 import {fetchUploadImage} from '../../../../product/apiProduct';
 import {fetchUpdateUserInfo} from '../../../../admin/apiUser';
-import {validateName} from '../../../../../shared/utils/Validate';
 const log = LOG.extend(`EDIT_PROFILE.JS`);
 
 const EditProfile = ({navigation, route}) => {
@@ -68,7 +67,6 @@ const EditProfile = ({navigation, route}) => {
   const [isShowEditImage, setIsShowEditImage] = useState(false);
   const [isFailValue, setIsFailValue] = useState(true);
 
-
   const [avatar, setAvatar] = useState(user.imageUrl);
   const [isPicked, setIsPicked] = useState(false);
   const handleClick = () => {
@@ -92,13 +90,6 @@ const EditProfile = ({navigation, route}) => {
   };
 
   const onSave = async () => {
-    let validateString = validateName(name);
-
-    if (validateString.error) {
-      handleName();
-      return;
-    }
-
     if (phone.length != 10) {
       handleClick();
       return;
@@ -338,11 +329,11 @@ const EditProfile = ({navigation, route}) => {
         handleClick={handleClick}
       />
 
-      <ModalNotify
+      {/* <ModalNotify
         message1={validateName(name).error ? messageName : messageCommon}
         isShowModal={isShowModalName}
         handleClick={handleName}
-      />
+      /> */}
 
       <ModalPickImage
         isShowModal={isShowEditImage}
@@ -352,8 +343,6 @@ const EditProfile = ({navigation, route}) => {
         navigation={navigation}
         handleShowPickImage={handleShowPickImage}
       />
-
-     
     </SafeKeyComponent>
   );
 };

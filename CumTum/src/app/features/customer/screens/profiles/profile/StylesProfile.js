@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
   },
   // header:
   header: {
-    flex: 2,
+    flex: 3/2,
     alignItems: 'center',
     justifyContent: 'space-around',
   },
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
 
   //body
   body: {
-    flex: 8,
+    flex: 10,
     backgroundColor: constants.COLOR.GREY,
     alignItems: 'center',
     borderTopStartRadius: 35,

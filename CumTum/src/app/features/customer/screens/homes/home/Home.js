@@ -53,6 +53,8 @@ const HomeCustomer = ({navigation}) => {
   //   authSelect.notifications,
   // );
 
+  const user = authSelect.user
+
   const userInfo = {
     name: authSelect.user.name,
     phone: authSelect.user.phone,
@@ -250,7 +252,7 @@ const HomeCustomer = ({navigation}) => {
                   />
                 </View>
                 <View style={styles.viewTextRingBell}>
-                  <Text style={styles.textRingBell}>9</Text>
+                  <Text style={styles.textRingBell}>{user.notifications.length}</Text>
                 </View>
               </View>
             </TouchableOpacity>
