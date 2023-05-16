@@ -62,14 +62,11 @@ const ItemDetail = ({item, index}) => {
             )}
           </View>
           <View style={styles.boxHandleAmount}>
-           
-
             <View style={styles.boxShowAmount}>
               <Text style={[styles.textName, styles.textNameUpdate]}>
                 {item.amounts}
               </Text>
             </View>
-           
           </View>
         </View>
       </View>

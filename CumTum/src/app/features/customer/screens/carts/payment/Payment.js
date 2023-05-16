@@ -38,6 +38,8 @@ import Snackbar from 'react-native-snackbar';
 import {resetCart} from '../../../../product/sliceProduct';
 import CheckModal from '../../../../../shared/utils/CheckModal';
 import ModalNotify from '../../../../../components/modal/ModalNotify';
+import messaging from '@react-native-firebase/messaging';
+
 const log = LOG.extend(`PAYMENT.JS`);
 const Payment = ({navigation, route}) => {
   let {order} = route.params;
@@ -101,11 +103,12 @@ const Payment = ({navigation, route}) => {
     setModalVisible(!isModalVisible);
   };
 
-  const handleCreateOrder = (order, address) => {
+  const handleCreateOrder = async (order, address) => {
     const newOrder = {
       ...order,
       address: address,
     };
+
     dispatch(fetchCreateOrder(newOrder));
 
     // dispatch(fetchNotification(data));
@@ -204,10 +207,15 @@ const Payment = ({navigation, route}) => {
   const paymentSuccess = async id => {
     try {
       const response = await verifyCaptureOrderPaypal(id, accessToken);
-      log.error(
-        '🚀 ~ file: Payment.js:140 ~ paymentSuccess ~ paymentStatus:',
-        response,
-      );
+      // log.error(
+      //   '🚀 ~ file: Payment.js:140 ~ paymentSuccess ~ paymentStatus:',
+      //   response,
+      // );
+      const captureId = response.purchase_units[0].payments.captures[0].id;
+      const valueAmount =
+        response.purchase_units[0].payments.captures[0].amount.value;
+   
+     
       if (response.status === 'COMPLETED') {
         resetDataPaypal();
         handleCreateOrder(order, addressDefault);

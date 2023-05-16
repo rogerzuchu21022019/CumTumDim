@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'flex-end',
+    // justifyContent: 'flex-end',
     // backgroundColor: constants.COLOR.WHITE,
 
     marginRight: 20,

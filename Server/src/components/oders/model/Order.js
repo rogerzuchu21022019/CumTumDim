@@ -143,6 +143,12 @@ const OrderSchema = new mongoose.Schema(
       required: true,
     },
     address: {},
+    captureId: {
+      type: String,
+    },
+    valueAmount: {
+      type: Number,
+    },
   },
   {
     timestamps: true,

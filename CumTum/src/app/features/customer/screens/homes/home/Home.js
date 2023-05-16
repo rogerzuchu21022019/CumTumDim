@@ -41,6 +41,8 @@ import {formatCodeOrder} from '../../../../../shared/utils/CreateCodeOrder';
 import {authSelector} from '../../../../admin/sliceAuth';
 import ModalNotify from '../../../../../components/modal/ModalNotify';
 import DropdownElement from '../../../../../components/dropdownElement/DropdownElement';
+import messaging from '@react-native-firebase/messaging';
+import {getFCMTokens} from '../../../../../shared/utils/PermissionFCM';
 
 const HomeCustomer = ({navigation}) => {
   const log = LOG.extend('HOME_CUSTOMER.js');
@@ -50,6 +52,8 @@ const HomeCustomer = ({navigation}) => {
   //   '🚀 ~ file: Home.js:47 ~ HomeCustomer ~ notifications:',
   //   authSelect.notifications,
   // );
+
+  const user = authSelect.user
 
   const userInfo = {
     name: authSelect.user.name,
@@ -95,22 +99,12 @@ const HomeCustomer = ({navigation}) => {
   useEffect(() => {
     socketServices.initializeSocket();
 
-    socketServices.on(constants.SOCKET.UPDATE_ORDER, data => {
-      log.error('🚀 ~ file: Home.js:82 ~ socketServices.on ~ data:', data);
-      onDisplayNotiAccepted(data);
-      // handleCreateHistoryCart(data);
-
-      // move to history
-    });
-
-    socketServices.on(constants.SOCKET.UPDATE_NOTIFICATION_CUSTOMER, data => {
-      log.info('🚀 ~ file: Home.js:79 ~ useEffect ~ data:', data);
-    });
-
     return () => {
       socketServices.socket.disconnect();
     };
   }, []);
+
+  
 
   useEffect(() => {
     if (address.length === 0) {
@@ -258,7 +252,7 @@ const HomeCustomer = ({navigation}) => {
                   />
                 </View>
                 <View style={styles.viewTextRingBell}>
-                  <Text style={styles.textRingBell}>9</Text>
+                  <Text style={styles.textRingBell}>{user.notifications.length}</Text>
                 </View>
               </View>
             </TouchableOpacity>

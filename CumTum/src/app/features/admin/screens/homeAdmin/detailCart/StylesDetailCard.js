@@ -196,6 +196,23 @@ const StylesDetailCard = StyleSheet.create({
     fontSize: 16,
     fontWeight: '500',
   },
+
+  containerPaypal: {
+    flex: 1,
+    backgroundColor: constants.COLOR.WHITE,
+  },
+
+  textTitle: {
+    color: constants.COLOR.WHITE,
+    fontWeight: '900',
+    fontSize: 16,
+    lineHeight: 22,
+  },
+  updateTitlePaypal: {
+    color: constants.COLOR.BLACK,
+    fontSize: 20,
+    marginLeft: 20,
+  },
   groupButton: {
     flexDirection: 'row',
     justifyContent: 'space-evenly',

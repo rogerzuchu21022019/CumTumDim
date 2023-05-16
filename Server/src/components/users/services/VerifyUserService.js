@@ -5,7 +5,7 @@ const VerifyUserSv = async (idToken) => {
   const emailAdminNam = "vuthanhnam21022019@gmail.com";
   const emailAdminHoang = "xuanhoanggn@gmail.com";
   const emailAdminHai = "duchai0408@gmail.com";
-  const emailAdminPhuoc = "vongocphuocit2002@gmail.com";
+  const emailAdminTri = "triphan1197@gmail.com";
   try {
     const payload = await verifyIdToken(idToken);
     try {
@@ -18,7 +18,7 @@ const VerifyUserSv = async (idToken) => {
         if (
           payload.email === emailAdminNam ||
           payload.email === emailAdminHai ||
-          payload.email === emailAdminPhuoc ||
+          payload.email === emailAdminTri ||
           payload.email === emailAdminHoang
         ) {
           const newUser = await User.create({

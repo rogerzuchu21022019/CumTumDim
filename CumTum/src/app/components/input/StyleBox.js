@@ -48,6 +48,7 @@ const styleBox = StyleSheet.create({
   boxInput: {
     width: '100%',
     flexDirection: 'row',
+    justifyContent:'center'
     // borderWidth:1,
     // borderColor: constants.COLOR.WHITE,
   },

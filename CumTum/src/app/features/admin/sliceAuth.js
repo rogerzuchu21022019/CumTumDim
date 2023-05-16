@@ -50,7 +50,7 @@ export const authSlice = createSlice({
     });
     builder.addCase(fetchLogin.fulfilled, (state, action) => {
       const dataResponse = action.payload;
-      state.isLoading = true;
+      state.isLoading = dataResponse.isLoading;
       state.message = dataResponse.message;
       state.isLoggedIn = dataResponse.isLoggedIn;
       state.error = dataResponse.error;
@@ -72,7 +72,7 @@ export const authSlice = createSlice({
     });
     builder.addCase(fetchUserById.fulfilled, (state, action) => {
       const dataResponse = action.payload;
-      state.isLoading = false;
+      state.isLoading = dataResponse.isLoading;
       state.user = dataResponse.data;
       state.notifications = state.user.notifications;
       state.addresses = state.user.addresses;
@@ -88,7 +88,7 @@ export const authSlice = createSlice({
     });
     builder.addCase(fetchUpdateUserInfo.fulfilled, (state, action) => {
       const dataResponse = action.payload;
-      state.isLoading = false;
+      state.isLoading = dataResponse.isLoading;
       state.message = dataResponse.message;
       state.error = dataResponse.error;
       state.user = dataResponse.data;
@@ -104,7 +104,7 @@ export const authSlice = createSlice({
     });
     builder.addCase(fetchPushNotification.fulfilled, (state, action) => {
       const dataResponse = action.payload;
-      state.isLoading = false;
+      state.isLoading = dataResponse.isLoading;
       state.message = dataResponse.message;
       state.error = dataResponse.error;
       state.user = dataResponse.data;
@@ -120,7 +120,7 @@ export const authSlice = createSlice({
     });
     builder.addCase(fetchUpdateNotification.fulfilled, (state, action) => {
       const dataResponse = action.payload;
-      state.isLoading = false;
+      state.isLoading = dataResponse.isLoading;
       state.message = dataResponse.message;
       state.error = dataResponse.error;
       state.user = dataResponse.data;

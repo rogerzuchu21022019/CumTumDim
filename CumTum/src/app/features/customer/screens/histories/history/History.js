@@ -28,6 +28,7 @@ const History = ({navigation}) => {
   let orderHistory = user.user.orders;
 
   useEffect(() => {
+    socketServices.initializeSocket();
     socketServices.on(constants.SOCKET.FIND_ORDER_BY_USER_ID, userId => {
       log.info('🚀 ~ file: History.js:17 ~ History ~ user:', userId);
       dispatch(fetchUserById(userId));

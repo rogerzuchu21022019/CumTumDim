@@ -27,16 +27,12 @@ import {onCamera, onGallery} from '../../../../../shared/utils/Camera';
 import ModalPickImage from '../../../../../components/modalPickImage/ModalPickImage';
 import {fetchUploadImage} from '../../../../product/apiProduct';
 import {fetchUpdateUserInfo} from '../../../../admin/apiUser';
-import {validateName} from '../../../../../shared/utils/Validate';
-import ModalLoading from '../../../../../components/modalLoading/ModalLoading';
 const log = LOG.extend(`EDIT_PROFILE.JS`);
 
 const EditProfile = ({navigation, route}) => {
   const {item} = route.params;
 
   const authSelect = useSelector(authSelector);
-  const isLoading = authSelect.isLoading;
-
   const user = authSelect.user;
   const userId = authSelect.user._id;
   const dispatch = useDispatch();
@@ -52,7 +48,6 @@ const EditProfile = ({navigation, route}) => {
   const [name, setName] = useState(item.name);
   const [isName, setIsName] = useState(true);
   const [phone, setPhone] = useState(item.phone);
-  const [isPhone, setIsPhone] = useState(true);
   const [isPhone, setIsPhone] = useState(true);
   const [ward, setWard] = useState(item.ward);
   const [district, setDistrict] = useState('12');
@@ -71,8 +66,6 @@ const EditProfile = ({navigation, route}) => {
   const [isShowModalName, setIsShowModalName] = useState(false);
   const [isShowEditImage, setIsShowEditImage] = useState(false);
   const [isFailValue, setIsFailValue] = useState(true);
-
-  const [isShowLoading, setIsShowLoading] = useState(false);
 
   const [avatar, setAvatar] = useState(user.imageUrl);
   const [isPicked, setIsPicked] = useState(false);
@@ -97,13 +90,6 @@ const EditProfile = ({navigation, route}) => {
   };
 
   const onSave = async () => {
-    let validateString = validateName(name);
-
-    if (validateString.error) {
-      handleName();
-      return;
-    }
-
     if (phone.length != 10) {
       handleClick();
       return;
@@ -343,11 +329,11 @@ const EditProfile = ({navigation, route}) => {
         handleClick={handleClick}
       />
 
-      <ModalNotify
+      {/* <ModalNotify
         message1={validateName(name).error ? messageName : messageCommon}
         isShowModal={isShowModalName}
         handleClick={handleName}
-      />
+      /> */}
 
       <ModalPickImage
         isShowModal={isShowEditImage}
@@ -356,12 +342,6 @@ const EditProfile = ({navigation, route}) => {
         handleGallery={handleGallery}
         navigation={navigation}
         handleShowPickImage={handleShowPickImage}
-      />
-
-      <ModalLoading
-        isShowModal={isShowLoading}
-        isLoading={isLoading}
-        handleShowLoading={handleShowLoading}
       />
     </SafeKeyComponent>
   );
