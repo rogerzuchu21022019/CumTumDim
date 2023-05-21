@@ -329,12 +329,6 @@ const EditProfile = ({navigation, route}) => {
         handleClick={handleClick}
       />
 
-      {/* <ModalNotify
-        message1={validateName(name).error ? messageName : messageCommon}
-        isShowModal={isShowModalName}
-        handleClick={handleName}
-      /> */}
-
       <ModalPickImage
         isShowModal={isShowEditImage}
         isAvatar={avatar}

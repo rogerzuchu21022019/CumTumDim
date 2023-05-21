@@ -29,7 +29,6 @@ import {LIST_STREET, WARDS} from '../../../../../../shared/utils/DataAddress';
 import ModalNotify from '../../../../../../components/modal/ModalNotify';
 import {fetchAddAddress, fetchUserById} from '../../../../../admin/apiUser';
 import {authSelector} from '../../../../../admin/sliceAuth';
-import {validateName} from '../../../../../../shared/utils/Validate';
 
 const log = LOG.extend(`EDIT_DELIVERY_ADDRESS.JS`);
 const AddDeliveryAddress = ({navigation}) => {
@@ -68,12 +67,6 @@ const AddDeliveryAddress = ({navigation}) => {
   };
 
   const onAddAddress = () => {
-    let validateString = validateName(name);
-    if (validateString.error) {
-      handleName();
-      return;
-    }
-
     if (phone.length != 10) {
       handleClick();
       return;
@@ -281,11 +274,6 @@ const AddDeliveryAddress = ({navigation}) => {
           handleClick={handleClick}
         />
 
-        <ModalNotify
-          message1={validateName(name).error ? messageName : messageCommon}
-          isShowModal={isShowModalName}
-          handleClick={handleName}
-        />
       </View>
     </SafeKeyComponent>
   );
