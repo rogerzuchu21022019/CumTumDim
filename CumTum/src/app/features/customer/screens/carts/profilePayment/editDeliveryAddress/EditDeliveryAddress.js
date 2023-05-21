@@ -26,7 +26,6 @@ import {
   fetchDeleteAddress,
   fetchUpdateAddress,
 } from '../../../../../admin/apiUser';
-import {validateName} from '../../../../../../shared/utils/Validate';
 
 const log = LOG.extend(`EDIT_DELIVERY_ADDRESS.JS`);
 const EditDeliveryAddress = ({navigation, route}) => {
@@ -72,7 +71,7 @@ const EditDeliveryAddress = ({navigation, route}) => {
   const [hem, setHem] = useState(
     arrHouseNumber[1] ? `${arrHouseNumber[1]}` : '',
   );
-  
+
   const handleShowLoading = () => {
     setIsShowLoading(!isShowLoading);
   };
@@ -87,11 +86,6 @@ const EditDeliveryAddress = ({navigation, route}) => {
     navigation.goBack();
   };
   const onSave = () => {
-    let validateString = validateName(name);
-    if (validateString.error) {
-      handleName();
-      return;
-    }
 
     if (phone.length != 10) {
       handleClick();
@@ -346,13 +340,6 @@ const EditDeliveryAddress = ({navigation, route}) => {
           isShowModal={isShowModal}
           handleClick={handleClick}
         />
-
-        <ModalNotify
-          message1={validateName(name).error ? messageName : messageCommon}
-          isShowModal={isShowModalName}
-          handleClick={handleName}
-        />
-    
       </View>
     </SafeKeyComponent>
   );
