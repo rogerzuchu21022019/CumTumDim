@@ -273,7 +273,6 @@ const AddDeliveryAddress = ({navigation}) => {
           isShowModal={isShowModal}
           handleClick={handleClick}
         />
-
       </View>
     </SafeKeyComponent>
   );

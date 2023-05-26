@@ -1,5 +1,4 @@
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
-import {Platform} from 'react-native';
 
 const {createAsyncThunk} = require('@reduxjs/toolkit');
 const {LOG} = require('../../../../logger.config');
@@ -9,20 +8,13 @@ const log = LOG.extend(`API_USER.JS`);
 export const fetchLogin = createAsyncThunk(
   constants.FETCH.LOGIN,
   async data => {
-    if (Platform.OS === 'android') {
-      const response = await AxiosInstance().post(`/login`, {
-        idToken: data.idToken,
-        accessToken: data.accessToken,
-        fcmTokenDevice: data.fcmTokenDevice,
-      });
-      return response.data;
-    } else {
-      const response = await AxiosInstance().post(`/login`, {
-        idToken: data.idToken,
-        accessToken: data.accessToken,
-      });
-      return response.data;
-    }
+    console.log('🚀 ~ file: apiUser.js:11 ~ data:', data);
+    const response = await AxiosInstance().post(`/login`, {
+      idToken: data.idToken,
+      accessToken: data.accessToken,
+      fcmTokenDevice: data.fcmTokenDevice,
+    });
+    return response.data;
     // log.info("🚀 ~ file: apiUser.js:8 ~ fetchLogin ~ response:", response.data)
   },
 );

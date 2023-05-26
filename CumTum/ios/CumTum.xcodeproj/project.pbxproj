@@ -13,8 +13,8 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		95CAA89729B86E76004A7B29 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 95CAA89629B86E76004A7B29 /* GoogleService-Info.plist */; };
-		A6AC35ABE128BBF7E978E2D4 /* libPods-CumTum.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 428EF232544E7CE410CA89B6 /* libPods-CumTum.a */; };
-		B776FB4682402C9E908471EA /* libPods-CumTum-CumTumTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 59FABB3E2C330C51A0F9C8FC /* libPods-CumTum-CumTumTests.a */; };
+		AD185ACA507EF2CC45C84120 /* libPods-CumTum-CumTumTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D61DE7009EE369D0277304F /* libPods-CumTum-CumTumTests.a */; };
+		E16E959D7448D6B2449E23A1 /* libPods-CumTum.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 60CB8D922AD210C3129B4CB2 /* libPods-CumTum.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,12 +51,13 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = CumTum/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = CumTum/main.m; sourceTree = "<group>"; };
 		1539DBBF7454FE6D424EE832 /* Pods-CumTum.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CumTum.debug.xcconfig"; path = "Target Support Files/Pods-CumTum/Pods-CumTum.debug.xcconfig"; sourceTree = "<group>"; };
+		1D61DE7009EE369D0277304F /* libPods-CumTum-CumTumTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CumTum-CumTumTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		39695178CC3D9C1C969A075F /* Pods-CumTum.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CumTum.release.xcconfig"; path = "Target Support Files/Pods-CumTum/Pods-CumTum.release.xcconfig"; sourceTree = "<group>"; };
-		428EF232544E7CE410CA89B6 /* libPods-CumTum.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CumTum.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		59FABB3E2C330C51A0F9C8FC /* libPods-CumTum-CumTumTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CumTum-CumTumTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		60CB8D922AD210C3129B4CB2 /* libPods-CumTum.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CumTum.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F8427B6E0D2041C2C542CB1 /* Pods-CumTum-CumTumTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CumTum-CumTumTests.debug.xcconfig"; path = "Target Support Files/Pods-CumTum-CumTumTests/Pods-CumTum-CumTumTests.debug.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = CumTum/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		95097CC329C7CFC7005DAA90 /* CumTumDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = CumTumDebug.entitlements; path = CumTum/CumTumDebug.entitlements; sourceTree = "<group>"; };
+		9523A0092A1E2657002C2C50 /* CumTumRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = CumTumRelease.entitlements; path = CumTum/CumTumRelease.entitlements; sourceTree = "<group>"; };
 		95CAA89629B86E76004A7B29 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DF8C6F4282C55AC09B16B655 /* Pods-CumTum-CumTumTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CumTum-CumTumTests.release.xcconfig"; path = "Target Support Files/Pods-CumTum-CumTumTests/Pods-CumTum-CumTumTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
@@ -67,7 +68,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B776FB4682402C9E908471EA /* libPods-CumTum-CumTumTests.a in Frameworks */,
+				AD185ACA507EF2CC45C84120 /* libPods-CumTum-CumTumTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,7 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A6AC35ABE128BBF7E978E2D4 /* libPods-CumTum.a in Frameworks */,
+				E16E959D7448D6B2449E23A1 /* libPods-CumTum.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -102,6 +103,7 @@
 		13B07FAE1A68108700A75B9A /* CumTum */ = {
 			isa = PBXGroup;
 			children = (
+				9523A0092A1E2657002C2C50 /* CumTumRelease.entitlements */,
 				95097CC329C7CFC7005DAA90 /* CumTumDebug.entitlements */,
 				95CAA89629B86E76004A7B29 /* GoogleService-Info.plist */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -118,8 +120,8 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				428EF232544E7CE410CA89B6 /* libPods-CumTum.a */,
-				59FABB3E2C330C51A0F9C8FC /* libPods-CumTum-CumTumTests.a */,
+				60CB8D922AD210C3129B4CB2 /* libPods-CumTum.a */,
+				1D61DE7009EE369D0277304F /* libPods-CumTum-CumTumTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -486,7 +488,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = CumTum/CumTumDebug.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = CTSPPPL89T;
+				DEVELOPMENT_TEAM = 57W72N6SBF;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -523,8 +525,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = CumTum/CumTumRelease.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = CTSPPPL89T;
+				DEVELOPMENT_TEAM = 57W72N6SBF;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
