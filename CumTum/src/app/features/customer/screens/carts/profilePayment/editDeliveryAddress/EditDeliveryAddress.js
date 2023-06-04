@@ -277,7 +277,8 @@ const EditDeliveryAddress = ({navigation, route}) => {
         </View>
         <View style={styles.line}></View>
         <View style={styles.footer}>
-          <ButtonCus title="Lưu" onHandleClick={onSave} />
+          <ButtonCus title="Lưu" onHandleClick={moveToBack} />
+          <ButtonCus title="xóa" onHandleClick={moveToBack} />
         </View>
 
         <ModalNotify

@@ -5,6 +5,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: constants.COLOR.BLACK,
+   
   },
   // header:
   header: {
@@ -91,6 +92,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: constants.COLOR.GREY,
+    flexDirection:'row'
   },
   textSave: {
     fontSize: 18,
@@ -131,6 +133,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     paddingHorizontal: 8,
     backgroundColor: constants.COLOR.WHITE,
+    
   },
   placeholderStyle: {
     // backgroundColor: constants.COLOR.WHITE,
