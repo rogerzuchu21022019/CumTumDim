@@ -50,7 +50,7 @@ export const fetchUpdateUserInfo = createAsyncThunk(
 export const fetchPushNotification = createAsyncThunk(
   constants.FETCH.PUSH_NOTIFICATION,
   async data => {
-    log.error('🚀 ~ file: apiUser.js:34 ~ data:', data);
+    // log.error('🚀 ~ file: apiUser.js:34 ~ data:', data);
     const response = await AxiosInstance().post(
       `/users/${data.userId}/push-notification`,
       {
@@ -67,7 +67,7 @@ export const fetchPushNotification = createAsyncThunk(
 export const fetchUpdateNotification = createAsyncThunk(
   constants.FETCH.UPDATE_NOTIFICATION,
   async data => {
-    log.error('🚀 ~ file: apiUser.js:34 ~ data:', data);
+    // log.error('🚀 ~ file: apiUser.js:34 ~ data:', data);
     const response = await AxiosInstance().post(
       `/users/${data.userId}/update-notification`,
       {

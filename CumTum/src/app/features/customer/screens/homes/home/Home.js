@@ -252,7 +252,7 @@ const HomeCustomer = ({navigation}) => {
                   />
                 </View>
                 <View style={styles.viewTextRingBell}>
-                  <Text style={styles.textRingBell}>{user.notifications.length}</Text>
+                  {/* <Text style={styles.textRingBell}>{user.notifications.length}</Text> */}
                 </View>
               </View>
             </TouchableOpacity>

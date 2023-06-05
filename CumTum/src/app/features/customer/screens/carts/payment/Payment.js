@@ -72,11 +72,6 @@ const Payment = ({navigation, route}) => {
   const dispatch = useDispatch();
 
   const addressDefault = getAddressDefault[0];
-  log.info(
-    '🚀 ~ file: Payment.js:75 ~ Payment ~ addressDefault:',
-    addressDefault,
-  );
-
   const message = 'Bạn chưa chọn phương thức thanh toán!';
 
   const onDisplayNotification = async () => {
@@ -116,14 +111,8 @@ const Payment = ({navigation, route}) => {
 
   const handleGetAccessToken = async order => {
     const response = await getDataPaypal();
-    console.log(
-      '🚀 ~ file: Payment.js:88 ~ handleGetAccessToken ~ response:',
-      response,
-    );
     setAccessToken(response.access_token);
-
     const res = await createOrderPaypal(response.access_token, order);
-    log.error('🚀 ~ file: Payment.js:91 ~ handleGetAccessToken ~ res:', res);
     if (res.links != undefined) {
       const url = res.links.find(link => link.rel === 'approve');
       setUrlPaypalCheckout(url.href);
@@ -188,10 +177,10 @@ const Payment = ({navigation, route}) => {
     }
   };
   const onUrlStateChange = async webViewState => {
-    log.info(
-      '🚀 ~ file: Payment.js:120 ~ onUrlStateChange ~ webViewState:',
-      webViewState,
-    );
+    // log.info(
+    //   '🚀 ~ file: Payment.js:120 ~ onUrlStateChange ~ webViewState:',
+    //   webViewState,
+    // );
     if (webViewState.url.includes(`https://example.com/cancel`)) {
       resetDataPaypal();
       return;
@@ -227,7 +216,7 @@ const Payment = ({navigation, route}) => {
         return;
       }
     } catch (error) {
-      log.error('🚀 ~ file: Payment.js:148 ~ paymentSuccess ~ error:', error);
+      // log.error('🚀 ~ file: Payment.js:148 ~ paymentSuccess ~ error:', error);
     }
   };
 

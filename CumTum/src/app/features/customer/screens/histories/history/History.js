@@ -1,42 +1,54 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {
   View,
   Text,
-  FlatList,
   RefreshControl,
   TouchableNativeFeedback,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
+import messaging from '@react-native-firebase/messaging';
+
 import styles from './StylesHistory';
-import FastImage from 'react-native-fast-image';
 import {constants} from '../../../../../shared/constants';
 import {useDispatch, useSelector} from 'react-redux';
-import {cartSelector} from '../../../../carts/sliceOrder';
 import {FlashList} from '@shopify/flash-list';
 import ItemView from './item/ItemView';
 import SafeKeyComponent from '../../../../../components/safe_area/SafeKeyComponent';
-// import HistoryNoItems from './historynoitems/HistoryNoItems';
 import {authSelector} from '../../../../admin/sliceAuth';
-import socketServices from '../../../../../shared/utils/Socket';
 import {LOG} from '../../../../../../../logger.config';
 import {fetchUserById} from '../../../../admin/apiUser';
+import {onDisplayNotiAccepted} from '../../../../../shared/utils/ShowNotificationAccepted';
 const log = LOG.extend(`HISTORY.JS`);
 const History = ({navigation}) => {
   // const data = useSelector(cartSelector);
   const user = useSelector(authSelector);
+  const userId = user.user._id;
+  const fcmTokenDevice = user.fcmTokenDevice;
+
   const [isRefresh, setIsRefresh] = useState(false);
   const dispatch = useDispatch();
   let orderHistory = user.user.orders;
 
-  useEffect(() => {
-    socketServices.initializeSocket();
-    socketServices.on(constants.SOCKET.FIND_ORDER_BY_USER_ID, userId => {
-      log.info('🚀 ~ file: History.js:17 ~ History ~ user:', userId);
+  const getNotification = async () => {
+    await messaging().onMessage(remoteMessage => {
+      const title = remoteMessage.notification.title;
+      const body = remoteMessage.notification.body;
+      const data = remoteMessage.data;
+      const orderStatus = data.orderStatus;
+      const order = data.order;
+      const moneyToPaid = data.moneyToPaid;
+      onDisplayNotiAccepted({
+        title,
+        order,
+        orderStatus,
+        moneyToPaid,
+      });
       dispatch(fetchUserById(userId));
     });
-    return () => {
-      socketServices.socket.disconnect();
-    };
-  }, []);
+  };
+  useEffect(() => {
+    getNotification();
+  }, [getNotification]);
 
   return (
     <SafeKeyComponent>
@@ -62,7 +74,7 @@ const History = ({navigation}) => {
                     />
                   );
                 }}
-                keyExtractor={(item, index) => item._id.toString()}
+                keyExtractor={(item, index) => index.toString()}
                 refreshControl={
                   <RefreshControl
                     refreshing={isRefresh}
