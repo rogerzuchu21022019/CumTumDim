@@ -8,7 +8,6 @@ const log = LOG.extend(`API_USER.JS`);
 export const fetchLogin = createAsyncThunk(
   constants.FETCH.LOGIN,
   async data => {
-    console.log('🚀 ~ file: apiUser.js:11 ~ data:', data);
     const response = await AxiosInstance().post(`/login`, {
       idToken: data.idToken,
       accessToken: data.accessToken,

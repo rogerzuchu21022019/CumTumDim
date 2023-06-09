@@ -81,10 +81,6 @@ const DetailCard = ({route, navigation}) => {
   };
 
   const onUrlStateChange = async webViewState => {
-    // log.info(
-    //   '🚀 ~ file:  DetailCard.js:116 ~ onUrlStateChange ~ webViewState:',
-    //   webViewState,
-    // );
     if (webViewState.title === 'Refund Complete - PayPal') {
       handleAcceptedOrderCancel();
     }

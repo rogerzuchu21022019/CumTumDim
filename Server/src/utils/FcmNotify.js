@@ -16,9 +16,9 @@ const FcmNotify = async (fcmTokenDevice, title, body, data) => {
 
     fcm.send(message, function (err, response) {
       if (err) {
-        // console.log("🚀 ~ file: PushNotify.js:27 ~ err:", err);
+        console.log("🚀 ~ file: PushNotify.js:27 ~ err:", err);
       } else {
-        // console.log("Successfully sent with response: ", response);
+        console.log("Successfully sent with response: ", response);
       }
     });
   } catch (error) {

@@ -20,7 +20,6 @@ const RingBell = ({navigation}) => {
   const data = useSelector(authSelector);
   log.info("🚀 ~ file: RingBell.js:21 ~ RingBell ~ data:", data.user.notifications);
 
-
   const DATA = [
     {
       title: "Khuyến mãi giảm giá 30%",
@@ -92,12 +91,10 @@ const RingBell = ({navigation}) => {
           <View style={styles.groupHeader}>
             <View style={styles.viewIcon}>
             <TouchableOpacity onPress={moveToBack}>
-
               <IconAntDesign
               name="left"
               color={constants.COLOR.WHITE}
               size={18}
-              
               />
             </TouchableOpacity>
 
@@ -115,7 +112,7 @@ const RingBell = ({navigation}) => {
         </View>
         <View style={styles.body}>
         <FlashList
-           data={DATA}
+           data={data}
            estimatedItemSize={200}
            renderItem={({item, index}) => (
              <ListItem item={item} index={index} />
