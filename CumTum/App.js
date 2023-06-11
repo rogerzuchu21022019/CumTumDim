@@ -8,7 +8,7 @@ import Router from './src/app/navigation/Router';
 import {Store} from './src/app/app_store/Store';
 
 // import Provider
-import {Provider, useSelector} from 'react-redux';
+import {Provider, useDispatch, useSelector} from 'react-redux';
 import AdminStack from './src/app/navigation/AdminStack';
 import DetailCard from './src/app/features/admin/screens/homeAdmin/detailCart/DetailCard';
 import CustomerStack from './src/app/navigation/CustomerStack';
@@ -40,9 +40,9 @@ import {
   getFCMTokens,
   requestUserPermission,
 } from './src/app/shared/utils/PermissionFCM';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
 const App = () => {
   const Stack = createNativeStackNavigator();
-
   useEffect(() => {
     requestPermissionNoti();
     requestUserPermission();
@@ -181,4 +181,5 @@ const App = () => {
     </Provider>
   );
 };
+
 export default App;

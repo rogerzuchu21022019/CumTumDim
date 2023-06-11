@@ -1,127 +1,111 @@
-import {StyleSheet, Text, View,TouchableOpacity} from 'react-native';
-import React from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  RefreshControl,
+} from 'react-native';
+import React, {useEffect, useState} from 'react';
 import styles from './Styles.js';
 import SafeKeyComponent from '../../../../../components/safe_area/SafeKeyComponent.js';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
-import { constants } from '../../../../../shared/constants.js';
+import {constants} from '../../../../../shared/constants.js';
 import Router from '../../../../../navigation/Router.js';
-import { FlashList } from '@shopify/flash-list';
+import {FlashList} from '@shopify/flash-list';
 import ListItem from './ListItem.js';
 import {useDispatch, useSelector} from 'react-redux';
-import { authSelector } from '../../../../admin/sliceAuth.js';
-import { LOG } from '../../../../../../../logger.config.js';
+import {authSelector} from '../../../../admin/sliceAuth.js';
+import {LOG} from '../../../../../../../logger.config.js';
+import messaging from '@react-native-firebase/messaging';
+
+import {
+  fetchDeleteNotification,
+  fetchUserById,
+} from '../../../../admin/apiUser.js';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
 const RingBell = ({navigation}) => {
-  const moveToBack =()=>{
-    navigation.navigate(Router.HOME_CUSTOMER)
-  }
+  const dispatch = useDispatch();
+  const authSelect = useSelector(authSelector);
+  const [isRefresh, setIsRefresh] = useState(false);
+  const user = authSelect.user;
+  const [listNotification, setListNotification] = useState(user.notifications);
+  const moveToBack = () => {
+    navigation.navigate(Router.HOME_CUSTOMER);
+  };
   const log = LOG.extend(`RING_BELL.JS`);
 
-
   const data = useSelector(authSelector);
-  log.info("🚀 ~ file: RingBell.js:21 ~ RingBell ~ data:", data.user.notifications);
+  useEffect(() => {
+    dispatch(fetchUserById(user._id));
+  }, [messaging, user.notifications.length]);
 
-  const DATA = [
-    {
-      title: "Khuyến mãi giảm giá 30%",
-      content:  "Khi đến của hàng ăn uống hoá đơn của bạn trên 150k sẽ được giảm giá 30% trên tổng hoá đơn",
-      date:"07/04/2023",
-      time: "14:20:33",
-    },
-    {
-      title: "Khuyến mãi giảm giá 30%",
-      content:  "Khi đến của hàng",
-      date:"07/04/2023",
-      time: "14:20:33",
-    },
-    {
-      title: "Khuyến mãi giảm giá 30%",
-      content:  "Khi đến của hàng ăn uống hoá đơn của bạn trên 150k sẽ được giảm giá 30% trên tổng hoá đơn Khi đến của hàng ăn uống hoá đơn của bạn trên 150k sẽ được giảm giá 30% trên tổng hoá đơn Khi đến của hàng ăn uống hoá đơn của bạn trên 150k sẽ được giảm giá 30% trên tổng hoá đơn",
-      date:"07/04/2023",
-      time: "14:20:33",
-    },
-    {
-      title: "Khuyến mãi giảm giá 30%",
-      content:  "Khi đến của hàng ăn uống hoá đơn của bạn trên 150k sẽ được giảm giá 30% trên tổng hoá đơn",
-      date:"07/04/2023",
-      time: "14:20:33",
-    },
-    {
-      title: "Khuyến mãi giảm giá 30%",
-      content:  "Khi đến của hàng ăn uống hoá đơn của bạn trên 150k sẽ được giảm giá 30% trên tổng hoá đơn",
-      date:"07/04/2023",
-      time: "14:20:33",
-    }, {
-      title: "Khuyến mãi giảm giá 30%",
-      content:  "Khi đến của hàng ăn uống hoá đơn của bạn trên 150k sẽ được giảm giá 30% trên tổng hoá đơn",
-      date:"07/04/2023",
-      time: "14:20:33",
-    },
-    {
-      title: "Khuyến mãi giảm giá 30%",
-      content:  "Khi đến của hàng ăn uống hoá đơn của bạn trên 150k sẽ được giảm giá 30% trên tổng hoá đơn",
-      date:"07/04/2023",
-      time: "14:20:33",
-    },
-    {
-      title: "Khuyến mãi giảm giá 30%",
-      content:  "Khi đến của hàng ăn uống hoá đơn của bạn trên 150k sẽ được giảm giá 30% trên tổng hoá đơn",
-      date:"07/04/2023",
-      time: "14:20:33",
-    },
-    {
-      title: "Khuyến mãi giảm giá 30%",
-      content:  "Khi đến của hàng ăn uống hoá đơn ",
-      date:"07/04/2023",
-      time: "14:20:33",
-    },
-    {
-      title: "Khuyến mãi giảm giá 0000",
-      content:  "Khi đến của hàng ăn uống hoá đơn của bạn trên 150k sẽ được giảm giá 30% trên tổng hoá đơn",
-      date:"07/04/2023",
-      time: "14:20:33",
-    },
+  const handleRemove = async item => {
+    console.log('remove', item);
+    if (listNotification.length === 0) {
+      return;
+    }
+    const data = {
+      userId: user._id,
+      notificationId: item._id,
+    };
+    dispatch(fetchDeleteNotification(data));
+    const newList = listNotification.filter(
+      itemData => itemData._id !== item._id,
+    );
+    setListNotification(newList);
+    await dispatch(fetchUserById(user._id));
+  };
 
-
-
-   ]
   return (
     <SafeKeyComponent>
       <View style={styles.container}>
-      <View style={styles.header}>
+        <View style={styles.header}>
           <View style={styles.groupHeader}>
             <View style={styles.viewIcon}>
-            <TouchableOpacity onPress={moveToBack}>
-              <IconAntDesign
-              name="left"
-              color={constants.COLOR.WHITE}
-              size={18}
-              />
-            </TouchableOpacity>
-
+              <TouchableOpacity onPress={moveToBack}>
+                <IconAntDesign
+                  name="left"
+                  color={constants.COLOR.WHITE}
+                  size={18}
+                />
+              </TouchableOpacity>
             </View>
             <View style={styles.profile}>
               <Text style={styles.textProfile}>Thông báo</Text>
-            </View> 
+            </View>
             <View style={styles.viewIcon}>
               <IconAntDesign
-              name="delete"
-              color={constants.COLOR.WHITE}
-              size={18}/>
+                name="delete"
+                color={constants.COLOR.WHITE}
+                size={18}
+              />
             </View>
           </View>
         </View>
         <View style={styles.body}>
-        <FlashList
-           data={data}
-           estimatedItemSize={200}
-           renderItem={({item, index}) => (
-             <ListItem item={item} index={index} />
-           )}
-           keyExtractor={(item, index) => index.toString()}
-        />
-         
-
-
+          <FlashList
+            data={listNotification}
+            estimatedItemSize={200}
+            renderItem={({item, index}) => (
+              <ListItem
+                item={item}
+                index={index}
+                handleRemove={() => handleRemove(item)}
+              />
+            )}
+            keyExtractor={(item, index) => index.toString()}
+            refreshControl={
+              <RefreshControl
+                refreshing={isRefresh}
+                onRefresh={() => {
+                  dispatch(fetchUserById(user._id));
+                }}
+                title="Cập nhật..."
+                titleColor={constants.COLOR.RED}
+                tintColor={constants.COLOR.RED}
+              />
+            }
+          />
         </View>
       </View>
     </SafeKeyComponent>
@@ -129,4 +113,3 @@ const RingBell = ({navigation}) => {
 };
 
 export default RingBell;
-

@@ -4,10 +4,14 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/server",
-    "dev": "nodemon ./bin/server ",
-    "server": "concurrently \"yarn dev\" "
+    "dev": "nodemon --exec babel-node ./bin/server && 'yarn build'",
+    "server": "concurrently \"yarn dev\" ",
+    "tsc": "tsc --init",
+    "build": "webpack --config webpack.config.js --mode=production --watch"
   },
   "dependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.22.5",
+    "@babel/preset-typescript": "^7.22.5",
     "@types/passport-google-oauth20": "^2.0.11",
     "amqplib": "^0.10.3",
     "axios": "^1.3.4",
@@ -44,8 +48,12 @@
     "randombytes": "^2.1.0",
     "redis": "^4.6.4",
     "socket.io": "^4.6.1",
+    "ts-node": "^10.9.1",
     "twilio": "^4.8.0",
-    "uuid": "^9.0.0"
+    "typescript": "^5.1.3",
+    "uuid": "^9.0.0",
+    "webpack": "^5.86.0",
+    "webpack-cli": "^5.1.4"
   },
   "main": "NoteUsePassport.js",
   "bin": {
@@ -54,7 +62,13 @@
   "devDependencies": {
     "@babel/cli": "^7.22.5",
     "@babel/core": "^7.22.5",
-    "@babel/preset-env": "^7.22.5"
+    "@babel/node": "^7.22.5",
+    "@babel/plugin-transform-runtime": "^7.22.5",
+    "@babel/preset-env": "^7.22.5",
+    "@swc/cli": "^0.1.62",
+    "@swc/core": "^1.3.62",
+    "babel-loader": "^9.1.2",
+    "babel-plugin-module-resolver": "^5.0.0"
   },
   "keywords": [],
   "author": "",

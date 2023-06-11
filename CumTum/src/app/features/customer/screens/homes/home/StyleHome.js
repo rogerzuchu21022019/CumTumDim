@@ -32,8 +32,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     // justifyContent: 'flex-end',
     // backgroundColor: constants.COLOR.WHITE,
-
-    marginRight: 20,
+    marginRight: 40,
+    position: 'relative',
   },
   divideLine: {
     height: 2,
@@ -86,8 +86,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 10,
-    bottom: 8,
-    right: 10,
+    // bottom: 8,
+    // right: 10,
+    position: 'absolute',
+    top: 10,
+    left: 10,
   },
 
   /* imageBackground */

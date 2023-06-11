@@ -25,12 +25,12 @@ export const constants = {
       'EPscZ2cKSvwcybfeIbQksSxlCJVZDGuzAMy0skSzZJIJ2NL4yJUUuKaC6Ve2fi9kHzgnWZOpfSPPU_Oi',
   },
   BASE_URL: {
-    MAIN: 'http://192.168.2.12:3000/api',
+    MAIN: 'http://192.168.2.4:3000/api',
     // MAIN: 'http://192.168.2.7:3000/api',
     SECOND: 'https://cumtumdim.becofoodstore.click/api',
   },
   SOCKET: {
-    URL: 'http://192.168.2.12:3000',
+    URL: 'http://192.168.2.4:3000',
     CONNECTION: 'connection',
     CONNECT: 'connect',
     DISCONNECT: 'disconnect',
@@ -88,6 +88,7 @@ export const constants = {
     CREATE_ORDER_PAYPAL: 'fetchCreateOrderPaypal',
     PUSH_NOTIFICATION: 'fetchPushNotification',
     UPDATE_NOTIFICATION: 'fetchUpdateNotification',
+    DELETE_NOTIFICATION: 'fetchDeleteNotification',
 
     ADD_ADDRESS: 'fetchAddAddress',
     UPDATE_ADDRESS: 'fetchUpdateAddress',

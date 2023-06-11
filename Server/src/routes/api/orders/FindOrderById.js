@@ -4,6 +4,8 @@ const FindOrderByIdCon = require("../../../components/oders/controllers/FindOrde
 const UpdateUserOrderByIdCon = require("../../../components/users/controllers/UpdateUserOrderByIdCon");
 const FcmNotify = require("../../../utils/FcmNotify");
 const UpdateUserOrderExistedCon = require("../../../components/users/controllers/UpdateUserOrderExistedCon");
+const PushNotificationCon = require("../../../components/users/controllers/PushNotificationCon");
+const FindUserByIDCon = require("../../../components/users/controllers/FindUserByIdCon");
 
 const router = express.Router();
 
@@ -12,11 +14,14 @@ router.post(`/find-order-by-id/:orderId`, async (req, res) => {
     const { orderId } = req.params;
     const { orderStatus } = req.body;
     const order = await FindOrderByIdCon(orderId, orderStatus);
+    console.log("🚀 ~ file: FindOrderById.js:16 ~ router.post ~ order:", order);
 
     /* Call api user to update order by userId */
     const user = await UpdateUserOrderExistedCon(order.userId, order);
     const title = "Notifications";
-    const body = `Your order ${order.orderId} has been ${orderStatus}`;
+    const body = `Đơn hàng số ${order._id} ${
+      orderStatus === "Chấp nhận" ? "đã được" : "đã bị"
+    } ${orderStatus}`;
 
     const data = {
       orderStatus: orderStatus,
@@ -27,9 +32,9 @@ router.post(`/find-order-by-id/:orderId`, async (req, res) => {
     if (user.fcmTokenDevice != undefined) {
       await FcmNotify(user.fcmTokenDevice, title, body, data);
     }
-    await PushNotificationCon(order.userId, notification);
 
     
+
     // console.log("🚀 ~ file: FindOrderById.js:24 ~ router.post ~ socket:", socket)
     // console.log("🚀 ~ file: FindOrderById.js:24 ~ router.post ~ socket:", socket.sockets.sockets)
     // const mapSockets = socket.sockets.sockets

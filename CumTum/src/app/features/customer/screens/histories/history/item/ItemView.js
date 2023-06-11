@@ -6,6 +6,7 @@ import SafeKeyComponent from '../../../../../../components/safe_area/SafeKeyComp
 import Router from '../../../../../../navigation/Router';
 
 const ItemView = ({item, navigation, index}) => {
+  console.log('🚀 ~ file: ItemView.js:9 ~ ItemView ~ item:', item);
   const moveToDetailHistory = () => {
     navigation.navigate(Router.PAYMENT_ZALO, {item});
   };

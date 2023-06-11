@@ -79,6 +79,22 @@ export const fetchUpdateNotification = createAsyncThunk(
   },
 );
 
+export const fetchDeleteNotification = createAsyncThunk(
+  constants.FETCH.DELETE_NOTIFICATION,
+  async data => {
+    log.error('🚀 ~ file: apiUser.js:34 ~ data:', data);
+    const response = await AxiosInstance().post(
+      `/users/delete-notification/${data.notificationId}`,
+      {
+        userId: data.userId,
+      },
+    );
+    log.warning('🚀 ~ file: apiUser.js:74 ~ response:', response);
+
+    return response.data;
+  },
+);
+
 /* Address */
 export const fetchAddAddress = createAsyncThunk(
   constants.FETCH.ADD_ADDRESS,

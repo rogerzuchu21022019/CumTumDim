@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import messaging from '@react-native-firebase/messaging';
-
+import notifee from '@notifee/react-native';
 import styles from './StylesHistory';
 import {constants} from '../../../../../shared/constants';
 import {useDispatch, useSelector} from 'react-redux';
@@ -21,34 +21,27 @@ import {onDisplayNotiAccepted} from '../../../../../shared/utils/ShowNotificatio
 const log = LOG.extend(`HISTORY.JS`);
 const History = ({navigation}) => {
   // const data = useSelector(cartSelector);
-  const user = useSelector(authSelector);
-  const userId = user.user._id;
-  const fcmTokenDevice = user.fcmTokenDevice;
+  const authSelect = useSelector(authSelector);
+  const userId = authSelect.user._id;
+  const fcmTokenDevice = authSelect.fcmTokenDevice;
 
   const [isRefresh, setIsRefresh] = useState(false);
   const dispatch = useDispatch();
-  let orderHistory = user.user.orders;
-
-  const getNotification = async () => {
-    await messaging().onMessage(remoteMessage => {
-      const title = remoteMessage.notification.title;
-      const body = remoteMessage.notification.body;
-      const data = remoteMessage.data;
-      const orderStatus = data.orderStatus;
-      const order = data.order;
-      const moneyToPaid = data.moneyToPaid;
-      onDisplayNotiAccepted({
-        title,
-        order,
-        orderStatus,
-        moneyToPaid,
-      });
-      dispatch(fetchUserById(userId));
-    });
-  };
+  let orderHistory = authSelect.user.orders;
   useEffect(() => {
-    getNotification();
-  }, [getNotification]);
+    dispatch(fetchUserById(userId));
+  }, [authSelect.user.orders.length]);
+  // const onSetOrderHistory = async () => {
+  //   const response = await dispatch(fetchUserById(userId));
+  //   console.log(
+  //     '🚀 ~ file: History.js:33 ~ onSetOrderHistory ~ response:',
+  //     response.payload.data.orders,
+  //   );
+  //   setListOrderHistory(response.payload.data.orders);
+  // };
+  // useEffect(() => {
+  //   onSetOrderHistory();
+  // }, [listOrderHistory.length]);
 
   return (
     <SafeKeyComponent>
@@ -79,9 +72,9 @@ const History = ({navigation}) => {
                   <RefreshControl
                     refreshing={isRefresh}
                     onRefresh={() => {
-                      dispatch(fetchUserById(user.user._id));
+                      dispatch(fetchUserById(authSelect.user._id));
                     }}
-                    title="Pull to refresh..."
+                    title="Cập nhật..."
                     titleColor={constants.COLOR.RED}
                     tintColor={constants.COLOR.RED}
                   />

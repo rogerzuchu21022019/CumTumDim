@@ -450,6 +450,8 @@ PODS:
     - RNFBApp
   - RNFlashList (1.4.1):
     - React-Core
+  - RNGestureHandler (2.11.0):
+    - React-Core
   - RNGoogleSignin (9.0.2):
     - GoogleSignIn (~> 6.2)
     - React-Core
@@ -467,6 +469,33 @@ PODS:
     - RNNotifee/NotifeeCore (= 7.6.1)
   - RNNotifee/NotifeeCore (7.6.1):
     - React-Core
+  - RNReanimated (3.2.0):
+    - DoubleConversion
+    - FBLazyVector
+    - FBReactNativeSpec
+    - glog
+    - RCT-Folly
+    - RCTRequired
+    - RCTTypeSafety
+    - React-callinvoker
+    - React-Core
+    - React-Core/DevSupport
+    - React-Core/RCTWebSocket
+    - React-CoreModules
+    - React-cxxreact
+    - React-jsi
+    - React-jsiexecutor
+    - React-jsinspector
+    - React-RCTActionSheet
+    - React-RCTAnimation
+    - React-RCTBlob
+    - React-RCTImage
+    - React-RCTLinking
+    - React-RCTNetwork
+    - React-RCTSettings
+    - React-RCTText
+    - ReactCommon/turbomodule/core
+    - Yoga
   - RNScreens (3.20.0):
     - React-Core
     - React-RCTImage
@@ -536,9 +565,11 @@ DEPENDENCIES:
   - "RNFBAuth (from `../node_modules/@react-native-firebase/auth`)"
   - "RNFBMessaging (from `../node_modules/@react-native-firebase/messaging`)"
   - "RNFlashList (from `../node_modules/@shopify/flash-list`)"
+  - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - "RNGoogleSignin (from `../node_modules/@react-native-google-signin/google-signin`)"
   - RNImageCropPicker (from `../node_modules/react-native-image-crop-picker`)
   - "RNNotifee (from `../node_modules/@notifee/react-native`)"
+  - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNSnackbar (from `../node_modules/react-native-snackbar`)
   - RNSVG (from `../node_modules/react-native-svg`)
@@ -659,12 +690,16 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-firebase/messaging"
   RNFlashList:
     :path: "../node_modules/@shopify/flash-list"
+  RNGestureHandler:
+    :path: "../node_modules/react-native-gesture-handler"
   RNGoogleSignin:
     :path: "../node_modules/@react-native-google-signin/google-signin"
   RNImageCropPicker:
     :path: "../node_modules/react-native-image-crop-picker"
   RNNotifee:
     :path: "../node_modules/@notifee/react-native"
+  RNReanimated:
+    :path: "../node_modules/react-native-reanimated"
   RNScreens:
     :path: "../node_modules/react-native-screens"
   RNSnackbar:
@@ -741,9 +776,11 @@ SPEC CHECKSUMS:
   RNFBAuth: 97bf82a2b26e061a98befd948fee79a7a750b0e7
   RNFBMessaging: c2bf85653cdb745f60d3cc43c9ec51d4edca0c52
   RNFlashList: 8ec7f7454721145fe84566bb9e88bcf58981c9fe
+  RNGestureHandler: 026038a97d4c8649ce397a22e162ca58b4e6c230
   RNGoogleSignin: 22e468a9474dbcb8618d8847205ad4f0b2575d13
   RNImageCropPicker: 14fe1c29298fb4018f3186f455c475ab107da332
   RNNotifee: bdc064c29f4d558046f51f0c3ae02bab4fd3cd85
+  RNReanimated: c931b356bda56c0196110bdc462e48e4c2668dc3
   RNScreens: 218801c16a2782546d30bd2026bb625c0302d70f
   RNSnackbar: be3333a21a453ccc272f41a8add5a71f7d44dfcd
   RNSVG: c1e76b81c76cdcd34b4e1188852892dc280eb902

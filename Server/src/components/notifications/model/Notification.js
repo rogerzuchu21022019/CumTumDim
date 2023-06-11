@@ -8,33 +8,12 @@ const NotificationSchema = new Schema(
       type: String,
       required: true,
     },
-    messageToCustomer: {
-      type: String,
-      required: true,
-      unique: true,
-    },
-    messageToAdmin: {
+    content: {
       type: String,
       required: true,
     },
-    userId: {
-      type: Schema.Types.ObjectId,
-      ref: "User",
-      require: true,
-    },
-    notificationUUID: {
-      type: String,
-      default: uuidv4(),
-      required: true,
-    },
-    time: {
-      type: Date,
-      default: Date.now(),
-      index: {
-        // expires = 2 hours
-        // expires: "7200",
-        expires: "5000",
-      },
+    data: {
+      type: {},
     },
   },
   {

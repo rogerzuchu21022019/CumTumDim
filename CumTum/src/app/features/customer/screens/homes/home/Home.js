@@ -1,20 +1,6 @@
-import {
-  View,
-  Text,
-  Button,
-  ActivityIndicator,
-  Image,
-  useWindowDimensions,
-  ScrollView,
-  TouchableOpacity,
-  StyleSheet,
-} from 'react-native';
-
+import {View, Text, Image, TouchableOpacity, StyleSheet} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-
-import {useCallback, useEffect, useState} from 'react';
-import notifee from '@notifee/react-native';
-
+import {useEffect, useState} from 'react';
 import {LOG} from '../../../../../../../logger.config';
 import SafeKeyComponent from '../../../../../components/safe_area/SafeKeyComponent';
 import {showNotifyLocal} from '../../../../../shared/utils/Notifies';
@@ -32,8 +18,6 @@ import {
   decreaseDishByID,
   updateAmount,
 } from '../../../../product/sliceProduct';
-import DropdownPicker from '../../../../../shared/utils/DropdownPicker';
-import {cartSelector, createHistoryCart} from '../../../../carts/sliceOrder';
 import Advertisement from '../../../../../shared/utils/Advertisement';
 import socketServices from '../../../../../shared/utils/Socket';
 import Router from '../../../../../navigation/Router';
@@ -42,7 +26,8 @@ import {authSelector} from '../../../../admin/sliceAuth';
 import ModalNotify from '../../../../../components/modal/ModalNotify';
 import DropdownElement from '../../../../../components/dropdownElement/DropdownElement';
 import messaging from '@react-native-firebase/messaging';
-import {getFCMTokens} from '../../../../../shared/utils/PermissionFCM';
+import {onShowNotiWelCome} from '../../../../../shared/utils/ShowNotifiWelcome';
+import {fetchUserById} from '../../../../admin/apiUser';
 
 const HomeCustomer = ({navigation}) => {
   const log = LOG.extend('HOME_CUSTOMER.js');
@@ -53,7 +38,8 @@ const HomeCustomer = ({navigation}) => {
   //   authSelect.notifications,
   // );
 
-  const user = authSelect.user
+  const user = authSelect.user;
+  const userId = user._id;
 
   const userInfo = {
     name: authSelect.user.name,
@@ -61,11 +47,31 @@ const HomeCustomer = ({navigation}) => {
     address: authSelect.user.addresses,
   };
 
+  const getNotification = async () => {
+    await messaging().onMessage(remoteMessage => {
+      const title = remoteMessage.notification.title;
+      const body = remoteMessage.notification.body;
+      const data = remoteMessage.data;
+      const orderStatus = data.orderStatus;
+      const order = data.order;
+      const moneyToPaid = data.moneyToPaid;
+      dispatch(fetchUserById(userId));
+      onDisplayNotiAccepted({
+        title,
+        order,
+        orderStatus,
+        moneyToPaid,
+      });
+    });
+  };
+  useEffect(() => {
+    getNotification();
+  }, [messaging]);
+
   const message1 = `Bạn chưa cập nhật địa chỉ giao hàng!!`;
   const message2 = `Vui lòng cập nhật địa chỉ`;
   const message3 = `để chúng tôi có thể giao hàng cho bạn`;
 
-  const cartSelect = useSelector(cartSelector);
   const IMAGE_BG =
     'https://cdn.britannica.com/38/111338-050-D23BE7C8/Stars-NGC-290-Hubble-Space-Telescope.jpg?w=400&h=300&c=crop';
   const data = useSelector(productSelector);
@@ -74,10 +80,7 @@ const HomeCustomer = ({navigation}) => {
 
   /* State Dropdown */
   const [isShowDropdown, setIsShowDropdown] = useState(true);
-  const [openSubMainDish, setOpenSubMainDish] = useState(false);
-  const [valueSubMainDish, setValueSubMainDish] = useState([]);
   const [value, setValue] = useState(mainDishOptionsData[0].value);
-  // const [listSubMainDish, setListSubMainDish] = useState(mainDishOptionsData);
 
   /* State Modal Address */
   const [isShowModal, setIsShowModal] = useState(false);
@@ -91,9 +94,6 @@ const HomeCustomer = ({navigation}) => {
     setIsShowModal(!isShowModal);
     setIsAddress(!isAddress);
   };
-
-  const style = styles.dropdownList;
-  const placeholder = 'Chọn loại sườn';
   /* Fetch API and dispatch action type to store */
 
   useEffect(() => {
@@ -104,65 +104,34 @@ const HomeCustomer = ({navigation}) => {
     };
   }, []);
 
-  
-
   useEffect(() => {
     if (address.length === 0) {
       handleClick();
     }
   }, []);
 
-  const onCreateHistoryCart = order => ({
-    type: createHistoryCart().type,
-    payload: order,
-  });
-
-  const handleCreateHistoryCart = order => {
-    dispatch(onCreateHistoryCart(order));
-  };
+ 
 
   const onDisplayNotiAccepted = async data => {
+    console.log('🚀 ~ file: Home.js:124 ~ onDisplayNotiAccepted ~ data:', data);
     const idOrder = formatCodeOrder(data._id);
     const total = data.moneyToPaid;
     const status = data.orderStatus;
-
     const title = 'Notification';
-    const contentAccepted = `Đơn hàng số ${idOrder} với số tiền ${total}K của bạn đã được ${status}`;
-    const contentDeny = `Đơn hàng số ${idOrder} với số tiền ${total}K của bạn đã bị ${status} bởi Admin`;
-
+    const contentAccepted = `Đơn hàng với số tiền ${total}K của bạn đã được ${status}`;
+    const contentDeny = `Đơn hàng với số tiền ${total}K của bạn đã bị ${status} bởi Admin`;
     // console.log("🚀 ~ file: Payment.js:45 ~ onDisplayNotification ~ content:", content)
     const dataMap = {
       title,
       content: status === 'Chấp nhận' ? contentAccepted : contentDeny,
     };
-
-    showNotifyLocal(dataMap);
-  };
-
-  const onDisplayNotification = async () => {
-    // Request permissions (required for iOS)
-
-    // Create a channel (required for Android)
-    const channelId = await notifee.createChannel({
-      id: 'default',
-      name: 'Default Channel',
-    });
-    const title = 'Notification';
-    const content = 'Chào mừng bạn đến với dịch vụ của CumTumDim.';
-    // console.log("🚀 ~ file: Payment.js:45 ~ onDisplayNotification ~ content:", content)
-    const dataMap = {
-      title,
-      content,
-      channelId,
-    };
-    // Display a notification
     showNotifyLocal(dataMap);
   };
 
   useEffect(() => {
     dispatch(fetchCategories());
     dispatch(fetchDishes());
-    onDisplayNotification();
+    onShowNotiWelCome();
     setTabs(0);
     return () => {
       dispatch(fetchCategories());
@@ -223,7 +192,7 @@ const HomeCustomer = ({navigation}) => {
     setIsShowDropdown(false);
     setTabs(3);
   };
-  const movoRingBell = () => {
+  const moveToRingBell = () => {
     navigation.navigate(Router.RING_BELL);
   };
   return (
@@ -242,7 +211,7 @@ const HomeCustomer = ({navigation}) => {
               />
               <Text style={styles.textTitle}>Cum tứm đim</Text>
             </View>
-            <TouchableOpacity onPress={movoRingBell}>
+            <TouchableOpacity onPress={moveToRingBell}>
               <View style={styles.rightHeader}>
                 <View>
                   <IconOcticons
@@ -251,9 +220,13 @@ const HomeCustomer = ({navigation}) => {
                     size={20}
                   />
                 </View>
-                <View style={styles.viewTextRingBell}>
-                  {/* <Text style={styles.textRingBell}>{user.notifications.length}</Text> */}
-                </View>
+                {user.notifications.length !== 0 && (
+                  <View style={styles.viewTextRingBell}>
+                    <Text style={styles.textRingBell}>
+                      {user.notifications.length}
+                    </Text>
+                  </View>
+                )}
               </View>
             </TouchableOpacity>
           </View>
