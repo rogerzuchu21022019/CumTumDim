@@ -8,7 +8,12 @@
     "lint": "eslint .",
     "start": "react-native start",
     "test": "jest",
-    "debug": "open 'rndebugger://set-debugger-loc?host=localhost&port=19001' "
+    "debug": "open 'rndebugger://set-debugger-loc?host=localhost&port=19001' ",
+    "release": "yarn ios --configuration Release --device 'Thiên Mã Hành Không'",
+    "debugs": "yarn ios --configuration Debug --device 'Thiên Mã Hành Không'",
+    "codepush:staging": "appcenter codepush release-react -a namzuchu/CumTum -d Staging",
+    "codepush:prod": "appcenter codepush release-react -a namzuchu/CumTum -d Production"
+    
   },
   "dependencies": {
     "@gorhom/bottom-sheet": "^4",

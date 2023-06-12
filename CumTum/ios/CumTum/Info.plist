@@ -107,7 +107,6 @@
 	<key>ZPAppKey</key>
 	<string>sdngKKJmqEMzvh5QQcdD2A9XBSKUNaYn</string>
 	<key>CodePushDeploymentKey</key>
-	<string>WjnmMF6_J-8q4o0RxbABUWgXw30K36g8AZ_5B</string>
-
+	<string>$(CODE_PUSH_KEY)</string>
 </dict>
 </plist>
