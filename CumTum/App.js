@@ -29,8 +29,10 @@ import Payment from './src/app/features/customer/screens/carts/payment/Payment';
 import EditProfile from './src/app/features/customer/screens/profiles/editProfile/EditProfile';
 import UploadImage from './src/app/features/customer/screens/profiles/uploadImage/UploadImage';
 import RingBell from './src/app/features/customer/screens/homes/ringBell/RingBell';
+import codePush from 'react-native-code-push';
 
 let persistor = persistStore(Store);
+
 import CartNoItem from './src/app/features/customer/screens/carts/cart/cartWithNoItem/CartNoItem';
 import socketServices from './src/app/shared/utils/Socket';
 import RingBellAdmin from './src/app/features/admin/screens/homeAdmin/ringBellAdmin/RingBellAdmin';
@@ -69,6 +71,13 @@ const App = () => {
           console.log('User pressed notification', detail.notification);
           break;
       }
+    });
+  }, []);
+
+  useEffect(() => {
+    codePush.sync({
+      updateDialog: true,
+      installMode: codePush.InstallMode.ON_NEXT_RESTART,
     });
   }, []);
 
@@ -181,5 +190,5 @@ const App = () => {
     </Provider>
   );
 };
-
-export default App;
+const codePushOptions = {checkFrequency: codePush.CheckFrequency.MANUAL};
+export default codePush(codePushOptions)(App);
