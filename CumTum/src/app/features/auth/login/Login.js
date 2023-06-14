@@ -79,16 +79,11 @@ const LoginScreen = ({navigation}) => {
         accessToken,
       );
 
-      // const fcmTokenDevice = await messaging().getToken();
-      // const data = {
-      //   idToken,
-      //   accessToken,
-      //   fcmTokenDevice,
-      // };
-
+      const fcmTokenDevice = await messaging().getToken();
       const data = {
         idToken,
         accessToken,
+        fcmTokenDevice,
       };
 
       dispatch(fetchLogin(data));

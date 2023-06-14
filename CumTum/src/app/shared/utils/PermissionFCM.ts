@@ -15,14 +15,14 @@ export const requestUserPermission = async () => {
     log.error('Authorization status:', authStatus);
     // await messaging().registerDeviceForRemoteMessages()
 
-    // getFCMTokens();
+    getFCMTokens();
   }
 };
 
 export const getFCMTokens = async () => {
   try {
-    if (Platform.OS === 'ios')
-      await messaging().registerDeviceForRemoteMessages();
+    // if (Platform.OS === 'ios')
+    //   await messaging().registerDeviceForRemoteMessages();
     const tokens = await messaging().getToken();
     if (tokens) {
       log.info(
