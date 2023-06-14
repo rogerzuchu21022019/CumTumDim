@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import notifee, {EventType} from '@notifee/react-native';
@@ -29,22 +29,24 @@ import Payment from './src/app/features/customer/screens/carts/payment/Payment';
 import EditProfile from './src/app/features/customer/screens/profiles/editProfile/EditProfile';
 import UploadImage from './src/app/features/customer/screens/profiles/uploadImage/UploadImage';
 import RingBell from './src/app/features/customer/screens/homes/ringBell/RingBell';
-import codePush from 'react-native-code-push';
+import codePush, {
+  CodePushOptions,
+  DownloadProgress,
+} from 'react-native-code-push';
 
 let persistor = persistStore(Store);
 
 import CartNoItem from './src/app/features/customer/screens/carts/cart/cartWithNoItem/CartNoItem';
-import socketServices from './src/app/shared/utils/Socket';
 import RingBellAdmin from './src/app/features/admin/screens/homeAdmin/ringBellAdmin/RingBellAdmin';
-import EditDeliveryAddress from './src/app/features/customer/screens/carts/profilePayment/editDeliveryAddress/EditDeliveryAddress';
 import AddDeliveryAddress from './src/app/features/customer/screens/carts/profilePayment/addDeliveryAddress/AddDeliveryAddress';
-import {
-  getFCMTokens,
-  requestUserPermission,
-} from './src/app/shared/utils/PermissionFCM';
-import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import {requestUserPermission} from './src/app/shared/utils/PermissionFCM';
+import ModalDownLoad from './src/app/components/modal/ModalDownLoad';
+import Snackbar from 'react-native-snackbar';
 const App = () => {
   const Stack = createNativeStackNavigator();
+  const [isShowProgress, setIsShowProgress] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [receivedBytes, setReceivedBytes] = useState<any>();
   useEffect(() => {
     requestPermissionNoti();
     requestUserPermission();
@@ -56,10 +58,52 @@ const App = () => {
   useEffect(() => {
     return notifee.onBackgroundEvent(async ({type, detail}) => {
       console.log(`Received background event: ${type}`, detail);
-
       // Handle the background event here
     });
   }, []);
+
+  const onDownLoadProgress = (progress: DownloadProgress) => {
+    setReceivedBytes(progress.receivedBytes);
+    if (progress.totalBytes === progress.receivedBytes) {
+      Snackbar.show({
+        text: 'Cập nhật thành công.Bạn chưa hãy reset app',
+        duration: Snackbar.LENGTH_SHORT,
+      });
+    }
+  };
+
+  const codePushStatusDidChange = (syncStatus: codePush.SyncStatus) => {
+    switch (syncStatus) {
+      case codePush.SyncStatus.CHECKING_FOR_UPDATE:
+        console.log('Checking for update.');
+        break;
+      case codePush.SyncStatus.DOWNLOADING_PACKAGE:
+        console.log('Downloading package.');
+        break;
+      case codePush.SyncStatus.AWAITING_USER_ACTION:
+        console.log('Awaiting user action.');
+        setIsShowProgress(true);
+        setIsLoading(true);
+        break;
+      case codePush.SyncStatus.INSTALLING_UPDATE:
+        console.log('Installing update.');
+        break;
+      case codePush.SyncStatus.UP_TO_DATE:
+        console.log('App up to date.');
+        setIsShowProgress(false);
+        setIsLoading(false);
+        break;
+      case codePush.SyncStatus.UPDATE_IGNORED:
+        console.log('Update cancelled by user..');
+        break;
+      case codePush.SyncStatus.UPDATE_INSTALLED:
+        console.log('Update installed and will be applied on restart');
+        break;
+      case codePush.SyncStatus.UNKNOWN_ERROR:
+        console.log('An unknown error occurred');
+        break;
+    }
+  };
 
   useEffect(() => {
     return notifee.onForegroundEvent(({type, detail}) => {
@@ -75,10 +119,13 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    codePush.sync({
-      updateDialog: true,
-      installMode: codePush.InstallMode.ON_NEXT_RESTART,
-    });
+    codePush.sync(
+      {
+        installMode: codePush.InstallMode.ON_NEXT_RESTART,
+      },
+      codePushStatusDidChange,
+      onDownLoadProgress,
+    );
   }, []);
 
   return (
@@ -186,6 +233,7 @@ const App = () => {
             />
           </Stack.Navigator>
         </NavigationContainer>
+        <ModalDownLoad isShowProgress={isShowProgress} isLoading={isLoading} />
       </PersistGate>
     </Provider>
   );

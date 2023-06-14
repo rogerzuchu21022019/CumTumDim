@@ -1,5 +1,6 @@
 import messaging from '@react-native-firebase/messaging';
 import {LOG} from '../../../../logger.config';
+import {Platform} from 'react-native';
 const log = LOG.extend(`PERMISSION_FCM.JS`);
 export const requestUserPermission = async () => {
   const authStatus = await messaging().requestPermission({
@@ -14,14 +15,14 @@ export const requestUserPermission = async () => {
     log.error('Authorization status:', authStatus);
     // await messaging().registerDeviceForRemoteMessages()
 
-    getFCMTokens();
+    // getFCMTokens();
   }
 };
 
 export const getFCMTokens = async () => {
   try {
-    // if (Platform.OS === 'ios')
-    //   await messaging().registerDeviceForRemoteMessages();
+    if (Platform.OS === 'ios')
+      await messaging().registerDeviceForRemoteMessages();
     const tokens = await messaging().getToken();
     if (tokens) {
       log.info(

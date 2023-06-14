@@ -12,8 +12,9 @@
     "release": "yarn ios --configuration Release --device 'Thiên Mã Hành Không'",
     "debugs": "yarn ios --configuration Debug --device 'Thiên Mã Hành Không'",
     "codepush:staging": "appcenter codepush release-react -a namzuchu/CumTum -d Staging",
-    "codepush:prod": "appcenter codepush release-react -a namzuchu/CumTum -d Production"
-    
+    "codepush:prod": "appcenter codepush release-react -a namzuchu/CumTum -d Production",
+    "codepush:andr-staging": "appcenter codepush release-react -a namzuchu/CumTum-1 -d Staging",
+    "codepush:andr-prod": "appcenter codepush release-react -a namzuchu/CumTum-1 -d Production"
   },
   "dependencies": {
     "@gorhom/bottom-sheet": "^4",
@@ -38,6 +39,7 @@
     "date-fns": "^2.29.3",
     "joi": "^17.9.2",
     "moment": "^2.29.4",
+    "nativewind": "^2.0.11",
     "query-string": "^8.1.0",
     "querystring": "^0.2.1",
     "react": "18.2.0",
@@ -90,6 +92,7 @@
     "metro-react-native-babel-preset": "0.73.7",
     "prettier": "^2.4.1",
     "react-test-renderer": "18.2.0",
+    "tailwindcss": "^3.3.2",
     "typescript": "4.8.4"
   },
   "jest": {

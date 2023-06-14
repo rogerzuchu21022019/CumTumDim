@@ -208,7 +208,7 @@ const Payment = ({navigation, route}) => {
         dispatch(fetchUserById(userId));
         handleResetCart();
         navigation.goBack();
-        navigation.navigate(Router.HISTORY_TABS);
+        navigation.navigate(Router.HOME_CUSTOMER);
       } else {
         return;
       }

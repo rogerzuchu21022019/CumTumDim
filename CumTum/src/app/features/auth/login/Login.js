@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 import {
   GoogleSignin,
   statusCodes,
@@ -26,8 +27,6 @@ import {StackActions} from '@react-navigation/native';
 import {fetchCategories, fetchDishes} from '../../product/apiProduct';
 import messaging from '@react-native-firebase/messaging';
 
-import {getFCMTokens} from '../../../shared/utils/PermissionFCM';
-import {} from '@react-native-firebase/app';
 const LoginScreen = ({navigation}) => {
   const log = LOG.extend(`LOGIN.JS`);
   const data = useSelector(authSelector);
@@ -80,11 +79,16 @@ const LoginScreen = ({navigation}) => {
         accessToken,
       );
 
-      const fcmTokenDevice = await messaging().getToken();
+      // const fcmTokenDevice = await messaging().getToken();
+      // const data = {
+      //   idToken,
+      //   accessToken,
+      //   fcmTokenDevice,
+      // };
+
       const data = {
         idToken,
         accessToken,
-        fcmTokenDevice,
       };
 
       dispatch(fetchLogin(data));
