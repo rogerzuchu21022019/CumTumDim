@@ -6,7 +6,7 @@ const VerifyUserSv = async (idToken) => {
   const emailAdminHoang = "xuanhoanggn@gmail.com";
   const emailAdminHai = "duchai0408@gmail.com";
   const emailAdminTri = "triphan1197@gmail.com";
-  const emailAdminNam1 = "namvt293@gmail.com";
+  const emailAdminNam1 = "slimzuchu@gmail.com";
   try {
     const payload = await verifyIdToken(idToken);
     try {

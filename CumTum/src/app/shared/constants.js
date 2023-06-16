@@ -27,7 +27,7 @@ export const constants = {
   BASE_URL: {
     MAIN: 'http://192.168.2.101:3000/api',
     // MAIN: 'http://192.168.2.7:3000/api',
-    SECOND: 'https://cumtumdim.becofoodstore.click/api',
+    SECOND: 'https://cumtum.storm.io.vn/api',
   },
   SOCKET: {
     URL: 'http://192.168.2.101:3000',
