@@ -1,5 +1,6 @@
 // User.js
 const mongoose = require("mongoose");
+const { v4: uuidv4 } = require("uuid");
 
 const userSchema = new mongoose.Schema(
   {
@@ -32,41 +33,63 @@ const userSchema = new mongoose.Schema(
       type: [],
     },
     notifications: {
-      type: [],
-    },
-    fcmToken:{
-      type: String,
-    },
-    order:{
       type: [
         {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "Order",
-        },
-      ]
-    },
-    address: {
-      type: [
-        {
-          street: {
+          title: {
             type: String,
+            required: true,
           },
-          houseNumber: {
+          content: {
             type: String,
+            required: true,
           },
-          district: {
-            type: String,
-          },
-          ward: {
-            type: String,
-          },
-          city: {
-            type: String,
+          data: {
+            type: {},
           },
         },
       ],
     },
-    
+    addresses: {
+      type: [
+        {
+          name: {
+            type: String,
+            required: true,
+          },
+          phone: {
+            type: String,
+            required: true,
+          },
+          street: {
+            type: String,
+            required: true,
+          },
+          houseNumber: {
+            type: String,
+            required: true,
+          },
+          district: {
+            type: String,
+            required: true,
+          },
+          ward: {
+            type: String,
+            required: true,
+          },
+          city: {
+            type: String,
+            required: true,
+          },
+          addressDefault: {
+            type: Boolean,
+            default: false,
+          },
+        },
+      ],
+    },
+    fcmTokenDevice: {
+      type: String,
+    },
   },
   {
     timestamps: true,

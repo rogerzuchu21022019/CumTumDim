@@ -4,16 +4,17 @@ const {createAsyncThunk} = require('@reduxjs/toolkit');
 const {LOG} = require('../../../../logger.config');
 const {constants} = require('../../shared/constants');
 const {AxiosInstance} = require('../../shared/utils/AxiosInstance');
-const log = LOG.extend(`API_ADMIN.JS`);
+const log = LOG.extend(`API_USER.JS`);
 export const fetchLogin = createAsyncThunk(
   constants.FETCH.LOGIN,
-  async (idToken, accessToken) => {
+  async data => {
     const response = await AxiosInstance().post(`/login`, {
-      idToken,
-      accessToken,
+      idToken: data.idToken,
+      accessToken: data.accessToken,
+      fcmTokenDevice: data.fcmTokenDevice,
     });
-    // log.info("🚀 ~ file: apiUser.js:8 ~ fetchLogin ~ response:", response.data)
     return response.data;
+    // log.info("🚀 ~ file: apiUser.js:8 ~ fetchLogin ~ response:", response.data)
   },
 );
 
@@ -23,7 +24,24 @@ export const fetchUserById = createAsyncThunk(
     const response = await AxiosInstance().get(
       `/users/${userId}/find-user-by-id`,
     );
-    log.info('🚀 ~ file: apiUser.js:8 ~ fetchLogin ~ response:', response.data);
+    // log.info('🚀 ~ file: apiUser.js:8 ~ fetchLogin ~ response:', response.data);
+    return response.data;
+  },
+);
+
+export const fetchUpdateUserInfo = createAsyncThunk(
+  constants.FETCH.UPDATE_USER_INFO,
+  async data => {
+    log.error('🚀 ~ file: apiUser.js:34 ~ data:', data);
+    const response = await AxiosInstance().post(
+      `/users/${data.userId}/update-user-info`,
+      {
+        imageUrl: data.imageUrl,
+        address: data.address,
+      },
+    );
+    // log.info("🚀 ~ file: apiUser.js:41 ~ response:", response.data)
+
     return response.data;
   },
 );
@@ -31,7 +49,7 @@ export const fetchUserById = createAsyncThunk(
 export const fetchPushNotification = createAsyncThunk(
   constants.FETCH.PUSH_NOTIFICATION,
   async data => {
-    log.error('🚀 ~ file: apiUser.js:34 ~ data:', data);
+    // log.error('🚀 ~ file: apiUser.js:34 ~ data:', data);
     const response = await AxiosInstance().post(
       `/users/${data.userId}/push-notification`,
       {
@@ -40,7 +58,7 @@ export const fetchPushNotification = createAsyncThunk(
       },
     );
 
-    log.error('🚀 ~ file: apiUser.js:34 ~ response:', response.data);
+    // log.error('🚀 ~ file: apiUser.js:59 ~ response:', response.data);
     return response.data;
   },
 );
@@ -48,16 +66,82 @@ export const fetchPushNotification = createAsyncThunk(
 export const fetchUpdateNotification = createAsyncThunk(
   constants.FETCH.UPDATE_NOTIFICATION,
   async data => {
-    log.error('🚀 ~ file: apiUser.js:34 ~ data:', data);
+    // log.error('🚀 ~ file: apiUser.js:34 ~ data:', data);
     const response = await AxiosInstance().post(
       `/users/${data.userId}/update-notification`,
       {
         notification: data.notification,
       },
     );
-    log.warning("🚀 ~ file: apiUser.js:58 ~ response:", response.data)
-    
+    // log.warning('🚀 ~ file: apiUser.js:74 ~ response:', response.data);
 
+    return response.data;
+  },
+);
+
+export const fetchDeleteNotification = createAsyncThunk(
+  constants.FETCH.DELETE_NOTIFICATION,
+  async data => {
+    log.error('🚀 ~ file: apiUser.js:34 ~ data:', data);
+    const response = await AxiosInstance().post(
+      `/users/delete-notification/${data.notificationId}`,
+      {
+        userId: data.userId,
+      },
+    );
+    log.warning('🚀 ~ file: apiUser.js:74 ~ response:', response);
+
+    return response.data;
+  },
+);
+
+/* Address */
+export const fetchAddAddress = createAsyncThunk(
+  constants.FETCH.ADD_ADDRESS,
+  async data => {
+    log.info('🚀 ~ file: apiUser.js:84 ~ data:', data);
+    const response = await AxiosInstance().post(
+      `/users/add-address/${data.userId}`,
+      {
+        address: data.address,
+      },
+    );
+
+    // log.error('🚀 ~ file: apiUser.js:76 ~ response:', response.data);
+    return response.data;
+  },
+);
+
+/* Address */
+export const fetchUpdateAddress = createAsyncThunk(
+  constants.FETCH.UPDATE_ADDRESS,
+  async data => {
+    log.info('🚀 ~ file: apiUser.js:101 ~ data:', data);
+    const response = await AxiosInstance().post(
+      `/users/update-address/${data.userId}`,
+      {
+        address: data.address,
+      },
+    );
+
+    // log.error('🚀 ~ file: apiUser.js:76 ~ response:', response.data);
+    return response.data;
+  },
+);
+
+/* Address */
+export const fetchDeleteAddress = createAsyncThunk(
+  constants.FETCH.DELETE_ADDRESS,
+  async data => {
+    log.info('🚀 ~ file: apiUser.js:118 ~ data:', data);
+    const response = await AxiosInstance().post(
+      `/users/delete-address/${data.userId}`,
+      {
+        address: data.address,
+      },
+    );
+
+    // log.error('🚀 ~ file: apiUser.js:126 ~ response:', response.data);
     return response.data;
   },
 );

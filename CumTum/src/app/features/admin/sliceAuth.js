@@ -6,6 +6,11 @@ import {
   fetchPushNotification,
   fetchUserById,
   fetchUpdateNotification,
+  fetchAddAddress,
+  fetchUpdateAddress,
+  fetchDeleteAddress,
+  fetchUpdateUserInfo,
+  fetchDeleteNotification,
 } from './apiUser';
 
 const {createSlice} = require('@reduxjs/toolkit');
@@ -19,6 +24,7 @@ const initialState = {
   isLoggedIn: false,
   message: null,
   notifications: [],
+  addresses: [],
 };
 
 export const authSlice = createSlice({
@@ -45,7 +51,7 @@ export const authSlice = createSlice({
     });
     builder.addCase(fetchLogin.fulfilled, (state, action) => {
       const dataResponse = action.payload;
-      state.isLoading = true;
+      state.isLoading = dataResponse.isLoading;
       state.message = dataResponse.message;
       state.isLoggedIn = dataResponse.isLoggedIn;
       state.error = dataResponse.error;
@@ -67,11 +73,28 @@ export const authSlice = createSlice({
     });
     builder.addCase(fetchUserById.fulfilled, (state, action) => {
       const dataResponse = action.payload;
-      state.isLoading = false;
+      state.isLoading = dataResponse.isLoading;
       state.user = dataResponse.data;
       state.notifications = state.user.notifications;
+      state.addresses = state.user.addresses;
     });
     builder.addCase(fetchUserById.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = true;
+    });
+
+    // Update User Info
+    builder.addCase(fetchUpdateUserInfo.pending, state => {
+      state.isLoading = true;
+    });
+    builder.addCase(fetchUpdateUserInfo.fulfilled, (state, action) => {
+      const dataResponse = action.payload;
+      state.isLoading = dataResponse.isLoading;
+      state.message = dataResponse.message;
+      state.error = dataResponse.error;
+      state.user = dataResponse.data;
+    });
+    builder.addCase(fetchUpdateUserInfo.rejected, (state, action) => {
       state.isLoading = false;
       state.error = true;
     });
@@ -82,7 +105,9 @@ export const authSlice = createSlice({
     });
     builder.addCase(fetchPushNotification.fulfilled, (state, action) => {
       const dataResponse = action.payload;
-      state.isLoading = false;
+      state.isLoading = dataResponse.isLoading;
+      state.message = dataResponse.message;
+      state.error = dataResponse.error;
       state.user = dataResponse.data;
     });
     builder.addCase(fetchPushNotification.rejected, (state, action) => {
@@ -90,16 +115,82 @@ export const authSlice = createSlice({
       state.error = true;
     });
 
-     // Update Notification  By UserId
-     builder.addCase(fetchUpdateNotification.pending, state => {
+    // Update Notification  By UserId
+    builder.addCase(fetchUpdateNotification.pending, state => {
       state.isLoading = true;
     });
     builder.addCase(fetchUpdateNotification.fulfilled, (state, action) => {
       const dataResponse = action.payload;
-      state.isLoading = false;
+      state.isLoading = dataResponse.isLoading;
+      state.message = dataResponse.message;
+      state.error = dataResponse.error;
       state.user = dataResponse.data;
     });
     builder.addCase(fetchUpdateNotification.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = true;
+    });
+
+    // Delete Notification  By UserId
+    builder.addCase(fetchDeleteNotification.pending, state => {
+      state.isLoading = true;
+    });
+    builder.addCase(fetchDeleteNotification.fulfilled, (state, action) => {
+      const dataResponse = action.payload;
+      state.isLoading = dataResponse.isLoading;
+      state.message = dataResponse.message;
+      state.error = dataResponse.error;
+      state.user = dataResponse.data;
+    });
+    builder.addCase(fetchDeleteNotification.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = true;
+    });
+
+    // Add Address
+    builder.addCase(fetchAddAddress.pending, state => {
+      state.isLoading = true;
+    });
+    builder.addCase(fetchAddAddress.fulfilled, (state, action) => {
+      const dataResponse = action.payload;
+      state.isLoading = dataResponse.isLoading;
+      state.message = dataResponse.message;
+      state.error = dataResponse.error;
+      state.user = dataResponse.data;
+    });
+    builder.addCase(fetchAddAddress.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = true;
+    });
+
+    // Update Address
+    builder.addCase(fetchUpdateAddress.pending, state => {
+      state.isLoading = true;
+    });
+    builder.addCase(fetchUpdateAddress.fulfilled, (state, action) => {
+      const dataResponse = action.payload;
+      state.isLoading = dataResponse.isLoading;
+      state.message = dataResponse.message;
+      state.error = dataResponse.error;
+      state.user = dataResponse.data;
+    });
+    builder.addCase(fetchUpdateAddress.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = true;
+    });
+
+    // Delete Address
+    builder.addCase(fetchDeleteAddress.pending, state => {
+      state.isLoading = true;
+    });
+    builder.addCase(fetchDeleteAddress.fulfilled, (state, action) => {
+      const dataResponse = action.payload;
+      state.isLoading = dataResponse.isLoading;
+      state.message = dataResponse.message;
+      state.error = dataResponse.error;
+      state.user = dataResponse.data;
+    });
+    builder.addCase(fetchDeleteAddress.rejected, (state, action) => {
       state.isLoading = false;
       state.error = true;
     });

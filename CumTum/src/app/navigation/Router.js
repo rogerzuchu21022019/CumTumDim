@@ -26,7 +26,7 @@ const Router = {
   /* Customer */
   SPLASH_SCREEN:"Splash",
   LOGIN: 'Login',
-  UPDATE_INFO1:"UpdateInfo1",
+  UPDATE_INFO:"UpdateInfo",
   OTP:"Otp",
   HOME_CUSTOMER_TABS:"HomeCustomerTabs",
   HOME_CUSTOMER:"HomeCustomer",
@@ -39,6 +39,10 @@ const Router = {
   PAYMENT:"Payment",
   PAYMENT_PAID:"PaymentPaid",
   PAYMENT_ZALO:"PaymentZalo",
+
+  DELIVERY_ADDRESS:"DeliveryAddress",
+  EDIT_DELIVERY_ADDRESS:"EditDeliveryAddress",
+  ADD_DELIVERY_ADDRESS:"AddDeliveryAddress",
 
 
   HISTORY_WHIH_NO_ITEM:"HistoryWithNoItem",

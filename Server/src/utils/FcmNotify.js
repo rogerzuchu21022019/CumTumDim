@@ -1,0 +1,37 @@
+const FCM = require("fcm-node");
+const PushNotificationCon = require("../components/users/controllers/PushNotificationCon");
+const serverKey =
+  "AAAAAfQ02XY:APA91bGKWFAiDb4ajF1EALU6Iqovst_zu1624wnTLMdwHOZo-zSVPozBEsV4XdqaAQWu0NIL1I91ScYrE1x6OkIWjba6VOBCCaYSo-Vqa31qj5Wux8J7eLz7qTsvPwPLmZMQ-X2buXDn";
+const fcm = new FCM(serverKey);
+
+const FcmNotify = async (fcmTokenDevice, title, body, data) => {
+  try {
+    var message = {
+      to: fcmTokenDevice,
+      notification: {
+        title: title,
+        body: body,
+      },
+      data: data,
+    };
+
+    fcm.send(message, function (err, response) {
+      if (err) {
+        console.log("🚀 ~ file: PushNotify.js:27 ~ err:", err);
+      } else {
+        console.log("Successfully sent with response: ", response);
+        const notification = {
+          title,
+          content: body,
+          data,
+        };
+    
+        PushNotificationCon(data.order.userId, notification);
+      }
+    });
+  } catch (error) {
+    console.log("🚀 ~ file: FcmNotify.js:5 ~ FcmNotify ~ error:", error);
+  }
+};
+
+module.exports = FcmNotify;

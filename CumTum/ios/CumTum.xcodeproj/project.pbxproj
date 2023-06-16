@@ -13,10 +13,8 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		95CAA89729B86E76004A7B29 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 95CAA89629B86E76004A7B29 /* GoogleService-Info.plist */; };
-		95D87EA029D0C98A00ABED0E /* zpdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95D87E9F29D0C98A00ABED0E /* zpdk.framework */; settings = {ATTRIBUTES = (Required, ); }; };
-		95D87EA329D0EBD900ABED0E /* PayZaloBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 95D87EA229D0EBD900ABED0E /* PayZaloBridge.m */; };
-		A6AC35ABE128BBF7E978E2D4 /* libPods-CumTum.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 428EF232544E7CE410CA89B6 /* libPods-CumTum.a */; };
-		B776FB4682402C9E908471EA /* libPods-CumTum-CumTumTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 59FABB3E2C330C51A0F9C8FC /* libPods-CumTum-CumTumTests.a */; };
+		AD185ACA507EF2CC45C84120 /* libPods-CumTum-CumTumTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D61DE7009EE369D0277304F /* libPods-CumTum-CumTumTests.a */; };
+		E16E959D7448D6B2449E23A1 /* libPods-CumTum.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 60CB8D922AD210C3129B4CB2 /* libPods-CumTum.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,16 +51,14 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = CumTum/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = CumTum/main.m; sourceTree = "<group>"; };
 		1539DBBF7454FE6D424EE832 /* Pods-CumTum.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CumTum.debug.xcconfig"; path = "Target Support Files/Pods-CumTum/Pods-CumTum.debug.xcconfig"; sourceTree = "<group>"; };
+		1D61DE7009EE369D0277304F /* libPods-CumTum-CumTumTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CumTum-CumTumTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		39695178CC3D9C1C969A075F /* Pods-CumTum.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CumTum.release.xcconfig"; path = "Target Support Files/Pods-CumTum/Pods-CumTum.release.xcconfig"; sourceTree = "<group>"; };
-		428EF232544E7CE410CA89B6 /* libPods-CumTum.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CumTum.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		59FABB3E2C330C51A0F9C8FC /* libPods-CumTum-CumTumTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CumTum-CumTumTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		60CB8D922AD210C3129B4CB2 /* libPods-CumTum.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CumTum.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F8427B6E0D2041C2C542CB1 /* Pods-CumTum-CumTumTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CumTum-CumTumTests.debug.xcconfig"; path = "Target Support Files/Pods-CumTum-CumTumTests/Pods-CumTum-CumTumTests.debug.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = CumTum/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		95097CC329C7CFC7005DAA90 /* CumTumDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = CumTumDebug.entitlements; path = CumTum/CumTumDebug.entitlements; sourceTree = "<group>"; };
+		9523A0092A1E2657002C2C50 /* CumTumRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = CumTumRelease.entitlements; path = CumTum/CumTumRelease.entitlements; sourceTree = "<group>"; };
 		95CAA89629B86E76004A7B29 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		95D87E9F29D0C98A00ABED0E /* zpdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = zpdk.framework; sourceTree = "<group>"; };
-		95D87EA129D0EBD900ABED0E /* PayZaloBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayZaloBridge.h; sourceTree = "<group>"; };
-		95D87EA229D0EBD900ABED0E /* PayZaloBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayZaloBridge.m; sourceTree = "<group>"; };
 		DF8C6F4282C55AC09B16B655 /* Pods-CumTum-CumTumTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CumTum-CumTumTests.release.xcconfig"; path = "Target Support Files/Pods-CumTum-CumTumTests/Pods-CumTum-CumTumTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -72,7 +68,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B776FB4682402C9E908471EA /* libPods-CumTum-CumTumTests.a in Frameworks */,
+				AD185ACA507EF2CC45C84120 /* libPods-CumTum-CumTumTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,8 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				95D87EA029D0C98A00ABED0E /* zpdk.framework in Frameworks */,
-				A6AC35ABE128BBF7E978E2D4 /* libPods-CumTum.a in Frameworks */,
+				E16E959D7448D6B2449E23A1 /* libPods-CumTum.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,8 +103,7 @@
 		13B07FAE1A68108700A75B9A /* CumTum */ = {
 			isa = PBXGroup;
 			children = (
-				95D87EA129D0EBD900ABED0E /* PayZaloBridge.h */,
-				95D87EA229D0EBD900ABED0E /* PayZaloBridge.m */,
+				9523A0092A1E2657002C2C50 /* CumTumRelease.entitlements */,
 				95097CC329C7CFC7005DAA90 /* CumTumDebug.entitlements */,
 				95CAA89629B86E76004A7B29 /* GoogleService-Info.plist */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -125,10 +119,9 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				95D87E9F29D0C98A00ABED0E /* zpdk.framework */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				428EF232544E7CE410CA89B6 /* libPods-CumTum.a */,
-				59FABB3E2C330C51A0F9C8FC /* libPods-CumTum-CumTumTests.a */,
+				60CB8D922AD210C3129B4CB2 /* libPods-CumTum.a */,
+				1D61DE7009EE369D0277304F /* libPods-CumTum-CumTumTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -246,6 +239,7 @@
 			knownRegions = (
 				en,
 				Base,
+				vi,
 			);
 			mainGroup = 83CBB9F61A601CBA00E9B192;
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
@@ -422,7 +416,6 @@
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
-				95D87EA329D0EBD900ABED0E /* PayZaloBridge.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -495,14 +488,17 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = CumTum/CumTumDebug.entitlements;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = CTSPPPL89T;
+				CURRENT_PROJECT_VERSION = 2;
+				DEVELOPMENT_TEAM = 57W72N6SBF;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = CumTum/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Cum Túm Đim";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.food-and-drink";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -512,7 +508,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/zpdk.framework",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -521,8 +517,12 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = namvt.dev.cumtum;
 				PRODUCT_NAME = CumTum;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -533,13 +533,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = CTSPPPL89T;
+				CODE_SIGN_ENTITLEMENTS = CumTum/CumTumRelease.entitlements;
+				CURRENT_PROJECT_VERSION = 2;
+				DEVELOPMENT_TEAM = 57W72N6SBF;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = CumTum/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Cum Túm Đim";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.food-and-drink";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -549,8 +553,8 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/zpdk.framework",
 				);
-				MARKETING_VERSION = 1.0;
-				ONLY_ACTIVE_ARCH = NO;
+				MARKETING_VERSION = 1.1;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -558,7 +562,11 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = namvt.dev.cumtum;
 				PRODUCT_NAME = CumTum;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
@@ -592,6 +600,8 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_PUSH_KEY = "";
+				"CODE_PUSH_KEY[arch=*]" = AaSfd8Q56_DjtTU2PJqJ11RKloortYXIE1rJB;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -612,7 +622,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					/usr/lib/swift,
 					"$(inherited)",
@@ -664,6 +674,8 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_PUSH_KEY = "";
+				"CODE_PUSH_KEY[arch=*]" = "WjnmMF6_J-8q4o0RxbABUWgXw30K36g8AZ_5B";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -677,7 +689,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					/usr/lib/swift,
 					"$(inherited)",

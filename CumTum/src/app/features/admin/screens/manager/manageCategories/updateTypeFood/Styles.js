@@ -67,13 +67,15 @@ const Styles = StyleSheet.create({
   },
   viewFinal:{
     width: '100%',
+    
   },
     viewTextInput:{
       backgroundColor: constants.COLOR.WHITE,
       height:40,
       borderRadius:10,
       marginStart:20,
-      marginEnd:20
+      marginEnd:20,
+      with:'100%'
     },
     textInput:{
       marginStart:10,

@@ -11,12 +11,12 @@ const log = LOG.extend(`API_ORDER.JS`);
 
 export const fetchCreateOrder = createAsyncThunk(
   constants.FETCH.CREATE_ORDER,
-  async order => {
+  async newOrder => {
     // const response = await AxiosInstance().post(
     // `/products/push-notification-rabbit`,
     // {
     const response = await AxiosInstance().post(`/products/create-order`, {
-      order,
+      order: newOrder,
     });
     log.info('🚀 ~ file: apiOrder.js:13 ~ response ~ response:', response.data);
     return response.data;
@@ -42,18 +42,17 @@ export const fetchNotifies = createAsyncThunk(
   },
 );
 
-
 export const fetchUpdateOrder = createAsyncThunk(
   constants.FETCH.UPDATE_ORDER,
   async data => {
-    log.error('🚀 ~ file: apiOrder.js:63 ~ data:', data);
+    // log.error('🚀 ~ file: apiOrder.js:63 ~ data:', data);
     const response = await AxiosInstance().post(
       `/products/find-order-by-id/${data.orderId}`,
       {
         orderStatus: data.orderStatus,
       },
     );
-    console.log('🚀 ~ file: apiOrder.js:69 ~ response:', response.data);
+    // console.log('🚀 ~ file: apiOrder.js:69 ~ response:', response.data);
     return response.data;
   },
 );
@@ -77,7 +76,7 @@ export const fetchAccessTokenPaypal = createAsyncThunk(
           headers: headers,
         },
       );
-      log.info('🚀 ~ file: apiOrder.js:97 ~ response:', response.data);
+      // log.info('🚀 ~ file: apiOrder.js:97 ~ response:', response.data);
       return response.data;
     } catch (error) {
       log.error('🚀 ~ file: apiOrder.js:101 ~ error:', error);
@@ -103,7 +102,7 @@ export const fetchCreateOrderPaypal = createAsyncThunk(
           headers: headers,
         },
       );
-      log.info('🚀 ~ file: apiOrder.js:97 ~ response:', response.data);
+      // log.info('🚀 ~ file: apiOrder.js:97 ~ response:', response.data);
       return response.data;
     } catch (error) {
       log.error('🚀 ~ file: apiOrder.js:101 ~ error:', error);
@@ -129,7 +128,7 @@ export const fetchCaptureOrder = createAsyncThunk(
           headers: headers,
         },
       );
-      log.info('🚀 ~ file: apiOrder.js:97 ~ response:', response.data);
+      // log.info('🚀 ~ file: apiOrder.js:97 ~ response:', response.data);
       return response.data;
     } catch (error) {
       log.error('🚀 ~ file: apiOrder.js:101 ~ error:', error);

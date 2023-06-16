@@ -6,7 +6,7 @@ import {
   FlatList,
   TouchableOpacity,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from './Styles';
 import ListItem from './ListItem';
 import IconIonicons from 'react-native-vector-icons/Ionicons';
@@ -14,31 +14,24 @@ import FastImage from 'react-native-fast-image';
 import {constants} from '../../../../../../shared/constants';
 import SafeKeyComponent from '../../../../../../components/safe_area/SafeKeyComponent';
 import Router from '../../../../../../navigation/Router';
-
+import {useDispatch, useSelector} from 'react-redux';
+import {fetchCategories} from '../../../../../product/apiProduct';
+import {productSelector} from '../../../../../product/sliceProduct';
+import {LOG} from '../../../../../../../../logger.config';
+const log = LOG.extend(`EDIT_TYPE_FOOD.JS`);
 const EditTypeFood = ({navigation}) => {
-  const [data, setData] = useState([
-    {
-      id: '1',
-      name: 'Món ăn',
-    },
-    {
-      id: '2',
-      name: 'Đồ ăn thêm',
-    },
-    {
-      id: '3',
-      name: 'Topping',
-    },
-    {
-      id: '4',
-      name: 'Khác',
-    },
-  ]);
-  const pressHandler = id => {
-    setData(itemData => {
-      return itemData.filter(data => data.id != id);
-    });
-  };
+  const dispatch = useDispatch();
+  const productSelect = useSelector(productSelector);
+  log.info(
+    '🚀 ~ file: EditTypeFood.js:24 ~ EditTypeFood ~ productSelect:',
+    productSelect,
+  );
+
+  useEffect(() => {
+    dispatch(fetchCategories());
+
+    return () => {};
+  }, []);
 
   const moveToScreen = nameScreen => {
     navigation.navigate(nameScreen);
@@ -54,12 +47,14 @@ const EditTypeFood = ({navigation}) => {
           <View style={styles.mainHeader}>
             <View style={styles.leftHeader}>
               <TouchableOpacity onPress={goBack}>
-                <IconIonicons
-                  style={styles.imageReturn}
-                  name="arrow-back"
-                  color={constants.COLOR.WHITE}
-                  size={20}
-                />
+                <View style={styles.imageBack}>
+                  <IconIonicons
+                    style={styles.imageReturn}
+                    name="arrow-back"
+                    color={constants.COLOR.WHITE}
+                    size={20}
+                  />
+                </View>
               </TouchableOpacity>
               {/* Code back to HomeScreen */}
               <TouchableOpacity onPress={() => moveToScreen(Router.HOME_ADMIN)}>
@@ -78,7 +73,8 @@ const EditTypeFood = ({navigation}) => {
         <View style={styles.body}>
           <View>
             <FlatList
-              data={data}
+              showsVerticalScrollIndicator={false}
+              data={productSelect.categories}
               renderItem={({item, index}) => (
                 <ListItem item={item} index={index} navigation={navigation} />
               )}

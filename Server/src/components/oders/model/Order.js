@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-
 const OrderSchema = new mongoose.Schema(
   {
     mainDishCart: [
@@ -107,7 +106,7 @@ const OrderSchema = new mongoose.Schema(
     paymentStatus: {
       type: String,
       enum: ["Đang chờ", "Đã thanh toán", "Chưa thanh toán"],
-      default: "Đang chờ",
+      default: "Đã thanh toán",
     },
     orderStatus: {
       type: String,
@@ -142,6 +141,13 @@ const OrderSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
+    },
+    address: {},
+    captureId: {
+      type: String,
+    },
+    valueAmount: {
+      type: Number,
     },
   },
   {

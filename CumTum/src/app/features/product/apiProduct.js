@@ -36,17 +36,55 @@ export const fetchUploadImage = createAsyncThunk(
 export const fetchAddCategory = createAsyncThunk(
   constants.FETCH.ADD_CATEGORY,
   async name => {
+    console.log('🚀 ~ file: apiProduct.js:39 ~ name:', name);
     const response = await AxiosInstance().post('/products/create-cate', {
       name: name,
     });
-    log.info(
-      '🚀 ~ file: apiProduct.js:40 ~ response ~ response:',
-      response.data,
-    );
+    // log.info(
+    //   '🚀 ~ file: apiProduct.js:40 ~ response ~ response:',
+    //   response.data,
+    // );
 
     return response.data;
   },
 );
+
+export const fetchUpdateCategory = createAsyncThunk(
+  constants.FETCH.UPDATE_CATEGORY_BY_ID,
+  async data => {
+    // log.info('🚀 ~ file: apiProduct.js:55 ~ data:', data);
+    const response = await AxiosInstance().post(
+      `/products/update-category-by-id/${data.categoryId}`,
+      {
+        name: data.name,
+      },
+    );
+    // log.info(
+    //   '🚀 ~ file: apiProduct.js:63 ~ response ~ response:',
+    //   response.data,
+    // );
+
+    return response.data;
+  },
+);
+
+export const fetchDeleteCategory = createAsyncThunk(
+  constants.FETCH.DELETE_CATEGORY_BY_ID,
+  async categoryId => {
+    // log.info('🚀 ~ file: apiProduct.js:55 ~ data:', data);
+    const response = await AxiosInstance().post(
+      `/products/delete-category/${categoryId}`,
+    );
+    // log.info(
+    //   '🚀 ~ file: apiProduct.js:63 ~ response ~ response:',
+    //   response.data,
+    // );
+
+    return response.data;
+  },
+);
+
+// http://localhost:3000/api/products/update-category-by-id/643acd4674c20e7854e3f9b1
 
 export const fetchCategories = createAsyncThunk(
   constants.FETCH.FIND_CATEGORIES,
@@ -71,6 +109,40 @@ export const fetchAddDish = createAsyncThunk(
       },
     );
     // console.log("🚀 ~ file: apiProduct.js:58 ~ response:", response)
+
+    return response.data;
+  },
+);
+
+export const fetchDeleteDish = createAsyncThunk(
+  constants.FETCH.DELETE_DISH,
+  async dishId => {
+    const response = await AxiosInstance().post(
+      `/products/delete-dish/${dishId}`,
+    );
+    log.info(
+      '🚀 ~ file: apiProduct.js:128 ~ response ~ response:',
+      response.data,
+    );
+
+    return response.data;
+  },
+);
+
+export const fetchUpdateDish = createAsyncThunk(
+  constants.FETCH.UPDATE_DISH,
+  async data => {
+    log.error('🚀 ~ file: apiProduct.js:120 ~ data:', data);
+    const response = await AxiosInstance().post(
+      `/products/update-dish-by-id/${data.dishId}`,
+      {
+        dish: data.dish,
+      },
+    );
+    log.info(
+      '🚀 ~ file: apiProduct.js:128 ~ response ~ response:',
+      response.data,
+    );
 
     return response.data;
   },

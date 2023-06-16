@@ -36,6 +36,7 @@ import {
 import socketServices from '../../../../shared/utils/Socket';
 import {fetchOrders} from '../../../carts/apiOrder';
 const log = LOG.extend(`STATISTIC.JS`);
+import {isToday} from 'date-fns';
 
 const Statistic = ({navigation}) => {
   const dispatch = useDispatch();
@@ -62,33 +63,22 @@ const Statistic = ({navigation}) => {
   const [isRefresh, setIsRefresh] = useState(false);
 
   // const isLoading = cartSelect
+  const currentDate = new Date();
+  currentDate.setHours(0, 0, 0, 0);
 
   const filteredProducts = orders.filter(product => {
     const timeCreated = new Date(product.createdAt);
 
-    /* get day month year time created to compare */
-    const timeCreatedYear = timeCreated.getFullYear();
-    const timeCreatedMonth = timeCreated.getMonth();
-    const timeCreatedDay = timeCreated.getDate();
+    /* Check today */
+    const createdToday = isToday(timeCreated);
+    const startToday = isToday(startDate);
+    const endToday = isToday(endDate);
 
-    /* get day month year start date to compare */
-    const startDateYear = startDate.getFullYear();
-    const startDateMonth = startDate.getMonth();
-    const startDateDay = startDate.getDate();
-
-    /* get day month year end date to compare */
-    const endDateYear = endDate.getFullYear();
-    const endDateMonth = endDate.getMonth();
-    const endDateDay = endDate.getDate();
-
-    return (
-      timeCreatedYear >= startDateYear &&
-      timeCreatedYear <= endDateYear &&
-      timeCreatedMonth >= startDateMonth &&
-      timeCreatedMonth <= endDateMonth &&
-      timeCreatedDay >= startDateDay &&
-      timeCreatedDay <= endDateDay
-    );
+    if (startToday && endToday && createdToday) {
+      return product;
+    } else {
+      return timeCreated >= startDate && timeCreated <= endDate;
+    }
   });
 
   const screenWidth = Dimensions.get('window').width;
@@ -122,15 +112,16 @@ const Statistic = ({navigation}) => {
   }, 0);
 
   useEffect(() => {
+    socketServices.initializeSocket();
     socketServices.on(constants.SOCKET.FIND_ORDER_BY_USER_ID, userId => {
-      console.log('🚀 ~ file: Statistic.js:119 ~ useEffect ~ userId:', userId);
+      log.info('🚀 ~ file: Statistic.js:119 ~ useEffect ~ userId:', userId);
       // log.info('🚀 ~ file: History.js:17 ~ History ~ user:', userId);
       dispatch(fetchOrders());
     });
     return () => {
       socketServices.socket.disconnect();
     };
-  }, []);
+  }, [orders.length]);
 
   const [openStart, setOpenStart] = useState(false);
   const [openEnd, setOpenEnd] = useState(false);
@@ -232,14 +223,12 @@ const Statistic = ({navigation}) => {
               </View>
               <View style={styles.strikethrough}></View>
               <View style={styles.boxIncome}>
-                  <Text style={styles.itemText1}>
-                    Doanh thu: {convertMoney(totalIncome)}
-                  </Text>
-                  <Text style={styles.itemText1}>
-                    Tổng đơn: {filteredProducts.length}
-                  </Text>
-               
-               
+                <Text style={styles.itemText1}>
+                  Doanh thu: {convertMoney(totalIncome)}
+                </Text>
+                <Text style={styles.itemText1}>
+                  Tổng đơn: {filteredProducts.length}
+                </Text>
               </View>
               <TouchableNativeFeedback>
                 {isLoading ? (
@@ -257,7 +246,7 @@ const Statistic = ({navigation}) => {
                         onRefresh={() => {
                           dispatch(fetchOrders());
                         }}
-                        title="Pull to refresh..."
+                        title="Cập nhật..."
                         titleColor={constants.COLOR.RED}
                         tintColor={constants.COLOR.RED}
                       />

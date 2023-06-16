@@ -2,6 +2,7 @@ import {View, Text} from 'react-native';
 import React from 'react';
 import DropDownPicker from 'react-native-dropdown-picker';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+
 import {constants} from '../constants';
 
 const DropdownPicker = props => {
@@ -28,6 +29,7 @@ const DropdownPicker = props => {
       setOpen={setOpenSubMainDish}
       setValue={setValueSubMainDish}
       setItems={setListSubMainDish}
+      
       // custom color text
       placeholder={placeholder}
       placeholderStyle={{

@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     },
     textProfile:{
         color:constants.COLOR.WHITE,
-        fontSize:20,
+        fontSize:16,
         fontWeight:'bold',
     },
 
@@ -54,11 +54,12 @@ const styles = StyleSheet.create({
 
     },
     itemImage:{
-        width:250,
-        height:250,
+        width:295,
+        height:295,
+        borderRadius:150
 
     },
-    groupAll:{
+    boxChooseImage:{
         marginBottom:20
     },
     item:{

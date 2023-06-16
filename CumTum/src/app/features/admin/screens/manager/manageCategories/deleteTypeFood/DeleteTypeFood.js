@@ -6,7 +6,7 @@ import {
   FlatList,
   TouchableOpacity,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from './Styles';
 import ListItem from './ListItem';
 import IconIonicons from 'react-native-vector-icons/Ionicons';
@@ -14,37 +14,35 @@ import FastImage from 'react-native-fast-image';
 import {constants} from '../../../../../../shared/constants';
 import SafeKeyComponent from '../../../../../../components/safe_area/SafeKeyComponent';
 import Router from '../../../../../../navigation/Router';
+import {useDispatch, useSelector} from 'react-redux';
+import {productSelector} from '../../../../../product/sliceProduct';
+import {
+  fetchCategories,
+  fetchDeleteCategory,
+} from '../../../../../product/apiProduct';
+import ModalNotify from '../../../../../../components/modal/ModalNotify';
+import {LOG} from '../../../../../../../../logger.config';
+
+const log = LOG.extend(`DELETE_TYPE_FOOD.JS`);
 const DeleteTypeFood = ({navigation}) => {
+  const productSelect = useSelector(productSelector);
+  
+
   const goBack = () => {
     navigation.goBack();
   };
+
   const moveToScreen = nameScreen => {
     navigation.navigate(nameScreen);
   };
 
-  const [data, setData] = useState([
-    {
-      id: '1',
-      name: 'Món ăn',
-    },
-    {
-      id: '2',
-      name: 'Đồ ăn thêm',
-    },
-    {
-      id: '3',
-      name: 'Topping',
-    },
-    {
-      id: '4',
-      name: 'Khác',
-    },
-  ]);
-  const pressHandler = id => {
-    setData(itemData => {
-      return itemData.filter(data => data.id != id);
-    });
-  };
+  const dispatch = useDispatch();
+
+
+  useEffect(() => {
+    dispatch(fetchCategories());
+    return () => {};
+  }, []);
 
   return (
     <SafeKeyComponent>
@@ -84,15 +82,16 @@ const DeleteTypeFood = ({navigation}) => {
         <View style={styles.body}>
           <View>
             <FlatList
-              data={data}
+              data={productSelect.categories}
+              showsVerticalScrollIndicator={false}
               renderItem={({item, index}) => (
                 <ListItem
                   item={item}
                   index={index}
                   navigation={navigation}
-                  pressHandler={pressHandler}
                 />
               )}
+              keyExtractor={item => item._id.toString()}
             />
           </View>
         </View>

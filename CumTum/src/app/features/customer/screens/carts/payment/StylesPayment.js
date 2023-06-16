@@ -167,6 +167,7 @@ const styles = StyleSheet.create({
   },
   iconLocation:{
     marginEnd:10,
+    justifyContent:'center'
   },
   modal:{
     backgroundColor:constants.COLOR.BLACK,
@@ -236,7 +237,7 @@ const styles = StyleSheet.create({
 
   // footer
   footer: {
-    flex: 2,
+    flex: 1.5,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: constants.COLOR.DARK_BROWN,

@@ -25,15 +25,13 @@ export const moneyData = [
   {value: 100, label: '100k'},
 ];
 
-
 export const mainDishOptionsData = [
-  {value: 'Sườn', label: 'Sườn'},
-  {value: 'Sườn mỡ', label: 'Sườn mỡ'},
+  {label: 'Sườn', value: 'Sườn'},
+  {label: 'Sườn mỡ', value: 'Sườn mỡ'},
 ];
 
 export const nameDishes = [
   {label: 'Sườn', value: 'Sườn'},
-  {label: 'Sườn mỡ', value: 'Sườn mỡ'},
   {label: 'Sườn bì', value: 'Sườn bì'},
   {label: 'Sườn chả', value: 'Sườn chả'},
   {label: 'Sườn trứng', value: 'Sườn trứng'},

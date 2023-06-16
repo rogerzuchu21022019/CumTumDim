@@ -7,25 +7,58 @@ import {
   TouchableOpacity,
   TextInput,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import styles from './Styles';
 import IconIonicons from 'react-native-vector-icons/Ionicons';
 import FastImage from 'react-native-fast-image';
 import {constants} from '../../../../../../shared/constants';
 import Router from '../../../../../../navigation/Router';
 import SafeKeyComponent from '../../../../../../components/safe_area/SafeKeyComponent';
+import {useDispatch} from 'react-redux';
+import {fetchAddCategory} from '../../../../../product/apiProduct';
+import BoxInputCus from '../../../../../../components/input/BoxInput';
+import ButtonCus from '../../../../../../components/button/ButtonCus';
+import ModalNotify from '../../../../../../components/modal/ModalNotify';
 
 const AddTypeFood = ({navigation}) => {
+  const nameRef = useRef('');
+
+  const dispatch = useDispatch();
   const goBack = () => {
     navigation.goBack();
   };
 
+  const [isShowModal, setIsShowModal] = useState(false);
+  const [isCancel, setIsCancel] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+
   const moveToScreen = nameScreen => {
     navigation.navigate(nameScreen);
   };
-  const handleAdd = () => {
-    navigation.goBack();
+
+  const messageEmpty = `Vui lòng không để trống thông tin loại món ăn`;
+  const messageSuccess = `Thêm danh mục món ăn thành công`;
+  const handleClick = () => {
+    setIsShowModal(!isShowModal);
   };
+
+  const handleSuccess = () => {
+    setIsSuccess(!isSuccess);
+  };
+  const handleAdd = () => {
+    const currentName = nameRef.current;
+    if (currentName === '') {
+      handleClick();
+    } else {
+      dispatch(fetchAddCategory(currentName));
+      handleSuccess();
+    }
+  };
+
+  const handleNameChange = text => {
+    nameRef.current = text;
+  };
+
   return (
     <SafeKeyComponent>
       <View style={styles.container}>
@@ -33,12 +66,14 @@ const AddTypeFood = ({navigation}) => {
           <View style={styles.mainHeader}>
             <View style={styles.leftHeader}>
               <TouchableOpacity onPress={goBack}>
-                <IconIonicons
-                  style={styles.imageReturn}
-                  name="arrow-back"
-                  color={constants.COLOR.WHITE}
-                  size={20}
-                />
+                <View style={styles.imageBack}>
+                  <IconIonicons
+                    style={styles.imageReturn}
+                    name="arrow-back"
+                    color={constants.COLOR.WHITE}
+                    size={20}
+                  />
+                </View>
               </TouchableOpacity>
               {/* Code back to HomeScreen */}
               <TouchableOpacity onPress={() => moveToScreen(Router.HOME_ADMIN)}>
@@ -68,17 +103,27 @@ const AddTypeFood = ({navigation}) => {
             />
           </View>
           <View style={styles.viewTextInput}>
-            <View style={styles.viewInput}>
-              <TextInput
-                style={styles.textInput}
-                placeholder="Nhập loại món ăn"
-              />
-            </View>
+            <BoxInputCus
+              placeholder="Nhập loại món ăn"
+              title="Tên loại món ăn"
+              onChangeText={handleNameChange}
+              // value={name}
+            />
           </View>
           <TouchableOpacity onPress={handleAdd}>
-            <View style={styles.viewBTN}>
-              <Text style={styles.btn}>Thêm</Text>
-            </View>
+            <ButtonCus onHandleClick={handleAdd} title="Thêm" />
+            <ModalNotify
+              message1={messageEmpty}
+              handleClick={handleClick}
+              isShowModal={isShowModal}
+            />
+
+            <ModalNotify
+              message1={messageSuccess}
+              handleClick={handleSuccess}
+              isShowModal={isSuccess}
+              navigation={navigation}
+            />
           </TouchableOpacity>
           <View style={styles.cartToon}>
             <Image

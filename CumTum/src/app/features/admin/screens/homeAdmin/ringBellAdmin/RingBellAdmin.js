@@ -14,7 +14,7 @@ import {fetchUpdateNotification, fetchUserById} from '../../../apiUser.js';
 import socketServices from '../../../../../shared/utils/Socket.js';
 
 const RingBellAdmin = ({navigation}) => {
-  const moToBack = () => {
+  const moveToBack = () => {
     navigation.navigate(Router.HOME_ADMIN);
   };
   const log = LOG.extend(`RING_BELL.JS`);
@@ -57,7 +57,7 @@ const RingBellAdmin = ({navigation}) => {
         <View style={styles.header}>
           <View style={styles.groupHeader}>
             <View style={styles.viewIcon}>
-            <TouchableOpacity onPress={moToBack}>
+            <TouchableOpacity onPress={moveToBack}>
 
               <IconAntDesign
               name="left"

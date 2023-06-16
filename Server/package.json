@@ -2,10 +2,12 @@
   "name": "server",
   "version": "0.0.0",
   "private": true,
+  "homepage": "https://cumtum.storm.io.vm",
   "scripts": {
     "start": "node ./bin/server",
-    "dev": "nodemon ./bin/server ",
-    "server": "concurrently \"yarn dev\" "
+    "dev": "nodemon --exec babel-node ./bin/server && 'yarn build'",
+    "server": "concurrently \"yarn dev\" ",
+    "tsc": "tsc --init"
   },
   "dependencies": {
     "@types/passport-google-oauth20": "^2.0.11",
@@ -44,8 +46,10 @@
     "randombytes": "^2.1.0",
     "redis": "^4.6.4",
     "socket.io": "^4.6.1",
+    "ts-node": "^10.9.1",
     "twilio": "^4.8.0",
-    "uuid": "^9.0.0"
+    "uuid": "^9.0.0",
+    "vercel": "^30.2.2"
   },
   "main": "NoteUsePassport.js",
   "bin": {

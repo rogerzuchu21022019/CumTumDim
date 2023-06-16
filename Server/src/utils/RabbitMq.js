@@ -1,7 +1,7 @@
 const amqp = require("amqplib");
-const connectRabbitPub = async (connection,queueName) => {
+const CONSTANTS = require("./Constant");
+const connectRabbitPub = async (connection, queueName) => {
   try {
-
     const channel = await connection.createChannel();
     await channel.assertQueue(queueName, { durable: true });
     console.log(`Connected to RabbitMQ ${queueName}`);
@@ -12,7 +12,7 @@ const connectRabbitPub = async (connection,queueName) => {
 };
 const publish = async (channel, message) => {
   try {
-    const queueName = "orders";
+    const queueName = CONSTANTS.RABBIT_MQ.QUEUE_NAME_ORDER;
 
     await channel.sendToQueue(queueName, Buffer.from(JSON.stringify(message)), {
       persistent: true,
@@ -25,7 +25,7 @@ const publish = async (channel, message) => {
 
 const connectRabbitConsume = async (connection) => {
   try {
-    const queueName = "orders";
+    const queueName = CONSTANTS.RABBIT_MQ.QUEUE_NAME_ORDER;
 
     const channel = await connection.createChannel();
     await channel.assertQueue(queueName);

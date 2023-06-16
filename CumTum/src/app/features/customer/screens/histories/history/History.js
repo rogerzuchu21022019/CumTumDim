@@ -1,41 +1,47 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {
   View,
   Text,
-  FlatList,
   RefreshControl,
   TouchableNativeFeedback,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
+import messaging from '@react-native-firebase/messaging';
+import notifee from '@notifee/react-native';
 import styles from './StylesHistory';
-import FastImage from 'react-native-fast-image';
 import {constants} from '../../../../../shared/constants';
 import {useDispatch, useSelector} from 'react-redux';
-import {cartSelector} from '../../../../carts/sliceOrder';
 import {FlashList} from '@shopify/flash-list';
 import ItemView from './item/ItemView';
 import SafeKeyComponent from '../../../../../components/safe_area/SafeKeyComponent';
-// import HistoryNoItems from './historynoitems/HistoryNoItems';
 import {authSelector} from '../../../../admin/sliceAuth';
-import socketServices from '../../../../../shared/utils/Socket';
 import {LOG} from '../../../../../../../logger.config';
 import {fetchUserById} from '../../../../admin/apiUser';
+import {onDisplayNotiAccepted} from '../../../../../shared/utils/ShowNotificationAccepted';
 const log = LOG.extend(`HISTORY.JS`);
 const History = ({navigation}) => {
   // const data = useSelector(cartSelector);
-  const user = useSelector(authSelector);
+  const authSelect = useSelector(authSelector);
+  const userId = authSelect.user._id;
+  const fcmTokenDevice = authSelect.fcmTokenDevice;
+
   const [isRefresh, setIsRefresh] = useState(false);
   const dispatch = useDispatch();
-  let orderHistory = user.user.orders;
-
+  let orderHistory = authSelect.user.orders;
   useEffect(() => {
-    socketServices.on(constants.SOCKET.FIND_ORDER_BY_USER_ID, userId => {
-      log.info('🚀 ~ file: History.js:17 ~ History ~ user:', userId);
-      dispatch(fetchUserById(userId));
-    });
-    return () => {
-      socketServices.socket.disconnect();
-    };
-  }, []);
+    dispatch(fetchUserById(userId));
+  }, [authSelect.user.orders.length]);
+  // const onSetOrderHistory = async () => {
+  //   const response = await dispatch(fetchUserById(userId));
+  //   console.log(
+  //     '🚀 ~ file: History.js:33 ~ onSetOrderHistory ~ response:',
+  //     response.payload.data.orders,
+  //   );
+  //   setListOrderHistory(response.payload.data.orders);
+  // };
+  // useEffect(() => {
+  //   onSetOrderHistory();
+  // }, [listOrderHistory.length]);
 
   return (
     <SafeKeyComponent>
@@ -61,14 +67,14 @@ const History = ({navigation}) => {
                     />
                   );
                 }}
-                keyExtractor={(item, index) => item._id.toString()}
+                keyExtractor={(item, index) => index.toString()}
                 refreshControl={
                   <RefreshControl
                     refreshing={isRefresh}
                     onRefresh={() => {
-                      dispatch(fetchUserById(user.user._id));
+                      dispatch(fetchUserById(authSelect.user._id));
                     }}
-                    title="Pull to refresh..."
+                    title="Cập nhật..."
                     titleColor={constants.COLOR.RED}
                     tintColor={constants.COLOR.RED}
                   />

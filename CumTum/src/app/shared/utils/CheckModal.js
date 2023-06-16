@@ -12,7 +12,6 @@ const CheckModal = props => {
   };
 
   return (
-  
         <Modal
           isVisible={isModalVisible}
           animationType="slide"

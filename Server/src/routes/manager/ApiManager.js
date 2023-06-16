@@ -35,19 +35,33 @@ const ManagerRouter = (app, fixPublic) => {
   /* Users */
   app.use(MAIN, ApiUser.login, fixPublic);
   app.use(MAIN, ApiUser.updateUserById, fixPublic);
+
+  app.use(SUB_USERS, ApiUser.updateUserInfo, fixPublic);
   app.use(SUB_USERS, ApiUser.createOtp, fixPublic);
   app.use(SUB_USERS, ApiUser.verifyOtp, fixPublic);
+
   app.use(SUB_USERS, ApiUser.findUserById, fixPublic);
   app.use(SUB_USERS, ApiUser.pushNotification, fixPublic);
   app.use(SUB_USERS, ApiUser.updateNotification, fixPublic);
+
+  app.use(SUB_USERS, ApiUser.addAddress, fixPublic);
+  app.use(SUB_USERS, ApiUser.updateAddress, fixPublic);
+  app.use(SUB_USERS, ApiUser.deleteAddress, fixPublic);
+  app.use(SUB_USERS, ApiUser.deleteNotification, fixPublic);
 
   //   app.use(MAIN, ApiUser.logoutRouter, fixPublic);
   //   app.use(SUB_USERS, ApiUser.registerRouter, fixPublic);
 
   //   /* Products */
   app.use(SUB_PRODUCTS, ApiProducts.createCategory, fixPublic);
+  app.use(SUB_PRODUCTS, ApiProducts.updateCategoryById, fixPublic);
+  app.use(SUB_PRODUCTS, ApiProducts.deleteCategory, fixPublic);
   app.use(SUB_PRODUCTS, ApiProducts.findCategories, fixPublic);
+
   app.use(SUB_PRODUCTS, ApiProducts.addDish, fixPublic);
+  app.use(SUB_PRODUCTS, ApiProducts.updateDishById, fixPublic);
+  app.use(SUB_PRODUCTS, ApiProducts.deleteDishById, fixPublic);
+
   app.use(SUB_PRODUCTS, ApiProducts.findDishes, fixPublic);
   app.use(SUB_PRODUCTS, ApiProducts.createOrder, fixPublic);
   app.use(SUB_PRODUCTS, ApiProducts.updateOrder, fixPublic);

@@ -24,17 +24,16 @@ const styles = StyleSheet.create({
   imageLogo: {
     width: 40,
     height: 40,
-    borderRadius:10,
-
+    borderRadius: 10,
   },
   rightHeader: {
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'flex-end',
+    // justifyContent: 'flex-end',
     // backgroundColor: constants.COLOR.WHITE,
-
-    marginRight: 20,
+    marginRight: 40,
+    position: 'relative',
   },
   divideLine: {
     height: 2,
@@ -76,19 +75,22 @@ const styles = StyleSheet.create({
     height: '100%',
     marginTop: 56,
   },
-  textRingBell:{
-    fontSize:10,
+  textRingBell: {
+    fontSize: 10,
     color: constants.COLOR.WHITE,
   },
-  viewTextRingBell:{
+  viewTextRingBell: {
     backgroundColor: constants.COLOR.RED,
-    width:30,
-    height:15,
+    width: 30,
+    height: 15,
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius:10,
-    bottom:8,
-    right:10,
+    borderRadius: 10,
+    // bottom: 8,
+    // right: 10,
+    position: 'absolute',
+    top: 10,
+    left: 10,
   },
 
   /* imageBackground */
@@ -157,6 +159,47 @@ const styles = StyleSheet.create({
     backgroundColor: constants.COLOR.WHITE,
   },
   /* Second Body */
+
+  /* Dropdown */
+  styleBorderWidth: {
+    // margin: 20,
+    paddingVertical: 20,
+    // backgroundColor:'white'
+  },
+  stylesLabel: {
+    position: 'absolute',
+    backgroundColor: constants.COLOR.YELLOW,
+    left: 20,
+    top: 8,
+    zIndex: 999,
+    paddingHorizontal: 8,
+    fontSize: 14,
+    borderRadius: 8,
+  },
+  styleMain: {
+    height: 50,
+    borderColor: constants.COLOR.BLACK,
+    borderWidth: 0.5,
+    borderRadius: 8,
+    paddingHorizontal: 8,
+    backgroundColor: constants.COLOR.PRIMARY,
+  },
+
+  selectedTextStyle: {
+    fontSize: 16,
+    color: constants.COLOR.WHITE,
+  },
+  styleTextTitle: {
+    fontSize: 16,
+    color: constants.COLOR.WHITE,
+  },
+  placeholderStyle: {
+    // backgroundColor: constants.COLOR.WHITE,
+  },
+  itemContainerStyle: {
+    backgroundColor: constants.COLOR.WHITE,
+  },
+  /* Dropdown */
   /* Body */
 
   /* Footer */

@@ -16,7 +16,7 @@ route.post(`/:userId/update-notification`, async (req, res) => {
     
 
     
-    _io.emit(CONSTANTS.SOCKET.PUSH_NOTIFICATION_ADMIN, userId);
+    // _io.emit(CONSTANTS.SOCKET.PUSH_NOTIFICATION_ADMIN, userId);
     
     return res.status(200).json({
       isLoading: false,

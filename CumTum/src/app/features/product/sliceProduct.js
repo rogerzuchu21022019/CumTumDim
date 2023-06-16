@@ -4,7 +4,11 @@ import {
   fetchAddCategory,
   fetchAddDish,
   fetchCategories,
+  fetchDeleteCategory,
+  fetchDeleteDish,
   fetchDishes,
+  fetchUpdateCategory,
+  fetchUpdateDish,
   fetchUploadImage,
 } from './apiProduct';
 
@@ -39,6 +43,7 @@ export const sliceProduct = createSlice({
     addDishToWishCartOrUpdate: (state, action) => {
       let data = action.payload;
       const {_id, amount, price, categoryId} = data;
+      /* Step1 : Find item by id of item */
       const itemMainCart = state.mainDishCart.find(item => item._id === _id);
       const itemExtraCart = state.extraDishCart.find(item => item._id === _id);
       const itemToppingsCart = state.toppingsCart.find(
@@ -46,16 +51,28 @@ export const sliceProduct = createSlice({
       );
       const itemAnotherCart = state.anotherCart.find(item => item._id === _id);
 
+      /* Step2 : Check item is exist in list dishes */
+      // if item exist => update item.amount
+
       if (itemMainCart) {
         itemMainCart.amount += 1;
+        // log.error("🚀 ~ file: sliceProduct.js:59 ~ itemMainCart:", itemMainCart)
       } else {
         data = {
           ...data,
           amount: 1,
         };
+        /* Check categoryId của sản phẩm này có trùng với categoryID của item trong list categories hay không
+          Nếu trùng thì push data vào từng cái array mà mình cần
+          Nếu không trùng thì qua các if khác
+        */
         const filterDataMainList = state.categories.filter(
           item => item._id === categoryId && item.name === 'Món chính',
         );
+        // log.info(
+        //   '🚀 ~ file: sliceProduct.js:69 ~ filterDataMainList:',
+        //   filterDataMainList,
+        // );
         if (filterDataMainList.length > 0) {
           state.mainDishCart.push(data);
         }
@@ -67,6 +84,11 @@ export const sliceProduct = createSlice({
           ...data,
           amount: 1,
         };
+        /* Check categoryId của sản phẩm này có trùng với categoryID của item trong list categories hay không 
+         => sẽ tạo array
+          Check size array > 0 và push data vào từng cái array mà mình cần
+          Nếu không trùng thì qua các if khác
+        */
         const filterDataExtraList = state.categories.filter(
           item => item._id === categoryId && item.name === 'Món ăn thêm',
         );
@@ -82,6 +104,11 @@ export const sliceProduct = createSlice({
           ...data,
           amount: 1,
         };
+        /* Check categoryId của sản phẩm này có trùng với categoryID của item trong list categories hay không
+          => sẽ tạo array
+          Check size array > 0 và push data vào từng cái array mà mình cần
+          Nếu không trùng thì qua các if khác
+        */
         const filterDataToppingsList = state.categories.filter(
           item => item._id === categoryId && item.name === 'Toppings',
         );
@@ -97,6 +124,11 @@ export const sliceProduct = createSlice({
           ...data,
           amount: 1,
         };
+        /* Check categoryId của sản phẩm này có trùng với categoryID của item trong list categories hay không
+          => sẽ tạo array
+          Check size array > 0 và push data vào từng cái array mà mình cần
+          Nếu không trùng thì qua các if khác
+        */
         const filterDataAnotherList = state.categories.filter(
           item => item._id === categoryId && item.name === 'Khác',
         );
@@ -239,6 +271,12 @@ export const sliceProduct = createSlice({
         indexOfToppingInArray != -1 ||
         indexOfAnotherInArray != -1
       ) {
+        /*
+        Because when i click + or - to update or decrease amount. I will 
+        update amount in state.mainDishes,state.extraDishes.... => after i clear app
+        and reopen it. it will initial old state . and this is the last result i would update
+        amount of item. So it will show all info of item with the last update
+        */
         if (itemMainDishCart != null) {
           state.mainDishes[indexOfMainDishInArray].amount =
             itemMainDishCart?.amount;
@@ -312,7 +350,6 @@ export const sliceProduct = createSlice({
     },
   },
   extraReducers: builder => {
-
     /* Add Category */
     builder.addCase(fetchAddCategory.pending, (state, action) => {
       state.isLoading = true;
@@ -325,9 +362,47 @@ export const sliceProduct = createSlice({
       state.data = dataResponse.data;
     });
     builder.addCase(fetchAddCategory.rejected, (state, action) => {
-      state.isLoading = false;
-      state.error = true;
-      state.message = action.payload;
+      const dataResponse = action.payload;
+      state.isLoading = dataResponse.isLoading;
+      state.error = dataResponse.error;
+      state.message = dataResponse.message;
+    });
+
+    /* Update Category */
+    builder.addCase(fetchUpdateCategory.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(fetchUpdateCategory.fulfilled, (state, action) => {
+      const dataResponse = action.payload;
+      state.isLoading = dataResponse.isLoading;
+      state.message = dataResponse.message;
+      state.error = dataResponse.error;
+      state.categories = state.categories.forEach(item =>
+        item._id === dataResponse.data._id ? dataResponse.data : item,
+      );
+    });
+    builder.addCase(fetchUpdateCategory.rejected, (state, action) => {
+      const dataResponse = action.payload;
+      state.isLoading = dataResponse.isLoading;
+      state.error = dataResponse.error;
+      state.message = dataResponse.message;
+    });
+
+    /* Delete Category */
+    builder.addCase(fetchDeleteCategory.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(fetchDeleteCategory.fulfilled, (state, action) => {
+      const dataResponse = action.payload;
+      state.isLoading = dataResponse.isLoading;
+      state.message = dataResponse.message;
+      state.error = dataResponse.error;
+    });
+    builder.addCase(fetchDeleteCategory.rejected, (state, action) => {
+      const dataResponse = action.payload;
+      state.isLoading = dataResponse.isLoading;
+      state.error = dataResponse.error;
+      state.message = dataResponse.message;
     });
 
     /* Upload image */
@@ -342,10 +417,13 @@ export const sliceProduct = createSlice({
       state.data = dataResponse.data;
     });
     builder.addCase(fetchUploadImage.rejected, (state, action) => {
-      state.isLoading = false;
-      state.error = true;
-      state.message = action.payload;
+      const dataResponse = action.payload;
+      state.isLoading = dataResponse.isLoading;
+      state.error = dataResponse.error;
+      state.message = dataResponse.message;
     });
+
+    /* Categories */
     builder.addCase(fetchCategories.pending, state => {
       state.isLoading = true;
     });
@@ -357,11 +435,13 @@ export const sliceProduct = createSlice({
       state.categories = dataResponse.data;
     });
     builder.addCase(fetchCategories.rejected, (state, action) => {
-      state.isLoading = false;
-      state.error = true;
-      state.message = action.payload;
+      const dataResponse = action.payload;
+      state.isLoading = dataResponse.isLoading;
+      state.error = dataResponse.error;
+      state.message = dataResponse.message;
     });
 
+    /* Add Dish */
     builder.addCase(fetchAddDish.pending, state => {
       state.isLoading = true;
     });
@@ -371,17 +451,56 @@ export const sliceProduct = createSlice({
       state.success = dataResponse.success;
       state.message = dataResponse.message;
       state.dish = dataResponse.data;
+      state.dishes.unshift(dataResponse.data);
     });
     builder.addCase(fetchAddDish.rejected, (state, action) => {
-      state.isLoading = false;
-      state.error = true;
-      state.message = action.payload;
+      const dataResponse = action.payload;
+      state.isLoading = dataResponse.isLoading;
+      state.error = dataResponse.error;
+      state.message = dataResponse.message;
     });
-    //
+
+    /* Update DISH */
+    builder.addCase(fetchUpdateDish.pending, state => {
+      state.isLoading = true;
+    });
+    builder.addCase(fetchUpdateDish.fulfilled, (state, action) => {
+      const dataResponse = action.payload;
+      state.isLoading = dataResponse.isLoading;
+      state.message = dataResponse.message;
+      state.error = dataResponse.error;
+      state.dishes.forEach(item =>
+        item._id === dataResponse.data._id ? dataResponse.data : item,
+      );
+    });
+    builder.addCase(fetchUpdateDish.rejected, (state, action) => {
+      const dataResponse = action.payload;
+      state.isLoading = dataResponse.isLoading;
+      state.error = dataResponse.error;
+      state.message = dataResponse.message;
+    });
+
+    /* Delete Dish */
+    builder.addCase(fetchDeleteDish.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(fetchDeleteDish.fulfilled, (state, action) => {
+      const dataResponse = action.payload;
+      state.isLoading = dataResponse.isLoading;
+      state.message = dataResponse.message;
+      state.error = dataResponse.error;
+    });
+    builder.addCase(fetchDeleteDish.rejected, (state, action) => {
+      const dataResponse = action.payload;
+      state.isLoading = dataResponse.isLoading;
+      state.error = dataResponse.error;
+      state.message = dataResponse.message;
+    });
+
+    /* Dishes */
     builder.addCase(fetchDishes.pending, state => {
       state.isLoading = true;
     });
-
     builder.addCase(fetchDishes.fulfilled, (state, action) => {
       const dataResponse = action.payload;
       state.isLoading = false;
@@ -404,26 +523,37 @@ export const sliceProduct = createSlice({
       const dataListAnother = state.categories.filter(
         item => item.name === 'Khác',
       );
+      let nameItemMainCategory = {};
+      let nameItemExtraCategory = {};
+      let nameItemToppingCategory = {};
+      let nameItemAnotherCategory = {};
+      dataListMain.forEach(item => {
+        return (nameItemMainCategory = item);
+      });
+      dataListExtra.forEach(item => {
+        return (nameItemExtraCategory = item);
+      });
+      dataListTopping.forEach(item => {
+        return (nameItemToppingCategory = item);
+      });
+      dataListAnother.forEach(item => {
+        return (nameItemAnotherCategory = item);
+      });
 
       state.extraDishes = dataResponse.data.filter(
-        item => item.categoryId === dataListExtra[0]._id,
+        item => item.categoryId === nameItemExtraCategory._id,
       );
 
-      // state.mainDishes.map(item => (item.amount = 0));
-      // state.extraDishes.map(item => (item.amount = 0));
-      // state.toppings.map(item => (item.amount = 0));
-      // state.another.map(item => (item.amount = 0));
-
       state.toppings = dataResponse.data.filter(
-        dish => dish.categoryId === dataListTopping[0]._id,
+        dish => dish.categoryId === nameItemToppingCategory._id,
       );
 
       state.another = dataResponse.data.filter(
-        dish => dish.categoryId === dataListAnother[0]._id,
+        dish => dish.categoryId === nameItemAnotherCategory._id,
       );
 
       state.mainDishes = dataResponse.data.filter(
-        dish => dish.categoryId === dataListMain[0]._id,
+        dish => dish.categoryId === nameItemMainCategory._id,
       );
 
       // Handle data when app crash or turn off app will get amount of home screen to exactly === amount in cart
@@ -433,8 +563,7 @@ export const sliceProduct = createSlice({
         state.toppingsCart.length > 0 ||
         state.anotherCart.length > 0
       ) {
-
-        // 
+        //
         state.mainDishCart.forEach(item => {
           state.mainDishes.forEach(dish => {
             if (item._id === dish._id) {

@@ -18,18 +18,19 @@ export const constants = {
   },
   PAYPAL: {
     SANDBOX_PAYPAL: 'https://api-m.sandbox.paypal.com',
+    SANDBOX_PAYPAL_SIGN_IN: 'https://www.sandbox.paypal.com/signin',
     CLIENT_ID_PAYPAL:
       'ATjzaFNR4InUFxsBZBtQPnNiu7gvhtVOmovA6IgU6D9wBzPp5FTHTOSr9sqSgd-90h7ALd_4od4QMfvJ',
     SECRET_PAYPAL:
       'EPscZ2cKSvwcybfeIbQksSxlCJVZDGuzAMy0skSzZJIJ2NL4yJUUuKaC6Ve2fi9kHzgnWZOpfSPPU_Oi',
   },
   BASE_URL: {
-    MAIN: 'http://192.168.2.6:3000/api',
+    MAIN: 'http://192.168.2.101:3000/api',
     // MAIN: 'http://192.168.2.7:3000/api',
-    SECOND: 'https://cumtumdim.becofoodstore.click/api',
+    SECOND: 'https://cumtum.storm.io.vn/api',
   },
   SOCKET: {
-    URL: 'http://192.168.2.6:3000',
+    URL: 'http://192.168.2.101:3000',
     CONNECTION: 'connection',
     CONNECT: 'connect',
     DISCONNECT: 'disconnect',
@@ -37,11 +38,11 @@ export const constants = {
     CREATE_ORDER: 'create-order',
     UPDATE_ORDER: 'update-order',
     FIND_ORDER_BY_USER_ID: 'find-order-by-user-id',
-    PUSH_NOTIFICATION_ADMIN: "push-notification-admin",
-    UPDATE_NOTIFICATION_ADMIN: "update-notification-admin",
-    PUSH_NOTIFICATION_CUSTOMER: "push-notification-customer",
-    UPDATE_NOTIFICATION_CUSTOMER: "update-notification-customer",
-
+    PUSH_NOTIFICATION_ADMIN: 'push-notification-admin',
+    UPDATE_NOTIFICATION_ADMIN: 'update-notification-admin',
+    PUSH_NOTIFICATION_CUSTOMER: 'push-notification-customer',
+    UPDATE_NOTIFICATION_CUSTOMER: 'update-notification-customer',
+    LISTEN_FROM_EDIT_DELIVERY_ADDRESS:'listenFromEditDeliveryAddress'
   },
   ROLE: {
     ADMIN: 'admin',
@@ -62,12 +63,21 @@ export const constants = {
   FETCH: {
     LOGIN: 'fetchLogin',
     USER_BY_ID: 'fetchUserById',
+    UPDATE_USER_INFO: 'fetchUpdateUserInfo',
+
     UPLOAD_IMAGE: 'fetchUploadImage',
     SIGN_OUT: 'fetchSignOut',
+
     ADD_CATEGORY: 'fetchAddCategory',
+    UPDATE_CATEGORY_BY_ID: 'fetchUpdateCategoryById',
+    DELETE_CATEGORY_BY_ID: 'fetchDeleteCategoryById',
     FIND_CATEGORIES: 'fetchCategories',
+
     ADD_DISH: 'fetchAddDish',
+    UPDATE_DISH: 'fetchUpdateDish',
+    DELETE_DISH: 'fetchDeleteDish',
     FIND_DISHES: 'fetchDishes',
+
     CREATE_ORDER: 'fetchCreateOrder',
     FIND_ORDERS: 'fetchOrders',
     FIND_RABBIT: 'fetchRabbit',
@@ -78,6 +88,11 @@ export const constants = {
     CREATE_ORDER_PAYPAL: 'fetchCreateOrderPaypal',
     PUSH_NOTIFICATION: 'fetchPushNotification',
     UPDATE_NOTIFICATION: 'fetchUpdateNotification',
+    DELETE_NOTIFICATION: 'fetchDeleteNotification',
+
+    ADD_ADDRESS: 'fetchAddAddress',
+    UPDATE_ADDRESS: 'fetchUpdateAddress',
+    DELETE_ADDRESS: 'fetchDeleteAddress',
   },
   SLICE: {
     ADMIN: 'admin',
