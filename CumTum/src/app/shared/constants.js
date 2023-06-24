@@ -25,12 +25,13 @@ export const constants = {
       'EPscZ2cKSvwcybfeIbQksSxlCJVZDGuzAMy0skSzZJIJ2NL4yJUUuKaC6Ve2fi9kHzgnWZOpfSPPU_Oi',
   },
   BASE_URL: {
-    MAIN: 'http://192.168.2.101:3000/api',
+    MAIN: 'http://192.168.2.14:3000/api',
     // MAIN: 'http://192.168.2.7:3000/api',
-    SECOND: 'https://cumtum.storm.io.vn/api',
+    // SECOND: 'https://cumtum.storm.io.vn/api',
   },
   SOCKET: {
-    URL: 'http://192.168.2.101:3000',
+    URL: 'http://192.168.2.14:3000',
+    // URL: 'https://cumtum.storm.io.vn',
     CONNECTION: 'connection',
     CONNECT: 'connect',
     DISCONNECT: 'disconnect',
