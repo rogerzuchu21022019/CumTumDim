@@ -1,0 +1,13 @@
+body {
+    padding: 50px;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    background-image: linear-gradient(to bottom, #373232, #44372A);
+    min-height: 100vh;
+}
+
+h1 {
+    color: #ffffff;
+    text-align: center;
+    font-weight: bold;
+    font-size: 30px;
+}
