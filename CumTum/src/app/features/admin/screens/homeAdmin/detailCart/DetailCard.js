@@ -30,14 +30,7 @@ const DetailCard = ({route, navigation}) => {
   const log = LOG.extend('DETAILCART');
   const {item, index} = route.params;
   const [urlPaypalCheckout, setUrlPaypalCheckout] = useState(false);
-
-  log.info('item', item);
-
   const arrHouseNumber = item.address.houseNumber.split(`/`);
-  log.info(
-    '🚀 ~ file: DetailCard.js:33 ~ DetailCard ~ arrHouseNumber:',
-    arrHouseNumber,
-  );
   const houseNumber = `${arrHouseNumber[0]}/${arrHouseNumber[1]}`;
   const hem = arrHouseNumber[1];
   const moveToHome = () => {
@@ -88,10 +81,6 @@ const DetailCard = ({route, navigation}) => {
   };
 
   const onUrlStateChange = async webViewState => {
-    // log.info(
-    //   '🚀 ~ file:  DetailCard.js:116 ~ onUrlStateChange ~ webViewState:',
-    //   webViewState,
-    // );
     if (webViewState.title === 'Refund Complete - PayPal') {
       handleAcceptedOrderCancel();
     }

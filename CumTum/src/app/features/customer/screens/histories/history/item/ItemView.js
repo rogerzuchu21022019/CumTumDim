@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 import {Text, TouchableOpacity, View} from 'react-native';
 import {formatTime} from '../../../../../../shared/utils/Moment';
 import styles from './StyleItem';
@@ -5,8 +6,7 @@ import SafeKeyComponent from '../../../../../../components/safe_area/SafeKeyComp
 import Router from '../../../../../../navigation/Router';
 
 const ItemView = ({item, navigation, index}) => {
-  console.log('🚀 ~ file: ItemView.js:11 ~ ItemView ~ item:', item);
-
+  console.log('🚀 ~ file: ItemView.js:9 ~ ItemView ~ item:', item);
   const moveToDetailHistory = () => {
     navigation.navigate(Router.PAYMENT_ZALO, {item});
   };
@@ -26,7 +26,7 @@ const ItemView = ({item, navigation, index}) => {
                       ? styles.textItem
                       : styles.textItemPaid
                   }>
-                  Đơn hàng {item.orderStatus} thanh toán
+                  Đơn hàng đang chờ xác nhận
                 </Text>
               ) : (
                 <Text
@@ -35,7 +35,7 @@ const ItemView = ({item, navigation, index}) => {
                       ? styles.textItem
                       : styles.textItemPaid
                   }>
-                  Đơn hàng đã {item.orderStatus}
+                  Đơn hàng {item.paymentStatus}
                 </Text>
               )}
               <Text style={styles.textItem}>{item.totalAmount} Món</Text>

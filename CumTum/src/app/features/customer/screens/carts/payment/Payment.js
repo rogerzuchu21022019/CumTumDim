@@ -24,7 +24,7 @@ import {
   fetchCreateOrderPaypal,
 } from '../../../../carts/apiOrder';
 import {authSelector} from '../../../../admin/sliceAuth';
-import {cartSelector} from '../../../../carts/sliceOrder';
+import {cartSelector, createHistoryCart} from '../../../../carts/sliceOrder';
 import notifee from '@notifee/react-native';
 import {showNotifyLocal} from '../../../../../shared/utils/Notifies';
 import {LOG} from '../../../../../../../logger.config';
@@ -39,6 +39,8 @@ import {resetCart} from '../../../../product/sliceProduct';
 import CheckModal from '../../../../../shared/utils/CheckModal';
 import ModalNotify from '../../../../../components/modal/ModalNotify';
 import messaging from '@react-native-firebase/messaging';
+import {onDisplayNotification} from '../../../../../shared/utils/ShowNotifiWelcome';
+import {fetchUserById} from '../../../../admin/apiUser';
 
 const log = LOG.extend(`PAYMENT.JS`);
 const Payment = ({navigation, route}) => {
@@ -72,24 +74,7 @@ const Payment = ({navigation, route}) => {
   const dispatch = useDispatch();
 
   const addressDefault = getAddressDefault[0];
-  log.info(
-    '🚀 ~ file: Payment.js:75 ~ Payment ~ addressDefault:',
-    addressDefault,
-  );
-
   const message = 'Bạn chưa chọn phương thức thanh toán!';
-
-  const onDisplayNotification = async () => {
-    // Create a channel (required for Android)
-    const title = 'Notification';
-    const content = `Cảm ơn bạn ${name} đã đặt hàng. Đơn hàng của bạn đang được chúng tôi xác nhận.....`;
-    const dataMap = {
-      title,
-      content,
-    };
-    // Display a notification
-    showNotifyLocal(dataMap);
-  };
 
   const handleCheck = id => {
     if (checkedId === id) {
@@ -110,20 +95,21 @@ const Payment = ({navigation, route}) => {
     };
 
     dispatch(fetchCreateOrder(newOrder));
+  };
 
-    // dispatch(fetchNotification(data));
+  const onCreateHistoryCart = order => ({
+    type: createHistoryCart().type,
+    payload: order,
+  });
+
+  const handleCreateHistoryCart = order => {
+    dispatch(onCreateHistoryCart(order));
   };
 
   const handleGetAccessToken = async order => {
     const response = await getDataPaypal();
-    console.log(
-      '🚀 ~ file: Payment.js:88 ~ handleGetAccessToken ~ response:',
-      response,
-    );
     setAccessToken(response.access_token);
-
     const res = await createOrderPaypal(response.access_token, order);
-    log.error('🚀 ~ file: Payment.js:91 ~ handleGetAccessToken ~ res:', res);
     if (res.links != undefined) {
       const url = res.links.find(link => link.rel === 'approve');
       setUrlPaypalCheckout(url.href);
@@ -188,10 +174,10 @@ const Payment = ({navigation, route}) => {
     }
   };
   const onUrlStateChange = async webViewState => {
-    log.info(
-      '🚀 ~ file: Payment.js:120 ~ onUrlStateChange ~ webViewState:',
-      webViewState,
-    );
+    // log.info(
+    //   '🚀 ~ file: Payment.js:120 ~ onUrlStateChange ~ webViewState:',
+    //   webViewState,
+    // );
     if (webViewState.url.includes(`https://example.com/cancel`)) {
       resetDataPaypal();
       return;
@@ -214,20 +200,20 @@ const Payment = ({navigation, route}) => {
       const captureId = response.purchase_units[0].payments.captures[0].id;
       const valueAmount =
         response.purchase_units[0].payments.captures[0].amount.value;
-   
-     
+
       if (response.status === 'COMPLETED') {
         resetDataPaypal();
         handleCreateOrder(order, addressDefault);
-        onDisplayNotification();
+        onDisplayNotification(name);
+        dispatch(fetchUserById(userId));
         handleResetCart();
         navigation.goBack();
-        navigation.navigate(Router.HOME_CUSTOMER_TABS);
+        navigation.navigate(Router.HOME_CUSTOMER);
       } else {
         return;
       }
     } catch (error) {
-      log.error('🚀 ~ file: Payment.js:148 ~ paymentSuccess ~ error:', error);
+      // log.error('🚀 ~ file: Payment.js:148 ~ paymentSuccess ~ error:', error);
     }
   };
 

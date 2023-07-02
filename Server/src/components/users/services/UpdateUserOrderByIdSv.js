@@ -17,7 +17,6 @@ const UpdateUserOrderByIdSv = async (userId, order, ) => {
       new: true,
       upsert: true,
     });
-    console.log("🚀 ~ file: UpdateUserOrderByIdSv.js:24 ~ UpdateUserOrderByIdSv ~ user:", user)
 
     return user;
   } catch (error) {

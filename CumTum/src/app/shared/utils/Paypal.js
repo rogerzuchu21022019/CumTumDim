@@ -169,10 +169,10 @@ export const createOrderPaypal = async (accessToken, order) => {
         headers: headers,
       },
     );
-    console.log(
-      '🚀 ~ file: Paypal.js:69 ~ createOrderPaypal ~ response:',
-      itemData,
-    );
+    // console.log(
+    //   '🚀 ~ file: Paypal.js:69 ~ createOrderPaypal ~ response:',
+    //   itemData,
+    // );
     return response.data;
   } catch (error) {
     console.error(error);
@@ -196,9 +196,9 @@ export const verifyCaptureOrderPaypal = async (id, accessToken) => {
 
     return response.data;
   } catch (error) {
-    console.log(
-      '🚀 ~ file: Paypal.js:119 ~ verifyCaptureOrderPaypal ~ error:',
-      error,
-    );
+    // console.log(
+    //   '🚀 ~ file: Paypal.js:119 ~ verifyCaptureOrderPaypal ~ error:',
+    //   error,
+    // );
   }
 };
