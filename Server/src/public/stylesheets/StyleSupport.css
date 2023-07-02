@@ -1,15 +1,21 @@
-.container {
+body {
     font-family: Arial, sans-serif;
-    margin: 20px;
-    background-color: white;
+    margin: 0;
+    padding: 0;
+    background-image: linear-gradient(to bottom, #373232, #44372A);
+    min-height: 100vh;
 }
 
+
 h1 {
-    color: #333;
+    color: #ffffff;
+    text-align: center;
+    font-weight: bold;
 }
 
 p {
-    color: #666;
+    color: #ffffff;
+    text-align: center;
 }
 
 .contact-info {
