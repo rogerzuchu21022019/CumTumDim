@@ -41,6 +41,7 @@ import ModalNotify from '../../../../../components/modal/ModalNotify';
 import messaging from '@react-native-firebase/messaging';
 import {onDisplayNotification} from '../../../../../shared/utils/ShowNotifiWelcome';
 import {fetchUserById} from '../../../../admin/apiUser';
+import {boolean} from 'joi';
 
 const log = LOG.extend(`PAYMENT.JS`);
 const Payment = ({navigation, route}) => {
@@ -55,7 +56,7 @@ const Payment = ({navigation, route}) => {
   const [urlPaypalCheckout, setUrlPaypalCheckout] = useState(null);
   const [accessToken, setAccessToken] = useState(null);
   const [isModalVisible, setModalVisible] = useState(false);
-
+  const [showCancel, setShowCancel] = useState(false);
   const [isEditAddress, setIsEditAddress] = useState(false);
 
   /* Selector */
@@ -93,8 +94,7 @@ const Payment = ({navigation, route}) => {
       ...order,
       address: address,
     };
-
-    dispatch(fetchCreateOrder(newOrder));
+    await dispatch(fetchCreateOrder(newOrder));
   };
 
   const onCreateHistoryCart = order => ({
@@ -182,8 +182,9 @@ const Payment = ({navigation, route}) => {
       resetDataPaypal();
       return;
     }
-    if (webViewState.url.includes(`https://example.com/return`)) {
+    if (webViewState.url.includes(`${constants.BASE_URL.URL_THANKS_LOCAL}`)) {
       const urlValue = queryString.parseUrl(webViewState.url);
+      setShowCancel(true);
       const id = urlValue.query.token;
       if (!!id) {
         paymentSuccess(id);
@@ -202,11 +203,11 @@ const Payment = ({navigation, route}) => {
         response.purchase_units[0].payments.captures[0].amount.value;
 
       if (response.status === 'COMPLETED') {
-        resetDataPaypal();
-        handleCreateOrder(order, addressDefault);
-        onDisplayNotification(name);
+        await handleCreateOrder(order, addressDefault);
         dispatch(fetchUserById(userId));
         handleResetCart();
+        resetDataPaypal();
+        onDisplayNotification(name);
         navigation.goBack();
         navigation.navigate(Router.HOME_CUSTOMER);
       } else {
@@ -259,9 +260,6 @@ const Payment = ({navigation, route}) => {
             <TouchableOpacity onPress={editDeliveryAddress}>
               <View style={styles.textTile}>
                 <Text style={styles.text}>Địa chỉ nhận hàng</Text>
-                {isEditAddress ? (
-                  <Text style={styles.text}>Click me</Text>
-                ) : null}
               </View>
               {addressDefault ? (
                 <View style={styles.groupContent}>
@@ -420,10 +418,12 @@ const Payment = ({navigation, route}) => {
                 <SafeKeyComponent>
                   <View style={styles.containerPaypal}>
                     <TouchableOpacity onPress={resetDataPaypal}>
-                      <Text
-                        style={[styles.textTitle, styles.updateTitlePaypal]}>
-                        Cancel
-                      </Text>
+                      {showCancel === false && (
+                        <Text
+                          style={[styles.textTitle, styles.updateTitlePaypal]}>
+                          Cancel
+                        </Text>
+                      )}
                     </TouchableOpacity>
                     <WebView
                       source={{uri: urlPaypalCheckout}}

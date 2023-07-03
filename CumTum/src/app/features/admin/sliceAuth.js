@@ -25,6 +25,7 @@ const initialState = {
   message: null,
   notifications: [],
   addresses: [],
+  orders: [],
 };
 
 export const authSlice = createSlice({
@@ -77,6 +78,7 @@ export const authSlice = createSlice({
       state.user = dataResponse.data;
       state.notifications = state.user.notifications;
       state.addresses = state.user.addresses;
+      state.orders = state.user.orders
     });
     builder.addCase(fetchUserById.rejected, (state, action) => {
       state.isLoading = false;
