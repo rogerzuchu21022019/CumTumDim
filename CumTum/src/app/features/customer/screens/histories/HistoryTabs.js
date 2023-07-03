@@ -4,8 +4,6 @@ import Router from '../../../../navigation/Router';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import SafeKeyComponent from '../../../../components/safe_area/SafeKeyComponent';
 import History from './history/History';
-import {createHistoryCart} from '../../../carts/sliceOrder';
-import HistoryNoItems from './historyNoItem/HistoryNoItems';
 import ShowBill from '../carts/showBill/ShowBill';
 
 const HistoryTabs = () => {

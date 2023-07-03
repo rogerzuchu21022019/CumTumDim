@@ -10,6 +10,7 @@ import {
   fetchUpdateAddress,
   fetchDeleteAddress,
   fetchUpdateUserInfo,
+  fetchDeleteNotification,
 } from './apiUser';
 
 const {createSlice} = require('@reduxjs/toolkit');
@@ -24,6 +25,7 @@ const initialState = {
   message: null,
   notifications: [],
   addresses: [],
+  orders: [],
 };
 
 export const authSlice = createSlice({
@@ -76,6 +78,7 @@ export const authSlice = createSlice({
       state.user = dataResponse.data;
       state.notifications = state.user.notifications;
       state.addresses = state.user.addresses;
+      state.orders = state.user.orders
     });
     builder.addCase(fetchUserById.rejected, (state, action) => {
       state.isLoading = false;
@@ -126,6 +129,22 @@ export const authSlice = createSlice({
       state.user = dataResponse.data;
     });
     builder.addCase(fetchUpdateNotification.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = true;
+    });
+
+    // Delete Notification  By UserId
+    builder.addCase(fetchDeleteNotification.pending, state => {
+      state.isLoading = true;
+    });
+    builder.addCase(fetchDeleteNotification.fulfilled, (state, action) => {
+      const dataResponse = action.payload;
+      state.isLoading = dataResponse.isLoading;
+      state.message = dataResponse.message;
+      state.error = dataResponse.error;
+      state.user = dataResponse.data;
+    });
+    builder.addCase(fetchDeleteNotification.rejected, (state, action) => {
       state.isLoading = false;
       state.error = true;
     });
