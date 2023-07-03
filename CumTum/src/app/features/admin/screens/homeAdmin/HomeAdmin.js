@@ -69,6 +69,10 @@ const HomeAdmin = ({navigation}) => {
   useEffect(() => {
     socketServices.initializeSocket();
     socketServices.on(constants.SOCKET.CREATE_ORDER, orderData => {
+      console.log(
+        '🚀 ~ file: HomeAdmin.js:72 ~ useEffect ~ orderData:',
+        orderData,
+      );
       onDisplayNotification(orderData);
       dispatch(fetchOrders());
     });
@@ -81,8 +85,8 @@ const HomeAdmin = ({navigation}) => {
   }, [dispatch]);
 
   const onDisplayNotification = async orderData => {
-    let idOrder = formatCodeOrder(orderData._id);
-    const total = orderData.moneyToPaid;
+    let idOrder = formatCodeOrder(orderData.orderData._id);
+    const total = orderData.orderData.moneyToPaid;
 
     const title = 'Notification';
     const content = `Đơn hàng mã số ${idOrder} có tổng giá tiền ${total}K đang chờ bạn xác nhận!`;

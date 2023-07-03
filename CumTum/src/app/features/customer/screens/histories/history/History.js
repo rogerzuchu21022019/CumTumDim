@@ -32,7 +32,18 @@ const History = ({navigation}) => {
   let orderHistory = authSelect.orders;
   useEffect(() => {
     dispatch(fetchUserById(userId));
-  }, [orderHistory[0]._id]);
+  }, []);
+  // const onSetOrderHistory = async () => {
+  //   const response = await disatch(fetchUserById(userId));
+  //   console.log(
+  //     '🚀 ~ file: History.js:33 ~ onSetOrderHistory ~ response:',
+  //     response.payload.data.orders,
+  //   );
+  //   setListOrderHistory(response.payload.data.orders);
+  // };
+  // useEffect(() => {
+  //   onSetOrderHistory();
+  // }, [listOrderHistory.length]);
 
   return (
     <SafeKeyComponent>
