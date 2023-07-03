@@ -5,7 +5,7 @@
   "homepage": "https://cumtum.storm.io.vm",
   "scripts": {
     "start": "node ./bin/server",
-    "dev": "nodemon --exec babel-node ./bin/server && 'yarn build'",
+    "dev": "nodemon ./bin/server && 'yarn build'",
     "server": "concurrently \"yarn dev\" ",
     "tsc": "tsc --init"
   },

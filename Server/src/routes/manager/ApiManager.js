@@ -1,7 +1,6 @@
 /* Check import lại mấy cái router này khi import */
 const ApiProducts = require("../api/ApiProducts");
 const ApiUser = require("../api/ApiUser");
-
 /* Được gọi từ app.js */
 const ManagerRouter = (app, fixPublic) => {
   // https://congtydacap.club/api/users/auth-login
@@ -67,6 +66,10 @@ const ManagerRouter = (app, fixPublic) => {
   app.use(SUB_PRODUCTS, ApiProducts.updateOrder, fixPublic);
   app.use(SUB_PRODUCTS, ApiProducts.findOrders, fixPublic);
   app.use(SUB_PRODUCTS, ApiProducts.getRabbit, fixPublic);
+  
+
+
+
 
   //   app.use(SUB_PRODUCTS, ApiProduct.chartRouter, fixPublic);
   //   app.use(SUB_PRODUCTS, ApiProduct.dataTableRouter, fixPublic);

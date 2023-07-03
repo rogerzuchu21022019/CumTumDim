@@ -5,8 +5,10 @@ const path = require("path");
 const mongoose = require("mongoose");
 const ManagerMiddleware = require("./middlewares/ManageMiddleware");
 const HandlerError = require("./middlewares/HandleError");
-const supportRouter = require("./routes/support");
+
 const ApiManagerRouter = require("./routes/manager/ApiManager");
+const WebManagerRouter = require("./routes/manager/WebManager");
+
 // const WebManagerRouter = require("./routes/manager/WebManager");
 mongoose.set("strictQuery", false);
 mongoose
@@ -27,11 +29,10 @@ const fixPublic = express.static(publicDir);
 app.use(fixPublic);
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
-app.use('/', supportRouter);
 ManagerMiddleware(app);
 
 ApiManagerRouter(app, fixPublic);
-// WebManagerRouter(app, fixPublic);
+WebManagerRouter(app, fixPublic);
 
 HandlerError(app);
 
