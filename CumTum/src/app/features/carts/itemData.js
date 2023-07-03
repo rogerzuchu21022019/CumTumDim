@@ -1,3 +1,5 @@
+import { constants } from "../../shared/constants";
+
 export const setItemPaypal = data => {
   console.log('🚀 ~ file: itemData.js:2 ~ setItemPaypal ~ data:', data);
   const itemNew = data.mainDishCart
@@ -33,7 +35,7 @@ export const setItemPaypal = data => {
       },
     ],
     application_context: {
-      return_url: 'https://example.com/return',
+      return_url: `${constants.BASE_URL.URL_THANKS_LOCAL}`,
       cancel_url: 'https://example.com/cancel',
     },
   };
