@@ -152,7 +152,7 @@ export const createOrderPaypal = async (accessToken, order) => {
         },
       ],
       application_context: {
-        return_url: `${constants.BASE_URL.URL_THANKS_LOCAL}`,
+        return_url: `${constants.BASE_URL.URL_THANKS}`,
         cancel_url: 'https://example.com/cancel',
       },
     };

@@ -182,7 +182,7 @@ const Payment = ({navigation, route}) => {
       resetDataPaypal();
       return;
     }
-    if (webViewState.url.includes(`${constants.BASE_URL.URL_THANKS_LOCAL}`)) {
+    if (webViewState.url.includes(`${constants.BASE_URL.URL_THANKS}`)) {
       const urlValue = queryString.parseUrl(webViewState.url);
       setShowCancel(true);
       const id = urlValue.query.token;
