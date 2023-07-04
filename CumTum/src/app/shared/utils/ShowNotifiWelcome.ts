@@ -33,6 +33,11 @@ export const onDisplayNotification = async (name: string) => {
 export const onShowData = async (data: TypeResponseNotificationFirebase) => {
   // Create a channel (required for Android)
   const title = data.title;
+  const dataFromBE = data.data;
+  console.log(
+    '🚀 ~ file: ShowNotifiWelcome.ts:37 ~ onShowData ~ dataFromBE:',
+    dataFromBE,
+  );
   const content = data.body;
   const dataMap = {
     title,

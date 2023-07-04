@@ -1,54 +1,59 @@
-import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  RefreshControl,
+} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import styles from './Styles.js';
-import {FlashList} from '@shopify/flash-list';
-import ListItem from './ListItem.js';
-import {useDispatch, useSelector} from 'react-redux';
-import {LOG} from '../../../../../../../logger.config.js';
-import {authSelector, updateIsRead} from '../../../sliceAuth.js';
-import Router from '../../../../../navigation/Router.js';
 import SafeKeyComponent from '../../../../../components/safe_area/SafeKeyComponent.js';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
 import {constants} from '../../../../../shared/constants.js';
-import {fetchUpdateNotification, fetchUserById} from '../../../apiUser.js';
-import socketServices from '../../../../../shared/utils/Socket.js';
+import Router from '../../../../../navigation/Router.js';
+import {FlashList} from '@shopify/flash-list';
+import ListItem from './ListItem.js';
+import {useDispatch, useSelector} from 'react-redux';
+import {authSelector} from '../../../../admin/sliceAuth.js';
+import {LOG} from '../../../../../../../logger.config.js';
+import messaging from '@react-native-firebase/messaging';
 
+import {
+  fetchDeleteNotification,
+  fetchUserById,
+} from '../../../../admin/apiUser.js';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
 const RingBellAdmin = ({navigation}) => {
+  const dispatch = useDispatch();
+  const authSelect = useSelector(authSelector);
+  const [isRefresh, setIsRefresh] = useState(false);
+  const user = authSelect.user;
+  const [listNotification, setListNotification] = useState(user.notifications);
   const moveToBack = () => {
-    navigation.navigate(Router.HOME_ADMIN);
+    navigation.goBack();
   };
   const log = LOG.extend(`RING_BELL.JS`);
 
   const data = useSelector(authSelector);
-  // log.info(
-  //   '🚀 ~ file: RingBell.js:21 ~ RingBell ~ data:',
-  //   data.user.notifications,
-  // );
+  useEffect(() => {
+    dispatch(fetchUserById(user._id));
+  }, [messaging, user.notifications.length]);
 
-  const notifications = data.notifications;
-
-  const userId = data.user._id;
-  const dispatch = useDispatch();
-
-  const onDisable = item => {
+  const handleRemove = async item => {
+    console.log('remove', item);
+    if (listNotification.length === 0) {
+      return;
+    }
     const data = {
-      userId: userId,
-      notification: item,
+      userId: user._id,
+      notificationId: item._id,
     };
-    dispatch(fetchUpdateNotification(data));
-    // notifications.map(notification => {
-    //   if (notification._id === item._id) {
-    //     // console.log(
-    //     //   '🚀 ~ file: RingBellAdmin.js:41 ~ onDisable ~ notification:',
-    //     //   notification,
-    //     // );
-    //     // console.log('🚀 ~ file: RingBellAdmin.js:41 ~ onDisable ~ item:', item);
-    //     if (notification.isRead != undefined) {
-    //       notification.isRead = item.isRead;
-
-    //     }
-    //   }
-    // });
+    dispatch(fetchDeleteNotification(data));
+    const newList = listNotification.filter(
+      itemData => itemData._id !== item._id,
+    );
+    setListNotification(newList);
+    await dispatch(fetchUserById(user._id));
   };
 
   return (
@@ -57,41 +62,49 @@ const RingBellAdmin = ({navigation}) => {
         <View style={styles.header}>
           <View style={styles.groupHeader}>
             <View style={styles.viewIcon}>
-            <TouchableOpacity onPress={moveToBack}>
-
-              <IconAntDesign
-              name="left"
-              color={constants.COLOR.WHITE}
-              size={18}
-              
-              />
-            </TouchableOpacity>
-
+              <TouchableOpacity onPress={moveToBack}>
+                <IconAntDesign
+                  name="left"
+                  color={constants.COLOR.WHITE}
+                  size={18}
+                />
+              </TouchableOpacity>
             </View>
             <View style={styles.profile}>
               <Text style={styles.textProfile}>Thông báo</Text>
-            </View> 
+            </View>
             <View style={styles.viewIcon}>
               <IconAntDesign
-              name="delete"
-              color={constants.COLOR.WHITE}
-              size={18}/>
+                name="delete"
+                color={constants.COLOR.WHITE}
+                size={18}
+              />
             </View>
           </View>
         </View>
         <View style={styles.body}>
           <FlashList
-            data={notifications}
+            data={listNotification}
             estimatedItemSize={200}
             renderItem={({item, index}) => (
               <ListItem
                 item={item}
                 index={index}
-                navigation={navigation}
-                onDisable={onDisable}
+                handleRemove={() => handleRemove(item)}
               />
             )}
             keyExtractor={(item, index) => index.toString()}
+            refreshControl={
+              <RefreshControl
+                refreshing={isRefresh}
+                onRefresh={() => {
+                  dispatch(fetchUserById(user._id));
+                }}
+                title="Cập nhật..."
+                titleColor={constants.COLOR.RED}
+                tintColor={constants.COLOR.RED}
+              />
+            }
           />
         </View>
       </View>
