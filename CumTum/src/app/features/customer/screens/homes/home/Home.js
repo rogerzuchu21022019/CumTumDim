@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {View, Text, Image, TouchableOpacity, StyleSheet} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {useEffect, useState} from 'react';
@@ -26,7 +27,10 @@ import {authSelector} from '../../../../admin/sliceAuth';
 import ModalNotify from '../../../../../components/modal/ModalNotify';
 import DropdownElement from '../../../../../components/dropdownElement/DropdownElement';
 import messaging from '@react-native-firebase/messaging';
-import {onShowNotiWelCome} from '../../../../../shared/utils/ShowNotifiWelcome';
+import {
+  onShowData,
+  onShowNotiWelCome,
+} from '../../../../../shared/utils/ShowNotifiWelcome';
 import {fetchUserById} from '../../../../admin/apiUser';
 
 const HomeCustomer = ({navigation}) => {
@@ -36,9 +40,10 @@ const HomeCustomer = ({navigation}) => {
   // log.info(
   //   '🚀 ~ file: Home.js:47 ~ HomeCustomer ~ notifications:',
   //   authSelect.notifications,
-  // );
+  // );noti
 
   const user = authSelect.user;
+  const orders = authSelect.orders;
   const userId = user._id;
 
   const userInfo = {
@@ -47,25 +52,16 @@ const HomeCustomer = ({navigation}) => {
     address: authSelect.user.addresses,
   };
 
-  const getNotification = async () => {
-    await messaging().onMessage(remoteMessage => {
-      const title = remoteMessage.notification.title;
-      const body = remoteMessage.notification.body;
-      const data = remoteMessage.data;
-      const orderStatus = data.orderStatus;
-      const order = data.order;
-      const moneyToPaid = data.moneyToPaid;
-      dispatch(fetchUserById(userId));
-      onDisplayNotiAccepted({
-        title,
-        order,
-        orderStatus,
-        moneyToPaid,
-      });
-    });
-  };
   useEffect(() => {
-    getNotification();
+    const unsubscribe = messaging().onMessage(remoteMessage => {
+      const {title, body, data} = remoteMessage.notification;
+      data ? onShowData(data) : onShowNotiWelCome(title, body);
+      dispatch(fetchUserById(userId));
+    });
+
+    return () => {
+      unsubscribe();
+    };
   }, [messaging]);
 
   const message1 = `Bạn chưa cập nhật địa chỉ giao hàng!!`;
@@ -110,8 +106,6 @@ const HomeCustomer = ({navigation}) => {
     }
   }, []);
 
- 
-
   const onDisplayNotiAccepted = async data => {
     console.log('🚀 ~ file: Home.js:124 ~ onDisplayNotiAccepted ~ data:', data);
     const idOrder = formatCodeOrder(data._id);
@@ -131,7 +125,7 @@ const HomeCustomer = ({navigation}) => {
   useEffect(() => {
     dispatch(fetchCategories());
     dispatch(fetchDishes());
-    onShowNotiWelCome();
+    // onShowNotiWelCome();
     setTabs(0);
     return () => {
       dispatch(fetchCategories());
@@ -315,7 +309,7 @@ const HomeCustomer = ({navigation}) => {
                   <View style={styles.viewImageDish}>
                     <FastImage
                       style={styles.imageLogo}
-                      source={require('../../../../../../assets/logoKhac.png')}
+                      source={require('../../../../../../assets/logo_another.png')}
                     />
                   </View>
                 </View>

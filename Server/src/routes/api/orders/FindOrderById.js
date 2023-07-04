@@ -2,9 +2,10 @@ const express = require(`express`);
 const CONSTANTS = require("../../../utils/Constant");
 const FindOrderByIdCon = require("../../../components/oders/controllers/FindOrderByIdCon");
 const UpdateUserOrderByIdCon = require("../../../components/users/controllers/UpdateUserOrderByIdCon");
-const FcmNotify = require("../../../utils/FcmNotify");
 const UpdateUserOrderExistedCon = require("../../../components/users/controllers/UpdateUserOrderExistedCon");
 const PushNotificationCon = require("../../../components/users/controllers/PushNotificationCon");
+const { sendMessage } = require("../../../utils/FirebaseVerify");
+const formatCodeOrder = require("../../../utils/Extension");
 const FindUserByIDCon = require("../../../components/users/controllers/FindUserByIdCon");
 
 const router = express.Router();
@@ -14,26 +15,38 @@ router.post(`/find-order-by-id/:orderId`, async (req, res) => {
     const { orderId } = req.params;
     const { orderStatus } = req.body;
     const order = await FindOrderByIdCon(orderId, orderStatus);
-    console.log("🚀 ~ file: FindOrderById.js:16 ~ router.post ~ order:", order);
+    // console.log("🚀 ~ file: FindOrderById.js:16 ~ router.post ~ order:", order);
 
     /* Call api user to update order by userId */
-    const user = await UpdateUserOrderExistedCon(order.userId, order);
-    const title = "Notifications";
-    const body = `Đơn hàng số ${order._id} ${
+    const title = "Trạng thái đơn hàng";
+    const body = `Đơn hàng có mã ${formatCodeOrder(orderId)} ${
       orderStatus === "Chấp nhận" ? "đã được" : "đã bị"
     } ${orderStatus}`;
 
     const data = {
+      orderStatus: JSON.stringify(orderStatus),
+      order: JSON.stringify(order),
+      moneyToPaid: JSON.stringify(order.moneyToPaid),
+    };
+
+    const dataForUpdateNoti = {
       orderStatus: orderStatus,
       order: order,
       moneyToPaid: order.moneyToPaid,
     };
 
-    if (user.fcmTokenDevice != undefined) {
-      await FcmNotify(user.fcmTokenDevice, title, body, data);
-    }
-
-    
+    const notificationForUpdateInUser = {
+      title,
+      content: body,
+      data: dataForUpdateNoti,
+    };
+    const user = await PushNotificationCon(
+      order.userId,
+      notificationForUpdateInUser
+    );
+    await UpdateUserOrderExistedCon(order.userId, order);
+    sendMessage(user.fcmTokenDevice, title, body, data);
+    // await FindUserByIDCon(order.userId);
 
     // console.log("🚀 ~ file: FindOrderById.js:24 ~ router.post ~ socket:", socket)
     // console.log("🚀 ~ file: FindOrderById.js:24 ~ router.post ~ socket:", socket.sockets.sockets)

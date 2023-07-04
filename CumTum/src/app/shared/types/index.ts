@@ -4,3 +4,9 @@ export interface TypeNotification {
   orderStatus: string;
   moneyToPaid: any;
 }
+
+export interface TypeResponseNotificationFirebase {
+  title: string;
+  body: string;
+  data: {};
+}
