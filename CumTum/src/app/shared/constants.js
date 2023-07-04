@@ -29,12 +29,12 @@ export const constants = {
     URL_THANKS_LOCAL: 'http://192.168.2.16:3000/thanks',
     URL_THANKS: 'https://cumtum.storm.io.vn/thanks',
 
-    // MAIN: 'http://192.168.2.7:3000/api',
+    // MAIN: 'http://192.168.2.7:300A0/api',
     SECOND: 'https://cumtum.storm.io.vn/api',
   },
   SOCKET: {
-    // URL: 'http://192.168.2.16:3000',
-    URL: 'https://cumtum.storm.io.vn',
+    URL: 'http://192.168.2.16:3000',
+    // URL: 'https://cumtum.storm.io.vn',
     CONNECTION: 'connection',
     CONNECT: 'connect',
     DISCONNECT: 'disconnect',

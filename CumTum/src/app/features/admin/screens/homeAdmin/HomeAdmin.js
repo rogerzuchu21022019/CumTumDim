@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 //HomeAdmin.js
 import {
   Text,
@@ -33,22 +34,13 @@ import {
 import Router from '../../../../navigation/Router';
 import {fetchPushNotification, fetchUserById} from '../../apiUser';
 const log = LOG.extend(`HOME_ADMIN.JS`);
-// const socket = io(constants.SOCKET.URL, {
-//   transports: ['websocket'],
-// });
+
 const HomeAdmin = ({navigation}) => {
   const dispatch = useDispatch();
   const data = useSelector(cartSelector);
-  // log.info('🚀 ~ file: HomeAdmin.js:36 ~ HomeAdmin ~ data:', data);
 
   const isLoading = data.isLoading;
-
   const user = useSelector(authSelector);
-  // console.log('🚀 ~ file: HomeAdmin.js:44 ~ HomeAdmin ~ user:', user);
-  // log.info(
-  //   '🚀 ~ file: HomeAdmin.js:43 ~ HomeAdmin ~ notifications:',
-  //   user.notifications,
-  // );
 
   const userId = user.user._id;
   // console.log('🚀 ~ file: HomeAdmin.js:51 ~ HomeAdmin ~ userId:', userId);
@@ -69,22 +61,23 @@ const HomeAdmin = ({navigation}) => {
   useEffect(() => {
     socketServices.initializeSocket();
     socketServices.on(constants.SOCKET.CREATE_ORDER, orderData => {
-      console.log(
-        '🚀 ~ file: HomeAdmin.js:72 ~ useEffect ~ orderData:',
-        orderData,
-      );
       onDisplayNotification(orderData);
+      dispatch(fetchUserById(userId));
       dispatch(fetchOrders());
     });
-    socketServices.on(constants.SOCKET.PUSH_NOTIFICATION_ADMIN, userId => {
-      dispatch(fetchUserById(userId));
-    });
+    // socketServices.on(constants.SOCKET.PUSH_NOTIFICATION_ADMIN, userId => {
+    //   dispatch(fetchUserById(userId));
+    // });
     return () => {
       socketServices.socket.disconnect();
     };
   }, [dispatch]);
 
   const onDisplayNotification = async orderData => {
+    console.log(
+      '🚀 ~ file: HomeAdmin.js:80 ~ onDisplayNotification ~ orderData:',
+      orderData,
+    );
     let idOrder = formatCodeOrder(orderData.orderData._id);
     const total = orderData.orderData.moneyToPaid;
 
@@ -96,13 +89,11 @@ const HomeAdmin = ({navigation}) => {
       content,
       _id: orderData._id,
       createdAt: orderData.createdAt,
-      isRead: false,
     };
     const data = {
       userId: userId,
       notification: notification,
     };
-
     dispatch(fetchPushNotification(data));
 
     showNotifyLocal(notification);

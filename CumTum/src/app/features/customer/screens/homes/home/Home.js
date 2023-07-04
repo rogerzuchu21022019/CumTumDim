@@ -55,6 +55,7 @@ const HomeCustomer = ({navigation}) => {
   useEffect(() => {
     const unsubscribe = messaging().onMessage(remoteMessage => {
       const {title, body, data} = remoteMessage.notification;
+      console.log('🚀 ~ file: Home.js:58 ~ unsubscribe ~ data:', data);
       data ? onShowData(data) : onShowNotiWelCome(title, body);
       dispatch(fetchUserById(userId));
     });
@@ -273,7 +274,7 @@ const HomeCustomer = ({navigation}) => {
                   <View style={styles.viewImageDish}>
                     <FastImage
                       style={styles.imageLogo}
-                      source={require('../../../../../../assets/logoExtraDish.png')}
+                      source={require('../../../../../../assets/logo_extra_food.jpg')}
                     />
                   </View>
                 </View>
@@ -309,7 +310,7 @@ const HomeCustomer = ({navigation}) => {
                   <View style={styles.viewImageDish}>
                     <FastImage
                       style={styles.imageLogo}
-                      source={require('../../../../../../assets/logo_another.png')}
+                      source={require('../../../../../../assets/logo_another.jpeg')}
                     />
                   </View>
                 </View>
