@@ -17,7 +17,6 @@ import SafeKeyComponent from '../../../../../components/safe_area/SafeKeyCompone
 import {authSelector} from '../../../../admin/sliceAuth';
 import {LOG} from '../../../../../../../logger.config';
 import {fetchUserById} from '../../../../admin/apiUser';
-import {onDisplayNotiAccepted} from '../../../../../shared/utils/ShowNotificationAccepted';
 const log = LOG.extend(`HISTORY.JS`);
 
 const History = ({navigation}) => {
