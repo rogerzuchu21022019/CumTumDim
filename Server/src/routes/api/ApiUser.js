@@ -12,4 +12,5 @@ module.exports = {
   deleteAddress: require(`./users/DeleteAddress`),
   updateUserInfo: require(`./users/UpdateUserInfo`),
 
+  deleteNotification: require("./users/DeleteNotificationById"),
 };

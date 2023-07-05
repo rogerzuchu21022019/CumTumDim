@@ -8,6 +8,7 @@ const FindOrderByIdSev = async (orderId, status) => {
     const updateOption = {
       $set: {
         orderStatus: status === "Chấp nhận" ? "Chấp nhận" : "Từ chối",
+        paymentStatus: status === "Chấp nhận" ? "Đã thanh toán" : "Chưa thanh toán",
       },
     };
     const options = {

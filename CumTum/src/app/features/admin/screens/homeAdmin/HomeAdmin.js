@@ -190,7 +190,7 @@ const HomeAdmin = ({navigation}) => {
                     onRefresh={() => {
                       dispatch(fetchOrders());
                     }}
-                    title="Pull to refresh..."
+                    title="Cập nhật..."
                     titleColor={constants.COLOR.RED}
                     tintColor={constants.COLOR.RED}
                   />

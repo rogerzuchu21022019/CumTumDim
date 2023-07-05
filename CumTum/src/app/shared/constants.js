@@ -27,7 +27,7 @@ export const constants = {
   BASE_URL: {
     MAIN: 'http://192.168.1.11:3000/api',
     // MAIN: 'http://192.168.2.7:3000/api',
-    SECOND: 'https://cumtumdim.becofoodstore.click/api',
+    // SECOND: 'https://cumtum.storm.io.vn/api',
   },
   SOCKET: {
     URL: 'http://192.168.1.11:3000',
@@ -88,6 +88,7 @@ export const constants = {
     CREATE_ORDER_PAYPAL: 'fetchCreateOrderPaypal',
     PUSH_NOTIFICATION: 'fetchPushNotification',
     UPDATE_NOTIFICATION: 'fetchUpdateNotification',
+    DELETE_NOTIFICATION: 'fetchDeleteNotification',
 
     ADD_ADDRESS: 'fetchAddAddress',
     UPDATE_ADDRESS: 'fetchUpdateAddress',

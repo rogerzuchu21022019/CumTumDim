@@ -69,10 +69,10 @@ export const sliceProduct = createSlice({
         const filterDataMainList = state.categories.filter(
           item => item._id === categoryId && item.name === 'Món chính',
         );
-        log.info(
-          '🚀 ~ file: sliceProduct.js:69 ~ filterDataMainList:',
-          filterDataMainList,
-        );
+        // log.info(
+        //   '🚀 ~ file: sliceProduct.js:69 ~ filterDataMainList:',
+        //   filterDataMainList,
+        // );
         if (filterDataMainList.length > 0) {
           state.mainDishCart.push(data);
         }
