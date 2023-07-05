@@ -1,3 +1,5 @@
+import Manage from "../features/admin/screens/manager/manage/Manage";
+
 const Router = {
   /* Admin */
   HOME_ADMIN: 'Trang chủ',
@@ -22,6 +24,11 @@ const Router = {
   SUPPORT:"Support",
   INCOME:"Income",
   STATISTIC:"thống kê",
+  
+  BANNER:"Banner",
+  ADD_BANNER:"AddBanner",
+  UPDATE_BANNER:"UpdateBanner",
+  DELETE_BANNER:"DeleteBanner",
 
   /* Customer */
   SPLASH_SCREEN:"Splash",
