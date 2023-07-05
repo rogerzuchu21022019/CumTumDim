@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 import { constants } from '../../../../shared/constants';
 
 const StyleStatistic = StyleSheet.create({
@@ -10,7 +10,7 @@ const StyleStatistic = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     backgroundColor: constants.COLOR.PRIMARY,
-    marginBottom:2,
+    marginBottom: 2,
   },
 
   imageLogo: {
@@ -61,10 +61,10 @@ const StyleStatistic = StyleSheet.create({
     justifyContent: 'space-evenly',
   },
   tabRevenue: {
-    width: 197,
-    height: 50,
+    width: 180,
+    height: 48,
     backgroundColor: constants.COLOR.DARK_BROWN,
-    borderRadius:10,
+    borderRadius: 10,
   },
   tab1: {
     height: 50,
@@ -74,13 +74,19 @@ const StyleStatistic = StyleSheet.create({
   textTab: {
     color: constants.COLOR.WHITE,
     fontWeight: '700',
+    bottom: 1,
+  },
+  textTab1: {
+    color: constants.COLOR.WHITE,
+    fontWeight: '700',
+    right: 10,
+    bottom: 1,
   },
   tabChart: {
-    width: 191,
-    height: 50,
+    width: 180,
+    height: 48,
     backgroundColor: constants.COLOR.DARK_BROWN,
-    borderRadius:10,
-
+    borderRadius: 10,
   },
   tab2: {
     width: 200,
@@ -90,11 +96,11 @@ const StyleStatistic = StyleSheet.create({
   },
   bodyTabRevenue: {
     width: '100%',
-    flex:1,
-    marginVertical:20
+    flex: 1,
+    marginVertical: 20
   },
-  dateRangePickerContainer:{
-    
+  dateRangePickerContainer: {
+
   },
   dateRangePickerText: {
     top: 10,
@@ -105,18 +111,18 @@ const StyleStatistic = StyleSheet.create({
     fontWeight: '500',
   },
   dateRangePickerText1: {
-    width: 100,
+    width: 180,
     height: 40,
-    marginHorizontal: 20,
+    left: 0,
     borderRadius: 9,
     borderWidth: 1,
     backgroundColor: constants.COLOR.ORANGE,
   },
   dateRangePickerText3: {
     backgroundColor: constants.COLOR.DARK_BROWN,
-    width: 200,
+    width: 183,
     height: 40,
-    marginHorizontal: 15,
+    // marginHorizontal: 30,
     marginBottom: 20,
     borderRadius: 9,
     borderWidth: 1,
@@ -129,12 +135,13 @@ const StyleStatistic = StyleSheet.create({
   },
   dateRangePickerText4: {
     top: 10,
-    marginLeft: 12,
+    // marginLeft: 12,
     color: constants.COLOR.WHITE,
     fontWeight: '500',
+    textAlign: 'center',
   },
   datePickerContainer: {
-    marginTop:50,
+    marginTop: 50,
     height: 200,
     top: 100,
     alignItems: 'center',
@@ -146,8 +153,8 @@ const StyleStatistic = StyleSheet.create({
     borderWidth: 1,
   },
 
-  boxButton:{
-    marginTop:100
+  boxButton: {
+    marginTop: 100
   },
   buttonTouch: {
     width: 310,
@@ -178,7 +185,7 @@ const StyleStatistic = StyleSheet.create({
   bodyTabBieuDo: {
     backgroundColor: 'blue',
   },
-  viewItem1:{
+  viewItem1: {
     backgroundColor: constants.COLOR.WHITE,
     alignItems: 'center',
     justifyContent: 'center',
@@ -206,9 +213,9 @@ const StyleStatistic = StyleSheet.create({
     marginVertical: 6,
   },
 
-  boxIncome:{
+  boxIncome: {
     // backgroundColor:constants.COLOR.GREEN,
-    marginHorizontal:20,
+    marginHorizontal: 20,
     justifyContent: 'center',
     alignItems: 'center',
   },

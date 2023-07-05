@@ -156,7 +156,7 @@ const Statistic = ({navigation}) => {
                 style={[styles.tab2, activeTab === 'Tab 2' && styles.activeTab]}
                 onPress={() => handleTabPress('Tab 2')}>
                 <View style={styles.itemText1}>
-                  <Text style={styles.textTab}>Biểu Đồ</Text>
+                  <Text style={styles.textTab1}>Biểu Đồ</Text>
                 </View>
               </TouchableOpacity>
             </View>
