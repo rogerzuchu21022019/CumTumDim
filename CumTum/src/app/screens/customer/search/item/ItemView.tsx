@@ -8,7 +8,7 @@ import SafeKeyComponent from '../../../../components/safe_area/SafeKeyComponent'
 import {ItemPropsHandler, Subcategory} from '../../../../../redux/api/types';
 const log = LOG.extend('ITEM_VIEW.JS');
 const ItemView = (props: ItemPropsHandler) => {
-  const {item, index, handleAddDish, handleRemoveDish} = props;
+  const {item, index, handleAddDish, handleRemoveDish, lastIndex} = props;
 
   const onDecrease = () => {
     if (item.amount === 0) {
@@ -29,7 +29,10 @@ const ItemView = (props: ItemPropsHandler) => {
 
   return (
     <SafeKeyComponent>
-      <View key={index} style={styles.container}>
+      <View
+        key={index}
+        className={`${index === lastIndex ? 'pb-[40px]' : ''}`}
+        style={styles.container}>
         <View style={styles.header} />
         <View style={styles.body}>
           <View style={styles.boxInfoDish}>
