@@ -140,6 +140,7 @@ export const sliceProduct = createSlice({
       return state;
     },
 
+
     decreaseDishByID: (state, action) => {
       const data = action.payload;
       const {_id} = data;
@@ -214,6 +215,7 @@ export const sliceProduct = createSlice({
 
       return state;
     },
+
     updateAmount: (state, action) => {
       const data = action.payload;
       // log.error(
@@ -316,6 +318,7 @@ export const sliceProduct = createSlice({
       }
       return state;
     },
+
     resetCart: state => {
       state.mainDishCart = [];
       state.extraDishCart = [];

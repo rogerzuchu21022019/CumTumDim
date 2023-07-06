@@ -32,6 +32,7 @@ import {
   onShowNotiWelCome,
 } from '../../../../../shared/utils/ShowNotifiWelcome';
 import {fetchUserById} from '../../../../admin/apiUser';
+import ModalSearch from '../../../../../components/modal/ModalSearch';
 
 const HomeCustomer = ({navigation}) => {
   const log = LOG.extend('HOME_CUSTOMER.js');
@@ -55,7 +56,6 @@ const HomeCustomer = ({navigation}) => {
   useEffect(() => {
     const unsubscribe = messaging().onMessage(remoteMessage => {
       const {title, body, data} = remoteMessage.notification;
-      console.log('🚀 ~ file: Home.js:58 ~ unsubscribe ~ data:', data);
       data ? onShowData(data) : onShowNotiWelCome(title, body);
       dispatch(fetchUserById(userId));
     });
@@ -69,8 +69,6 @@ const HomeCustomer = ({navigation}) => {
   const message2 = `Vui lòng cập nhật địa chỉ`;
   const message3 = `để chúng tôi có thể giao hàng cho bạn`;
 
-  const IMAGE_BG =
-    'https://cdn.britannica.com/38/111338-050-D23BE7C8/Stars-NGC-290-Hubble-Space-Telescope.jpg?w=400&h=300&c=crop';
   const data = useSelector(productSelector);
 
   const [tabs, setTabs] = useState([0, 1, 2, 3]);
@@ -83,6 +81,7 @@ const HomeCustomer = ({navigation}) => {
   const [isShowModal, setIsShowModal] = useState(false);
   const [isCancel, setIsCancel] = useState(false);
   const [isAddress, setIsAddress] = useState(false);
+  const [isShowModalSearch, setIsShowModalSearch] = useState(false);
 
   const [iconFoods, setIconFoods] = useState(true);
 
@@ -95,7 +94,6 @@ const HomeCustomer = ({navigation}) => {
 
   useEffect(() => {
     socketServices.initializeSocket();
-
     return () => {
       socketServices.socket.disconnect();
     };
@@ -121,6 +119,19 @@ const HomeCustomer = ({navigation}) => {
       content: status === 'Chấp nhận' ? contentAccepted : contentDeny,
     };
     showNotifyLocal(dataMap);
+  };
+
+  const onCancel = () => {
+    setIsShowModalSearch(false);
+  };
+
+  const openModalSearch = () => {
+    setIsShowModalSearch(true);
+  };
+
+  const onDone = () => {
+    setIsShowModalSearch(false);
+    navigation.navigate(Router.CART_TABS);
   };
 
   useEffect(() => {
@@ -163,12 +174,6 @@ const HomeCustomer = ({navigation}) => {
     dispatch(updateQuantity(dish));
   };
 
-  const imageUrlOptions = {
-    uri: '',
-    priority: FastImage.priority.normal,
-    cache: FastImage.cacheControl.immutable,
-  };
-
   const openTab1 = () => {
     setIsShowDropdown(true);
     setTabs(0);
@@ -206,6 +211,19 @@ const HomeCustomer = ({navigation}) => {
               />
               <Text style={styles.textTitle}>Cum tứm đim</Text>
             </View>
+            <TouchableOpacity
+              style={{
+                marginRight: 20,
+              }}
+              onPress={openModalSearch}>
+              <View>
+                <IconOcticons
+                  name="search"
+                  color={constants.COLOR.WHITE}
+                  size={20}
+                />
+              </View>
+            </TouchableOpacity>
             <TouchableOpacity onPress={moveToRingBell}>
               <View style={styles.rightHeader}>
                 <View>
@@ -321,7 +339,7 @@ const HomeCustomer = ({navigation}) => {
               <View style={styles.boxFlashList}>
                 <Image
                   source={{
-                    uri: IMAGE_BG,
+                    uri: constants.IMAGE_BG.URI,
                   }}
                   style={StyleSheet.absoluteFillObject}
                   blurRadius={20}
@@ -374,7 +392,7 @@ const HomeCustomer = ({navigation}) => {
               <View style={styles.boxFlashList}>
                 <Image
                   source={{
-                    uri: IMAGE_BG,
+                    uri: constants.IMAGE_BG.URI,
                   }}
                   style={StyleSheet.absoluteFillObject}
                   blurRadius={20}
@@ -446,6 +464,12 @@ const HomeCustomer = ({navigation}) => {
           navigation={navigation}
           isAddress={isAddress}
           item={userInfo}
+        />
+        <ModalSearch
+          isVisible={isShowModalSearch}
+          navigation={navigation}
+          onCancel={onCancel}
+          onDone={onDone}
         />
         {/* <View style={styles.footer}></View> */}
       </View>

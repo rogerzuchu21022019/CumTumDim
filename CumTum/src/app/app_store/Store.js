@@ -9,6 +9,8 @@ import sliceAuth from '../features/admin/sliceAuth';
 import sliceProduct from '../features/product/sliceProduct';
 import {constants} from '../shared/constants';
 import sliceCart from '../features/carts/sliceOrder';
+import {categoriesApi} from '../../redux/api/categoriesApi';
+import {dishesApi} from '../../redux/api/dishesApi';
 
 let persistConfig = {
   key: 'root',
@@ -21,6 +23,8 @@ const rootReducers = combineReducers({
   auth: sliceAuth,
   product: sliceProduct,
   cart: sliceCart,
+  [categoriesApi.reducerPath]: categoriesApi.reducer,
+  [dishesApi.reducerPath]: dishesApi.reducer,
 });
 
 const resetRootReducer = (state, action) => {
@@ -38,5 +42,5 @@ export const Store = configureStore({
     getDefaultMiddleware({
       serializableCheck: false, // bỏ qua kiểm tra tính immutability của state
       immutableCheck: false,
-    }),
+    }).concat([categoriesApi.middleware, dishesApi.middleware]),
 });
