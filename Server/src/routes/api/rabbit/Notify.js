@@ -4,7 +4,7 @@ const express = require(`express`);
 const amqp = require("amqplib");
 
 const CONSTANTS = require("../../../utils/Constant");
-const CreateOrderCon = require("../../../components/oders/controllers/CreateOrderCon");
+const CreateOrderCon = require("../../../components/orders/controllers/CreateOrderCon");
 const FindUserByIdCon = require("../../../components/users/controllers/FindUserByIdCon");
 const { connectRabbitPub } = require("../../../utils/RabbitMq");
 

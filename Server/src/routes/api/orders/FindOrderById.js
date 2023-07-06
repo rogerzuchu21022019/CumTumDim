@@ -1,6 +1,6 @@
 const express = require(`express`);
 const CONSTANTS = require("../../../utils/Constant");
-const FindOrderByIdCon = require("../../../components/oders/controllers/FindOrderByIdCon");
+const FindOrderByIdCon = require("../../../components/orders/controllers/FindOrderByIdCon");
 const UpdateUserOrderByIdCon = require("../../../components/users/controllers/UpdateUserOrderByIdCon");
 const UpdateUserOrderExistedCon = require("../../../components/users/controllers/UpdateUserOrderExistedCon");
 const PushNotificationCon = require("../../../components/users/controllers/PushNotificationCon");

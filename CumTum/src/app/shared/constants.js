@@ -46,7 +46,7 @@ export const constants = {
     UPDATE_NOTIFICATION_ADMIN: 'update-notification-admin',
     PUSH_NOTIFICATION_CUSTOMER: 'push-notification-customer',
     UPDATE_NOTIFICATION_CUSTOMER: 'update-notification-customer',
-    LISTEN_FROM_EDIT_DELIVERY_ADDRESS:'listenFromEditDeliveryAddress'
+    LISTEN_FROM_EDIT_DELIVERY_ADDRESS: 'listenFromEditDeliveryAddress',
   },
   ROLE: {
     ADMIN: 'admin',
@@ -110,5 +110,8 @@ export const constants = {
 
   RABBIT_MQ: {
     QUEUE_NAME_ORDER: 'order',
+  },
+  IMAGE_BG: {
+    URI: 'https://cdn.britannica.com/38/111338-050-D23BE7C8/Stars-NGC-290-Hubble-Space-Telescope.jpg?w=400&h=300&c=crop',
   },
 };

@@ -30,7 +30,8 @@ app.use(fixPublic);
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 ManagerMiddleware(app);
-
+const searchRoute = require('./routes/api/products/Search');
+app.use('/api/products', searchRoute);
 ApiManagerRouter(app, fixPublic);
 WebManagerRouter(app, fixPublic);
 

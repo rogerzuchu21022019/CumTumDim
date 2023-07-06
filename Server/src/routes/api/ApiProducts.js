@@ -12,4 +12,5 @@ module.exports = {
   updateOrder: require(`../api/orders/FindOrderById`),
   getRabbit: require(`../api/rabbit/NotifyGet`),
   findOrders: require(`../api/orders/FindOrders`),
+  // search:require(`../api/products/Search`)
 };
