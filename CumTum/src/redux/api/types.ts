@@ -37,6 +37,7 @@ export enum Subcategory {
 export declare interface ItemPropsHandler {
   item: Dish | any;
   index: number;
+  lastIndex: number;
   handleAddDish: (item: Dish) => void;
   handleRemoveDish: (item: Dish) => void;
 }

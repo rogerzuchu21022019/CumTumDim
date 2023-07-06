@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-shadow */
+/* eslint-disable no-bitwise */
 import React, {useState, useEffect} from 'react';
 import {
   View,
@@ -6,12 +8,11 @@ import {
   Image,
   StyleSheet,
   TextInput,
-  ScrollView,
 } from 'react-native';
 import IconAnt from 'react-native-vector-icons/AntDesign';
-import IconOcticons from 'react-native-vector-icons/Octicons';
+// import IconOcticons from 'react-native-vector-icons/Octicons';
 import {useDispatch, useSelector} from 'react-redux';
-import {useListDishQuery} from '../../../../redux/api/dishesApi';
+// import {useListDishQuery} from '../../../../redux/api/dishesApi';
 import {
   addDishToWishCartOrUpdate,
   decreaseDishByID,
@@ -30,11 +31,9 @@ const Search = (props: PropsModalSearch) => {
   const {onCancel, onDone} = props;
   const dispatch = useDispatch();
   const productSelect = useSelector(productSelector);
-  const {data, isLoading} = useListDishQuery(); // <- use RTK Query
-
+  // const {data, isLoading} = useListDishQuery(); // <- use RTK Query
   const [search, setSearch] = useState('');
   const [newList, setNewList] = useState<Dish[]>([]);
-
   useEffect(() => {
     const filteredList = filterDishes(productSelect, search);
     setNewList(filteredList);
@@ -49,9 +48,34 @@ const Search = (props: PropsModalSearch) => {
     ];
 
     if (search.length > 0) {
-      allDishes = allDishes.filter((dish: Dish) =>
-        dish.name.toLowerCase().includes(search.toLowerCase()),
-      );
+      allDishes = allDishes.filter((dish: Dish, index: number) => {
+        const filterByName = dish.name
+          .toLowerCase()
+          .includes(search.toLowerCase());
+        const filterByPrice = dish.price
+          .toString()
+          .includes(search.toLowerCase());
+
+        const filterByAmount = dish.amount
+          .toString()
+          .includes(search.toLowerCase());
+        const dishTotalMoney = dish.price * dish.amount;
+        const filterByTotalMoney = dishTotalMoney
+          .toString()
+          .includes(search.toLowerCase());
+
+        const filterByIndex = (index + 1)
+          .toString()
+          .includes(search.toLowerCase());
+        // {item.price * item.amount}
+        return (
+          filterByName ||
+          filterByPrice ||
+          filterByAmount ||
+          filterByTotalMoney ||
+          filterByIndex
+        );
+      });
     }
 
     return allDishes;
@@ -92,7 +116,7 @@ const Search = (props: PropsModalSearch) => {
               <IconAnt name="search1" size={20} style={styles.iconMargin} />
               <TextInput
                 onChangeText={beginFilter}
-                placeholder="Tìm kiếm"
+                placeholder="Tìm kiếm. Vd:'Sườn',28,STT:1,2 "
                 placeholderTextColor="gray"
                 style={styles.inputStyle}
                 value={search}
@@ -105,13 +129,8 @@ const Search = (props: PropsModalSearch) => {
             </View>
             <View style={styles.boxDone}>
               <TouchableOpacity onPress={onDone}>
-                <Text style={styles.textWhite}>Giỏ hàng</Text>
+                <Text className="text-white">Giỏ hàng</Text>
               </TouchableOpacity>
-              {search && (
-                <TouchableOpacity style={styles.btnFind}>
-                  <Text style={styles.textWhite}>Tìm kiếm</Text>
-                </TouchableOpacity>
-              )}
             </View>
           </View>
         </View>
@@ -128,6 +147,7 @@ const Search = (props: PropsModalSearch) => {
                   data={newList}
                   renderItem={({item, index}) => (
                     <ItemView
+                      lastIndex={newList.length - 1}
                       item={item}
                       index={index}
                       handleAddDish={handleAddDish}

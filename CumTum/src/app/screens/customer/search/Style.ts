@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
+
   inputStyle: {
     flex: 1,
     justifyContent: 'center',
@@ -43,7 +44,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: '10%',
   },
-  
+
   body: {
     flex: 8,
     // backgroundColor:'red'
