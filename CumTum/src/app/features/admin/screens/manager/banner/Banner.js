@@ -51,7 +51,7 @@ const Banner = ({navigation}) => {
         </View>
         <View style={styles.body}>
           <View style={styles.groupBody}>
-            {/* Thêm loại món ăn */}
+   
             <TouchableOpacity onPress={() => moveToScreen(Router.ADD_BANNER)}>
               <View style={styles.btnAll}>
                 <Image
@@ -60,16 +60,16 @@ const Banner = ({navigation}) => {
                 <Text style={styles.textAll}>Thêm quảng cáo</Text>
               </View>
             </TouchableOpacity>
-            {/* Sửa loại món ăn */}
-            <TouchableOpacity onPress={() => moveToScreen(Router.UPDATE_BANNER)}>
+           
+            {/* <TouchableOpacity onPress={() => moveToScreen(Router.UPDATE_BANNER)}>
               <View style={styles.btnAll}>
                 <Image
                   source={require('../../../../../../assets/iconLogo_CumTumDim.jpg')}
                 />
                 <Text style={styles.textAll}>Sửa quảng cáo</Text>
               </View>
-            </TouchableOpacity>
-            {/* xóa loại món ăn */}
+            </TouchableOpacity> */}
+  
             <TouchableOpacity onPress={() => moveToScreen(Router.DELETE_BANNER)}>
               <View style={styles.btnAll}>
                 <Image

@@ -124,13 +124,13 @@ const ManagerTabs = () => {
               headerShown: false,
             }}
           />
-          <Stack.Screen
+          {/* <Stack.Screen
             name={Router.UPDATE_BANNER}
             component={UpdateBanner}
             options={{
               headerShown: false,
             }}
-          />
+          /> */}
           <Stack.Screen
             name={Router.DELETE_BANNER}
             component={DeleteBanner}

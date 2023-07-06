@@ -82,7 +82,7 @@ const DeleteBanner = ({navigation}) => {
         <View style={styles.body}>
           <View>
             <FlatList
-              // data={productSelect.categories}
+              data={productSelect.categories}
               showsVerticalScrollIndicator={false}
               renderItem={({item, index}) => (
                 <ListItem
