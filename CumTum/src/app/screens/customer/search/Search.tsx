@@ -52,6 +52,8 @@ const Search = (props: PropsModalSearch) => {
         const filterByName = dish.name
           .toLowerCase()
           .includes(search.toLowerCase());
+        const filterBySubCategory = dish.subCategory && dish.subCategory.toLowerCase()
+          .includes(search.toLowerCase());  
         const filterByPrice = dish.price
           .toString()
           .includes(search.toLowerCase());
@@ -73,7 +75,7 @@ const Search = (props: PropsModalSearch) => {
           filterByPrice ||
           filterByAmount ||
           filterByTotalMoney ||
-          filterByIndex
+          filterByIndex || filterBySubCategory
         );
       });
     }
@@ -117,17 +119,27 @@ const Search = (props: PropsModalSearch) => {
               <IconAnt name="left" color={constants.COLOR.WHITE} size={18} />
             </TouchableOpacity>
             <View style={styles.boxInput}>
-              <IconAnt name="search1" size={20} style={styles.iconMargin} />
+              <IconAnt
+                name="search1"
+                size={20}
+                color={constants.COLOR.WHITE}
+                style={styles.iconMargin}
+              />
               <TextInput
                 onChangeText={beginFilter}
-                placeholder="Tìm kiếm. Vd:'Sườn',28,STT:1,2 "
-                placeholderTextColor="gray"
+                placeholder="Tìm kiếm"
+                placeholderTextColor={constants.COLOR.WHITE}
                 style={styles.inputStyle}
                 value={search}
               />
               {search.length > 0 && (
                 <TouchableOpacity style={styles.boxClear} onPress={resetSearch}>
-                  <IconAnt name="close" size={16} style={styles.iconMargin} />
+                  <IconAnt
+                    name="close"
+                    size={25}
+                    color={constants.COLOR.WHITE}
+                    style={styles.iconMargin}
+                  />
                 </TouchableOpacity>
               )}
             </View>
@@ -139,23 +151,23 @@ const Search = (props: PropsModalSearch) => {
             </View>
           </View>
           {search.length > 0 && (
-            <View className="mt-[20px] w-full">
+            <View className="mt-[20px] px-[30px] w-full">
               <View>
                 <Text className="text-red-500">Tìm kiếm theo:</Text>
               </View>
               <View className="inline">
                 <Text className="text-green-500 text-w">
-                  Trạng thái: Đang chờ, Chấp nhận, đang, Đang, chờ, Chờ
+                  Tên món ăn: Sườn,cây,Sườn cây,mỡ....
                 </Text>
               </View>
               <View>
                 <Text className="text-red-500">
-                  Đơn hàng: bất kì kí tự có trong mã đơn
+                  Giá tiền: Giá hiển thị : 50,25,28....
                 </Text>
               </View>
               <View>
                 <Text className="text-red-500">
-                  Giá tiền: Giá hiển thị : 50,25,28
+                  Tổng tiền của món: Giá hiển thị * số lượng : 25 *2 = 50 => gõ 50 là ra 
                 </Text>
               </View>
             </View>

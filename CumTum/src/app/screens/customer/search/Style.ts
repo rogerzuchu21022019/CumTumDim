@@ -27,6 +27,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    borderColor: constants.COLOR.WHITE,
   },
 
   inputStyle: {
@@ -34,6 +35,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginLeft: 10,
+    color:constants.COLOR.WHITE
   },
   boxSearch: {
     flexDirection: 'row',

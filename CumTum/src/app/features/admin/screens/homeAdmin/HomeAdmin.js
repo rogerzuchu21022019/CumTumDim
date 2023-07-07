@@ -197,13 +197,13 @@ const HomeAdmin = ({navigation}) => {
                 Doanh thu: {convertMoney(totalIncome)}
               </Text>
               <View style={styles.boxInput} className="mb-[20px]">
-                <IconAnt name="search1" size={20} style={styles.iconMargin} />
+                <IconAnt name="search1" color={constants.COLOR.WHITE}  size={20} style={styles.iconMargin} />
                 <TextInput
                   onChangeText={text => {
                     beginFilter(text);
                   }}
                   placeholder="Tìm kiếm"
-                  placeholderTextColor="gray"
+                  placeholderTextColor={constants.COLOR.WHITE}
                   style={styles.inputStyle}
                   value={search}
                 />
@@ -212,7 +212,7 @@ const HomeAdmin = ({navigation}) => {
                   <TouchableOpacity
                     style={styles.boxClear}
                     onPress={resetSearch}>
-                    <IconAnt name="close" size={16} style={styles.iconMargin} />
+                    <IconAnt name="close" color={constants.COLOR.WHITE} size={20} style={styles.iconMargin} />
                   </TouchableOpacity>
                 )}
               </View>
