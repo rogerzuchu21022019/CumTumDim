@@ -9,6 +9,12 @@ export interface Category {
   name: string;
 }
 
+export interface Banner {
+  name?: string;
+  imageUrl: string;
+  _id?: string;
+}
+
 export interface Order {
   _id: string;
   mainDishCart: [];

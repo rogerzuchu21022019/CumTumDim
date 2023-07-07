@@ -3,6 +3,10 @@ module.exports = {
   updateCategoryById: require(`../api/products/UpdateCategoryByID`),
   deleteCategory: require(`../api/products/DeleteCategory`),
   findCategories: require(`../api/products/FindCategories`),
+
+  findBanners: require(`../api/banners/FindBanners`),
+  addBanner: require(`../api/banners/AddBanner`),
+
   addDish: require(`../api/products/AddDish`),
   updateDishById: require(`../api/products/UpdateDishByID`),
   deleteDishById: require(`../api/products/DeleteDish`),

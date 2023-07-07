@@ -12,6 +12,7 @@ import sliceCart from '../features/carts/sliceOrder';
 import {categoriesApi} from '../../redux/api/categoriesApi';
 import {dishesApi} from '../../redux/api/dishesApi';
 import {ordersApi} from '../../redux/api/ordersApi';
+import {bannersApi} from '../../redux/api/bannersApi';
 
 let persistConfig = {
   key: 'root',
@@ -27,6 +28,7 @@ const rootReducers = combineReducers({
   [categoriesApi.reducerPath]: categoriesApi.reducer,
   [dishesApi.reducerPath]: dishesApi.reducer,
   [ordersApi.reducerPath]: ordersApi.reducer,
+  [bannersApi.reducerPath]: bannersApi.reducer,
 });
 
 const resetRootReducer = (state, action) => {
@@ -48,5 +50,6 @@ export const Store = configureStore({
       categoriesApi.middleware,
       dishesApi.middleware,
       ordersApi.middleware,
+      bannersApi.middleware,
     ]),
 });

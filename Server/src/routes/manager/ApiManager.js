@@ -56,6 +56,9 @@ const ManagerRouter = (app, fixPublic) => {
   app.use(SUB_PRODUCTS, ApiProducts.updateCategoryById, fixPublic);
   app.use(SUB_PRODUCTS, ApiProducts.deleteCategory, fixPublic);
   app.use(SUB_PRODUCTS, ApiProducts.findCategories, fixPublic);
+  
+  app.use(SUB_PRODUCTS, ApiProducts.findBanners, fixPublic);
+  app.use(SUB_PRODUCTS, ApiProducts.addBanner, fixPublic);
 
   app.use(SUB_PRODUCTS, ApiProducts.addDish, fixPublic);
   app.use(SUB_PRODUCTS, ApiProducts.updateDishById, fixPublic);

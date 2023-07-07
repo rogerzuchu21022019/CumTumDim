@@ -15,7 +15,7 @@ import DeleteTypeFood from './manageCategories/deleteTypeFood/DeleteTypeFood';
 import UpdateTypeFood from './manageCategories/updateTypeFood/UpdateTypeFood';
 import UpdateDish from './manageFood/updateDish/UpdateDish';
 import DeleteDish from './manageFood/deleteDish/DeleteDish';
-import Banner from './banner/Banner';
+import ManageBanner from './banner/ManageBanner';
 import AddBanner from './banner/addBanner/AddBanner';
 import DeleteBanner from './banner/deleteBanner/DeleteBanner';
 import UpdateBanner from './banner/updateBanner/UpdateBanner';
@@ -110,11 +110,10 @@ const ManagerTabs = () => {
             }}
           />
           <Stack.Screen
-            name={Router.BANNER}
-            component={Banner}
+            name={Router.MANAGE_BANNER}
+            component={ManageBanner}
             options={{
               headerShown: false,
-              presentation: 'modal',
             }}
           />
           <Stack.Screen

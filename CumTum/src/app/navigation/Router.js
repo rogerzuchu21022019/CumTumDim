@@ -25,7 +25,7 @@ const Router = {
   INCOME:"Income",
   STATISTIC:"thống kê",
   
-  BANNER:"Banner",
+  MANAGE_BANNER:"ManageBanner",
   ADD_BANNER:"AddBanner",
   UPDATE_BANNER:"UpdateBanner",
   DELETE_BANNER:"DeleteBanner",

@@ -48,8 +48,8 @@ const Manage = ({navigation}) => {
                 <Text style={styleManager.textAll}>Quản lý món ăn</Text>
               </View>
             </TouchableOpacity>
-               {/* Quản lý món ăn */}
-            <TouchableOpacity onPress={() => moveToScreen(Router.BANNER)}>
+               {/* Quản lý banner */}
+            <TouchableOpacity onPress={() => moveToScreen(Router.MANAGE_BANNER)}>
               <View style={styleManager.btnAll}>
                 <Image
                   source={require('../../../../../../assets/iconLogo_CumTumDim.jpg')}

@@ -1,13 +1,13 @@
 import {View, Text, Image, TouchableOpacity} from 'react-native';
 import React from 'react';
-import styles from './StylesBanner';
+import styles from './StylesManageBanner';
 import SafeKeyComponent from '../../../../../components/safe_area/SafeKeyComponent';
 
 import FastImage from 'react-native-fast-image';
 import IconIonicons from 'react-native-vector-icons/Ionicons';
 import Router from '../../../../../navigation/Router';
 import {constants} from '../../../../../shared/constants';
-const Banner = ({navigation}) => {
+const ManageBanner = ({navigation}) => {
   const moveToScreen = nameScreen => {
     navigation.navigate(nameScreen);
   };
@@ -51,7 +51,6 @@ const Banner = ({navigation}) => {
         </View>
         <View style={styles.body}>
           <View style={styles.groupBody}>
-   
             <TouchableOpacity onPress={() => moveToScreen(Router.ADD_BANNER)}>
               <View style={styles.btnAll}>
                 <Image
@@ -86,4 +85,4 @@ const Banner = ({navigation}) => {
   );
 };
 
-export default Banner;
+export default ManageBanner;

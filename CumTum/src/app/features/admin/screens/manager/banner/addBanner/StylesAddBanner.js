@@ -58,6 +58,8 @@ const styles = StyleSheet.create({
   body: {
     flex: 12,
     backgroundColor: constants.COLOR.PRIMARY,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   viewDropdown: {
     marginTop: 20,
