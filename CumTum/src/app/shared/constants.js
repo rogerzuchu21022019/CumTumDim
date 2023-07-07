@@ -32,8 +32,8 @@ export const constants = {
     SECOND: 'https://cumtum.storm.io.vn/api',
   },
   SOCKET: {
-    // URL: 'http://192.168.2.4:3000',
-    URL: 'https://cumtum.storm.io.vn',
+    URL: 'http://192.168.2.4:3000',
+    // URL: 'https://cumtum.storm.io.vn',
     CONNECTION: 'connection',
     CONNECT: 'connect',
     DISCONNECT: 'disconnect',

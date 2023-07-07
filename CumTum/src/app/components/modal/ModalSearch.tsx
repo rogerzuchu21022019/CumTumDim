@@ -8,6 +8,7 @@ const ModalSearch = (props: PropsModalSearch) => {
   return (
     <Modal
       visible={isVisible}
+      animationType="slide"
       onRequestClose={() => {
         setIsVisible(false);
       }}>
