@@ -107,7 +107,11 @@ const Search = (props: PropsModalSearch) => {
           style={StyleSheet.absoluteFillObject}
           blurRadius={20}
         />
-        <View style={styles.header}>
+        <View
+          // style={styles.header}
+          className={` justify-center items-center ${
+            search.length > 0 ? 'h-[20%]' : 'h-[10%]'
+          }`}>
           <View style={styles.boxSearch}>
             <TouchableOpacity style={styles.boxIconBack} onPress={onCancel}>
               <IconAnt name="left" color={constants.COLOR.WHITE} size={18} />
@@ -127,12 +131,35 @@ const Search = (props: PropsModalSearch) => {
                 </TouchableOpacity>
               )}
             </View>
+
             <View style={styles.boxDone}>
               <TouchableOpacity onPress={onDone}>
                 <Text className="text-white">Giỏ hàng</Text>
               </TouchableOpacity>
             </View>
           </View>
+          {search.length > 0 && (
+            <View className="mt-[20px] w-full">
+              <View>
+                <Text className="text-red-500">Tìm kiếm theo:</Text>
+              </View>
+              <View className="inline">
+                <Text className="text-green-500 text-w">
+                  Trạng thái: Đang chờ, Chấp nhận, đang, Đang, chờ, Chờ
+                </Text>
+              </View>
+              <View>
+                <Text className="text-red-500">
+                  Đơn hàng: bất kì kí tự có trong mã đơn
+                </Text>
+              </View>
+              <View>
+                <Text className="text-red-500">
+                  Giá tiền: Giá hiển thị : 50,25,28
+                </Text>
+              </View>
+            </View>
+          )}
         </View>
         <View style={styles.body}>
           <View style={styles.container}>
