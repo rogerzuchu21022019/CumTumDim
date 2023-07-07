@@ -18,7 +18,7 @@ export const fetchCreateOrder = createAsyncThunk(
     const response = await AxiosInstance().post(`/products/create-order`, {
       order: newOrder,
     });
-    log.info('🚀 ~ file: apiOrder.js:13 ~ response ~ response:', response.data);
+    // log.info('🚀 ~ file: apiOrder.js:13 ~ response ~ response:', response.data);
     return response.data;
   },
 );

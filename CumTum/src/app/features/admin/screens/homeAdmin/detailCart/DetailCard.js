@@ -86,8 +86,6 @@ const DetailCard = ({route, navigation}) => {
     }
   };
 
-  // item.totalMainDish
-
   return (
     <SafeKeyComponent>
       {item.mainDishCart.length ||
