@@ -9,7 +9,7 @@ const ModalSearch = (props: PropsModalSearch) => {
     <Modal
       visible={isVisible}
       onRequestClose={() => {
-        setIsVisible(true);
+        setIsVisible(false);
       }}>
       <Search
         setIsVisible={setIsVisible}

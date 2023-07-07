@@ -9,6 +9,28 @@ export interface Category {
   name: string;
 }
 
+export interface Order {
+  _id: string;
+  mainDishCart: [];
+  extraDishCart: [];
+  toppingsCart: [];
+  anotherCart: [];
+  paymentStatus: string;
+  orderStatus: string;
+  totalMainDish: number;
+  totalExtraDish: number;
+  totalTopping: number;
+  totalAnother: number;
+  totalAmount: number;
+  moneyToPaid: number;
+  userId: string;
+  address: {};
+  captureId: string;
+  valueAmount: number;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 export interface Dish {
   _id: string;
   name: string;
