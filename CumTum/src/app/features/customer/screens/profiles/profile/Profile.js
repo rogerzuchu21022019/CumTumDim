@@ -39,10 +39,10 @@ const Profile = ({navigation}) => {
 
   const handleLogout = async () => {
     dispatch(fetchSignOut());
-    moveTo();
+    // moveTo();
   };
   const moveTo = async () => {
-    navigation.navigate(Router.LOGIN);
+    // navigation.navigate(Router.LOGIN);
     socketServices.socket.disconnect();
   };
   const moveToEdit = async () => {

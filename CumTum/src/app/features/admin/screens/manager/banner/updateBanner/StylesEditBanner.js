@@ -1,11 +1,11 @@
-import {StyleSheet} from 'react-native';
 import {constants} from '../../../../../../shared/constants';
-const Styles = StyleSheet.create({
+
+const {StyleSheet} = require('react-native');
+const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'black',
   },
-  // header
+  /* Header */
   header: {
     flex: 1,
     justifyContent: 'center',
@@ -53,78 +53,38 @@ const Styles = StyleSheet.create({
     // backgroundColor: constants.COLOR.WHITE,
     alignItems: 'center',
   },
-  trashImage: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: 60,
-    borderRadius: 20,
-  },
+  /* Header */
 
-  // body
   body: {
     flex: 12,
     backgroundColor: constants.COLOR.PRIMARY,
+    justifyContent: 'center',
     alignItems: 'center',
   },
-
-  itemEat: {
-    backgroundColor: constants.COLOR.GREY,
-    height: 200,
-    width: 350,
-    marginHorizontal: 10,
-    borderRadius: 10,
+  viewDropdown: {
+    marginTop: 20,
+    marginLeft: 20,
+    marginRight: 20,
+  },
+  footer: {
     justifyContent: 'center',
-    marginBottom: 15,
-    marginTop: 10,
+    alignItems: 'center',
+    // backgroundColor: constants.COLOR.YELLOW,
   },
-  itemNumber: {
-    flex: 1 / 3,
-    justifyContent: 'center',
-    // backgroundColor:'red'
-  },
-
-  numberItem: {
-    color: constants.COLOR.WHITE,
-    fontSize: 15,
-    fontWeight: '500',
-    textAlign: 'center',
-  },
-  itemQuantity: {
-    flex: 1,
-  },
-  imageEdit: {
-    justifyContent: 'center',
+  viewButtonCreate: {
     backgroundColor: constants.COLOR.ORANGE,
-    width: 50,
-    height: 50,
+    marginTop: 20,
     alignItems: 'center',
-    borderRadius: 25,
-  },
-
-  groupItem: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-  },
-  itemName: {
-    color: 'white',
-    fontSize: 15,
-    fontWeight: '500',
     justifyContent: 'center',
-    textAlign: 'center',
+    borderRadius: 10,
+    width: 350,
+    height: 50,
   },
-  viewName: {
-    flex: 3,
+  btnCreate: {
+    // backgroundColor: constants.COLOR.RED,
+    fontWeight: '700',
+    fontSize: 20,
+    color: constants.COLOR.WHITE,
   },
-  // nameTitle: {
-  //   color: constants.COLOR.WHITE,
-  //   fontSize: 20,
-  //   paddingBottom: 15,
-  // },
-
-  // itemImage: {
-  //   height: 25,
-  //   width: 25,
-  // },
 });
-export default Styles;
+export default styles;

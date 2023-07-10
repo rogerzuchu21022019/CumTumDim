@@ -17,10 +17,11 @@ export interface PropsModalSearch {
 export interface PropsItemBanner {
   item: Banner;
   index: number;
+  indexSelected: number;
   navigation: any;
-  onTapImage: (index: number) => void;
-  onDrag?: (x: number, y: number) => void;
-  onDrop?: (x: number, y: number, index: number) => void;
+  isLoading?: boolean;
+  handleSwipeableOpen: (index: number) => void;
+  handleRemove?: (item: Banner | any) => void;
 }
 
 export interface ILoading {

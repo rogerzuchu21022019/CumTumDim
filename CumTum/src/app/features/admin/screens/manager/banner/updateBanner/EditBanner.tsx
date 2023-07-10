@@ -1,13 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/react-in-jsx-scope */
 import {useState} from 'react';
-import {
-  View,
-  Text,
-  Platform,
-  TouchableOpacity,
-  ActivityIndicator,
-} from 'react-native';
+import {View, Text, Platform, TouchableOpacity} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import IconIonicons from 'react-native-vector-icons/Ionicons';
 
@@ -16,25 +10,23 @@ import SafeKeyComponent from '../../../../../../components/safe_area/SafeKeyComp
 import Router from '../../../../../../navigation/Router';
 import {onGallery} from '../../../../../../shared/utils/Camera';
 import {androidCameraPermission} from '../../../../../../shared/utils/PermissionAndroid';
-import styles from './StylesAddBanner';
+import styles from './StylesEditBanner';
 
 import {constants} from '../../../../../../shared/constants';
 import {LOG} from '../../../../../../../../logger.config';
 import CheckModal from '../../../../../../shared/utils/CheckModal';
-import {useAddBannerMutation} from '../../../../../../../redux/api/bannersApi';
+import {useUpdateBannerMutation} from '../../../../../../../redux/api/bannersApi';
 import {Banner} from '../../../../../../../redux/api/types';
 import {renderLoading} from '../../../../../../shared/utils/LoadingRender';
 const log = LOG.extend('ADD_BANNER.JS ');
 
-const AddBanner = ({navigation}) => {
+const UpdateBanner = ({navigation, route}: any) => {
+  const {item} = route.params;
+  const bannerItem: Banner = item;
   // Camera states
-  const [avatar, setAvatar] = useState('');
+  const [avatar, setAvatar] = useState(bannerItem.imageUrl);
   const [isPicked, setIsPicked] = useState(false);
-  const [addBanner, {isLoading}] = useAddBannerMutation();
-  console.log(
-    '🚀 ~ file: AddBanner.tsx:28 ~ AddBanner ~ isLoading:',
-    isLoading,
-  );
+  const [updateBanner, {isLoading}] = useUpdateBannerMutation();
   const openCamera = async () => {
     Platform.OS === 'ios'
       ? onGallery(setAvatar, setIsPicked)
@@ -49,15 +41,6 @@ const AddBanner = ({navigation}) => {
     }
   };
 
-  // xử lý options FastImage
-  const imageUrlOptions = {
-    uri: avatar,
-    priority: FastImage.priority.high,
-    cache: FastImage.cacheControl.immutable,
-  };
-
-  const urlHardCode = require('../../../../../../../assets/AddImages.png');
-
   const moveToScreen = (nameScreen: string) => {
     navigation.navigate(nameScreen);
   };
@@ -65,11 +48,12 @@ const AddBanner = ({navigation}) => {
     navigation.goBack();
   };
 
-  const addBannerAndNavigate = async () => {
+  const updateBannerAndNavigate = async () => {
     const banner: Banner = {
       imageUrl: avatar,
+      _id: bannerItem._id,
     };
-    await addBanner(banner).unwrap();
+    await updateBanner(banner).unwrap();
     goBack();
   };
 
@@ -102,12 +86,15 @@ const AddBanner = ({navigation}) => {
         <View style={styles.divideLine} />
 
         <View style={styles.body}>
+          <Text className="text-white">
+            Click bên dưới để chọn ảnh từ thư viện
+          </Text>
           <TouchableOpacity
             onPress={openCamera}
             className="justify-center items-center">
             <FastImage
               className="w-[300px] h-[200px]"
-              source={avatar ? imageUrlOptions : urlHardCode}
+              source={{uri: avatar}}
               onLoadEnd={() => {
                 FastImage.cacheControl.cacheOnly;
               }}
@@ -115,12 +102,12 @@ const AddBanner = ({navigation}) => {
             />
           </TouchableOpacity>
           <View style={styles.footer}>
-            <TouchableOpacity onPress={() => addBannerAndNavigate()}>
+            <TouchableOpacity onPress={() => updateBannerAndNavigate()}>
               <View style={styles.viewButtonCreate}>
                 {isLoading ? (
                   renderLoading()
                 ) : (
-                  <Text style={styles.btnCreate}>Thêm</Text>
+                  <Text style={styles.btnCreate}>Cập nhật</Text>
                 )}
               </View>
             </TouchableOpacity>
@@ -134,4 +121,4 @@ const AddBanner = ({navigation}) => {
   );
 };
 
-export default AddBanner;
+export default UpdateBanner;

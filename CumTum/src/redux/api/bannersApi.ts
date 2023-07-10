@@ -5,6 +5,7 @@ import {constants} from '../../app/shared/constants';
 const endPointBanners = 'banners';
 const endPointAdd = 'add-banner';
 const endPointDelete = 'delete-banner';
+const endPointUpdate = 'update-banner-by-id';
 
 export enum BannerEnum {
   IMAGE_URL = 'imageUrl',
@@ -78,11 +79,19 @@ export const bannersApi = createApi({
       DataResponse<Banner>,
       Pick<Banner, BannerEnum.IMAGE_URL | BannerEnum._ID>
     >({
-      query: itemBanner => ({
-        url: `${endPointBanners}/${itemBanner._id}`,
-        method: 'PATCH',
-        body: {imageUrl: itemBanner.imageUrl},
-      }),
+      query: itemBanner => {
+        const formData = new FormData();
+        formData.append('file', {
+          uri: itemBanner.imageUrl,
+          type: 'image/jpeg',
+          name: 'image.jpg',
+        });
+        return {
+          url: `${endPointUpdate}/${itemBanner._id}`,
+          method: 'POST',
+          body: formData,
+        };
+      },
       invalidatesTags: ['Banner'],
       onQueryStarted: async (_, {dispatch, queryFulfilled}) => {
         try {
@@ -105,5 +114,6 @@ export const bannersApi = createApi({
 export const {
   useListBannerQuery,
   useAddBannerMutation,
+  useUpdateBannerMutation,
   useDeleteBannerMutation,
 } = bannersApi;

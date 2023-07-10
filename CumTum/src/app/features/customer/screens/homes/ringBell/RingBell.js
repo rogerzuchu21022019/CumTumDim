@@ -22,11 +22,12 @@ import {
   fetchDeleteNotification,
   fetchUserById,
 } from '../../../../admin/apiUser.js';
-import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import {FlatList} from 'react-native-gesture-handler';
 const RingBell = ({navigation}) => {
   const dispatch = useDispatch();
   const authSelect = useSelector(authSelector);
   const [isRefresh, setIsRefresh] = useState(false);
+  const [indexSelected, setIndexSelected] = useState(0);
   const user = authSelect.user;
   const [listNotification, setListNotification] = useState(user.notifications);
   const moveToBack = () => {
@@ -34,6 +35,13 @@ const RingBell = ({navigation}) => {
   };
   const log = LOG.extend(`RING_BELL.JS`);
 
+  const handleSwipeableOpen = index => {
+    console.log(
+      '🚀 ~ file: RingBell.js:39 ~ handleSwipeableOpen ~ index:',
+      index,
+    );
+    setIndexSelected(index);
+  };
   const data = useSelector(authSelector);
   useEffect(() => {
     dispatch(fetchUserById(user._id));
@@ -83,14 +91,16 @@ const RingBell = ({navigation}) => {
           </View>
         </View>
         <View style={styles.body}>
-          <FlashList
+          <FlatList
             data={listNotification}
-            estimatedItemSize={200}
             renderItem={({item, index}) => (
               <ListItem
                 item={item}
                 index={index}
                 handleRemove={() => handleRemove(item)}
+                handleSwipeableOpen={() => handleSwipeableOpen(index)}
+                indexSelected={indexSelected}
+                navigation={navigation}
               />
             )}
             keyExtractor={(item, index) => index.toString()}

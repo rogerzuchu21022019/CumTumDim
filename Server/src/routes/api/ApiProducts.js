@@ -6,6 +6,8 @@ module.exports = {
 
   findBanners: require(`../api/banners/FindBanners`),
   addBanner: require(`../api/banners/AddBanner`),
+  updateBannerById: require(`../api/banners/UpdateBannerByID`),
+  deleteBannerById: require(`../api/banners/DeleteBannerById`),
 
   addDish: require(`../api/products/AddDish`),
   updateDishById: require(`../api/products/UpdateDishByID`),
