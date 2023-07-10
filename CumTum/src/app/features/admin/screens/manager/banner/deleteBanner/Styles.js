@@ -53,16 +53,23 @@ const Styles = StyleSheet.create({
     // backgroundColor: constants.COLOR.WHITE,
     alignItems: 'center',
   },
+  trashImage: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 60,
+    borderRadius: 20,
+  },
+
   // body
   body: {
     flex: 12,
-    backgroundColor: constants.COLOR.BLACK,
+    backgroundColor: constants.COLOR.WHITE,
     alignItems: 'center',
   },
 
   itemEat: {
     backgroundColor: constants.COLOR.GREY,
-    height: 80,
+    height: 250,
     width: 350,
     borderRadius: 10,
     justifyContent: 'center',

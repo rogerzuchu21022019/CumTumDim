@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {
   StyleSheet,
   Text,
@@ -5,6 +6,7 @@ import {
   Image,
   FlatList,
   TouchableOpacity,
+  Dimensions,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import styles from './Styles';
@@ -14,8 +16,6 @@ import FastImage from 'react-native-fast-image';
 import {constants} from '../../../../../../shared/constants';
 import SafeKeyComponent from '../../../../../../components/safe_area/SafeKeyComponent';
 import Router from '../../../../../../navigation/Router';
-import {useDispatch, useSelector} from 'react-redux';
-import {productSelector} from '../../../../../product/sliceProduct';
 import {
   fetchCategories,
   fetchDeleteCategory,
@@ -23,26 +23,30 @@ import {
 import ModalNotify from '../../../../../../components/modal/ModalNotify';
 import {LOG} from '../../../../../../../../logger.config';
 import DeleteDish from '../../manageFood/deleteDish/DeleteDish';
+import {useListBannerQuery} from '../../../../../../../redux/api/bannersApi';
+import {Banner} from '../../../../../../../redux/api/types';
 
 const DeleteBanner = ({navigation}) => {
-  const productSelect = useSelector(productSelector);
-  
-
+  const {data} = useListBannerQuery();
   const goBack = () => {
     navigation.goBack();
   };
+  const [indexSelected, setIndexSelected] = useState<number>(0);
 
-  const moveToScreen = nameScreen => {
+  const moveToScreen = (nameScreen: string) => {
     navigation.navigate(nameScreen);
   };
 
-  const dispatch = useDispatch();
+  const onTapImage = (index: number) => {
+    console.log('🚀 ~ file: DeleteBanner.tsx:40 ~ onTapImage ~ index:', index);
+    setIndexSelected(index);
+  };
+  const onDrag = (x?: number, y?: number) => {
+    console.log('ON_DRAG', x, y);
+    // setIsPositionRemove(true);
+  };
 
-
-  useEffect(() => {
-    dispatch(fetchCategories());
-    return () => {};
-  }, []);
+  const onDrop = (x?: number, y?: number, index?: number) => {};
 
   return (
     <SafeKeyComponent>
@@ -79,20 +83,23 @@ const DeleteBanner = ({navigation}) => {
           </View>
         </View>
         <View style={styles.divideLine}></View>
+
         <View style={styles.body}>
           <View>
-            <FlatList
-              data={productSelect.categories}
-              showsVerticalScrollIndicator={false}
-              renderItem={({item, index}) => (
-                <ListItem
-                  item={item}
-                  index={index}
-                  navigation={navigation}
-                />
-              )}
-              keyExtractor={item => item._id.toString()}
-            />
+            <View>
+              <Text>{indexSelected}</Text>
+            </View>
+            {data?.data.map((item, index) => (
+              <ListItem
+                key={index}
+                item={item}
+                onDrag={onDrag}
+                onDrop={onDrop}
+                onTapImage={onTapImage}
+                index={index}
+                navigation={navigation}
+              />
+            ))}
           </View>
         </View>
       </View>

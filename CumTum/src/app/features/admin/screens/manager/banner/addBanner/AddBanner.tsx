@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/react-in-jsx-scope */
 import {useState} from 'react';
 import {View, Text, Platform, TouchableOpacity} from 'react-native';
@@ -14,11 +15,8 @@ import styles from './StylesAddBanner';
 import {constants} from '../../../../../../shared/constants';
 import {LOG} from '../../../../../../../../logger.config';
 import CheckModal from '../../../../../../shared/utils/CheckModal';
-import {
-  bannersApi,
-  useAddBannerMutation,
-} from '../../../../../../../redux/api/bannersApi';
-import { Banner } from '../../../../../../../redux/api/types';
+import {useAddBannerMutation} from '../../../../../../../redux/api/bannersApi';
+import {Banner} from '../../../../../../../redux/api/types';
 const log = LOG.extend('ADD_BANNER.JS ');
 
 const AddBanner = ({navigation}) => {
@@ -60,8 +58,12 @@ const AddBanner = ({navigation}) => {
     navigation.goBack();
   };
 
-  const banner: Banner = {
-    imageUrl: avatar,
+  const addBannerAndNavigate = async () => {
+    const banner: Banner = {
+      imageUrl: avatar,
+    };
+    await addBanner(banner).unwrap();
+    goBack();
   };
 
   return (
@@ -107,10 +109,7 @@ const AddBanner = ({navigation}) => {
           </TouchableOpacity>
           <View style={styles.footer}>
             <Text>{avatar}</Text>
-            <TouchableOpacity
-              onPress={() => {
-                addBanner(banner).unwrap();
-              }}>
+            <TouchableOpacity onPress={() => addBannerAndNavigate()}>
               <View style={styles.viewButtonCreate}>
                 <Text style={styles.btnCreate}>Thêm</Text>
               </View>

@@ -1,4 +1,3 @@
-import Manage from "../features/admin/screens/manager/manage/Manage";
 
 const Router = {
   /* Admin */

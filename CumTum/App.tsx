@@ -42,6 +42,7 @@ import AddDeliveryAddress from './src/app/features/customer/screens/carts/profil
 import {requestUserPermission} from './src/app/shared/utils/PermissionFCM';
 import ModalDownLoad from './src/app/components/modal/ModalDownLoad';
 import Snackbar from 'react-native-snackbar';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
 const App = () => {
   const Stack = createNativeStackNavigator();
   const [isShowProgress, setIsShowProgress] = useState(false);
@@ -132,106 +133,108 @@ const App = () => {
     <Provider store={Store}>
       <PersistGate loading={null} persistor={persistor}>
         <NavigationContainer ref={navigationRef}>
-          <Stack.Navigator>
-            <Stack.Screen
-              name={Router.SPLASH_SCREEN}
-              component={SplashScreen}
-              options={{
-                headerShown: false,
-              }}
-            />
-            <Stack.Screen
-              name={Router.LOGIN}
-              component={LoginScreen}
-              options={{
-                headerShown: false,
-              }}
-            />
+          <GestureHandlerRootView className="flex-1">
+            <Stack.Navigator>
+              <Stack.Screen
+                name={Router.SPLASH_SCREEN}
+                component={SplashScreen}
+                options={{
+                  headerShown: false,
+                }}
+              />
+              <Stack.Screen
+                name={Router.LOGIN}
+                component={LoginScreen}
+                options={{
+                  headerShown: false,
+                }}
+              />
 
-            <Stack.Screen
-              name={Router.UPDATE_INFO}
-              component={UpdateInformation}
-              options={{
-                headerShown: false,
-              }}
-            />
+              <Stack.Screen
+                name={Router.UPDATE_INFO}
+                component={UpdateInformation}
+                options={{
+                  headerShown: false,
+                }}
+              />
 
-            <Stack.Screen
-              name={Router.CUSTOMER_STACK}
-              component={CustomerStack}
-              options={{
-                headerShown: false,
-              }}
-            />
+              <Stack.Screen
+                name={Router.CUSTOMER_STACK}
+                component={CustomerStack}
+                options={{
+                  headerShown: false,
+                }}
+              />
 
-            <Stack.Screen
-              name={Router.ADMIN_STACK}
-              component={AdminStack}
-              options={{
-                headerShown: false,
-              }}
-            />
-            <Stack.Screen
-              name={Router.DETAIL_CART_ADMIN}
-              component={DetailCard}
-              options={{
-                headerShown: false,
-                presentation: 'modal',
-              }}
-            />
+              <Stack.Screen
+                name={Router.ADMIN_STACK}
+                component={AdminStack}
+                options={{
+                  headerShown: false,
+                }}
+              />
+              <Stack.Screen
+                name={Router.DETAIL_CART_ADMIN}
+                component={DetailCard}
+                options={{
+                  headerShown: false,
+                  presentation: 'modal',
+                }}
+              />
 
-            <Stack.Screen
-              name={Router.PAYMENT}
-              component={Payment}
-              options={{
-                headerShown: false,
-              }}
-            />
-            <Stack.Screen
-              name={Router.CART_WITH_NO_ITEM}
-              component={CartNoItem}
-              options={{
-                headerShown: false,
-              }}
-            />
-            <Stack.Screen
-              name={Router.ADD_DELIVERY_ADDRESS}
-              component={AddDeliveryAddress}
-              options={{
-                headerShown: false,
-              }}
-            />
+              <Stack.Screen
+                name={Router.PAYMENT}
+                component={Payment}
+                options={{
+                  headerShown: false,
+                }}
+              />
+              <Stack.Screen
+                name={Router.CART_WITH_NO_ITEM}
+                component={CartNoItem}
+                options={{
+                  headerShown: false,
+                }}
+              />
+              <Stack.Screen
+                name={Router.ADD_DELIVERY_ADDRESS}
+                component={AddDeliveryAddress}
+                options={{
+                  headerShown: false,
+                }}
+              />
 
-            <Stack.Screen
-              name={Router.EDIT_PROFILE}
-              component={EditProfile}
-              options={{
-                headerShown: false,
-              }}
-            />
+              <Stack.Screen
+                name={Router.EDIT_PROFILE}
+                component={EditProfile}
+                options={{
+                  headerShown: false,
+                }}
+              />
 
-            <Stack.Screen
-              name={Router.UPLOAD_IMAGE}
-              component={UploadImage}
-              options={{
-                headerShown: false,
-              }}
-            />
-            <Stack.Screen
-              name={Router.RING_BELL}
-              component={RingBell}
-              options={{
-                headerShown: false,
-              }}
-            />
-            <Stack.Screen
-              name={Router.RING_BELL_ADMIN}
-              component={RingBellAdmin}
-              options={{
-                headerShown: false,
-              }}
-            />
-          </Stack.Navigator>
+              <Stack.Screen
+                name={Router.UPLOAD_IMAGE}
+                component={UploadImage}
+                options={{
+                  headerShown: false,
+                }}
+              />
+              <Stack.Screen
+                name={Router.RING_BELL}
+                component={RingBell}
+                options={{
+                  headerShown: false,
+                }}
+              />
+              <Stack.Screen
+                name={Router.RING_BELL_ADMIN}
+                component={RingBellAdmin}
+                options={{
+                  headerShown: false,
+                }}
+              />
+            </Stack.Navigator>
+          </GestureHandlerRootView>
         </NavigationContainer>
         <ModalDownLoad isShowProgress={isShowProgress} isLoading={isLoading} />
       </PersistGate>

@@ -11,7 +11,7 @@ export interface Category {
 
 export interface Banner {
   name?: string;
-  imageUrl: string;
+  imageUrl?: string;
   _id?: string;
 }
 
