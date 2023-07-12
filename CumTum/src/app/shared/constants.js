@@ -25,7 +25,7 @@ export const constants = {
       'EPscZ2cKSvwcybfeIbQksSxlCJVZDGuzAMy0skSzZJIJ2NL4yJUUuKaC6Ve2fi9kHzgnWZOpfSPPU_Oi',
   },
   BASE_URL: {
-    MAIN: 'http://192.168.1.115:3000/api',
+    MAIN: 'http://192.168.1.78:3000/api',
     // MAIN: 'http://192.168.2.7:3000/api',
     SECOND: 'https://cumtumdim.becofoodstore.click/api',
   },
