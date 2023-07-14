@@ -40,6 +40,7 @@ target 'CumTum' do
   pod 'FirebaseUI/Auth'
   pod 'FirebaseUI/Email'
   pod 'FirebaseUI/OAuth'
+  pod 'SwinjectStoryboard'
   use_react_native!(
     :path => config[:reactNativePath],
     # Hermes is now enabled by default. Disable by setting this flag to false.

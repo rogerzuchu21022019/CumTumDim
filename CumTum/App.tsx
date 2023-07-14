@@ -4,22 +4,12 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import notifee, {EventType} from '@notifee/react-native';
 
 import Router from './src/app/navigation/Router';
-
-import {Store} from './src/app/app_store/Store';
-
-// import Provider
-import {Provider, useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 import AdminStack from './src/app/navigation/AdminStack';
 import DetailCard from './src/app/features/admin/screens/homeAdmin/detailCart/DetailCard';
 import CustomerStack from './src/app/navigation/CustomerStack';
 
-// import RootNavigation
 import {navigationRef} from './src/app/navigation/RootNavigation';
-
-// Redux Persist
-
-import {persistStore} from 'reduxjs-toolkit-persist';
-import {PersistGate} from 'reduxjs-toolkit-persist/integration/react';
 
 import LoginScreen from './src/app/features/auth/login/Login';
 import SplashScreen from './src/app/features/auth/splashScreen/SplashScreen';
@@ -29,12 +19,7 @@ import Payment from './src/app/features/customer/screens/carts/payment/Payment';
 import EditProfile from './src/app/features/customer/screens/profiles/editProfile/EditProfile';
 import UploadImage from './src/app/features/customer/screens/profiles/uploadImage/UploadImage';
 import RingBell from './src/app/features/customer/screens/homes/ringBell/RingBell';
-import codePush, {
-  CodePushOptions,
-  DownloadProgress,
-} from 'react-native-code-push';
-
-let persistor = persistStore(Store);
+import codePush, {DownloadProgress} from 'react-native-code-push';
 
 import CartNoItem from './src/app/features/customer/screens/carts/cart/cartWithNoItem/CartNoItem';
 import RingBellAdmin from './src/app/features/admin/screens/homeAdmin/ringBellAdmin/RingBellAdmin';
@@ -44,7 +29,7 @@ import ModalDownLoad from './src/app/components/modal/ModalDownLoad';
 import Snackbar from 'react-native-snackbar';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {authSelector} from './src/app/features/admin/sliceAuth';
-import {constants} from './src/app/shared/constants';
+
 const App = () => {
   const Stack = createNativeStackNavigator();
   const [isShowProgress, setIsShowProgress] = useState(false);

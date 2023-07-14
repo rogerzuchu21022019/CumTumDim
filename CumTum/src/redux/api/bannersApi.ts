@@ -39,17 +39,17 @@ export const bannersApi = createApi({
         };
       },
       invalidatesTags: ['Banner'],
-      onQueryStarted: async (_, {dispatch, queryFulfilled}) => {
+      onQueryStarted: async (_, {queryFulfilled}) => {
         try {
           // Wait for the mutation to be fulfilled
           await queryFulfilled;
 
           // Fetch the updated list of banners after adding a new item
-          await dispatch(
-            bannersApi.endpoints.listBanner.initiate(undefined, {
-              forceRefetch: true,
-            }),
-          );
+          // await dispatch(
+          //   bannersApi.endpoints.listBanner.initiate(undefined, {
+          //     forceRefetch: true,
+          //   }),
+          // );
         } catch (error) {
           console.error('Error occurred while fetching banners:', error);
         }
@@ -61,15 +61,15 @@ export const bannersApi = createApi({
         method: 'POST',
       }),
       invalidatesTags: ['Banner'],
-      onQueryStarted: async (_, {dispatch, queryFulfilled}) => {
+      onQueryStarted: async (_, {queryFulfilled}) => {
         try {
           await queryFulfilled;
 
-          await dispatch(
-            bannersApi.endpoints.listBanner.initiate(undefined, {
-              forceRefetch: true,
-            }),
-          );
+          // await dispatch(
+          //   bannersApi.endpoints.listBanner.initiate(undefined, {
+          //     forceRefetch: true,
+          //   }),
+          // );
         } catch (error) {
           console.error('Error occurred while fetching banners:', error);
         }
