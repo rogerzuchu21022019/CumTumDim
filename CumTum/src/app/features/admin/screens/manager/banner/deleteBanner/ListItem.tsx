@@ -19,11 +19,6 @@ import {useDeleteBannerMutation} from '../../../../../../../redux/api/bannersApi
 import {PropsItemBanner} from '../../../../../../components/types';
 import {constants} from '../../../../../../shared/constants';
 import {GestureHandlerRootView, Swipeable} from 'react-native-gesture-handler';
-import {
-  runOnJS,
-  useAnimatedStyle,
-  useSharedValue,
-} from 'react-native-reanimated';
 import Router from '../../../../../../navigation/Router';
 import {renderLoading} from '../../../../../../shared/utils/LoadingRender';
 import {useFocusEffect} from '@react-navigation/native';
@@ -105,6 +100,15 @@ const ItemEditEat = (props: PropsItemBanner) => {
   useEffect(() => {
     indexSelected !== index && closeSwipeable();
   }, [indexSelected]);
+
+  useFocusEffect(
+    useCallback(() => {
+      indexSelected !== index && closeSwipeable();
+      return () => {
+        closeSwipeable();
+      };
+    }, [indexSelected]),
+  );
 
   return (
     <TouchableNativeFeedback>

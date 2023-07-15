@@ -42,11 +42,6 @@ const EditDeliveryAddress = ({navigation, route}) => {
 
   /* States user info*/
   const arrHouseNumber = item.houseNumber.split(`/`);
-  log.info(
-    '🚀 ~ file: EditDeliveryAddress.js:61 ~ EditDeliveryAddress ~ newT:',
-    arrHouseNumber,
-  );
-
   const messageCommon = 'Bạn vui lòng điền đầy đủ thông tin';
   const messagePhone = 'Bạn vui lòng nhập đúng số điện thoại';
   const messageName = 'Tên không được chứa kí tự đặc biệt hoặc số';
@@ -72,14 +67,10 @@ const EditDeliveryAddress = ({navigation, route}) => {
     arrHouseNumber[1] ? `${arrHouseNumber[1]}` : '',
   );
 
-  const handleShowLoading = () => {
-    setIsShowLoading(!isShowLoading);
-  };
 
   /* States modal */
   const [isShowModal, setIsShowModal] = useState(false);
   const [isShowModalName, setIsShowModalName] = useState(false);
-  const [isShowLoading, setIsShowLoading] = useState(false);
 
   const dispatch = useDispatch();
   const goBack = () => {
@@ -110,10 +101,10 @@ const EditDeliveryAddress = ({navigation, route}) => {
       handleClick();
       return;
     } else {
-      console.log(
-        '🚀 ~ file: EditDeliveryAddress.js:38 ~ EditDeliveryAddress ~ userId:',
-        userId,
-      );
+      // console.log(
+      //   '🚀 ~ file: EditDeliveryAddress.js:38 ~ EditDeliveryAddress ~ userId:',
+      //   userId,
+      // );
       const newAddress = {
         _id: item._id,
         name: name,
@@ -125,15 +116,14 @@ const EditDeliveryAddress = ({navigation, route}) => {
         houseNumber: hem ? `${houseNumber}/${hem}` : `${houseNumber}`,
         addressDefault: isEnabled,
       };
-      log.info(
-        '🚀 ~ file: EditDeliveryAddress.js:52 ~ moveToBack ~ newAddress:',
-        newAddress,
-      );
+      // log.info(
+      //   '🚀 ~ file: EditDeliveryAddress.js:52 ~ moveToBack ~ newAddress:',
+      //   newAddress,
+      // );
       const data = {
         userId: userId,
         address: newAddress,
       };
-      handleShowLoading();
       dispatch(fetchUpdateAddress(data));
       const timeOut = setTimeout(() => {
         navigation.goBack();
