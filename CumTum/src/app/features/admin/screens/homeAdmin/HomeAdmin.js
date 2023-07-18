@@ -47,7 +47,6 @@ const HomeAdmin = ({navigation}) => {
 
   const isLoading = data.isLoading;
   const user = useSelector(authSelector);
-  const [isChangeList, setIsChangeList] = useState(false);
 
   const userId = user.user._id;
   // console.log('🚀 ~ file: HomeAdmin.js:51 ~ HomeAdmin ~ userId:', userId);
@@ -105,10 +104,12 @@ const HomeAdmin = ({navigation}) => {
   };
   useEffect(() => {
     socketServices.initializeSocket();
+    socketServices.emit(constants.SOCKET.CONNECT_RABBIT_ADMIN);
     socketServices.on(constants.SOCKET.CREATE_ORDER, orderData => {
       onDisplayNotification(orderData);
       dispatch(fetchUserById(userId));
       dispatch(fetchOrders());
+      // dispatch(fetchGetQueueFromRabbitMQ())
     });
     return () => {
       socketServices.socket.disconnect();
@@ -197,7 +198,12 @@ const HomeAdmin = ({navigation}) => {
                 Doanh thu: {convertMoney(totalIncome)}
               </Text>
               <View style={styles.boxInput} className="mb-[20px]">
-                <IconAnt name="search1" color={constants.COLOR.WHITE}  size={20} style={styles.iconMargin} />
+                <IconAnt
+                  name="search1"
+                  color={constants.COLOR.WHITE}
+                  size={20}
+                  style={styles.iconMargin}
+                />
                 <TextInput
                   onChangeText={text => {
                     beginFilter(text);
@@ -212,27 +218,32 @@ const HomeAdmin = ({navigation}) => {
                   <TouchableOpacity
                     style={styles.boxClear}
                     onPress={resetSearch}>
-                    <IconAnt name="close" color={constants.COLOR.WHITE} size={20} style={styles.iconMargin} />
+                    <IconAnt
+                      name="close"
+                      color={constants.COLOR.WHITE}
+                      size={20}
+                      style={styles.iconMargin}
+                    />
                   </TouchableOpacity>
                 )}
               </View>
               {search.length > 0 && (
                 <View className="mt-[20px] w-full">
                   <View>
-                    <Text className="text-red-500">Tìm kiếm theo:</Text>
+                    <Text className="text-yellow-500">Tìm kiếm theo:</Text>
                   </View>
-                  <View className='inline'>
-                    <Text className="text-green-500 text-w">
+                  <View className="inline">
+                    <Text className="text-red-500 text-w">
                       Trạng thái: Đang chờ, Chấp nhận, đang, Đang, chờ, Chờ
                     </Text>
                   </View>
                   <View>
-                    <Text className="text-red-500">
-                     Đơn hàng: bất kì kí tự có trong mã đơn
+                    <Text className="text-blue-500">
+                      Đơn hàng: Bất kì kí tự có trong mã đơn hàng
                     </Text>
                   </View>
                   <View>
-                    <Text className="text-red-500">
+                    <Text className="text-white">
                       Giá tiền: Giá hiển thị : 50,25,28
                     </Text>
                   </View>

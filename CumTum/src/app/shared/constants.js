@@ -25,14 +25,14 @@ export const constants = {
       'EPscZ2cKSvwcybfeIbQksSxlCJVZDGuzAMy0skSzZJIJ2NL4yJUUuKaC6Ve2fi9kHzgnWZOpfSPPU_Oi',
   },
   BASE_URL: {
-    MAIN: 'http://192.168.2.8:3000/api',
+    MAIN: 'http://192.168.2.12:3000/api',
     URL_THANKS_LOCAL: 'http://192.168.2.4:3000/thanks',
     URL_THANKS: 'https://cumtum.storm.io.vn/thanks',
     // MAIN: 'http://192.168.2.7:300A0/api',
     SECOND: 'https://cumtum.storm.io.vn/api',
   },
   SOCKET: {
-    URL: 'http://192.168.2.8:3000',
+    URL: 'http://192.168.2.12:3000',
     // URL: 'https://cumtum.storm.io.vn',
     CONNECTION: 'connection',
     CONNECT: 'connect',
@@ -47,6 +47,8 @@ export const constants = {
     PUSH_NOTIFICATION_CUSTOMER: 'push-notification-customer',
     UPDATE_NOTIFICATION_CUSTOMER: 'update-notification-customer',
     LISTEN_FROM_EDIT_DELIVERY_ADDRESS: 'listenFromEditDeliveryAddress',
+    CONNECT_RABBIT_ADMIN: 'connectRabbitAdmin',
+    CONNECT_RABBIT_CUSTOMER: 'connectRabbitCustomer',
   },
   ROLE: {
     ADMIN: 'admin',

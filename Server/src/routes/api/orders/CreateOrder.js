@@ -13,6 +13,9 @@ route.post(`/create-order`, async (req, res) => {
     const { order, fcmTokenDevice } = req.body;
 
     const orderData = await CreateOrderCon(order); //orderData with status pending
+
+    const userId = orderData.userId;
+    console.log("🚀 ~ file: CreateOrder.js:18 ~ route.post ~ userId:", userId);
     await UpdateUserOrderByIdCon(order.userId, orderData);
     const data = {
       orderData,
@@ -21,9 +24,13 @@ route.post(`/create-order`, async (req, res) => {
     _io.emit(CONSTANTS.SOCKET.CREATE_ORDER, data);
 
     // console.log("🚀 ~ file: Notify.js:17 ~ route.post ~ orderData:", orderData);
+    // AMQP_URL=amqps://gyllvxff:W7_IK6Ts8HOkbah7Hx5ARDboIVBxH8z-@kebnekaise.lmq.cloudamqp.com/gyllvxffQƯERTII
 
     const amqpUrl = process.env.AMQP_URL;
-    const message = order.moneyToPaid;
+    const message = {
+      userId: userId,
+      data: order.moneyToPaid,
+    };
 
     const connection = await amqp.connect(amqpUrl);
 

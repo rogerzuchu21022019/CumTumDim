@@ -153,7 +153,7 @@ const Search = (props: PropsModalSearch) => {
           {search.length > 0 && (
             <View className="mt-[20px] px-[30px] w-full">
               <View>
-                <Text className="text-red-500">Tìm kiếm theo:</Text>
+                <Text className="text-yellow-500">Tìm kiếm theo:</Text>
               </View>
               <View className="inline">
                 <Text className="text-green-500 text-w">
@@ -161,12 +161,12 @@ const Search = (props: PropsModalSearch) => {
                 </Text>
               </View>
               <View>
-                <Text className="text-red-500">
+                <Text className="text-white">
                   Giá tiền: Giá hiển thị : 50,25,28....
                 </Text>
               </View>
               <View>
-                <Text className="text-red-500">
+                <Text className="text-orange-500">
                   Tổng tiền của món: Giá hiển thị * số lượng : 25 *2 = 50 => gõ 50 là ra 
                 </Text>
               </View>

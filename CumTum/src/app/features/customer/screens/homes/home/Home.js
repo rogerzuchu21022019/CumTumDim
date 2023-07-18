@@ -94,6 +94,7 @@ const HomeCustomer = ({navigation}) => {
 
   useEffect(() => {
     socketServices.initializeSocket();
+    socketServices.emit(constants.SOCKET.CONNECT_RABBIT_CUSTOMER, userId);
     return () => {
       socketServices.socket.disconnect();
     };

@@ -29,16 +29,12 @@ const ChooseDeliveryAddress = ({navigation}) => {
   const authSelect = useSelector(authSelector);
   const addressArr = authSelect.addresses;
   const addressSelected = authSelect.addressSelected;
-  const addressSelectedIndex = addressArr.findIndex(item => {
-    // addressSelected
-    //   ? item._id === addressSelected._id
-    //   : item.addressDefault === true;
-    if (addressSelected) {
-      return item._id === addressSelected._id;
-    } else {
-      return item.addressDefault === true;
-    }
-  });
+  const addressSelectedIndex = addressArr.findIndex(
+    item =>
+      addressSelected
+        ? item._id === addressSelected._id
+        : item.addressDefault === true,
+  );
 
   const userId = authSelect.user._id;
   const [checkedItem, setCheckedItem] = useState(addressSelectedIndex);
@@ -74,7 +70,6 @@ const ChooseDeliveryAddress = ({navigation}) => {
 
   const handleCheckedItem = index => {
     setCheckedItem(index);
-
     setIsSelected(true);
   };
 

@@ -57,6 +57,7 @@
 		7F8427B6E0D2041C2C542CB1 /* Pods-CumTum-CumTumTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CumTum-CumTumTests.debug.xcconfig"; path = "Target Support Files/Pods-CumTum-CumTumTests/Pods-CumTum-CumTumTests.debug.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = CumTum/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		95097CC329C7CFC7005DAA90 /* CumTumDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = CumTumDebug.entitlements; path = CumTum/CumTumDebug.entitlements; sourceTree = "<group>"; };
+		950EE7102A63691A007BA9B9 /* CumTum.profdata */ = {isa = PBXFileReference; lastKnownFileType = file; path = CumTum.profdata; sourceTree = "<group>"; };
 		9523A0092A1E2657002C2C50 /* CumTumRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = CumTumRelease.entitlements; path = CumTum/CumTumRelease.entitlements; sourceTree = "<group>"; };
 		95CAA89629B86E76004A7B29 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DF8C6F4282C55AC09B16B655 /* Pods-CumTum-CumTumTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CumTum-CumTumTests.release.xcconfig"; path = "Target Support Files/Pods-CumTum-CumTumTests/Pods-CumTum-CumTumTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -142,6 +143,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				950EE70F2A63691A007BA9B9 /* OptimizationProfiles */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -155,6 +157,14 @@
 				00E356EE1AD99517003FC87E /* CumTumTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		950EE70F2A63691A007BA9B9 /* OptimizationProfiles */ = {
+			isa = PBXGroup;
+			children = (
+				950EE7102A63691A007BA9B9 /* CumTum.profdata */,
+			);
+			path = OptimizationProfiles;
 			sourceTree = "<group>";
 		};
 		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
@@ -487,6 +497,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CLANG_USE_OPTIMIZATION_PROFILE = YES;
 				CODE_SIGN_ENTITLEMENTS = CumTum/CumTumDebug.entitlements;
 				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_TEAM = 57W72N6SBF;
@@ -533,6 +544,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CLANG_USE_OPTIMIZATION_PROFILE = YES;
 				CODE_SIGN_ENTITLEMENTS = CumTum/CumTumRelease.entitlements;
 				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_TEAM = 57W72N6SBF;

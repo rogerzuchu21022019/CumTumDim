@@ -1,6 +1,6 @@
 //import createSlice
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {persistReducer} from 'reduxjs-toolkit-persist';
+import {persistReducer, persistStore} from 'reduxjs-toolkit-persist';
 
 import {combineReducers, configureStore} from '@reduxjs/toolkit';
 
@@ -17,7 +17,12 @@ import {bannersApi} from '../../redux/api/bannersApi';
 let persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  whiteList: [constants.SLICE.PRODUCT],
+  whiteList: [
+    constants.SLICE.PRODUCT,
+    constants.SLICE.ADMIN,
+    constants.SLICE.AUTH,
+    constants.SLICE.CART,
+  ],
   // blacklist: [constants.SLICE.ADMIN],
 };
 
@@ -42,6 +47,7 @@ let persistedReducers = persistReducer(persistConfig, resetRootReducer);
 
 export const Store = configureStore({
   reducer: persistedReducers,
+  // devTools: false,
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: false, // bỏ qua kiểm tra tính immutability của state
@@ -53,3 +59,5 @@ export const Store = configureStore({
       bannersApi.middleware,
     ]),
 });
+
+export let persistor = persistStore(Store);

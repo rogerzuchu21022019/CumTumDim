@@ -46,22 +46,6 @@ router.post(`/find-order-by-id/:orderId`, async (req, res) => {
     );
     await UpdateUserOrderExistedCon(order.userId, order);
     sendMessage(user.fcmTokenDevice, title, body, data);
-    // await FindUserByIDCon(order.userId);
-
-    // console.log("🚀 ~ file: FindOrderById.js:24 ~ router.post ~ socket:", socket)
-    // console.log("🚀 ~ file: FindOrderById.js:24 ~ router.post ~ socket:", socket.sockets.sockets)
-    // const mapSockets = socket.sockets.sockets
-    // for (const key of mapSockets.keys()) {
-    //   console.log(`map key ${key}`);
-    // }
-
-    // _io.emit(CONSTANTS.SOCKET.UPDATE_ORDER, order);
-    // _io.to(`${user.fcmTokenDevice}`).emit(user.fcmTokenDevice, order.userId);
-    // _io.on(CONSTANTS.SOCKET.CONNECTION, (socket) => {
-    //   console.log(`A user connected huhu to socket ${socket.id}`);
-    //   socket.emit(CONSTANTS.SOCKET.UPDATE_NOTIFICATION_CUSTOMER, order);
-    // });
-
     res.status(200).json({
       message: "Update status order success",
       data: order,
