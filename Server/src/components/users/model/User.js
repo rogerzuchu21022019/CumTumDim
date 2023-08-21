@@ -33,7 +33,21 @@ const userSchema = new mongoose.Schema(
       type: [],
     },
     notifications: {
-      type: [],
+      type: [
+        {
+          title: {
+            type: String,
+            required: true,
+          },
+          content: {
+            type: String,
+            required: true,
+          },
+          data: {
+            type: {},
+          },
+        },
+      ],
     },
     addresses: {
       type: [
@@ -72,6 +86,9 @@ const userSchema = new mongoose.Schema(
           },
         },
       ],
+    },
+    fcmTokenDevice: {
+      type: String,
     },
   },
   {

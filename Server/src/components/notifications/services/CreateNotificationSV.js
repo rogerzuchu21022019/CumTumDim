@@ -5,9 +5,8 @@ const CreateNotificationSV = async (notification) => {
   try {
     const newNotification = await Notification.create({
       title: notification.title,
-      messageToCustomer: notification.messageToCustomer,
-      messageToAdmin: notification.messageToAdmin,
-      userId: notification.userId,
+      content: notification.content,
+      data: notification.data,
     });
 
     const query = {

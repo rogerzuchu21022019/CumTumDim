@@ -1176,7 +1176,6 @@ export const STREETS_TMT = [
     label: 'Nguyễn Ảnh Thủ',
     value: 'Hoàng Tăng Bí',
   },
-
   // {
   //   label: 'Tô Ký',
   //   value: 'Tô Ký',
@@ -1237,129 +1236,6 @@ export const STREETS_TMT = [
   //   label: 'Vườn Lài',
   //   value: 'Vườn Lài',
   // },
-];
-// phường Tần Chánh Hiệp(xong)
-export const STREETS_TCH = [
-  {
-    label: 'Quốc lộ 1',
-    value: 'Quốc lộ 1',
-  },
-  {
-    label: 'Tô Ký',
-    value: 'Tô Ký',
-  },
-  {
-    label: 'ĐT.15',
-    value: 'ĐT.15',
-  },
-  {
-    label: 'Đường số 1',
-    value: 'Đường số 1',
-  },
-  {
-    label: 'Đường số 2',
-    value: 'Đường số 2',
-  },
-  {
-    label: 'Đường số 3',
-    value: 'Đường số 3',
-  },
-  {
-    label: 'Đường số 4',
-    value: 'Đường số 4',
-  },
-  {
-    label: 'Đường số 5',
-    value: 'Đường số 5',
-  },
-  {
-    label: 'Đường số 7',
-    value: 'Đường số 7',
-  },
-  {
-    label: 'Đường số 10',
-    value: 'Đường số 10',
-  },
-  {
-    label: 'Đường số 12',
-    value: 'Đường số 12',
-  },
-  {
-    label: 'Dương Thị Mười',
-    value: 'Dương Thị Mười',
-  },
-  {
-    label: 'Đường Đông Bắc',
-    value: 'Đường Đông Bắc',
-  },
-  {
-    label: 'Tân Chánh Hiệp 3',
-    value: 'Tân Chánh Hiệp 3',
-  },
-  {
-    label: 'Tân Chánh Hiệp 5',
-    value: 'Tân Chánh Hiệp 5',
-  },
-  {
-    label: 'Tân Chánh Hiệp 7',
-    value: 'Tân Chánh Hiệp 7',
-  },
-  {
-    label: 'Tân Chánh Hiệp 8',
-    value: 'Tân Chánh Hiệp 8',
-  },
-  {
-    label: 'Tân Chánh Hiệp 10',
-    value: 'Tân Chánh Hiệp 10',
-  },
-  {
-    label: 'Tân Chánh Hiệp 16',
-    value: 'Tân Chánh Hiệp 16',
-  },
-  {
-    label: 'Tân Chánh Hiệp 17',
-    value: 'Tân Chánh Hiệp 17',
-  },
-  {
-    label: 'Tân Chánh Hiệp 34',
-    value: 'Tân Chánh Hiệp 34',
-  },
-  {
-    label: 'Tân Chánh Hiệp 35',
-    value: 'Tân Chánh Hiệp 35',
-  },
-  {
-    label: 'Tân Chánh Hiệp 36',
-    value: 'Tân Chánh Hiệp 36',
-  },
-  {
-    label: 'Nguyễn Ảnh Thủ',
-    value: 'Nguyễn Ảnh Thủ',
-  },
-  {
-    label: 'Bùi Văn Ngữ',
-    value: 'Bùi Văn Ngữ',
-  },
-  {
-    label: 'Đường Hùynh Thị Hai',
-    value: 'Đường Hùynh Thị Hai',
-  },
-  {
-    label: 'Trần Thị Năm',
-    value: 'Trần Thị Năm',
-  },
-  {
-    label: 'Tô Ký',
-    value: 'Tô Ký',
-  },
-  {
-    label: 'Lâm Thị Hồ',
-    value: 'Lâm Thị Hồ',
-  },
-  {
-    label: 'Nguyễn Thị Búp',
-    value: 'Nguyễn Thị Búp',
-  },
 ];
 
 // phường Tân Thới Nhất(Xong)
@@ -1760,4 +1636,8 @@ export const STREETS_THT = [
   },
 ];
 
-export const LIST_STREET = STREETS1.concat();
+export const LIST_STREET = STREETS_TMT.concat(
+  STREETS_THT,
+  STREETS_DHT,
+  STREETS_TTN,
+);

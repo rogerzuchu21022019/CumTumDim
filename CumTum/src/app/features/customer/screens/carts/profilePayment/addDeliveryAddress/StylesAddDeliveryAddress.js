@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
   header: {
     flex: 1,
   },
-  groupHeader: {
+  boxHeader: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -23,9 +23,9 @@ const styles = StyleSheet.create({
     color: constants.COLOR.WHITE,
     fontSize: 15,
   },
-  textProfile: {
+  textTitle: {
     color: constants.COLOR.WHITE,
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: 'bold',
   },
   // header:
@@ -93,6 +93,18 @@ const styles = StyleSheet.create({
     flex: 1,
     // backgroundColor: constants.COLOR.GREEN,
     width: '100%',
+  },
+  boxHouse: {
+    flexDirection: 'row',
+  },
+  boxSec: {
+    justifyContent: 'center',
+    marginTop: 25,
+
+  },
+  textSec: {
+    color: constants.COLOR.WHITE,
+    fontWeight: 'bold',
   },
 
   viewFooter:{

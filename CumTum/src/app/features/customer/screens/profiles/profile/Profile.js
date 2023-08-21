@@ -8,15 +8,28 @@ import styles from './StylesProfile';
 import FastImage from 'react-native-fast-image';
 import socketServices from '../../../../../shared/utils/Socket';
 import {authSelector} from '../../../../admin/sliceAuth';
+import {LOG} from '../../../../../../../logger.config';
+const log = LOG.extend(`PROFILE.JS`);
 const Profile = ({navigation}) => {
   const dispatch = useDispatch();
 
   const authSelect = useSelector(authSelector);
-  const userId = authSelect.user._id;
-  const addresses = authSelect.user.addresses.filter(
+  const user = authSelect.user;
+  const userId = user._id;
+  const addresses = authSelect.user.addresses?.filter(
     item => item.addressDefault === true,
   );
-  const address = addresses[0];
+  let address = {};
+  let houseNumber = '';
+  let hem = '';
+  if (addresses[0]) {
+    address = addresses[0];
+    const arrHouseNumber = address.houseNumber.split(`/`);
+    houseNumber = arrHouseNumber[0];
+    hem = arrHouseNumber[1];
+  } else {
+    address = null;
+  }
 
   useEffect(() => {
     dispatch(fetchUserById(userId));
@@ -26,15 +39,28 @@ const Profile = ({navigation}) => {
 
   const handleLogout = async () => {
     dispatch(fetchSignOut());
-    moveTo();
+    // moveTo();
   };
   const moveTo = async () => {
-    navigation.navigate(Router.LOGIN);
+    // navigation.navigate(Router.LOGIN);
     socketServices.socket.disconnect();
   };
   const moveToEdit = async () => {
-    navigation.navigate(Router.EDIT_PROFILE, {item: address});
+    if (address) {
+      navigation.navigate(Router.EDIT_PROFILE, {item: address});
+    } else {
+      navigation.navigate(Router.ADD_DELIVERY_ADDRESS);
+    }
   };
+
+  // xử lý options FastImage
+  const imageUrlOptions = {
+    uri: user.imageUrl,
+    priority: FastImage.priority.high,
+    cache: FastImage.cacheControl.immutable,
+  };
+
+  const urlHardCode = require('../../../../../../assets/Logo_CumTumDim.png');
 
   return (
     <SafeKeyComponent>
@@ -67,11 +93,13 @@ const Profile = ({navigation}) => {
             <View style={styles.viewImage}>
               <FastImage
                 style={styles.imageProfile}
-                source={require('../../../../../../assets/Logo_CumTumDim.png')}
+                source={user.imageUrl ? imageUrlOptions : urlHardCode}
               />
             </View>
             <View style={styles.viewTextName}>
-              <Text style={styles.textProfile}>{address.name}</Text>
+              <Text style={styles.textProfile}>
+                {address ? address.name : user.name}
+              </Text>
             </View>
           </View>
 
@@ -81,7 +109,9 @@ const Profile = ({navigation}) => {
                 <Text style={styles.textTitle}>Số điện thoại</Text>
               </View>
               <View style={styles.viewInput}>
-                <Text style={styles.textInput}>{address.phone}</Text>
+                <Text style={styles.textInput}>
+                  {address ? address.phone : null}
+                </Text>
               </View>
             </View>
             <View style={styles.item}>
@@ -89,7 +119,9 @@ const Profile = ({navigation}) => {
                 <Text style={styles.textTitle}>Phường</Text>
               </View>
               <View style={styles.viewInput}>
-                <Text style={styles.textInput}>{address.ward}</Text>
+                <Text style={styles.textInput}>
+                  {address ? address.ward : null}
+                </Text>
               </View>
             </View>
             <View style={styles.item}>
@@ -97,7 +129,9 @@ const Profile = ({navigation}) => {
                 <Text style={styles.textTitle}>Đường</Text>
               </View>
               <View style={styles.viewInput}>
-                <Text style={styles.textInput}>{address.street}</Text>
+                <Text style={styles.textInput}>
+                  {address ? address.street : null}
+                </Text>
               </View>
             </View>
             <View style={styles.item}>
@@ -105,7 +139,18 @@ const Profile = ({navigation}) => {
                 <Text style={styles.textTitle}>Số nhà</Text>
               </View>
               <View style={styles.viewInput}>
-                <Text style={styles.textInput}>{address.houseNumber}</Text>
+                <Text style={styles.textInput}>
+                  {address ? address.houseNumber : null}
+                </Text>
+              </View>
+            </View>
+
+            <View style={styles.item}>
+              <View style={styles.viewTitle}>
+                <Text style={styles.textTitle}>Hẻm</Text>
+              </View>
+              <View style={styles.viewInput}>
+                <Text style={styles.textInput}>{address ? hem : null}</Text>
               </View>
             </View>
           </View>

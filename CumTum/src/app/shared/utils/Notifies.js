@@ -21,7 +21,7 @@ export const showNotifyLocal = async data => {
         badge: true,
         sound: true,
         banner: true,
-        list: true,
+        // list: true,
       },
 
       sound: 'default',

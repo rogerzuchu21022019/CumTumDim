@@ -41,8 +41,9 @@ const styles = StyleSheet.create({
     marginBottom: 2,
   },
   imageProfile: {
-    width: 80,
-    height: 80,
+    width: 90,
+    height: 90,
+    borderRadius:100
   },
   textTitle: {
     color: constants.COLOR.WHITE,
@@ -186,6 +187,17 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     paddingHorizontal: 8,
     backgroundColor: constants.COLOR.WHITE,
+  },
+
+  boxHouse: {
+    flexDirection: 'row',
+  },
+  boxSec: {
+    justifyContent: 'center',
+    marginTop: 20,
+  },
+  textSec:{
+    color: constants.COLOR.WHITE,
   },
   placeholderStyle: {
     // backgroundColor: constants.COLOR.WHITE,

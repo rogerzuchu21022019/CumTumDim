@@ -17,7 +17,6 @@ import IconEntypo from 'react-native-vector-icons/Entypo';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
 import styles from './StylesAddDeliveryAddress';
 import {FlashList} from '@shopify/flash-list';
-import ItemEditDeliveryAddress from '../item/ItemEditDeliveryAddress';
 import ButtonCus from '../../../../../../components/button/ButtonCus';
 import {LOG} from '../../../../../../../../logger.config';
 import Router from '../../../../../../navigation/Router';
@@ -37,20 +36,42 @@ const AddDeliveryAddress = ({navigation}) => {
   const userId = authSelect.user._id;
   /* States user info*/
   const [name, setName] = useState('');
+  const [isName, setIsName] = useState(true);
   const [phone, setPhone] = useState('');
+  const [isPhone, setIsPhone] = useState(true);
+  const [isFailValue, setIsFailValue] = useState(true);
+
   const [ward, setWard] = useState('');
   const [district, setDistrict] = useState('12');
   const [city, setCity] = useState('Hồ Chí Minh');
   const [street, setStreet] = useState('');
   const [icon, setIcon] = useState(true);
+  const [hem, setHem] = useState('');
 
   const [isShowModal, setIsShowModal] = useState(false);
+  const [isShowModalName, setIsShowModalName] = useState(false);
   const [houseNumber, setHouseNumber] = useState('');
   const dispatch = useDispatch();
   const goBack = () => {
     navigation.goBack();
   };
+  const messageCommon = 'Bạn vui lòng điền đầy đủ thông tin';
+  const messagePhone = 'Bạn vui lòng nhập đúng số điện thoại';
+  const messageName = 'Tên không được chứa kí tự đặc biệt hoặc số';
+  const handleName = () => {
+    setIsShowModalName(!isShowModalName);
+  };
+
+  const handleShowLoading = () => {
+    setIsShowLoading(!isShowLoading);
+  };
+
   const onAddAddress = () => {
+    if (phone.length != 10) {
+      handleClick();
+      return;
+    }
+
     if (
       name === '' ||
       name === undefined ||
@@ -77,13 +98,9 @@ const AddDeliveryAddress = ({navigation}) => {
         district: district,
         city: city,
         street: street,
-        houseNumber: houseNumber,
+        houseNumber: hem ? `${houseNumber}/${hem}` : `${houseNumber}`,
         addressDefault: isEnabled,
       };
-      log.info(
-        '🚀 ~ file: EditDeliveryAddress.js:52 ~ moveToBack ~ newAddress:',
-        newAddress,
-      );
       const data = {
         userId: userId,
         address: newAddress,
@@ -91,7 +108,10 @@ const AddDeliveryAddress = ({navigation}) => {
       dispatch(fetchAddAddress(data));
       dispatch(fetchUserById(userId));
     }
-    navigation.goBack();
+    const timeOut = setTimeout(() => {
+      navigation.goBack();
+      clearTimeout(timeOut);
+    }, 1500);
   };
 
   const handleClick = () => {
@@ -114,7 +134,7 @@ const AddDeliveryAddress = ({navigation}) => {
     <SafeKeyComponent>
       <View style={styles.container}>
         <View style={styles.header}>
-          <View style={styles.groupHeader}>
+          <View style={styles.boxHeader}>
             <TouchableOpacity onPress={goBack}>
               <View>
                 <IconAntDesign
@@ -125,9 +145,9 @@ const AddDeliveryAddress = ({navigation}) => {
               </View>
             </TouchableOpacity>
             <View style={styles.profile}>
-              <Text style={styles.textProfile}>Thêm địa chỉ giao hàng</Text>
+              <Text style={styles.textTitle}>Thêm địa chỉ giao hàng</Text>
             </View>
-            <View style={styles.groupHeader}></View>
+            <View style={styles.boxHeader}></View>
           </View>
         </View>
         <View style={styles.body}>
@@ -168,11 +188,17 @@ const AddDeliveryAddress = ({navigation}) => {
                   keyboardType="ascii-capable"
                   onChangeText={text => setName(text)}
                   placeholder="Nhập họ và tên người nhận"
+                  isName={isName}
+                  isFailValue={
+                    name.length < 3 || name.length > 50
+                      ? isFailValue
+                      : !isFailValue
+                  }
                 />
-
                 <BoxInputCus
                   title="Số điện thoại người nhận"
                   value={phone}
+                  isPhone={isPhone}
                   keyboardType="numeric"
                   onChangeText={text => {
                     if (validatePhoneNumber(text)) {
@@ -180,6 +206,7 @@ const AddDeliveryAddress = ({navigation}) => {
                     }
                   }}
                   placeholder="Nhập số điện thoại người nhận"
+                  isFailValue={phone.length != 10 ? isFailValue : !isFailValue}
                 />
 
                 <DropdownElement
@@ -195,12 +222,24 @@ const AddDeliveryAddress = ({navigation}) => {
                   itemContainerStyle={styles.itemContainerStyle}
                 />
 
-                <View>
+                <View style={styles.boxHouse}>
                   <BoxInputCus
                     title="Số nhà"
                     value={houseNumber}
+                    keyboardType="numeric"
                     onChangeText={text => setHouseNumber(text)}
                     placeholder="Nhập số nhà"
+                  />
+                  <View style={styles.boxSec}>
+                    <Text style={styles.textSec}>{'/'}</Text>
+                  </View>
+
+                  <BoxInputCus
+                    title="Hẻm"
+                    value={hem}
+                    keyboardType="numeric"
+                    onChangeText={text => setHem(text)}
+                    placeholder="Nhập số của hẻm"
                   />
                 </View>
 
@@ -240,7 +279,7 @@ const AddDeliveryAddress = ({navigation}) => {
           <ButtonCus title="Thêm" onHandleClick={onAddAddress} icon={icon} />
         </View>
         <ModalNotify
-          message1="Bạn vui lòng điền đầy đủ thông tin"
+          message1={phone.length != 10 ? messagePhone : messageCommon}
           isShowModal={isShowModal}
           handleClick={handleClick}
         />

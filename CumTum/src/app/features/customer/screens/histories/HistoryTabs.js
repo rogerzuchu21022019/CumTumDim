@@ -4,9 +4,7 @@ import Router from '../../../../navigation/Router';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import SafeKeyComponent from '../../../../components/safe_area/SafeKeyComponent';
 import History from './history/History';
-import {createHistoryCart} from '../../../carts/sliceOrder';
-import HistoryNoItems from './historyNoItem/HistoryNoItems';
-import PaymentZalo from '../carts/paymentZalo/PaymentZalo';
+import ShowBill from '../carts/showBill/ShowBill';
 
 const HistoryTabs = () => {
   const Stack = createNativeStackNavigator();
@@ -23,7 +21,7 @@ const HistoryTabs = () => {
         />
         <Stack.Screen
           name={Router.PAYMENT_ZALO}
-          component={PaymentZalo}
+          component={ShowBill}
           options={{
             headerShown: false,
           }}

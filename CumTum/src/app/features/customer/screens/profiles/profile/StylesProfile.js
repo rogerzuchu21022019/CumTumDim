@@ -9,9 +9,9 @@ const styles = StyleSheet.create({
   },
   // header:
   header: {
-    flex: 2,
+    flex: 3/2,
     alignItems: 'center',
-    justifyContent: 'space-evenly',
+    justifyContent: 'space-around',
   },
   iconHeader: {
     width: 25,
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
 
   //body
   body: {
-    flex: 8,
+    flex: 10,
     backgroundColor: constants.COLOR.GREY,
     alignItems: 'center',
     borderTopStartRadius: 35,
@@ -47,6 +47,7 @@ const styles = StyleSheet.create({
   imageProfile: {
     width: 100,
     height: 100,
+    borderRadius: 100,
   },
   textTitle: {
     color: constants.COLOR.WHITE,

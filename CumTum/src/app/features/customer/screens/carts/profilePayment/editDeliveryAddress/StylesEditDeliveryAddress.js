@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
   header: {
     flex: 1,
   },
-  groupHeader: {
+  boxHeader: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -24,9 +24,9 @@ const styles = StyleSheet.create({
     color: constants.COLOR.WHITE,
     fontSize: 15,
   },
-  textProfile: {
+  textTitle: {
     color: constants.COLOR.WHITE,
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: 'bold',
   },
   // header:
@@ -134,6 +134,16 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     backgroundColor: constants.COLOR.WHITE,
     
+  },
+  boxHouse: {
+    flexDirection: 'row',
+  },
+  boxSec: {
+    justifyContent: 'center',
+    marginTop: 20,
+  },
+  textSec:{
+    color: constants.COLOR.WHITE,
   },
   placeholderStyle: {
     // backgroundColor: constants.COLOR.WHITE,

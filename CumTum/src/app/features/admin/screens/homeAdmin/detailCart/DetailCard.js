@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   ScrollView,
   TouchableNativeFeedback,
+  Modal,
 } from 'react-native';
 
 import React, {useEffect, useState} from 'react';
@@ -18,17 +19,24 @@ import {LOG} from '../../../../../../../logger.config';
 import {constants} from '../../../../../shared/constants';
 import SafeKeyComponent from '../../../../../components/safe_area/SafeKeyComponent';
 import IconIonicons from 'react-native-vector-icons/Ionicons';
-import {useDispatch} from 'react-redux';
-import {fetchUpdateOrder} from '../../../../carts/apiOrder';
+import {useDispatch, useSelector} from 'react-redux';
+import {fetchOrders, fetchUpdateOrder} from '../../../../carts/apiOrder';
 import socketServices from '../../../../../shared/utils/Socket';
+
+import WebView from 'react-native-webview';
+import {authSelector} from '../../../sliceAuth';
+import {fetchUserById} from '../../../apiUser';
 
 const DetailCard = ({route, navigation}) => {
   const dispatch = useDispatch();
   const log = LOG.extend('DETAILCART');
   const {item, index} = route.params;
-  log.info('item', item);
-
-  const moveToHOme = () => {
+  const authSelect = useSelector(authSelector);
+  const userIdAdmin = authSelect.user._id;
+  console.log('🚀 ~ file: DetailCard.js:32 ~ DetailCard ~ item:', item);
+  const [urlPaypalCheckout, setUrlPaypalCheckout] = useState(false);
+  const houseNumber = item.address.houseNumber;
+  const moveToHome = () => {
     navigation.navigate(Router.HOME_ADMIN);
   };
 
@@ -56,21 +64,31 @@ const DetailCard = ({route, navigation}) => {
         orderStatus: 'Chấp nhận',
       }),
     );
-
+    dispatch(fetchOrders());
     navigation.goBack();
   };
   const onCancel = async () => {
+    setUrlPaypalCheckout(true);
+  };
+  const resetDataPaypal = () => {
+    setUrlPaypalCheckout(null);
+  };
+  const handleAcceptedOrderCancel = () => {
     dispatch(
       fetchUpdateOrder({
         orderId: item._id,
         orderStatus: 'Từ chối',
       }),
     );
-
+    resetDataPaypal();
     navigation.goBack();
   };
 
-  // item.totalMainDish
+  const onUrlStateChange = async webViewState => {
+    if (webViewState.title === 'Refund Complete - PayPal') {
+      handleAcceptedOrderCancel();
+    }
+  };
 
   return (
     <SafeKeyComponent>
@@ -82,7 +100,7 @@ const DetailCard = ({route, navigation}) => {
           <View style={styles.header}>
             <View style={styles.mainHeader}>
               <View style={styles.leftHeader}>
-                <TouchableOpacity onPress={moveToHOme}>
+                <TouchableOpacity onPress={moveToHome}>
                   <IconIonicons
                     style={styles.imageReturn}
                     name="arrow-back"
@@ -91,7 +109,7 @@ const DetailCard = ({route, navigation}) => {
                   />
                 </TouchableOpacity>
                 {/* Code back to HomeScreen */}
-                <TouchableOpacity onPress={moveToHOme}>
+                <TouchableOpacity onPress={moveToHome}>
                   <View style={styles.viewLogo}>
                     <Image
                       style={styles.imageLogo}
@@ -147,6 +165,41 @@ const DetailCard = ({route, navigation}) => {
                     </View>
                   )}
                   {/*  số lượng món chính  */}
+
+                  <Modal
+                    animationType="slide"
+                    transparent={true}
+                    visible={urlPaypalCheckout}>
+                    <SafeKeyComponent>
+                      <View style={styles.containerPaypal}>
+                        <TouchableOpacity onPress={resetDataPaypal}>
+                          <Text
+                            style={[
+                              styles.textTitle,
+                              styles.updateTitlePaypal,
+                            ]}>
+                            Cancel
+                          </Text>
+                        </TouchableOpacity>
+
+                        {/* <TouchableOpacity onPress={handleAcceptedOrderCancel}>
+                          <Text
+                            style={[
+                              styles.textTitle,
+                              styles.updateTitlePaypal,
+                            ]}>
+                            Accepted Cancel Order
+                          </Text>
+                        </TouchableOpacity> */}
+                        <WebView
+                          source={{
+                            uri: constants.PAYPAL.SANDBOX_PAYPAL_SIGN_IN,
+                          }}
+                          onNavigationStateChange={onUrlStateChange}
+                        />
+                      </View>
+                    </SafeKeyComponent>
+                  </Modal>
                   <View style={styles.viewTotal}>
                     {/* Tổng tiền  */}
                     <View style={styles.viewBoxShowInfoBill}>
@@ -155,7 +208,7 @@ const DetailCard = ({route, navigation}) => {
                       </Text>
                       <Text style={[styles.textInfo, styles.updateTextInfo]}>
                         {/* {solveMoneyToPaid()} K */}
-                        {item.moneyToPaid}
+                        {item.moneyToPaid} K
                       </Text>
                     </View>
                     <View style={styles.divideLine}></View>
@@ -229,10 +282,24 @@ const DetailCard = ({route, navigation}) => {
                   {/*  Đỉa chỉ*/}
                   <View style={styles.viewTotal}>
                     <View style={styles.viewBoxShowInfoBill}>
-                      <Text style={styles.textAddress}>Số nhà :{item.address.houseNumber}</Text>
+                      <Text style={styles.textAddress}>
+                        Tên khách hàng : {item.address.name}
+                      </Text>
                     </View>
                     <View style={styles.viewBoxShowInfoBill}>
-                      <Text style={styles.textAddress}>Đường :{item.address.street}</Text>
+                      <Text style={styles.textAddress}>
+                        Số điện thoại : {item.address.phone}
+                      </Text>
+                    </View>
+                    <View style={styles.viewBoxShowInfoBill}>
+                      <Text style={styles.textAddress}>
+                        Số nhà :{houseNumber}
+                      </Text>
+                    </View>
+                    <View style={styles.viewBoxShowInfoBill}>
+                      <Text style={styles.textAddress}>
+                        Đường :{item.address.street}
+                      </Text>
                     </View>
                     <View style={styles.viewBoxShowInfoBill}>
                       <Text style={styles.textAddress}>
@@ -240,7 +307,9 @@ const DetailCard = ({route, navigation}) => {
                       </Text>
                     </View>
                     <View style={styles.viewBoxShowInfoBill}>
-                      <Text style={styles.textAddress}>Quận : {item.address.district}</Text>
+                      <Text style={styles.textAddress}>
+                        Quận : {item.address.district}
+                      </Text>
                     </View>
                     <View style={styles.viewBoxShowInfoBill}>
                       <Text style={styles.textAddress}>
@@ -292,7 +361,6 @@ const DetailCard = ({route, navigation}) => {
                       </View>
                     </View>
                   ) : null}
-
                   {item.toppingsCart.length ? (
                     <View style={styles.viewToppings}>
                       <View style={styles.viewTextHeader}>
@@ -307,13 +375,11 @@ const DetailCard = ({route, navigation}) => {
                         keyExtractor={(item, index) => index.toString()}
                         estimatedItemSize={100}
                       />
-
                       <View style={styles.viewTextHeader}>
                         <View style={styles.divideLine}></View>
                       </View>
                     </View>
                   ) : null}
-
                   {item.anotherCart.length ? (
                     <View style={styles.viewAnother}>
                       <View style={styles.viewTextHeader}>
@@ -328,12 +394,9 @@ const DetailCard = ({route, navigation}) => {
                         estimatedItemSize={100}
                         key={'list4'}
                       />
-
-                      <View style={styles.viewTextHeader}>
-                      </View>
+                      <View style={styles.viewTextHeader}></View>
                     </View>
                   ) : null}
-                 
                 </View>
               </TouchableNativeFeedback>
             </ScrollView>

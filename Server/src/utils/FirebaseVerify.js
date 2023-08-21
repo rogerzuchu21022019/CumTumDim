@@ -1,19 +1,28 @@
 // firebase-auth.js
 
-const admin = require('firebase-admin');
+const admin = require("firebase-admin");
+const serviceAccount = require("../firebase_sevice/cumtum-35a73-603682cdc4b6.json");
+const PushNotificationCon = require("../components/users/controllers/PushNotificationCon");
 
-const getFCMToken = async (idToken) => {
-  
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+});
+
+const sendMessage = async (fcmDeviceToken, title, body, data) => {
+  const message = {
+    notification: {
+      title: title,
+      body: body,
+    },
+    data: data,
+    token: fcmDeviceToken,
+  };
+
   try {
-    const decodedToken = await admin.auth().verifyIdToken(idToken);
-    const uid = decodedToken.uid;
-    const userRecord = await admin.auth().getUser(uid).then((userRecord) => userRecord.toJSON().uid);;
-    console.log("🚀 ~ file: FirebaseVerify.js:10 ~ getFCMToken ~ userRecord:", userRecord)
-    return userRecord.toJSON().uid;
+    const response = await admin.messaging().send(message);
+    console.log("Tin nhắn đã được gửi:", response);
   } catch (error) {
-    console.error('Error retrieving FCM token:', error);
-    return null;
+    console.log("Lỗi khi gửi tin nhắn:", error);
   }
 };
-
-module.exports = { getFCMToken };
+module.exports = { sendMessage };

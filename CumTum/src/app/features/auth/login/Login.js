@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 import {
   GoogleSignin,
   statusCodes,
@@ -9,6 +10,7 @@ import {
   Image,
   TouchableOpacity,
   ActivityIndicator,
+  Platform,
 } from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 
@@ -21,13 +23,15 @@ import StyleLogin from './StyleLogin';
 
 import auth, {firebase} from '@react-native-firebase/auth';
 import {LOG} from '../../../../../logger.config';
-import {StackActions} from '@react-navigation/native';
 import {fetchCategories, fetchDishes} from '../../product/apiProduct';
+import messaging from '@react-native-firebase/messaging';
+import {useListBannerQuery} from '../../../../redux/api/bannersApi';
+import {CommonActions} from '@react-navigation/native';
 
 const LoginScreen = ({navigation}) => {
   const log = LOG.extend(`LOGIN.JS`);
   const data = useSelector(authSelector);
-  // log.info("🚀 ~ file: Login.js:30 ~ LoginScreen ~ data:", data);
+  const {data: listBanner} = useListBannerQuery();
 
   const isLoading = data?.isLoading;
 
@@ -48,22 +52,29 @@ const LoginScreen = ({navigation}) => {
   }, [data.user.role]);
 
   const dispatch = useDispatch();
-
+  
+  const handlePreFetchAndSetRouter = nameRouter => {
+    dispatch(fetchCategories());
+    dispatch(fetchDishes());
+    navigation.dispatch(
+      CommonActions.reset({
+        index: 0,
+        routes: [{name: nameRouter}],
+      }),
+    );
+  };
   const moveTo = async () => {
-    if (data.user.role === constants.ROLE.ADMIN) {
-      navigation.navigate(Router.ADMIN_STACK);
-      dispatch(fetchCategories());
-      dispatch(fetchDishes());
-    } else {
-      navigation.navigate(Router.CUSTOMER_STACK);
-      dispatch(fetchCategories());
-      dispatch(fetchDishes());
-    }
+    data.user.role === constants.ROLE.ADMIN
+      ? handlePreFetchAndSetRouter(Router.ADMIN_STACK)
+      : handlePreFetchAndSetRouter(Router.CUSTOMER_STACK);
+    // Sau khi đăng nhập thành công, sử dụng navigation.reset()
   };
 
   const signIn = async () => {
     try {
-      await GoogleSignin.hasPlayServices({showPlayServicesUpdateDialog: true});
+      await GoogleSignin.hasPlayServices({
+        showPlayServicesUpdateDialog: true,
+      });
       const {idToken} = await GoogleSignin.signIn();
       // log.info('🚀 ~ file: Login.js:38 ~ signIn ~ idToken:', idToken);
 
@@ -74,8 +85,14 @@ const LoginScreen = ({navigation}) => {
         accessToken,
       );
 
-      dispatch(fetchLogin(idToken, accessToken));
+      const fcmTokenDevice = await messaging().getToken();
+      const data = {
+        idToken,
+        accessToken,
+        fcmTokenDevice,
+      };
 
+      dispatch(fetchLogin(data));
       return await auth().signInWithCredential(credential);
     } catch (error) {
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
