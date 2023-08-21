@@ -55,7 +55,7 @@ const Profile = ({navigation}) => {
     console.log('🚀 ~ file: Profile.js:38 ~ moveToEdit ~ address:', address);
   };
 
-  // xử lý options FastImage
+  // xử lý optionsFastImage
   const imageUrlOptions = {
     uri: user.imageUrl,
     priority: FastImage.priority.high,
