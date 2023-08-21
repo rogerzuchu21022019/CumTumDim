@@ -183,6 +183,8 @@ const AddDish = ({navigation}) => {
     const name = nameValue[0];
     const price = namePrice[0];
     const subCategory = valueSubMainDish[0];
+    //=== là so sánh cả kiểu dữ liệu và giá trị còn && là so sánh giữa 2 giá trị
+    // nếu categoryId === dataMainList[0]._id thì subCategory phải có giá trị
     if (categoryId === dataMainList[0]._id && !subCategory) {
       Alert.alert(`Bạn quên chưa nhập loại sườn. Hãy thêm đủ các trường nhé !`);
       return;
