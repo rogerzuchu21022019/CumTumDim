@@ -20,15 +20,25 @@ import Router from '../../../../../navigation/Router';
 import AddDeliveryAddress from './addDeliveryAddress/AddDeliveryAddress';
 import {LOG} from '../../../../../../../logger.config';
 import {useDispatch, useSelector} from 'react-redux';
-import {authSelector} from '../../../../admin/sliceAuth';
+import {authSelector, setSelectedAddress} from '../../../../admin/sliceAuth';
 import {fetchUserById} from '../../../../admin/apiUser';
 const log = LOG.extend(`CHOOSE_DELIVERY_ADDRESS.JS`);
 import IconMaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 const ChooseDeliveryAddress = ({navigation}) => {
   const authSelect = useSelector(authSelector);
+  const addressArr = authSelect.addresses;
+  const addressSelected = authSelect.addressSelected;
+  const addressSelectedIndex = addressArr.findIndex(
+    item =>
+      addressSelected
+        ? item._id === addressSelected._id
+        : item.addressDefault === true,
+  );
+
   const userId = authSelect.user._id;
-  const [checkedItem, setCheckedItem] = useState(0);
+  const [checkedItem, setCheckedItem] = useState(addressSelectedIndex);
+  const [isSelected, setIsSelected] = useState(false);
   const goBack = () => {
     navigation.goBack();
   };
@@ -54,9 +64,22 @@ const ChooseDeliveryAddress = ({navigation}) => {
     };
   });
 
+  const handleSetItemSelectedAddress = address => {
+    dispatch(setSelectedAddress(address));
+  };
+
   const handleCheckedItem = index => {
     setCheckedItem(index);
+    setIsSelected(true);
   };
+
+  useEffect(() => {
+    if (isSelected) {
+      handleSetItemSelectedAddress(radioButtonsData[checkedItem]);
+      navigation.goBack();
+      setIsSelected(false);
+    }
+  }, [checkedItem, isSelected]);
 
   return (
     <SafeKeyComponent>
@@ -118,7 +141,6 @@ const ChooseDeliveryAddress = ({navigation}) => {
             </View>
           </TouchableOpacity>
         </View>
-
       </View>
     </SafeKeyComponent>
   );

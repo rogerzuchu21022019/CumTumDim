@@ -1,0 +1,6 @@
+FROM node:18-alpine
+WORKDIR /Server
+COPY . .
+RUN  yarn 
+CMD [ "node","bin/server.js" ]
+EXPOSE 3000

@@ -1,7 +1,7 @@
 // Login.js in sever-side
 const express = require("express");
 const VerifyUserCon = require("../../../components/users/controllers/VerifyUserController");
-const { getFCMToken } = require("../../../utils/FirebaseVerify");
+const { sendMessage } = require("../../../utils/FirebaseVerify");
 const UpdateFcmTokenUserCon = require("../../../components/users/controllers/UpdateFcmTokenUserCon");
 
 const router = express.Router();
@@ -31,6 +31,9 @@ router.post(`/login`, async (req, res) => {
     }
     let user = await VerifyUserCon(idToken);
     const _user = await UpdateFcmTokenUserCon(user._id, fcmTokenDevice);
+    const title = "Đăng nhập thành công";
+    const body = "Chào mừng bạn đến với CumTumDim";
+    await sendMessage(fcmTokenDevice, title, body,{});
     return res.json({
       isLoggedIn: true,
       isLoading: false,

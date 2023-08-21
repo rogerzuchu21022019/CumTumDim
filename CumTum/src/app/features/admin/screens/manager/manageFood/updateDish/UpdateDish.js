@@ -164,6 +164,7 @@ const UpdateDish = ({navigation, route}) => {
                 value={`${price}`}
                 icon={null}
                 title="Giá (K)"
+                keyboardType='numeric'
                 onChangeText={handlePriceChange}
               />
             </View>

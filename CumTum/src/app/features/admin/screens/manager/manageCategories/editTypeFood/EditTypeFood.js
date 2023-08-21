@@ -22,10 +22,10 @@ const log = LOG.extend(`EDIT_TYPE_FOOD.JS`);
 const EditTypeFood = ({navigation}) => {
   const dispatch = useDispatch();
   const productSelect = useSelector(productSelector);
-  log.info(
-    '🚀 ~ file: EditTypeFood.js:24 ~ EditTypeFood ~ productSelect:',
-    productSelect,
-  );
+  // log.info(
+  //   '🚀 ~ file: EditTypeFood.js:24 ~ EditTypeFood ~ productSelect:',
+  //   productSelect,
+  // );
 
   useEffect(() => {
     dispatch(fetchCategories());

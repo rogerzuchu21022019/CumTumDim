@@ -8,7 +8,7 @@ const { connectRabbitConsume } = require("../../../utils/RabbitMq");
 const CONSTANTS = require("../../../utils/Constant");
 const route = express.Router();
 
-route.get(`/get-notification-rabbit`, async (req, res) => {
+route.get(`/get-rabitmq-admin`, async (req, res) => {
   try {
     const amqpUrl = process.env.AMQP_URL;
 

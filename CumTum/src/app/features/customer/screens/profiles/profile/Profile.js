@@ -15,7 +15,6 @@ const Profile = ({navigation}) => {
 
   const authSelect = useSelector(authSelector);
   const user = authSelect.user;
-  log.info('🚀 ~ file: Profile.js:16 ~ Profile ~ user:', user);
   const userId = user._id;
   const addresses = authSelect.user.addresses?.filter(
     item => item.addressDefault === true,
@@ -40,10 +39,10 @@ const Profile = ({navigation}) => {
 
   const handleLogout = async () => {
     dispatch(fetchSignOut());
-    moveTo();
+    // moveTo();
   };
   const moveTo = async () => {
-    navigation.navigate(Router.LOGIN);
+    // navigation.navigate(Router.LOGIN);
     socketServices.socket.disconnect();
   };
   const moveToEdit = async () => {
@@ -52,7 +51,6 @@ const Profile = ({navigation}) => {
     } else {
       navigation.navigate(Router.ADD_DELIVERY_ADDRESS);
     }
-    console.log('🚀 ~ file: Profile.js:38 ~ moveToEdit ~ address:', address);
   };
 
   // xử lý options FastImage

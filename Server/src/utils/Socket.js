@@ -25,15 +25,20 @@ const initSocket = (server) => {
       const index = connectedSockets.indexOf(socket.id);
       if (index > -1) {
         connectedSockets.splice(index, 1);
-        console.log("🚀 ~ file: Socket.js:28 ~ socket.on ~ connectedSockets:", connectedSockets)
+        console.log(
+          "🚀 ~ file: Socket.js:28 ~ socket.on ~ connectedSockets:",
+          connectedSockets
+        );
       }
     });
 
-    socket.on(
-      CONSTANTS.SOCKET.UPDATE_NOTIFICATION_CUSTOMER,() => { 
-        
-       }
-    )
+    socket.on(CONSTANTS.SOCKET.CONNECT_RABBIT_ADMIN, () => {
+      console.log("CONNECT_RABBIT_ADMIN");
+    });
+
+    socket.on(CONSTANTS.SOCKET.CONNECT_RABBIT_CUSTOMER, (userId) => {
+      console.log("CONNECT_RABBIT_CUSTOMER: userID: ", userId);
+    });
 
     // socket.on(CONSTANTS.SOCKET.CREATE_ORDER, (data) => {
     //   console.log("A user created an order.");
