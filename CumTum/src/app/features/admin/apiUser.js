@@ -8,7 +8,6 @@ const log = LOG.extend(`API_USER.JS`);
 export const fetchLogin = createAsyncThunk(
   constants.FETCH.LOGIN,
   async data => {
-    console.log('🚀 ~ file: apiUser.js:11 ~ data:', data);
     const response = await AxiosInstance().post(`/login`, {
       idToken: data.idToken,
       accessToken: data.accessToken,
@@ -33,7 +32,7 @@ export const fetchUserById = createAsyncThunk(
 export const fetchUpdateUserInfo = createAsyncThunk(
   constants.FETCH.UPDATE_USER_INFO,
   async data => {
-    log.error('🚀 ~ file: apiUser.js:34 ~ data:', data);
+    // log.error('🚀 ~ file: apiUser.js:34 ~ data:', data);
     const response = await AxiosInstance().post(
       `/users/${data.userId}/update-user-info`,
       {
@@ -50,7 +49,7 @@ export const fetchUpdateUserInfo = createAsyncThunk(
 export const fetchPushNotification = createAsyncThunk(
   constants.FETCH.PUSH_NOTIFICATION,
   async data => {
-    log.error('🚀 ~ file: apiUser.js:34 ~ data:', data);
+    // log.error('🚀 ~ file: apiUser.js:34 ~ data:', data);
     const response = await AxiosInstance().post(
       `/users/${data.userId}/push-notification`,
       {
@@ -67,7 +66,7 @@ export const fetchPushNotification = createAsyncThunk(
 export const fetchUpdateNotification = createAsyncThunk(
   constants.FETCH.UPDATE_NOTIFICATION,
   async data => {
-    log.error('🚀 ~ file: apiUser.js:34 ~ data:', data);
+    // log.error('🚀 ~ file: apiUser.js:34 ~ data:', data);
     const response = await AxiosInstance().post(
       `/users/${data.userId}/update-notification`,
       {
@@ -75,6 +74,22 @@ export const fetchUpdateNotification = createAsyncThunk(
       },
     );
     // log.warning('🚀 ~ file: apiUser.js:74 ~ response:', response.data);
+
+    return response.data;
+  },
+);
+
+export const fetchDeleteNotification = createAsyncThunk(
+  constants.FETCH.DELETE_NOTIFICATION,
+  async data => {
+    log.error('🚀 ~ file: apiUser.js:34 ~ data:', data);
+    const response = await AxiosInstance().post(
+      `/users/delete-notification/${data.notificationId}`,
+      {
+        userId: data.userId,
+      },
+    );
+    log.warning('🚀 ~ file: apiUser.js:74 ~ response:', response);
 
     return response.data;
   },

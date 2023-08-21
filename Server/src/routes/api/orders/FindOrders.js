@@ -1,5 +1,5 @@
 const express = require(`express`);
-const FindOrdersCon = require("../../../components/oders/controllers/FindOrdersCon");
+const FindOrdersCon = require("../../../components/orders/controllers/FindOrdersCon");
 const router = express.Router();
 
 router.get(`/find-orders`, async (req, res) => {

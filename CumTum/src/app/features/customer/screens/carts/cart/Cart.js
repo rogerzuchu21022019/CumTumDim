@@ -104,7 +104,7 @@ const Cart = ({navigation}) => {
         totalAmount: solveAmountDishes(),
         userId: userId,
       };
-      log.error('🚀 ~ file: Cart.js:48 ~ onBuy ~ item:', order);
+      // log.error('🚀 ~ file: Cart.js:48 ~ onBuy ~ item:', order);
       
       navigation.navigate(Router.PAYMENT, {order});
     } else {

@@ -12,7 +12,7 @@ import com.facebook.react.defaults.DefaultReactNativeHost;
 import com.facebook.soloader.SoLoader;
 import com.reactnativegooglesignin.RNGoogleSigninPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
-
+import com.microsoft.codepush.react.CodePush;
 import java.util.List;
 
 
@@ -36,6 +36,11 @@ public class MainApplication extends Application implements ReactApplication {
                     new VectorIconsPackage();
 
                     return packages;
+                }
+
+                @Override
+                protected String getJSBundleFile() {
+                    return CodePush.getJSBundleFile();
                 }
 
                 @Override

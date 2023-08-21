@@ -33,6 +33,8 @@ const EditProfile = ({navigation, route}) => {
   const {item} = route.params;
 
   const authSelect = useSelector(authSelector);
+  const {isLoading} = authSelect.isLoading;
+  
   const user = authSelect.user;
   const userId = authSelect.user._id;
   const dispatch = useDispatch();
@@ -71,10 +73,6 @@ const EditProfile = ({navigation, route}) => {
   const [isPicked, setIsPicked] = useState(false);
   const handleClick = () => {
     setIsShowModal(!isShowModal);
-  };
-
-  const handleShowLoading = () => {
-    setIsShowLoading(!isShowLoading);
   };
 
   const handleName = () => {
@@ -129,7 +127,6 @@ const EditProfile = ({navigation, route}) => {
 
       if (avatar != user.imageUrl) {
         const result = await dispatch(fetchUploadImage(avatar));
-        handleShowLoading();
         const imageUrl = result.payload.data;
         const data = {
           userId: userId,
@@ -148,7 +145,6 @@ const EditProfile = ({navigation, route}) => {
           imageUrl: user.imageUrl,
           address: newAddress,
         };
-        handleShowLoading();
         // navigation.goBack();
         dispatch(fetchUpdateUserInfo(data));
         const timeOut = setTimeout(() => {

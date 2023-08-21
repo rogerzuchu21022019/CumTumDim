@@ -15,11 +15,6 @@ const CustomerSupport = ({navigation}) => {
 
   const signOut = async () => {
     dispatch(fetchSignOut());
-    moveTo();
-  };
-
-  const moveTo = async () => {
-    navigation.navigate(Router.LOGIN);
   };
 
   return (
