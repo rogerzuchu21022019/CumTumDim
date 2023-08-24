@@ -7,6 +7,10 @@ import {useListBannerQuery} from '../../../redux/api/bannersApi';
 const Advertisement = () => {
   const [imageIndex, setImageIndex] = useState<number>(0);
   const {data} = useListBannerQuery();
+  console.log(
+    '🚀 ~ file: Advertisement.tsx:10 ~ Advertisement ~ data:',
+    data?.data,
+  );
   const images = data?.data ?? [];
   useEffect(() => {
     const interval = setInterval(() => {

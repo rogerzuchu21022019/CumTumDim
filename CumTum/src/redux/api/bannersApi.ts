@@ -1,6 +1,16 @@
-import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
+import {
+  BaseQueryFn,
+  FetchArgs,
+  FetchBaseQueryError,
+  FetchBaseQueryMeta,
+  QueryDefinition,
+  createApi,
+  fetchBaseQuery,
+} from '@reduxjs/toolkit/query/react';
 import {Banner, DataResponse} from './types';
 import {constants} from '../../app/shared/constants';
+import {ThunkAction, AnyAction} from '@reduxjs/toolkit';
+import {QueryActionCreatorResult} from '@reduxjs/toolkit/dist/query/core/buildInitiate';
 
 const endPointBanners = 'banners';
 const endPointAdd = 'add-banner';
@@ -16,13 +26,13 @@ export enum BannerEnum {
 export const bannersApi = createApi({
   reducerPath: 'bannersApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: `${constants.BASE_URL.MAIN}/products/`,
+    baseUrl: `${constants.BASE_URL.SECOND}/products/`,
   }),
   tagTypes: ['Banner'],
   endpoints: builder => ({
     listBanner: builder.query<DataResponse<Banner>, void>({
       query: () => `${endPointBanners}`,
-      providesTags: ['Banner'],
+      // providesTags: ['Banner'],
     }),
     addBanner: builder.mutation<DataResponse<Banner>, Omit<Banner, '_id'>>({
       query: item => {
@@ -39,17 +49,17 @@ export const bannersApi = createApi({
         };
       },
       invalidatesTags: ['Banner'],
-      onQueryStarted: async (_, {queryFulfilled}) => {
+      onQueryStarted: async (_, {dispatch, queryFulfilled}) => {
         try {
           // Wait for the mutation to be fulfilled
           await queryFulfilled;
 
           // Fetch the updated list of banners after adding a new item
-          // await dispatch(
-          //   bannersApi.endpoints.listBanner.initiate(undefined, {
-          //     forceRefetch: true,
-          //   }),
-          // );
+          await dispatch(
+            bannersApi.endpoints.listBanner.initiate(undefined, {
+              forceRefetch: true,
+            }),
+          );
         } catch (error) {
           console.error('Error occurred while fetching banners:', error);
         }
@@ -61,15 +71,15 @@ export const bannersApi = createApi({
         method: 'POST',
       }),
       invalidatesTags: ['Banner'],
-      onQueryStarted: async (_, {queryFulfilled}) => {
+      onQueryStarted: async (_, {dispatch, queryFulfilled}) => {
         try {
           await queryFulfilled;
 
-          // await dispatch(
-          //   bannersApi.endpoints.listBanner.initiate(undefined, {
-          //     forceRefetch: true,
-          //   }),
-          // );
+          await dispatch(
+            bannersApi.endpoints.listBanner.initiate(undefined, {
+              forceRefetch: true,
+            }),
+          );
         } catch (error) {
           console.error('Error occurred while fetching banners:', error);
         }

@@ -6,7 +6,7 @@ const endPoint = 'categories';
 export const categoriesApi = createApi({
   reducerPath: 'categoriesApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: `${constants.BASE_URL.MAIN}/products/`,
+    baseUrl: `${constants.BASE_URL.SECOND}/products/`,
   }),
   endpoints: builder => ({
     listCategory: builder.query<DataResponse<Category>, void>({

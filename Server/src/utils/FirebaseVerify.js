@@ -1,9 +1,7 @@
 // firebase-auth.js
 
 const admin = require("firebase-admin");
-const serviceAccount = require("../firebase_sevice/cumtum-35a73-603682cdc4b6.json");
-const PushNotificationCon = require("../components/users/controllers/PushNotificationCon");
-
+const serviceAccount = require("../firebase_sevice/firebase.json");
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
 });

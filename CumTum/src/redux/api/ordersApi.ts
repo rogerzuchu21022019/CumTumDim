@@ -7,7 +7,7 @@ const endPoint = 'find-orders';
 export const ordersApi = createApi({
   reducerPath: 'ordersApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: `${constants.BASE_URL.MAIN}/products/`,
+    baseUrl: `${constants.BASE_URL.SECOND}/products/`,
   }),
   endpoints: builder => ({
     listOrder: builder.query<DataResponse<Order>, void>({

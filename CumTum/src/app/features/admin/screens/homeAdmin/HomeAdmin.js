@@ -20,12 +20,12 @@ import {cartSelector} from '../../../carts/sliceOrder';
 import {LOG} from '../../../../../../logger.config';
 import IconOcticons from 'react-native-vector-icons/Octicons';
 import IconAnt from 'react-native-vector-icons/AntDesign';
-import {fetchOrders} from '../../../carts/apiOrder';
+import {fetchOrders, fetchUpdateIsReceivedOrder} from '../../../carts/apiOrder';
 import {authSelector} from '../../sliceAuth';
 import socketServices from '../../../../shared/utils/Socket';
-import {compareTwoStrings} from 'string-similarity';
 // import io from 'socket.io-client';
-import {Dish} from '../../../../../redux/api/types';
+import messaging from '@react-native-firebase/messaging';
+
 import {showNotifyLocal} from '../../../../shared/utils/Notifies';
 
 import {format, isToday} from 'date-fns';
@@ -39,15 +39,16 @@ import {
   useListOrderQuery,
   useListOrderSortTodayQuery,
 } from '../../../../../redux/api/ordersApi';
+import {onShowData, onShowNotiWelCome} from '../../../../shared/utils/ShowNotifiWelcome';
 const log = LOG.extend(`HOME_ADMIN.JS`);
 
 const HomeAdmin = ({navigation}) => {
   const dispatch = useDispatch();
   const data = useSelector(cartSelector);
-
+  const [isOnline, setIsOnline] = useState(true);
   const isLoading = data.isLoading;
   const user = useSelector(authSelector);
-
+  const fcmTokenDevice = user.user.fcmTokenDevice;
   const userId = user.user._id;
   // console.log('🚀 ~ file: HomeAdmin.js:51 ~ HomeAdmin ~ userId:', userId);
   const notifications = user.notifications;
@@ -102,11 +103,34 @@ const HomeAdmin = ({navigation}) => {
   const resetSearch = () => {
     setSearch('');
   };
+
+  useEffect(() => {
+    const unsubscribe = messaging().onMessage(remoteMessage => {
+      const {title, body, data} = remoteMessage.notification;
+      data ? onShowData(data) : onShowNotiWelCome(title, body);
+      dispatch(fetchUserById(userId));
+    });
+
+    dispatch(fetchUserById(userId));
+
+    return () => {
+      unsubscribe();
+    };
+  }, [messaging]);
+
   useEffect(() => {
     socketServices.initializeSocket();
-    socketServices.emit(constants.SOCKET.CONNECT_RABBIT_ADMIN);
-    socketServices.on(constants.SOCKET.CREATE_ORDER, orderData => {
+    socketServices.emit(constants.SOCKET.CONNECT_RABBIT_ADMIN, fcmTokenDevice);
+    
+    /* connect rabbit mq với file Socket.js trong Server */
+    socketServices.on(constants.SOCKET.CREATE_ORDER, async orderData => {
+      console.log('🚀 ~ file: HomeAdmin.js:131 ~ useEffect ~ loging:');
       onDisplayNotification(orderData);
+      const data = {
+        orderId: orderData.orderData._id,
+        isReceived: true,
+      };
+      // dispatch(fetchUpdateIsReceivedOrder(data));
       dispatch(fetchUserById(userId));
       dispatch(fetchOrders());
       // dispatch(fetchGetQueueFromRabbitMQ())
@@ -114,14 +138,18 @@ const HomeAdmin = ({navigation}) => {
     return () => {
       socketServices.socket.disconnect();
     };
-  }, [dispatch]);
+  }, [dispatch,]);
 
   const onDisplayNotification = async orderData => {
     let idOrder = formatCodeOrder(orderData.orderData._id);
     const total = orderData.orderData.moneyToPaid;
 
     const title = 'Notification';
-    const content = `Đơn hàng mã số ${idOrder} có tổng giá tiền ${total}K đang chờ bạn xác nhận!`;
+    const content = `Đơn hàng có mã ${formatCodeOrder(
+      idOrder,
+    )} của khách hàng có tên ${orderData.orderData.address.name} với tổng tiền ${
+      total
+    } K đang chờ bạn xác nhận`;
     const notification = {
       title,
       content,
