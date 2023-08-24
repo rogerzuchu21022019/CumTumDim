@@ -19,20 +19,23 @@ import {LOG} from '../../../../../../../logger.config';
 import {constants} from '../../../../../shared/constants';
 import SafeKeyComponent from '../../../../../components/safe_area/SafeKeyComponent';
 import IconIonicons from 'react-native-vector-icons/Ionicons';
-import {useDispatch} from 'react-redux';
-import {fetchUpdateOrder} from '../../../../carts/apiOrder';
+import {useDispatch, useSelector} from 'react-redux';
+import {fetchOrders, fetchUpdateOrder} from '../../../../carts/apiOrder';
 import socketServices from '../../../../../shared/utils/Socket';
 
 import WebView from 'react-native-webview';
+import {authSelector} from '../../../sliceAuth';
+import {fetchUserById} from '../../../apiUser';
 
 const DetailCard = ({route, navigation}) => {
   const dispatch = useDispatch();
   const log = LOG.extend('DETAILCART');
   const {item, index} = route.params;
+  const authSelect = useSelector(authSelector);
+  const userIdAdmin = authSelect.user._id;
+  console.log('🚀 ~ file: DetailCard.js:32 ~ DetailCard ~ item:', item);
   const [urlPaypalCheckout, setUrlPaypalCheckout] = useState(false);
-  const arrHouseNumber = item.address.houseNumber.split(`/`);
-  const houseNumber = `${arrHouseNumber[0]}/${arrHouseNumber[1]}`;
-  const hem = arrHouseNumber[1];
+  const houseNumber = item.address.houseNumber;
   const moveToHome = () => {
     navigation.navigate(Router.HOME_ADMIN);
   };
@@ -61,6 +64,7 @@ const DetailCard = ({route, navigation}) => {
         orderStatus: 'Chấp nhận',
       }),
     );
+    dispatch(fetchOrders());
     navigation.goBack();
   };
   const onCancel = async () => {
@@ -85,8 +89,6 @@ const DetailCard = ({route, navigation}) => {
       handleAcceptedOrderCancel();
     }
   };
-
-  // item.totalMainDish
 
   return (
     <SafeKeyComponent>
@@ -206,7 +208,7 @@ const DetailCard = ({route, navigation}) => {
                       </Text>
                       <Text style={[styles.textInfo, styles.updateTextInfo]}>
                         {/* {solveMoneyToPaid()} K */}
-                        {item.moneyToPaid} K 
+                        {item.moneyToPaid} K
                       </Text>
                     </View>
                     <View style={styles.divideLine}></View>
@@ -281,9 +283,18 @@ const DetailCard = ({route, navigation}) => {
                   <View style={styles.viewTotal}>
                     <View style={styles.viewBoxShowInfoBill}>
                       <Text style={styles.textAddress}>
+                        Tên khách hàng : {item.address.name}
+                      </Text>
+                    </View>
+                    <View style={styles.viewBoxShowInfoBill}>
+                      <Text style={styles.textAddress}>
+                        Số điện thoại : {item.address.phone}
+                      </Text>
+                    </View>
+                    <View style={styles.viewBoxShowInfoBill}>
+                      <Text style={styles.textAddress}>
                         Số nhà :{houseNumber}
                       </Text>
-                      <Text style={styles.textAddress}>Hẻm :{hem}</Text>
                     </View>
                     <View style={styles.viewBoxShowInfoBill}>
                       <Text style={styles.textAddress}>

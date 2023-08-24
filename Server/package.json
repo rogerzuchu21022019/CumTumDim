@@ -5,7 +5,7 @@
   "homepage": "https://cumtum.storm.io.vm",
   "scripts": {
     "start": "node ./bin/server",
-    "dev": "nodemon --exec babel-node ./bin/server && 'yarn build'",
+    "dev": "nodemon ./bin/server && 'yarn build'",
     "server": "concurrently \"yarn dev\" ",
     "tsc": "tsc --init"
   },
@@ -46,6 +46,7 @@
     "randombytes": "^2.1.0",
     "redis": "^4.6.4",
     "socket.io": "^4.6.1",
+    "tailwindcss": "^3.3.2",
     "ts-node": "^10.9.1",
     "twilio": "^4.8.0",
     "uuid": "^9.0.0",

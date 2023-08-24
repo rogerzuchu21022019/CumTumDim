@@ -15,6 +15,7 @@ import {
 
 const {createSlice} = require('@reduxjs/toolkit');
 import * as RootNavigation from '../../navigation/RootNavigation';
+import {LOG} from '../../../../logger.config';
 
 const initialState = {
   users: [],
@@ -25,7 +26,10 @@ const initialState = {
   message: null,
   notifications: [],
   addresses: [],
+  orders: [],
+  addressSelected: undefined,
 };
+const log = LOG.extend(`SLICE_AUTH`);
 
 export const authSlice = createSlice({
   name: constants.SLICE.AUTH,
@@ -43,6 +47,12 @@ export const authSlice = createSlice({
         }
         return notification;
       });
+    },
+    setSelectedAddress: (state, action) => {
+      const itemSelected = action.payload;
+      state.addressSelected = itemSelected;
+
+      return state;
     },
   },
   extraReducers: builder => {
@@ -77,6 +87,7 @@ export const authSlice = createSlice({
       state.user = dataResponse.data;
       state.notifications = state.user.notifications;
       state.addresses = state.user.addresses;
+      state.orders = state.user.orders;
     });
     builder.addCase(fetchUserById.rejected, (state, action) => {
       state.isLoading = false;
@@ -210,5 +221,5 @@ export const authSlice = createSlice({
 });
 
 export const authSelector = state => state.auth;
-export const {updateIsRead} = authSlice.actions;
+export const {updateIsRead, setSelectedAddress} = authSlice.actions;
 export default authSlice.reducer;

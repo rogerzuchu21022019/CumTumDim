@@ -14,13 +14,15 @@
     "codepush:staging": "appcenter codepush release-react -a namzuchu/CumTum -d Staging",
     "codepush:prod": "appcenter codepush release-react -a namzuchu/CumTum -d Production",
     "codepush:andr-staging": "appcenter codepush release-react -a namzuchu/CumTum-1 -d Staging",
-    "codepush:andr-prod": "appcenter codepush release-react -a namzuchu/CumTum-1 -d Production"
+    "codepush:andr-prod": "appcenter codepush release-react -a namzuchu/CumTum-1 -d Production",
+    "devices": "xcrun simctl list devices"
   },
   "dependencies": {
     "@gorhom/bottom-sheet": "^4",
     "@notifee/react-native": "^7.6.1",
     "@react-native-async-storage/async-storage": "^1.17.12",
     "@react-native-community/hooks": "^3.0.0",
+    "@react-native-community/netinfo": "^9.4.1",
     "@react-native-firebase/app": "^17.3.2",
     "@react-native-firebase/auth": "^17.3.1",
     "@react-native-firebase/messaging": "^17.3.2",
@@ -48,6 +50,7 @@
     "react-native-code-push": "^8.0.2",
     "react-native-crypto-js": "^1.0.0",
     "react-native-date-picker": "^4.2.9",
+    "react-native-draggable-flatlist": "^4.0.1",
     "react-native-dropdown-picker": "^5.4.6",
     "react-native-dropdown-select-list": "^2.0.4",
     "react-native-element-dropdown": "^2.9.0",
@@ -61,11 +64,13 @@
     "react-native-reanimated": "^3.2.0",
     "react-native-safe-area-context": "^4.5.0",
     "react-native-screens": "^3.19.0",
+    "react-native-share": "^9.1.0",
     "react-native-snackbar": "^2.4.0",
     "react-native-svg": "^13.8.0",
     "react-native-tab-view": "^3.5.1",
     "react-native-table-component": "^1.2.2",
     "react-native-vector-icons": "^9.2.0",
+    "react-native-view-shot": "^3.7.0",
     "react-native-walkthrough-tooltip": "^1.5.0",
     "react-native-webview": "^11.26.1",
     "react-redux": "^8.0.5",
@@ -75,6 +80,7 @@
     "redux-saga": "^1.2.2",
     "reduxjs-toolkit-persist": "^7.2.1",
     "socket.io-client": "^4.6.1",
+    "string-similarity": "^4.0.4",
     "uuid": "^9.0.0"
   },
   "devDependencies": {

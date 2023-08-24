@@ -11,9 +11,12 @@ const CONSTANTS = {
     UPDATE_NOTIFICATION_ADMIN: "update-notification-admin",
     PUSH_NOTIFICATION_CUSTOMER: "push-notification-customer",
     UPDATE_NOTIFICATION_CUSTOMER: "update-notification-customer",
+    CONNECT_RABBIT_ADMIN: "connectRabbitAdmin",
+    CONNECT_RABBIT_CUSTOMER: "connectRabbitCustomer",
   },
   RABBIT_MQ: {
     QUEUE_NAME_ORDER: "order",
+    
   },
 };
 

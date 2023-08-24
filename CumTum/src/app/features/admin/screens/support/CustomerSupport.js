@@ -9,17 +9,14 @@ import {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import Router from '../../../../navigation/Router';
 import IconFontAwesome from 'react-native-vector-icons/FontAwesome';
+import socketServices from '../../../../shared/utils/Socket';
 
 const CustomerSupport = ({navigation}) => {
   const dispatch = useDispatch();
 
   const signOut = async () => {
     dispatch(fetchSignOut());
-    moveTo();
-  };
-
-  const moveTo = async () => {
-    navigation.navigate(Router.LOGIN);
+    socketServices.socket.disconnect();
   };
 
   return (

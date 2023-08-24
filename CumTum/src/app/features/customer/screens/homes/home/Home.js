@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {View, Text, Image, TouchableOpacity, StyleSheet} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {useEffect, useState} from 'react';
@@ -26,8 +27,12 @@ import {authSelector} from '../../../../admin/sliceAuth';
 import ModalNotify from '../../../../../components/modal/ModalNotify';
 import DropdownElement from '../../../../../components/dropdownElement/DropdownElement';
 import messaging from '@react-native-firebase/messaging';
-import {onShowNotiWelCome} from '../../../../../shared/utils/ShowNotifiWelcome';
+import {
+  onShowData,
+  onShowNotiWelCome,
+} from '../../../../../shared/utils/ShowNotifiWelcome';
 import {fetchUserById} from '../../../../admin/apiUser';
+import ModalSearch from '../../../../../components/modal/ModalSearch';
 
 const HomeCustomer = ({navigation}) => {
   const log = LOG.extend('HOME_CUSTOMER.js');
@@ -36,9 +41,10 @@ const HomeCustomer = ({navigation}) => {
   // log.info(
   //   '🚀 ~ file: Home.js:47 ~ HomeCustomer ~ notifications:',
   //   authSelect.notifications,
-  // );
+  // );noti
 
   const user = authSelect.user;
+  const orders = authSelect.orders;
   const userId = user._id;
 
   const userInfo = {
@@ -47,33 +53,24 @@ const HomeCustomer = ({navigation}) => {
     address: authSelect.user.addresses,
   };
 
-  const getNotification = async () => {
-    await messaging().onMessage(remoteMessage => {
-      const title = remoteMessage.notification.title;
-      const body = remoteMessage.notification.body;
-      const data = remoteMessage.data;
-      const orderStatus = data.orderStatus;
-      const order = data.order;
-      const moneyToPaid = data.moneyToPaid;
-      dispatch(fetchUserById(userId));
-      onDisplayNotiAccepted({
-        title,
-        order,
-        orderStatus,
-        moneyToPaid,
-      });
-    });
-  };
   useEffect(() => {
-    getNotification();
+    const unsubscribe = messaging().onMessage(remoteMessage => {
+      const {title, body, data} = remoteMessage.notification;
+      data ? onShowData(data) : onShowNotiWelCome(title, body);
+      dispatch(fetchUserById(userId));
+    });
+
+    dispatch(fetchUserById(userId));
+
+    return () => {
+      unsubscribe();
+    };
   }, [messaging]);
 
   const message1 = `Bạn chưa cập nhật địa chỉ giao hàng!!`;
   const message2 = `Vui lòng cập nhật địa chỉ`;
   const message3 = `để chúng tôi có thể giao hàng cho bạn`;
 
-  const IMAGE_BG =
-    'https://cdn.britannica.com/38/111338-050-D23BE7C8/Stars-NGC-290-Hubble-Space-Telescope.jpg?w=400&h=300&c=crop';
   const data = useSelector(productSelector);
 
   const [tabs, setTabs] = useState([0, 1, 2, 3]);
@@ -86,6 +83,7 @@ const HomeCustomer = ({navigation}) => {
   const [isShowModal, setIsShowModal] = useState(false);
   const [isCancel, setIsCancel] = useState(false);
   const [isAddress, setIsAddress] = useState(false);
+  const [isShowModalSearch, setIsShowModalSearch] = useState(false);
 
   const [iconFoods, setIconFoods] = useState(true);
 
@@ -98,7 +96,7 @@ const HomeCustomer = ({navigation}) => {
 
   useEffect(() => {
     socketServices.initializeSocket();
-
+    socketServices.emit(constants.SOCKET.CONNECT_RABBIT_CUSTOMER, userId);
     return () => {
       socketServices.socket.disconnect();
     };
@@ -109,8 +107,6 @@ const HomeCustomer = ({navigation}) => {
       handleClick();
     }
   }, []);
-
- 
 
   const onDisplayNotiAccepted = async data => {
     console.log('🚀 ~ file: Home.js:124 ~ onDisplayNotiAccepted ~ data:', data);
@@ -128,10 +124,23 @@ const HomeCustomer = ({navigation}) => {
     showNotifyLocal(dataMap);
   };
 
+  const onCancel = () => {
+    setIsShowModalSearch(false);
+  };
+
+  const openModalSearch = () => {
+    setIsShowModalSearch(true);
+  };
+
+  const onDone = () => {
+    setIsShowModalSearch(false);
+    navigation.navigate(Router.CART_TABS);
+  };
+
   useEffect(() => {
     dispatch(fetchCategories());
     dispatch(fetchDishes());
-    onShowNotiWelCome();
+    // onShowNotiWelCome();
     setTabs(0);
     return () => {
       dispatch(fetchCategories());
@@ -166,12 +175,6 @@ const HomeCustomer = ({navigation}) => {
     // log.error('🚀 ~ file: Home.js:75 ~ handleRemoveDish ~ dish:', dish);
     dispatch(removeDish(dish));
     dispatch(updateQuantity(dish));
-  };
-
-  const imageUrlOptions = {
-    uri: '',
-    priority: FastImage.priority.normal,
-    cache: FastImage.cacheControl.immutable,
   };
 
   const openTab1 = () => {
@@ -211,6 +214,19 @@ const HomeCustomer = ({navigation}) => {
               />
               <Text style={styles.textTitle}>Cum tứm đim</Text>
             </View>
+            <TouchableOpacity
+              style={{
+                marginRight: 20,
+              }}
+              onPress={openModalSearch}>
+              <View>
+                <IconOcticons
+                  name="search"
+                  color={constants.COLOR.WHITE}
+                  size={20}
+                />
+              </View>
+            </TouchableOpacity>
             <TouchableOpacity onPress={moveToRingBell}>
               <View style={styles.rightHeader}>
                 <View>
@@ -279,7 +295,7 @@ const HomeCustomer = ({navigation}) => {
                   <View style={styles.viewImageDish}>
                     <FastImage
                       style={styles.imageLogo}
-                      source={require('../../../../../../assets/logoExtraDish.png')}
+                      source={require('../../../../../../assets/logo_extra_food.jpg')}
                     />
                   </View>
                 </View>
@@ -315,7 +331,7 @@ const HomeCustomer = ({navigation}) => {
                   <View style={styles.viewImageDish}>
                     <FastImage
                       style={styles.imageLogo}
-                      source={require('../../../../../../assets/logoKhac.png')}
+                      source={require('../../../../../../assets/logo_another.jpeg')}
                     />
                   </View>
                 </View>
@@ -326,7 +342,7 @@ const HomeCustomer = ({navigation}) => {
               <View style={styles.boxFlashList}>
                 <Image
                   source={{
-                    uri: IMAGE_BG,
+                    uri: constants.IMAGE_BG.URI,
                   }}
                   style={StyleSheet.absoluteFillObject}
                   blurRadius={20}
@@ -379,7 +395,7 @@ const HomeCustomer = ({navigation}) => {
               <View style={styles.boxFlashList}>
                 <Image
                   source={{
-                    uri: IMAGE_BG,
+                    uri: constants.IMAGE_BG.URI,
                   }}
                   style={StyleSheet.absoluteFillObject}
                   blurRadius={20}
@@ -451,6 +467,12 @@ const HomeCustomer = ({navigation}) => {
           navigation={navigation}
           isAddress={isAddress}
           item={userInfo}
+        />
+        <ModalSearch
+          isVisible={isShowModalSearch}
+          navigation={navigation}
+          onCancel={onCancel}
+          onDone={onDone}
         />
         {/* <View style={styles.footer}></View> */}
       </View>

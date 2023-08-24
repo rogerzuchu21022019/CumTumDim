@@ -1,7 +1,6 @@
 /* Check import lại mấy cái router này khi import */
 const ApiProducts = require("../api/ApiProducts");
 const ApiUser = require("../api/ApiUser");
-
 /* Được gọi từ app.js */
 const ManagerRouter = (app, fixPublic) => {
   // https://congtydacap.club/api/users/auth-login
@@ -58,13 +57,20 @@ const ManagerRouter = (app, fixPublic) => {
   app.use(SUB_PRODUCTS, ApiProducts.deleteCategory, fixPublic);
   app.use(SUB_PRODUCTS, ApiProducts.findCategories, fixPublic);
 
+  app.use(SUB_PRODUCTS, ApiProducts.findBanners, fixPublic);
+  app.use(SUB_PRODUCTS, ApiProducts.addBanner, fixPublic);
+  app.use(SUB_PRODUCTS, ApiProducts.updateBannerById, fixPublic);
+  app.use(SUB_PRODUCTS, ApiProducts.deleteBannerById, fixPublic);
+
   app.use(SUB_PRODUCTS, ApiProducts.addDish, fixPublic);
   app.use(SUB_PRODUCTS, ApiProducts.updateDishById, fixPublic);
   app.use(SUB_PRODUCTS, ApiProducts.deleteDishById, fixPublic);
 
   app.use(SUB_PRODUCTS, ApiProducts.findDishes, fixPublic);
+  // app.use(SUB_USERS, ApiProducts.search, fixPublic);
   app.use(SUB_PRODUCTS, ApiProducts.createOrder, fixPublic);
   app.use(SUB_PRODUCTS, ApiProducts.updateOrder, fixPublic);
+  app.use(SUB_PRODUCTS, ApiProducts.updateIsReceivedOrder, fixPublic);
   app.use(SUB_PRODUCTS, ApiProducts.findOrders, fixPublic);
   app.use(SUB_PRODUCTS, ApiProducts.getRabbit, fixPublic);
 

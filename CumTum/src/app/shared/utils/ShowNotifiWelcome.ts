@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import {TypeResponseNotificationFirebase} from '../types';
 import {showNotifyLocal} from './Notifies';
 import notifee from '@notifee/react-native';
-export const onShowNotiWelCome = async () => {
+export const onShowNotiWelCome = async (title: string, body: string) => {
   // Request permissions (required for iOS)
 
   // Create a channel (required for Android)
@@ -8,12 +10,9 @@ export const onShowNotiWelCome = async () => {
     id: 'default',
     name: 'Default Channel',
   });
-  const title = 'Notification';
-  const content = 'Chào mừng bạn đến với dịch vụ của CumTumDim.';
-  // console.log("🚀 ~ file: Payment.js:45 ~ onDisplayNotification ~ content:", content)
   const dataMap = {
     title,
-    content,
+    content: body,
     channelId,
   };
   // Display a notification
@@ -24,6 +23,18 @@ export const onDisplayNotification = async (name: string) => {
   // Create a channel (required for Android)
   const title = 'Notification';
   const content = `Cảm ơn bạn ${name} đã đặt hàng. Đơn hàng của bạn đang được chúng tôi xác nhận.....`;
+  const dataMap = {
+    title,
+    content,
+  };
+  showNotifyLocal(dataMap);
+};
+
+export const onShowData = async (data: TypeResponseNotificationFirebase) => {
+  // Create a channel (required for Android)
+  const title = data.title;
+  const dataFromBE = data.data;
+  const content = data.body;
   const dataMap = {
     title,
     content,

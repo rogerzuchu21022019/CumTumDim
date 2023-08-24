@@ -17,22 +17,23 @@ import SafeKeyComponent from '../../../../../components/safe_area/SafeKeyCompone
 import {authSelector} from '../../../../admin/sliceAuth';
 import {LOG} from '../../../../../../../logger.config';
 import {fetchUserById} from '../../../../admin/apiUser';
-import {onDisplayNotiAccepted} from '../../../../../shared/utils/ShowNotificationAccepted';
 const log = LOG.extend(`HISTORY.JS`);
+
 const History = ({navigation}) => {
   // const data = useSelector(cartSelector);
   const authSelect = useSelector(authSelector);
+  const [isChange, setIsChange] = useState(false);
   const userId = authSelect.user._id;
   const fcmTokenDevice = authSelect.fcmTokenDevice;
 
   const [isRefresh, setIsRefresh] = useState(false);
   const dispatch = useDispatch();
-  let orderHistory = authSelect.user.orders;
+  let orderHistory = authSelect.orders;
   useEffect(() => {
     dispatch(fetchUserById(userId));
-  }, [authSelect.user.orders.length]);
+  }, []);
   // const onSetOrderHistory = async () => {
-  //   const response = await dispatch(fetchUserById(userId));
+  //   const response = await disatch(fetchUserById(userId));
   //   console.log(
   //     '🚀 ~ file: History.js:33 ~ onSetOrderHistory ~ response:',
   //     response.payload.data.orders,
