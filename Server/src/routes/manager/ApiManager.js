@@ -70,6 +70,7 @@ const ManagerRouter = (app, fixPublic) => {
   // app.use(SUB_USERS, ApiProducts.search, fixPublic);
   app.use(SUB_PRODUCTS, ApiProducts.createOrder, fixPublic);
   app.use(SUB_PRODUCTS, ApiProducts.updateOrder, fixPublic);
+  app.use(SUB_PRODUCTS, ApiProducts.updateIsReceivedOrder, fixPublic);
   app.use(SUB_PRODUCTS, ApiProducts.findOrders, fixPublic);
   app.use(SUB_PRODUCTS, ApiProducts.getRabbit, fixPublic);
 

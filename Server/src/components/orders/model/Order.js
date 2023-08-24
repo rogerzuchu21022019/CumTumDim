@@ -121,6 +121,10 @@ const OrderSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+    isReceived: {
+      type: Boolean,
+      default: false,
+    },
     totalTopping: {
       type: Number,
       required: true,

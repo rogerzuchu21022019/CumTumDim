@@ -214,6 +214,7 @@
 				CAEF4BD1BC92AE48FDDDCFE8 /* [CP] Copy Pods Resources */,
 				45D9998FC416A5D6A3708336 /* [CP-User] [RNFB] Core Configuration */,
 				95AF214329D0C69C00624B59 /* Embed Frameworks */,
+				959117182A6A1DA100822835 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -328,6 +329,23 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CumTum-CumTumTests/Pods-CumTum-CumTumTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		959117182A6A1DA100822835 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = " if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n  export SKIP_BUNDLING=true\n fi\n";
 		};
 		96E31A05565FB6B0C3A9992F /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -499,7 +517,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_USE_OPTIMIZATION_PROFILE = YES;
 				CODE_SIGN_ENTITLEMENTS = CumTum/CumTumDebug.entitlements;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 14;
 				DEVELOPMENT_TEAM = 57W72N6SBF;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -519,7 +537,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/zpdk.framework",
 				);
-				MARKETING_VERSION = 1.13;
+				MARKETING_VERSION = 1.14;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -546,7 +564,9 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_USE_OPTIMIZATION_PROFILE = YES;
 				CODE_SIGN_ENTITLEMENTS = CumTum/CumTumRelease.entitlements;
-				CURRENT_PROJECT_VERSION = 13;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 14;
 				DEVELOPMENT_TEAM = 57W72N6SBF;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -565,7 +585,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/zpdk.framework",
 				);
-				MARKETING_VERSION = 1.13;
+				MARKETING_VERSION = 1.14;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -574,6 +594,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = namvt.dev.cumtum;
 				PRODUCT_NAME = CumTum;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;

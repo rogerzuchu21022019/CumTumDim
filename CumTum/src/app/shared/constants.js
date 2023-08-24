@@ -30,7 +30,7 @@ export const constants = {
     // MAIN: 'http://192.168.2.7:3000/api',
     SECOND: 'https://cumtumdim.becofoodstore.click/api',
 =======
-    MAIN: 'http://192.168.2.12:3000/api',
+    MAIN: 'http://192.168.2.4:3000/api',
     URL_THANKS_LOCAL: 'http://192.168.2.4:3000/thanks',
     URL_THANKS: 'https://cumtum.storm.io.vn/thanks',
     // MAIN: 'http://192.168.2.7:300A0/api',
@@ -38,8 +38,8 @@ export const constants = {
 >>>>>>> Nam
   },
   SOCKET: {
-    URL: 'http://192.168.2.12:3000',
-    // URL: 'https://cumtum.storm.io.vn',
+    // URL: 'http://192.168.2.4:3000',
+    URL: 'https://cumtum.storm.io.vn',
     CONNECTION: 'connection',
     CONNECT: 'connect',
     DISCONNECT: 'disconnect',
@@ -96,6 +96,7 @@ export const constants = {
     PUSH_NOTIFICATION: 'fetchNotification',
     FIND_NOTIFICATIONS: 'fetchNotifications',
     UPDATE_ORDER: 'fetchUpdateOrder',
+    UPDATE_IS_RECEIVED_ORDER: 'fetchUpdateIsReceivedOrder',
     ACCESS_TOKEN_PAYPAL: 'fetchAccessTokenPaypal',
     CREATE_ORDER_PAYPAL: 'fetchCreateOrderPaypal',
     PUSH_NOTIFICATION: 'fetchPushNotification',

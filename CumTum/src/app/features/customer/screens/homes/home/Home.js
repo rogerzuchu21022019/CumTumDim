@@ -60,6 +60,8 @@ const HomeCustomer = ({navigation}) => {
       dispatch(fetchUserById(userId));
     });
 
+    dispatch(fetchUserById(userId));
+
     return () => {
       unsubscribe();
     };

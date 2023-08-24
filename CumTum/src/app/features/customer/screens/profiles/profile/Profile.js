@@ -39,11 +39,11 @@ const Profile = ({navigation}) => {
 
   const handleLogout = async () => {
     dispatch(fetchSignOut());
+    socketServices.socket.disconnect();
     // moveTo();
   };
   const moveTo = async () => {
-    // navigation.navigate(Router.LOGIN);
-    socketServices.socket.disconnect();
+    navigation.navigate(Router.LOGIN);
   };
   const moveToEdit = async () => {
     if (address) {
@@ -140,7 +140,7 @@ const Profile = ({navigation}) => {
               </View>
               <View style={styles.viewInput}>
                 <Text style={styles.textInput}>
-                  {address ? address.houseNumber : null}
+                  {address ? address.houseNumber.split(`/`) : null}
                 </Text>
               </View>
             </View>

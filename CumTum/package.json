@@ -14,13 +14,15 @@
     "codepush:staging": "appcenter codepush release-react -a namzuchu/CumTum -d Staging",
     "codepush:prod": "appcenter codepush release-react -a namzuchu/CumTum -d Production",
     "codepush:andr-staging": "appcenter codepush release-react -a namzuchu/CumTum-1 -d Staging",
-    "codepush:andr-prod": "appcenter codepush release-react -a namzuchu/CumTum-1 -d Production"
+    "codepush:andr-prod": "appcenter codepush release-react -a namzuchu/CumTum-1 -d Production",
+    "devices": "xcrun simctl list devices"
   },
   "dependencies": {
     "@gorhom/bottom-sheet": "^4",
     "@notifee/react-native": "^7.6.1",
     "@react-native-async-storage/async-storage": "^1.17.12",
     "@react-native-community/hooks": "^3.0.0",
+    "@react-native-community/netinfo": "^9.4.1",
     "@react-native-firebase/app": "^17.3.2",
     "@react-native-firebase/auth": "^17.3.1",
     "@react-native-firebase/messaging": "^17.3.2",

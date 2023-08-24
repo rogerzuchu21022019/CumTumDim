@@ -1,4 +1,5 @@
-import React, {useEffect, useState} from 'react';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import React, {useEffect} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import notifee, {EventType} from '@notifee/react-native';
@@ -7,7 +8,7 @@ import {useSelector} from 'react-redux';
 import AdminStack from './src/app/navigation/AdminStack';
 import DetailCard from './src/app/features/admin/screens/homeAdmin/detailCart/DetailCard';
 import CustomerStack from './src/app/navigation/CustomerStack';
-import {navigationRef} from './src/app/navigation/RootNavigation';
+import {navigationRef as RootNavigation} from './src/app/navigation/RootNavigation';
 import LoginScreen from './src/app/features/auth/login/Login';
 import SplashScreen from './src/app/features/auth/splashScreen/SplashScreen';
 import UpdateInformation from './src/app/features/auth/updateInformation/UpdateInformation';
@@ -23,6 +24,11 @@ import AddDeliveryAddress from './src/app/features/customer/screens/carts/profil
 import {requestUserPermission} from './src/app/shared/utils/PermissionFCM';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {authSelector} from './src/app/features/admin/sliceAuth';
+
+export enum RoleUser {
+  USER = 'user',
+  ADMIN = 'admin',
+}
 
 const App = () => {
   const Stack = createNativeStackNavigator();
@@ -50,17 +56,17 @@ const App = () => {
     return notifee.onForegroundEvent(({type, detail}) => {
       switch (type) {
         case EventType.DISMISSED:
-          console.log('User dismissed notification', detail.notification);
+          // console.log('User dismissed notification', detail.notification);
           break;
         case EventType.PRESS:
-          console.log('User pressed notification', detail.notification);
+          // console.log('User pressed notification', detail.notification);
           break;
       }
     });
   }, []);
 
   return (
-    <NavigationContainer ref={navigationRef}>
+    <NavigationContainer ref={RootNavigation}>
       <GestureHandlerRootView className="flex-1">
         <Stack.Navigator>
           <Stack.Screen
@@ -71,7 +77,7 @@ const App = () => {
             }}
           />
 
-          {isLoggedIn && authSelect.user.role === 'user' ? (
+          {isLoggedIn && authSelect.user.role === RoleUser.USER ? (
             <Stack.Screen
               name={Router.CUSTOMER_STACK}
               component={CustomerStack}
@@ -79,7 +85,7 @@ const App = () => {
                 headerShown: false,
               }}
             />
-          ) : isLoggedIn && authSelect.user.role === 'admin' ? (
+          ) : isLoggedIn && authSelect.user.role === RoleUser.ADMIN ? (
             <Stack.Screen
               name={Router.ADMIN_STACK}
               component={AdminStack}

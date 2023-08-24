@@ -16,6 +16,7 @@ module.exports = {
   uploadImage: require(`../api/media/UploadImage`),
   createOrder: require(`../api/orders/CreateOrder`),
   updateOrder: require(`../api/orders/FindOrderById`),
+  updateIsReceivedOrder: require(`../api/orders/UpdateOrderIsReceived`),
   getRabbit: require(`../api/rabbit/NotifyGet`),
   findOrders: require(`../api/orders/FindOrders`),
   // search:require(`../api/products/Search`)

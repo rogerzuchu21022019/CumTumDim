@@ -11,6 +11,7 @@ import {
   fetchFindNotifications,
   fetchNotification,
   fetchOrders,
+  fetchUpdateIsReceivedOrder,
   fetchUpdateOrder,
 } from './apiOrder';
 
@@ -100,6 +101,27 @@ export const sliceCart = createSlice({
       const data = action.payload;
       state.isLoading = false;
     });
+
+    //  /* Update Order IsReceived */
+    //  builder.addCase(fetchUpdateIsReceivedOrder.pending, state => {
+    //   state.isLoading = true;
+    // });
+    // builder.addCase(fetchUpdateIsReceivedOrder.fulfilled, (state, action) => {
+    //   const data = action.payload;
+    //   state.message = data.message;
+    //   state.isLoading = false;
+    //   state.orderToday.filter(item => {
+    //     if (item._id === data.data._id) {
+    //       item.isReceived = data.data.isReceived;
+    //     }
+    //   });
+    // });
+    // builder.addCase(fetchUpdateIsReceivedOrder.rejected, (state, action) => {
+    //   const data = action.payload;
+    //   state.isLoading = false;
+    // });
+
+
 
     /* Fetch AccessToken Paypal */
     builder.addCase(fetchAccessTokenPaypal.pending, state => {

@@ -58,10 +58,6 @@ const RingBellAdmin = ({navigation}) => {
   };
 
   const handleSwipeableOpen = index => {
-    console.log(
-      '🚀 ~ file: ListItem.js:50 ~ handleSwipeableOpen ~ index:',
-      index,
-    );
     setIndexSelected(index);
   };
 
