@@ -69,10 +69,10 @@ export const sliceProduct = createSlice({
         const filterDataMainList = state.categories.filter(
           item => item._id === categoryId && item.name === 'Món chính',
         );
-        log.info(
-          '🚀 ~ file: sliceProduct.js:69 ~ filterDataMainList:',
-          filterDataMainList,
-        );
+        // log.info(
+        //   '🚀 ~ file: sliceProduct.js:69 ~ filterDataMainList:',
+        //   filterDataMainList,
+        // );
         if (filterDataMainList.length > 0) {
           state.mainDishCart.push(data);
         }
@@ -139,6 +139,7 @@ export const sliceProduct = createSlice({
 
       return state;
     },
+
 
     decreaseDishByID: (state, action) => {
       const data = action.payload;
@@ -214,6 +215,7 @@ export const sliceProduct = createSlice({
 
       return state;
     },
+
     updateAmount: (state, action) => {
       const data = action.payload;
       // log.error(
@@ -316,6 +318,7 @@ export const sliceProduct = createSlice({
       }
       return state;
     },
+
     resetCart: state => {
       state.mainDishCart = [];
       state.extraDishCart = [];

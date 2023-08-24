@@ -25,24 +25,30 @@ export const constants = {
       'EPscZ2cKSvwcybfeIbQksSxlCJVZDGuzAMy0skSzZJIJ2NL4yJUUuKaC6Ve2fi9kHzgnWZOpfSPPU_Oi',
   },
   BASE_URL: {
-    MAIN: 'http://192.168.1.78:3000/api',
-    // MAIN: 'http://192.168.2.7:3000/api',
-    SECOND: 'https://cumtumdim.becofoodstore.click/api',
+    MAIN: 'http://192.168.2.4:3000/api',
+    URL_THANKS_LOCAL: 'http://192.168.2.4:3000/thanks',
+    URL_THANKS: 'https://cumtum.storm.io.vn/thanks',
+    // MAIN: 'http://192.168.2.7:300A0/api',
+    SECOND: 'https://cumtum.storm.io.vn/api',
   },
   SOCKET: {
-    URL: 'http://192.168.1.115:3000',
+    // URL: 'http://192.168.2.4:3000',
+    URL: 'https://cumtum.storm.io.vn',
     CONNECTION: 'connection',
     CONNECT: 'connect',
     DISCONNECT: 'disconnect',
     PUSH_NOTIFY: 'push-notify',
     CREATE_ORDER: 'create-order',
     UPDATE_ORDER: 'update-order',
+    UPDATE_ORDER_ADMIN: 'update-order-admin',
     FIND_ORDER_BY_USER_ID: 'find-order-by-user-id',
     PUSH_NOTIFICATION_ADMIN: 'push-notification-admin',
     UPDATE_NOTIFICATION_ADMIN: 'update-notification-admin',
     PUSH_NOTIFICATION_CUSTOMER: 'push-notification-customer',
     UPDATE_NOTIFICATION_CUSTOMER: 'update-notification-customer',
-    LISTEN_FROM_EDIT_DELIVERY_ADDRESS:'listenFromEditDeliveryAddress'
+    LISTEN_FROM_EDIT_DELIVERY_ADDRESS: 'listenFromEditDeliveryAddress',
+    CONNECT_RABBIT_ADMIN: 'connectRabbitAdmin',
+    CONNECT_RABBIT_CUSTOMER: 'connectRabbitCustomer',
   },
   ROLE: {
     ADMIN: 'admin',
@@ -84,10 +90,12 @@ export const constants = {
     PUSH_NOTIFICATION: 'fetchNotification',
     FIND_NOTIFICATIONS: 'fetchNotifications',
     UPDATE_ORDER: 'fetchUpdateOrder',
+    UPDATE_IS_RECEIVED_ORDER: 'fetchUpdateIsReceivedOrder',
     ACCESS_TOKEN_PAYPAL: 'fetchAccessTokenPaypal',
     CREATE_ORDER_PAYPAL: 'fetchCreateOrderPaypal',
     PUSH_NOTIFICATION: 'fetchPushNotification',
     UPDATE_NOTIFICATION: 'fetchUpdateNotification',
+    DELETE_NOTIFICATION: 'fetchDeleteNotification',
 
     ADD_ADDRESS: 'fetchAddAddress',
     UPDATE_ADDRESS: 'fetchUpdateAddress',
@@ -105,5 +113,8 @@ export const constants = {
 
   RABBIT_MQ: {
     QUEUE_NAME_ORDER: 'order',
+  },
+  IMAGE_BG: {
+    URI: 'https://cdn.britannica.com/38/111338-050-D23BE7C8/Stars-NGC-290-Hubble-Space-Telescope.jpg?w=400&h=300&c=crop',
   },
 };

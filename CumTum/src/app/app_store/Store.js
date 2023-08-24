@@ -1,6 +1,6 @@
 //import createSlice
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {persistReducer} from 'reduxjs-toolkit-persist';
+import {persistReducer, persistStore} from 'reduxjs-toolkit-persist';
 
 import {combineReducers, configureStore} from '@reduxjs/toolkit';
 
@@ -9,11 +9,20 @@ import sliceAuth from '../features/admin/sliceAuth';
 import sliceProduct from '../features/product/sliceProduct';
 import {constants} from '../shared/constants';
 import sliceCart from '../features/carts/sliceOrder';
+import {categoriesApi} from '../../redux/api/categoriesApi';
+import {dishesApi} from '../../redux/api/dishesApi';
+import {ordersApi} from '../../redux/api/ordersApi';
+import {bannersApi} from '../../redux/api/bannersApi';
 
 let persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  whiteList: [constants.SLICE.PRODUCT],
+  whiteList: [
+    constants.SLICE.PRODUCT,
+    constants.SLICE.ADMIN,
+    constants.SLICE.AUTH,
+    constants.SLICE.CART,
+  ],
   // blacklist: [constants.SLICE.ADMIN],
 };
 
@@ -21,6 +30,10 @@ const rootReducers = combineReducers({
   auth: sliceAuth,
   product: sliceProduct,
   cart: sliceCart,
+  [categoriesApi.reducerPath]: categoriesApi.reducer,
+  [dishesApi.reducerPath]: dishesApi.reducer,
+  [ordersApi.reducerPath]: ordersApi.reducer,
+  [bannersApi.reducerPath]: bannersApi.reducer,
 });
 
 const resetRootReducer = (state, action) => {
@@ -34,9 +47,17 @@ let persistedReducers = persistReducer(persistConfig, resetRootReducer);
 
 export const Store = configureStore({
   reducer: persistedReducers,
+  // devTools: false,
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: false, // bỏ qua kiểm tra tính immutability của state
       immutableCheck: false,
-    }),
+    }).concat([
+      categoriesApi.middleware,
+      dishesApi.middleware,
+      ordersApi.middleware,
+      bannersApi.middleware,
+    ]),
 });
+
+export let persistor = persistStore(Store);

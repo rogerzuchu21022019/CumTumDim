@@ -1,3 +1,4 @@
+
 const Router = {
   /* Admin */
   HOME_ADMIN: 'Trang chủ',
@@ -22,6 +23,11 @@ const Router = {
   SUPPORT:"Support",
   INCOME:"Income",
   STATISTIC:"thống kê",
+  
+  MANAGE_BANNER:"ManageBanner",
+  ADD_BANNER:"AddBanner",
+  UPDATE_BANNER:"UpdateBanner",
+  DELETE_BANNER:"DeleteBanner",
 
   /* Customer */
   SPLASH_SCREEN:"Splash",

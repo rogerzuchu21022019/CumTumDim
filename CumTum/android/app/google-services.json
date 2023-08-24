@@ -22,6 +22,14 @@
           }
         },
         {
+          "client_id": "8392071542-tfcl2nlh58of7inulpcjm883si7kb41h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cumtum",
+            "certificate_hash": "ee88587086dcde2128abfefb4e2ccd624a8a5e9d"
+          }
+        },
+        {
           "client_id": "8392071542-uket243u20vj719uir2iu1ofh4chq7oc.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -39,7 +47,7 @@
               "client_type": 3
             },
             {
-              "client_id": "8392071542-6jau34qpcu594et1vbt2uukakso783au.apps.googleusercontent.com",
+              "client_id": "8392071542-69gn7lplohvkdgfouebq0m18e8np61g0.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
                 "bundle_id": "namvt.dev.cumtum"

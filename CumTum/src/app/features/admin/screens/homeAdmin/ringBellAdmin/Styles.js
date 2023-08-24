@@ -24,7 +24,12 @@ const styles = StyleSheet.create({
     },
     profile:{
     },
-   
+    trashImage: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      width: 60,
+      borderRadius: 20,
+    },
     
     textProfile:{
         color:constants.COLOR.WHITE,

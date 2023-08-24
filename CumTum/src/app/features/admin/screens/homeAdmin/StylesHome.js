@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     // backgroundColor: constants.COLOR.WHITE,
-    marginStart:20,
+    marginStart: 20,
   },
   rightHeader: {
     flex: 1,
@@ -38,6 +38,35 @@ const styles = StyleSheet.create({
     backgroundColor: constants.COLOR.BLACK,
     // marginTop: 10,
   },
+  boxInput: {
+    width: '70%',
+    height: 40,
+    borderWidth: 1,
+    borderRadius: 5,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    borderColor: constants.COLOR.WHITE,
+  },
+  iconMargin: {
+    marginLeft: 10,
+  },
+  boxClear: {
+    flexDirection: 'row',
+    marginRight: 10,
+  },
+  inputStyle: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginLeft: 10,
+    color: constants.COLOR.WHITE,
+  },
+  boxSearch: {
+    flexDirection: 'row',
+    width: '100%',
+  },
+
   textTitle: {
     color: 'white',
     marginLeft: 6,
@@ -51,22 +80,21 @@ const styles = StyleSheet.create({
     color: 'white',
     marginLeft: 6,
   },
-  textTotalNotifies:{
-    fontSize:10,
+  textTotalNotifies: {
+    fontSize: 10,
     color: constants.COLOR.WHITE,
   },
-  viewTotalNotifies:{
+  viewTotalNotifies: {
     backgroundColor: constants.COLOR.RED,
-    width:30,
-    height:15,
+    width: 30,
+    height: 15,
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius:10,
-    bottom:8,
-    right:10,
+    borderRadius: 10,
+    bottom: 8,
+    right: 10,
   },
 
-  
   /* Header */
 
   //body
@@ -83,11 +111,10 @@ const styles = StyleSheet.create({
     paddingRight: 20,
     marginTop: 10,
   },
-  
+
   viewToday: {
     justifyContent: 'center',
     alignItems: 'center',
-    
   },
   textToday: {
     lineHeight: 30,
@@ -100,7 +127,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginVertical: 6,
     fontWeight: 'bold',
-
   },
 
   //body

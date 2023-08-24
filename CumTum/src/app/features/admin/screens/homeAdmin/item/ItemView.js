@@ -21,7 +21,7 @@ const ItemView = ({item, index, navigation}) => {
           <View style={styles.body}>
             <View style={styles.boxItem}>
               <View style={styles.itemOrder}>
-                <Text style={styles.itemText}>Đơn hàng {formatCodeOrder(item._id)}</Text>
+                <Text style={styles.itemText}>Mã Đơn hàng <Text className='text-blue-500'>{formatCodeOrder(item._id)}</Text></Text>
                 <Text style={styles.itemText}>||</Text>
                 <Text style={styles.itemText}>{convertMoney(item.moneyToPaid)}</Text>
               </View>
