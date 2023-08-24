@@ -6,6 +6,8 @@ module.exports = {
 
   findBanners: require(`../api/banners/FindBanners`),
   addBanner: require(`../api/banners/AddBanner`),
+  updateBannerById: require(`../api/banners/UpdateBannerByID`),
+  deleteBannerById: require(`../api/banners/DeleteBannerById`),
 
   addDish: require(`../api/products/AddDish`),
   updateDishById: require(`../api/products/UpdateDishByID`),
@@ -14,6 +16,7 @@ module.exports = {
   uploadImage: require(`../api/media/UploadImage`),
   createOrder: require(`../api/orders/CreateOrder`),
   updateOrder: require(`../api/orders/FindOrderById`),
+  updateIsReceivedOrder: require(`../api/orders/UpdateOrderIsReceived`),
   getRabbit: require(`../api/rabbit/NotifyGet`),
   findOrders: require(`../api/orders/FindOrders`),
   // search:require(`../api/products/Search`)

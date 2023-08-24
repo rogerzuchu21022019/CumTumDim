@@ -57,6 +57,21 @@ export const fetchUpdateOrder = createAsyncThunk(
   },
 );
 
+// export const fetchUpdateIsReceivedOrder = createAsyncThunk(
+//   constants.FETCH.UPDATE_IS_RECEIVED_ORDER,
+//   async data => {
+//     // log.error('🚀 ~ file: apiOrder.js:63 ~ data:', data);
+//     const response = await AxiosInstance().post(
+//       `/products/update-order-received/${data.orderId}`,
+//       {
+//         isReceived: data.isReceived,
+//       },
+//     );
+//     // log.error('🚀 ~ file: apiOrder.js:69 ~ response:', response.data);
+//     return response.data;
+//   },
+// );
+
 export const fetchAccessTokenPaypal = createAsyncThunk(
   constants.FETCH.ACCESS_TOKEN_PAYPAL,
   async () => {

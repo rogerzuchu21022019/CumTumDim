@@ -6,7 +6,7 @@ const endPoint = 'dishes';
 export const dishesApi = createApi({
   reducerPath: 'dishesApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: `${constants.BASE_URL.MAIN}/products/`,
+    baseUrl: `${constants.BASE_URL.SECOND}/products/`,
   }),
   endpoints: builder => ({
     listDish: builder.query<DataResponse<Dish>, void>({

@@ -32,8 +32,8 @@ export const constants = {
     SECOND: 'https://cumtum.storm.io.vn/api',
   },
   SOCKET: {
-    URL: 'http://192.168.1.107:3000',
-    // URL: 'https://cumtum.storm.io.vn',
+    // URL: 'http://192.168.2.4:3000',
+    URL: 'https://cumtum.storm.io.vn',
     CONNECTION: 'connection',
     CONNECT: 'connect',
     DISCONNECT: 'disconnect',
@@ -47,6 +47,8 @@ export const constants = {
     PUSH_NOTIFICATION_CUSTOMER: 'push-notification-customer',
     UPDATE_NOTIFICATION_CUSTOMER: 'update-notification-customer',
     LISTEN_FROM_EDIT_DELIVERY_ADDRESS: 'listenFromEditDeliveryAddress',
+    CONNECT_RABBIT_ADMIN: 'connectRabbitAdmin',
+    CONNECT_RABBIT_CUSTOMER: 'connectRabbitCustomer',
   },
   ROLE: {
     ADMIN: 'admin',
@@ -88,6 +90,7 @@ export const constants = {
     PUSH_NOTIFICATION: 'fetchNotification',
     FIND_NOTIFICATIONS: 'fetchNotifications',
     UPDATE_ORDER: 'fetchUpdateOrder',
+    UPDATE_IS_RECEIVED_ORDER: 'fetchUpdateIsReceivedOrder',
     ACCESS_TOKEN_PAYPAL: 'fetchAccessTokenPaypal',
     CREATE_ORDER_PAYPAL: 'fetchCreateOrderPaypal',
     PUSH_NOTIFICATION: 'fetchPushNotification',

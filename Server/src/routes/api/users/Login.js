@@ -11,10 +11,7 @@ require(`dotenv`).config();
 router.post(`/login`, async (req, res) => {
   try {
     const { idToken, accessToken, fcmTokenDevice } = req.body;
-    console.log(
-      "🚀 ~ file: Login.js:14 ~ router.post ~ fcmTokenDevice:",
-      fcmTokenDevice
-    );
+   
     if (
       fcmTokenDevice === "" ||
       fcmTokenDevice === null ||
@@ -42,7 +39,6 @@ router.post(`/login`, async (req, res) => {
       data: _user,
     });
 
-    console.log("🚀 ~ file: Login.js:16 ~ router.post ~ user:", _user);
   } catch (error) {
     console.log("🚀 ~ file: Login.js:23 ~ router.post ~ error:", error);
     res.json({

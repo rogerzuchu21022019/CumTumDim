@@ -1,63 +1,66 @@
 const amqp = require("amqplib");
 const CONSTANTS = require("./Constant");
-const connectRabbitPub = async (connection, queueName) => {
+const connectRabbitPub = async (connection, exchangeName) => {
   try {
     const channel = await connection.createChannel();
-    await channel.assertQueue(queueName, { durable: true });
-    console.log(`Connected to RabbitMQ ${queueName}`);
+    await channel.assertQueue(exchangeName, { durable: true });
+
     return channel;
   } catch (error) {
     console.log(error);
   }
 };
-const publish = async (channel, message) => {
+const publish = async (channel, message, exchangeName) => {
   try {
-    const queueName = CONSTANTS.RABBIT_MQ.QUEUE_NAME_ORDER;
-
-    await channel.sendToQueue(queueName, Buffer.from(JSON.stringify(message)), {
-      persistent: true,
-    });
+    await channel.sendToQueue(
+      exchangeName,
+      Buffer.from(JSON.stringify(message)),
+      {
+        persistent: true,
+      }
+    );
     console.log(`Order with id ${message} has been published`);
   } catch (error) {
     console.log(error);
   }
 };
 
-const connectRabbitConsume = async (connection) => {
-  try {
-    const queueName = CONSTANTS.RABBIT_MQ.QUEUE_NAME_ORDER;
+let allOrders = [];
+const connectRabbitConsume = async (channel, connection, queueName) => {
+  return new Promise((resolve, reject) => {
+    try {
+      channel.assertQueue(queueName);
 
-    const channel = await connection.createChannel();
-    await channel.assertQueue(queueName);
-    console.log(`Connected to RabbitMQ ${queueName}`);
+      // Khai báo một biến array để lưu trữ tất cả các tin nhắn đã nhận được
 
-    await channel.consume(
-      queueName,
-      async (message) => {
-        const order = JSON.parse(message.content?.toString());
-        console.log("Received new order:", order);
+      channel.consume(
+        queueName,
+        async (message) => {
+          const order = JSON.parse(message.content?.toString());
+          // console.log("Received new order:", order);
+          // Thêm tin nhắn vào danh sách tạm thời
+          allOrders.unshift(order);
 
-        // Perform some logic to accept or reject the order
-        // const accepted = true;
-        // if (accepted) {
-        //   // Update order status to "accepted" in the database
-        //   console.log(`Order ${order.id} has been accepted.`);
-        // } else {
-        //   // Update order status to "rejected" in the database
-        //   console.log(`Order ${order.id} has been rejected.`);
-        // }
+          channel.ack(message);
 
-        // Acknowledge the message to remove it from the queue
-        // await channel.ack(message);
-        await connection.close();
-      },
-      {
-        noAck: true,
-      }
-    );
-  } catch (error) {
-    console.error("Error connecting to RabbitMQ", error);
-  }
+          // if (allOrders.length === 2) {
+          //   // Đóng kết nối sau khi nhận hết tin nhắn
+          //   // console.log('All orders:', allOrders.length);
+
+          //   // Resolve Promise với danh sách tất cả các tin nhắn
+          // }
+          resolve(allOrders);
+
+        },
+        {
+          noAck: false, // Sử dụng manual acknowledgment
+        }
+      );
+    } catch (error) {
+      console.error("Error connecting to RabbitMQ", error);
+      reject(error);
+    }
+  });
 };
 
 module.exports = {

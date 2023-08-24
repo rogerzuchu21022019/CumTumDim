@@ -56,9 +56,11 @@ const ManagerRouter = (app, fixPublic) => {
   app.use(SUB_PRODUCTS, ApiProducts.updateCategoryById, fixPublic);
   app.use(SUB_PRODUCTS, ApiProducts.deleteCategory, fixPublic);
   app.use(SUB_PRODUCTS, ApiProducts.findCategories, fixPublic);
-  
+
   app.use(SUB_PRODUCTS, ApiProducts.findBanners, fixPublic);
   app.use(SUB_PRODUCTS, ApiProducts.addBanner, fixPublic);
+  app.use(SUB_PRODUCTS, ApiProducts.updateBannerById, fixPublic);
+  app.use(SUB_PRODUCTS, ApiProducts.deleteBannerById, fixPublic);
 
   app.use(SUB_PRODUCTS, ApiProducts.addDish, fixPublic);
   app.use(SUB_PRODUCTS, ApiProducts.updateDishById, fixPublic);
@@ -68,6 +70,7 @@ const ManagerRouter = (app, fixPublic) => {
   // app.use(SUB_USERS, ApiProducts.search, fixPublic);
   app.use(SUB_PRODUCTS, ApiProducts.createOrder, fixPublic);
   app.use(SUB_PRODUCTS, ApiProducts.updateOrder, fixPublic);
+  app.use(SUB_PRODUCTS, ApiProducts.updateIsReceivedOrder, fixPublic);
   app.use(SUB_PRODUCTS, ApiProducts.findOrders, fixPublic);
   app.use(SUB_PRODUCTS, ApiProducts.getRabbit, fixPublic);
 

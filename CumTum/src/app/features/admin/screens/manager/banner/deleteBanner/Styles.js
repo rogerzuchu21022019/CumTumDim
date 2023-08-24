@@ -53,25 +53,34 @@ const Styles = StyleSheet.create({
     // backgroundColor: constants.COLOR.WHITE,
     alignItems: 'center',
   },
+  trashImage: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 60,
+    borderRadius: 20,
+  },
+
   // body
   body: {
     flex: 12,
-    backgroundColor: constants.COLOR.BLACK,
+    backgroundColor: constants.COLOR.PRIMARY,
     alignItems: 'center',
   },
 
   itemEat: {
     backgroundColor: constants.COLOR.GREY,
-    height: 80,
+    height: 200,
     width: 350,
+    marginHorizontal: 10,
     borderRadius: 10,
     justifyContent: 'center',
     marginBottom: 15,
     marginTop: 10,
   },
   itemNumber: {
-    flex: 1,
+    flex: 1 / 3,
     justifyContent: 'center',
+    // backgroundColor:'red'
   },
 
   numberItem: {

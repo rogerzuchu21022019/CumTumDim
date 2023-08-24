@@ -32,7 +32,7 @@ export const fetchUserById = createAsyncThunk(
 export const fetchUpdateUserInfo = createAsyncThunk(
   constants.FETCH.UPDATE_USER_INFO,
   async data => {
-    log.error('🚀 ~ file: apiUser.js:34 ~ data:', data);
+    // log.error('🚀 ~ file: apiUser.js:34 ~ data:', data);
     const response = await AxiosInstance().post(
       `/users/${data.userId}/update-user-info`,
       {

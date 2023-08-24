@@ -67,14 +67,20 @@ const Payment = ({navigation, route}) => {
   const name = authSelect.user.name;
   const userId = authSelect.user._id;
   const moneyToPaid = order.moneyToPaid;
+  const addressSelected = authSelect.addressSelected;
+
   const address = authSelect.user.addresses;
 
   const getAddressDefault = address.filter(item => {
     return item.addressDefault === true;
   });
+
+  const addressDefault = addressSelected
+    ? addressSelected
+    : getAddressDefault[0];
+
   const dispatch = useDispatch();
 
-  const addressDefault = getAddressDefault[0];
   const message = 'Bạn chưa chọn phương thức thanh toán!';
 
   const handleCheck = id => {
@@ -261,7 +267,7 @@ const Payment = ({navigation, route}) => {
               <View style={styles.textTile}>
                 <Text style={styles.text}>Địa chỉ nhận hàng</Text>
               </View>
-              {addressDefault ? (
+              {addressDefault !== undefined ? (
                 <View style={styles.groupContent}>
                   <View style={styles.leftContent}>
                     <View style={styles.iconLocation}>
@@ -279,7 +285,7 @@ const Payment = ({navigation, route}) => {
                       </View>
                       <View>
                         <Text style={styles.text1}>
-                          {addressDefault.houseNumber} Đường{' '}
+                          {addressDefault.houseNumber}Đường
                           {addressDefault.street}
                         </Text>
                       </View>

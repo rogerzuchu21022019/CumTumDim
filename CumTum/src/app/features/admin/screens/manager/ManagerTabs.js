@@ -18,7 +18,7 @@ import DeleteDish from './manageFood/deleteDish/DeleteDish';
 import ManageBanner from './banner/ManageBanner';
 import AddBanner from './banner/addBanner/AddBanner';
 import DeleteBanner from './banner/deleteBanner/DeleteBanner';
-import UpdateBanner from './banner/updateBanner/UpdateBanner';
+import UpdateBanner from './banner/updateBanner/EditBanner';
 
 const ManagerTabs = () => {
   const Stack = createNativeStackNavigator();
@@ -123,13 +123,13 @@ const ManagerTabs = () => {
               headerShown: false,
             }}
           />
-          {/* <Stack.Screen
+          <Stack.Screen
             name={Router.UPDATE_BANNER}
             component={UpdateBanner}
             options={{
               headerShown: false,
             }}
-          /> */}
+          />
           <Stack.Screen
             name={Router.DELETE_BANNER}
             component={DeleteBanner}

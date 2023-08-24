@@ -22,10 +22,11 @@ import {
   fetchDeleteNotification,
   fetchUserById,
 } from '../../../../admin/apiUser.js';
-import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import {FlatList, GestureHandlerRootView} from 'react-native-gesture-handler';
 const RingBellAdmin = ({navigation}) => {
   const dispatch = useDispatch();
   const authSelect = useSelector(authSelector);
+  const [indexSelected, setIndexSelected] = useState(0);
   const [isRefresh, setIsRefresh] = useState(false);
   const user = authSelect.user;
   const [listNotification, setListNotification] = useState(user.notifications);
@@ -56,6 +57,10 @@ const RingBellAdmin = ({navigation}) => {
     await dispatch(fetchUserById(user._id));
   };
 
+  const handleSwipeableOpen = index => {
+    setIndexSelected(index);
+  };
+
   return (
     <SafeKeyComponent>
       <View style={styles.container}>
@@ -83,14 +88,17 @@ const RingBellAdmin = ({navigation}) => {
           </View>
         </View>
         <View style={styles.body}>
-          <FlashList
+          <FlatList
             data={listNotification}
             estimatedItemSize={200}
             renderItem={({item, index}) => (
               <ListItem
+                handleSwipeableOpen={() => handleSwipeableOpen(index)}
+                indexSelected={indexSelected}
                 item={item}
                 index={index}
                 handleRemove={() => handleRemove(item)}
+                navigation={navigation}
               />
             )}
             keyExtractor={(item, index) => index.toString()}

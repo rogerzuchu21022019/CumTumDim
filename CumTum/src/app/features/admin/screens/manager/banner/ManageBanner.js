@@ -74,7 +74,7 @@ const ManageBanner = ({navigation}) => {
                 <Image
                   source={require('../../../../../../assets/iconLogo_CumTumDim.jpg')}
                 />
-                <Text style={styles.textAll}>Xoá quảng cáo</Text>
+                <Text style={styles.textAll}>Sửa hoặc xoá quảng cáo</Text>
               </View>
             </TouchableOpacity>
           </View>
